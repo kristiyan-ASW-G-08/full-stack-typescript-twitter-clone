@@ -1,0 +1,25 @@
+{
+  "name": "twtr",
+  "version": "1.0.0",
+  "author": "Kristiyan Todorov",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "lerna run test --since --ignore @twtr/common",
+    "start": "lerna run start --stream --ignore @twtr/common",
+    "build": "lerna run build  --ignore @twtr/common",
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/jest",
+      "**/jest/**"
+    ]
+  }
+}
