@@ -8,5 +8,4 @@ const db = async (): Promise<void> => {
     console.log(err);
   }
 };
-
 export default db;

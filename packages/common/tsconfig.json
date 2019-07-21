@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/*", "src/*"] },
     "target": "es6",
     "lib": ["esnext"],
     "allowJs": true,
@@ -14,8 +13,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
-  },
-  "include": ["./src", "./types"]
+    "noEmit": true
+  }
 }

@@ -18,5 +18,4 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
 export default app;
