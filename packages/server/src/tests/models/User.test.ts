@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import User from '../../models/User';
-import UserType from '../../types/User';
-import db from '../../db';
+import User from 'src/models/User';
+import UserType from 'src/types/User';
+import db from 'src/db';
 
 describe('User model', (): void => {
   beforeAll(
@@ -26,6 +26,7 @@ describe('User model', (): void => {
     expect(user.validate).toThrow();
   });
   it('should save a user', async (): Promise<void> => {
+    expect.assertions(6);
     const username = 'handle';
     const handle = 'testUserHandle';
     const email = 'testEmail@mail.com';

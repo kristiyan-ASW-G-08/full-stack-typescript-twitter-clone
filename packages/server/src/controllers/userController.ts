@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import passErrorToNext from '@utilities//passErrorToNext';
 
 const signUp = async (
   req: Request,
@@ -6,9 +7,9 @@ const signUp = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email, username, password } = req.body;
+    const { email, username, password, confirmPassword } = req.body;
   } catch (err) {
-    console.log(err);
+    passErrorToNext(err, next);
   }
 };
 

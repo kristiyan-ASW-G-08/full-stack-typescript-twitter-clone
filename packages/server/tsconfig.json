@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/*", "src/*"] },
+    "paths": {
+      "@routes/*": ["src/routes/*"],
+      "@models/*": ["src/models/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@customTypes/*": ["src/types/*"],
+      "@utilities/*": ["src/utilities/*"]
+    },
     "target": "es6",
     "lib": ["esnext"],
     "allowJs": true,

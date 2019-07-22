@@ -1,6 +1,6 @@
 {
   "name": "@twtr/browser",
-  "version": "1.0.48",
+  "version": "1.0.5",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.15",
