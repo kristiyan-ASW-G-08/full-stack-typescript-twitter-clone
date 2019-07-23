@@ -13,5 +13,6 @@ module.exports = {
     'controllers/(.*)$': '<rootDir>/src/controllers/$1',
     'customTypes/(.*)$': '<rootDir>/src/types/$1',
     'utilities/(.*)$': '<rootDir>/src/utilities/$1',
+    'middleware/(.*)$': '<rootDir>/src/middleware/$1',
   },
 };

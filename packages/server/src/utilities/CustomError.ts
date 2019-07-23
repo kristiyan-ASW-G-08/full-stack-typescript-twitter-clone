@@ -27,7 +27,7 @@ const errors = {
   },
 };
 
-class ErrorService extends Error {
+class CustomError extends Error {
   public status: number;
 
   public message: string;
@@ -40,11 +40,11 @@ class ErrorService extends Error {
     data?: ValidationError[] | string,
   ) {
     super();
-    Object.setPrototypeOf(this, ErrorService.prototype);
+    Object.setPrototypeOf(this, CustomError.prototype);
     this.status = status;
     this.message = message;
     this.data = data;
   }
 }
 
-export { ErrorService, errors };
+export { CustomError, errors };

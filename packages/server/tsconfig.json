@@ -6,7 +6,8 @@
       "@models/*": ["src/models/*"],
       "@controllers/*": ["src/controllers/*"],
       "@customTypes/*": ["src/types/*"],
-      "@utilities/*": ["src/utilities/*"]
+      "@utilities/*": ["src/utilities/*"],
+      "@middleware/*": ["src/middleware/*"]
     },
     "target": "es6",
     "lib": ["esnext"],

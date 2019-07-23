@@ -5,7 +5,7 @@ import compression from 'compression';
 
 import userRoutes from '@routes/userRoutes';
 
-import { ErrorService, errors } from '@utilities/ErrorService';
+import { CustomError, errors } from '@utilities/CustomError';
 
 const app: Application = express();
 
@@ -25,17 +25,15 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 app.use(userRoutes);
 app.use(
   (
-    error: ErrorService,
+    error: CustomError,
     req: Request,
     res: Response,
     next: NextFunction,
   ): void => {
+    console.log(error);
     const status = error.status || 500;
-    console.log(status);
     const { message } = error;
     const response = error.data ? { data: error.data, message } : { message };
-    console.log(response);
-    console.log('nani');
     res.status(status).json(response);
   },
 );

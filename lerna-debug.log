@@ -7,27 +7,90 @@
 0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js' }
 1 notice cli v3.14.1
 2 verbose rootPath C:\Users\PC\Desktop\typescript-twitter-clone
-3 info current version 1.0.51
+3 info current version 1.0.52
 4 silly isAnythingCommitted
 5 verbose isAnythingCommitted 1
 6 silly currentBranch
 7 verbose currentBranch master
 8 silly remoteBranchExists
 9 silly isBehindUpstream
-10 error Error: Command failed: git remote update
-10 error Received disconnect from 140.82.118.3 port 22:11: Bye Bye
-10 error Disconnected from 140.82.118.3 port 22
-10 error fatal: Could not read from remote repository.
-10 error
-10 error Please make sure you have the correct access rights
-10 error and the repository exists.
-10 error error: Could not fetch origin
-10 error
-10 error Fetching origin
-10 error
-10 error     at makeError (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:174:9)
-10 error     at Function.module.exports.sync (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:338:15)
-10 error     at Object.execSync (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\child-process\index.js:23:16)
-10 error     at updateRemote (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\lib\is-behind-upstream.js:26:16)
-10 error     at isBehindUpstream (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\lib\is-behind-upstream.js:11:3)
-10 error     at VersionCommand.initialize (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\index.js:152:9)
+10 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 1
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v1.0.52-1-gef3536a" => {"lastTagName":"v1.0.52","lastVersion":"v1.0.52","refCount":"1","sha":"ef3536a","isDirty":false}
+14 info Looking for changed packages since v1.0.52
+15 silly checking diff packages/browser
+16 silly no diff found in @twtr/browser
+17 silly checking diff packages/common
+18 silly found diff in packages/common/package.json
+19 verbose filtered diff [ 'packages/common/package.json' ]
+20 silly checking diff packages/server
+21 silly found diff in packages/server/package.json
+22 verbose filtered diff [ 'packages/server/package.json' ]
+23 verbose updated @twtr/common
+24 verbose updated @twtr/server
+25 verbose git-describe undefined => "v1.0.52-1-gef3536a"
+26 silly git-describe parsed => {"lastTagName":"v1.0.52","lastVersion":"v1.0.52","refCount":"1","sha":"ef3536a","isDirty":false}
+27 verbose version Overriding version of @twtr/common from 1.0.4 to 1.0.52
+28 verbose version Overriding version of @twtr/server from 1.0.4 to 1.0.52
+29 silly fixed for @twtr/common at C:\Users\PC\Desktop\typescript-twitter-clone\packages\common
+30 verbose getChangelogConfig using preset "conventional-changelog-angular"
+31 silly npa { type: 'tag',
+31 silly npa   registry: true,
+31 silly npa   where: undefined,
+31 silly npa   raw: 'conventional-changelog-angular',
+31 silly npa   name: 'conventional-changelog-angular',
+31 silly npa   escapedName: 'conventional-changelog-angular',
+31 silly npa   scope: undefined,
+31 silly npa   rawSpec: '',
+31 silly npa   saveSpec: null,
+31 silly npa   fetchSpec: 'latest',
+31 silly npa   gitRange: undefined,
+31 silly npa   gitCommittish: undefined,
+31 silly npa   hosted: undefined }
+32 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
+33 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
+34 verbose fixed increment 1.0.52 by patch
+35 silly fixed for @twtr/server at C:\Users\PC\Desktop\typescript-twitter-clone\packages\server
+36 verbose fixed increment 1.0.52 by patch
+37 info auto-confirmed
+38 info execute Skipping GitHub releases
+39 silly lifecycle No script for "preversion" in "twtr", continuing
+40 silly lifecycle No script for "preversion" in "@twtr/common", continuing
+41 silly lifecycle No script for "version" in "@twtr/common", continuing
+42 silly fixed for @twtr/common at C:\Users\PC\Desktop\typescript-twitter-clone\packages\common
+43 silly fixed writing new entry: "## [1.0.53](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.52...v1.0.53) (2019-07-23)\n\n**Note:** Version bump only for package @twtr/common\n\n\n\n"
+44 verbose fixed wrote C:\Users\PC\Desktop\typescript-twitter-clone\packages\common\CHANGELOG.md
+45 silly lifecycle No script for "preversion" in "@twtr/server", continuing
+46 silly lifecycle No script for "version" in "@twtr/server", continuing
+47 silly fixed for @twtr/server at C:\Users\PC\Desktop\typescript-twitter-clone\packages\server
+48 silly fixed writing new entry: "## [1.0.53](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.52...v1.0.53) (2019-07-23)\n\n**Note:** Version bump only for package @twtr/server\n\n\n\n"
+49 verbose fixed wrote C:\Users\PC\Desktop\typescript-twitter-clone\packages\server\CHANGELOG.md
+50 silly root for twtr at C:\Users\PC\Desktop\typescript-twitter-clone
+51 silly root writing new entry: "## [1.0.53](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.52...v1.0.53) (2019-07-23)\n\n**Note:** Version bump only for package twtr\n\n\n\n"
+52 verbose root wrote C:\Users\PC\Desktop\typescript-twitter-clone\CHANGELOG.md
+53 silly lifecycle No script for "version" in "twtr", continuing
+54 silly gitAdd [ 'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\common\\package.json',
+54 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\common\\CHANGELOG.md',
+54 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\server\\package.json',
+54 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\server\\CHANGELOG.md',
+54 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\CHANGELOG.md',
+54 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\lerna.json' ]
+55 silly gitCommit v1.0.53
+56 verbose git [ 'commit', '-m', 'v1.0.53' ]
+57 silly gitTag v1.0.53
+58 verbose git [ 'tag', 'v1.0.53', '-m', 'v1.0.53' ]
+59 silly lifecycle No script for "postversion" in "@twtr/common", continuing
+60 silly lifecycle No script for "postversion" in "@twtr/server", continuing
+61 silly lifecycle No script for "postversion" in "twtr", continuing
+62 info git Pushing tags...
+63 silly gitPush origin master
+64 error Error: Command failed: git push --follow-tags --no-verify origin master
+64 error git@github.com: Permission denied (publickey).
+64 error fatal: Could not read from remote repository.
+64 error
+64 error Please make sure you have the correct access rights
+64 error and the repository exists.
+64 error
+64 error     at makeError (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:174:9)
+64 error     at Promise.all.then.arr (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:278:16)

@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction, Application } from 'express';
 import { MixedSchema, ValidationError } from 'yup';
 import CustomValidationError from '@twtr/common/types/ValidationError';
-import { errors, ErrorService } from '@utilities/ErrorService';
+import { errors, CustomError } from '@utilities/CustomError';
+
 const validate = (
   validator: MixedSchema,
 ): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
@@ -12,7 +13,7 @@ const validate = (
   ): Promise<void> => {
     try {
       const { body } = req;
-      const validationResult = await validator.validate(body, {
+      await validator.validate(body, {
         abortEarly: false,
       });
     } catch (err) {
@@ -23,7 +24,7 @@ const validate = (
         },
       );
       const { status, message } = errors.BadRequest;
-      const error = new ErrorService(status, message, validationErrors);
+      const error = new CustomError(status, message, validationErrors);
       next(error);
     }
   };
