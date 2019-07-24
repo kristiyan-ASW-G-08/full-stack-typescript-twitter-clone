@@ -37,7 +37,7 @@ describe('isAuth', (): void => {
   });
   it(`should not call next`, async (): Promise<void> => {
     expect.assertions(1);
-    const username = 'a';
+    const username = 'testUser';
     const handle = 'testUserHandle';
     const email = 'testEmail@mail.com';
     const password = 'testPassword';

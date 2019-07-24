@@ -14,5 +14,6 @@ module.exports = {
     'customTypes/(.*)$': '<rootDir>/src/types/$1',
     'utilities/(.*)$': '<rootDir>/src/utilities/$1',
     'middleware/(.*)$': '<rootDir>/src/middleware/$1',
+    'services/(.*)$': '<rootDir>/src/services/$1',
   },
 };

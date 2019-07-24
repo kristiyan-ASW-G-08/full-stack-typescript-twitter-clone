@@ -27,6 +27,7 @@ const UserValidator = yup.object().shape({
     .string()
     .trim()
     .min(12)
+    .oneOf([yup.ref('password')], "Passwords don't match")
     .required(),
 });
 

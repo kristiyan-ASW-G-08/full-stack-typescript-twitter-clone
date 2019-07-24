@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import User from '@customTypes/User';
 
-
 const UserSchema: Schema = new Schema({
   username: {
     required: true,
@@ -20,7 +19,7 @@ const UserSchema: Schema = new Schema({
   email: { required: true, type: String, minlength: 3, unique: true },
   password: { required: true, type: String, minlength: 12 },
   website: { required: false, type: String, minlength: 3 },
-  confirmed: { required: false, type: Boolean, default: false },
+  confirmed: { type: Boolean, default: false },
   date: {
     type: Date,
     default: Date.now,
