@@ -10,13 +10,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['jest'],
   //eslint-config-airbnb-typescript import/no-unresolved throws an error when a custom path is used
   rules: {
     'import/no-unresolved': 0,
-    'no-underscore-dangle': 0,
-  },
-  env: {
-    'jest/globals': true,
   },
 };
