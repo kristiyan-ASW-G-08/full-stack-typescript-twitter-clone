@@ -25,9 +25,9 @@ describe('User model', (): void => {
 
     expect(user.validate).toThrow();
   });
-  it('should save a user', async (): Promise<void> => {
+  it('should create a new user', async (): Promise<void> => {
     expect.assertions(6);
-    const username = 'handle';
+    const username = 'username';
     const handle = 'testUserHandle';
     const email = 'testEmail@mail.com';
     const password = 'testPassword';
@@ -37,10 +37,10 @@ describe('User model', (): void => {
       email,
       password,
     });
-    const spy = jest.spyOn(user, 'save');
-    user.save();
+    const saveSpy = jest.spyOn(user, 'save');
+    await user.save();
 
-    expect(spy).toHaveBeenCalled();
+    expect(saveSpy).toHaveBeenCalled();
     expect(user).toMatchObject({
       username,
       handle,
@@ -51,5 +51,6 @@ describe('User model', (): void => {
     expect(user.handle).toBe(handle);
     expect(user.email).toBe(email);
     expect(user.password).toBe(password);
+    saveSpy.mockRestore();
   });
 });
