@@ -1,8 +1,16 @@
 import mongoose from 'mongoose';
-import { createUser } from '@services/userServices';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { createUser, sendConfirmationEmail } from '@services/userServices';
 import User from '@models/User';
 import db from 'src/db';
-import bcrypt from 'bcryptjs';
+import sendEmail from '@utilities/sendEmail';
+import MailOptions from '@customTypes/MailOptions';
+
+jest.mock('@utilities/sendEmail');
+jest.mock('jsonwebtoken');
+const mockToken = 'mockToken';
+(jwt.sign as jest.Mock).mockReturnValue(mockToken);
 
 describe('userServices', (): void => {
   beforeAll(
@@ -21,9 +29,10 @@ describe('userServices', (): void => {
       await mongoose.disconnect();
     },
   );
+  const secret = process.env.SECRET;
   const username = 'username';
   const handle = 'testUserHandle';
-  const email = 'testEmail@mail.com';
+  const email = 'bestestkris@gmail.com';
   const password = 'testPassword';
   describe('createUser', (): void => {
     it(`should create a new user`, async (): Promise<void> => {
@@ -50,5 +59,31 @@ describe('userServices', (): void => {
     await expect(
       createUser(username, handle, email, password),
     ).rejects.toThrow();
+  });
+  describe('sendConfirmationEmail', (): void => {
+    it(`should call sign and sendEmail`, async (): Promise<void> => {
+      const appEmail = process.env.EMAIL;
+      const clientUri = process.env.CLIENT_URI;
+      const url = `${clientUri}/confirmation/${mockToken}`;
+      const mailOptions: MailOptions = {
+        from: appEmail,
+        to: email,
+        subject: 'TwittClone Email Confirmation',
+        html: `Confirm your email: <a href="${url}">${url}</a>`,
+      };
+      expect.assertions(4);
+      const userId = mongoose.Types.ObjectId().toString();
+      sendConfirmationEmail(userId, email);
+      expect(jwt.sign).toHaveBeenCalledTimes(1);
+      expect(jwt.sign).toHaveBeenCalledWith(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      expect(sendEmail).toHaveBeenCalledTimes(1);
+      expect(sendEmail).toHaveBeenCalledWith(mailOptions);
+    });
   });
 });
