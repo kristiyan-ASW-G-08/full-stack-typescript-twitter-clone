@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.58](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.57...v1.0.58) (2019-07-26)
+
+**Note:** Version bump only for package @twtr/server
+
+
+
+
+
 ## [1.0.57](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.56...v1.0.57) (2019-07-25)
 
 **Note:** Version bump only for package @twtr/server
