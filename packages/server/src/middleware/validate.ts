@@ -26,6 +26,8 @@ const validate = (
       const { status, message } = errors.BadRequest;
       const error = new CustomError(status, message, validationErrors);
       next(error);
+    } finally {
+      next();
     }
   };
 };

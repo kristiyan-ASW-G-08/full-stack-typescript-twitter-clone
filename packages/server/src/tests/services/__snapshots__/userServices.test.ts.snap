@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userServices sendConfirmationEmail should call sign and sendEmail 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "from": "testmail@test.test",
+        "html": "Confirm your email: <a href=\\"http://localhost:3000/confirmation/mockToken\\">http://localhost:3000/confirmation/mockToken</a>",
+        "subject": "TwittClone Email Confirmation",
+        "to": "testmail@mail.com",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;

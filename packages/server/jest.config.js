@@ -6,6 +6,7 @@ module.exports = {
   setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['./jest.setup.js'],
   moduleDirectories: ['node_modules', 'src'],
+  clearMocks: true,
   moduleNameMapper: {
     'src/(.*)$': '<rootDir>/src/$1',
     'routes/(.*)$': '<rootDir>/src/routes//$1',
@@ -13,7 +14,7 @@ module.exports = {
     'controllers/(.*)$': '<rootDir>/src/controllers/$1',
     'customTypes/(.*)$': '<rootDir>/src/types/$1',
     'utilities/(.*)$': '<rootDir>/src/utilities/$1',
-    'middleware/(.*)$': '<rootDir>/src/middleware/$1',
+    'customMiddleware/(.*)$': '<rootDir>/src/middleware/$1',
     'services/(.*)$': '<rootDir>/src/services/$1',
   },
 };

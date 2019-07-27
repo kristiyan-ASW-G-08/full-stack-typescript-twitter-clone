@@ -15,7 +15,7 @@ const errors = {
   },
   NotFound: {
     status: 404,
-    message: 'Resource  not found.',
+    message: 'Resource not found.',
   },
   UnprocessableEntity: {
     status: 422,

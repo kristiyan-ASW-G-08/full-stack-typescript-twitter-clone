@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userRoutes /users should not create a new user 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "email must be a valid email",
+      "name": "email",
+    },
+    Object {
+      "message": "password must be at least 12 characters",
+      "name": "password",
+    },
+    Object {
+      "message": "Passwords don't match",
+      "name": "confirmPassword",
+    },
+  ],
+  "message": "Request has wrong format.",
+}
+`;

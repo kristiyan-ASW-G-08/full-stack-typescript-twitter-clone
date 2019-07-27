@@ -1,10 +1,10 @@
 import httpMocks from 'node-mocks-http';
-import validate from '@middleware/validate';
+import validate from '@customMiddleware/validate';
 import UserValidator from '@twtr/common/schemaValidators/UserValidator';
 import ValidationError from '@twtr/common/types/ValidationError';
 import { errors, CustomError } from '@utilities/CustomError';
 
-describe('isAuth', (): void => {
+describe('validate', (): void => {
   it(`should call next`, async (): Promise<void> => {
     expect.assertions(2);
     const username = 'a';
@@ -57,6 +57,6 @@ describe('isAuth', (): void => {
 
     const validateFunc = validate(UserValidator);
     await validateFunc(req, res, next);
-    expect(next).not.toHaveBeenCalled();
+    expect(next).toHaveBeenCalledTimes(1);
   });
 });

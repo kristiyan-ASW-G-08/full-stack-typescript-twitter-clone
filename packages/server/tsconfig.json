@@ -7,7 +7,7 @@
       "@controllers/*": ["src/controllers/*"],
       "@customTypes/*": ["src/types/*"],
       "@utilities/*": ["src/utilities/*"],
-      "@middleware/*": ["src/middleware/*"],
+      "@customMiddleware/*": ["src/middleware/*"],
       "@services/*": ["src/services/*"]
     },
     "target": "es6",

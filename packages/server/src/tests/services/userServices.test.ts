@@ -32,7 +32,7 @@ describe('userServices', (): void => {
   const secret = process.env.SECRET;
   const username = 'username';
   const handle = 'testUserHandle';
-  const email = 'bestestkris@gmail.com';
+  const email = 'testmail@mail.com';
   const password = 'testPassword';
   describe('createUser', (): void => {
     it(`should create a new user`, async (): Promise<void> => {
@@ -62,15 +62,6 @@ describe('userServices', (): void => {
   });
   describe('sendConfirmationEmail', (): void => {
     it(`should call sign and sendEmail`, async (): Promise<void> => {
-      const appEmail = process.env.EMAIL;
-      const clientUri = process.env.CLIENT_URI;
-      const url = `${clientUri}/confirmation/${mockToken}`;
-      const mailOptions: MailOptions = {
-        from: appEmail,
-        to: email,
-        subject: 'TwittClone Email Confirmation',
-        html: `Confirm your email: <a href="${url}">${url}</a>`,
-      };
       expect.assertions(4);
       const userId = mongoose.Types.ObjectId().toString();
       sendConfirmationEmail(userId, email);
@@ -83,7 +74,7 @@ describe('userServices', (): void => {
         { expiresIn: '1h' },
       );
       expect(sendEmail).toHaveBeenCalledTimes(1);
-      expect(sendEmail).toHaveBeenCalledWith(mailOptions);
+      expect(sendEmail).toMatchSnapshot();
     });
   });
 });
