@@ -1,12 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import {
   createUser,
+  getUserByEmail,
   sendConfirmationEmail,
   checkCredentialsAvailability,
+  getAuthenticationToken,
+  comparePasswords,
+  checkUserConfirmation,
 } from '@services/userServices';
 import passErrorToNext from '@utilities//passErrorToNext';
 
-const signUp = async (
+export const signUp = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -22,4 +26,29 @@ const signUp = async (
   }
 };
 
-export default signUp;
+export const logIn = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+    const user = await getUserByEmail(email);
+    await comparePasswords(password, user.password);
+    await checkUserConfirmation(user);
+    const token = await getAuthenticationToken(user._id);
+    const { username, handle, following, likes, bookmarks, date } = user;
+    const userData = {
+      username,
+      handle,
+      following,
+      likes,
+      bookmarks,
+      email,
+      date,
+    };
+    res.status(200).json({ data: { token, user: userData } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};

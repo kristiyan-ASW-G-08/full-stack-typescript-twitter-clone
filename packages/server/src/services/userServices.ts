@@ -1,7 +1,9 @@
+import { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '@models/User';
 import MailOptions from '@customTypes/MailOptions';
+import UserType from '@customTypes/User';
 import sendEmail from '@utilities/sendEmail';
 import { CustomError, errors } from '@utilities/CustomError';
 import ValidationError from '@twtr/common/types/ValidationError';
@@ -22,17 +24,76 @@ export const createUser = async (
   await user.save();
   return user._id;
 };
+
+export const getUserByEmail = async (email: string): Promise<UserType> => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    const validationErrorsArr: ValidationError[] = [
+      {
+        name: 'email',
+        message: 'User with this email does not exist',
+      },
+    ];
+    const { status, message } = errors.NotFound;
+    const error = new CustomError(status, message, validationErrorsArr);
+    throw error;
+  }
+  return user;
+};
+export const checkUserConfirmation = async (user: UserType): Promise<void> => {
+  if (!user.confirmed) {
+    const validationErrorsArr: ValidationError[] = [
+      {
+        name: 'email',
+        message: 'Confirm your email to login.',
+      },
+    ];
+    const { status, message } = errors.Unauthorized;
+    const error = new CustomError(status, message, validationErrorsArr);
+    throw error;
+  }
+};
+
+export const comparePasswords = async (
+  password: string,
+  userPassword: string,
+): Promise<void> => {
+  const passwordMatch = await bcrypt.compare(password, userPassword);
+  if (!passwordMatch) {
+    const validationErrorsArr: ValidationError[] = [
+      {
+        name: 'password',
+        message: 'Wrong password. Try again',
+      },
+    ];
+    const { status, message } = errors.Unauthorized;
+    const error = new CustomError(status, message, validationErrorsArr);
+    throw error;
+  }
+};
+export default comparePasswords;
+export const getAuthenticationToken = async (userId: UserType): Promise<string> => {
+  const secret = process.env.SECRET;
+  const token = jwt.sign(
+    {
+      userId,
+    },
+    secret,
+    { expiresIn: '1h' },
+  );
+  return token;
+};
 export const sendConfirmationEmail = (userId: string, email: string): void => {
   const secret = process.env.SECRET;
   const appEmail = process.env.EMAIL;
   const clientUri = process.env.CLIENT_URI;
-  const { status, message } = errors.BadRequest;
+  const { status, message } = errors.InternalServerError;
   if (!secret) {
-    const error = new CustomError(status, message, 'Provide env secret');
+    const error = new CustomError(status, message);
     throw error;
   }
   if (!appEmail) {
-    const error = new CustomError(status, message, 'Provide env email');
+    const error = new CustomError(status, message);
     throw error;
   }
   const token = jwt.sign(
