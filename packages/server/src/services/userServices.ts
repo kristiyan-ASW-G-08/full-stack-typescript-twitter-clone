@@ -4,6 +4,7 @@ import User from '@models/User';
 import MailOptions from '@customTypes/MailOptions';
 import sendEmail from '@utilities/sendEmail';
 import { CustomError, errors } from '@utilities/CustomError';
+import ValidationError from '@twtr/common/types/ValidationError';
 
 export const createUser = async (
   username: string,
@@ -49,4 +50,41 @@ export const sendConfirmationEmail = (userId: string, email: string): void => {
     html: `Confirm your email: <a href="${url}">${url}</a>`,
   };
   sendEmail(mailOptions);
+};
+
+export const checkCredentialsAvailability = async (
+  username: string,
+  handle: string,
+  email: string,
+): Promise<void> => {
+  const validationErrorsArr: ValidationError[] = [];
+  const isAvailableUsername = await User.findOne({ username });
+  const isAvailableHandle = await User.findOne({ handle });
+  const isAvailableEmail = await User.findOne({ email });
+  if (isAvailableUsername) {
+    const usernameValidationError = {
+      name: 'username',
+      message: 'username is already taken',
+    };
+    validationErrorsArr.push(usernameValidationError);
+  }
+  if (isAvailableHandle) {
+    const handleValidationError = {
+      name: 'handle',
+      message: 'handle is already taken',
+    };
+    validationErrorsArr.push(handleValidationError);
+  }
+  if (isAvailableEmail) {
+    const emailValidationError = {
+      name: 'email',
+      message: 'email is already taken',
+    };
+    validationErrorsArr.push(emailValidationError);
+  }
+  if (isAvailableUsername || isAvailableHandle || isAvailableEmail) {
+    const { message, status } = errors.Conflict;
+    const error = new CustomError(status, message, validationErrorsArr);
+    throw error;
+  }
 };

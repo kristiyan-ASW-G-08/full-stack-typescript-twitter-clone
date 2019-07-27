@@ -17,6 +17,10 @@ const errors = {
     status: 404,
     message: 'Resource not found.',
   },
+  Conflict: {
+    status: 409,
+    message: 'Conflict',
+  },
   UnprocessableEntity: {
     status: 422,
     message: 'Request cannot be processed.',

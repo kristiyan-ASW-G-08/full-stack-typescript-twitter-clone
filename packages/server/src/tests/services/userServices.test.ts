@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { createUser, sendConfirmationEmail } from '@services/userServices';
+import {
+  createUser,
+  sendConfirmationEmail,
+  checkCredentialsAvailability,
+} from '@services/userServices';
 import User from '@models/User';
 import db from 'src/db';
 import sendEmail from '@utilities/sendEmail';
-import MailOptions from '@customTypes/MailOptions';
 
 jest.mock('@utilities/sendEmail');
 jest.mock('jsonwebtoken');
@@ -75,6 +78,21 @@ describe('userServices', (): void => {
       );
       expect(sendEmail).toHaveBeenCalledTimes(1);
       expect(sendEmail).toMatchSnapshot();
+    });
+  });
+  describe('checkCredentialsAvailability', (): void => {
+    it('should throw a validationError error', async (): Promise<void> => {
+      expect.assertions(1);
+      await User.insertMany({ username, handle, email, password });
+      await expect(
+        checkCredentialsAvailability(username, handle, email),
+      ).rejects.toThrow();
+    });
+    it('should not throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      await expect(
+        checkCredentialsAvailability(username, handle, email),
+      ).resolves.toBeUndefined();
     });
   });
 });
