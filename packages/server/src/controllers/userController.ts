@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
 import {
   createUser,
   getUserByEmail,
   sendConfirmationEmail,
   checkCredentialsAvailability,
-  getAuthenticationToken,
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
@@ -33,10 +34,17 @@ export const logIn = async (
 ): Promise<void> => {
   try {
     const { email, password } = req.body;
+    const secret = process.env.SECRET;
     const user = await getUserByEmail(email);
     await comparePasswords(password, user.password);
     await checkUserConfirmation(user);
-    const token = await getAuthenticationToken(user._id);
+    const token = jwt.sign(
+      {
+        userId: user._id,
+      },
+      secret,
+      { expiresIn: '1h' },
+    );
     const { username, handle, following, likes, bookmarks, date } = user;
     const userData = {
       username,

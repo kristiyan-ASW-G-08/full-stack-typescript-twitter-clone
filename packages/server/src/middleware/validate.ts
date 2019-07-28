@@ -11,12 +11,14 @@ const validate = (
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
+    let isError = false;
     try {
       const { body } = req;
       await validator.validate(body, {
         abortEarly: false,
       });
     } catch (err) {
+      isError = true;
       const validationErrors = err.inner.map(
         (error: ValidationError): CustomValidationError => {
           const { path, message } = error;
@@ -27,7 +29,7 @@ const validate = (
       const error = new CustomError(status, message, validationErrors);
       next(error);
     } finally {
-      next();
+      if (!isError) next();
     }
   };
 };

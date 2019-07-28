@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
+import bcrypt from 'bcryptjs';
 import app from 'src/app';
 import User from '@models/User';
 import db from 'src/db';
@@ -64,6 +65,72 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(400);
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
+    });
+    it('should not create a new user', async (): Promise<void> => {
+      expect.assertions(3);
+      await User.insertMany({ username, handle, email, password });
+      const response = await request(app)
+        .post('/users')
+        .send({
+          username,
+          handle,
+          email,
+          password,
+          confirmPassword: password,
+        });
+      expect(response.status).toEqual(409);
+      expect(response.body).toMatchSnapshot();
+      expect(sendEmail).not.toHaveBeenCalled();
+    });
+    it('should not create a new user', async (): Promise<void> => {
+      expect.assertions(3);
+      const response = await request(app).post('/users');
+      expect(response.status).toEqual(400);
+      expect(response.body).toMatchSnapshot();
+      expect(sendEmail).not.toHaveBeenCalled();
+    });
+  });
+  describe('/users/tokens', (): void => {
+    it('should get a authentication token and user data', async (): Promise<
+      void
+    > => {
+      expect.assertions(5);
+      const hashedPassword = await bcrypt.hash(password, 12);
+      await User.insertMany({
+        username,
+        handle,
+        email,
+        password: hashedPassword,
+        confirmed: true,
+      });
+      const response = await request(app)
+        .post('/users/tokens')
+        .send({
+          email,
+          password,
+        });
+      const { token, user } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(typeof token).toMatch('string');
+      expect(user.username).toMatch(username);
+      expect(user.handle).toMatch(handle);
+      expect(user.email).toMatch(email);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const response = await request(app)
+        .post('/users/tokens')
+        .send({
+          email,
+          password,
+        });
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(2);
+      const response = await request(app).post('/users/tokens');
+      expect(response.status).toEqual(400);
+      expect(response.body).toMatchSnapshot();
     });
   });
 });

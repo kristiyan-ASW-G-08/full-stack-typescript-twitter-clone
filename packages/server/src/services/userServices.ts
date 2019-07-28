@@ -72,17 +72,7 @@ export const comparePasswords = async (
   }
 };
 export default comparePasswords;
-export const getAuthenticationToken = async (userId: UserType): Promise<string> => {
-  const secret = process.env.SECRET;
-  const token = jwt.sign(
-    {
-      userId,
-    },
-    secret,
-    { expiresIn: '1h' },
-  );
-  return token;
-};
+
 export const sendConfirmationEmail = (userId: string, email: string): void => {
   const secret = process.env.SECRET;
   const appEmail = process.env.EMAIL;

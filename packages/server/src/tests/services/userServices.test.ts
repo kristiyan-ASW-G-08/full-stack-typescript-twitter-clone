@@ -5,14 +5,20 @@ import {
   createUser,
   sendConfirmationEmail,
   checkCredentialsAvailability,
+  comparePasswords,
+  checkUserConfirmation,
+  getUserByEmail,
 } from '@services/userServices';
 import User from '@models/User';
 import db from 'src/db';
 import sendEmail from '@utilities/sendEmail';
+import { CustomError, errors } from '@utilities/CustomError';
 
 jest.mock('@utilities/sendEmail');
 jest.mock('jsonwebtoken');
+
 const mockToken = 'mockToken';
+
 (jwt.sign as jest.Mock).mockReturnValue(mockToken);
 
 describe('userServices', (): void => {
@@ -63,6 +69,30 @@ describe('userServices', (): void => {
       createUser(username, handle, email, password),
     ).rejects.toThrow();
   });
+  describe('getUserByEmail', (): void => {
+    it(`should get a user`, async (): Promise<void> => {
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const user = await getUserByEmail(email);
+      if (!user) {
+        return;
+      }
+      expect(user.username).toMatch(username);
+      expect(user.handle).toMatch(handle);
+      expect(user.email).toMatch(email);
+    });
+
+    it(`should throw an error`, async (): Promise<void> => {
+      const { status, message } = errors.NotFound;
+      const error = new CustomError(status, message);
+      await expect(getUserByEmail(email)).rejects.toThrow(error);
+    });
+  });
   describe('sendConfirmationEmail', (): void => {
     it(`should call sign and sendEmail`, async (): Promise<void> => {
       expect.assertions(4);
@@ -83,6 +113,7 @@ describe('userServices', (): void => {
   describe('checkCredentialsAvailability', (): void => {
     it('should throw a validationError error', async (): Promise<void> => {
       expect.assertions(1);
+
       await User.insertMany({ username, handle, email, password });
       await expect(
         checkCredentialsAvailability(username, handle, email),
@@ -93,6 +124,53 @@ describe('userServices', (): void => {
       await expect(
         checkCredentialsAvailability(username, handle, email),
       ).resolves.toBeUndefined();
+    });
+  });
+
+  describe('comparePasswords', (): void => {
+    let hashedPassword: string;
+    beforeEach(
+      async (): Promise<void> => {
+        hashedPassword = await bcrypt.hash(password, 12);
+      },
+    );
+    it(`should throw an error`, async (): Promise<void> => {
+      const incorrectPassword = 'incorrectPassword';
+      const { status, message } = errors.Unauthorized;
+      const error = new CustomError(status, message);
+      await expect(
+        comparePasswords(incorrectPassword, hashedPassword),
+      ).rejects.toThrow(error);
+    });
+    it(`should not throw an error`, async (): Promise<void> => {
+      await expect(comparePasswords(password, hashedPassword)).toEqual(
+        Promise.resolve({}),
+      );
+    });
+  });
+  describe('checkUserConfirmation', (): void => {
+    it(`should throw an error`, async (): Promise<void> => {
+      const user = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await user.save();
+      const { status, message } = errors.Unauthorized;
+      const error = new CustomError(status, message);
+      await expect(checkUserConfirmation(user)).rejects.toThrow(error);
+    });
+    it(`should not throw an error`, async (): Promise<void> => {
+      const user = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      user.confirmed = true;
+      await user.save();
+      await expect(checkUserConfirmation(user)).toEqual(Promise.resolve());
     });
   });
 });

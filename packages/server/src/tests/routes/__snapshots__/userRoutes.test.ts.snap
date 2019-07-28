@@ -19,3 +19,39 @@ Object {
   "message": "Request has wrong format.",
 }
 `;
+
+exports[`userRoutes /users should not create a new user 2`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "username is already taken",
+      "name": "username",
+    },
+    Object {
+      "message": "handle is already taken",
+      "name": "handle",
+    },
+    Object {
+      "message": "email is already taken",
+      "name": "email",
+    },
+  ],
+  "message": "Conflict",
+}
+`;
+
+exports[`userRoutes /users/tokens should throw an error 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "email is a required field",
+      "name": "email",
+    },
+    Object {
+      "message": "password is a required field",
+      "name": "password",
+    },
+  ],
+  "message": "Request has wrong format.",
+}
+`;
