@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import mjml2html from 'mjml';
 import User from '@models/User';
 import MailOptions from '@customTypes/MailOptions';
 import UserType from '@customTypes/User';
@@ -94,11 +95,47 @@ export const sendConfirmationEmail = (userId: string, email: string): void => {
     { expiresIn: '1h' },
   );
   const url = `${clientUri}/confirmation/${token}`;
+  const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
+  const options = {
+    validationLevel,
+  };
+  const htmlOutput = mjml2html(
+    `
+    <mjml>
+    <mj-head>
+      <mj-attributes>
+        <mj-class name="dark" color="#4f4f4f" />
+        <mj-class name="primary" color="#1dcaff" />
+        <mj-class name="primary-bg" background-color="#1dcaff" />
+        <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+        <mj-all font-family="Roboto" />
+      </mj-attributes>
+    </mj-head>
+    <mj-body>
+      <mj-hero mode="fixed-height" height="370px" padding="10px 40px 10px 40px">
+        <mj-text align="center" font-size="25px" font-weight="900" mj-class="primary">
+          TwittClone
+        </mj-text>
+        <mj-text align="left" font-size="20px" font-weight="900" mj-class="dark">
+          Confirm your email address
+        </mj-text>
+        <mj-text align="left" mj-class="dark" font-size="15px" line-height="20px">
+          There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
+        </mj-text>
+        <mj-button mj-class="primary-bg" href="${url}" align="center">
+          Verify email address
+        </mj-button>
+      </mj-hero>
+    </mj-body>
+  </mjml>
+`,
+    options,
+  );
   const mailOptions: MailOptions = {
     from: appEmail,
     to: email,
     subject: 'TwittClone Email Confirmation',
-    html: `Confirm your email: <a href="${url}">${url}</a>`,
+    html: htmlOutput.html,
   };
   sendEmail(mailOptions);
 };
