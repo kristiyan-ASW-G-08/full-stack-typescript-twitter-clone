@@ -4,12 +4,14 @@ import jwt from 'jsonwebtoken';
 import {
   createUser,
   getUserByEmail,
+  getUserById,
   sendConfirmationEmail,
   checkCredentialsAvailability,
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
-import passErrorToNext from '@utilities//passErrorToNext';
+import passErrorToNext from '@utilities/passErrorToNext';
+import { CustomError, errors } from '@utilities/CustomError';
 
 export const signUp = async (
   req: Request,
@@ -56,6 +58,35 @@ export const logIn = async (
       date,
     };
     res.status(200).json({ data: { token, user: userData } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const confirmEmail = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { token } = req.params;
+    const secret = process.env.SECRET;
+    const { userId }: any = jwt.verify(
+      token,
+      secret,
+      (err: any, decoded: any): { userId: string } => {
+        if (err) {
+          const { status, message } = errors.Unauthorized;
+          const error = new CustomError(status, message);
+          throw error;
+        } else {
+          return decoded;
+        }
+      },
+    );
+    const user = await getUserById(userId);
+    user.confirmed = true;
+    res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
   }

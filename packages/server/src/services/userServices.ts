@@ -41,6 +41,21 @@ export const getUserByEmail = async (email: string): Promise<UserType> => {
   }
   return user;
 };
+export const getUserById = async (userId: string): Promise<UserType> => {
+  const user = await User.findById(userId);
+  if (!user) {
+    const validationErrorsArr: ValidationError[] = [
+      {
+        name: '',
+        message: 'User does not exist',
+      },
+    ];
+    const { status, message } = errors.NotFound;
+    const error = new CustomError(status, message, validationErrorsArr);
+    throw error;
+  }
+  return user;
+};
 export const checkUserConfirmation = async (user: UserType): Promise<void> => {
   if (!user.confirmed) {
     const validationErrorsArr: ValidationError[] = [
