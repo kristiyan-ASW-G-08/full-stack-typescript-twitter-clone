@@ -6,6 +6,7 @@ import {
   getUserByEmail,
   getUserById,
   sendConfirmationEmail,
+  sendPasswordResetEmail,
   checkCredentialsAvailability,
   comparePasswords,
   checkUserConfirmation,
@@ -86,6 +87,21 @@ export const confirmEmail = async (
     );
     const user = await getUserById(userId);
     user.confirmed = true;
+    res.sendStatus(204);
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const requestPasswordResetEmail = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { email } = req.params;
+    const user = await getUserByEmail(email);
+    sendPasswordResetEmail(user._id, email);
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
