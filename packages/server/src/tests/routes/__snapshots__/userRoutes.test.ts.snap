@@ -40,6 +40,34 @@ Object {
 }
 `;
 
+exports[`userRoutes /users should not create a new user 3`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "username is a required field",
+      "name": "username",
+    },
+    Object {
+      "message": "handle is a required field",
+      "name": "handle",
+    },
+    Object {
+      "message": "email is a required field",
+      "name": "email",
+    },
+    Object {
+      "message": "password is a required field",
+      "name": "password",
+    },
+    Object {
+      "message": "confirmPassword is a required field",
+      "name": "confirmPassword",
+    },
+  ],
+  "message": "Request has wrong format.",
+}
+`;
+
 exports[`userRoutes /users/tokens should throw an error 1`] = `
 Object {
   "data": Array [

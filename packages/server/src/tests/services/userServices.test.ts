@@ -7,6 +7,7 @@ import {
   checkCredentialsAvailability,
   comparePasswords,
   checkUserConfirmation,
+  getUserById,
   getUserByEmail,
 } from '@services/userServices';
 import User from '@models/User';
@@ -18,7 +19,6 @@ jest.mock('@utilities/sendEmail');
 jest.mock('jsonwebtoken');
 
 const mockToken = 'mockToken';
-
 (jwt.sign as jest.Mock).mockReturnValue(mockToken);
 
 describe('userServices', (): void => {
@@ -91,6 +91,32 @@ describe('userServices', (): void => {
       const { status, message } = errors.NotFound;
       const error = new CustomError(status, message);
       await expect(getUserByEmail(email)).rejects.toThrow(error);
+    });
+  });
+  describe('getUserById', (): void => {
+    it(`should get a user`, async (): Promise<void> => {
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const user = await getUserById(userId);
+      if (!user) {
+        return;
+      }
+      expect(user.username).toMatch(username);
+      expect(user.handle).toMatch(handle);
+      expect(user.email).toMatch(email);
+    });
+
+    it(`should throw an error`, async (): Promise<void> => {
+      const { status, message } = errors.NotFound;
+      const error = new CustomError(status, message);
+      const userId = mongoose.Types.ObjectId().toString();
+      await expect(getUserById(userId)).rejects.toThrow(error);
     });
   });
   describe('sendConfirmationEmail', (): void => {

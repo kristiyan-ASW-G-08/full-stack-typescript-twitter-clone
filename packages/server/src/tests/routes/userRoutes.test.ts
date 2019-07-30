@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import mjml from 'mjml';
 import app from 'src/app';
 import User from '@models/User';
 import db from 'src/db';
-
 import sendEmail from '@utilities/sendEmail';
 
 const port = process.env.PORT || 8080;
-
+const mockTemplate = 'MockTemplate';
+(mjml as jest.Mock).mockReturnValue(mockTemplate);
+jest.mock('mjml');
 jest.mock('@utilities/sendEmail');
 
 describe('userRoutes', (): void => {
@@ -36,6 +39,7 @@ describe('userRoutes', (): void => {
   const password = 'testPassword';
   const invalidEmail = 'testmail';
   const invalidPassword = '1234';
+  const secret = process.env.SECRET;
   describe('/users', (): void => {
     it('should create a new user', async (): Promise<void> => {
       expect.assertions(2);
@@ -131,6 +135,42 @@ describe('userRoutes', (): void => {
       const response = await request(app).post('/users/tokens');
       expect(response.status).toEqual(400);
       expect(response.body).toMatchSnapshot();
+    });
+  });
+  describe('/users/:token', (): void => {
+    it('should confirm user email', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app).patch(`/users/${token}`);
+      expect(response.status).toEqual(204);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app).patch(`/users/${token}`);
+      expect(response.status).toEqual(404);
     });
   });
 });

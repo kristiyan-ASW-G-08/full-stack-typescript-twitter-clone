@@ -8,9 +8,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/server.ts NODE_ENV=development",
+    "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
     "test": "jest --watchAll --runInBand ",
-    "build": "tsc src/server.ts"
+    "build": "tsc src/index.ts"
   },
   "dependencies": {
     "@twtr/common": "^1.0.61",
