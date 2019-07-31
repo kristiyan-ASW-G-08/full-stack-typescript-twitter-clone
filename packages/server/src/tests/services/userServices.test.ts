@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {
   createUser,
   sendConfirmationEmail,
+  sendPasswordResetEmail,
   checkCredentialsAvailability,
   comparePasswords,
   checkUserConfirmation,
@@ -124,6 +125,23 @@ describe('userServices', (): void => {
       expect.assertions(4);
       const userId = mongoose.Types.ObjectId().toString();
       sendConfirmationEmail(userId, email);
+      expect(jwt.sign).toHaveBeenCalledTimes(1);
+      expect(jwt.sign).toHaveBeenCalledWith(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      expect(sendEmail).toHaveBeenCalledTimes(1);
+      expect(sendEmail).toMatchSnapshot();
+    });
+  });
+  describe('sendPasswordRequestEmail', (): void => {
+    it(`should call sign and sendEmail`, async (): Promise<void> => {
+      expect.assertions(4);
+      const userId = mongoose.Types.ObjectId().toString();
+      sendPasswordResetEmail(userId, email);
       expect(jwt.sign).toHaveBeenCalledTimes(1);
       expect(jwt.sign).toHaveBeenCalledWith(
         {

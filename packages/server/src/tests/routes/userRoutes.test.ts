@@ -139,7 +139,7 @@ describe('userRoutes', (): void => {
   });
   describe('/users/:token', (): void => {
     it('should confirm user email', async (): Promise<void> => {
-      expect.assertions(1);
+      expect.assertions(2);
       const newUser = new User({
         username,
         handle,
@@ -156,8 +156,14 @@ describe('userRoutes', (): void => {
         secret,
         { expiresIn: '1h' },
       );
+
       const response = await request(app).patch(`/users/${token}`);
+      const confirmedUser = await User.findById(newUser._id);
+      if (!confirmedUser) {
+        return;
+      }
       expect(response.status).toEqual(204);
+      expect(confirmedUser.confirmed).toBeTruthy();
     });
     it('should throw an error', async (): Promise<void> => {
       expect.assertions(1);
@@ -170,6 +176,25 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app).patch(`/users/${token}`);
+      expect(response.status).toEqual(404);
+    });
+  });
+  describe('/users/:email', (): void => {
+    it('should request password reset email', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const response = await request(app).post(`/users/${email}`);
+      expect(response.status).toEqual(204);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const response = await request(app).post(`/users/${email}`);
       expect(response.status).toEqual(404);
     });
   });

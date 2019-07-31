@@ -87,6 +87,7 @@ export const confirmEmail = async (
     );
     const user = await getUserById(userId);
     user.confirmed = true;
+    await user.save();
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
