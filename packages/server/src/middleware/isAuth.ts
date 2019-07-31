@@ -11,18 +11,13 @@ const isAuth = (req: Request, res: Response, next: NextFunction): void => {
     throw error;
   }
   const token = authHeader.split(' ')[1];
-  try {
-    const decodedToken = verify(token, secret);
-    // @ts-ignore
-    const { userId } = decodedToken;
-    if (!decodedToken || !userId) {
-      throw error;
-    }
-  } catch (err) {
-    err.status = 500;
-    throw err;
+  const decodedToken = verify(token, secret);
+  // @ts-ignore
+  const { userId } = decodedToken;
+  if (!decodedToken || !userId) {
+    throw error;
   }
-
+  req.userId = userId;
   next();
 };
 export default isAuth;
