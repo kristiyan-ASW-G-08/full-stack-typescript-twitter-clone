@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 import {
   createUser,
@@ -88,6 +89,23 @@ export const requestPasswordResetEmail = async (
     const { email } = req.params;
     const user = await getUserByEmail(email);
     sendPasswordResetEmail(user._id, email);
+    res.sendStatus(204);
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+export const resetPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { password } = req.body;
+    const { userId } = req;
+    const user = await getUserById(userId);
+    const hashedPassword = await bcrypt.hash(password, 12);
+    user.password = hashedPassword;
+    await user.save();
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);

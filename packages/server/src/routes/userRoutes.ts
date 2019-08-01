@@ -5,9 +5,11 @@ import {
   logIn,
   confirmEmail,
   requestPasswordResetEmail,
+  resetPassword,
 } from '@controllers/userController';
 import UserValidator from '@twtr/common/schemaValidators/UserValidator';
 import UserLoginValidator from '@twtr/common/schemaValidators/UserLoginValidator';
+import ResetPasswordValidator from '@twtr/common/schemaValidators/ResetPasswordValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
@@ -18,5 +20,11 @@ router.post('/users/tokens', validate(UserLoginValidator), logIn);
 
 router.post('/users/:email', requestPasswordResetEmail);
 router.patch('/users', isAuth, confirmEmail);
+router.patch(
+  '/users/reset',
+  isAuth,
+  validate(ResetPasswordValidator),
+  resetPassword,
+);
 
 export default router;

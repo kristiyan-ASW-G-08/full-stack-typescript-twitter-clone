@@ -207,4 +207,80 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('/users/reset', (): void => {
+    it("should reset user's password", async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const newPassword = 'newPasswordNewPassword';
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/reset`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          password: newPassword,
+          confirmPassword: newPassword,
+        });
+      expect(response.status).toEqual(204);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const newPassword = 'invalid';
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/reset`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          password: newPassword,
+          confirmPassword: newPassword,
+        });
+      expect(response.status).toEqual(400);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const newPassword = 'newPasswordNewPassword';
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/reset`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          password: newPassword,
+          confirmPassword: newPassword,
+        });
+      expect(response.status).toEqual(404);
+    });
+  });
 });
