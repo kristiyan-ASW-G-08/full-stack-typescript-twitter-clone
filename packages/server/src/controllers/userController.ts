@@ -12,7 +12,6 @@ import {
   checkUserConfirmation,
 } from '@services/userServices';
 import passErrorToNext from '@utilities/passErrorToNext';
-import { CustomError, errors } from '@utilities/CustomError';
 
 export const signUp = async (
   req: Request,
@@ -70,21 +69,7 @@ export const confirmEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { token } = req.params;
-    const secret = process.env.SECRET;
-    const { userId }: any = jwt.verify(
-      token,
-      secret,
-      (err: any, decoded: any): { userId: string } => {
-        if (err) {
-          const { status, message } = errors.Unauthorized;
-          const error = new CustomError(status, message);
-          throw error;
-        } else {
-          return decoded;
-        }
-      },
-    );
+    const { userId } = req;
     const user = await getUserById(userId);
     user.confirmed = true;
     await user.save();

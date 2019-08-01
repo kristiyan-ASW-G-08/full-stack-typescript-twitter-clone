@@ -1,12 +1,13 @@
+import mongoose from 'mongoose';
 import httpMocks from 'node-mocks-http';
 import jwt from 'jsonwebtoken';
 import isAuth from '@customMiddleware/isAuth';
 
 describe('isAuth', (): void => {
   it(`should add userId to req`, async (): Promise<void> => {
-    // expect.assertions(2);
+    expect.assertions(2);
     const nextMock = jest.fn();
-    const userId = 'randomUserId';
+    const userId = mongoose.Types.ObjectId();
     const secret = process.env.SECRET;
     const token = jwt.sign(
       {
@@ -25,7 +26,7 @@ describe('isAuth', (): void => {
     const resMock = httpMocks.createResponse();
     isAuth(reqMock, resMock, nextMock);
     expect(nextMock).toBeCalledTimes(1);
-    expect(reqMock.userId).toEqual(userId);
+    expect(reqMock.userId).toMatch(userId.toString());
   });
   it('should throw an error', async (): Promise<void> => {
     expect.assertions(1);

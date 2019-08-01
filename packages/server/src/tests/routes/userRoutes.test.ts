@@ -137,7 +137,7 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
     });
   });
-  describe('/users/:token', (): void => {
+  describe('/users', (): void => {
     it('should confirm user email', async (): Promise<void> => {
       expect.assertions(2);
       const newUser = new User({
@@ -157,7 +157,9 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
 
-      const response = await request(app).patch(`/users/${token}`);
+      const response = await request(app)
+        .patch(`/users`)
+        .set('Authorization', `Bearer ${token}`);
       const confirmedUser = await User.findById(newUser._id);
       if (!confirmedUser) {
         return;
@@ -175,8 +177,15 @@ describe('userRoutes', (): void => {
         secret,
         { expiresIn: '1h' },
       );
-      const response = await request(app).patch(`/users/${token}`);
+      const response = await request(app)
+        .patch(`/users`)
+        .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const response = await request(app).patch(`/users`);
+      expect(response.status).toEqual(401);
     });
   });
   describe('/users/:email', (): void => {
