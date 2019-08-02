@@ -283,4 +283,49 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('delete /users', (): void => {
+    it('should delete a user', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .delete(`/users`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(204);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .delete(`/users`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const response = await request(app).delete(`/users`);
+      expect(response.status).toEqual(401);
+    });
+  });
 });
