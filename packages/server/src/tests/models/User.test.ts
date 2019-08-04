@@ -20,9 +20,8 @@ describe('User model', (): void => {
       await mongoose.disconnect();
     },
   );
-  it('Should throw validation error', (): void => {
+  it('Should throw and error', (): void => {
     const user = new User();
-
     expect(user.validate).toThrow();
   });
   it('should create a new user', async (): Promise<void> => {

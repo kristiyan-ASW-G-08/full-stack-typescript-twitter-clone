@@ -63,7 +63,7 @@ describe('userServices', (): void => {
       hashMock.mockRestore();
     });
   });
-  it('should throw a mongo duplicate key error', async (): Promise<void> => {
+  it('should throw an error', async (): Promise<void> => {
     expect.assertions(1);
     await User.insertMany({ username, handle, email, password });
     await expect(

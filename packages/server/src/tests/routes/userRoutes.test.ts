@@ -294,7 +294,6 @@ describe('userRoutes', (): void => {
       });
       await newUser.save();
       const userId = newUser._id;
-
       const token = jwt.sign(
         {
           userId,

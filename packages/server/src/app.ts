@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import compression from 'compression';
 import userRoutes from '@routes/userRoutes';
-import { CustomError, errors } from '@utilities/CustomError';
+import { CustomError } from '@utilities/CustomError';
 
 const app: Application = express();
 
