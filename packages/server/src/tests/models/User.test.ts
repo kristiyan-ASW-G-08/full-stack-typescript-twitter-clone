@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import User from 'src/models/User';
-import UserType from 'src/types/User';
+import User from '@models/User';
+import UserType from '@customTypes/User';
 import db from 'src/db';
 
-describe('User model', (): void => {
+describe('User', (): void => {
   beforeAll(
     async (): Promise<void> => {
       db();

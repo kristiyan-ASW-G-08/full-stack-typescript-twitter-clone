@@ -20,10 +20,7 @@ const TweetSchema: Schema = new Schema({
 });
 
 TweetSchema.pre('find', function(next: NextFunction): void {
-  this.populate([
-    { path: 'user', select: 'username' },
-    { path: 'community', select: 'name description subscribers theme' },
-  ]);
+  this.populate([{ path: 'user', select: 'username handle' }]);
   next();
 });
 export default mongoose.model<Tweet>('Tweet', TweetSchema);
