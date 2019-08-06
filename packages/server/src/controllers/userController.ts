@@ -21,7 +21,7 @@ export const signUp = async (
   try {
     const { username, handle, email, password } = req.body;
     await checkCredentialsAvailability(username, handle, email);
-    const userId = await createUser(username, handle, email, password);
+    const { userId } = await createUser(username, handle, email, password);
     sendConfirmationEmail(userId, email);
     res.sendStatus(204);
   } catch (err) {
@@ -37,7 +37,7 @@ export const logIn = async (
   try {
     const { email, password } = req.body;
     const secret = process.env.SECRET;
-    const user = await getUserByEmail(email);
+    const { user } = await getUserByEmail(email);
     await comparePasswords(password, user.password);
     await checkUserConfirmation(user);
     const token = jwt.sign(
@@ -70,7 +70,7 @@ export const confirmEmail = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
-    const user = await getUserById(userId);
+    const { user } = await getUserById(userId);
     user.confirmed = true;
     await user.save();
     res.sendStatus(204);
@@ -86,7 +86,7 @@ export const requestPasswordResetEmail = async (
 ): Promise<void> => {
   try {
     const { email } = req.params;
-    const user = await getUserByEmail(email);
+    const { user } = await getUserByEmail(email);
     sendPasswordResetEmail(user._id, email);
     res.sendStatus(204);
   } catch (err) {
@@ -101,7 +101,7 @@ export const resetPassword = async (
   try {
     const { password } = req.body;
     const { userId } = req;
-    const user = await getUserById(userId);
+    const { user } = await getUserById(userId);
     const hashedPassword = await bcrypt.hash(password, 12);
     user.password = hashedPassword;
     await user.save();
@@ -117,7 +117,7 @@ export const deleteUser = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
-    const user = await getUserById(userId);
+    const { user } = await getUserById(userId);
     await user.remove();
     res.sendStatus(204);
   } catch (err) {

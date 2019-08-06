@@ -48,7 +48,7 @@ describe('userServices', (): void => {
     it(`should create a new user`, async (): Promise<void> => {
       expect.assertions(7);
       const hashMock = jest.spyOn(bcrypt, 'hash');
-      const userId = await createUser(username, handle, email, password);
+      const { userId } = await createUser(username, handle, email, password);
       expect(userId).toBeTruthy();
       const user = await User.findById(userId);
       if (!user) {
@@ -79,7 +79,7 @@ describe('userServices', (): void => {
         password,
       });
       await newUser.save();
-      const user = await getUserByEmail(email);
+      const { user } = await getUserByEmail(email);
       if (!user) {
         return;
       }
@@ -96,6 +96,7 @@ describe('userServices', (): void => {
   });
   describe('getUserById', (): void => {
     it(`should get a user`, async (): Promise<void> => {
+      expect.assertions(3);
       const newUser = new User({
         username,
         handle,
@@ -104,7 +105,7 @@ describe('userServices', (): void => {
       });
       await newUser.save();
       const userId = newUser._id;
-      const user = await getUserById(userId);
+      const { user } = await getUserById(userId);
       if (!user) {
         return;
       }

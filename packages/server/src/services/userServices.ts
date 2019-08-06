@@ -13,7 +13,7 @@ export const createUser = async (
   handle: string,
   email: string,
   password: string,
-): Promise<string> => {
+): Promise<{ userId: string }> => {
   const hashedPassword = await bcrypt.hash(password, 12);
   const user = new User({
     username,
@@ -22,10 +22,13 @@ export const createUser = async (
     password: hashedPassword,
   });
   await user.save();
-  return user._id;
+  const userId = user._id;
+  return { userId };
 };
 
-export const getUserByEmail = async (email: string): Promise<UserType> => {
+export const getUserByEmail = async (
+  email: string,
+): Promise<{ user: UserType }> => {
   const user = await User.findOne({ email });
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
@@ -38,9 +41,11 @@ export const getUserByEmail = async (email: string): Promise<UserType> => {
     const error = new CustomError(status, message, validationErrorsArr);
     throw error;
   }
-  return user;
+  return { user };
 };
-export const getUserById = async (userId: string): Promise<UserType> => {
+export const getUserById = async (
+  userId: string,
+): Promise<{ user: UserType }> => {
   const user = await User.findById(userId);
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
@@ -53,7 +58,7 @@ export const getUserById = async (userId: string): Promise<UserType> => {
     const error = new CustomError(status, message, validationErrorsArr);
     throw error;
   }
-  return user;
+  return { user };
 };
 export const checkUserConfirmation = async (user: UserType): Promise<void> => {
   if (!user.confirmed) {

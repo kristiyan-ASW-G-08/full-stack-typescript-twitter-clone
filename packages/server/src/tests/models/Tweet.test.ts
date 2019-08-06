@@ -28,8 +28,8 @@ describe('Tweet model', (): void => {
     expect(tweet.validate).toThrow();
   });
   it('should create a new tweet', async (): Promise<void> => {
-    expect.assertions(4);
-    const user = mongoose.Types.ObjectId();
+    expect.assertions(3);
+    const user = mongoose.Types.ObjectId().toString();
     const type = 'text';
     const tweet: TweetType = new Tweet({
       user,
@@ -39,10 +39,6 @@ describe('Tweet model', (): void => {
     await tweet.save();
 
     expect(saveSpy).toHaveBeenCalled();
-    expect(tweet).toMatchObject({
-      user,
-      type,
-    });
     expect(tweet.user.toString()).toMatch(user.toString());
     expect(tweet.type).toMatch(type);
     saveSpy.mockRestore();
