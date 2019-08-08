@@ -87,6 +87,7 @@ export const requestPasswordResetEmail = async (
   try {
     const { email } = req.params;
     const { user } = await getUserByEmail(email);
+    await checkUserConfirmation(user);
     sendPasswordResetEmail(user._id, email);
     res.sendStatus(204);
   } catch (err) {

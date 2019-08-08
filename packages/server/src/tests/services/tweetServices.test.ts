@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import createTweet from '@services/tweetServices';
+import { createTweet, createLinkTweet } from '@services/tweetServices';
 import User from '@models/User';
 import Tweet from '@models/Tweet';
 import db from 'src/db';
@@ -34,6 +34,7 @@ describe('tweetServices', (): void => {
   );
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
+  const link = 'fakeUrl';
   const userId = mongoose.Types.ObjectId().toString();
   describe('createTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
@@ -54,5 +55,25 @@ describe('tweetServices', (): void => {
     expect.assertions(1);
     const invalidUserId = 'invalid';
     await expect(createTweet(text, invalidUserId)).rejects.toThrow();
+  });
+  describe('createLinkTweet', (): void => {
+    it(`should create a new tweet`, async (): Promise<void> => {
+      expect.assertions(3);
+      const hashMock = jest.spyOn(bcrypt, 'hash');
+      const { tweetId } = await createLinkTweet(text, link, userId);
+      expect(tweetId).toBeTruthy();
+      const tweet = await Tweet.findById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(tweet.text).toMatch(text);
+      expect(tweet.user.toString()).toMatch(userId);
+      hashMock.mockRestore();
+    });
+  });
+  it('should throw an error', async (): Promise<void> => {
+    expect.assertions(1);
+    const invalidUserId = 'invalid';
+    await expect(createLinkTweet(text, link, invalidUserId)).rejects.toThrow();
   });
 });

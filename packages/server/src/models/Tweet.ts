@@ -5,6 +5,8 @@ import Tweet from '@customTypes/Tweet';
 const TweetSchema: Schema = new Schema({
   type: { type: String, required: true, enum: ['text', 'image', 'retweet'] },
   text: { type: String, minlength: 1, maxlength: 500 },
+  image: { type: String, minlength: 1 },
+  link: { type: String, minlength: 1 },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

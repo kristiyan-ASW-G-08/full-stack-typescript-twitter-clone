@@ -196,10 +196,23 @@ describe('userRoutes', (): void => {
         handle,
         email,
         password,
+        confirmed: true,
       });
       await newUser.save();
       const response = await request(app).post(`/users/${email}`);
       expect(response.status).toEqual(204);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const response = await request(app).post(`/users/${email}`);
+      expect(response.status).toEqual(401);
     });
     it('should throw an error', async (): Promise<void> => {
       expect.assertions(1);

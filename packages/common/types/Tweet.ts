@@ -1,10 +1,10 @@
-import User from './User';
-
 export default interface Tweet {
-  type: 'text' | 'image' | 'retweet';
+  type: 'text' | 'link' | 'image';
   text: string;
   date: string;
   retweets: number;
   likes: number;
   comments: number;
+  image: string;
+  link: string;
 }

@@ -2,3 +2,4 @@
 nodemon.json
 dist
 .env
+/src/assets/images/*

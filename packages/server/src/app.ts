@@ -1,9 +1,12 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
+import multer from 'multer';
 import compression from 'compression';
 import userRoutes from '@routes/userRoutes';
+import tweetRoutes from '@routes/tweetRoutes';
 import { CustomError } from '@utilities/CustomError';
+import path from 'path';
 
 const app: Application = express();
 
@@ -19,8 +22,39 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+const fileStorage = multer.diskStorage({
+  // @ts-ignore:Problem with multer and typescript
+  destination: (req: Request, file, cb): any => {
+    cb(null, '/images');
+  },
+  filename: (req: Request, file, cb) => {
+    cb(
+      null,
+      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`,
+    );
+  },
+});
+
+const fileFilter = (req: Request, file: any, cb: any) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/svg+xml'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
+
+app.use('/images', express.static(path.join(__dirname, './assets/images')));
+app.use('/default', express.static(path.join(__dirname, './assets/default')));
 
 app.use(userRoutes);
+app.use(tweetRoutes);
 
 app.use(
   (
