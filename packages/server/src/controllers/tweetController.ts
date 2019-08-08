@@ -14,26 +14,15 @@ export const postTweet = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, link, type } = req.body;
+    const { text, linkUrl, type } = req.body;
     const { userId } = req;
     if (type === 'text') {
       const { tweetId } = await createTweet(text, userId);
       res.status(200).json({ data: { tweetId } });
     } else if (type === 'link') {
-      const { tweetId } = await createLinkTweet(text, link, userId);
+      const { tweetId } = await createLinkTweet(text, linkUrl, userId);
       res.status(200).json({ data: { tweetId } });
     } else if (type === 'image') {
-      if (!req.file) {
-        const errorData: ValidationError[] = [
-          {
-            name: 'image',
-            message: 'Upload an image',
-          },
-        ];
-        const { status, message } = errors.BadRequest;
-        const error = new CustomError(status, message, errorData);
-        throw error;
-      }
       if (!req.file) {
         const errorData: ValidationError[] = [
           {

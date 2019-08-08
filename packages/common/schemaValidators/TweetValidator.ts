@@ -16,14 +16,14 @@ const TweetValidator = yup.object<TweetValidatorType>().shape({
     .string()
     .trim()
     .min(1)
-    .max(100)
+    .max(500)
     .when(
       'type',
       (type: 'text' | 'link' | 'image', schema: StringSchema): any => {
         return type === 'text' ? schema.required() : schema.notRequired();
       },
     ),
-  link: yup
+  linkUrl: yup
     .string()
     .trim()
     .url()
