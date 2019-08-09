@@ -2,10 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import {
   createTweet,
   createLinkTweet,
-  createImageTweet,
+  getTweetById,
 } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
+import isAuthorized from '@utilities/isAuthorized';
 import ValidationError from '@twtr/common/types/ValidationError';
 
 export const postTweet = async (
@@ -40,4 +41,19 @@ export const postTweet = async (
   }
 };
 
-export default postTweet;
+export const deleteTweet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { tweetId } = req.params;
+    const { userId } = req;
+    const { tweet } = await getTweetById(tweetId);
+    isAuthorized(tweet.user.toString(), userId);
+    tweet.remove();
+    res.sendStatus(204);
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};

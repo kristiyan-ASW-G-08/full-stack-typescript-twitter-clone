@@ -8,7 +8,7 @@ import db from 'src/db';
 import Tweet from '@models/Tweet';
 
 const port = process.env.PORT || 8080;
-// Temporary comment:The tweet routes don't call mjml, but removing the mock causes issues
+// Temporary comment:The tweet routes don't call mjml, but removing its mock causes issues
 const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
