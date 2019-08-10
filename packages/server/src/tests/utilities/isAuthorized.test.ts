@@ -11,7 +11,7 @@ describe('isAuthorized', (): void => {
     expect((): void => isAuthorized(authorizedUserId, userId)).toThrow(error);
   });
   it(`shouldn't throw an error`, async (): Promise<void> => {
-    await expect((): void =>
+    expect((): void =>
       isAuthorized(authorizedUserId, authorizedUserId),
     ).not.toThrow();
   });

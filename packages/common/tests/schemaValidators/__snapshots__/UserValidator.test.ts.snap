@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserValidator should throw an error 1`] = `[ValidationError: 7 errors occurred]`;
