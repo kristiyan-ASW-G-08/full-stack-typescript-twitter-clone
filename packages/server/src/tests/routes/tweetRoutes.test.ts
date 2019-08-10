@@ -42,7 +42,7 @@ describe('userRoutes', (): void => {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   const link = 'https://fakeLink.fakeLink';
   const secret = process.env.SECRET;
-  describe('/tweets', (): void => {
+  describe('post /tweets', (): void => {
     it('should create a new text tweet', async (): Promise<void> => {
       expect.assertions(1);
       const newUser = new User({
@@ -138,6 +138,73 @@ describe('userRoutes', (): void => {
           text,
         });
       expect(response.status).toEqual(401);
+    });
+  });
+  describe('delete /tweets/:tweetId', (): void => {
+    it('should delete a tweet', async (): Promise<void> => {
+      expect.assertions(2);
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .delete(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`);
+      const tweet = await Tweet.findById(tweetId);
+      expect(response.status).toEqual(204);
+      expect(tweet).toBeNull();
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(2);
+      const userId = mongoose.Types.ObjectId().toString();
+      const unauthorizedUserId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId: unauthorizedUserId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .delete(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`);
+      const tweet = await Tweet.findById(tweetId);
+      expect(response.status).toEqual(401);
+      expect(tweet).not.toBeNull();
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .delete(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(404);
     });
   });
 });

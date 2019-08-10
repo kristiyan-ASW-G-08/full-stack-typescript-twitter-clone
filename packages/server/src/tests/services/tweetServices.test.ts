@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { createTweet, createLinkTweet } from '@services/tweetServices';
+import {
+  createTweet,
+  createLinkTweet,
+  getTweetById,
+} from '@services/tweetServices';
 import User from '@models/User';
 import Tweet from '@models/Tweet';
 import db from 'src/db';
@@ -35,19 +39,19 @@ describe('tweetServices', (): void => {
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   const link = 'fakeUrl';
-  const userId = mongoose.Types.ObjectId().toString();
+  const mockUserId = mongoose.Types.ObjectId().toString();
   describe('createTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(3);
       const hashMock = jest.spyOn(bcrypt, 'hash');
-      const { tweetId } = await createTweet(text, userId);
+      const { tweetId } = await createTweet(text, mockUserId);
       expect(tweetId).toBeTruthy();
       const tweet = await Tweet.findById(tweetId);
       if (!tweet) {
         return;
       }
       expect(tweet.text).toMatch(text);
-      expect(tweet.user.toString()).toMatch(userId);
+      expect(tweet.user.toString()).toMatch(mockUserId);
       hashMock.mockRestore();
     });
   });
@@ -60,14 +64,14 @@ describe('tweetServices', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(3);
       const hashMock = jest.spyOn(bcrypt, 'hash');
-      const { tweetId } = await createLinkTweet(text, link, userId);
+      const { tweetId } = await createLinkTweet(text, link, mockUserId);
       expect(tweetId).toBeTruthy();
       const tweet = await Tweet.findById(tweetId);
       if (!tweet) {
         return;
       }
       expect(tweet.text).toMatch(text);
-      expect(tweet.user.toString()).toMatch(userId);
+      expect(tweet.user.toString()).toMatch(mockUserId);
       hashMock.mockRestore();
     });
   });
@@ -75,5 +79,33 @@ describe('tweetServices', (): void => {
     expect.assertions(1);
     const invalidUserId = 'invalid';
     await expect(createLinkTweet(text, link, invalidUserId)).rejects.toThrow();
+  });
+  describe('getTweetById', (): void => {
+    it(`should get a tweet`, async (): Promise<void> => {
+      expect.assertions(3);
+      const type = 'text';
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        text,
+        user: userId,
+        type,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const { tweet } = await getTweetById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(tweet.text).toMatch(text);
+      expect(tweet.type).toMatch(type);
+      expect(tweet.user.toString()).toMatch(userId.toString());
+    });
+
+    it(`should throw an error`, async (): Promise<void> => {
+      const { status, message } = errors.NotFound;
+      const error = new CustomError(status, message);
+      const tweetId = mongoose.Types.ObjectId().toString();
+      await expect(getTweetById(tweetId)).rejects.toThrow(error);
+    });
   });
 });
