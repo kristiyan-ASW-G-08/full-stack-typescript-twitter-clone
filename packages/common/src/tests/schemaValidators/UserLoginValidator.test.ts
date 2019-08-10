@@ -1,4 +1,4 @@
-import UserLoginValidator from '../../schemaValidators/UserLoginValidator';
+import UserLoginValidator from '@schemaValidators/UserLoginValidator';
 
 describe('userLoginValidator', (): void => {
   const email = 'testmail@mail.com';

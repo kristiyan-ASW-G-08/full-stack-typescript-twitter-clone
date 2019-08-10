@@ -1,4 +1,4 @@
-import UserValidator from '../../schemaValidators/UserValidator';
+import UserValidator from '@schemaValidators/UserValidator';
 
 describe('UserValidator', (): void => {
   const username = 'username';

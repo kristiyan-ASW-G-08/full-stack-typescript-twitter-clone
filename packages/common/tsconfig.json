@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@schemaValidators/*": ["src/schemaValidators/*"],
+      "@customTypes/*": ["src/types/*"]
+    },
     "target": "es6",
     "lib": ["esnext"],
     "allowJs": true,
@@ -14,5 +18,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true
-  }
+  },
+  "include": ["./src"]
 }

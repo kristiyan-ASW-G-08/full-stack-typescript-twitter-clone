@@ -1,4 +1,4 @@
-import TweetValidator from '../../schemaValidators/TweetValidator';
+import TweetValidator from '@schemaValidators/TweetValidator';
 
 describe('TweetValidator', (): void => {
   const type = 'text';

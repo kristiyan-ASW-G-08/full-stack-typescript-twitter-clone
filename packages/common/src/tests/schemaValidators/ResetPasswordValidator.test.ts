@@ -1,4 +1,4 @@
-import ResetPasswordValidator from '../../schemaValidators/ResetPasswordValidator';
+import ResetPasswordValidator from '@schemaValidators/ResetPasswordValidator';
 
 describe('ResetPasswordValidator', (): void => {
   const password = '123456789012';
