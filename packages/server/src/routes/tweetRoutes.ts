@@ -1,7 +1,7 @@
 import express from 'express';
 import validate from '@customMiddleware/validate';
 import { postTweet, deleteTweet } from '@controllers/tweetController';
-import TweetValidator from '@twtr/common/schemaValidators/TweetValidator';
+import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();

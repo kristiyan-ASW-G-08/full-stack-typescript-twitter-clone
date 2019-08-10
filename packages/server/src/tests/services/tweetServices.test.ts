@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {
   createTweet,
   createLinkTweet,
+  createImageTweet,
   getTweetById,
 } from '@services/tweetServices';
 import User from '@models/User';
@@ -39,6 +40,7 @@ describe('tweetServices', (): void => {
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   const link = 'fakeUrl';
+  const imagePath = 'fakeImagePath';
   const mockUserId = mongoose.Types.ObjectId().toString();
   describe('createTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
@@ -60,17 +62,18 @@ describe('tweetServices', (): void => {
     const invalidUserId = 'invalid';
     await expect(createTweet(text, invalidUserId)).rejects.toThrow();
   });
-  describe('createLinkTweet', (): void => {
+  describe('createImageTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(4);
       const hashMock = jest.spyOn(bcrypt, 'hash');
-      const { tweetId } = await createLinkTweet(text, link, mockUserId);
+      const { tweetId } = await createImageTweet(text, imagePath, mockUserId);
       expect(tweetId).toBeTruthy();
       const tweet = await Tweet.findById(tweetId);
       if (!tweet) {
         return;
       }
       expect(tweet.text).toMatch(text);
+      expect(tweet.image).toMatch(imagePath);
       expect(tweet.user.toString()).toMatch(mockUserId);
       hashMock.mockRestore();
     });
@@ -78,7 +81,33 @@ describe('tweetServices', (): void => {
   it('should throw an error', async (): Promise<void> => {
     expect.assertions(1);
     const invalidUserId = 'invalid';
-    await expect(createLinkTweet(text, link, invalidUserId)).rejects.toThrow();
+    await expect(
+      createImageTweet(text, imagePath, invalidUserId),
+    ).rejects.toThrow();
+  });
+  describe('createLinkTweet', (): void => {
+    it(`should create a new tweet`, async (): Promise<void> => {
+      expect.assertions(4);
+      const hashMock = jest.spyOn(bcrypt, 'hash');
+      const { tweetId } = await createLinkTweet(text, link, mockUserId);
+
+      expect(tweetId).toBeTruthy();
+      const tweet = await Tweet.findById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(tweet.text).toMatch(text);
+      expect(tweet.link).toMatch(link);
+      expect(tweet.user.toString()).toMatch(mockUserId);
+      hashMock.mockRestore();
+    });
+  });
+  it('should throw an error', async (): Promise<void> => {
+    expect.assertions(1);
+    const invalidUserId = 'invalid';
+    await expect(
+      createLinkTweet(text, imagePath, invalidUserId),
+    ).rejects.toThrow();
   });
   describe('getTweetById', (): void => {
     it(`should get a tweet`, async (): Promise<void> => {

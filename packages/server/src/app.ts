@@ -25,7 +25,7 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 const fileStorage = multer.diskStorage({
   // @ts-ignore:Problem with multer and typescript
   destination: (req: Request, file, cb): any => {
-    cb(null, '/images');
+    cb(null, './assets/images');
   },
   filename: (req: Request, file, cb) => {
     cb(

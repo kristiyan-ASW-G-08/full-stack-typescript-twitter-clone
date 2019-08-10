@@ -2,12 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 import {
   createTweet,
   createLinkTweet,
+  createImageTweet,
   getTweetById,
 } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
-import ValidationError from '@twtr/common/types/ValidationError';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 
 export const postTweet = async (
   req: Request,
@@ -35,6 +36,8 @@ export const postTweet = async (
         const error = new CustomError(status, message, errorData);
         throw error;
       }
+      const { tweetId } = await createImageTweet(text, req.file.path, userId);
+      res.status(200).json({ data: { tweetId } });
     }
   } catch (err) {
     passErrorToNext(err, next);

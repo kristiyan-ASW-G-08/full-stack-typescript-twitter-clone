@@ -1,7 +1,7 @@
 import httpMocks from 'node-mocks-http';
 import validate from '@customMiddleware/validate';
-import UserValidator from '@twtr/common/schemaValidators/UserValidator';
-import ValidationError from '@twtr/common/types/ValidationError';
+import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 import { errors, CustomError } from '@utilities/CustomError';
 
 describe('validate', (): void => {

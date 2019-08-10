@@ -1,4 +1,4 @@
-import CommonUser from '@twtr/common/types/User';
+import CommonUser from '@twtr/common/source/types/User';
 import { Schema, Document } from 'mongoose';
 
 export default interface User extends CommonUser, Document {

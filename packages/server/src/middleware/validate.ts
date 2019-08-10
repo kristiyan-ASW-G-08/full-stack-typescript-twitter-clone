@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Application } from 'express';
 import { MixedSchema, ValidationError } from 'yup';
-import CustomValidationError from '@twtr/common/types/ValidationError';
+import CustomValidationError from '@twtr/common/source/types/ValidationError';
 import { errors, CustomError } from '@utilities/CustomError';
 
 const validate = (

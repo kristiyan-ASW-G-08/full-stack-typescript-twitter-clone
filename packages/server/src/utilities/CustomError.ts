@@ -1,4 +1,4 @@
-import ValidationError from '@twtr/common/types/ValidationError';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 
 const errors = {
   BadRequest: {

@@ -6,7 +6,7 @@ import MailOptions from '@customTypes/MailOptions';
 import UserType from '@customTypes/User';
 import sendEmail from '@utilities/sendEmail';
 import { CustomError, errors } from '@utilities/CustomError';
-import ValidationError from '@twtr/common/types/ValidationError';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 
 export const createUser = async (
   username: string,

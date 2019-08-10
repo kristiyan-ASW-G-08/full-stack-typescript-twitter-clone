@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@schemaValidators/*": ["src/schemaValidators/*"],
-      "@customTypes/*": ["src/types/*"]
+      "@schemaValidators/*": ["source/schemaValidators/*"],
+      "@customTypes/*": ["source/types/*"]
     },
     "target": "es6",
     "lib": ["esnext"],
@@ -19,5 +19,5 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["./src"]
+  "include": ["./source"]
 }

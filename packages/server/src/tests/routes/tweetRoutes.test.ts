@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
+import mockFs from 'mock-fs';
 import mjml from 'mjml';
 import app from 'src/app';
 import User from '@models/User';
@@ -13,7 +14,7 @@ const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
 
-describe('userRoutes', (): void => {
+describe('tweetRoutes', (): void => {
   beforeAll(
     async (): Promise<void> => {
       await mongoose.disconnect();
@@ -32,6 +33,7 @@ describe('userRoutes', (): void => {
   afterAll(
     async (): Promise<void> => {
       await mongoose.disconnect();
+      mockFs.restore();
     },
   );
   const username = 'username';
@@ -96,6 +98,39 @@ describe('userRoutes', (): void => {
           type,
           linkUrl: link,
         })
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(200);
+    });
+    it('should create a new image tweet', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      mockFs({
+        'assets/images': {
+          'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
+        },
+      });
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const type = 'image';
+      const response = await request(app)
+        .post('/tweets')
+        .field({
+          type,
+          text,
+        })
+        .attach('image', 'assets/images/test.jpg')
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(200);
     });

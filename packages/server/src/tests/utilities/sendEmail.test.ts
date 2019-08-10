@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer';
-
 import sendEmail from '@utilities/sendEmail';
 import MailOptions from '@customTypes/MailOptions';
 

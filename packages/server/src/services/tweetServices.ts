@@ -1,6 +1,6 @@
 import Tweet from '@models/Tweet';
 import TweetType from '@customTypes/Tweet';
-import ValidationError from '@twtr/common/types/ValidationError';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 import { CustomError, errors } from '@utilities/CustomError';
 
 export const createTweet = async (

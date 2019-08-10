@@ -1,10 +1,10 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleDirectories: ['node_modules', 'src'],
+  moduleDirectories: ['node_modules', 'source'],
   moduleNameMapper: {
-    'src/(.*)$': '<rootDir>/src/$1',
-    'customTypes/(.*)$': '<rootDir>/src/types/$1',
-    'schemaValidators/(.*)$': '<rootDir>/src/schemaValidators/$1',
+    'src/(.*)$': '<rootDir>/source/$1',
+    'customTypes/(.*)$': '<rootDir>/source/types/$1',
+    'schemaValidators/(.*)$': '<rootDir>/source/schemaValidators/$1',
   },
 };

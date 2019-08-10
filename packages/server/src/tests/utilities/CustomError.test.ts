@@ -1,5 +1,5 @@
 import { CustomError, errors } from '@utilities/CustomError';
-import ValidationError from '@twtr/common/types/ValidationError';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 
 describe('CustomError', (): void => {
   it('should have correct status,message and data', (): void => {

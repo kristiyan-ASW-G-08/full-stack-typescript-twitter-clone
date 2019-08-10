@@ -8,9 +8,9 @@ import {
   resetPassword,
   deleteUser,
 } from '@controllers/userController';
-import UserValidator from '@twtr/common/schemaValidators/UserValidator';
-import UserLoginValidator from '@twtr/common/schemaValidators/UserLoginValidator';
-import ResetPasswordValidator from '@twtr/common/schemaValidators/ResetPasswordValidator';
+import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
+import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
+import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
