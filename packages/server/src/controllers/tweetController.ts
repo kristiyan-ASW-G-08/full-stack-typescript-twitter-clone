@@ -54,7 +54,7 @@ export const deleteTweet = async (
     const { userId } = req;
     const { tweet } = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
-    tweet.remove();
+    await tweet.remove();
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);

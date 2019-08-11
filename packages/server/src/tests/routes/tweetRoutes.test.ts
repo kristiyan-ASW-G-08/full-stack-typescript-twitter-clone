@@ -26,6 +26,7 @@ describe('tweetRoutes', (): void => {
   );
   afterEach(
     async (): Promise<void> => {
+      mockFs.restore();
       await Tweet.deleteMany({}).exec();
       await User.deleteMany({}).exec();
     },
@@ -33,7 +34,6 @@ describe('tweetRoutes', (): void => {
   afterAll(
     async (): Promise<void> => {
       await mongoose.disconnect();
-      mockFs.restore();
     },
   );
   const username = 'username';
