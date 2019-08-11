@@ -175,6 +175,134 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toEqual(401);
     });
   });
+  describe('patch /tweets/:tweetId', (): void => {
+    it('should update a text tweet', async (): Promise<void> => {
+      expect.assertions(2);
+      const newText = 'newTestText';
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          type: 'text',
+          text: newText,
+        });
+      const tweet = await Tweet.findById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(response.status).toEqual(204);
+      expect(tweet.text).toMatch(newText);
+    });
+    it('should update a link tweet', async (): Promise<void> => {
+      expect.assertions(2);
+      const newLink = 'https://fakeNewLink.com';
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          type: 'link',
+          linkUrl: newLink,
+        });
+      const tweet = await Tweet.findById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(response.status).toEqual(204);
+      expect(tweet.link).toMatch(newLink);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      const newLink = 'https://fakeNewLink.com';
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          type: 'link',
+          linkUrl: newLink,
+        });
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const newLink = 'https://fakeNewLink.com';
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .send({
+          type: 'link',
+          linkUrl: newLink,
+        });
+      expect(response.status).toEqual(401);
+    });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(400);
+    });
+  });
   describe('delete /tweets/:tweetId', (): void => {
     it('should delete a tweet', async (): Promise<void> => {
       expect.assertions(2);

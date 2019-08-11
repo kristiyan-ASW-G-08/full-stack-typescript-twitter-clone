@@ -53,16 +53,15 @@ export const updateTweet = async (
     const { tweetId } = req.params;
     const { userId } = req;
     const { tweet } = await getTweetById(tweetId);
-    const { text, link } = req.body;
+    const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
     if (tweet.type === 'text') {
       tweet.text = text;
     } else if (tweet.type === 'link') {
-      tweet.text = text;
       if (tweet.text) {
         tweet.text = text;
       }
-      tweet.link = link;
+      tweet.link = linkUrl;
     } else if (tweet.type === 'image') {
       if (!req.file) {
         const errorData: ValidationError[] = [
