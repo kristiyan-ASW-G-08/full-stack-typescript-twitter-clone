@@ -4,6 +4,7 @@ import {
   postTweet,
   deleteTweet,
   updateTweet,
+  getTweet,
 } from '@controllers/tweetController';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import isAuth from '@customMiddleware/isAuth';
@@ -16,4 +17,5 @@ router.patch('/tweets/:tweetId', isAuth, validate(TweetValidator), updateTweet);
 
 router.delete('/tweets/:tweetId', isAuth, deleteTweet);
 
+router.get('/tweets/:tweetId', getTweet);
 export default router;

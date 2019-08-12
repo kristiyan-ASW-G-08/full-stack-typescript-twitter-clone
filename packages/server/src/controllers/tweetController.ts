@@ -106,3 +106,17 @@ export const deleteTweet = async (
     passErrorToNext(err, next);
   }
 };
+
+export const getTweet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { tweetId } = req.params;
+    const { tweet } = await getTweetById(tweetId);
+    res.status(200).json({ data: { tweet } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
