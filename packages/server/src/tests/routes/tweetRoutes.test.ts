@@ -409,4 +409,197 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('get /tweets', (): void => {
+    it('should get a list of tweets', async (): Promise<void> => {
+      expect.assertions(3);
+      const userId = mongoose.Types.ObjectId().toString();
+      await Tweet.insertMany([
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+      ]);
+      const response = await request(app).get(`/tweets`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets.length).toEqual(5);
+      expect(links).toMatchSnapshot();
+    });
+    it('should get a list of tweets sorted by likes', async (): Promise<
+      void
+    > => {
+      expect.assertions(6);
+      const userId = mongoose.Types.ObjectId().toString();
+      await Tweet.insertMany([
+        {
+          type: 'text',
+          text,
+          user: userId,
+          likes: 100,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          likes: 300,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          likes: 200,
+        },
+
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+      ]);
+      const response = await request(app).get(`/tweets?sort=top&limit=5`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets.length).toEqual(5);
+      expect(tweets[0].likes).toBe(300);
+      expect(tweets[1].likes).toBe(200);
+      expect(tweets[2].likes).toBe(100);
+      expect(links).toMatchSnapshot();
+    });
+    it('should get a list of tweets sorted by comments', async (): Promise<
+      void
+    > => {
+      expect.assertions(6);
+      const userId = mongoose.Types.ObjectId().toString();
+      await Tweet.insertMany([
+        {
+          type: 'text',
+          text,
+          user: userId,
+          comments: 100,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          comments: 300,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          comments: 200,
+        },
+
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+      ]);
+      const response = await request(app).get(`/tweets?sort=comments&limit=5`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets.length).toEqual(5);
+      expect(tweets[0].comments).toBe(300);
+      expect(tweets[1].comments).toBe(200);
+      expect(tweets[2].comments).toBe(100);
+      expect(links).toMatchSnapshot();
+    });
+    it('should get a list of tweets sorted by retweets', async (): Promise<
+      void
+    > => {
+      expect.assertions(6);
+      const userId = mongoose.Types.ObjectId().toString();
+      await Tweet.insertMany([
+        {
+          type: 'text',
+          text,
+          user: userId,
+          retweets: 100,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          retweets: 300,
+        },
+        {
+          type: 'text',
+          text,
+          user: userId,
+          retweets: 200,
+        },
+
+        {
+          type: 'text',
+          text,
+          user: userId,
+        },
+      ]);
+      const response = await request(app).get(`/tweets/?sort=trending&limit=5`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets.length).toEqual(5);
+      expect(tweets[0].retweets).toBe(300);
+      expect(tweets[1].retweets).toBe(200);
+      expect(tweets[2].retweets).toBe(100);
+      expect(links).toMatchSnapshot();
+    });
+    it('should get an empty list of tweets when none are found', async (): Promise<
+      void
+    > => {
+      expect.assertions(3);
+      const response = await request(app).get(`/tweets`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets.length).toEqual(0);
+      expect(links).toMatchSnapshot();
+    });
+    it("should throw an error with a status of 400: BadRequest when the req query doesn't pass validation", async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      const response = await request(app).get(
+        `/tweets/?sort=invalid&limit=invalid&page=invalid`,
+      );
+      expect(response.status).toEqual(400);
+      expect(response.body.data).toMatchSnapshot();
+    });
+  });
 });

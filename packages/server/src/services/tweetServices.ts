@@ -77,7 +77,7 @@ export const getTweets = async (
       sortString = '-likes';
       break;
     case 'trending':
-      sortString = '-likes';
+      sortString = '-retweets';
       break;
     case 'new':
       sortString = '-date';

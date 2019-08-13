@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tweetRoutes get /tweets should get a list of tweets 1`] = `
+Object {
+  "next": null,
+  "prev": null,
+}
+`;
+
+exports[`tweetRoutes get /tweets should get a list of tweets sorted by comments 1`] = `
+Object {
+  "next": null,
+  "prev": null,
+}
+`;
+
+exports[`tweetRoutes get /tweets should get a list of tweets sorted by likes 1`] = `
+Object {
+  "next": null,
+  "prev": null,
+}
+`;
+
+exports[`tweetRoutes get /tweets should get a list of tweets sorted by retweets 1`] = `
+Object {
+  "next": null,
+  "prev": null,
+}
+`;
+
+exports[`tweetRoutes get /tweets should get an empty list of tweets when none are found 1`] = `
+Object {
+  "next": null,
+  "prev": null,
+}
+`;
+
+exports[`tweetRoutes get /tweets should throw an error with a status of 400: BadRequest when the req query doesn't pass validation 1`] = `
+Array [
+  Object {
+    "message": "sort must be one of the following values: top, trending, new, comments",
+    "name": "sort",
+  },
+  Object {
+    "message": "limit must be a \`number\` type, but the final value was: \`NaN\` (cast from the value \`\\"invalid\\"\`).",
+    "name": "limit",
+  },
+  Object {
+    "message": "page must be a \`number\` type, but the final value was: \`NaN\` (cast from the value \`\\"invalid\\"\`).",
+    "name": "page",
+  },
+]
+`;

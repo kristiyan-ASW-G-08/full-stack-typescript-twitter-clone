@@ -164,7 +164,7 @@ exports[`userServices sendConfirmationEmail should call sign and sendEmail 1`] =
              align=\\"center\\" bgcolor=\\"#1dcaff\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#1dcaff;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"http://localhost:3000/confirmation/mockToken\\" style=\\"display:inline-block;background:#1dcaff;color:#ffffff;font-family:Roboto;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;\\" target=\\"_blank\\"
+               href=\\"undefined/confirmation/mockToken\\" style=\\"display:inline-block;background:#1dcaff;color:#ffffff;font-family:Roboto;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;\\" target=\\"_blank\\"
             >
               Verify email address
             </a>
@@ -358,7 +358,7 @@ exports[`userServices sendPasswordRequestEmail should call sign and sendEmail 1`
              align=\\"center\\" bgcolor=\\"#1dcaff\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#1dcaff;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"http://localhost:3000/reset/mockToken\\" style=\\"display:inline-block;background:#1dcaff;color:#ffffff;font-family:Roboto;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;\\" target=\\"_blank\\"
+               href=\\"undefined/reset/mockToken\\" style=\\"display:inline-block;background:#1dcaff;color:#ffffff;font-family:Roboto;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;\\" target=\\"_blank\\"
             >
               Reset Your Password
             </a>
