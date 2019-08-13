@@ -65,3 +65,35 @@ export const getTweetById = async (
   }
   return { tweet };
 };
+
+export const getTweets = async (
+  sort: string,
+  limit: number,
+  page: number,
+): Promise<{ tweets: TweetType[]; tweetsCount: number }> => {
+  let sortString: string;
+  switch (sort) {
+    case 'top':
+      sortString = '-likes';
+      break;
+    case 'trending':
+      sortString = '-likes';
+      break;
+    case 'new':
+      sortString = '-date';
+      break;
+    case 'comments':
+      sortString = '-comments';
+      break;
+    default:
+      sortString = '-likes';
+      break;
+  }
+  const tweets = await Tweet.countDocuments()
+    .find()
+    .sort(sortString)
+    .skip((page - 1) * limit)
+    .limit(limit);
+  const tweetsCount = (await Tweet.countDocuments()) - page * limit;
+  return { tweets, tweetsCount };
+};

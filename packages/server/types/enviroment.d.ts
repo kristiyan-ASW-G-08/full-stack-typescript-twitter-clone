@@ -3,6 +3,7 @@ declare namespace NodeJS {
     SECRET: string;
     EMAIL: string;
     EMAIL_PASSWORD: string;
-    CLIENT_URI: string;
+    SERVER_URL: string;
+    SERVER_URL: string;
   }
 }

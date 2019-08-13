@@ -4,6 +4,7 @@ import {
   createLinkTweet,
   createImageTweet,
   getTweetById,
+  getTweets,
 } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
@@ -116,6 +117,35 @@ export const getTweet = async (
     const { tweetId } = req.params;
     const { tweet } = await getTweetById(tweetId);
     res.status(200).json({ data: { tweet } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getAllTweets = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const sort = req.query.sort || 'top';
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const { SERVER_URL } = process.env;
+    const { tweets, tweetsCount } = await getTweets(sort, limit, page);
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (tweetsCount > 0) {
+      links.next = `${SERVER_URL}/tweets?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/tweets?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { tweets, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
