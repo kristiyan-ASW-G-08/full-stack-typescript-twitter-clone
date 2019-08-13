@@ -8,7 +8,7 @@ describe('ResetPasswordValidator', (): void => {
       ResetPasswordValidator.validate(resetPasswordObj),
     ).resolves.toBe(resetPasswordObj);
   });
-  it(`should throw an errors`, async (): Promise<void> => {
+  it(`should throw an error`, async (): Promise<void> => {
     const invalidPassword = 'invalid';
     const resetPasswordObj = {
       password: invalidPassword,
@@ -18,7 +18,7 @@ describe('ResetPasswordValidator', (): void => {
       ResetPasswordValidator.validate(resetPasswordObj),
     ).rejects.toMatchSnapshot();
   });
-  it(`should throw an errors`, async (): Promise<void> => {
+  it(`should throw an error`, async (): Promise<void> => {
     const confirmPassword = 'invalid';
     const resetPasswordObj = { password, confirmPassword };
     await expect(
