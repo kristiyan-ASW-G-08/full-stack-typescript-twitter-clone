@@ -384,4 +384,29 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('get /tweets/:tweetId', (): void => {
+    it('should get a tweet', async (): Promise<void> => {
+      expect.assertions(2);
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const response = await request(app).get(`/tweets/${tweetId}`);
+      const { tweet } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweet._id.toString()).toMatch(tweetId.toString());
+    });
+    it('should throw an error with a status of 404: NotFound when the tweet is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const tweetId = mongoose.Types.ObjectId();
+      const response = await request(app).get(`/tweets/${tweetId}`);
+      expect(response.status).toEqual(404);
+    });
+  });
 });
