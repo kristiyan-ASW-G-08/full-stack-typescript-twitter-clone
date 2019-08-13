@@ -20,11 +20,13 @@ describe('User', (): void => {
       await mongoose.disconnect();
     },
   );
-  it('Should throw and error', (): void => {
+  it('should throw an error when the object passed to the model does not pass validation', (): void => {
     const user = new User();
     expect(user.validate).toThrow();
   });
-  it('should create a new user', async (): Promise<void> => {
+  it('should create a new user when validation is successful', async (): Promise<
+    void
+  > => {
     expect.assertions(6);
     const username = 'username';
     const handle = 'testUserHandle';

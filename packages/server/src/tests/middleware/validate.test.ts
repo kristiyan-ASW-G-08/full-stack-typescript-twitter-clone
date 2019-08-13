@@ -5,7 +5,9 @@ import ValidationError from '@twtr/common/source/types/ValidationError';
 import { errors, CustomError } from '@utilities/CustomError';
 
 describe('validate', (): void => {
-  it(`should call next`, async (): Promise<void> => {
+  it(`should call next when a validation error occurs`, async (): Promise<
+    void
+  > => {
     expect.assertions(2);
     const username = 'a';
     const handle = 'testUserHandle';
@@ -35,7 +37,9 @@ describe('validate', (): void => {
     expect(next).toHaveBeenCalledTimes(1);
     expect(next).toHaveBeenCalledWith(error);
   });
-  it(`should not call next`, async (): Promise<void> => {
+  it("shouldn't call next when validation is successful", async (): Promise<
+    void
+  > => {
     expect.assertions(1);
     const username = 'testUser';
     const handle = 'testUserHandle';

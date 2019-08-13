@@ -78,12 +78,17 @@ describe('tweetServices', (): void => {
       hashMock.mockRestore();
     });
   });
-  it('should throw an error', async (): Promise<void> => {
-    expect.assertions(1);
+  it('should throw an error when the user id is invalid', async (): Promise<
+    void
+  > => {
+    expect.assertions(2);
     const invalidUserId = 'invalid';
     await expect(
       createImageTweet(text, imagePath, invalidUserId),
     ).rejects.toThrow();
+    await expect(
+      createImageTweet(text, imagePath, invalidUserId),
+    ).rejects.toMatchSnapshot();
   });
   describe('createLinkTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
@@ -102,7 +107,9 @@ describe('tweetServices', (): void => {
       hashMock.mockRestore();
     });
   });
-  it('should throw an error', async (): Promise<void> => {
+  it('should throw an error when the user id is invalid', async (): Promise<
+    void
+  > => {
     expect.assertions(1);
     const invalidUserId = 'invalid';
     await expect(
@@ -130,11 +137,13 @@ describe('tweetServices', (): void => {
       expect(tweet.user.toString()).toMatch(userId.toString());
     });
 
-    it(`should throw an error`, async (): Promise<void> => {
-      const { status, message } = errors.NotFound;
-      const error = new CustomError(status, message);
+    it('should throw an error when the tweet is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
       const tweetId = mongoose.Types.ObjectId().toString();
-      await expect(getTweetById(tweetId)).rejects.toThrow(error);
+      await expect(getTweetById(tweetId)).rejects.toThrow();
+      await expect(getTweetById(tweetId)).rejects.toMatchSnapshot();
     });
   });
 });

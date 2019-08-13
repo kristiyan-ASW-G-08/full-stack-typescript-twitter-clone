@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken';
 import isAuth from '@customMiddleware/isAuth';
 
 describe('isAuth', (): void => {
-  it(`should add userId to req`, async (): Promise<void> => {
+  it(`should add userId to req when the authorization header is valid`, async (): Promise<
+    void
+  > => {
     expect.assertions(2);
     const nextMock = jest.fn();
     const userId = mongoose.Types.ObjectId();
@@ -28,7 +30,9 @@ describe('isAuth', (): void => {
     expect(nextMock).toBeCalledTimes(1);
     expect(reqMock.userId).toMatch(userId.toString());
   });
-  it('should throw an error', async (): Promise<void> => {
+  it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    void
+  > => {
     expect.assertions(1);
     const nextMock = jest.fn();
     const reqMock = httpMocks.createRequest({

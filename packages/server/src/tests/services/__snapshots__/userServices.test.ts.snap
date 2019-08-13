@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`userServices checkCredentialsAvailability should throw an error when the user credentials are already taken 1`] = `[Error: Conflict]`;
+
+exports[`userServices checkUserConfirmation should throw an error the user hasn't confirmed his email address 1`] = `[Error: Authentication credentials not valid.]`;
+
+exports[`userServices comparePasswords should throw an error when the passwords don't match 1`] = `[Error: Authentication credentials not valid.]`;
+
+exports[`userServices getUserByEmail should throw an error when the user is not found 1`] = `[Error: Resource not found.]`;
+
+exports[`userServices getUserById should throw an error should throw an error when the user is not found 1`] = `[Error: Resource not found.]`;
+
 exports[`userServices sendConfirmationEmail should call sign and sendEmail 1`] = `
 [MockFunction] {
   "calls": Array [
@@ -399,3 +409,5 @@ exports[`userServices sendPasswordRequestEmail should call sign and sendEmail 1`
   ],
 }
 `;
+
+exports[`userServices should throw an error when the user credentials are already taken 1`] = `[MongoError: E11000 duplicate key error collection: testFullStackTwitterClone.users index: username_1 dup key: { : "username" }]`;

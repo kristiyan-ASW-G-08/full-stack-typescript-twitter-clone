@@ -12,7 +12,7 @@ describe('passErrorToNext', (): void => {
     expect(nextMock).toHaveBeenCalledWith(error);
   });
 
-  it("should add status of 500 to error if it doesn't have one", (): void => {
+  it("should throw an error with a status of 500: InternalServerError when the passed error doesn't have status code", (): void => {
     expect.assertions(2);
     const nextMock = jest.fn();
     const error = new Error('test error');

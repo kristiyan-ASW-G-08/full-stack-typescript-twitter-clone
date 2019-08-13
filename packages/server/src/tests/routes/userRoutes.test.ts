@@ -55,7 +55,9 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(204);
       expect(sendEmail).toHaveBeenCalledTimes(1);
     });
-    it('should not create a new user', async (): Promise<void> => {
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
       expect.assertions(3);
       const response = await request(app)
         .post('/users')
@@ -70,7 +72,9 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
-    it('should not create a new user', async (): Promise<void> => {
+    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
+      void
+    > => {
       expect.assertions(3);
       await User.insertMany({ username, handle, email, password });
       const response = await request(app)
@@ -86,7 +90,9 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
-    it('should not create a new user', async (): Promise<void> => {
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
       expect.assertions(3);
       const response = await request(app).post('/users');
       expect(response.status).toEqual(400);
@@ -95,7 +101,7 @@ describe('userRoutes', (): void => {
     });
   });
   describe('/users/tokens', (): void => {
-    it('should get a authentication token and user data', async (): Promise<
+    it('should get a authentication token and user data object', async (): Promise<
       void
     > => {
       expect.assertions(5);
@@ -120,7 +126,9 @@ describe('userRoutes', (): void => {
       expect(user.handle).toMatch(handle);
       expect(user.email).toMatch(email);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const response = await request(app)
         .post('/users/tokens')
@@ -130,7 +138,9 @@ describe('userRoutes', (): void => {
         });
       expect(response.status).toEqual(404);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
       expect.assertions(2);
       const response = await request(app).post('/users/tokens');
       expect(response.status).toEqual(400);
@@ -167,7 +177,9 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(204);
       expect(confirmedUser.confirmed).toBeTruthy();
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId();
       const token = jwt.sign(
@@ -182,7 +194,9 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const response = await request(app).patch(`/users`);
       expect(response.status).toEqual(401);
@@ -202,7 +216,9 @@ describe('userRoutes', (): void => {
       const response = await request(app).post(`/users/${email}`);
       expect(response.status).toEqual(204);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const newUser = new User({
         username,
@@ -214,7 +230,9 @@ describe('userRoutes', (): void => {
       const response = await request(app).post(`/users/${email}`);
       expect(response.status).toEqual(401);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const response = await request(app).post(`/users/${email}`);
       expect(response.status).toEqual(404);
@@ -248,7 +266,9 @@ describe('userRoutes', (): void => {
         });
       expect(response.status).toEqual(204);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const newUser = new User({
         username,
@@ -275,7 +295,9 @@ describe('userRoutes', (): void => {
         });
       expect(response.status).toEqual(400);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId();
       const newPassword = 'newPasswordNewPassword';
@@ -319,7 +341,9 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(204);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId();
       const token = jwt.sign(
@@ -334,7 +358,9 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
     });
-    it('should throw an error', async (): Promise<void> => {
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       const response = await request(app).delete(`/users`);
       expect(response.status).toEqual(401);

@@ -63,14 +63,20 @@ describe('userServices', (): void => {
       hashMock.mockRestore();
     });
   });
-  it('should throw an error', async (): Promise<void> => {
-    expect.assertions(1);
+  it('should throw an error when the user credentials are already taken', async (): Promise<
+    void
+  > => {
+    expect.assertions(2);
     await User.insertMany({ username, handle, email, password });
     await expect(
       createUser(username, handle, email, password),
     ).rejects.toThrow();
+    await expect(
+      createUser(username, handle, email, password),
+    ).rejects.toMatchSnapshot();
   });
   describe('getUserByEmail', (): void => {
+    expect.assertions(3);
     it(`should get a user`, async (): Promise<void> => {
       const newUser = new User({
         username,
@@ -88,10 +94,12 @@ describe('userServices', (): void => {
       expect(user.email).toMatch(email);
     });
 
-    it(`should throw an error`, async (): Promise<void> => {
-      const { status, message } = errors.NotFound;
-      const error = new CustomError(status, message);
-      await expect(getUserByEmail(email)).rejects.toThrow(error);
+    it('should throw an error when the user is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      await expect(getUserByEmail(email)).rejects.toThrow();
+      await expect(getUserByEmail(email)).rejects.toMatchSnapshot();
     });
   });
   describe('getUserById', (): void => {
@@ -114,11 +122,13 @@ describe('userServices', (): void => {
       expect(user.email).toMatch(email);
     });
 
-    it(`should throw an error`, async (): Promise<void> => {
-      const { status, message } = errors.NotFound;
-      const error = new CustomError(status, message);
+    it('should throw an error should throw an error when the user is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
       const userId = mongoose.Types.ObjectId().toString();
-      await expect(getUserById(userId)).rejects.toThrow(error);
+      await expect(getUserById(userId)).rejects.toThrow();
+      await expect(getUserById(userId)).rejects.toMatchSnapshot();
     });
   });
   describe('sendConfirmationEmail', (): void => {
@@ -156,15 +166,22 @@ describe('userServices', (): void => {
     });
   });
   describe('checkCredentialsAvailability', (): void => {
-    it('should throw a validationError error', async (): Promise<void> => {
-      expect.assertions(1);
+    it('should throw an error when the user credentials are already taken', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
 
       await User.insertMany({ username, handle, email, password });
       await expect(
         checkCredentialsAvailability(username, handle, email),
       ).rejects.toThrow();
+      await expect(
+        checkCredentialsAvailability(username, handle, email),
+      ).rejects.toMatchSnapshot();
     });
-    it('should not throw an error', async (): Promise<void> => {
+    it("shouldn't throw an error when the user credentials are available", async (): Promise<
+      void
+    > => {
       expect.assertions(1);
       await expect(
         checkCredentialsAvailability(username, handle, email),
@@ -179,22 +196,32 @@ describe('userServices', (): void => {
         hashedPassword = await bcrypt.hash(password, 12);
       },
     );
-    it(`should throw an error`, async (): Promise<void> => {
+    it("should throw an error when the passwords don't match", async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
       const incorrectPassword = 'incorrectPassword';
-      const { status, message } = errors.Unauthorized;
-      const error = new CustomError(status, message);
       await expect(
         comparePasswords(incorrectPassword, hashedPassword),
-      ).rejects.toThrow(error);
+      ).rejects.toThrow();
+      await expect(
+        comparePasswords(incorrectPassword, hashedPassword),
+      ).rejects.toMatchSnapshot();
     });
-    it(`should not throw an error`, async (): Promise<void> => {
+    it('should not throw an error when the passwords match', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
       await expect(comparePasswords(password, hashedPassword)).toEqual(
         Promise.resolve({}),
       );
     });
   });
   describe('checkUserConfirmation', (): void => {
-    it(`should throw an error`, async (): Promise<void> => {
+    it("should throw an error the user hasn't confirmed his email address", async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
       const user = new User({
         username,
         handle,
@@ -202,11 +229,13 @@ describe('userServices', (): void => {
         password,
       });
       await user.save();
-      const { status, message } = errors.Unauthorized;
-      const error = new CustomError(status, message);
-      await expect(checkUserConfirmation(user)).rejects.toThrow(error);
+      await expect(checkUserConfirmation(user)).rejects.toThrow();
+      await expect(checkUserConfirmation(user)).rejects.toMatchSnapshot();
     });
-    it(`should not throw an error`, async (): Promise<void> => {
+    it("shouldn't throw an error when the user confirmed his email address", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
       const user = new User({
         username,
         handle,

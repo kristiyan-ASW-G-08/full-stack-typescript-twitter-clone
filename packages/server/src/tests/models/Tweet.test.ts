@@ -23,11 +23,13 @@ describe('Tweet model', (): void => {
       await mongoose.disconnect();
     },
   );
-  it('Should throw and error', (): void => {
+  it('should throw an error when the object passed to the model does not pass validation', (): void => {
     const tweet = new Tweet();
     expect(tweet.validate).toThrow();
   });
-  it('should create a new tweet', async (): Promise<void> => {
+  it('should create a new tweet when validation is successful', async (): Promise<
+    void
+  > => {
     expect.assertions(3);
     const user = mongoose.Types.ObjectId().toString();
     const type = 'text';
