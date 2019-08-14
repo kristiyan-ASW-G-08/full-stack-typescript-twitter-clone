@@ -1,10 +1,10 @@
 import CommonUser from '@twtr/common/source/types/User';
-import { Schema, Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export default interface User extends CommonUser, Document {
   password: string;
   confirmed: boolean;
-  following: Schema.Types.ObjectId[];
-  likes: Schema.Types.ObjectId[];
-  bookmarks: Schema.Types.ObjectId[];
+  following: mongoose.Types.ObjectId[];
+  likes: mongoose.Types.ObjectId[];
+  bookmarks: mongoose.Types.ObjectId[];
 }

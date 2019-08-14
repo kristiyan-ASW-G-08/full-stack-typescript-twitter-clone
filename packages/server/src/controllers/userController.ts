@@ -12,6 +12,8 @@ import {
   checkUserConfirmation,
 } from '@services/userServices';
 import passErrorToNext from '@utilities/passErrorToNext';
+import includesObjectId from '@utilities/includesObjectId';
+import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
 
 export const signUp = async (
   req: Request,
@@ -121,6 +123,28 @@ export const deleteUser = async (
     const { user } = await getUserById(userId);
     await user.remove();
     res.sendStatus(204);
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const bookmarkTweet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { tweetId } = req.params;
+    const { userId } = req;
+    const { user } = await getUserById(userId);
+    if (!includesObjectId(user.bookmarks, tweetId)) {
+      user.bookmarks = [...user.bookmarks, tweetId];
+    } else {
+      user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
+    }
+    await user.save();
+    const { bookmarks } = user;
+    res.status(200).json({ data: { bookmarks } });
   } catch (err) {
     passErrorToNext(err, next);
   }

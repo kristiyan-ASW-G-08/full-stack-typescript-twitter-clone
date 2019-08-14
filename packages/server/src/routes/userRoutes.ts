@@ -7,6 +7,7 @@ import {
   requestPasswordResetEmail,
   resetPassword,
   deleteUser,
+  bookmarkTweet,
 } from '@controllers/userController';
 import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -29,6 +30,8 @@ router.patch(
   validate(ResetPasswordValidator),
   resetPassword,
 );
+
+router.patch('/users/tweets/:tweetId', isAuth, bookmarkTweet);
 
 router.delete('/users', isAuth, deleteUser);
 
