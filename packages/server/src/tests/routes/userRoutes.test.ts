@@ -531,6 +531,91 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(401);
     });
   });
+  describe('patch /users/:userId/', (): void => {
+    it('should follow a user', async (): Promise<void> => {
+      expect.assertions(3);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const currentUserId = newUser._id;
+      const userId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId: currentUserId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/${userId}`)
+        .set('Authorization', `Bearer ${token}`);
+      const user = await User.findById(currentUserId);
+      if (!user) return;
+      expect(response.status).toEqual(200);
+      expect(user.following.length).toBe(1);
+      expect(user.following[0].equals(userId)).toBeTruthy();
+    });
+    it('should remove a followed user', async (): Promise<void> => {
+      expect.assertions(3);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const currentUserId = newUser._id;
+      const userId = mongoose.Types.ObjectId();
+      newUser.following = [userId];
+      await newUser.save();
+      const token = jwt.sign(
+        {
+          userId: currentUserId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/${userId}`)
+        .set('Authorization', `Bearer ${token}`);
+      const user = await User.findById(currentUserId);
+      if (!user) return;
+      expect(response.status).toEqual(200);
+      expect(user.following.length).toBe(0);
+      expect(user.following[0]).toBeUndefined();
+    });
+
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const currentUserId = mongoose.Types.ObjectId().toString();
+      const userId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId: currentUserId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/${userId}`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const response = await request(app).patch(`/users/${userId}`);
+      expect(response.status).toEqual(401);
+    });
+  });
   describe('delete /users', (): void => {
     it('should delete a user', async (): Promise<void> => {
       expect.assertions(1);
