@@ -171,3 +171,25 @@ export const likeTweet = async (
     passErrorToNext(err, next);
   }
 };
+
+export const followUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const currentUserId = req.userId;
+    const { user } = await getUserById(currentUserId);
+    if (!includesObjectId(user.following, userId)) {
+      user.following = [...user.following, userId];
+    } else {
+      user.following = removeObjectIdFromArr(user.following, userId);
+    }
+    await user.save();
+    const { following } = user;
+    res.status(200).json({ data: { following } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};

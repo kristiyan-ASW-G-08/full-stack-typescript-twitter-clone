@@ -9,6 +9,7 @@ import {
   deleteUser,
   bookmarkTweet,
   likeTweet,
+  followUser,
 } from '@controllers/userController';
 import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -35,6 +36,8 @@ router.patch(
 router.patch('/users/tweets/:tweetId', isAuth, bookmarkTweet);
 
 router.patch('/users/tweets/:tweetId/like', isAuth, likeTweet);
+
+router.patch('/users/:userId', isAuth, followUser);
 
 router.delete('/users', isAuth, deleteUser);
 
