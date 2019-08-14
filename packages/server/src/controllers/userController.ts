@@ -149,3 +149,25 @@ export const bookmarkTweet = async (
     passErrorToNext(err, next);
   }
 };
+
+export const likeTweet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { tweetId } = req.params;
+    const { userId } = req;
+    const { user } = await getUserById(userId);
+    if (!includesObjectId(user.likes, tweetId)) {
+      user.likes = [...user.likes, tweetId];
+    } else {
+      user.likes = removeObjectIdFromArr(user.likes, tweetId);
+    }
+    await user.save();
+    const { likes } = user;
+    res.status(200).json({ data: { likes } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};

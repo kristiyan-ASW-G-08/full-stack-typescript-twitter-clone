@@ -324,7 +324,7 @@ describe('userRoutes', (): void => {
     });
   });
   describe('patch /users/tweets/:tweetId', (): void => {
-    it('should bookmark a tweet', async (): Promise<void> => {
+    it('should add a tweet bookmark', async (): Promise<void> => {
       expect.assertions(3);
       const newUser = new User({
         username,
@@ -357,6 +357,41 @@ describe('userRoutes', (): void => {
       expect(user.bookmarks.length).toBe(1);
       expect(user.bookmarks[0].equals(tweetId)).toBeTruthy();
     });
+    it('should remove a tweet bookmark', async (): Promise<void> => {
+      expect.assertions(3);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      newUser.bookmarks = [tweetId];
+      await newUser.save();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`);
+      const user = await User.findById(userId);
+      if (!user) return;
+      expect(response.status).toEqual(200);
+      expect(user.bookmarks.length).toBe(0);
+      expect(user.bookmarks[0]).toBeUndefined();
+    });
 
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
@@ -388,6 +423,111 @@ describe('userRoutes', (): void => {
       expect.assertions(1);
       const tweetId = mongoose.Types.ObjectId();
       const response = await request(app).patch(`/users/tweets/${tweetId}`);
+      expect(response.status).toEqual(401);
+    });
+  });
+  describe('patch /users/tweets/:tweetId/like', (): void => {
+    it('should add a liked tweet', async (): Promise<void> => {
+      expect.assertions(3);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/tweets/${tweetId}/like`)
+        .set('Authorization', `Bearer ${token}`);
+      const user = await User.findById(userId);
+      if (!user) return;
+      expect(response.status).toEqual(200);
+      expect(user.likes.length).toBe(1);
+      expect(user.likes[0].equals(tweetId)).toBeTruthy();
+    });
+    it('should remove a liked tweet', async (): Promise<void> => {
+      expect.assertions(3);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      newUser.likes = [tweetId];
+      await newUser.save();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/tweets/${tweetId}/like`)
+        .set('Authorization', `Bearer ${token}`);
+      const user = await User.findById(userId);
+      if (!user) return;
+      expect(response.status).toEqual(200);
+      expect(user.likes.length).toBe(0);
+      expect(user.likes[0]).toBeUndefined();
+    });
+
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/tweets/${tweetId}/like`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const tweetId = mongoose.Types.ObjectId();
+      const response = await request(app).patch(
+        `/users/tweets/${tweetId}/like`,
+      );
       expect(response.status).toEqual(401);
     });
   });
