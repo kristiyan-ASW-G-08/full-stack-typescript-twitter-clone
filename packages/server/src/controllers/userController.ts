@@ -11,6 +11,7 @@ import {
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
+import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
@@ -159,11 +160,15 @@ export const likeTweet = async (
     const { tweetId } = req.params;
     const { userId } = req;
     const { user } = await getUserById(userId);
+    const { tweet } = await getTweetById(tweetId);
     if (!includesObjectId(user.likes, tweetId)) {
       user.likes = [...user.likes, tweetId];
+      tweet.likes += 1;
     } else {
       user.likes = removeObjectIdFromArr(user.likes, tweetId);
+      tweet.likes -= 1;
     }
+    await tweet.save();
     await user.save();
     const { likes } = user;
     res.status(200).json({ data: { likes } });
