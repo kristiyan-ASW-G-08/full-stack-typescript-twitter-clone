@@ -428,7 +428,7 @@ describe('userRoutes', (): void => {
   });
   describe('patch /users/tweets/:tweetId/like', (): void => {
     it('should add a liked tweet', async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(4);
       const newUser = new User({
         username,
         handle,
@@ -455,13 +455,15 @@ describe('userRoutes', (): void => {
         .patch(`/users/tweets/${tweetId}/like`)
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
-      if (!user) return;
+      const tweet = await Tweet.findById(tweetId);
+      if (!user || !tweet) return;
       expect(response.status).toEqual(200);
       expect(user.likes.length).toBe(1);
       expect(user.likes[0].equals(tweetId)).toBeTruthy();
+      expect(tweet.likes).toBe(1);
     });
     it('should remove a liked tweet', async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(4);
       const newUser = new User({
         username,
         handle,
@@ -474,6 +476,7 @@ describe('userRoutes', (): void => {
         type: 'text',
         text,
         user: userId,
+        likes: 1,
       });
       await newTweet.save();
       const tweetId = newTweet._id;
@@ -490,10 +493,12 @@ describe('userRoutes', (): void => {
         .patch(`/users/tweets/${tweetId}/like`)
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
-      if (!user) return;
+      const tweet = await Tweet.findById(tweetId);
+      if (!user || !tweet) return;
       expect(response.status).toEqual(200);
       expect(user.likes.length).toBe(0);
       expect(user.likes[0]).toBeUndefined();
+      expect(tweet.likes).toBe(0);
     });
 
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
