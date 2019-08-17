@@ -30,6 +30,10 @@ const UserSchema: Schema = new Schema({
       ref: 'User',
     },
   ],
+  followers: {
+    type: Number,
+    default: 0,
+  },
   likes: [
     {
       type: Schema.Types.ObjectId,

@@ -4,4 +4,5 @@ export default interface User {
   email: string;
   website: string | undefined;
   date: string;
+  followers: number;
 }

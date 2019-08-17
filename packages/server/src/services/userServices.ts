@@ -26,9 +26,7 @@ export const createUser = async (
   return { userId };
 };
 
-export const getUserByEmail = async (
-  email: string,
-): Promise<{ user: UserType }> => {
+export const getUserByEmail = async (email: string): Promise<UserType> => {
   const user = await User.findOne({ email });
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
@@ -41,11 +39,9 @@ export const getUserByEmail = async (
     const error = new CustomError(status, message, validationErrorsArr);
     throw error;
   }
-  return { user };
+  return user;
 };
-export const getUserById = async (
-  userId: string,
-): Promise<{ user: UserType }> => {
+export const getUserById = async (userId: string): Promise<UserType> => {
   const user = await User.findById(userId);
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
@@ -58,7 +54,7 @@ export const getUserById = async (
     const error = new CustomError(status, message, validationErrorsArr);
     throw error;
   }
-  return { user };
+  return user;
 };
 export const checkUserConfirmation = async (user: UserType): Promise<void> => {
   if (!user.confirmed) {

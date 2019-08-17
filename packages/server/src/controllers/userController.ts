@@ -40,7 +40,7 @@ export const logIn = async (
   try {
     const { email, password } = req.body;
     const secret = process.env.SECRET;
-    const { user } = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
     await comparePasswords(password, user.password);
     await checkUserConfirmation(user);
     const token = jwt.sign(
@@ -73,7 +73,7 @@ export const confirmEmail = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
-    const { user } = await getUserById(userId);
+    const user = await getUserById(userId);
     user.confirmed = true;
     await user.save();
     res.sendStatus(204);
@@ -89,7 +89,7 @@ export const requestPasswordResetEmail = async (
 ): Promise<void> => {
   try {
     const { email } = req.params;
-    const { user } = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
     await checkUserConfirmation(user);
     sendPasswordResetEmail(user._id, email);
     res.sendStatus(204);
@@ -105,7 +105,7 @@ export const resetPassword = async (
   try {
     const { password } = req.body;
     const { userId } = req;
-    const { user } = await getUserById(userId);
+    const user = await getUserById(userId);
     const hashedPassword = await bcrypt.hash(password, 12);
     user.password = hashedPassword;
     await user.save();
@@ -121,7 +121,7 @@ export const deleteUser = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
-    const { user } = await getUserById(userId);
+    const user = await getUserById(userId);
     await user.remove();
     res.sendStatus(204);
   } catch (err) {
@@ -137,7 +137,7 @@ export const bookmarkTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const { user } = await getUserById(userId);
+    const user = await getUserById(userId);
     if (!includesObjectId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, tweetId];
     } else {
@@ -159,7 +159,7 @@ export const likeTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const { user } = await getUserById(userId);
+    const user = await getUserById(userId);
     const { tweet } = await getTweetById(tweetId);
     if (!includesObjectId(user.likes, tweetId)) {
       user.likes = [...user.likes, tweetId];
@@ -184,15 +184,22 @@ export const followUser = async (
 ): Promise<void> => {
   try {
     const { userId } = req.params;
-    const currentUserId = req.userId;
-    const { user } = await getUserById(currentUserId);
-    if (!includesObjectId(user.following, userId)) {
-      user.following = [...user.following, userId];
+    const authenticatedUserId = req.userId;
+    const user = await getUserById(authenticatedUserId);
+    const authenticatedUser = await getUserById(authenticatedUserId);
+    if (!includesObjectId(authenticatedUser.following, userId)) {
+      authenticatedUser.following = [...authenticatedUser.following, userId];
+      user.followers += 1;
     } else {
-      user.following = removeObjectIdFromArr(user.following, userId);
+      authenticatedUser.following = removeObjectIdFromArr(
+        authenticatedUser.following,
+        userId,
+      );
+      user.followers -= 1;
     }
+    await authenticatedUser.save();
     await user.save();
-    const { following } = user;
+    const { following } = authenticatedUser;
     res.status(200).json({ data: { following } });
   } catch (err) {
     passErrorToNext(err, next);
