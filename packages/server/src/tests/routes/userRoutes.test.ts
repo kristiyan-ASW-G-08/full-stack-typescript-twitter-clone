@@ -538,7 +538,14 @@ describe('userRoutes', (): void => {
   });
   describe('patch /users/:userId/', (): void => {
     it('should follow a user', async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(4);
+      const newAuthenticatedUser = new User({
+        username: 'authenticatedUser',
+        handle: 'authenticatedUserHandle',
+        email: 'authenticatedUser@mail.com',
+        password,
+      });
+      await newAuthenticatedUser.save();
       const newUser = new User({
         username,
         handle,
@@ -546,11 +553,11 @@ describe('userRoutes', (): void => {
         password,
       });
       await newUser.save();
-      const currentUserId = newUser._id;
-      const userId = mongoose.Types.ObjectId();
+      const authenticatedUserId = newAuthenticatedUser._id;
+      const userId = newUser._id;
       const token = jwt.sign(
         {
-          userId: currentUserId,
+          userId: authenticatedUserId,
         },
         secret,
         { expiresIn: '1h' },
@@ -558,28 +565,38 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .patch(`/users/${userId}`)
         .set('Authorization', `Bearer ${token}`);
-      const user = await User.findById(currentUserId);
-      if (!user) return;
+      const authenticatedUser = await User.findById(authenticatedUserId);
+      const user = await User.findById(userId);
+      if (!authenticatedUser || !user) return;
       expect(response.status).toEqual(200);
-      expect(user.following.length).toBe(1);
-      expect(user.following[0].equals(userId)).toBeTruthy();
+      expect(authenticatedUser.following.length).toBe(1);
+      expect(authenticatedUser.following[0].equals(userId)).toBeTruthy();
+      expect(user.followers).toBe(1);
     });
     it('should remove a followed user', async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(4);
+      const newAuthenticatedUser = new User({
+        username: 'authenticatedUser',
+        handle: 'authenticatedUserHandle',
+        email: 'authenticatedUser@mail.com',
+        password,
+      });
+      await newAuthenticatedUser.save();
+      const authenticatedUserId = newAuthenticatedUser._id;
       const newUser = new User({
         username,
         handle,
         email,
         password,
+        followers: 1,
       });
       await newUser.save();
-      const currentUserId = newUser._id;
-      const userId = mongoose.Types.ObjectId();
-      newUser.following = [userId];
-      await newUser.save();
+      const userId = newUser._id;
+      newAuthenticatedUser.following = [userId];
+      await newAuthenticatedUser.save();
       const token = jwt.sign(
         {
-          userId: currentUserId,
+          userId: authenticatedUserId,
         },
         secret,
         { expiresIn: '1h' },
@@ -587,22 +604,24 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .patch(`/users/${userId}`)
         .set('Authorization', `Bearer ${token}`);
-      const user = await User.findById(currentUserId);
-      if (!user) return;
+      const authenticatedUser = await User.findById(authenticatedUserId);
+      const user = await User.findById(userId);
+      if (!authenticatedUser || !user) return;
       expect(response.status).toEqual(200);
-      expect(user.following.length).toBe(0);
-      expect(user.following[0]).toBeUndefined();
+      expect(authenticatedUser.following.length).toBe(0);
+      expect(authenticatedUser.following[0]).toBeUndefined();
+      expect(user.followers).toBe(0);
     });
 
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
     > => {
       expect.assertions(1);
-      const currentUserId = mongoose.Types.ObjectId().toString();
+      const authenticatedUserId = mongoose.Types.ObjectId().toString();
       const userId = mongoose.Types.ObjectId();
       const token = jwt.sign(
         {
-          userId: currentUserId,
+          userId: authenticatedUserId,
         },
         secret,
         { expiresIn: '1h' },

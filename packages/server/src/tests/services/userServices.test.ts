@@ -85,7 +85,7 @@ describe('userServices', (): void => {
         password,
       });
       await newUser.save();
-      const { user } = await getUserByEmail(email);
+      const user = await getUserByEmail(email);
       if (!user) {
         return;
       }
@@ -113,7 +113,7 @@ describe('userServices', (): void => {
       });
       await newUser.save();
       const userId = newUser._id;
-      const { user } = await getUserById(userId);
+      const user = await getUserById(userId);
       if (!user) {
         return;
       }

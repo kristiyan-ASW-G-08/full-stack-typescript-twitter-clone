@@ -185,7 +185,7 @@ export const followUser = async (
   try {
     const { userId } = req.params;
     const authenticatedUserId = req.userId;
-    const user = await getUserById(authenticatedUserId);
+    const user = await getUserById(userId);
     const authenticatedUser = await getUserById(authenticatedUserId);
     if (!includesObjectId(authenticatedUser.following, userId)) {
       authenticatedUser.following = [...authenticatedUser.following, userId];
@@ -197,8 +197,8 @@ export const followUser = async (
       );
       user.followers -= 1;
     }
-    await authenticatedUser.save();
     await user.save();
+    await authenticatedUser.save();
     const { following } = authenticatedUser;
     res.status(200).json({ data: { following } });
   } catch (err) {
