@@ -409,4 +409,38 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('get /users/:userId/tweets', (): void => {
+    it('should get a list of tweets', async (): Promise<void> => {
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const response = await request(app).get(`/users/${userId}/tweets`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets).toMatchSnapshot();
+      expect(links).toMatchSnapshot();
+    });
+  });
+  describe('get /tweets', (): void => {
+    it('should get a list of tweets', async (): Promise<void> => {
+      expect.assertions(3);
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const response = await request(app).get(`/tweets`);
+      const { tweets, links } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets).toMatchSnapshot();
+      expect(links).toMatchSnapshot();
+    });
+  });
 });
