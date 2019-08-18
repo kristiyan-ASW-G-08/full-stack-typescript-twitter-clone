@@ -7,6 +7,7 @@ import {
   updateTweet,
   getTweet,
   getAllTweets,
+  getUserTweets,
 } from '@controllers/tweetController';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import GetTweetsQueryValidator from '@twtr/common/source/schemaValidators/GetTweetsQueryValidator';
@@ -24,4 +25,9 @@ router.get('/tweets/:tweetId', getTweet);
 
 router.get('/tweets', validateQuery(GetTweetsQueryValidator), getAllTweets);
 
+router.get(
+  '/users/:userId/tweets',
+  validateQuery(GetTweetsQueryValidator),
+  getUserTweets,
+);
 export default router;

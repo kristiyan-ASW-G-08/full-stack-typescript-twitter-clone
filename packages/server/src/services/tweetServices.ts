@@ -66,11 +66,7 @@ export const getTweetById = async (
   return { tweet };
 };
 
-export const getTweets = async (
-  sort: string,
-  limit: number,
-  page: number,
-): Promise<{ tweets: TweetType[]; tweetsCount: number }> => {
+export const getSortString = (sort: string): string => {
   let sortString: string;
   switch (sort) {
     case 'top':
@@ -89,44 +85,5 @@ export const getTweets = async (
       sortString = '-likes';
       break;
   }
-  const tweets = await Tweet.countDocuments()
-    .find()
-    .sort(sortString)
-    .skip((page - 1) * limit)
-    .limit(limit);
-  const tweetsCount = (await Tweet.countDocuments()) - page * limit;
-  return { tweets, tweetsCount };
-};
-
-export const getTweetsByUserId = async (
-  sort: string,
-  limit: number,
-  page: number,
-  userId: string,
-): Promise<{ tweets: TweetType[]; tweetsCount: number }> => {
-  let sortString: string;
-  switch (sort) {
-    case 'top':
-      sortString = '-likes';
-      break;
-    case 'trending':
-      sortString = '-retweets';
-      break;
-    case 'new':
-      sortString = '-date';
-      break;
-    case 'comments':
-      sortString = '-comments';
-      break;
-    default:
-      sortString = '-likes';
-      break;
-  }
-  const tweets = await Tweet.countDocuments()
-    .find({ user: userId })
-    .sort(sortString)
-    .skip((page - 1) * limit)
-    .limit(limit);
-  const tweetsCount = (await Tweet.countDocuments()) - page * limit;
-  return { tweets, tweetsCount };
+  return sortString;
 };

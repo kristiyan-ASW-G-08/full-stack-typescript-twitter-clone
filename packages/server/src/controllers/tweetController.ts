@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
+import Tweet from '@models/Tweet';
 import {
   createTweet,
   createLinkTweet,
   createImageTweet,
   getTweetById,
-  getTweets,
+  getSortString,
 } from '@services/tweetServices';
+
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
@@ -132,7 +134,13 @@ export const getAllTweets = async (
     const limit = parseInt(req.query.limit, 10) || 25;
     const page = parseInt(req.query.page, 10) || 1;
     const { SERVER_URL } = process.env;
-    const { tweets, tweetsCount } = await getTweets(sort, limit, page);
+    const sortString = getSortString(sort);
+    const tweets = await Tweet.countDocuments()
+      .find()
+      .sort(sortString)
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
@@ -143,6 +151,42 @@ export const getAllTweets = async (
     }
     if (page > 1) {
       links.prev = `${SERVER_URL}/tweets?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { tweets, links } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUserTweets = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const sort = req.query.sort || 'top';
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const { SERVER_URL } = process.env;
+    const sortString = getSortString(sort);
+    const tweets = await Tweet.countDocuments()
+      .find({ user: userId })
+      .sort(sortString)
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (tweetsCount > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/tweets?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/tweets?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
     res.status(200).json({ data: { tweets, links } });
