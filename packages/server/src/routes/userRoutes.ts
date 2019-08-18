@@ -10,11 +10,14 @@ import {
   bookmarkTweet,
   likeTweet,
   followUser,
+  getUserTweets,
 } from '@controllers/userController';
 import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
 import isAuth from '@customMiddleware/isAuth';
+import validateQuery from '@customMiddleware/validateQuery';
+import GetTweetsQueryValidator from '@twtr/common/source/schemaValidators/GetTweetsQueryValidator';
 
 const router = express.Router();
 
@@ -41,4 +44,9 @@ router.patch('/users/:userId', isAuth, followUser);
 
 router.delete('/users', isAuth, deleteUser);
 
+router.get(
+  '/users/:userId/tweets',
+  validateQuery(GetTweetsQueryValidator),
+  getUserTweets,
+);
 export default router;

@@ -23,4 +23,5 @@ router.delete('/tweets/:tweetId', isAuth, deleteTweet);
 router.get('/tweets/:tweetId', getTweet);
 
 router.get('/tweets', validateQuery(GetTweetsQueryValidator), getAllTweets);
+
 export default router;

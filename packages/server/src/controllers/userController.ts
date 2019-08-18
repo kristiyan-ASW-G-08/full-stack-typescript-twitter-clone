@@ -11,7 +11,7 @@ import {
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
-import { getTweetById } from '@services/tweetServices';
+import { getTweetById, getTweetsByUserId } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
@@ -201,6 +201,41 @@ export const followUser = async (
     await authenticatedUser.save();
     const { following } = authenticatedUser;
     res.status(200).json({ data: { following } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUserTweets = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const sort = req.query.sort || 'top';
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const { SERVER_URL } = process.env;
+    const { tweets, tweetsCount } = await getTweetsByUserId(
+      sort,
+      limit,
+      page,
+      userId,
+    );
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (tweetsCount > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/tweets?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/tweets?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { tweets, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
