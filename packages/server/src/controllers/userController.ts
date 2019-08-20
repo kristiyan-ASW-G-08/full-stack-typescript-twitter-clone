@@ -163,7 +163,6 @@ export const bookmarkTweet = async (
     const { bookmarks } = user;
     res.status(200).json({ data: { bookmarks } });
   } catch (err) {
-    console.log(err, 'Bookmark');
     passErrorToNext(err, next);
   }
 };
@@ -231,7 +230,9 @@ export const getUserBookmarks = async (
   try {
     const { userId } = req;
     const user = await getUserById(userId);
-    const populatedUser = await user.populate('bookmarks').execPopulate();
+    const populatedUser = await user
+      .populate('bookmarks.source')
+      .execPopulate();
     const { bookmarks } = populatedUser;
     res.status(200).json({ data: { bookmarks } });
   } catch (err) {

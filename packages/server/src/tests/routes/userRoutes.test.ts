@@ -640,7 +640,45 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(401);
     });
   });
- 
+  describe('get /users/user/bookmarks', (): void => {
+    it('should get a list of bookmarks', async (): Promise<void> => {
+      expect.assertions(1);
+      const validUserId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: validUserId,
+      });
+      await newTweet.save();
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        bookmarks: [{ source: newTweet._id, ref: 'Tweet' }],
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .get(`/users/user/bookmarks`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(200);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const response = await request(app).get(`/users/user/bookmarks`);
+      expect(response.status).toEqual(401);
+    });
+  });
   describe('delete /users', (): void => {
     it('should delete a user', async (): Promise<void> => {
       expect.assertions(1);

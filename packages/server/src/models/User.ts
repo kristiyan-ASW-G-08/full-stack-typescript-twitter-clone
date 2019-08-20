@@ -49,7 +49,7 @@ const UserSchema: Schema = new Schema({
       source: {
         type: mongoose.Types.ObjectId,
         required: true,
-        refPath: 'ref',
+        refPath: 'bookmarks.ref',
       },
       ref: {
         type: String,
