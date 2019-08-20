@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -355,7 +355,7 @@ describe('userRoutes', (): void => {
       if (!user) return;
       expect(response.status).toEqual(200);
       expect(user.bookmarks.length).toBe(1);
-      expect(user.bookmarks[0].equals(tweetId)).toBeTruthy();
+      expect(user.bookmarks[0].source.equals(tweetId)).toBeTruthy();
     });
     it('should remove a tweet bookmark', async (): Promise<void> => {
       expect.assertions(3);
@@ -374,7 +374,7 @@ describe('userRoutes', (): void => {
       });
       await newTweet.save();
       const tweetId = newTweet._id;
-      newUser.bookmarks = [tweetId];
+      newUser.bookmarks = [{ source: tweetId, ref: 'Tweet' }];
       await newUser.save();
       const token = jwt.sign(
         {
@@ -640,6 +640,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(401);
     });
   });
+ 
   describe('delete /users', (): void => {
     it('should delete a user', async (): Promise<void> => {
       expect.assertions(1);

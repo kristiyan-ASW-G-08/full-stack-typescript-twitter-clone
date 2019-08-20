@@ -13,6 +13,7 @@ module.exports = {
   plugins: ['jest'],
   //eslint-config-airbnb-typescript import/no-unresolved throws an error when a custom path is used
   rules: {
+    'no-irregular-whitespace': 0,
     'import/no-unresolved': 0,
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,

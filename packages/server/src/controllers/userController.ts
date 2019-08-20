@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import {
   createUser,
@@ -11,7 +12,7 @@ import {
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
-import { getTweetById, getTweetsByUserId } from '@services/tweetServices';
+import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
@@ -138,15 +139,31 @@ export const bookmarkTweet = async (
     const { tweetId } = req.params;
     const { userId } = req;
     const user = await getUserById(userId);
-    if (!includesObjectId(user.bookmarks, tweetId)) {
-      user.bookmarks = [...user.bookmarks, tweetId];
+    const bookmarkIds = user.bookmarks.map(
+      (bookmark: {
+        source: mongoose.Types.ObjectId;
+        ref: 'Tweet' | 'Reply';
+      }): mongoose.Types.ObjectId => bookmark.source,
+    );
+    if (!includesObjectId(bookmarkIds, tweetId)) {
+      user.bookmarks = [
+        ...user.bookmarks,
+        { source: mongoose.Types.ObjectId(tweetId), ref: 'Tweet' },
+      ];
     } else {
-      user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
+      user.bookmarks = user.bookmarks.filter(
+        (bookmark: {
+          source: mongoose.Types.ObjectId;
+          ref: 'Tweet' | 'Reply';
+        }): boolean =>
+          !bookmark.source.equals(mongoose.Types.ObjectId(tweetId)),
+      );
     }
     await user.save();
     const { bookmarks } = user;
     res.status(200).json({ data: { bookmarks } });
   } catch (err) {
+    console.log(err, 'Bookmark');
     passErrorToNext(err, next);
   }
 };
@@ -206,3 +223,19 @@ export const followUser = async (
   }
 };
 
+export const getUserBookmarks = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req;
+    const user = await getUserById(userId);
+    const populatedUser = await user.populate('bookmarks').execPopulate();
+    const { bookmarks } = populatedUser;
+    res.status(200).json({ data: { bookmarks } });
+  } catch (err) {
+    console.log(err, 'Bookmarks!!!!!!!!');
+    passErrorToNext(err, next);
+  }
+};

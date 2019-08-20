@@ -14,7 +14,6 @@ import {
 import User from '@models/User';
 import db from 'src/db';
 import sendEmail from '@utilities/sendEmail';
-import { CustomError, errors } from '@utilities/CustomError';
 
 jest.mock('@utilities/sendEmail');
 jest.mock('jsonwebtoken');

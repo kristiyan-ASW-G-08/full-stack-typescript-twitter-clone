@@ -10,6 +10,7 @@ import {
   bookmarkTweet,
   likeTweet,
   followUser,
+  getUserBookmarks,
 } from '@controllers/userController';
 import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -41,4 +42,5 @@ router.patch('/users/:userId', isAuth, followUser);
 
 router.delete('/users', isAuth, deleteUser);
 
+router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
 export default router;

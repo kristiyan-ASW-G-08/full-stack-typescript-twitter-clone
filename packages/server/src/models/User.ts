@@ -46,7 +46,11 @@ const UserSchema: Schema = new Schema({
   ],
   bookmarks: [
     {
-      type: Schema.Types.ObjectId,
+      source: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        refPath: 'ref',
+      },
       ref: {
         type: String,
         required: true,

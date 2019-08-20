@@ -7,7 +7,6 @@ import {
   getTweetById,
   getSortString,
 } from '@services/tweetServices';
-
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
