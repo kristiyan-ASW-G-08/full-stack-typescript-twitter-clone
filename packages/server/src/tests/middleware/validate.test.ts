@@ -1,6 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import validate from '@customMiddleware/validate';
-import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
+import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 
 describe('validate', (): void => {
   it(`should call next when a validation error occurs`, async (): Promise<
@@ -25,7 +25,7 @@ describe('validate', (): void => {
     const res = httpMocks.createResponse();
     const next = jest.fn();
 
-    const validateFunc = validate(UserValidator);
+    const validateFunc = validate(UserSignUpValidator);
     await validateFunc(req, res, next);
     expect(next).toHaveBeenCalledTimes(1);
   });
@@ -51,7 +51,7 @@ describe('validate', (): void => {
     const res = httpMocks.createResponse();
     const next = jest.fn();
 
-    const validateFunc = validate(UserValidator);
+    const validateFunc = validate(UserSignUpValidator);
     await validateFunc(req, res, next);
     expect(next).toHaveBeenCalledTimes(1);
   });

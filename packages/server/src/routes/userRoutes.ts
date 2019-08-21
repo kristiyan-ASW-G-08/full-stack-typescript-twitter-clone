@@ -11,15 +11,17 @@ import {
   likeTweet,
   followUser,
   getUserBookmarks,
+  patchProfile,
 } from '@controllers/userController';
-import UserValidator from '@twtr/common/source/schemaValidators/UserValidator';
+import UserSIgnUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
+import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
 
-router.post('/users', validate(UserValidator), signUp);
+router.post('/users', validate(UserSIgnUpValidator), signUp);
 
 router.post('/users/tokens', validate(UserLoginValidator), logIn);
 
@@ -32,6 +34,12 @@ router.patch(
   isAuth,
   validate(ResetPasswordValidator),
   resetPassword,
+);
+router.patch(
+  '/users/user/profile',
+  isAuth,
+  validate(UserProfileValidator),
+  patchProfile,
 );
 
 router.patch('/users/tweets/:tweetId', isAuth, bookmarkTweet);

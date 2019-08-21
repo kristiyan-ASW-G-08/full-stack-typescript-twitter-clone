@@ -217,37 +217,28 @@ export const sendPasswordResetEmail = (userId: string, email: string): void => {
   };
   sendEmail(mailOptions);
 };
-export const checkCredentialsAvailability = async (
-  username: string,
-  handle: string,
-  email: string,
+
+export const areCredentialsAvailable = async (
+  credentials: { name: 'username' | 'handle' | 'email'; value: string }[],
+  userId?: string,
 ): Promise<void> => {
-  const validationErrorsArr: ValidationError[] = [];
-  const isAvailableUsername = await User.findOne({ username });
-  const isAvailableHandle = await User.findOne({ handle });
-  const isAvailableEmail = await User.findOne({ email });
-  if (isAvailableUsername) {
-    const usernameValidationError = {
-      name: 'username',
-      message: 'username is already taken',
-    };
-    validationErrorsArr.push(usernameValidationError);
+  let validationErrorsArr: ValidationError[] = [];
+  for await (const credential of credentials) {
+    const { name } = credential;
+    const query: { [key: string]: string } = {};
+    query[`${credential.name}`] = credential.value;
+    const user = await User.findOne(query);
+    if (user) {
+      validationErrorsArr = [
+        ...validationErrorsArr,
+        {
+          name,
+          message: `${name} is already taken`,
+        },
+      ];
+    }
   }
-  if (isAvailableHandle) {
-    const handleValidationError = {
-      name: 'handle',
-      message: 'handle is already taken',
-    };
-    validationErrorsArr.push(handleValidationError);
-  }
-  if (isAvailableEmail) {
-    const emailValidationError = {
-      name: 'email',
-      message: 'email is already taken',
-    };
-    validationErrorsArr.push(emailValidationError);
-  }
-  if (isAvailableUsername || isAvailableHandle || isAvailableEmail) {
+  if (validationErrorsArr.length !== 0) {
     const { message, status } = errors.Conflict;
     const error = new CustomError(status, message, validationErrorsArr);
     throw error;

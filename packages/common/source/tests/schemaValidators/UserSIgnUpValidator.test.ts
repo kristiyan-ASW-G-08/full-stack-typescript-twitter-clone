@@ -1,6 +1,6 @@
-import UserValidator from '@schemaValidators/UserValidator';
+import UserSIgnUpValidator from '@schemaValidators/UserSignUpValidator';
 
-describe('UserValidator', (): void => {
+describe('UserSIgnUpValidator', (): void => {
   const username = 'username';
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
@@ -15,7 +15,7 @@ describe('UserValidator', (): void => {
       confirmPassword: password,
     };
     await expect(
-      UserValidator.validate(user, { abortEarly: false }),
+      UserSIgnUpValidator.validate(user, { abortEarly: false }),
     ).resolves.toBe(user);
   });
   it(`should throw an error`, async (): Promise<void> => {
@@ -27,7 +27,7 @@ describe('UserValidator', (): void => {
       confirmPassword: invalidPassword,
     };
     await expect(
-      UserValidator.validate(user, { abortEarly: false }),
+      UserSIgnUpValidator.validate(user, { abortEarly: false }),
     ).rejects.toMatchSnapshot();
   });
 });

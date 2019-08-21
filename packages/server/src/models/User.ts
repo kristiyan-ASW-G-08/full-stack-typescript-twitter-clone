@@ -20,6 +20,8 @@ const UserSchema: Schema = new Schema({
   password: { required: true, type: String, minlength: 12 },
   website: { required: false, type: String, minlength: 3 },
   confirmed: { type: Boolean, default: false },
+  profilePhoto: { type: String },
+  headerPhoto: { type: String },
   date: {
     type: Date,
     default: Date.now,

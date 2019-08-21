@@ -5,7 +5,7 @@ import {
   createUser,
   sendConfirmationEmail,
   sendPasswordResetEmail,
-  checkCredentialsAvailability,
+  areCredentialsAvailable,
   comparePasswords,
   checkUserConfirmation,
   getUserById,
@@ -164,26 +164,39 @@ describe('userServices', (): void => {
       expect(sendEmail).toMatchSnapshot();
     });
   });
-  describe('checkCredentialsAvailability', (): void => {
+  describe('areCredentialsAvailable', (): void => {
     it('should throw an error when the user credentials are already taken', async (): Promise<
       void
     > => {
       expect.assertions(2);
-
+      const credentials: {
+        name: 'username' | 'handle' | 'email';
+        value: string;
+      }[] = [
+        { name: 'username', value: username },
+        { name: 'handle', value: handle },
+        { name: 'email', value: email },
+      ];
       await User.insertMany({ username, handle, email, password });
+      await expect(areCredentialsAvailable(credentials)).rejects.toThrow();
       await expect(
-        checkCredentialsAvailability(username, handle, email),
-      ).rejects.toThrow();
-      await expect(
-        checkCredentialsAvailability(username, handle, email),
+        areCredentialsAvailable(credentials),
       ).rejects.toMatchSnapshot();
     });
     it("shouldn't throw an error when the user credentials are available", async (): Promise<
       void
     > => {
+      const credentials: {
+        name: 'username' | 'handle' | 'email';
+        value: string;
+      }[] = [
+        { name: 'username', value: username },
+        { name: 'handle', value: handle },
+        { name: 'email', value: email },
+      ];
       expect.assertions(1);
       await expect(
-        checkCredentialsAvailability(username, handle, email),
+        areCredentialsAvailable(credentials),
       ).resolves.toBeUndefined();
     });
   });

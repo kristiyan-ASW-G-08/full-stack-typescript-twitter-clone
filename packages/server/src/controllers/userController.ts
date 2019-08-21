@@ -8,7 +8,7 @@ import {
   getUserById,
   sendConfirmationEmail,
   sendPasswordResetEmail,
-  checkCredentialsAvailability,
+  areCredentialsAvailable,
   comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
@@ -25,7 +25,15 @@ export const signUp = async (
 ): Promise<void> => {
   try {
     const { username, handle, email, password } = req.body;
-    await checkCredentialsAvailability(username, handle, email);
+    const credentials: {
+      name: 'username' | 'handle' | 'email';
+      value: string;
+    }[] = [
+      { name: 'username', value: username },
+      { name: 'handle', value: handle },
+      { name: 'email', value: email },
+    ];
+    await areCredentialsAvailable(credentials);
     const { userId } = await createUser(username, handle, email, password);
     sendConfirmationEmail(userId, email);
     res.sendStatus(204);
@@ -240,7 +248,28 @@ export const getUserBookmarks = async (
     const { bookmarks } = populatedUser;
     res.status(200).json({ data: { bookmarks } });
   } catch (err) {
-    console.log(err, 'Bookmarks!!!!!!!!');
+    passErrorToNext(err, next);
+  }
+};
+
+export const patchProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { username, handle, website } = req.body;
+    const { userId } = req.body;
+    const credentials: {
+      name: 'username' | 'handle' | 'email';
+      value: string;
+    }[] = [
+      { name: 'username', value: username },
+      { name: 'handle', value: handle },
+    ];
+    await areCredentialsAvailable(credentials, userId);
+    res.sendStatus(204);
+  } catch (err) {
     passErrorToNext(err, next);
   }
 };
