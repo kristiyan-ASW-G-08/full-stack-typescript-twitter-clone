@@ -177,11 +177,25 @@ export const likeTweet = async (
     const { userId } = req;
     const user = await getUserById(userId);
     const { tweet } = await getTweetById(tweetId);
-    if (!includesObjectId(user.likes, tweetId)) {
-      user.likes = [...user.likes, tweetId];
+    const likeIds = user.likes.map(
+      (like: {
+        source: mongoose.Types.ObjectId;
+        ref: 'Tweet' | 'Reply';
+      }): mongoose.Types.ObjectId => like.source,
+    );
+    if (!includesObjectId(likeIds, tweetId)) {
+      user.likes = [
+        ...user.likes,
+        { source: mongoose.Types.ObjectId(tweetId), ref: 'Tweet' },
+      ];
       tweet.likes += 1;
     } else {
-      user.likes = removeObjectIdFromArr(user.likes, tweetId);
+      user.likes = user.likes.filter(
+        (like: {
+          source: mongoose.Types.ObjectId;
+          ref: 'Tweet' | 'Reply';
+        }): boolean => !like.source.equals(mongoose.Types.ObjectId(tweetId)),
+      );
       tweet.likes -= 1;
     }
     await tweet.save();

@@ -36,7 +36,11 @@ const UserSchema: Schema = new Schema({
   },
   likes: [
     {
-      type: Schema.Types.ObjectId,
+      source: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        refPath: 'likes.ref',
+      },
       ref: {
         type: String,
         required: true,

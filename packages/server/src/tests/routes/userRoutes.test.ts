@@ -459,7 +459,7 @@ describe('userRoutes', (): void => {
       if (!user || !tweet) return;
       expect(response.status).toEqual(200);
       expect(user.likes.length).toBe(1);
-      expect(user.likes[0].equals(tweetId)).toBeTruthy();
+      expect(user.likes[0].source.equals(tweetId)).toBeTruthy();
       expect(tweet.likes).toBe(1);
     });
     it('should remove a liked tweet', async (): Promise<void> => {
@@ -480,7 +480,7 @@ describe('userRoutes', (): void => {
       });
       await newTweet.save();
       const tweetId = newTweet._id;
-      newUser.likes = [tweetId];
+      newUser.likes = [{ source: tweetId, ref: 'Tweet' }];
       await newUser.save();
       const token = jwt.sign(
         {
