@@ -16,6 +16,7 @@ import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
+import SourceRef from '@customTypes/SourceRef';
 
 export const signUp = async (
   req: Request,
@@ -140,10 +141,7 @@ export const bookmarkTweet = async (
     const { userId } = req;
     const user = await getUserById(userId);
     const bookmarkIds = user.bookmarks.map(
-      (bookmark: {
-        source: mongoose.Types.ObjectId;
-        ref: 'Tweet' | 'Reply';
-      }): mongoose.Types.ObjectId => bookmark.source,
+      (bookmark: SourceRef): mongoose.Types.ObjectId => bookmark.source,
     );
     if (!includesObjectId(bookmarkIds, tweetId)) {
       user.bookmarks = [
@@ -152,10 +150,7 @@ export const bookmarkTweet = async (
       ];
     } else {
       user.bookmarks = user.bookmarks.filter(
-        (bookmark: {
-          source: mongoose.Types.ObjectId;
-          ref: 'Tweet' | 'Reply';
-        }): boolean =>
+        (bookmark: SourceRef): boolean =>
           !bookmark.source.equals(mongoose.Types.ObjectId(tweetId)),
       );
     }
@@ -178,10 +173,7 @@ export const likeTweet = async (
     const user = await getUserById(userId);
     const { tweet } = await getTweetById(tweetId);
     const likeIds = user.likes.map(
-      (like: {
-        source: mongoose.Types.ObjectId;
-        ref: 'Tweet' | 'Reply';
-      }): mongoose.Types.ObjectId => like.source,
+      (like: SourceRef): mongoose.Types.ObjectId => like.source,
     );
     if (!includesObjectId(likeIds, tweetId)) {
       user.likes = [
@@ -191,10 +183,8 @@ export const likeTweet = async (
       tweet.likes += 1;
     } else {
       user.likes = user.likes.filter(
-        (like: {
-          source: mongoose.Types.ObjectId;
-          ref: 'Tweet' | 'Reply';
-        }): boolean => !like.source.equals(mongoose.Types.ObjectId(tweetId)),
+        (like: SourceRef): boolean =>
+          !like.source.equals(mongoose.Types.ObjectId(tweetId)),
       );
       tweet.likes -= 1;
     }
