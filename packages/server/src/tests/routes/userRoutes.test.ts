@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -152,7 +152,7 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
     });
   });
-  describe('/users', (): void => {
+  describe('patch /users', (): void => {
     it('should confirm user email', async (): Promise<void> => {
       expect.assertions(2);
       const newUser = new User({
@@ -321,6 +321,144 @@ describe('userRoutes', (): void => {
           confirmPassword: newPassword,
         });
       expect(response.status).toEqual(404);
+    });
+  });
+  describe('patch /users/user/profile', (): void => {
+    const newUsername = 'newTestUsername';
+    const newHandle = 'newTestHandle';
+    const website = 'https://sometestwebsite.test';
+    const newEmail = 'someNewTest@mail.com';
+    it("should patch user's username, handle and website", async (): Promise<
+      void
+    > => {
+      expect.assertions(4);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          username: newUsername,
+          handle: newHandle,
+          website,
+        });
+      const user = await User.findById(newUser._id);
+      if (!user) {
+        return;
+      }
+      expect(response.status).toEqual(204);
+      expect(user.username).toMatch(newUsername);
+      expect(user.handle).toMatch(newHandle);
+      expect(user.website).toMatch(website);
+    });
+    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      await User.insertMany({ username, handle, email, password });
+
+      const newUser = new User({
+        username: newUsername,
+        handle: newHandle,
+        email: newEmail,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          username,
+          handle,
+          website,
+        });
+      expect(response.status).toEqual(409);
+    });
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          username: newUsername,
+          handle: newHandle,
+          website,
+        });
+      expect(response.status).toEqual(404);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .send({
+          username: newUsername,
+          handle: newHandle,
+          website,
+        });
+      expect(response.status).toEqual(401);
+    });
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(400);
     });
   });
   describe('patch /users/tweets/:tweetId', (): void => {

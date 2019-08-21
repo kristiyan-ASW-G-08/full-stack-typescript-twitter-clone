@@ -259,7 +259,7 @@ export const patchProfile = async (
 ): Promise<void> => {
   try {
     const { username, handle, website } = req.body;
-    const { userId } = req.body;
+    const { userId } = req;
     const credentials: {
       name: 'username' | 'handle' | 'email';
       value: string;
