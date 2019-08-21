@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mjml2html from 'mjml';
@@ -223,12 +224,13 @@ export const areCredentialsAvailable = async (
   userId?: string,
 ): Promise<void> => {
   let validationErrorsArr: ValidationError[] = [];
+  const userObjectId = mongoose.Types.ObjectId(userId);
   for await (const credential of credentials) {
     const { name } = credential;
     const query: { [key: string]: string } = {};
     query[`${credential.name}`] = credential.value;
     const user = await User.findOne(query);
-    if (user) {
+    if (user && !userObjectId.equals(user._id)) {
       validationErrorsArr = [
         ...validationErrorsArr,
         {

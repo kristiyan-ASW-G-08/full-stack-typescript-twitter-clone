@@ -267,7 +267,13 @@ export const patchProfile = async (
       { name: 'username', value: username },
       { name: 'handle', value: handle },
     ];
+
     await areCredentialsAvailable(credentials, userId);
+    const user = await getUserById(userId);
+    user.username = username;
+    user.handle = handle;
+    user.website = website;
+    await user.save();
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
