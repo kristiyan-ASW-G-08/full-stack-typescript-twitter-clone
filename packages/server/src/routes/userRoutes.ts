@@ -12,6 +12,7 @@ import {
   followUser,
   getUserBookmarks,
   patchProfile,
+  getUsersList,
 } from '@controllers/userController';
 import UserSIgnUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -51,4 +52,6 @@ router.patch('/users/:userId', isAuth, followUser);
 router.delete('/users', isAuth, deleteUser);
 
 router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
+
+router.get('/users/:searchTerm', getUsersList);
 export default router;

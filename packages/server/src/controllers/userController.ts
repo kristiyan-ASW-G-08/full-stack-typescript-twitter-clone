@@ -17,6 +17,7 @@ import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
 import SourceRef from '@customTypes/SourceRef';
+import User from '@models/User';
 
 export const signUp = async (
   req: Request,
@@ -273,8 +274,32 @@ export const patchProfile = async (
     user.username = username;
     user.handle = handle;
     user.website = website;
+    console.log(req.files, 'Files!!!!!!!!!!!!!!!!!!!!!!!');
     await user.save();
     res.sendStatus(204);
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUsersList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { searchTerm } = req.params;
+    const users = await User.find(
+      {
+        $text: { $search: searchTerm },
+      },
+      'username handle profilePhoto',
+    )
+      .select({ score: { $meta: 'textScore' } })
+      .limit(10)
+      .exec();
+
+    res.status(200).json({ data: { users } });
   } catch (err) {
     passErrorToNext(err, next);
   }
