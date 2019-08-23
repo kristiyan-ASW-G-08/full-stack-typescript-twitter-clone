@@ -153,7 +153,7 @@ describe('userRoutes', (): void => {
     });
   });
   describe('patch /users', (): void => {
-    it('should confirm user email', async (): Promise<void> => {
+    it("should confirm user's email", async (): Promise<void> => {
       expect.assertions(2);
       const newUser = new User({
         username,
@@ -815,6 +815,38 @@ describe('userRoutes', (): void => {
       expect.assertions(1);
       const response = await request(app).get(`/users/user/bookmarks`);
       expect(response.status).toEqual(401);
+    });
+  });
+  describe('get /users/:searchTerm', (): void => {
+    it('should get a list of users based on search term', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      await User.insertMany([
+        {
+          username,
+          handle,
+          email,
+          password,
+        },
+        {
+          username: 'otherUsername',
+          handle: 'testHandle',
+          email: 'otherTestmail@mail.com',
+          password,
+        },
+        {
+          username: 'newOtherUsername',
+          handle: 'userHandle',
+          email: 'newTestmail@mail.com',
+          password,
+        },
+      ]);
+      const searchTerm = 'userHandle';
+      const response = await request(app).get(`/users/${searchTerm}`);
+      const { users } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(users).toHaveLength(1);
     });
   });
   describe('delete /users', (): void => {

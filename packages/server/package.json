@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
-    "test": "jest --watchAll --runInBand ",
+    "test": "jest --watchAll --runInBand --no-cache",
     "build": "tsc src/index.ts"
   },
   "dependencies": {

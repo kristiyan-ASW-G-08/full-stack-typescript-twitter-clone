@@ -296,9 +296,7 @@ export const getUsersList = async (
       'username handle profilePhoto',
     )
       .select({ score: { $meta: 'textScore' } })
-      .limit(10)
       .exec();
-
     res.status(200).json({ data: { users } });
   } catch (err) {
     passErrorToNext(err, next);

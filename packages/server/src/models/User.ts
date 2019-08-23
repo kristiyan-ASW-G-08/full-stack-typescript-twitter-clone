@@ -15,6 +15,7 @@ const UserSchema: Schema = new Schema({
     minlength: 1,
     maxlength: 50,
     unique: true,
+    text: true,
   },
   email: { required: true, type: String, minlength: 3, unique: true },
   password: { required: true, type: String, minlength: 12 },
@@ -65,5 +66,7 @@ const UserSchema: Schema = new Schema({
     },
   ],
 });
+
+UserSchema.index({ handle: 'text' });
 
 export default mongoose.model<User>('User', UserSchema);
