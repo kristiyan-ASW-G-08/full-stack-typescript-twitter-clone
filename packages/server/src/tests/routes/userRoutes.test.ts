@@ -817,6 +817,39 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(401);
     });
   });
+  describe('get /users/:userId/likes', (): void => {
+    it('should get a list of liked tweets or replies', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const validUserId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: validUserId,
+      });
+      await newTweet.save();
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        likes: [{ source: newTweet._id, ref: 'Tweet' }],
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const response = await request(app).get(`/users/${userId}/likes`);
+      expect(response.status).toEqual(200);
+    });
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const response = await request(app).get(`/users/${userId}/likes`);
+      expect(response.status).toEqual(404);
+    });
+  });
   describe('get /users/:searchTerm', (): void => {
     it('should get a list of users based on search term', async (): Promise<
       void

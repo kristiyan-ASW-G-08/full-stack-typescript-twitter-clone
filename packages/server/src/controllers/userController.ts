@@ -253,6 +253,22 @@ export const getUserBookmarks = async (
   }
 };
 
+export const getUserLikes = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const user = await getUserById(userId);
+    const populatedUser = await user.populate('likes.source').execPopulate();
+    const { likes } = populatedUser;
+    res.status(200).json({ data: { likes } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
 export const patchProfile = async (
   req: Request,
   res: Response,
