@@ -1,15 +1,17 @@
 import { NextFunction } from 'express';
 import mongoose, { Schema } from 'mongoose';
-import Tweet from '@customTypes/Tweet';
+import Reply from '@customTypes/Reply';
 
-const TweetSchema: Schema = new Schema({
-  type: { type: String, required: true, enum: ['text', 'image', 'link'] },
+const ReplySchema: Schema = new Schema({
   text: { type: String, minlength: 1, maxlength: 500 },
-  image: { type: String, minlength: 1 },
-  link: { type: String, minlength: 1 },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
+  },
+  tweet: {
+    type: Schema.Types.ObjectId,
+    ref: 'Tweet',
     required: true,
   },
   retweets: { type: Number, default: 0 },
@@ -21,8 +23,8 @@ const TweetSchema: Schema = new Schema({
   },
 });
 
-TweetSchema.pre('find', function(next: NextFunction): void {
+ReplySchema.pre('find', function(next: NextFunction): void {
   this.populate([{ path: 'user', select: 'username handle' }]);
   next();
 });
-export default mongoose.model<Tweet>('Tweet', TweetSchema);
+export default mongoose.model<Reply>('Reply', ReplySchema);

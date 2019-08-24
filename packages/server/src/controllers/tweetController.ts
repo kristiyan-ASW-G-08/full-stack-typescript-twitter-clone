@@ -5,12 +5,12 @@ import {
   createLinkTweet,
   createImageTweet,
   getTweetById,
-  getSortString,
 } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
+import getSortString from '@utilities/getSortString';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
 export const postTweet = async (

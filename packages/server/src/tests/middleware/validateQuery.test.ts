@@ -1,8 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import validateQuery from '@customMiddleware/validateQuery';
-import GetTweetsQueryValidator from '@twtr/common/source/schemaValidators/GetTweetsQueryValidator';
-import ValidationError from '@twtr/common/source/types/ValidationError';
-import { errors, CustomError } from '@utilities/CustomError';
+import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 
 describe('validateQuery', (): void => {
   it(`should call next when a validation error occurs`, async (): Promise<
@@ -21,7 +19,7 @@ describe('validateQuery', (): void => {
     const res = httpMocks.createResponse();
     const next = jest.fn();
 
-    const validateQueryFunc = validateQuery(GetTweetsQueryValidator);
+    const validateQueryFunc = validateQuery(SortStringValidator);
     await validateQueryFunc(req, res, next);
     expect(next).toHaveBeenCalledTimes(1);
   });
@@ -41,7 +39,7 @@ describe('validateQuery', (): void => {
     const res = httpMocks.createResponse();
     const next = jest.fn();
 
-    const validateQueryFunc = validateQuery(GetTweetsQueryValidator);
+    const validateQueryFunc = validateQuery(SortStringValidator);
     await validateQueryFunc(req, res, next);
     expect(next).toHaveBeenCalledTimes(1);
   });

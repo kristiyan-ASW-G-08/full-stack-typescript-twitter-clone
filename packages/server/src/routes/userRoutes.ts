@@ -57,4 +57,5 @@ router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
 router.get('/users/:userId/likes', getUserLikes);
 
 router.get('/users/:searchTerm', getUsersList);
+
 export default router;

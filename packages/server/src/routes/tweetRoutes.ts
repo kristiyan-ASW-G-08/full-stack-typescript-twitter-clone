@@ -10,7 +10,7 @@ import {
   getUserTweets,
 } from '@controllers/tweetController';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
-import GetTweetsQueryValidator from '@twtr/common/source/schemaValidators/GetTweetsQueryValidator';
+import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
@@ -23,11 +23,11 @@ router.delete('/tweets/:tweetId', isAuth, deleteTweet);
 
 router.get('/tweets/:tweetId', getTweet);
 
-router.get('/tweets', validateQuery(GetTweetsQueryValidator), getAllTweets);
+router.get('/tweets', validateQuery(SortStringValidator), getAllTweets);
 
 router.get(
   '/users/:userId/tweets',
-  validateQuery(GetTweetsQueryValidator),
+  validateQuery(SortStringValidator),
   getUserTweets,
 );
 export default router;

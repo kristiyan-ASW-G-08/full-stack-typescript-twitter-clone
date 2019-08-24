@@ -5,6 +5,7 @@ import multer from 'multer';
 import compression from 'compression';
 import userRoutes from '@routes/userRoutes';
 import tweetRoutes from '@routes/tweetRoutes';
+import replyRoutes from '@routes/replyRoutes';
 import { CustomError } from '@utilities/CustomError';
 import path from 'path';
 
@@ -55,6 +56,7 @@ app.use('/default', express.static(path.join(__dirname, './assets/default')));
 
 app.use(userRoutes);
 app.use(tweetRoutes);
+app.use(replyRoutes);
 
 app.use(
   (
