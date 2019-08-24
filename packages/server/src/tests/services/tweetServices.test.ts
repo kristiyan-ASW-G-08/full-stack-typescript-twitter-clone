@@ -44,7 +44,6 @@ describe('tweetServices', (): void => {
   describe('createTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(3);
-      const hashMock = jest.spyOn(bcrypt, 'hash');
       const { tweetId } = await createTweet(text, mockUserId);
       expect(tweetId).toBeTruthy();
       const tweet = await Tweet.findById(tweetId);
@@ -53,7 +52,6 @@ describe('tweetServices', (): void => {
       }
       expect(tweet.text).toMatch(text);
       expect(tweet.user.toString()).toMatch(mockUserId);
-      hashMock.mockRestore();
     });
   });
   it('should throw an error', async (): Promise<void> => {
