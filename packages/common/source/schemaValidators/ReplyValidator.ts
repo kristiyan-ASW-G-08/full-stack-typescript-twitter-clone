@@ -9,6 +9,7 @@ const ReplyValidator = yup.object<ReplyValidatorType>().shape({
     .string()
     .trim()
     .min(1)
-    .max(500),
+    .max(500)
+    .required(),
 });
 export default ReplyValidator;
