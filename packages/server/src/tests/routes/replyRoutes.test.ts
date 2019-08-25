@@ -284,4 +284,34 @@ describe('replyRoute', (): void => {
       expect(response.status).toEqual(404);
     });
   });
+  describe('get /tweets/:tweetId/replies', (): void => {
+    it('should get a list of replies by tweet', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId().toString();
+      const newReply = new Reply({
+        text,
+        user: userId,
+        tweet: tweetId,
+      });
+      await newReply.save();
+      const response = await request(app).get(`/tweets/${tweetId}/replies`);
+      expect(response.status).toEqual(200);
+    });
+  });
+  describe('get /users/:userId/replies', (): void => {
+    it('should get a list of replies by user', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId().toString();
+      const newReply = new Reply({
+        text,
+        user: userId,
+        tweet: tweetId,
+      });
+      await newReply.save();
+      const response = await request(app).get(`/users/${userId}/replies`);
+      expect(response.status).toEqual(200);
+    });
+  });
 });

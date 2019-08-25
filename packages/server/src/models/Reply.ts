@@ -27,4 +27,5 @@ ReplySchema.pre('find', function(next: NextFunction): void {
   this.populate([{ path: 'user', select: 'username handle' }]);
   next();
 });
+
 export default mongoose.model<Reply>('Reply', ReplySchema);
