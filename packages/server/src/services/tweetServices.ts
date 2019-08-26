@@ -16,6 +16,21 @@ export const createTweet = async (
   const tweetId = tweet._id;
   return { tweetId };
 };
+export const createRetweet = async (
+  text: string,
+  retweetedId: string,
+  userId: string,
+): Promise<{ tweetId: string }> => {
+  const tweet = new Tweet({
+    text,
+    user: userId,
+    retweet: retweetedId,
+    type: 'retweet',
+  });
+  await tweet.save();
+  const tweetId = tweet._id;
+  return { tweetId };
+};
 export const createImageTweet = async (
   text: string,
   imagePath: string,

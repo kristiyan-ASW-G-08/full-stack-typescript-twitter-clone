@@ -4,6 +4,7 @@ import {
   createTweet,
   createLinkTweet,
   createImageTweet,
+  createRetweet,
   getTweetById,
 } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
@@ -19,7 +20,7 @@ export const postTweet = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, linkUrl, type } = req.body;
+    const { text, linkUrl, type, retweetedId } = req.body;
     const { userId } = req;
     if (type === 'text') {
       const { tweetId } = await createTweet(text, userId);
@@ -40,6 +41,9 @@ export const postTweet = async (
         throw error;
       }
       const { tweetId } = await createImageTweet(text, req.file.path, userId);
+      res.status(200).json({ data: { tweetId } });
+    } else if (type === 'retweet') {
+      const { tweetId } = await createRetweet(text, retweetedId, userId);
       res.status(200).json({ data: { tweetId } });
     }
   } catch (err) {

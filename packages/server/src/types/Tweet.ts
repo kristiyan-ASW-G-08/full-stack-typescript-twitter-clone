@@ -3,4 +3,5 @@ import { Document } from 'mongoose';
 
 export default interface Tweet extends CommonTweet, Document {
   user: string;
+  retweet: string;
 }

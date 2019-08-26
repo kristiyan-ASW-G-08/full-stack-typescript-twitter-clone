@@ -5,6 +5,7 @@ import {
   createTweet,
   createLinkTweet,
   createImageTweet,
+  createRetweet,
   getTweetById,
 } from '@services/tweetServices';
 import User from '@models/User';
@@ -41,6 +42,7 @@ describe('tweetServices', (): void => {
   const link = 'fakeUrl';
   const imagePath = 'fakeImagePath';
   const mockUserId = mongoose.Types.ObjectId().toString();
+  const mockTweetId = mongoose.Types.ObjectId().toString();
   describe('createTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(3);
@@ -53,16 +55,16 @@ describe('tweetServices', (): void => {
       expect(tweet.text).toMatch(text);
       expect(tweet.user.toString()).toMatch(mockUserId);
     });
+    it('should throw an error', async (): Promise<void> => {
+      expect.assertions(1);
+      const invalidUserId = 'invalid';
+      await expect(createTweet(text, invalidUserId)).rejects.toThrow();
+    });
   });
-  it('should throw an error', async (): Promise<void> => {
-    expect.assertions(1);
-    const invalidUserId = 'invalid';
-    await expect(createTweet(text, invalidUserId)).rejects.toThrow();
-  });
+
   describe('createImageTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(4);
-      const hashMock = jest.spyOn(bcrypt, 'hash');
       const { tweetId } = await createImageTweet(text, imagePath, mockUserId);
       expect(tweetId).toBeTruthy();
       const tweet = await Tweet.findById(tweetId);
@@ -72,25 +74,24 @@ describe('tweetServices', (): void => {
       expect(tweet.text).toMatch(text);
       expect(tweet.image).toMatch(imagePath);
       expect(tweet.user.toString()).toMatch(mockUserId);
-      hashMock.mockRestore();
+    });
+    it('should throw an error when the user id is invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      const invalidUserId = 'invalid';
+      await expect(
+        createImageTweet(text, imagePath, invalidUserId),
+      ).rejects.toThrow();
+      await expect(
+        createImageTweet(text, imagePath, invalidUserId),
+      ).rejects.toMatchSnapshot();
     });
   });
-  it('should throw an error when the user id is invalid', async (): Promise<
-    void
-  > => {
-    expect.assertions(2);
-    const invalidUserId = 'invalid';
-    await expect(
-      createImageTweet(text, imagePath, invalidUserId),
-    ).rejects.toThrow();
-    await expect(
-      createImageTweet(text, imagePath, invalidUserId),
-    ).rejects.toMatchSnapshot();
-  });
+
   describe('createLinkTweet', (): void => {
     it(`should create a new tweet`, async (): Promise<void> => {
       expect.assertions(4);
-      const hashMock = jest.spyOn(bcrypt, 'hash');
       const { tweetId } = await createLinkTweet(text, link, mockUserId);
 
       expect(tweetId).toBeTruthy();
@@ -101,18 +102,51 @@ describe('tweetServices', (): void => {
       expect(tweet.text).toMatch(text);
       expect(tweet.link).toMatch(link);
       expect(tweet.user.toString()).toMatch(mockUserId);
-      hashMock.mockRestore();
+    });
+    it('should throw an error when the user id is invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const invalidUserId = 'invalid';
+      await expect(
+        createLinkTweet(text, imagePath, invalidUserId),
+      ).rejects.toThrow();
     });
   });
-  it('should throw an error when the user id is invalid', async (): Promise<
-    void
-  > => {
-    expect.assertions(1);
-    const invalidUserId = 'invalid';
-    await expect(
-      createLinkTweet(text, imagePath, invalidUserId),
-    ).rejects.toThrow();
+
+  describe('createRetweet', (): void => {
+    it(`should create a new retweet`, async (): Promise<void> => {
+      expect.assertions(4);
+      const { tweetId } = await createRetweet(text, mockTweetId, mockUserId);
+      expect(tweetId).toBeTruthy();
+      const tweet = await Tweet.findById(tweetId);
+      if (!tweet) {
+        return;
+      }
+      expect(tweet.text).toMatch(text);
+      expect(tweet.user.toString()).toMatch(mockUserId);
+      expect(tweet.retweet.toString()).toMatch(mockTweetId);
+    });
+    it('should throw an error when the user id is invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const invalidUserId = 'invalid';
+      await expect(
+        createRetweet(text, mockUserId, invalidUserId),
+      ).rejects.toThrow();
+    });
+    it('should throw an error when the tweet id is invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const invalidTweetId = 'invalid';
+      await expect(
+        createRetweet(text, invalidTweetId, mockUserId),
+      ).rejects.toThrow();
+    });
   });
+
   describe('getTweetById', (): void => {
     it(`should get a tweet`, async (): Promise<void> => {
       expect.assertions(3);
