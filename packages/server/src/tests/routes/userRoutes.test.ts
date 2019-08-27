@@ -882,6 +882,116 @@ describe('userRoutes', (): void => {
       expect(users).toHaveLength(1);
     });
   });
+  describe('get /users/user/tweets/feed', (): void => {
+    it("should get a list of tweets based on user's following", async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      const followedUser = new User({
+        username: 'followedUser',
+        handle: 'followedUserHandle',
+        email: 'followedUserMail@mail.com',
+        password,
+      });
+      await followedUser.save();
+      const followedUserId = followedUser._id.toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: followedUserId,
+      });
+      await newTweet.save();
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        following: [followedUserId],
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .get(`/users/user/tweets/feed`)
+        .set('Authorization', `Bearer ${token}`);
+      const { tweets } = response.body.data;
+      expect(response.status).toEqual(200);
+      expect(tweets).toHaveLength(1);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const followedUser = new User({
+        username: 'followedUser',
+        handle: 'followedUserHandle',
+        email: 'followedUserMail@mail.com',
+        password,
+      });
+      await followedUser.save();
+      const followedUserId = followedUser._id.toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: followedUserId,
+      });
+      await newTweet.save();
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        following: [followedUserId],
+      });
+      await newUser.save();
+      const response = await request(app).get(`/users/user/tweets/feed`);
+      expect(response.status).toEqual(401);
+    });
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const followedUser = new User({
+        username: 'followedUser',
+        handle: 'followedUserHandle',
+        email: 'followedUserMail@mail.com',
+        password,
+      });
+      await followedUser.save();
+      const followedUserId = followedUser._id.toString();
+      const newTweet = new Tweet({
+        type: 'text',
+        text,
+        user: followedUserId,
+      });
+      await newTweet.save();
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        following: [followedUserId],
+      });
+      await newUser.save();
+      const token = jwt.sign(
+        {
+          userId: mongoose.Types.ObjectId(),
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .get(`/users/user/tweets/feed`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(404);
+    });
+  });
   describe('delete /users', (): void => {
     it('should delete a user', async (): Promise<void> => {
       expect.assertions(1);

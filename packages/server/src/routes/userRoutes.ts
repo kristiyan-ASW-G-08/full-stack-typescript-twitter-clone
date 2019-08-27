@@ -14,6 +14,7 @@ import {
   patchProfile,
   getUsersList,
   getUserLikes,
+  getUserFeed,
 } from '@controllers/userController';
 import UserSIgnUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -57,5 +58,7 @@ router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
 router.get('/users/:userId/likes', getUserLikes);
 
 router.get('/users/:searchTerm', getUsersList);
+
+router.get('/users/user/tweets/feed', isAuth, getUserFeed);
 
 export default router;

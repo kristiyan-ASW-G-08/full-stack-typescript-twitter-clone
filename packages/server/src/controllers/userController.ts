@@ -16,8 +16,10 @@ import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
+import getSortString from '@utilities/getSortString';
 import SourceRef from '@customTypes/SourceRef';
 import User from '@models/User';
+import Tweet from '@models/Tweet';
 
 export const signUp = async (
   req: Request,
@@ -314,6 +316,53 @@ export const getUsersList = async (
       .select({ score: { $meta: 'textScore' } })
       .exec();
     res.status(200).json({ data: { users } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUserFeed = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req;
+    const sort = req.query.sort || 'top';
+    const sortString = getSortString(sort);
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const user = await getUserById(userId);
+    const { SERVER_URL } = process.env;
+    const { following } = user;
+    const tweets = await Tweet.find()
+      .countDocuments()
+      .find({ user: { $in: following } })
+      .sort(sortString)
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const tweetsCount =
+      (await Tweet.find({ user: { $in: following } }).countDocuments()) -
+      page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (tweetsCount > 0) {
+      links.next = `${SERVER_URL}/users/users/tweets/feed?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/user/tweets/feed?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+
+    res.status(200).json({
+      data: {
+        tweets,
+        links,
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
