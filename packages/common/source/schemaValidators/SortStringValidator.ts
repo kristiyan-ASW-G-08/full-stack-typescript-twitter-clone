@@ -2,7 +2,6 @@ import * as yup from 'yup';
 
 interface SortStringValidatorType {
   sort: 'top' | 'trending' | 'new' | 'replies';
-  confirmPassword: string;
 }
 
 const SortStringValidator = yup.object<SortStringValidatorType>().shape({

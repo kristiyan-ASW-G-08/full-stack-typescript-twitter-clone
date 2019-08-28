@@ -16,7 +16,7 @@ import {
   getUserLikes,
   getUserFeed,
 } from '@controllers/userController';
-import UserSIgnUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
+import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
@@ -24,9 +24,17 @@ import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
 
-router.post('/users', validate(UserSIgnUpValidator), signUp);
+router.post(
+  '/users',
+  validate([{ schema: UserSignUpValidator, target: 'body' }]),
+  signUp,
+);
 
-router.post('/users/tokens', validate(UserLoginValidator), logIn);
+router.post(
+  '/users/tokens',
+  validate([{ schema: UserLoginValidator, target: 'body' }]),
+  logIn,
+);
 
 router.post('/users/:email', requestPasswordResetEmail);
 
@@ -35,13 +43,13 @@ router.patch('/users', isAuth, confirmEmail);
 router.patch(
   '/users/reset',
   isAuth,
-  validate(ResetPasswordValidator),
+  validate([{ schema: ResetPasswordValidator, target: 'body' }]),
   resetPassword,
 );
 router.patch(
   '/users/user/profile',
   isAuth,
-  validate(UserProfileValidator),
+  validate([{ schema: UserProfileValidator, target: 'body' }]),
   patchProfile,
 );
 

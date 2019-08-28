@@ -1,6 +1,5 @@
 import express from 'express';
 import validate from '@customMiddleware/validate';
-import validateQuery from '@customMiddleware/validateQuery';
 import {
   postTweet,
   deleteTweet,
@@ -15,19 +14,33 @@ import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
 
-router.post('/tweets', isAuth, validate(TweetValidator), postTweet);
+router.post(
+  '/tweets',
+  isAuth,
+  validate([{ schema: TweetValidator, target: 'body' }]),
+  postTweet,
+);
 
-router.patch('/tweets/:tweetId', isAuth, validate(TweetValidator), updateTweet);
+router.patch(
+  '/tweets/:tweetId',
+  isAuth,
+  validate([{ schema: TweetValidator, target: 'body' }]),
+  updateTweet,
+);
 
 router.delete('/tweets/:tweetId', isAuth, deleteTweet);
 
 router.get('/tweets/:tweetId', getTweet);
 
-router.get('/tweets', validateQuery(SortStringValidator), getAllTweets);
+router.get(
+  '/tweets',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  getAllTweets,
+);
 
 router.get(
   '/users/:userId/tweets',
-  validateQuery(SortStringValidator),
+  validate([{ schema: SortStringValidator, target: 'query' }]),
   getUserTweets,
 );
 export default router;

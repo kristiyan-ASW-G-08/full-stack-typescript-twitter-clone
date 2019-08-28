@@ -1,10 +1,11 @@
-import { Request, Response, NextFunction, Application } from 'express';
-import { MixedSchema, ValidationError } from 'yup';
+import { Request, Response, NextFunction } from 'express';
+import Validator from '@customTypes/Validator';
+import { ValidationError } from 'yup';
 import CustomValidationError from '@twtr/common/source/types/ValidationError';
 import { errors, CustomError } from '@utilities/CustomError';
 
 const validate = (
-  validator: MixedSchema,
+  validators: Validator[],
 ): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
   return async (
     req: Request,
@@ -13,10 +14,13 @@ const validate = (
   ): Promise<void> => {
     let isError = false;
     try {
-      const { body } = req;
-      await validator.validate(body, {
-        abortEarly: false,
-      });
+      for await (const validator of validators) {
+        const { schema, target } = validator;
+        const validationTarget = req[target];
+        await schema.validate(validationTarget, {
+          abortEarly: false,
+        });
+      }
     } catch (err) {
       isError = true;
       const validationErrors = err.inner.map(
