@@ -79,7 +79,7 @@ export const logIn = async (
   }
 };
 
-export const confirmEmail = async (
+export const verifyEmail = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -101,7 +101,7 @@ export const requestPasswordResetEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email } = req.params;
+    const { email } = req.body;
     const user = await getUserByEmail(email);
     await checkUserConfirmation(user);
     sendPasswordResetEmail(user._id, email);

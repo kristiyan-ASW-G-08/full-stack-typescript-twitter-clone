@@ -3,7 +3,7 @@ import validate from '@customMiddleware/validate';
 import {
   signUp,
   logIn,
-  confirmEmail,
+  verifyEmail,
   requestPasswordResetEmail,
   resetPassword,
   deleteUser,
@@ -20,6 +20,7 @@ import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUp
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
+import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
@@ -31,17 +32,21 @@ router.post(
 );
 
 router.post(
-  '/users/tokens',
+  '/users/user/tokens',
   validate([{ schema: UserLoginValidator, target: 'body' }]),
   logIn,
 );
 
-router.post('/users/:email', requestPasswordResetEmail);
+router.post(
+  '/users/user',
+  validate([{ schema: EmailValidator, target: 'body' }]),
+  requestPasswordResetEmail,
+);
 
-router.patch('/users', isAuth, confirmEmail);
+router.patch('/users/user/verify', isAuth, verifyEmail);
 
 router.patch(
-  '/users/reset',
+  '/users/user/reset',
   isAuth,
   validate([{ schema: ResetPasswordValidator, target: 'body' }]),
   resetPassword,
@@ -53,7 +58,7 @@ router.patch(
   patchProfile,
 );
 
-router.patch('/users/tweets/:tweetId', isAuth, bookmarkTweet);
+router.patch('/users/tweets/:tweetId/bookmark', isAuth, bookmarkTweet);
 
 router.patch('/users/tweets/:tweetId/like', isAuth, likeTweet);
 

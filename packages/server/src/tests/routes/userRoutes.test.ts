@@ -105,7 +105,7 @@ describe('userRoutes', (): void => {
       expect(sendEmail).not.toHaveBeenCalled();
     });
   });
-  describe('/users/tokens', (): void => {
+  describe('post /users/user/tokens', (): void => {
     it('should get a authentication token and user data object', async (): Promise<
       void
     > => {
@@ -119,7 +119,7 @@ describe('userRoutes', (): void => {
         confirmed: true,
       });
       const response = await request(app)
-        .post('/users/tokens')
+        .post('/users/user/tokens')
         .send({
           email,
           password,
@@ -136,7 +136,7 @@ describe('userRoutes', (): void => {
     > => {
       expect.assertions(1);
       const response = await request(app)
-        .post('/users/tokens')
+        .post('/users/user/tokens')
         .send({
           email,
           password,
@@ -147,13 +147,13 @@ describe('userRoutes', (): void => {
       void
     > => {
       expect.assertions(2);
-      const response = await request(app).post('/users/tokens');
+      const response = await request(app).post('/users/user/tokens');
       expect(response.status).toEqual(400);
       expect(response.body).toMatchSnapshot();
     });
   });
-  describe('patch /users', (): void => {
-    it("should confirm user's email", async (): Promise<void> => {
+  describe('patch /users/user/verify', (): void => {
+    it("should verify user's email address", async (): Promise<void> => {
       expect.assertions(2);
       const newUser = new User({
         username,
@@ -173,7 +173,7 @@ describe('userRoutes', (): void => {
       );
 
       const response = await request(app)
-        .patch(`/users`)
+        .patch(`/users/user/verify`)
         .set('Authorization', `Bearer ${token}`);
       const confirmedUser = await User.findById(newUser._id);
       if (!confirmedUser) {
@@ -195,7 +195,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users`)
+        .patch(`/users/user/verify`)
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
     });
@@ -203,11 +203,11 @@ describe('userRoutes', (): void => {
       void
     > => {
       expect.assertions(1);
-      const response = await request(app).patch(`/users`);
+      const response = await request(app).patch(`/users/user/verify`);
       expect(response.status).toEqual(401);
     });
   });
-  describe('/users/:email', (): void => {
+  describe('post /users/user', (): void => {
     it('should request password reset email', async (): Promise<void> => {
       expect.assertions(1);
       const newUser = new User({
@@ -218,32 +218,22 @@ describe('userRoutes', (): void => {
         confirmed: true,
       });
       await newUser.save();
-      const response = await request(app).post(`/users/${email}`);
+      const response = await request(app)
+        .post(`/users/user`)
+        .send({ email });
       expect(response.status).toEqual(204);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const response = await request(app).post(`/users/${email}`);
-      expect(response.status).toEqual(401);
     });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
     > => {
       expect.assertions(1);
-      const response = await request(app).post(`/users/${email}`);
+      const response = await request(app)
+        .post(`/users/user`)
+        .send({ email });
       expect(response.status).toEqual(404);
     });
   });
-  describe('/users/reset', (): void => {
+  describe('patch /users/user/reset', (): void => {
     it("should reset user's password", async (): Promise<void> => {
       expect.assertions(1);
       const newUser = new User({
@@ -263,7 +253,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/reset`)
+        .patch(`/users/user/reset`)
         .set('Authorization', `Bearer ${token}`)
         .send({
           password: newPassword,
@@ -292,7 +282,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/reset`)
+        .patch(`/users/user/reset`)
         .set('Authorization', `Bearer ${token}`)
         .send({
           password: newPassword,
@@ -314,7 +304,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/reset`)
+        .patch(`/users/user/reset`)
         .set('Authorization', `Bearer ${token}`)
         .send({
           password: newPassword,
@@ -461,7 +451,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toEqual(400);
     });
   });
-  describe('patch /users/tweets/:tweetId', (): void => {
+  describe('patch /users/tweets/:tweetId/bookmark', (): void => {
     it('should add a tweet bookmark', async (): Promise<void> => {
       expect.assertions(3);
       const newUser = new User({
@@ -487,7 +477,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/tweets/${tweetId}`)
+        .patch(`/users/tweets/${tweetId}/bookmark`)
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
       if (!user) return;
@@ -522,7 +512,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/tweets/${tweetId}`)
+        .patch(`/users/tweets/${tweetId}/bookmark`)
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
       if (!user) return;
@@ -551,7 +541,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .patch(`/users/tweets/${tweetId}`)
+        .patch(`/users/tweets/${tweetId}/bookmark`)
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
     });
@@ -560,7 +550,9 @@ describe('userRoutes', (): void => {
     > => {
       expect.assertions(1);
       const tweetId = mongoose.Types.ObjectId();
-      const response = await request(app).patch(`/users/tweets/${tweetId}`);
+      const response = await request(app).patch(
+        `/users/tweets/${tweetId}/bookmark`,
+      );
       expect(response.status).toEqual(401);
     });
   });
