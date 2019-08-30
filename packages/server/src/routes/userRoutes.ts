@@ -72,6 +72,6 @@ router.get('/users/:userId/likes', getUserLikes);
 
 router.get('/users/:searchTerm', getUsersList);
 
-router.get('/users/user/tweets/feed', isAuth, getUserFeed);
+router.get('/users/user/tweets', isAuth, getUserFeed);
 
 export default router;

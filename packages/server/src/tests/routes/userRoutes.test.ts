@@ -874,7 +874,7 @@ describe('userRoutes', (): void => {
       expect(users).toHaveLength(1);
     });
   });
-  describe('get /users/user/tweets/feed', (): void => {
+  describe('get /users/user/tweets', (): void => {
     it("should get a list of tweets based on user's following", async (): Promise<
       void
     > => {
@@ -910,7 +910,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .get(`/users/user/tweets/feed`)
+        .get(`/users/user/tweets`)
         .set('Authorization', `Bearer ${token}`);
       const { tweets } = response.body.data;
       expect(response.status).toEqual(200);
@@ -942,7 +942,7 @@ describe('userRoutes', (): void => {
         following: [followedUserId],
       });
       await newUser.save();
-      const response = await request(app).get(`/users/user/tweets/feed`);
+      const response = await request(app).get(`/users/user/tweets`);
       expect(response.status).toEqual(401);
     });
     it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
@@ -979,7 +979,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app)
-        .get(`/users/user/tweets/feed`)
+        .get(`/users/user/tweets`)
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(404);
     });

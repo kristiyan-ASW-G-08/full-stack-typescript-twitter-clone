@@ -4,6 +4,7 @@ declare namespace NodeJS {
     EMAIL: string;
     EMAIL_PASSWORD: string;
     SERVER_URL: string;
-    SERVER_URL: string;
+    REDIS_PORT: number;
+    REDIS_HOST: string;
   }
 }

@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import multer from 'multer';
 import compression from 'compression';
+import rateLimiter from '@customMiddleware/rateLimiter';
 import userRoutes from '@routes/userRoutes';
 import tweetRoutes from '@routes/tweetRoutes';
 import replyRoutes from '@routes/replyRoutes';
@@ -14,6 +15,7 @@ const app: Application = express();
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
+app.use(rateLimiter());
 app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
