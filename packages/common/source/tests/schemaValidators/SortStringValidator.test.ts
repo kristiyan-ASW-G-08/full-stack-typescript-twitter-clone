@@ -14,7 +14,7 @@ describe('SortStringValidator', (): void => {
     await expect(SortStringValidator.validate(query)).resolves.toBe(query);
   });
   it(`should validate successfully`, async (): Promise<void> => {
-    const sort = 'comments';
+    const sort = 'replies';
     const query = { page, limit, sort };
     await expect(SortStringValidator.validate(query)).resolves.toBe(query);
   });

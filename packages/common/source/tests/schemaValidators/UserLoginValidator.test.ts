@@ -1,6 +1,6 @@
 import UserLoginValidator from '@schemaValidators/UserLoginValidator';
 
-describe('userLoginValidator', (): void => {
+describe('UserLoginValidator', (): void => {
   const email = 'testmail@mail.com';
   const password = 'testPassword';
   const invalidPassword = '1234';

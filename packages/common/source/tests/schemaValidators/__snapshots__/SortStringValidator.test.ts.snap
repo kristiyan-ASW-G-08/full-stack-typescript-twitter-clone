@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortStringValidator should throw an error 1`] = `[ValidationError: sort must be one of the following values: top, trending, new, replies]`;

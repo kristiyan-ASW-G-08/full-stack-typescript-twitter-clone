@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailValidator should throw an error 1`] = `[ValidationError: email is a required field]`;
