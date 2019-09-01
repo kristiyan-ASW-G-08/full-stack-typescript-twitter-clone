@@ -36,7 +36,7 @@ Object {
       "name": "confirmPassword",
     },
   ],
-  "message": "Request has wrong format.",
+  "message": "Request has wrong format",
 }
 `;
 
@@ -64,23 +64,7 @@ Object {
       "name": "confirmPassword",
     },
   ],
-  "message": "Request has wrong format.",
-}
-`;
-
-exports[`userRoutes /users/tokens should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
-Object {
-  "data": Array [
-    Object {
-      "message": "email is a required field",
-      "name": "email",
-    },
-    Object {
-      "message": "password is a required field",
-      "name": "password",
-    },
-  ],
-  "message": "Request has wrong format.",
+  "message": "Request has wrong format",
 }
 `;
 
@@ -96,6 +80,6 @@ Object {
       "name": "password",
     },
   ],
-  "message": "Request has wrong format.",
+  "message": "Request has wrong format",
 }
 `;

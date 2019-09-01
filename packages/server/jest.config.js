@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: 'node',
   setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['./jest.setup.js'],
-  moduleDirectories: ['node_modules', 'src'],
+  moduleDirectories: ['node_modules', 'src', 'types'],
   clearMocks: true,
   moduleNameMapper: {
     'src/(.*)$': '<rootDir>/src/$1',

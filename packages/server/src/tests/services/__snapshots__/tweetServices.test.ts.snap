@@ -2,4 +2,4 @@
 
 exports[`tweetServices createImageTweet should throw an error when the user id is invalid 1`] = `[ValidationError: Tweet validation failed: user: Cast to ObjectID failed for value "invalid" at path "user"]`;
 
-exports[`tweetServices getTweetById should throw an error when the tweet is not found 1`] = `[Error: Resource not found.]`;
+exports[`tweetServices getTweetById should throw an error when the tweet is not found 1`] = `[Error: Resource not found]`;

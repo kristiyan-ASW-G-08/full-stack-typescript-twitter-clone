@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`replyServices getReplyById should throw an error when the reply is not found 1`] = `[Error: Resource not found.]`;
+exports[`replyServices getReplyById should throw an error when the reply is not found 1`] = `[Error: Resource not found]`;

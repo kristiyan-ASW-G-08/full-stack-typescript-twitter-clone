@@ -89,6 +89,7 @@ export const verifyEmail = async (
     const user = await getUserById(userId);
     user.confirmed = true;
     await user.save();
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -103,8 +104,10 @@ export const requestPasswordResetEmail = async (
   try {
     const { email } = req.body;
     const user = await getUserByEmail(email);
+    const userId = user._id.toString();
     await checkUserConfirmation(user);
     sendPasswordResetEmail(user._id, email);
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -122,6 +125,7 @@ export const resetPassword = async (
     const hashedPassword = await bcrypt.hash(password, 12);
     user.password = hashedPassword;
     await user.save();
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -136,6 +140,7 @@ export const deleteUser = async (
     const { userId } = req;
     const user = await getUserById(userId);
     await user.remove();
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -167,6 +172,7 @@ export const bookmarkTweet = async (
     }
     await user.save();
     const { bookmarks } = user;
+
     res.status(200).json({ data: { bookmarks } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -202,6 +208,7 @@ export const likeTweet = async (
     await tweet.save();
     await user.save();
     const { likes } = user;
+
     res.status(200).json({ data: { likes } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -231,6 +238,7 @@ export const followUser = async (
     await user.save();
     await authenticatedUser.save();
     const { following } = authenticatedUser;
+
     res.status(200).json({ data: { following } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -265,6 +273,7 @@ export const getUserLikes = async (
     const user = await getUserById(userId);
     const populatedUser = await user.populate('likes.source').execPopulate();
     const { likes } = populatedUser;
+
     res.status(200).json({ data: { likes } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -294,6 +303,7 @@ export const patchProfile = async (
     user.website = website;
     console.log(req.files, 'Files!!!!!!!!!!!!!!!!!!!!!!!');
     await user.save();
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);

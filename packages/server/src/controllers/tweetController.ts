@@ -86,6 +86,7 @@ export const updateTweet = async (
       }
       tweet.image = req.file.path;
     }
+
     await tweet.save();
     res.sendStatus(204);
   } catch (err) {
@@ -106,6 +107,7 @@ export const deleteTweet = async (
     if (tweet.type === 'image') {
       await deleteFile(tweet.image);
     }
+
     await tweet.remove();
     res.sendStatus(204);
   } catch (err) {

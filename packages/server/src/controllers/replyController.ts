@@ -15,6 +15,7 @@ export const postReply = async (
     const { text } = req.body;
     const { userId } = req;
     const { replyId } = await createReply(text, userId, tweetId);
+
     res.status(200).json({ data: { replyId } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -33,6 +34,7 @@ export const updateReply = async (
     isAuthorized(reply.user.toString(), userId);
     reply.text = text;
     await reply.save();
+
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -49,6 +51,7 @@ export const deleteReply = async (
     const { userId } = req;
     const { reply } = await getReplyById(replyId);
     isAuthorized(reply.user.toString(), userId);
+
     await reply.remove();
     res.sendStatus(204);
   } catch (err) {
