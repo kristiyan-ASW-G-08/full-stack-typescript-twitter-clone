@@ -7,7 +7,7 @@
 0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js' }
 1 notice cli v3.14.1
 2 verbose rootPath C:\Users\PC\Desktop\typescript-twitter-clone
-3 info current version 1.0.115
+3 info current version 1.0.129
 4 silly isAnythingCommitted
 5 verbose isAnythingCommitted 1
 6 silly currentBranch
@@ -15,7 +15,7 @@
 8 silly remoteBranchExists
 9 silly isBehindUpstream
 10 error Error: Command failed: git remote update
-10 error git@github.com: Permission denied (publickey).
+10 error ssh: Could not resolve hostname github.com: Name or service not known
 10 error fatal: Could not read from remote repository.
 10 error
 10 error Please make sure you have the correct access rights
