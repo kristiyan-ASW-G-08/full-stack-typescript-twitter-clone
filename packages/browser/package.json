@@ -1,6 +1,6 @@
 {
   "name": "@twtr/browser",
-  "version": "1.0.129",
+  "version": "1.0.130",
   "private": true,
   "dependencies": {
     "@twtr/common": "^1.0.126",
