@@ -89,7 +89,6 @@ export const verifyEmail = async (
     const user = await getUserById(userId);
     user.confirmed = true;
     await user.save();
-
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -104,10 +103,8 @@ export const requestPasswordResetEmail = async (
   try {
     const { email } = req.body;
     const user = await getUserByEmail(email);
-    const userId = user._id.toString();
     await checkUserConfirmation(user);
     sendPasswordResetEmail(user._id, email);
-
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -125,7 +122,6 @@ export const resetPassword = async (
     const hashedPassword = await bcrypt.hash(password, 12);
     user.password = hashedPassword;
     await user.save();
-
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -140,7 +136,6 @@ export const deleteUser = async (
     const { userId } = req;
     const user = await getUserById(userId);
     await user.remove();
-
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -208,7 +203,6 @@ export const likeTweet = async (
     await tweet.save();
     await user.save();
     const { likes } = user;
-
     res.status(200).json({ data: { likes } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -273,7 +267,6 @@ export const getUserLikes = async (
     const user = await getUserById(userId);
     const populatedUser = await user.populate('likes.source').execPopulate();
     const { likes } = populatedUser;
-
     res.status(200).json({ data: { likes } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -301,9 +294,7 @@ export const patchProfile = async (
     user.username = username;
     user.handle = handle;
     user.website = website;
-    console.log(req.files, 'Files!!!!!!!!!!!!!!!!!!!!!!!');
     await user.save();
-
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -366,7 +357,6 @@ export const getUserFeed = async (
       links.prev = `${SERVER_URL}/users/user/tweets/feed?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-
     res.status(200).json({
       data: {
         tweets,
