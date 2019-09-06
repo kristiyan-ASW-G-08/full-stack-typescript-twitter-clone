@@ -1,18 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import Tweet from '@models/Tweet';
-import {
-  createTweet,
-  createLinkTweet,
-  createImageTweet,
-  createRetweet,
-  getTweetById,
-} from '@services/tweetServices';
+import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
 import getSortString from '@utilities/getSortString';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import TweetType from '@customTypes/Tweet';
 
 export const postTweet = async (
   req: Request,
@@ -22,34 +17,64 @@ export const postTweet = async (
   try {
     const { text, linkUrl, type, retweetedId } = req.body;
     const { userId } = req;
-    if (type === 'text') {
-      const { tweetId } = await createTweet(text, userId);
-      res.status(200).json({ data: { tweetId } });
-    } else if (type === 'link') {
-      const { tweetId } = await createLinkTweet(text, linkUrl, userId);
-      res.status(200).json({ data: { tweetId } });
-    } else if (type === 'image') {
-      if (!req.file) {
-        const errorData: ValidationError[] = [
-          {
-            name: 'image',
-            message: 'Upload an image',
-          },
-        ];
-        const { status, message } = errors.BadRequest;
-        const error = new CustomError(status, message, errorData);
-        throw error;
-      }
-      const { tweetId } = await createImageTweet(text, req.file.path, userId);
-      res.status(200).json({ data: { tweetId } });
-    } else if (type === 'retweet') {
-      const { tweetId } = await createRetweet(text, retweetedId, userId);
-      res.status(200).json({ data: { tweetId } });
+    let tweetId: string;
+    let tweet: TweetType;
+    switch (type) {
+      case 'text':
+        tweet = new Tweet({ text, user: userId, type: 'text' });
+        tweetId = tweet._id;
+        break;
+      case 'link':
+        tweet = new Tweet({
+          text,
+          link: linkUrl,
+          user: userId,
+          type: 'link',
+        });
+        tweetId = tweet._id;
+        break;
+      case 'retweet':
+        tweet = new Tweet({
+          text,
+          user: userId,
+          retweet: retweetedId,
+          type: 'retweet',
+        });
+        await tweet.save();
+        tweetId = tweet._id;
+        break;
+      case 'image':
+        if (!req.file) {
+          const errorData: ValidationError[] = [
+            {
+              name: 'image',
+              message: 'Upload an image',
+            },
+          ];
+          const { status, message } = errors.BadRequest;
+          const error = new CustomError(status, message, errorData);
+          throw error;
+        }
+        tweet = new Tweet({
+          text,
+          image: req.file.path,
+          user: userId,
+          type: 'image',
+        });
+        tweetId = tweet._id;
+        break;
+      default:
+        tweet = new Tweet({ text, user: userId, type: 'text' });
+        tweetId = tweet._id;
+        break;
     }
+
+    res.status(200).json({ data: { tweetId } });
   } catch (err) {
     passErrorToNext(err, next);
   }
 };
+
 export const updateTweet = async (
   req: Request,
   res: Response,

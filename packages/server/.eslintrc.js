@@ -18,6 +18,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
+    'no-case-declarations': 0,
   },
   env: {
     'jest/globals': true,
