@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Reply from '@models/Reply';
-import { createReply, getReplyById } from '@services/replyServices';
+import { getReplyById } from '@services/replyServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import isAuthorized from '@utilities/isAuthorized';
 import getSortString from '@utilities/getSortString';
@@ -14,7 +14,13 @@ export const postReply = async (
     const { tweetId } = req.params;
     const { text } = req.body;
     const { userId } = req;
-    const { replyId } = await createReply(text, userId, tweetId);
+    const reply = new Reply({
+      text,
+      user: userId,
+      tweet: tweetId,
+    });
+    await reply.save();
+    const replyId = reply._id;
 
     res.status(200).json({ data: { replyId } });
   } catch (err) {
