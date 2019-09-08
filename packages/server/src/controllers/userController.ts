@@ -7,7 +7,6 @@ import {
   getUserByEmail,
   getUserById,
   areCredentialsAvailable,
-  comparePasswords,
   checkUserConfirmation,
 } from '@services/userServices';
 import { getTweetById } from '@services/tweetServices';
@@ -21,6 +20,7 @@ import User from '@models/User';
 import Tweet from '@models/Tweet';
 import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
+import ValidationError from '@twtr/common/source/types/ValidationError';
 
 export const signUp = async (
   req: Request,
@@ -125,7 +125,18 @@ export const logIn = async (
     const { email, password } = req.body;
     const secret = process.env.SECRET;
     const user = await getUserByEmail(email);
-    await comparePasswords(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      const validationErrorsArr: ValidationError[] = [
+        {
+          name: 'password',
+          message: 'Wrong password. Try again',
+        },
+      ];
+      const { status, message } = errors.Unauthorized;
+      const error = new CustomError(status, message, validationErrorsArr);
+      throw error;
+    }
     await checkUserConfirmation(user);
     const token = jwt.sign(
       {

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import {  getReplyById } from '@services/replyServices';
+import { getReplyById } from '@services/replyServices';
 import User from '@models/User';
 import Reply from '@models/Reply';
 import db from 'src/db';

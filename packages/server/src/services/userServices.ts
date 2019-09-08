@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import User from '@models/User';
 import UserType from '@customTypes/User';
 import { CustomError, errors } from '@utilities/CustomError';
@@ -41,24 +40,6 @@ export const checkUserConfirmation = async (user: UserType): Promise<void> => {
       {
         name: 'email',
         message: 'Confirm your email to login.',
-      },
-    ];
-    const { status, message } = errors.Unauthorized;
-    const error = new CustomError(status, message, validationErrorsArr);
-    throw error;
-  }
-};
-
-export const comparePasswords = async (
-  password: string,
-  userPassword: string,
-): Promise<void> => {
-  const passwordMatch = await bcrypt.compare(password, userPassword);
-  if (!passwordMatch) {
-    const validationErrorsArr: ValidationError[] = [
-      {
-        name: 'password',
-        message: 'Wrong password. Try again',
       },
     ];
     const { status, message } = errors.Unauthorized;

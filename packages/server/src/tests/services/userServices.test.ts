@@ -3,16 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {
   areCredentialsAvailable,
-  comparePasswords,
   checkUserConfirmation,
   getUserById,
   getUserByEmail,
 } from '@services/userServices';
 import User from '@models/User';
 import db from 'src/db';
-import sendEmail from '@utilities/sendEmail';
 
-jest.mock('@utilities/sendEmail');
 jest.mock('jsonwebtoken');
 
 const mockToken = 'mockToken';
@@ -130,35 +127,6 @@ describe('userServices', (): void => {
       await expect(
         areCredentialsAvailable(credentials),
       ).resolves.toBeUndefined();
-    });
-  });
-
-  describe('comparePasswords', (): void => {
-    let hashedPassword: string;
-    beforeEach(
-      async (): Promise<void> => {
-        hashedPassword = await bcrypt.hash(password, 12);
-      },
-    );
-    it("should throw an error when the passwords don't match", async (): Promise<
-      void
-    > => {
-      expect.assertions(2);
-      const incorrectPassword = 'incorrectPassword';
-      await expect(
-        comparePasswords(incorrectPassword, hashedPassword),
-      ).rejects.toThrow();
-      await expect(
-        comparePasswords(incorrectPassword, hashedPassword),
-      ).rejects.toMatchSnapshot();
-    });
-    it('should not throw an error when the passwords match', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      await expect(comparePasswords(password, hashedPassword)).toEqual(
-        Promise.resolve({}),
-      );
     });
   });
   describe('checkUserConfirmation', (): void => {
