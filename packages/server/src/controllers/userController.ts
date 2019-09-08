@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import mjml2html from 'mjml';
 import {
-  createUser,
   getUserByEmail,
   getUserById,
   areCredentialsAvailable,
@@ -39,7 +38,15 @@ export const signUp = async (
       { name: 'email', value: email },
     ];
     await areCredentialsAvailable(credentials);
-    const { userId } = await createUser(username, handle, email, password);
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = new User({
+      username,
+      handle,
+      email,
+      password: hashedPassword,
+    });
+    await user.save();
+    const userId = user._id;
     const secret = process.env.SECRET;
     const appEmail = process.env.EMAIL;
     const clientUri = process.env.CLIENT_URI;

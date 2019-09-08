@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {
-  createUser,
   areCredentialsAvailable,
   comparePasswords,
   checkUserConfirmation,
@@ -40,37 +39,6 @@ describe('userServices', (): void => {
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
   const password = 'testPassword';
-  describe('createUser', (): void => {
-    it(`should create a new user`, async (): Promise<void> => {
-      expect.assertions(7);
-      const hashMock = jest.spyOn(bcrypt, 'hash');
-      const { userId } = await createUser(username, handle, email, password);
-      expect(userId).toBeTruthy();
-      const user = await User.findById(userId);
-      if (!user) {
-        return;
-      }
-      expect(user.username).toMatch(username);
-      expect(user.handle).toMatch(handle);
-      expect(user.email).toMatch(email);
-      expect(user.password).not.toMatch(password);
-      expect(hashMock).toHaveBeenCalledTimes(1);
-      expect(hashMock).toHaveBeenCalledWith(password, 12);
-      hashMock.mockRestore();
-    });
-  });
-  it('should throw an error when the user credentials are already taken', async (): Promise<
-    void
-  > => {
-    expect.assertions(2);
-    await User.insertMany({ username, handle, email, password });
-    await expect(
-      createUser(username, handle, email, password),
-    ).rejects.toThrow();
-    await expect(
-      createUser(username, handle, email, password),
-    ).rejects.toMatchSnapshot();
-  });
   describe('getUserByEmail', (): void => {
     expect.assertions(3);
     it(`should get a user`, async (): Promise<void> => {

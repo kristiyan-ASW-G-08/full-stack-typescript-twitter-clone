@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { createReply, getReplyById } from '@services/replyServices';
+import {  getReplyById } from '@services/replyServices';
 import User from '@models/User';
 import Reply from '@models/Reply';
 import db from 'src/db';
@@ -35,28 +35,6 @@ describe('replyServices', (): void => {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   const userId = mongoose.Types.ObjectId().toString();
   const tweetId = mongoose.Types.ObjectId().toString();
-  describe('createTweet', (): void => {
-    it(`should create a new reply`, async (): Promise<void> => {
-      expect.assertions(4);
-      const { replyId } = await createReply(text, userId, tweetId);
-      expect(replyId).toBeTruthy();
-      const reply = await Reply.findById(replyId);
-      if (!reply) {
-        return;
-      }
-      expect(reply.text).toMatch(text);
-      expect(reply.user.toString()).toMatch(userId);
-      expect(reply.tweet.toString()).toMatch(tweetId);
-    });
-  });
-  it('should throw an error', async (): Promise<void> => {
-    expect.assertions(1);
-    const invalidUserId = 'invalid';
-    const invalidTweetId = 'invalid';
-    await expect(
-      createReply(text, invalidUserId, invalidTweetId),
-    ).rejects.toThrow();
-  });
   describe('getReplyById', (): void => {
     it(`should get a tweet`, async (): Promise<void> => {
       expect.assertions(3);

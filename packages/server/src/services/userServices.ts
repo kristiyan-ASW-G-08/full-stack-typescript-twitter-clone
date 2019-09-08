@@ -5,24 +5,6 @@ import UserType from '@customTypes/User';
 import { CustomError, errors } from '@utilities/CustomError';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
-export const createUser = async (
-  username: string,
-  handle: string,
-  email: string,
-  password: string,
-): Promise<{ userId: string }> => {
-  const hashedPassword = await bcrypt.hash(password, 12);
-  const user = new User({
-    username,
-    handle,
-    email,
-    password: hashedPassword,
-  });
-  await user.save();
-  const userId = user._id;
-  return { userId };
-};
-
 export const getUserByEmail = async (email: string): Promise<UserType> => {
   const user = await User.findOne({ email });
   if (!user) {
