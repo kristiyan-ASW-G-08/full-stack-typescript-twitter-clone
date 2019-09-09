@@ -1,14 +1,8 @@
-# Full Stack Twitter Clone
+# Full Stack Twitter Clone: server package
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Packages
-
-- browser (React.js website)
-- server (Typescript server)
-- common (Code shared between browser and server)
 
 ### Linters And Formatters
 
@@ -21,54 +15,56 @@ A step by step series of examples that tell you how to get a development env run
 
 #### Yarn
 
-##### Installing lerna
-
-globally
-
 ```
-yarn global add lerna
-```
-
-or
-
-locally
-
-```
-yarn add lerna --dev
+yarn install
 ```
 
 #### npm
 
-##### Installing lerna
-
-globally
-
 ```
-npx lerna
-```
-
-or
-
-locally
-
-```
-npm install lerna --save-dev
+npm install
 ```
 
 ### Running the app
 
-To start on a localhost server
+To start on a localhost server.
+You need to be running Redis server for the app to work.
 
 #### Yarn
 
 ```
+
 yarn start
+
 ```
 
 #### npm
 
 ```
+
 npm run start
+
+```
+
+### Testing
+
+You need to be running redis server for the app to work.
+For testing and development, two different env setups are used.
+
+#### Yarn
+
+```
+
+yarn start
+
+```
+
+#### npm
+
+```
+
+npm run start
+
 ```
 
 ## Author
