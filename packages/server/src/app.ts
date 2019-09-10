@@ -66,7 +66,7 @@ app.use(
     res: Response,
     next: NextFunction,
   ): void => {
-    // console.log(error);
+    console.log(error);
     const status = error.status || 500;
     const { message } = error;
     const response = error.data ? { data: error.data, message } : { message };

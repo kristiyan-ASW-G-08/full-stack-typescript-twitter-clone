@@ -4,10 +4,6 @@ exports[`userServices areCredentialsAvailable should throw an error when the 
 
 exports[`userServices checkUserConfirmation should throw an error the user hasn't confirmed his email address 1`] = `[Error: Authentication credentials not valid]`;
 
-exports[`userServices comparePasswords should throw an error when the passwords don't match 1`] = `[Error: Authentication credentials not valid]`;
-
 exports[`userServices getUserByEmail should throw an error when the user is not found 1`] = `[Error: Resource not found]`;
 
 exports[`userServices getUserById should throw an error should throw an error when the user is not found 1`] = `[Error: Resource not found]`;
-
-exports[`userServices should throw an error when the user credentials are already taken 1`] = `[MongoError: E11000 duplicate key error collection: testFullStackTwitterClone.users index: username_1 dup key: { : "username" }]`;

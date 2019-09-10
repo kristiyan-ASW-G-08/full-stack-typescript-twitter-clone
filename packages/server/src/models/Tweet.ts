@@ -1,4 +1,3 @@
-import { NextFunction } from 'express';
 import mongoose, { Schema } from 'mongoose';
 import Tweet from '@customTypes/Tweet';
 
@@ -29,8 +28,8 @@ const TweetSchema: Schema = new Schema({
   },
 });
 
-TweetSchema.pre('find', function(next: NextFunction): void {
+TweetSchema.pre('find', async function(): Promise<any> {
   this.populate([{ path: 'user', select: 'username handle' }]);
-  next();
 });
+
 export default mongoose.model<Tweet>('Tweet', TweetSchema);

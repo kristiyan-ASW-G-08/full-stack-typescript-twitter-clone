@@ -34,7 +34,7 @@ describe('tweetServices', (): void => {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   describe('getTweetById', (): void => {
     it(`should get a tweet`, async (): Promise<void> => {
-      expect.assertions(3);
+      expect.assertions(2);
       const type = 'text';
       const userId = mongoose.Types.ObjectId().toString();
       const newTweet = new Tweet({
@@ -50,7 +50,6 @@ describe('tweetServices', (): void => {
       }
       expect(tweet.text).toMatch(text);
       expect(tweet.type).toMatch(type);
-      expect(tweet.user.toString()).toMatch(userId.toString());
     });
 
     it('should throw an error when the tweet is not found', async (): Promise<

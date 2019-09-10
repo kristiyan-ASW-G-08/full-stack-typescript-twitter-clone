@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Query } from 'mongoose';
 import Reply from '@customTypes/Reply';
 
 const ReplySchema: Schema = new Schema({
@@ -23,9 +23,8 @@ const ReplySchema: Schema = new Schema({
   },
 });
 
-ReplySchema.pre('find', function(next: NextFunction): void {
+ReplySchema.pre('find', async function(): Promise<void> {
   this.populate([{ path: 'user', select: 'username handle' }]);
-  next();
 });
 
 export default mongoose.model<Reply>('Reply', ReplySchema);
