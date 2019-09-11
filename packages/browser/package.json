@@ -1,9 +1,9 @@
 {
   "name": "@twtr/browser",
-  "version": "1.0.131",
+  "version": "1.0.139",
   "private": true,
   "dependencies": {
-    "@twtr/common": "^1.0.126",
+    "@twtr/common": "^1.0.139",
     "@types/jest": "24.0.15",
     "@types/node": "12.6.6",
     "@types/react": "16.8.23",
