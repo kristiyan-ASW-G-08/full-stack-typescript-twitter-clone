@@ -4,4 +4,4 @@ exports[`TweetValidator should throw an error 1`] = `[ValidationError: text is a
 
 exports[`TweetValidator should throw an error 2`] = `[ValidationError: linkUrl is a required field]`;
 
-exports[`TweetValidator should throw an error 3`] = `[ValidationError: type must be one of the following values: text, link, image, retweet]`;
+exports[`TweetValidator should throw an error 3`] = `[ValidationError: type must be one of the following values: text, link, retweet, reply]`;

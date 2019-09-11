@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import mjml2html from 'mjml';
 import {
@@ -14,7 +13,6 @@ import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
 import getSortString from '@utilities/getSortString';
-import SourceRef from '@customTypes/SourceRef';
 import MailOptions from '@customTypes/MailOptions';
 import User from '@models/User';
 import Tweet from '@models/Tweet';
@@ -292,19 +290,10 @@ export const bookmarkTweet = async (
     const { tweetId } = req.params;
     const { userId } = req;
     const user = await getUserById(userId);
-    const bookmarkIds = user.bookmarks.map(
-      (bookmark: SourceRef): mongoose.Types.ObjectId => bookmark.source,
-    );
-    if (!includesObjectId(bookmarkIds, tweetId)) {
-      user.bookmarks = [
-        ...user.bookmarks,
-        { source: mongoose.Types.ObjectId(tweetId), ref: 'Tweet' },
-      ];
+    if (!includesObjectId(user.bookmarks, tweetId)) {
+      user.bookmarks = [...user.bookmarks, tweetId];
     } else {
-      user.bookmarks = user.bookmarks.filter(
-        (bookmark: SourceRef): boolean =>
-          !bookmark.source.equals(mongoose.Types.ObjectId(tweetId)),
-      );
+      user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
     }
     await user.save();
     const { bookmarks } = user;
@@ -325,20 +314,11 @@ export const likeTweet = async (
     const { userId } = req;
     const user = await getUserById(userId);
     const { tweet } = await getTweetById(tweetId);
-    const likeIds = user.likes.map(
-      (like: SourceRef): mongoose.Types.ObjectId => like.source,
-    );
-    if (!includesObjectId(likeIds, tweetId)) {
-      user.likes = [
-        ...user.likes,
-        { source: mongoose.Types.ObjectId(tweetId), ref: 'Tweet' },
-      ];
+    if (!includesObjectId(user.likes, tweetId)) {
+      user.likes = [...user.likes, tweetId];
       tweet.likes += 1;
     } else {
-      user.likes = user.likes.filter(
-        (like: SourceRef): boolean =>
-          !like.source.equals(mongoose.Types.ObjectId(tweetId)),
-      );
+      user.likes = removeObjectIdFromArr(user.likes, tweetId);
       tweet.likes -= 1;
     }
     await tweet.save();

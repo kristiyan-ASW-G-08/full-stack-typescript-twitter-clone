@@ -7,7 +7,6 @@ import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
 import getSortString from '@utilities/getSortString';
 import ValidationError from '@twtr/common/source/types/ValidationError';
-import TweetType from '@customTypes/Tweet';
 
 export const postTweet = async (
   req: Request,
@@ -15,60 +14,22 @@ export const postTweet = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, linkUrl, type, retweetedId } = req.body;
+    const { text, linkUrl, type, retweetedId, replyId } = req.body;
     const { userId } = req;
-    let tweetId: string;
-    let tweet: TweetType;
-    switch (type) {
-      case 'text':
-        tweet = new Tweet({ text, user: userId, type: 'text' });
-        tweetId = tweet._id;
-        break;
-      case 'link':
-        tweet = new Tweet({
-          text,
-          link: linkUrl,
-          user: userId,
-          type: 'link',
-        });
-        tweetId = tweet._id;
-        break;
-      case 'retweet':
-        tweet = new Tweet({
-          text,
-          user: userId,
-          retweet: retweetedId,
-          type: 'retweet',
-        });
-        await tweet.save();
-        tweetId = tweet._id;
-        break;
-      case 'image':
-        if (!req.file) {
-          const errorData: ValidationError[] = [
-            {
-              name: 'image',
-              message: 'Upload an image',
-            },
-          ];
-          const { status, message } = errors.BadRequest;
-          const error = new CustomError(status, message, errorData);
-          throw error;
-        }
-        tweet = new Tweet({
-          text,
-          image: req.file.path,
-          user: userId,
-          type: 'image',
-        });
-        tweetId = tweet._id;
-        break;
-      default:
-        tweet = new Tweet({ text, user: userId, type: 'text' });
-        tweetId = tweet._id;
-        break;
+    const tweet = new Tweet({
+      text,
+      user: userId,
+      type,
+      link: linkUrl,
+      reply: replyId,
+      retweet: retweetedId,
+    });
+    if (req.file) {
+      tweet.image = req.file.path;
     }
 
+    await tweet.save();
+    const tweetId = tweet._id;
     res.status(200).json({ data: { tweetId } });
   } catch (err) {
     passErrorToNext(err, next);
@@ -86,14 +47,13 @@ export const updateTweet = async (
     const { tweet } = await getTweetById(tweetId);
     const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
-    if (tweet.type === 'text') {
-      tweet.text = text;
-    } else if (tweet.type === 'link') {
-      if (tweet.text) {
-        tweet.text = text;
-      }
+    if (tweet.link) {
       tweet.link = linkUrl;
-    } else if (tweet.type === 'image') {
+    }
+    if (tweet.text) {
+      tweet.text = text;
+    }
+    if (tweet.image) {
       if (!req.file) {
         const errorData: ValidationError[] = [
           {
@@ -106,9 +66,6 @@ export const updateTweet = async (
         throw error;
       }
       await deleteFile(tweet.image);
-      if (tweet.text) {
-        tweet.text = text;
-      }
       tweet.image = req.file.path;
     }
     await tweet.save();
@@ -128,7 +85,7 @@ export const deleteTweet = async (
     const { userId } = req;
     const { tweet } = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
-    if (tweet.type === 'image') {
+    if (tweet.image) {
       await deleteFile(tweet.image);
     }
     await tweet.remove();
@@ -218,6 +175,78 @@ export const getUserTweets = async (
         1}&limit=${limit}&sort=${sort}`;
     }
     res.status(200).json({ data: { tweets, links } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getReplies = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { tweetId } = req.params;
+    const sort = req.query.sort || 'top';
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const { SERVER_URL } = process.env;
+    const sortString = getSortString(sort);
+    const replies = await Tweet.countDocuments()
+      .find({ reply: tweetId })
+      .sort(sortString)
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const repliesCount = (await Tweet.countDocuments()) - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (repliesCount > 0) {
+      links.next = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { replies, links } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUserReplies = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const sort = req.query.sort || 'top';
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const page = parseInt(req.query.page, 10) || 1;
+    const { SERVER_URL } = process.env;
+    const sortString = getSortString(sort);
+    const replies = await Tweet.countDocuments()
+      .find({ user: userId, type: 'reply' })
+      .sort(sortString)
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const repliesCount = (await Tweet.countDocuments()) - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (repliesCount > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/replies?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/replies?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { replies, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }

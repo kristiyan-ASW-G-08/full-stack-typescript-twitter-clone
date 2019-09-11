@@ -39,30 +39,14 @@ const UserSchema: Schema = new Schema({
   },
   likes: [
     {
-      source: {
-        type: mongoose.Types.ObjectId,
-        required: true,
-        refPath: 'likes.ref',
-      },
-      ref: {
-        type: String,
-        required: true,
-        enum: ['Tweet', 'Reply'],
-      },
+      type: Schema.Types.ObjectId,
+      ref: 'Tweet',
     },
   ],
   bookmarks: [
     {
-      source: {
-        type: mongoose.Types.ObjectId,
-        required: true,
-        refPath: 'bookmarks.ref',
-      },
-      ref: {
-        type: String,
-        required: true,
-        enum: ['Tweet', 'Reply'],
-      },
+      type: Schema.Types.ObjectId,
+      ref: 'Tweet',
     },
   ],
 });

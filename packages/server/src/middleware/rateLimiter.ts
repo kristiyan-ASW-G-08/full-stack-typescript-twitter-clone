@@ -1,12 +1,8 @@
-import Redis from 'ioredis';
-import { RateLimiterRedis } from 'rate-limiter-flexible';
+import { RateLimiterMemory } from 'rate-limiter-flexible';
 import { Request, Response, NextFunction } from 'express';
 import { CustomError, errors } from '@utilities/CustomError';
 
-const { REDIS_PORT, REDIS_HOST } = process.env;
-const redisClient = new Redis({ port: REDIS_PORT, host: REDIS_HOST });
-const idRateLimiter = new RateLimiterRedis({
-  storeClient: redisClient,
+const idRateLimiter = new RateLimiterMemory({
   keyPrefix: 'middleware',
   points: 10,
   duration: 1,

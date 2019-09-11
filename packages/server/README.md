@@ -28,7 +28,6 @@ npm install
 ### Running the app
 
 To start on a localhost server.
-You need to be running Redis server for the app to work.
 
 #### Yarn
 
@@ -48,7 +47,6 @@ npm run start
 
 ### Testing
 
-You need to be running redis server for the app to work.
 For testing and development, two different env setups are used.
 
 #### Yarn

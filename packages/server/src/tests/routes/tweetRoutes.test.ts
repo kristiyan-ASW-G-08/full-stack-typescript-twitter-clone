@@ -9,7 +9,6 @@ import db from 'src/db';
 import Tweet from '@models/Tweet';
 
 const port = process.env.PORT || 8080;
-// Temporary code:The tweet routes don't call mjml, but removing its mock causes issues
 const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
@@ -101,6 +100,35 @@ describe('tweetRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(200);
     });
+    it('should create a new reply tweet', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const replyId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const type = 'reply';
+      const response = await request(app)
+        .post('/tweets')
+        .send({
+          type,
+          text,
+          replyId,
+        })
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toEqual(200);
+    });
     it('should create a new image tweet', async (): Promise<void> => {
       expect.assertions(1);
       const newUser = new User({
@@ -123,7 +151,7 @@ describe('tweetRoutes', (): void => {
         secret,
         { expiresIn: '1h' },
       );
-      const type = 'image';
+      const type = 'text';
       const response = await request(app)
         .post('/tweets')
         .field({
@@ -434,6 +462,38 @@ describe('tweetRoutes', (): void => {
       });
       await newTweet.save();
       const response = await request(app).get(`/tweets`);
+      expect(response.status).toEqual(200);
+    });
+  });
+  describe('get /tweets/:tweetId/replies', (): void => {
+    it('should get a list of replies by tweet', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId().toString();
+      const newReply = new Tweet({
+        text,
+        type: 'reply',
+        user: userId,
+        reply: tweetId,
+      });
+      await newReply.save();
+      const response = await request(app).get(`/tweets/${tweetId}/replies`);
+      expect(response.status).toEqual(200);
+    });
+  });
+  describe('get /users/:userId/replies', (): void => {
+    it('should get a list of replies by user', async (): Promise<void> => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId().toString();
+      const newReply = new Tweet({
+        text,
+        type: 'reply',
+        user: userId,
+        reply: tweetId,
+      });
+      await newReply.save();
+      const response = await request(app).get(`/users/${userId}/replies`);
       expect(response.status).toEqual(200);
     });
   });

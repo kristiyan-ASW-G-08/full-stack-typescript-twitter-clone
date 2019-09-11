@@ -6,6 +6,8 @@ import {
   updateTweet,
   getTweet,
   getAllTweets,
+  getReplies,
+  getUserReplies,
   getUserTweets,
 } from '@controllers/tweetController';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
@@ -42,5 +44,17 @@ router.get(
   '/users/:userId/tweets',
   validate([{ schema: SortStringValidator, target: 'query' }]),
   getUserTweets,
+);
+
+router.get(
+  '/tweets/:tweetId/replies',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  getReplies,
+);
+
+router.get(
+  '/users/:userId/replies',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  getUserReplies,
 );
 export default router;

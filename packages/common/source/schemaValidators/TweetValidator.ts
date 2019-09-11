@@ -3,15 +3,27 @@ import * as yup from 'yup';
 import { StringSchema } from 'yup';
 
 interface TweetValidatorType {
-  type: 'text' | 'link' | 'image' | 'retweet';
+  type: 'text' | 'link' | 'retweet' | 'reply';
   text: string;
 }
 const TweetValidator = yup.object<TweetValidatorType>().shape({
   type: yup
     .string()
     .trim()
-    .oneOf(['text', 'link', 'image', 'retweet'])
+    .oneOf(['text', 'link', 'retweet', 'reply'])
     .required(),
+  replyId: yup
+    .string()
+    .trim()
+    .when(
+      'type',
+      (
+        type: 'text' | 'link' | 'retweet' | 'reply',
+        schema: StringSchema,
+      ): any => {
+        return type === 'reply' ? schema.required() : schema.notRequired();
+      },
+    ),
   text: yup
     .string()
     .trim()
@@ -20,7 +32,7 @@ const TweetValidator = yup.object<TweetValidatorType>().shape({
     .when(
       'type',
       (
-        type: 'text' | 'link' | 'image' | 'retweet',
+        type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
       ): any => {
         return type === 'text' ? schema.required() : schema.notRequired();
@@ -32,7 +44,7 @@ const TweetValidator = yup.object<TweetValidatorType>().shape({
     .when(
       'type',
       (
-        type: 'text' | 'link' | 'image' | 'retweet',
+        type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
       ): any => {
         return type === 'retweet' ? schema.required() : schema.notRequired();
@@ -45,7 +57,7 @@ const TweetValidator = yup.object<TweetValidatorType>().shape({
     .when(
       'type',
       (
-        type: 'text' | 'link' | 'image' | 'retweet',
+        type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
       ): any => {
         return type === 'link' ? schema.required() : schema.notRequired();

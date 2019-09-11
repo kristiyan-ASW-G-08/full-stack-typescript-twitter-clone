@@ -483,7 +483,7 @@ describe('userRoutes', (): void => {
       if (!user) return;
       expect(response.status).toEqual(200);
       expect(user.bookmarks.length).toBe(1);
-      expect(user.bookmarks[0].source.equals(tweetId)).toBeTruthy();
+      expect(user.bookmarks[0].equals(tweetId)).toBeTruthy();
     });
     it('should remove a tweet bookmark', async (): Promise<void> => {
       expect.assertions(3);
@@ -502,7 +502,7 @@ describe('userRoutes', (): void => {
       });
       await newTweet.save();
       const tweetId = newTweet._id;
-      newUser.bookmarks = [{ source: tweetId, ref: 'Tweet' }];
+      newUser.bookmarks = [tweetId];
       await newUser.save();
       const token = jwt.sign(
         {
@@ -589,7 +589,7 @@ describe('userRoutes', (): void => {
       if (!user || !tweet) return;
       expect(response.status).toEqual(200);
       expect(user.likes.length).toBe(1);
-      expect(user.likes[0].source.equals(tweetId)).toBeTruthy();
+      expect(user.likes[0].equals(tweetId)).toBeTruthy();
       expect(tweet.likes).toBe(1);
     });
     it('should remove a liked tweet', async (): Promise<void> => {
@@ -610,7 +610,7 @@ describe('userRoutes', (): void => {
       });
       await newTweet.save();
       const tweetId = newTweet._id;
-      newUser.likes = [{ source: tweetId, ref: 'Tweet' }];
+      newUser.likes = [tweetId];
       await newUser.save();
       const token = jwt.sign(
         {
@@ -785,7 +785,7 @@ describe('userRoutes', (): void => {
         handle,
         email,
         password,
-        bookmarks: [{ source: newTweet._id, ref: 'Tweet' }],
+        bookmarks: [newTweet._id],
       });
       await newUser.save();
       const userId = newUser._id;
@@ -826,7 +826,7 @@ describe('userRoutes', (): void => {
         handle,
         email,
         password,
-        likes: [{ source: newTweet._id, ref: 'Tweet' }],
+        likes: [newTweet._id],
       });
       await newUser.save();
       const userId = newUser._id;
