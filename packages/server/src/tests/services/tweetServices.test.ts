@@ -32,11 +32,21 @@ describe('tweetServices', (): void => {
   );
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
+  const username = 'username';
+  const handle = 'testUserHandle';
+  const email = 'testmail@mail.com';
+  const password = 'testPassword';
   describe('getTweetById', (): void => {
     it(`should get a tweet`, async (): Promise<void> => {
       expect.assertions(2);
       const type = 'text';
-      const userId = mongoose.Types.ObjectId().toString();
+      const user = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      const userId = user._id;
       const newTweet = new Tweet({
         text,
         user: userId,
@@ -44,7 +54,7 @@ describe('tweetServices', (): void => {
       });
       await newTweet.save();
       const tweetId = newTweet._id;
-      const { tweet } = await getTweetById(tweetId);
+      const tweet = await getTweetById(tweetId);
       if (!tweet) {
         return;
       }

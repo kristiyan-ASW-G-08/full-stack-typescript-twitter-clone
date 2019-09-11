@@ -415,7 +415,14 @@ describe('tweetRoutes', (): void => {
   describe('get /tweets/:tweetId', (): void => {
     it('should get a tweet', async (): Promise<void> => {
       expect.assertions(2);
-      const userId = mongoose.Types.ObjectId().toString();
+      const user = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await user.save();
+      const userId = user._id;
       const newTweet = new Tweet({
         type: 'text',
         text,

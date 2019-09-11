@@ -44,7 +44,7 @@ export const updateTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const { tweet } = await getTweetById(tweetId);
+    const tweet = await getTweetById(tweetId);
     const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
     if (tweet.link) {
@@ -83,7 +83,7 @@ export const deleteTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const { tweet } = await getTweetById(tweetId);
+    const tweet = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
     if (tweet.image) {
       await deleteFile(tweet.image);
@@ -102,8 +102,11 @@ export const getTweet = async (
 ): Promise<void> => {
   try {
     const { tweetId } = req.params;
-    const { tweet } = await getTweetById(tweetId);
-    res.status(200).json({ data: { tweet } });
+    const tweet = await getTweetById(tweetId);
+    const populatedTweet = await tweet
+      .populate('user', 'username handle')
+      .execPopulate();
+    res.status(200).json({ data: { tweet: populatedTweet } });
   } catch (err) {
     passErrorToNext(err, next);
   }

@@ -313,7 +313,7 @@ export const likeTweet = async (
     const { tweetId } = req.params;
     const { userId } = req;
     const user = await getUserById(userId);
-    const { tweet } = await getTweetById(tweetId);
+    const tweet = await getTweetById(tweetId);
     if (!includesObjectId(user.likes, tweetId)) {
       user.likes = [...user.likes, tweetId];
       tweet.likes += 1;
