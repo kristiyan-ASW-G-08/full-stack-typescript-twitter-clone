@@ -5,10 +5,10 @@ const includesObjectId = (
   stringId: string,
 ): boolean => {
   const id = mongoose.Types.ObjectId(stringId);
-  const check = arr.find((includedId: mongoose.Types.ObjectId): boolean => {
-    return id.equals(id);
+  const check = arr.some((includedId: mongoose.Types.ObjectId): boolean => {
+    return includedId.equals(id);
   });
-  return !!check;
+  return check;
 };
 
 export default includesObjectId;

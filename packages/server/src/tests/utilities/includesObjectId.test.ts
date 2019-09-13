@@ -14,7 +14,7 @@ describe('includesObjectId', (): void => {
     expect(includesObjectId(newIdArr, stringId)).toBeTruthy();
   });
   it(`should return false if the array doesn't include the objectId`, (): void => {
-    const newIdArr = [...idArr, id];
-    expect(includesObjectId(newIdArr, stringId)).toBeTruthy();
+    const newIdArr = [...idArr];
+    expect(includesObjectId(newIdArr, stringId)).toBeFalsy();
   });
 });
