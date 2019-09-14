@@ -47,10 +47,10 @@ export const updateTweet = async (
     const tweet = await getTweetById(tweetId);
     const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
-    if (tweet.link) {
+    if (tweet.link && linkUrl) {
       tweet.link = linkUrl;
     }
-    if (tweet.text) {
+    if (tweet.text && text) {
       tweet.text = text;
     }
     if (tweet.image) {

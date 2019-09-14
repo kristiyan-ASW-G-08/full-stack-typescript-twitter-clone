@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Query } from 'mongoose';
 import Tweet from '@customTypes/Tweet';
 
 const TweetSchema: Schema = new Schema({
@@ -29,8 +29,9 @@ const TweetSchema: Schema = new Schema({
   },
 });
 
-TweetSchema.pre('find', async function(): Promise<any> {
+async function preFindPopulate(this: Query<any>): Promise<any> {
   this.populate([{ path: 'user', select: 'username handle' }]);
-});
+}
+TweetSchema.pre('find', preFindPopulate);
 
 export default mongoose.model<Tweet>('Tweet', TweetSchema);

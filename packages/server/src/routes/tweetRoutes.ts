@@ -57,4 +57,5 @@ router.get(
   validate([{ schema: SortStringValidator, target: 'query' }]),
   getUserReplies,
 );
+
 export default router;
