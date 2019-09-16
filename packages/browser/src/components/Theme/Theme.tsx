@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
+
 interface ThemeProps {
   children: JSX.Element;
   currentTheme: 'light' | 'dark';
