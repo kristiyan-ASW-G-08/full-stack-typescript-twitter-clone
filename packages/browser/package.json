@@ -16,7 +16,7 @@
     "mobx-persist": "^0.4.1",
     "mobx-react-lite": "^1.4.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "styled-components": "^4.3.2",
@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -49,20 +51,29 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.0",
+    "@storybook/addon-info": "^5.2.0",
+    "@storybook/addon-links": "^5.2.0",
+    "@storybook/addon-options": "^5.2.0",
+    "@storybook/addons": "^5.2.0",
     "@storybook/react": "^5.1.11",
+    "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.3",
     "@testing-library/react-hooks": "^2.0.1",
     "@testing-library/user-event": "^7.0.0",
     "@types/react-router-dom": "^4.3.5",
+    "@types/storybook__addon-options": "^4.0.2",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "^4.1.18",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "babel-loader": "8.0.5",
     "eslint-config-airbnb-typescript": "^4.0.1",
     "eslint-config-prettier": "^6.1.0",
     "eslint-config-react-app": "^5.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3"
+    "eslint-plugin-react": "^7.14.3",
+    "react-docgen-typescript-loader": "^3.2.0"
   }
 }

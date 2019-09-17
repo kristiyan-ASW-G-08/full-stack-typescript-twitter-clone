@@ -1,8 +1,9 @@
-import AuthStore from 'stores/AuthStore/AuthStore';
+import AuthStore, { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import AuthState from 'types/AuthState';
 describe('AuthStore', (): void => {
   const authStore = new AuthStore();
   const authenticatedAuthState: AuthState = {
+    isAuth: true,
     user: {
       username: 'mockUserName',
       handle: 'mockUserHandle',
@@ -18,15 +19,15 @@ describe('AuthStore', (): void => {
     },
     token: 'mockToken',
   };
-  it('authState should be null', (): void => {
-    expect(authStore.authState).toEqual(null);
+  it('authState should equal defaultAuthStat', (): void => {
+    expect(authStore.authState).toEqual(defaultAuthState);
   });
   it('authState should be updated with the provided user-data and token', (): void => {
     authStore.setAuthState(authenticatedAuthState);
     expect(authStore.authState).toEqual(authenticatedAuthState);
   });
-  it('authState should be null after resetAuthState is called', (): void => {
+  it('authState should equal defaultAuthState after resetAuthState is called', (): void => {
     authStore.resetAuthState();
-    expect(authStore.authState).toEqual(null);
+    expect(authStore.authState).toEqual(defaultAuthState);
   });
 });

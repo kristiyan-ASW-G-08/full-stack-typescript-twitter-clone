@@ -1,4 +1,3 @@
-/* eslint-disable import/no-duplicates */
 import * as yup from 'yup';
 
 interface EmailValidatorType {
