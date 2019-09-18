@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import mjml2html from 'mjml';
@@ -291,7 +292,7 @@ export const bookmarkTweet = async (
     const { userId } = req;
     const user = await getUserById(userId);
     if (!includesObjectId(user.bookmarks, tweetId)) {
-      user.bookmarks = [...user.bookmarks, tweetId];
+      user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
     } else {
       user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
     }
@@ -315,7 +316,7 @@ export const likeTweet = async (
     const user = await getUserById(userId);
     const tweet = await getTweetById(tweetId);
     if (!includesObjectId(user.likes, tweetId)) {
-      user.likes = [...user.likes, tweetId];
+      user.likes = [...user.likes, mongoose.Types.ObjectId(tweetId)];
       tweet.likes += 1;
     } else {
       user.likes = removeObjectIdFromArr(user.likes, tweetId);
@@ -341,7 +342,10 @@ export const followUser = async (
     const user = await getUserById(userId);
     const authenticatedUser = await getUserById(authenticatedUserId);
     if (!includesObjectId(authenticatedUser.following, userId)) {
-      authenticatedUser.following = [...authenticatedUser.following, userId];
+      authenticatedUser.following = [
+        ...authenticatedUser.following,
+        mongoose.Types.ObjectId(userId),
+      ];
       user.followers += 1;
     } else {
       authenticatedUser.following = removeObjectIdFromArr(

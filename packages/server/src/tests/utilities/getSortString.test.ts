@@ -26,10 +26,4 @@ describe('getSortString', (): void => {
     const sortString = getSortString(sort);
     expect(sortString).toMatch('-replies');
   });
-  it(`should get a tweet`, (): void => {
-    expect.assertions(1);
-    const sort = '';
-    const sortString = getSortString(sort);
-    expect(sortString).toMatch('-likes');
-  });
 });
