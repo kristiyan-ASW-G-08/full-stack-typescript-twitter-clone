@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "lint:css": "stylelint ./src/**/*.{ts,tsx}"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +68,7 @@
     "@types/styled-components": "^4.1.18",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "babel-loader": "8.0.5",
+    "babel-plugin-styled-components": "^1.10.6",
     "eslint-config-airbnb-typescript": "^4.0.1",
     "eslint-config-prettier": "^6.1.0",
     "eslint-config-react-app": "^5.0.1",
@@ -74,6 +76,10 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
-    "react-docgen-typescript-loader": "^3.2.0"
+    "react-docgen-typescript-loader": "^3.2.0",
+    "stylelint": "^11.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0"
   }
 }
