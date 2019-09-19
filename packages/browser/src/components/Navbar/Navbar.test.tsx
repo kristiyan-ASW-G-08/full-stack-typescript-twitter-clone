@@ -29,7 +29,7 @@ describe('Navbar', () => {
     },
     token: 'mockToken',
   };
-  it('render', async () => {
+  it('render unauthenticated Navbar', async () => {
     const { container, getByText, rerender } = render(
       <Theme currentTheme={theme}>
         <Navbar
@@ -69,4 +69,5 @@ describe('Navbar', () => {
     fireEvent.click(logOutButton);
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });
+  
 });
