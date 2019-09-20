@@ -1,13 +1,6 @@
 import * as yup from 'yup';
 
-interface UserValidatorType {
-  username: string;
-  handle: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-const UserValidator = yup.object<UserValidatorType>().shape({
+const UserValidator = yup.object().shape({
   username: yup
     .string()
     .trim()

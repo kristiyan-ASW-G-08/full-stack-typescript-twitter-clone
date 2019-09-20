@@ -8,7 +8,7 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
-import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
+import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import StyledInput from 'styled/StyledInput';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
@@ -17,16 +17,13 @@ import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
-export const LoginForm: FC<RouteComponentProps> = () => {
+export const SignUpForm: FC<RouteComponentProps> = () => {
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const response = await axios.post(
-        'http://localhost:8090/users/user/tokens',
-        e,
-      );
+      const response = await axios.post('http://localhost:8090/users', e);
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
@@ -39,17 +36,29 @@ export const LoginForm: FC<RouteComponentProps> = () => {
   };
   return (
     <Formik
-      validationSchema={UserSignUpValidator}
-      initialValues={{ email: '', password: '' }}
-      onSubmit={e => {
-        console.log(e);
+      validationSchema={UserLoginValidator}
+      initialValues={{
+        username: '',
+        handle: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
       }}
+      onSubmit={submitHandler}
     >
       {() => (
         <CenterContainer>
           <Form>
             <StyledForm>
               <Logo type="vertical" />
+              <StyledInput>
+                <FastField name="username" type="text" placeholder="Username" />
+                <ErrorMessage component="span" name="username" />
+              </StyledInput>
+              <StyledInput>
+                <FastField name="handle" type="text" placeholder="Handle" />
+                <ErrorMessage component="span" name="handle" />
+              </StyledInput>
               <StyledInput>
                 <FastField
                   name="email"
@@ -66,7 +75,15 @@ export const LoginForm: FC<RouteComponentProps> = () => {
                 />
                 <ErrorMessage component="span" name="password" />
               </StyledInput>
-              <Button buttonType={'primary'}>Log In</Button>
+              <StyledInput>
+                <FastField
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Repeat Password"
+                />
+                <ErrorMessage component="span" name="confirmPassword" />
+              </StyledInput>
+              <Button buttonType={'primary'}>SIgn Up</Button>
             </StyledForm>
           </Form>
         </CenterContainer>
@@ -75,4 +92,4 @@ export const LoginForm: FC<RouteComponentProps> = () => {
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(SignUpForm);

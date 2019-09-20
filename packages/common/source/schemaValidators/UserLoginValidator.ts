@@ -1,9 +1,5 @@
 import * as yup from 'yup';
 
-// interface UserLoginValidatorProps {
-//   email: string;
-//   password: string;
-// }
 const UserLoginValidator = yup.object().shape({
   email: yup
     .string()

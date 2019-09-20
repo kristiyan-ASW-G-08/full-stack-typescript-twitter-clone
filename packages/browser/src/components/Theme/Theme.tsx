@@ -5,7 +5,9 @@ interface ThemeProps {
   children: JSX.Element;
   currentTheme: 'light' | 'dark';
 }
+
 const light = {
+  currentTheme: 'light',
   primary: '#1da1f2',
   secondary: '#657786',
   background: '#ffffff',
@@ -15,6 +17,7 @@ const light = {
   border: '#a0adb8',
 };
 const dark = {
+  currentTheme: 'dark',
   secondary: '#8899a6',
   primary: '#1da1f2',
   background: '#1c2938',

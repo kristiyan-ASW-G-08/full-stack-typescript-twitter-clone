@@ -1,18 +1,24 @@
 import styled from 'styled-components';
 
-export const StyledLogo = styled('div')`
+interface StyledLogoProps {
+  type: 'horizontal' | 'vertical';
+}
+export const StyledLogo = styled('div')<StyledLogoProps>`
   display: grid;
-  width: 10rem;
-  grid-template-columns: auto auto;
-  grid-gap: 0.5rem;
   align-content: center;
+  ${props =>
+    props.type === 'horizontal'
+      ? 'grid-template-columns: auto auto'
+      : 'grid-template-columns:1fr; justify-items:center '};
+  width: 10rem;
+  grid-gap: 0.5rem;
 `;
-export const StyledLogoText = styled('h1')`
+export const StyledLogoText = styled('h1')<StyledLogoProps>`
   font-size: 2rem;
   font-weight: bold;
   color: ${props => props.theme.primary};
   @media ${props => props.theme.mediaQueries.mobile} {
-    display: none;
+    ${props => (props.type === 'horizontal' ? ' display: none' : '')}
   }
 `;
 
