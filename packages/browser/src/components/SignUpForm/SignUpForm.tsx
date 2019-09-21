@@ -24,6 +24,7 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
   ): Promise<void> => {
     try {
       const response = await axios.post('http://localhost:8090/users', e);
+      console.log(response);
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
@@ -83,7 +84,9 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
                 />
                 <ErrorMessage component="span" name="confirmPassword" />
               </StyledInput>
-              <Button buttonType={'primary'}>SIgn Up</Button>
+              <Button buttonType={'primary'} type="submit">
+                Sign Up
+              </Button>
             </StyledForm>
           </Form>
         </CenterContainer>

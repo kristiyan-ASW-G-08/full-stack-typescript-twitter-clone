@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import {
   Formik,
   Form,
@@ -8,7 +8,8 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
-import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
+import { observer } from 'mobx-react-lite';
+import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import StyledInput from 'styled/StyledInput';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
@@ -16,8 +17,10 @@ import CenterContainer from 'styled/CenterContainer';
 import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import RootStoreContext from 'stores/RootStore/RootStore';
 
 export const LoginForm: FC<RouteComponentProps> = () => {
+  const { authStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
@@ -27,9 +30,13 @@ export const LoginForm: FC<RouteComponentProps> = () => {
         'http://localhost:8090/users/user/tokens',
         e,
       );
+      const { data } = response.data;
+      const authState = { ...data, isAuth: true };
+      authStore.setAuthState(authState);
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
+
         data.forEach((validationError: ValidationError) => {
           const { name, message } = validationError;
           setFieldError(name, message);
@@ -39,11 +46,9 @@ export const LoginForm: FC<RouteComponentProps> = () => {
   };
   return (
     <Formik
-      validationSchema={UserSignUpValidator}
+      validationSchema={UserLoginValidator}
       initialValues={{ email: '', password: '' }}
-      onSubmit={e => {
-        console.log(e);
-      }}
+      onSubmit={submitHandler}
     >
       {() => (
         <CenterContainer>
@@ -66,7 +71,9 @@ export const LoginForm: FC<RouteComponentProps> = () => {
                 />
                 <ErrorMessage component="span" name="password" />
               </StyledInput>
-              <Button buttonType={'primary'}>Log In</Button>
+              <Button buttonType={'primary'} type="submit">
+                Log In
+              </Button>
             </StyledForm>
           </Form>
         </CenterContainer>
@@ -75,4 +82,4 @@ export const LoginForm: FC<RouteComponentProps> = () => {
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(observer(LoginForm));

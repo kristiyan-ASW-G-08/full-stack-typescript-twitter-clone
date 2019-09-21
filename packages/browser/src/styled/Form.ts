@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten, setLightness } from 'polished';
+import { setLightness } from 'polished';
 
 export const Form = styled('div')`
   display: grid;

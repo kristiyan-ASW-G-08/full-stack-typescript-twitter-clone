@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import UserEvent from '@testing-library/user-event';
 import Navbar from './Navbar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import Theme from 'components/Theme/Theme';
@@ -48,7 +49,7 @@ describe('Navbar', () => {
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
 
-    fireEvent.click(themeButton);
+    UserEvent.click(themeButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
     rerender(
       <Theme currentTheme={theme}>
@@ -66,8 +67,7 @@ describe('Navbar', () => {
     const logOutButton = await waitForElement(() => getByText('Log Out'));
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
-    fireEvent.click(logOutButton);
+    UserEvent.click(logOutButton);
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });
-  
 });

@@ -8,7 +8,7 @@ export const StyledSearchBar = styled('form')`
   align-content: center;
   justify-items: space-between;
   height: 2.7rem;
-  width: 24rem;
+  width: 25rem;
   padding: 0 1rem 0 1rem;
   border-radius: 30px;
   background: ${props => props.theme.background};
