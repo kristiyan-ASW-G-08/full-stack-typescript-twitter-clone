@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 export const Form = styled('div')`
   display: grid;
@@ -9,7 +8,7 @@ export const Form = styled('div')`
   min-height: 25vh;
   padding: 2rem;
   background: ${props => props.theme.background};
-  border: solid 1px ${props => setLightness(0.3, props.theme.border)};
+  ${props => props.theme.mixins.border}
   border-radius: 10px;
   @media ${props => props.theme.mediaQueries.tablet} {
     width: 90vw;

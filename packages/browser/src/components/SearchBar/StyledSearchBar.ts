@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten, setLightness } from 'polished';
+import { setLightness } from 'polished';
 
 export const StyledSearchBar = styled('form')`
   display: grid;
@@ -13,7 +13,7 @@ export const StyledSearchBar = styled('form')`
   border-radius: 30px;
   background: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
-  border: solid 1px ${props => setLightness(0.3, props.theme.border)};
+  ${props => props.theme.mixins.border}
   input {
     border: none;
     font-weight: 600;

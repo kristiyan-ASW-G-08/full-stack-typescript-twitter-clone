@@ -5,9 +5,9 @@ const includesObjectId = (
   stringId: string,
 ): boolean => {
   const id = mongoose.Types.ObjectId(stringId);
-  const check = arr.some((includedId: mongoose.Types.ObjectId): boolean => {
-    return includedId.equals(id);
-  });
+  const check = arr.some((includedId: mongoose.Types.ObjectId): boolean =>
+    includedId.equals(id),
+  );
   return check;
 };
 

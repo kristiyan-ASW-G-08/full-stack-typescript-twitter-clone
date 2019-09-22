@@ -1,12 +1,11 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { render, waitForElement, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
-import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import Theme from 'components/Theme/Theme';
-
-describe('Navbar', () => {
+describe('Sidebar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
@@ -27,10 +26,11 @@ describe('Navbar', () => {
     },
     token: 'mockToken',
   };
-  it('render Navbar', async () => {
+  it('render unauthenticated Sidebar', async () => {
     const { container, getByText, rerender } = render(
       <Theme theme={theme}>
-        <Navbar
+        <Sidebar
+          on={true}
           authState={defaultAuthState}
           resetAuthState={resetAuthState}
           theme={theme}
@@ -38,11 +38,14 @@ describe('Navbar', () => {
         />
       </Theme>,
     );
-    const themeButton = await waitForElement(() => getByText('Dark mode'));
+    const themeButton = await waitForElement(() =>
+      getByTestId(container, 'theme-button'),
+    );
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
+    expect(themeButton.textContent).toMatchSnapshot();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
 
@@ -50,17 +53,19 @@ describe('Navbar', () => {
     expect(toggleTheme).toHaveBeenCalledTimes(1);
     rerender(
       <Theme theme={theme}>
-        <Navbar
+        <Sidebar
+          on={true}
           resetAuthState={resetAuthState}
           authState={authenticatedAuthState}
-          theme={'dark'}
+          theme={'light'}
           toggleTheme={toggleTheme}
         />
       </Theme>,
     );
     const lightThemeButton = await waitForElement(() =>
-      getByText('Light mode'),
+      getByTestId(container, 'theme-button'),
     );
+    expect(themeButton.textContent).toMatchSnapshot();
     const logOutButton = await waitForElement(() => getByText('Log Out'));
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();

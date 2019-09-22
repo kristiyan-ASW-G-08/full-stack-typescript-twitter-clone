@@ -12,7 +12,7 @@ const ThemeWrapper = makeDecorator({
     return (
       <>
         <GlobalStyle />
-        <Theme currentTheme={currentTheme}>{storyFn(context)}</Theme>
+        <Theme theme={currentTheme}>{storyFn(context)}</Theme>
       </>
     );
   },

@@ -7,7 +7,7 @@ export const SearchBar: FC = () => {
     <StyledSearchBar>
       <input type="text" placeholder="Search TwittClone" />
       <span>
-        <FontAwesomeIcon className="nav" icon="search" />
+        <FontAwesomeIcon icon="search" />
       </span>
     </StyledSearchBar>
   );

@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
-export const Avatar = styled('button')`
+interface AvatarProps {
+  size?: 'small' | 'large';
+}
+export const Avatar = styled('button')<AvatarProps>`
   display: grid;
   justify-items: center;
   align-content: center;
-  height: 2.7rem;
-  width: 2.7rem;
+  height: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
+  width: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   font-size: 1.7rem;
   border: none;
   border-radius: 100%;
@@ -15,4 +18,9 @@ export const Avatar = styled('button')`
     object-fit: cover;
   }
 `;
+
+Avatar.defaultProps = {
+  size: 'small',
+};
+
 export default Avatar;

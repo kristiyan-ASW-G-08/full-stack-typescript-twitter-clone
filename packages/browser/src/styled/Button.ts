@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
-  buttonType: 'primary' | 'secondary';
+  buttonType: 'primary' | 'secondary' | 'transparent';
 }
 export const Button = styled('button')<ButtonProps>`
   height: 2.7rem;
-  width: 8rem;
+  ${props => (props.buttonType === 'transparent' ? '' : 'width: 8rem')};
+  ${props => props.theme.mixins.button};
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
-  text-decoration: none;
   color: ${props => props.theme.white};
-  border: none;
   border-radius: 3rem;
   background: ${props => {
     const color = props.theme[props.buttonType];
@@ -30,4 +29,5 @@ export const Button = styled('button')<ButtonProps>`
       }};
   }
 `;
-export  default Button;
+
+export default Button;

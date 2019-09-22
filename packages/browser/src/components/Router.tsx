@@ -8,7 +8,7 @@ import {
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Navbar from 'components/Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
-
+import Sidebar from 'components/Sidebar/Sidebar';
 const LoginForm = lazy(() => import('components/LoginForm/LoginForm'));
 const SignUpForm = lazy(() => import('components/SignUpForm/SignUpForm'));
 const Router: FC = observer(
@@ -20,6 +20,13 @@ const Router: FC = observer(
         <>
           <Navbar
             theme={theme}
+            resetAuthState={() => authStore.resetAuthState()}
+            toggleTheme={() => themeStore.toggleTheme()}
+            authState={authStore.authState}
+          />
+          <Sidebar
+            theme={theme}
+            on={true}
             resetAuthState={() => authStore.resetAuthState()}
             toggleTheme={() => themeStore.toggleTheme()}
             authState={authStore.authState}

@@ -36,8 +36,7 @@ export const StyledThemeButton = styled('button')`
   height: 2.7rem;
   font-size: 1.3rem;
   text-align: center;
-  text-decoration: none;
+  ${props => props.theme.mixins.button}
   background: none;
   color: ${props => props.theme.secondary};
-  border: none;
 `;
