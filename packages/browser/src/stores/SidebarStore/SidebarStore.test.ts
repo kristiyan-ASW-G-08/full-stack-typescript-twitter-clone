@@ -1,13 +1,13 @@
 import SidebarStore from 'stores/SidebarStore/SidebarStore';
-describe('ThemeStore', (): void => {
+describe('SidebarStore', (): void => {
   const sibebarStore = new SidebarStore();
-  it('theme should be light as default', (): void => {
+  it('isActive should be false as default', (): void => {
     expect(sibebarStore.isActive).toBeFalsy();
   });
-  it('toggleTheme should switch between true and false', (): void => {
-    sibebarStore.toggleIsActive();
+  it('toggleSidebar should switch between true and false', (): void => {
+    sibebarStore.toggleSidebar();
     expect(sibebarStore.isActive).toBeTruthy();
-    sibebarStore.toggleIsActive();
+    sibebarStore.toggleSidebar();
     expect(sibebarStore.isActive).toBeFalsy();
   });
 });

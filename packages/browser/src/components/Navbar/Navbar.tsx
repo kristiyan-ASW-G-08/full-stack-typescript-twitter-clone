@@ -18,6 +18,7 @@ interface NavbarProps {
   authState: AuthState;
   resetAuthState: () => void;
   toggleTheme: () => void;
+  toggleSidebar: () => void;
   theme: 'light' | 'dark';
 }
 export const Navbar: FC<NavbarProps> = ({
@@ -25,13 +26,16 @@ export const Navbar: FC<NavbarProps> = ({
   authState,
   theme,
   resetAuthState,
+  toggleSidebar,
 }) => {
   const { user, token, isAuth } = authState;
   return (
     <StyledNavbar>
       <Logo />
       <StyledNavIcon>
-        <FontAwesomeIcon icon="bars" />
+        <button onClick={toggleSidebar} data-testid="mobile-nav-button">
+          <FontAwesomeIcon icon="bars" />
+        </button>
       </StyledNavIcon>
       <StyledContainer>
         <StyledThemeButton onClick={toggleTheme}>

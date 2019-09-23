@@ -5,10 +5,12 @@ import UserEvent from '@testing-library/user-event';
 import Sidebar from './Sidebar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import Theme from 'components/Theme/Theme';
+import userEvent from '@testing-library/user-event';
 describe('Sidebar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
+  const toggleSidebar = jest.fn();
   const authenticatedAuthState = {
     isAuth: true,
     user: {
@@ -30,7 +32,8 @@ describe('Sidebar', () => {
     const { container, getByText, rerender } = render(
       <Theme theme={theme}>
         <Sidebar
-          on={true}
+          toggleSidebar={toggleSidebar}
+          isActive={true}
           authState={defaultAuthState}
           resetAuthState={resetAuthState}
           theme={theme}
@@ -43,18 +46,25 @@ describe('Sidebar', () => {
     );
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
+    const backdrop = await waitForElement(() =>
+      getByTestId(container, 'backdrop'),
+    );
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(themeButton.textContent).toMatchSnapshot();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
 
+    userEvent.click(backdrop);
+    expect(toggleSidebar).toHaveBeenCalledTimes(1);
+
     UserEvent.click(themeButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
     rerender(
       <Theme theme={theme}>
         <Sidebar
-          on={true}
+          toggleSidebar={toggleSidebar}
+          isActive={true}
           resetAuthState={resetAuthState}
           authState={authenticatedAuthState}
           theme={'light'}

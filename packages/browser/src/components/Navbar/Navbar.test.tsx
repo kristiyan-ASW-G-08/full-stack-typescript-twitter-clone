@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { render, waitForElement, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Navbar from './Navbar';
@@ -10,6 +10,7 @@ describe('Navbar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
+  const toggleSidebar = jest.fn();
   const authenticatedAuthState = {
     isAuth: true,
     user: {
@@ -31,6 +32,7 @@ describe('Navbar', () => {
     const { container, getByText, rerender } = render(
       <Theme theme={theme}>
         <Navbar
+          toggleSidebar={toggleSidebar}
           authState={defaultAuthState}
           resetAuthState={resetAuthState}
           theme={theme}
@@ -41,16 +43,25 @@ describe('Navbar', () => {
     const themeButton = await waitForElement(() => getByText('Dark mode'));
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
+    const mobileNavButton = await waitForElement(() =>
+      getByTestId(container, 'mobile-nav-button'),
+    );
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
+    expect(mobileNavButton).toBeTruthy();
+
+    UserEvent.click(mobileNavButton);
+    expect(toggleSidebar).toHaveBeenCalledTimes(1);
 
     UserEvent.click(themeButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
+
     rerender(
       <Theme theme={theme}>
         <Navbar
+          toggleSidebar={toggleSidebar}
           resetAuthState={resetAuthState}
           authState={authenticatedAuthState}
           theme={'dark'}
@@ -62,8 +73,10 @@ describe('Navbar', () => {
       getByText('Light mode'),
     );
     const logOutButton = await waitForElement(() => getByText('Log Out'));
+
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
+
     UserEvent.click(logOutButton);
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });

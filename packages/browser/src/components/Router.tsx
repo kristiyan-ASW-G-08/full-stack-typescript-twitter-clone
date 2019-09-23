@@ -13,20 +13,25 @@ const LoginForm = lazy(() => import('components/LoginForm/LoginForm'));
 const SignUpForm = lazy(() => import('components/SignUpForm/SignUpForm'));
 const Router: FC = observer(
   (): JSX.Element => {
-    const { themeStore, authStore } = useContext(RootStoreContext);
+    const { themeStore, authStore, sidebarStore } = useContext(
+      RootStoreContext,
+    );
     const { theme } = themeStore;
+    const { isActive } = sidebarStore;
     return (
       <BrowserRouter>
         <>
           <Navbar
+            toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}
             resetAuthState={() => authStore.resetAuthState()}
             toggleTheme={() => themeStore.toggleTheme()}
             authState={authStore.authState}
           />
           <Sidebar
+            toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}
-            on={true}
+            isActive={isActive}
             resetAuthState={() => authStore.resetAuthState()}
             toggleTheme={() => themeStore.toggleTheme()}
             authState={authStore.authState}

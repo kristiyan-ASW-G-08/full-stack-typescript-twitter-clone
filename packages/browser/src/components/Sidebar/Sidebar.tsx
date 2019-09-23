@@ -19,26 +19,27 @@ import AuthState from 'types/AuthState';
 import Avatar from 'styled/Avatar';
 
 interface SidebarProps {
-  on: boolean;
+  isActive: boolean;
   authState: AuthState;
   theme: 'light' | 'dark';
   resetAuthState: () => void;
   toggleTheme: () => void;
+  toggleSidebar: () => void;
 }
 
 export const Sidebar: FC<SidebarProps> = ({
-  on,
+  isActive,
   authState,
   theme,
   resetAuthState,
   toggleTheme,
+  toggleSidebar,
 }) => {
-  const [isOn, setOn] = useState<boolean>(on);
   const { user, isAuth, token } = authState;
   const { username, handle, following, followers } = user;
   console.log(following, followers);
   return (
-    <StyledSidebar on={isOn}>
+    <StyledSidebar on={isActive}>
       <Container>
         {authState.isAuth ? (
           <AuthenticatedSidebarHeader>
@@ -103,7 +104,10 @@ export const Sidebar: FC<SidebarProps> = ({
               ''
             )}
             <li>
-              <SidebarButton onClick={() => toggleTheme()} data-testid={"theme-button"}>
+              <SidebarButton
+                onClick={toggleTheme}
+                data-testid={'theme-button'}
+              >
                 {theme === 'light' ? (
                   <>
                     <span>
@@ -123,7 +127,7 @@ export const Sidebar: FC<SidebarProps> = ({
             </li>
           </SidebarList>
           {isAuth ? (
-            <SidebarButton onClick={() => resetAuthState()}>
+            <SidebarButton onClick={ resetAuthState}>
               <span>
                 <FontAwesomeIcon icon={'sign-out-alt'} />
               </span>
@@ -134,7 +138,7 @@ export const Sidebar: FC<SidebarProps> = ({
           )}
         </SidebarBody>
       </Container>
-      <Backdrop onClick={() => setOn(!on)} />
+      <Backdrop onClick={toggleSidebar} data-testid="backdrop" />
     </StyledSidebar>
   );
 };

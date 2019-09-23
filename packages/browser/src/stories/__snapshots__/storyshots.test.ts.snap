@@ -3630,23 +3630,27 @@ Array [
       <div
         className="sc-gzVnrw gDfDoJ"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-bars fa-w-14 "
-          data-icon="bars"
-          data-prefix="fas"
-          focusable="false"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          data-testid="mobile-nav-button"
         >
-          <path
-            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-            fill="currentColor"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-bars fa-w-14 "
+            data-icon="bars"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
             style={Object {}}
-          />
-        </svg>
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </button>
       </div>
       <div
         className="sc-dnqmqq gWIBUI"
@@ -4591,23 +4595,27 @@ Array [
       <div
         className="sc-gzVnrw gDfDoJ"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-bars fa-w-14 "
-          data-icon="bars"
-          data-prefix="fas"
-          focusable="false"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          data-testid="mobile-nav-button"
         >
-          <path
-            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-            fill="currentColor"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-bars fa-w-14 "
+            data-icon="bars"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
             style={Object {}}
-          />
-        </svg>
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </button>
       </div>
       <div
         className="sc-dnqmqq gWIBUI"
@@ -6428,7 +6436,7 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-gqjmRU cCxRUO"
+      className="sc-gqjmRU iANYal"
     >
       <div
         className="sc-jTzLTM hkKshr"
@@ -6571,7 +6579,7 @@ Array [
       </div>
       <div
         className="sc-VigVT bpyxCe"
-        onClick={[Function]}
+        data-testid="backdrop"
       />
     </aside>
   </div>,
@@ -7451,7 +7459,7 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-gqjmRU cCxRUO"
+      className="sc-gqjmRU iANYal"
     >
       <div
         className="sc-jTzLTM fCeMfc"
@@ -7594,7 +7602,7 @@ Array [
       </div>
       <div
         className="sc-VigVT fdAPsy"
-        onClick={[Function]}
+        data-testid="backdrop"
       />
     </aside>
   </div>,
