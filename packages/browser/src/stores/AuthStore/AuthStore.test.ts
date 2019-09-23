@@ -19,15 +19,18 @@ describe('AuthStore', (): void => {
     token: 'mockToken',
   };
   it('authState should equal defaultAuthStat', (): void => {
+    expect.assertions(1);
     const authStore = new AuthStore();
     expect(authStore.authState).toEqual(defaultAuthState);
   });
   it('authState should be updated with the provided user-data and token', (): void => {
+    expect.assertions(1);
     const authStore = new AuthStore();
     authStore.setAuthState(authenticatedAuthState);
     expect(authStore.authState).toEqual(authenticatedAuthState);
   });
   it('authState should equal defaultAuthState after resetAuthState is called', (): void => {
+    expect.assertions(1);
     const authStore = new AuthStore();
     authStore.resetAuthState();
     expect(authStore.authState).toEqual(defaultAuthState);

@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sidebar render unauthenticated Sidebar 1`] = `"Dark Theme"`;
+exports[`Sidebar render Sidebar 1`] = `"Dark Theme"`;
 
-exports[`Sidebar render unauthenticated Sidebar 2`] = `"Dark Theme"`;
+exports[`Sidebar render Sidebar 2`] = `"Dark Theme"`;

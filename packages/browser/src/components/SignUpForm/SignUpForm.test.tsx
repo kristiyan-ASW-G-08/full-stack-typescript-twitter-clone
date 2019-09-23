@@ -7,10 +7,9 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import SignUpForm from './SignUpForm';
-import Theme from 'components/Theme/Theme';
+import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -23,15 +22,15 @@ describe('SignUpForm', () => {
   const email = 'testmail@test.test';
   const password = 'passwordpassword';
   const confirmPassword = 'passwordpassword';
-  const theme = 'light';
 
   it('it renders', async () => {
-    const { container, getByText, rerender, getByPlaceholderText } = render(
-      <BrowserRouter>
-        <Theme currentTheme={theme}>
-          <SignUpForm />
-        </Theme>
-      </BrowserRouter>,
+    expect.assertions(8);
+
+    const { container, getByText, getByPlaceholderText } = render(
+      <SignUpForm />,
+      {
+        wrapper: ({ children }) => <TestWrapper children={children} />,
+      },
     );
 
     expect(container).toBeTruthy();

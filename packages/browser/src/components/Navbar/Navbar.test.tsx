@@ -4,41 +4,28 @@ import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Navbar from './Navbar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
-import Theme from 'components/Theme/Theme';
+import TestWrapper from 'testUtilities/TestWrapper';
+import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 
 describe('Navbar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
-  const authenticatedAuthState = {
-    isAuth: true,
-    user: {
-      username: 'mockUserName',
-      handle: 'mockUserHandle',
-      email: 'mockUserEmail@mail.com',
-      profilePhoto: 'default',
-      headerPhoto: 'default',
-      date: 'mockDate',
-      website: 'mockWebsite',
-      followers: 0,
-      following: [],
-      likes: [],
-      bookmarks: [],
-    },
-    token: 'mockToken',
-  };
   it('render Navbar', async () => {
+    expect.assertions(10);
+
     const { container, getByText, rerender } = render(
-      <Theme theme={theme}>
-        <Navbar
-          toggleSidebar={toggleSidebar}
-          authState={defaultAuthState}
-          resetAuthState={resetAuthState}
-          theme={theme}
-          toggleTheme={toggleTheme}
-        />
-      </Theme>,
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        authState={defaultAuthState}
+        resetAuthState={resetAuthState}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />,
+      {
+        wrapper: ({ children }) => <TestWrapper children={children} />,
+      },
     );
     const themeButton = await waitForElement(() => getByText('Dark mode'));
     const logInButton = await waitForElement(() => getByText('Log In'));
@@ -59,15 +46,13 @@ describe('Navbar', () => {
     expect(toggleTheme).toHaveBeenCalledTimes(1);
 
     rerender(
-      <Theme theme={theme}>
-        <Navbar
-          toggleSidebar={toggleSidebar}
-          resetAuthState={resetAuthState}
-          authState={authenticatedAuthState}
-          theme={'dark'}
-          toggleTheme={toggleTheme}
-        />
-      </Theme>,
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        resetAuthState={resetAuthState}
+        authState={authenticatedAuthState}
+        theme={'dark'}
+        toggleTheme={toggleTheme}
+      />,
     );
     const lightThemeButton = await waitForElement(() =>
       getByText('Light mode'),

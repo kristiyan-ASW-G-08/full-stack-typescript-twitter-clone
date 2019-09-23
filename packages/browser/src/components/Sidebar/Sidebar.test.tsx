@@ -4,42 +4,30 @@ import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Sidebar from './Sidebar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
-import Theme from 'components/Theme/Theme';
 import userEvent from '@testing-library/user-event';
+import TestWrapper from 'testUtilities/TestWrapper';
+import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
+
 describe('Sidebar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
-  const authenticatedAuthState = {
-    isAuth: true,
-    user: {
-      username: 'mockUserName',
-      handle: 'mockUserHandle',
-      email: 'mockUserEmail@mail.com',
-      profilePhoto: 'default',
-      headerPhoto: 'default',
-      date: 'mockDate',
-      website: 'mockWebsite',
-      followers: 0,
-      following: [],
-      likes: [],
-      bookmarks: [],
-    },
-    token: 'mockToken',
-  };
-  it('render unauthenticated Sidebar', async () => {
+  it('render Sidebar', async () => {
+    expect.assertions(11);
+
     const { container, getByText, rerender } = render(
-      <Theme theme={theme}>
-        <Sidebar
-          toggleSidebar={toggleSidebar}
-          isActive={true}
-          authState={defaultAuthState}
-          resetAuthState={resetAuthState}
-          theme={theme}
-          toggleTheme={toggleTheme}
-        />
-      </Theme>,
+      <Sidebar
+        toggleSidebar={toggleSidebar}
+        isActive={true}
+        authState={defaultAuthState}
+        resetAuthState={resetAuthState}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />,
+      {
+        wrapper: ({ children }) => <TestWrapper children={children} />,
+      },
     );
     const themeButton = await waitForElement(() =>
       getByTestId(container, 'theme-button'),
@@ -61,16 +49,14 @@ describe('Sidebar', () => {
     UserEvent.click(themeButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
     rerender(
-      <Theme theme={theme}>
-        <Sidebar
-          toggleSidebar={toggleSidebar}
-          isActive={true}
-          resetAuthState={resetAuthState}
-          authState={authenticatedAuthState}
-          theme={'light'}
-          toggleTheme={toggleTheme}
-        />
-      </Theme>,
+      <Sidebar
+        toggleSidebar={toggleSidebar}
+        isActive={true}
+        resetAuthState={resetAuthState}
+        authState={authenticatedAuthState}
+        theme={'light'}
+        toggleTheme={toggleTheme}
+      />,
     );
     const lightThemeButton = await waitForElement(() =>
       getByTestId(container, 'theme-button'),
