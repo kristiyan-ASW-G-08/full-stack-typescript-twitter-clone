@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  waitForElement,
-  wait,
-} from '@testing-library/react';
+import { render, waitForElement, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import SignUpForm from './SignUpForm';
+import SignUpPage from './SignUpPage';
 import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
@@ -16,7 +11,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockReturnValueOnce(
   Promise.resolve({ data: {}, status: 200 }),
 );
-describe('SignUpForm', () => {
+describe('SignUpPage', () => {
   const username = 'newUsername';
   const handle = 'newHandle';
   const email = 'testmail@test.test';
@@ -27,7 +22,7 @@ describe('SignUpForm', () => {
     expect.assertions(8);
 
     const { container, getByText, getByPlaceholderText } = render(
-      <SignUpForm />,
+      <SignUpPage />,
       {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },

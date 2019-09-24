@@ -18,9 +18,13 @@ const utilities = {
 
 const Theme: FunctionComponent<ThemeProps> = ({ children, theme }) => {
   return theme === 'light' ? (
-    <ThemeProvider theme={{ ...utilities, ...light }}>{children}</ThemeProvider>
+    <ThemeProvider theme={{ ...utilities, ...light, theme }}>
+      {children}
+    </ThemeProvider>
   ) : (
-    <ThemeProvider theme={{ ...utilities, ...dark }}>{children}</ThemeProvider>
+    <ThemeProvider theme={{ ...utilities, ...dark, theme }}>
+      {children}
+    </ThemeProvider>
   );
 };
 

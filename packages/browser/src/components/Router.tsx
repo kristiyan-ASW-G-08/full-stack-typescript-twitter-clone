@@ -9,10 +9,10 @@ import RootStoreContext from 'stores/RootStore/RootStore';
 import Navbar from 'components/Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
-import Loader from 'styled/Loader';
-const LoginForm = lazy(() => import('components/LoginForm/LoginForm'));
-const SignUpForm = lazy(() => import('components/SignUpForm/SignUpForm'));
-const NotFound = lazy(() => import('components/NotFound/NotFound'));
+import CenteredLoader from 'components/CenteredLoader';
+const Login = lazy(() => import('pages/LoginPage/LoginPage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
+const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const Router: FC = observer(
   (): JSX.Element => {
     const { themeStore, authStore, sidebarStore } = useContext(
@@ -44,8 +44,8 @@ const Router: FC = observer(
               exact
               path="/log-in"
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<Loader />}>
-                  <LoginForm {...props} />
+                <Suspense fallback={<CenteredLoader />}>
+                  <Login {...props} />
                 </Suspense>
               )}
             />
@@ -53,15 +53,15 @@ const Router: FC = observer(
               exact
               path="/sign-up"
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<Loader />}>
-                  <SignUpForm {...props} />
+                <Suspense fallback={<CenteredLoader />}>
+                  <SignUpPage {...props} />
                 </Suspense>
               )}
             />
             <Route
               exact
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<CenteredLoader />}>
                   <NotFound {...props} />
                 </Suspense>
               )}

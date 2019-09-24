@@ -11,9 +11,9 @@ export const StyledInput = styled('div')`
     width: 100%;
     background-color: ${props => {
       const color =
-        props.theme.currentTheme === 'light'
+        props.theme.theme === 'light'
           ? lighten(0.45, props.theme.secondary)
-          : lighten(0.03, props.theme.background);
+          : lighten(0.1, props.theme.background);
 
       return color;
     }};

@@ -3,7 +3,7 @@ import { render, waitForElement, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import LoginForm from './LoginForm';
+import LoginPage from './LoginPage';
 import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
@@ -11,7 +11,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockReturnValueOnce(
   Promise.resolve({ data: {}, status: 200 }),
 );
-describe('LoginForm', () => {
+describe('LoginPage', () => {
   const email = 'testmail@test.test';
   const password = 'passwordpassword';
   const theme = 'light';
@@ -20,7 +20,7 @@ describe('LoginForm', () => {
     expect.assertions(5);
 
     const { container, getByText, getByPlaceholderText } = render(
-      <LoginForm />,
+      <LoginPage />,
       {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import {
   Formik,
   Form,
@@ -8,6 +8,7 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
+import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import StyledInput from 'styled/StyledInput';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -16,18 +17,26 @@ import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import RootStoreContext from 'stores/RootStore/RootStore';
 
-export const SignUpForm: FC<RouteComponentProps> = () => {
+export const LoginPage: FC<RouteComponentProps> = () => {
+  const { authStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const response = await axios.post('http://localhost:8090/users', e);
-      console.log(response);
+      const response = await axios.post(
+        'http://localhost:8090/users/user/tokens',
+        e,
+      );
+      const { data } = response.data;
+      const authState = { ...data, isAuth: true };
+      authStore.setAuthState(authState);
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
+
         data.forEach((validationError: ValidationError) => {
           const { name, message } = validationError;
           setFieldError(name, message);
@@ -38,13 +47,7 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
   return (
     <Formik
       validationSchema={UserLoginValidator}
-      initialValues={{
-        username: '',
-        handle: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-      }}
+      initialValues={{ email: '', password: '' }}
       onSubmit={submitHandler}
     >
       {() => (
@@ -52,14 +55,6 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
           <Form>
             <StyledForm>
               <Logo type="vertical" />
-              <StyledInput>
-                <FastField name="username" type="text" placeholder="Username" />
-                <ErrorMessage component="span" name="username" />
-              </StyledInput>
-              <StyledInput>
-                <FastField name="handle" type="text" placeholder="Handle" />
-                <ErrorMessage component="span" name="handle" />
-              </StyledInput>
               <StyledInput>
                 <FastField
                   name="email"
@@ -76,16 +71,8 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
                 />
                 <ErrorMessage component="span" name="password" />
               </StyledInput>
-              <StyledInput>
-                <FastField
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Repeat Password"
-                />
-                <ErrorMessage component="span" name="confirmPassword" />
-              </StyledInput>
               <Button buttonType={'primary'} type="submit">
-                Sign Up
+                Log In
               </Button>
             </StyledForm>
           </Form>
@@ -95,4 +82,4 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
   );
 };
 
-export default withRouter(SignUpForm);
+export default withRouter(observer(LoginPage));
