@@ -48,7 +48,7 @@ export const signUp = async (
     const userId = user._id;
     const secret = process.env.SECRET;
     const appEmail = process.env.EMAIL;
-    const clientUri = process.env.CLIENT_URI;
+    const clientUri = process.env.CLIENT_URL;
     const { status, message } = errors.InternalServerError;
     if (!secret) {
       const error = new CustomError(status, message);
@@ -94,7 +94,7 @@ export const signUp = async (
             There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
           </mj-text>
           <mj-button mj-class="primary-bg" href="${url}" align="center">
-            Verify email address
+            Verify email address ${url}
           </mj-button>
         </mj-hero>
       </mj-body>
@@ -166,7 +166,12 @@ export const verifyEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req;
+    const secret = process.env.SECRET;
+    const { token } = req.params;
+    console.log(token, 'Verify');
+    const decodedToken = jwt.verify(token, secret);
+    // @ts-ignore
+    const { userId } = decodedToken;
     const user = await getUserById(userId);
     user.confirmed = true;
     await user.save();

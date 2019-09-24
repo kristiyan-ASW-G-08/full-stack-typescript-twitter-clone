@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import Container from 'styled/PageContainer';
-import { StyledH1, StyledH2, StyledP, ButtonContainer } from './StyledNotFound';
 import { Link } from 'react-router-dom';
+import PageContainer from 'styled/PageContainer';
+import { StyledH1, StyledH2, StyledP, ButtonContainer } from './StyledNotFound';
 import Button from 'styled/Button';
 export const NotFound: FC<RouteComponentProps> = ({ history }) => {
   return (
-    <Container>
+    <PageContainer>
       <StyledH1>404</StyledH1>
       <StyledH2>Page Not Found</StyledH2>
       <StyledP>
@@ -20,7 +20,7 @@ export const NotFound: FC<RouteComponentProps> = ({ history }) => {
           Previous Page
         </Button>
       </ButtonContainer>
-    </Container>
+    </PageContainer>
   );
 };
 export default NotFound;

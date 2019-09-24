@@ -152,8 +152,8 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
     });
   });
-  describe('patch /users/user/verify', (): void => {
-    it("should verify user's email address", async (): Promise<void> => {
+  describe('patch /users/user/:token/confirm', (): void => {
+    it("should confirm user's email address", async (): Promise<void> => {
       expect.assertions(2);
       const newUser = new User({
         username,
@@ -172,9 +172,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
 
-      const response = await request(app)
-        .patch(`/users/user/verify`)
-        .set('Authorization', `Bearer ${token}`);
+      const response = await request(app).patch(`/users/user/${token}/confirm`);
       const confirmedUser = await User.findById(newUser._id);
       if (!confirmedUser) {
         return;
@@ -194,17 +192,8 @@ describe('userRoutes', (): void => {
         secret,
         { expiresIn: '1h' },
       );
-      const response = await request(app)
-        .patch(`/users/user/verify`)
-        .set('Authorization', `Bearer ${token}`);
+      const response = await request(app).patch(`/users/user/${token}/confirm`);
       expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const response = await request(app).patch(`/users/user/verify`);
-      expect(response.status).toEqual(401);
     });
   });
   describe('post /users/user', (): void => {

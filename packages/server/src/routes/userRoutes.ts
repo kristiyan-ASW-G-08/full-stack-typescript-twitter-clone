@@ -43,7 +43,7 @@ router.post(
   requestPasswordResetEmail,
 );
 
-router.patch('/users/user/verify', isAuth, verifyEmail);
+router.patch('/users/user/:token/confirm', verifyEmail);
 
 router.patch(
   '/users/user/reset',

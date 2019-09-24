@@ -10,9 +10,14 @@ import Navbar from 'components/Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
+
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const EmailConfirmation = lazy(() =>
+  import('pages/EmailConfirmation/EmailConfirmation'),
+);
+
 const Router: FC = observer(
   (): JSX.Element => {
     const { themeStore, authStore, sidebarStore } = useContext(
@@ -55,6 +60,15 @@ const Router: FC = observer(
               render={(props: RouteComponentProps): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
                   <SignUpPage {...props} />
+                </Suspense>
+              )}
+            />
+            <Route
+              exact
+              path="/confirmation/:token"
+              render={(props: RouteComponentProps): JSX.Element => (
+                <Suspense fallback={<CenteredLoader />}>
+                  <EmailConfirmation {...props} />
                 </Suspense>
               )}
             />
