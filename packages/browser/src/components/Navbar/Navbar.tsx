@@ -7,7 +7,7 @@ import {
 } from './StyledNavbar';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import Logo from 'components/Logo/Logo';
 import StyledButton from 'styled/Button';
 import SearchBar from 'components/SearchBar/SearchBar';
@@ -31,11 +31,11 @@ export const Navbar: FC<NavbarProps> = ({
   const { user, token, isAuth } = authState;
   return (
     <StyledNavbar>
-      <Logo />
-      <StyledNavIcon>
-        <button onClick={toggleSidebar} data-testid="mobile-nav-button">
-          <FontAwesomeIcon icon="bars" />
-        </button>
+      <Link to="/">
+        <Logo />
+      </Link>
+      <StyledNavIcon onClick={toggleSidebar} data-testid="mobile-nav-button">
+        <FontAwesomeIcon icon="bars" />
       </StyledNavIcon>
       <StyledContainer>
         <StyledThemeButton onClick={toggleTheme}>
@@ -58,8 +58,14 @@ export const Navbar: FC<NavbarProps> = ({
         ) : (
           <>
             {' '}
-            <StyledButton buttonType={'primary'}>Log In</StyledButton>
-            <StyledButton buttonType={'secondary'}>Sign Up</StyledButton>
+            <Link to="/log-in">
+              {' '}
+              <StyledButton buttonType={'primary'}>Log In</StyledButton>
+            </Link>
+            <Link to="/sign-up">
+              {' '}
+              <StyledButton buttonType={'secondary'}>Sign Up</StyledButton>
+            </Link>
           </>
         )}
       </StyledContainer>

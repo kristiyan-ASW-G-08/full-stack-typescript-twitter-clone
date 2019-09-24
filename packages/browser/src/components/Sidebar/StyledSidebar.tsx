@@ -50,6 +50,7 @@ export const AuthenticatedSidebarHeader = styled('div')`
   padding-top: 3rem;
   padding-left: 0.5rem;
   ${props => props.theme.mixins.border}
+  
   h3 {
     font-size: 1.3rem;
     color: ${props =>
@@ -90,7 +91,7 @@ export const AuthenticationBar = styled('div')`
   grid-template-columns: repeat(3, auto);
   align-items: center;
   padding-left: 0.5rem;
-  width: 33vw;
+  max-width: 15rem;
   * {
     font-size: 1.5rem;
     font-weight: bold;

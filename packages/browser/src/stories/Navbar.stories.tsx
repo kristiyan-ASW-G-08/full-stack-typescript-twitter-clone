@@ -11,6 +11,7 @@ storiesOf('Navbar', module)
         theme={'light'}
         resetAuthState={() => {}}
         toggleTheme={() => {}}
+        toggleSidebar={() => {}}
       />
     ),
     {
@@ -26,6 +27,7 @@ storiesOf('Navbar', module)
         theme={'light'}
         resetAuthState={() => {}}
         toggleTheme={() => {}}
+        toggleSidebar={() => {}}
       />
     ),
     {

@@ -9,8 +9,10 @@ import RootStoreContext from 'stores/RootStore/RootStore';
 import Navbar from 'components/Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
+import Loader from 'styled/Loader';
 const LoginForm = lazy(() => import('components/LoginForm/LoginForm'));
 const SignUpForm = lazy(() => import('components/SignUpForm/SignUpForm'));
+const NotFound = lazy(() => import('components/NotFound/NotFound'));
 const Router: FC = observer(
   (): JSX.Element => {
     const { themeStore, authStore, sidebarStore } = useContext(
@@ -42,7 +44,7 @@ const Router: FC = observer(
               exact
               path="/log-in"
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<p>LOading...</p>}>
+                <Suspense fallback={<Loader />}>
                   <LoginForm {...props} />
                 </Suspense>
               )}
@@ -51,11 +53,19 @@ const Router: FC = observer(
               exact
               path="/sign-up"
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<p>LOading...</p>}>
+                <Suspense fallback={<Loader />}>
                   <SignUpForm {...props} />
                 </Suspense>
               )}
             />
+            <Route
+              exact
+              render={(props: RouteComponentProps): JSX.Element => (
+                <Suspense fallback={<Loader />}>
+                  <NotFound {...props} />
+                </Suspense>
+              )}
+            />{' '}
           </Switch>
         </>
       </BrowserRouter>

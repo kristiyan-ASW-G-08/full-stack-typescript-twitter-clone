@@ -8,11 +8,12 @@ storiesOf('Sidebar', module)
     'light theme',
     () => (
       <Sidebar
+        toggleSidebar={() => {}}
         authState={defaultAuthState}
         theme={'light'}
         resetAuthState={() => {}}
         toggleTheme={() => {}}
-        on={true}
+        isActive={true}
       />
     ),
     {
@@ -24,11 +25,12 @@ storiesOf('Sidebar', module)
     'dark theme',
     () => (
       <Sidebar
+        toggleSidebar={() => {}}
         authState={defaultAuthState}
         theme={'dark'}
         resetAuthState={() => {}}
         toggleTheme={() => {}}
-        on={true}
+        isActive={true}
       />
     ),
     {

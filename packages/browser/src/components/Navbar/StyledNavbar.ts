@@ -7,12 +7,19 @@ export const StyledNavbar = styled('nav')`
   padding: 1rem;
   background-color: ${props => props.theme.background};
 `;
-export const StyledNavIcon = styled('div')`
+export const StyledNavIcon = styled('button')`
   display: none;
   @media ${props => props.theme.mediaQueries.mobile} {
     font-size: 2.5rem;
     color: ${props => props.theme.primary};
     display: block;
+    ${props => props.theme.mixins.button};
+    display: grid;
+    background: none;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    border: none;
   }
 `;
 

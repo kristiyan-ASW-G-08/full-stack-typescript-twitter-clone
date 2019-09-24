@@ -12,7 +12,7 @@ import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginVa
 import StyledInput from 'styled/StyledInput';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
-import CenterContainer from 'styled/CenterContainer';
+import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
@@ -48,7 +48,7 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
       onSubmit={submitHandler}
     >
       {() => (
-        <CenterContainer>
+        <PageContainer>
           <Form>
             <StyledForm>
               <Logo type="vertical" />
@@ -89,7 +89,7 @@ export const SignUpForm: FC<RouteComponentProps> = () => {
               </Button>
             </StyledForm>
           </Form>
-        </CenterContainer>
+        </PageContainer>
       )}
     </Formik>
   );
