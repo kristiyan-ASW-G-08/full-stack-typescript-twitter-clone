@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { makeDecorator } from '@storybook/addons';
 import GlobalStyle from '../../src/styled/GlobalStyle';
+import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../src/components/Theme/Theme';
 
 const ThemeWrapper = makeDecorator({
@@ -12,7 +13,9 @@ const ThemeWrapper = makeDecorator({
     return (
       <>
         <GlobalStyle />
-        <Theme theme={currentTheme}>{storyFn(context)}</Theme>
+        <Theme theme={currentTheme}>
+          <BrowserRouter>{storyFn(context)}</BrowserRouter>
+        </Theme>
       </>
     );
   },
