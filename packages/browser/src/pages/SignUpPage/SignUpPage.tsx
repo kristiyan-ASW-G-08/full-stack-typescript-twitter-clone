@@ -17,14 +17,14 @@ import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
-export const SignUpPage: FC<RouteComponentProps> = () => {
+export const SignUpPage: FC<RouteComponentProps> = ({ history }) => {
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const response = await axios.post('http://localhost:8090/users', e);
-      console.log(response);
+      history.replace('/');
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;

@@ -94,7 +94,7 @@ export const signUp = async (
             There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
           </mj-text>
           <mj-button mj-class="primary-bg" href="${url}" align="center">
-            Verify email address ${url}
+            Verify email address
           </mj-button>
         </mj-hero>
       </mj-body>

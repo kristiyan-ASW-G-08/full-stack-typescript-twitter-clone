@@ -19,7 +19,7 @@ import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
 
-export const LoginPage: FC<RouteComponentProps> = () => {
+export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
   const { authStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
@@ -33,6 +33,7 @@ export const LoginPage: FC<RouteComponentProps> = () => {
       const { data } = response.data;
       const authState = { ...data, isAuth: true };
       authStore.setAuthState(authState);
+      history.replace('/');
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
