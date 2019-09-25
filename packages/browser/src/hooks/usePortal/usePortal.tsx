@@ -7,7 +7,7 @@ export const createRootElement = (id: string): HTMLDivElement => {
 };
 
 export const appendRootElement = (rootElement: HTMLDivElement): void => {
-  document.body.appendChild(rootElement);
+  document.body.insertBefore(rootElement, document.body.firstChild);
 };
 
 export const getRootElement = (
@@ -21,24 +21,25 @@ export const getRootElement = (
 const usePortal = (id: string) => {
   const rootElementRef = useRef<HTMLDivElement>();
   useEffect(() => {
+    const { current } = rootElementRef;
     const existingParent = document.querySelector<HTMLDivElement>(`#${id}`);
     const parentElement = existingParent || createRootElement(id);
     if (!existingParent) {
       appendRootElement(parentElement);
     }
-    if (rootElementRef.current) {
-      parentElement.appendChild(rootElementRef.current);
+    if (current) {
+      parentElement.appendChild(current);
     }
 
     return () => {
-      if (rootElementRef.current) {
-        rootElementRef.current.remove();
+      if (current) {
+        current.remove();
       }
       if (parentElement.childNodes.length === -1) {
         parentElement.remove();
       }
     };
-  }, []);
+  }, [id]);
 
   return getRootElement(rootElementRef);
 };

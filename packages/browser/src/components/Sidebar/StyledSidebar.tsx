@@ -7,9 +7,9 @@ interface SidebarProps {
 export const StyledSidebar = styled('aside')<SidebarProps>`
   display:grid;
   grid-template-columns:3fr 1fr;
-  ${props => (props.theme.testing ? '' : 'position: fixed;')};
+  position: fixed;
   transform: translateX(-100vw);
-  z-index: 15;
+  z-index: 3;
   top: 0;
   width: 100vw;
   height: 100vh;
@@ -53,10 +53,7 @@ export const AuthenticatedSidebarHeader = styled('div')`
   
   h3 {
     font-size: 1.3rem;
-    color: ${props =>
-      props.theme.currentTheme === 'light'
-        ? props.theme.color
-        : props.theme.white};
+    color: ${props => props.theme.color}
   }
   h4 {
     font-size: 1rem;
@@ -109,10 +106,7 @@ export const AuthenticationBar = styled('div')`
     background: none;
 
     a {
-      color: ${props =>
-        props.theme.currentTheme === 'light'
-          ? props.theme.color
-          : props.theme.white};
+      color: ${props => props.theme.color};
     }
   }
 `;
@@ -147,10 +141,7 @@ export const SidebarButton = styled('button')`
   background:none;
   border: none;
   ${props => props.theme.mixins.button}
-  color: ${props =>
-    props.theme.currentTheme === 'light'
-      ? props.theme.color
-      : props.theme.white};
+  color: ${props => props.theme.color};
    
   p {
     display: block;

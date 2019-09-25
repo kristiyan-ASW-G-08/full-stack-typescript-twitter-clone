@@ -4,6 +4,7 @@ import { create } from 'mobx-persist';
 import AuthStore from 'stores/AuthStore/AuthStore';
 import ThemeStore from 'stores/ThemeStore/ThemeStore';
 import SidebarStore from 'stores/SidebarStore/SidebarStore';
+import NotificationStore from 'stores/NotificationStore/NotificationStore';
 
 const hydrate = create({
   storage: localStorage,
@@ -13,6 +14,7 @@ export class RootStore {
   @observable public authStore = new AuthStore();
   @observable public themeStore = new ThemeStore();
   @observable public sidebarStore = new SidebarStore();
+  @observable public notificationStore = new NotificationStore();
   public constructor() {
     hydrate('authStore', this.authStore);
     hydrate('themeStore', this.themeStore);

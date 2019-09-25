@@ -1,5 +1,5 @@
 export default interface Notification {
-  type: 'message' | 'warning' | 'alert';
+  type: 'message' | 'warning';
   content: string;
   isActive: boolean;
 }

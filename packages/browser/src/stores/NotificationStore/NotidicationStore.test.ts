@@ -1,13 +1,8 @@
 import NotificationStore, {
   defaultNotification,
 } from 'stores/NotificationStore/NotificationStore';
-import Notification from 'types/Notification';
+import activeNotification from 'testUtilities/activeNotification';
 
-const activeNotification: Notification = {
-  type: 'alert',
-  content: 'Alert',
-  isActive: true,
-};
 describe('NotificationStore', (): void => {
   it('notification should equal defaultNotification', (): void => {
     expect.assertions(1);

@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
 body ,html{
   width:100%;
   height:100%;
+  max-width:100vw;
+  overflow-x:hidden;
   font-family: 'Roboto', 'Segoe UI',  'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;

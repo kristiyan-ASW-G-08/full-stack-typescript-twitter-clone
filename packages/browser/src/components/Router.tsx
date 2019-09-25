@@ -11,7 +11,7 @@ import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
 import Portal from 'components/Portal/Portal';
-
+import Notification from 'components/Notification/Notification';
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
@@ -21,14 +21,26 @@ const EmailConfirmation = lazy(() =>
 
 const Router: FC = observer(
   (): JSX.Element => {
-    const { themeStore, authStore, sidebarStore } = useContext(
-      RootStoreContext,
-    );
+    const {
+      themeStore,
+      authStore,
+      sidebarStore,
+      notificationStore,
+    } = useContext(RootStoreContext);
     const { theme } = themeStore;
     const { isActive } = sidebarStore;
+    const { notification } = notificationStore;
     return (
       <BrowserRouter>
         <>
+          {notification.isActive ? (
+            <Portal
+              portalId={'notification'}
+              children={<Notification notification={notification} />}
+            ></Portal>
+          ) : (
+            ''
+          )}
           <Navbar
             toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}

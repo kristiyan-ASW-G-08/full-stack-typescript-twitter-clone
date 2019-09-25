@@ -12,11 +12,9 @@ export const StyledNavIcon = styled('button')`
   @media ${props => props.theme.mediaQueries.mobile} {
     font-size: 2.5rem;
     color: ${props => props.theme.primary};
-    display: block;
     ${props => props.theme.mixins.button};
     display: grid;
     background: none;
-    display: grid;
     align-content: center;
     justify-items: center;
     border: none;
