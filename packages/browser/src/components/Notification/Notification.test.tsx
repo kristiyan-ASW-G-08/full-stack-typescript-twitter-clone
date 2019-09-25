@@ -6,10 +6,10 @@ import TestWrapper from 'testUtilities/TestWrapper';
 import activeNotification from 'testUtilities/activeNotification';
 
 describe('Notification', () => {
-  it('it renders', async () => {
+  it('renders', async () => {
     expect.assertions(2);
 
-    const { container, getByText, getByPlaceholderText } = render(
+    const { container, getByText } = render(
       <Notification notification={activeNotification} />,
       {
         wrapper: ({ children }) => <TestWrapper children={children} />,
