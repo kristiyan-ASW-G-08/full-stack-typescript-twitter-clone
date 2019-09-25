@@ -1,0 +1,23 @@
+import React from 'react';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Portal from './Portal';
+
+describe('Portal', () => {
+  it('renders', async () => {
+    expect.assertions(3);
+    const id = 'portal';
+    const children = <h1>Child Element</h1>;
+    const { getByText } = render(<Portal portalId={id} children={children} />);
+
+    const rootElement = document.querySelector(`#${id}`);
+    if (!rootElement) {
+      return;
+    }
+    expect(rootElement).toBeTruthy();
+    expect(rootElement.id).toMatch(id);
+
+    const childElement = getByText('Child Element');
+    expect(childElement).toBeTruthy();
+  });
+});

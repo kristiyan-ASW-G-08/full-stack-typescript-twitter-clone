@@ -10,6 +10,7 @@ import Navbar from 'components/Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
+import Portal from 'components/Portal/Portal';
 
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));

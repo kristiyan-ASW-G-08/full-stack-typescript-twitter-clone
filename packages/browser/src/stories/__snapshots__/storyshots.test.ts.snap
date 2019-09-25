@@ -11868,7 +11868,7 @@ Array [
           className="sc-jzJRlG dKBsuF"
         >
           <div
-            className="sc-kAzzGY hOArUU"
+            className="sc-chPdSV idGKsA"
           >
             <div
               className="sc-ifAKCX ncoyA"
@@ -11891,55 +11891,75 @@ Array [
             </div>
           </div>
           <div
-            className="sc-chPdSV ikLkFJ"
+            className="sc-kgoBCf evdgxv"
           >
-            <button>
-              Log In
+            <button
+              onClick={[Function]}
+            >
+              <a
+                href="/log-in"
+                onClick={[Function]}
+              >
+                Log In
+              </a>
             </button>
             <span>
               or
             </span>
-            <button>
-              Sign Up
+            <button
+              onClick={[Function]}
+            >
+               
+              <a
+                href="/sign-up"
+                onClick={[Function]}
+              >
+                Sign Up
+              </a>
             </button>
           </div>
         </div>
         <div
-          className="sc-kgoBCf gJqbCF"
+          className="sc-kGXeez eBDAMd"
         >
-          <form
-            className="sc-gqjmRU jVqWyN"
+          <div
+            className="sc-kAzzGY khpLGP"
           >
-            <input
-              placeholder="Search TwittClone"
-              type="text"
-            />
-            <span>
-              <svg
-                aria-hidden="true"
-                className="svg-inline--fa fa-search fa-w-16 "
-                data-icon="search"
-                data-prefix="fas"
-                focusable="false"
-                role="img"
-                style={Object {}}
-                viewBox="0 0 512 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                  fill="currentColor"
+             
+            <form
+              className="sc-gqjmRU jVqWyN"
+            >
+              <input
+                placeholder="Search TwittClone"
+                type="text"
+              />
+              <span>
+                <svg
+                  aria-hidden="true"
+                  className="svg-inline--fa fa-search fa-w-16 "
+                  data-icon="search"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
                   style={Object {}}
-                />
-              </svg>
-            </span>
-          </form>
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+                    fill="currentColor"
+                    style={Object {}}
+                  />
+                </svg>
+              </span>
+            </form>
+          </div>
           <ul
-            className="sc-kGXeez hWfRRB"
+            className="sc-kpOJdX hooXDS"
           >
             <li>
               <button
-                className="sc-kpOJdX hJElu"
+                className="sc-dxgOiQ cxeyiZ"
               >
                 <span>
                   <svg
@@ -11968,7 +11988,7 @@ Array [
             
             <li>
               <button
-                className="sc-kpOJdX hJElu"
+                className="sc-dxgOiQ cxeyiZ"
                 data-testid="theme-button"
                 onClick={[Function]}
               >
@@ -13181,7 +13201,7 @@ Array [
           className="sc-jzJRlG cpsbUh"
         >
           <div
-            className="sc-kAzzGY hOArUU"
+            className="sc-chPdSV idGKsA"
           >
             <div
               className="sc-ifAKCX ncoyA"
@@ -13204,55 +13224,75 @@ Array [
             </div>
           </div>
           <div
-            className="sc-chPdSV kJJhhA"
+            className="sc-kgoBCf dBGwNx"
           >
-            <button>
-              Log In
+            <button
+              onClick={[Function]}
+            >
+              <a
+                href="/log-in"
+                onClick={[Function]}
+              >
+                Log In
+              </a>
             </button>
             <span>
               or
             </span>
-            <button>
-              Sign Up
+            <button
+              onClick={[Function]}
+            >
+               
+              <a
+                href="/sign-up"
+                onClick={[Function]}
+              >
+                Sign Up
+              </a>
             </button>
           </div>
         </div>
         <div
-          className="sc-kgoBCf gJqbCF"
+          className="sc-kGXeez eBDAMd"
         >
-          <form
-            className="sc-gqjmRU dwBsNZ"
+          <div
+            className="sc-kAzzGY khpLGP"
           >
-            <input
-              placeholder="Search TwittClone"
-              type="text"
-            />
-            <span>
-              <svg
-                aria-hidden="true"
-                className="svg-inline--fa fa-search fa-w-16 "
-                data-icon="search"
-                data-prefix="fas"
-                focusable="false"
-                role="img"
-                style={Object {}}
-                viewBox="0 0 512 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                  fill="currentColor"
+             
+            <form
+              className="sc-gqjmRU dwBsNZ"
+            >
+              <input
+                placeholder="Search TwittClone"
+                type="text"
+              />
+              <span>
+                <svg
+                  aria-hidden="true"
+                  className="svg-inline--fa fa-search fa-w-16 "
+                  data-icon="search"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
                   style={Object {}}
-                />
-              </svg>
-            </span>
-          </form>
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+                    fill="currentColor"
+                    style={Object {}}
+                  />
+                </svg>
+              </span>
+            </form>
+          </div>
           <ul
-            className="sc-kGXeez gpFUa"
+            className="sc-kpOJdX ebLRLl"
           >
             <li>
               <button
-                className="sc-kpOJdX cbTCQE"
+                className="sc-dxgOiQ bWUkqK"
               >
                 <span>
                   <svg
@@ -13281,7 +13321,7 @@ Array [
             
             <li>
               <button
-                className="sc-kpOJdX cbTCQE"
+                className="sc-dxgOiQ bWUkqK"
                 data-testid="theme-button"
                 onClick={[Function]}
               >

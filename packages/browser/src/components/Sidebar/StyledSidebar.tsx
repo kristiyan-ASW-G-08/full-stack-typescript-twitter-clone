@@ -48,7 +48,7 @@ export const AuthenticatedSidebarHeader = styled('div')`
   grid-template-columns: 1fr;
   grid-gap: 0.2rem;
   padding-top: 3rem;
-  padding-left: 0.5rem;
+  padding-left: 0.7rem;
   ${props => props.theme.mixins.border}
   
   h3 {
@@ -59,7 +59,7 @@ export const AuthenticatedSidebarHeader = styled('div')`
         : props.theme.white};
   }
   h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: ${props => props.theme.secondary};
   }
   button {
@@ -74,10 +74,13 @@ export const AuthenticatedSidebarHeader = styled('div')`
           ? darken(0.4, props.theme.secondary)
           : lighten(0.2, props.theme.secondary)};
     }
-    margin-right: 0.5rem;
+    margin-right: 0.7rem;
   }
 `;
 
+export const SearchBarWrapper = styled('div')`
+  margin-left: 0.7rem;
+`;
 export const LogoContainer = styled('div')`
   display: grid;
   align-content: center;
@@ -87,11 +90,11 @@ export const LogoContainer = styled('div')`
 export const AuthenticationBar = styled('div')`
   grid-area: authentication-bar;
   display: grid;
-  grid-gap: 0.3rem;
+  grid-gap: 0.7rem;
   grid-template-columns: repeat(3, auto);
   align-items: center;
   padding-left: 0.5rem;
-  max-width: 15rem;
+  width: 15rem;
   * {
     font-size: 1.5rem;
     font-weight: bold;
@@ -104,10 +107,13 @@ export const AuthenticationBar = styled('div')`
   button {
     ${props => props.theme.mixins.button}
     background: none;
-    color: ${props =>
-      props.theme.currentTheme === 'light'
-        ? props.theme.color
-        : props.theme.white};
+
+    a {
+      color: ${props =>
+        props.theme.currentTheme === 'light'
+          ? props.theme.color
+          : props.theme.white};
+    }
   }
 `;
 
@@ -134,7 +140,7 @@ export const SidebarList = styled('ul')`
 `;
 
 export const SidebarButton = styled('button')`
-  margin-left: 0.5rem;
+  margin-left: 0.7rem;
   width:auto;
   display: flex;
   flex-flow: row;

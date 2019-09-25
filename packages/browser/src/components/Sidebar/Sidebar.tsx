@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   StyledSidebar,
   Backdrop,
@@ -12,6 +13,7 @@ import {
   SidebarBody,
   SidebarList,
   SidebarButton,
+  SearchBarWrapper,
 } from './StyledSidebar';
 import Logo from 'components/Logo/Logo';
 import SearchBar from 'components/SearchBar/SearchBar';
@@ -63,14 +65,23 @@ export const Sidebar: FC<SidebarProps> = ({
               <Logo type="vertical" />
             </LogoContainer>
             <AuthenticationBar>
-              <button>Log In</button>
+              <button onClick={toggleSidebar}>
+                <Link to="/log-in">Log In</Link>
+              </button>
               <span>or</span>
-              <button>Sign Up</button>
+              <button onClick={toggleSidebar}>
+                {' '}
+                <Link to="/sign-up">Sign Up</Link>
+              </button>
             </AuthenticationBar>
           </SidebarHeader>
         )}
         <SidebarBody>
-          <SearchBar />
+          <SearchBarWrapper>
+            {' '}
+            <SearchBar />
+          </SearchBarWrapper>
+
           <SidebarList>
             <li>
               <SidebarButton>
@@ -104,10 +115,7 @@ export const Sidebar: FC<SidebarProps> = ({
               ''
             )}
             <li>
-              <SidebarButton
-                onClick={toggleTheme}
-                data-testid={'theme-button'}
-              >
+              <SidebarButton onClick={toggleTheme} data-testid={'theme-button'}>
                 {theme === 'light' ? (
                   <>
                     <span>
@@ -127,7 +135,7 @@ export const Sidebar: FC<SidebarProps> = ({
             </li>
           </SidebarList>
           {isAuth ? (
-            <SidebarButton onClick={ resetAuthState}>
+            <SidebarButton onClick={resetAuthState}>
               <span>
                 <FontAwesomeIcon icon={'sign-out-alt'} />
               </span>
