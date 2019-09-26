@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -29,7 +29,15 @@ library.add(
 );
 
 const App: FC = observer(() => {
-  const { theme } = useContext(RootStoreContext).themeStore;
+  const { themeStore, authStore } = useContext(RootStoreContext);
+  const { theme } = themeStore;
+  useEffect(() => {
+    const expiryDate = localStorage.getItem('expiryDate');
+    if (expiryDate && new Date(expiryDate) <= new Date()) {
+      authStore.resetAuthState();
+      localStorage.removeItem('expiryDate');
+    }
+  }, []);
   return (
     <div className="wrapper">
       <GlobalStyle />

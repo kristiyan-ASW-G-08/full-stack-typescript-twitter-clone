@@ -18,9 +18,10 @@ import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
+import Notification from 'types/Notification';
 
 export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
-  const { authStore } = useContext(RootStoreContext);
+  const { authStore, notificationStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
@@ -32,7 +33,15 @@ export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
       );
       const { data } = response.data;
       const authState = { ...data, isAuth: true };
+      const remainingMilliseconds = 60 * 60 * 1000;
+      const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+      localStorage.setItem('expiryDate', expiryDate.toISOString());
       authStore.setAuthState(authState);
+      const notification: Notification = {
+        type: 'message',
+        content: 'You have logged in succsessfully',
+      };
+      notificationStore.setNotification(notification);
       history.replace('/');
     } catch (error) {
       if (error.response) {

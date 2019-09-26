@@ -12,6 +12,7 @@ import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
 import Portal from 'components/Portal/Portal';
 import Notification from 'components/Notification/Notification';
+
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
@@ -29,11 +30,11 @@ const Router: FC = observer(
     } = useContext(RootStoreContext);
     const { theme } = themeStore;
     const { isActive } = sidebarStore;
-    const { notification } = notificationStore;
+    const { notification, isNotificationActive } = notificationStore;
     return (
       <BrowserRouter>
         <>
-          {notification.isActive ? (
+          {isNotificationActive ? (
             <Portal
               portalId={'notification'}
               children={<Notification notification={notification} />}

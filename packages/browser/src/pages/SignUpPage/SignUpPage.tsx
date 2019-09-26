@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import {
   Formik,
   Form,
@@ -16,14 +16,23 @@ import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import Logo from 'components/Logo/Logo';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import RootStoreContext from 'stores/RootStore/RootStore';
+import Notification from 'types/Notification';
 
 export const SignUpPage: FC<RouteComponentProps> = ({ history }) => {
+  const { notificationStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const response = await axios.post('http://localhost:8090/users', e);
+      const notification: Notification = {
+        type: 'message',
+        content:
+          'You have signed up successfully.Confirm your email to log in.',
+      };
+      notificationStore.setNotification(notification);
       history.replace('/');
     } catch (error) {
       if (error.response) {
