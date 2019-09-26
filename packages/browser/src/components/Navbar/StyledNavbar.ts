@@ -8,16 +8,16 @@ export const StyledNavbar = styled('nav')`
   background-color: ${props => props.theme.background};
 `;
 export const StyledNavIcon = styled('button')`
-  display: none;
-  @media ${props => props.theme.mediaQueries.mobile} {
-    font-size: 2.5rem;
-    color: ${props => props.theme.primary};
-    ${props => props.theme.mixins.button};
-    display: grid;
-    background: none;
-    align-content: center;
-    justify-items: center;
-    border: none;
+  font-size: 2.5rem;
+  color: ${props => props.theme.primary};
+  ${props => props.theme.mixins.button};
+  display: grid;
+  background: none;
+  align-content: center;
+  justify-items: center;
+  border: none;
+  @media ${props => props.theme.mediaQueries.desktop} {
+    display: none;
   }
 `;
 
@@ -29,11 +29,11 @@ export const StyledLogoText = styled('h1')`
 `;
 
 export const StyledContainer = styled('div')`
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 1rem;
-  @media ${props => props.theme.mediaQueries.mobile} {
-    display: none;
+  display: none;
+  @media ${props => props.theme.mediaQueries.desktop} {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
   }
 `;
 

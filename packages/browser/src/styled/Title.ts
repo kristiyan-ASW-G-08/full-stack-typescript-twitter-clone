@@ -15,7 +15,7 @@ export const Title = styled('h1')`
 
 export const Subtitle = styled('h2')`
   font-size: 2rem;
-  color: ${props => props.theme.secondary};
+  color: ${props => props.theme.color};
   text-align: center;
 `;
 

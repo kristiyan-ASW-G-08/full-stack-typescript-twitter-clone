@@ -39,7 +39,7 @@ export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
       authStore.setAuthState(authState);
       const notification: Notification = {
         type: 'message',
-        content: 'You have logged in succsessfully',
+        content: 'You have logged in successfully.',
       };
       notificationStore.setNotification(notification);
       history.replace('/');

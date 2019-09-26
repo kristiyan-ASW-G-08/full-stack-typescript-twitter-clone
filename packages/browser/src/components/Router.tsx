@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Navbar from 'components/Navbar/Navbar';
+import Home from 'pages/Home/Home';
 import { observer } from 'mobx-react-lite';
 import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
@@ -58,7 +59,7 @@ const Router: FC = observer(
             authState={authStore.authState}
           />
           <Switch>
-            <Route exact path="/" component={() => <div>Home</div>} />
+            <Route exact path="/" component={Home} />
             <Route
               exact
               path="/log-in"

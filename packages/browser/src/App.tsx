@@ -10,6 +10,7 @@ import {
   faSun,
   faBookmark,
   faSignOutAlt,
+  faFeatherAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import Router from 'components/Router';
 import StyledApp from 'styled/App';
@@ -26,6 +27,7 @@ library.add(
   faSun,
   faBookmark,
   faSignOutAlt,
+  faFeatherAlt,
 );
 
 const App: FC = observer(() => {

@@ -7986,7 +7986,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-htoDjs fdhkcF"
+        className="sc-htoDjs gupnOq"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -8009,7 +8009,7 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-iwsKbI gciqeY"
+        className="sc-iwsKbI ZVxtm"
       >
         <button
           className="sc-gZMcBi eGxmmy"
@@ -9255,7 +9255,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-htoDjs fdhkcF"
+        className="sc-htoDjs gupnOq"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -9278,7 +9278,7 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-iwsKbI gciqeY"
+        className="sc-iwsKbI ZVxtm"
       >
         <button
           className="sc-gZMcBi inlCEw"
