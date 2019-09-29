@@ -10,6 +10,7 @@ class ModalStore {
     this.type = type;
   }
   @action public reset(): void {
+    console.log('reset');
     this.isActive = false;
   }
 }

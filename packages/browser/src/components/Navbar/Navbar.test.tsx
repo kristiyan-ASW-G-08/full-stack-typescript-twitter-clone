@@ -33,16 +33,16 @@ describe('Navbar', () => {
     const mobileNavButton = await waitForElement(() =>
       getByTestId(container, 'mobile-nav-button'),
     );
+
+    UserEvent.click(mobileNavButton);
+    UserEvent.click(themeButton);
+
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
     expect(mobileNavButton).toBeTruthy();
-
-    UserEvent.click(mobileNavButton);
     expect(toggleSidebar).toHaveBeenCalledTimes(1);
-
-    UserEvent.click(themeButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
 
     rerender(
@@ -59,10 +59,10 @@ describe('Navbar', () => {
     );
     const logOutButton = await waitForElement(() => getByText('Log Out'));
 
+    UserEvent.click(logOutButton);
+
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
-
-    UserEvent.click(logOutButton);
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });
 });

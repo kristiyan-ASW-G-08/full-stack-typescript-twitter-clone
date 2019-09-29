@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StyledInput from 'styled/StyledInput';
+import StyledInput from 'styled/Input';
 storiesOf('StyledInput', module)
   .add(
     'light theme',

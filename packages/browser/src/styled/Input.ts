@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { lighten, setLightness } from 'polished';
-export const StyledInput = styled('div')`
+import { lighten } from 'polished';
+export const Input = styled('div')`
   width: 100%;
-  input {
+  input,
+  textarea {
     padding: 0.7rem;
     font-size: 1.5rem;
     font-weight: bold;
@@ -22,6 +23,9 @@ export const StyledInput = styled('div')`
       color: ${props => props.theme.secondary};
     }
   }
+  textarea {
+    height: 10rem;
+  }
   span {
     display: block;
     padding: 1rem 0rem 1rem 1rem;
@@ -31,4 +35,4 @@ export const StyledInput = styled('div')`
   }
 `;
 
-export default StyledInput;
+export default Input;

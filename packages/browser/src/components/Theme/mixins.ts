@@ -26,9 +26,17 @@ const button = css`
   text-decoration: none;
 `;
 
+const form = css`
+  width: 95vw;
+  padding: 2rem;
+  background: ${props => props.theme.background};
+  ${props => props.theme.mixins.border}
+  border-radius: 10px;
+`;
 const mixins = {
   slide,
   border,
   button,
+  form,
 };
 export default mixins;

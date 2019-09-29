@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
-import StyledInput from 'styled/StyledInput';
+import Input from 'styled/Input';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
@@ -65,22 +65,22 @@ export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
           <Form>
             <StyledForm>
               <Logo type="vertical" />
-              <StyledInput>
+              <Input>
                 <FastField
                   name="email"
                   type="email"
                   placeholder="Email address"
                 />
                 <ErrorMessage component="span" name="email" />
-              </StyledInput>
-              <StyledInput>
+              </Input>
+              <Input>
                 <FastField
                   name="password"
                   type="password"
                   placeholder="Password"
                 />
                 <ErrorMessage component="span" name="password" />
-              </StyledInput>
+              </Input>
               <Button buttonType={'primary'} type="submit">
                 Log In
               </Button>

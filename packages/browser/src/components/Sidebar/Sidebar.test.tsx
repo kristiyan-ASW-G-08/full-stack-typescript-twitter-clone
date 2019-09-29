@@ -37,17 +37,18 @@ describe('Sidebar', () => {
     const backdrop = await waitForElement(() =>
       getByTestId(container, 'backdrop'),
     );
+
+    userEvent.click(backdrop);
+    UserEvent.click(themeButton);
+
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(themeButton.textContent).toMatchSnapshot();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
-
-    userEvent.click(backdrop);
+    expect(toggleTheme).toHaveBeenCalledTimes(1);
     expect(toggleSidebar).toHaveBeenCalledTimes(1);
 
-    UserEvent.click(themeButton);
-    expect(toggleTheme).toHaveBeenCalledTimes(1);
     rerender(
       <Sidebar
         toggleSidebar={toggleSidebar}
@@ -61,11 +62,13 @@ describe('Sidebar', () => {
     const lightThemeButton = await waitForElement(() =>
       getByTestId(container, 'theme-button'),
     );
-    expect(themeButton.textContent).toMatchSnapshot();
     const logOutButton = await waitForElement(() => getByText('Log Out'));
+
+    UserEvent.click(logOutButton);
+
+    expect(themeButton.textContent).toMatchSnapshot();
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
-    UserEvent.click(logOutButton);
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });
 });

@@ -7,7 +7,7 @@ export const StyledNavbar = styled('nav')`
   padding: 1rem;
   background-color: ${props => props.theme.background};
 `;
-export const StyledNavIcon = styled('button')`
+export const NavIcon = styled('button')`
   font-size: 2.5rem;
   color: ${props => props.theme.primary};
   ${props => props.theme.mixins.button};
@@ -21,14 +21,14 @@ export const StyledNavIcon = styled('button')`
   }
 `;
 
-export const StyledLogoText = styled('h1')`
+export const LogoText = styled('h1')`
   font-size: 1rem;
   @media ${props => props.theme.mediaQueries.mobile} {
     display: none;
   }
 `;
 
-export const StyledContainer = styled('div')`
+export const Container = styled('div')`
   display: none;
   @media ${props => props.theme.mediaQueries.desktop} {
     display: grid;
@@ -37,7 +37,7 @@ export const StyledContainer = styled('div')`
   }
 `;
 
-export const StyledThemeButton = styled('button')`
+export const ThemeButton = styled('button')`
   height: 2.7rem;
   font-size: 1.3rem;
   text-align: center;

@@ -16,11 +16,11 @@ describe('Notification', () => {
       },
     );
 
-    expect(container).toBeTruthy();
-
     const notificationContent = await waitForElement(() =>
       getByText(activeNotification.content),
     );
+
+    expect(container).toBeTruthy();
     expect(notificationContent).toBeTruthy();
   });
 });

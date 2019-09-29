@@ -13,7 +13,7 @@ export const StyledLogo = styled('div')<StyledLogoProps>`
   width: 10rem;
   grid-gap: 0.5rem;
 `;
-export const StyledLogoText = styled('h1')<StyledLogoProps>`
+export const LogoText = styled('h1')<StyledLogoProps>`
   font-size: 2rem;
   font-weight: bold;
   color: ${props => props.theme.primary};
@@ -22,7 +22,7 @@ export const StyledLogoText = styled('h1')<StyledLogoProps>`
   }
 `;
 
-export const StyledLogoSpan = styled('span')`
+export const LogoSpan = styled('span')`
   font-size: 2rem;
   color: ${props => props.theme.color};
 `;

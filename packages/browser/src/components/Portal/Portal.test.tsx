@@ -9,15 +9,15 @@ describe('Portal', () => {
     const id = 'portal';
     const children = <h1>Child Element</h1>;
     const { getByText } = render(<Portal portalId={id} children={children} />);
-
     const rootElement = document.querySelector(`#${id}`);
+    const childElement = getByText('Child Element');
+
     if (!rootElement) {
       return;
     }
+
     expect(rootElement).toBeTruthy();
     expect(rootElement.id).toMatch(id);
-
-    const childElement = getByText('Child Element');
     expect(childElement).toBeTruthy();
   });
 });

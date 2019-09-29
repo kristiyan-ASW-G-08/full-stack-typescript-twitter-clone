@@ -14,7 +14,7 @@ mockedAxios.post.mockReturnValueOnce(
 describe('LoginPage', () => {
   const email = 'testmail@test.test';
   const password = 'passwordpassword';
-  const theme = 'light';
+
 
   it('it renders', async () => {
     expect.assertions(5);
@@ -34,19 +34,20 @@ describe('LoginPage', () => {
     const passwordInput = await waitForElement(() =>
       getByPlaceholderText('Password'),
     );
+    const submitButton = await waitForElement(() => getByText('Log In'));
 
     UserEvent.type(emailInput, email);
     UserEvent.type(passwordInput, password);
-
-    expect(emailInput).toHaveAttribute('value', email);
-    expect(passwordInput).toHaveAttribute('value', password);
-
-    const submitButton = await waitForElement(() => getByText('Log In'));
-    expect(submitButton).toBeTruthy();
+    UserEvent.click(submitButton);
 
     UserEvent.click(submitButton);
     await wait(() => {
       expect(axios.post).toHaveBeenCalledTimes(1);
     });
+
+    expect(emailInput).toHaveAttribute('value', email);
+    expect(passwordInput).toHaveAttribute('value', password);
+
+    expect(submitButton).toBeTruthy();
   });
 });

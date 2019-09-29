@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 export const StyledSearchBar = styled('form')`
   display: grid;

@@ -2,8 +2,6 @@ import React, { FC, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Tweet from 'types/Tweet';
-import MobileTweetButton from 'styled/MobileTweetButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Subtitle } from 'styled/Title';
 
 export const Home: FC = () => {
@@ -27,14 +25,6 @@ export const Home: FC = () => {
   return (
     <section>
       {tweets.length > 0 ? '' : <Subtitle>No tweets yet</Subtitle>}
-      {isAuth ? (
-        <MobileTweetButton>
-          {' '}
-          <FontAwesomeIcon icon="feather-alt" />
-        </MobileTweetButton>
-      ) : (
-        ''
-      )}
     </section>
   );
 };

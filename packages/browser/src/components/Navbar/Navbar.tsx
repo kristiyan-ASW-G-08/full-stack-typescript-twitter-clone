@@ -1,9 +1,9 @@
 import React, { FC, useContext } from 'react';
 import {
   StyledNavbar,
-  StyledNavIcon,
-  StyledContainer,
-  StyledThemeButton,
+  NavIcon,
+  Container,
+  ThemeButton,
 } from './StyledNavbar';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,13 +34,13 @@ export const Navbar: FC<NavbarProps> = ({
       <Link to="/">
         <Logo />
       </Link>
-      <StyledNavIcon onClick={toggleSidebar} data-testid="mobile-nav-button">
+      <NavIcon onClick={toggleSidebar} data-testid="mobile-nav-button">
         <FontAwesomeIcon icon="bars" />
-      </StyledNavIcon>
-      <StyledContainer>
-        <StyledThemeButton onClick={toggleTheme}>
+      </NavIcon>
+      <Container>
+        <ThemeButton onClick={toggleTheme}>
           {theme === 'light' ? 'Dark mode' : 'Light mode'}
-        </StyledThemeButton>
+        </ThemeButton>
         <SearchBar />
         {isAuth ? (
           <>
@@ -68,7 +68,7 @@ export const Navbar: FC<NavbarProps> = ({
             </Link>
           </>
         )}
-      </StyledContainer>
+      </Container>
     </StyledNavbar>
   );
 };

@@ -9,7 +9,7 @@ import {
 } from 'formik';
 import axios from 'axios';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
-import StyledInput from 'styled/StyledInput';
+import Input from 'styled/Input';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
@@ -61,38 +61,38 @@ export const SignUpPage: FC<RouteComponentProps> = ({ history }) => {
           <Form>
             <StyledForm>
               <Logo type="vertical" />
-              <StyledInput>
+              <Input>
                 <FastField name="username" type="text" placeholder="Username" />
                 <ErrorMessage component="span" name="username" />
-              </StyledInput>
-              <StyledInput>
+              </Input>
+              <Input>
                 <FastField name="handle" type="text" placeholder="Handle" />
                 <ErrorMessage component="span" name="handle" />
-              </StyledInput>
-              <StyledInput>
+              </Input>
+              <Input>
                 <FastField
                   name="email"
                   type="email"
                   placeholder="Email address"
                 />
                 <ErrorMessage component="span" name="email" />
-              </StyledInput>
-              <StyledInput>
+              </Input>
+              <Input>
                 <FastField
                   name="password"
                   type="password"
                   placeholder="Password"
                 />
                 <ErrorMessage component="span" name="password" />
-              </StyledInput>
-              <StyledInput>
+              </Input>
+              <Input>
                 <FastField
                   name="confirmPassword"
                   type="password"
                   placeholder="Repeat Password"
                 />
                 <ErrorMessage component="span" name="confirmPassword" />
-              </StyledInput>
+              </Input>
               <Button buttonType={'primary'} type="submit">
                 Sign Up
               </Button>

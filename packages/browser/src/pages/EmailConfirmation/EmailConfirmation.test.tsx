@@ -6,7 +6,6 @@ import axios from 'axios';
 import TestWrapper from 'testUtilities/TestWrapper';
 import EmailConfirmation from './EmailConfirmation';
 
-
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.patch.mockReturnValueOnce(
@@ -22,14 +21,14 @@ describe('EmailConfirmation', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    expect(container).toBeTruthy();
-
     const confirmationButton = await waitForElement(() =>
       getByText('Confirm Email'),
     );
-    expect(confirmationButton).toBeTruthy();
 
     UserEvent.click(confirmationButton);
+
+    expect(container).toBeTruthy();
+    expect(confirmationButton).toBeTruthy();
     await wait(() => {
       expect(axios.patch).toHaveBeenCalledTimes(1);
     });

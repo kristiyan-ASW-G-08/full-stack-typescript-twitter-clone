@@ -9,10 +9,10 @@ import RootStoreContext from 'stores/RootStore/RootStore';
 import Navbar from 'components/Navbar/Navbar';
 import Home from 'pages/Home/Home';
 import { observer } from 'mobx-react-lite';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Sidebar from 'components/Sidebar/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
-import Portal from 'components/Portal/Portal';
-import Notification from 'components/Notification/Notification';
+import MobileTweetButton from 'styled/MobileTweetButton';
 
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
@@ -20,26 +20,57 @@ const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const EmailConfirmation = lazy(() =>
   import('pages/EmailConfirmation/EmailConfirmation'),
 );
+const Modal = lazy(() => import('components/Modal/Modal'));
+const Portal = lazy(() => import('components/Portal/Portal'));
+const Notification = lazy(() => import('components/Notification/Notification'));
 
 const Router: FC = observer(
   (): JSX.Element => {
     const {
+      modalStore,
       themeStore,
       authStore,
       sidebarStore,
       notificationStore,
     } = useContext(RootStoreContext);
+    const { isAuth } = authStore.authState;
     const { theme } = themeStore;
-    const { isActive } = sidebarStore;
     const { notification, isNotificationActive } = notificationStore;
     return (
       <BrowserRouter>
         <>
+          {isAuth ? (
+            <MobileTweetButton
+              onClick={() => modalStore.openModal('tweetForm')}
+            >
+              {' '}
+              <FontAwesomeIcon icon="feather-alt" />
+            </MobileTweetButton>
+          ) : (
+            ''
+          )}
+          {modalStore.isActive ? (
+            <Suspense fallback={<CenteredLoader />}>
+              <Portal
+                portalId={'modal'}
+                children={
+                  <Modal
+                    type={modalStore.type}
+                    resetModalState={() => modalStore.reset()}
+                  />
+                }
+              />
+            </Suspense>
+          ) : (
+            ''
+          )}
           {isNotificationActive ? (
-            <Portal
-              portalId={'notification'}
-              children={<Notification notification={notification} />}
-            ></Portal>
+            <Suspense fallback={<CenteredLoader />}>
+              <Portal
+                portalId={'notification'}
+                children={<Notification notification={notification} />}
+              ></Portal>
+            </Suspense>
           ) : (
             ''
           )}
@@ -53,7 +84,7 @@ const Router: FC = observer(
           <Sidebar
             toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}
-            isActive={isActive}
+            isActive={sidebarStore.isActive}
             resetAuthState={() => authStore.resetAuthState()}
             toggleTheme={() => themeStore.toggleTheme()}
             authState={authStore.authState}
