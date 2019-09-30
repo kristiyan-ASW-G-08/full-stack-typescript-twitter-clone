@@ -23,11 +23,6 @@ export const Button = styled('button')<ButtonProps>`
       const color = props.theme[props.buttonType];
       return color;
     }};
-    border: solid 1px
-      ${props => {
-        const color = props.theme[props.buttonType];
-        return color;
-      }};
   }
   a {
     color: inherit;

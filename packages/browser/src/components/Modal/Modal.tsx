@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, SyntheticEvent } from 'react';
 import TweetForm from 'components/TweetForm/TweetForm';
 import { StyledModal, Backdrop } from './StyledModal';
 import { observer } from 'mobx-react-lite';
@@ -19,7 +19,9 @@ export const Modal: FC<ModalProps> = observer(({ type, resetModalState }) => {
   }, []);
   return (
     <Backdrop onClick={() => resetModalState()}>
-      <StyledModal>{modalComponents[type]}</StyledModal>
+      <StyledModal onClick={(e: SyntheticEvent) => e.stopPropagation()}>
+        {modalComponents[type]}
+      </StyledModal>
     </Backdrop>
   );
 });

@@ -12,6 +12,7 @@ import {
   faSignOutAlt,
   faFeatherAlt,
   faImage,
+  faLink,
 } from '@fortawesome/free-solid-svg-icons';
 import Router from 'components/Router';
 import StyledApp from 'styled/App';
@@ -30,6 +31,7 @@ library.add(
   faSignOutAlt,
   faFeatherAlt,
   faImage,
+  faLink
 );
 
 const App: FC = observer(() => {

@@ -1,10 +1,5 @@
 import React, { FC, useContext } from 'react';
-import {
-  StyledNavbar,
-  NavIcon,
-  Container,
-  ThemeButton,
-} from './StyledNavbar';
+import { StyledNavbar, NavIcon, Container, ThemeButton } from './StyledNavbar';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -51,6 +46,9 @@ export const Navbar: FC<NavbarProps> = ({
                 <FontAwesomeIcon icon="user" />
               )}
             </Avatar>
+            <StyledButton buttonType={'primary'} onClick={resetAuthState}>
+              Tweet
+            </StyledButton>
             <StyledButton buttonType={'secondary'} onClick={resetAuthState}>
               Log Out
             </StyledButton>

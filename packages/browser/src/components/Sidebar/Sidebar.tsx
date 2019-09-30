@@ -39,7 +39,6 @@ export const Sidebar: FC<SidebarProps> = ({
 }) => {
   const { user, isAuth, token } = authState;
   const { username, handle, following, followers } = user;
-  console.log(following, followers);
   return (
     <StyledSidebar on={isActive}>
       <Container>

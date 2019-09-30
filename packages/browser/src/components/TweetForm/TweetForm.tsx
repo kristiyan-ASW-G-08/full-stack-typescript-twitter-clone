@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState, SyntheticEvent } from 'react';
 import TweetValidator from 'validators/TweetValidator';
 import {
   Formik,
@@ -19,39 +19,64 @@ import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Avatar from 'styled/Avatar';
 import IconButton from 'styled/IconButton';
+import Notification from 'types/Notification';
 
 import {
   StyledTweetForm,
   TwButtonButtonContainer,
-  ImgButtonContainer,
+  ContentButtonsContainer,
   AvatarContainer,
   InputContainer,
 } from './StyledTweetForm';
 
 export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
-  const { modalStore } = useContext(RootStoreContext);
+  const { modalStore, authStore, notificationStore } = useContext(
+    RootStoreContext,
+  );
+  const { token } = authStore.authState;
+  const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
+    'text',
+  );
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const response = await axios.post('http://localhost:8090/tweets', e);
+      const requestBody = {
+        ...e,
+        type,
+      };
+
+      const config = {
+        headers: { Authorization: 'bearer ' + token },
+      };
+      console.log(requestBody);
+      const response = await axios.post(
+        'http://localhost:8090/tweets',
+        requestBody,
+        config,
+      );
       const { data } = response.data;
-      console.log(data);
     } catch (error) {
-      if (error.response) {
+      if (error.response & error.response.data) {
         const { data } = error.response.data;
         data.forEach((validationError: ValidationError) => {
           const { name, message } = validationError;
           setFieldError(name, message);
         });
+      } else {
+        const notification: Notification = {
+          type: 'warning',
+          content: 'Something went wrong',
+        };
+        notificationStore.setNotification(notification);
       }
     }
   };
   return (
     <Formik
       validationSchema={TweetValidator}
-      initialValues={{ text: '' }}
+      initialValues={{ text: '', linkUrl: '' }}
       onSubmit={submitHandler}
     >
       {() => (
@@ -62,23 +87,40 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" />
               </Avatar>
             </AvatarContainer>
-
             <InputContainer>
               <Input>
                 <FastField
-                  component={() => <textarea />}
+                  component={'textarea'}
                   name="text"
                   type="text"
                   placeholder="Text"
                 />
                 <ErrorMessage component="span" name="text" />
               </Input>
+              {type === 'link' ? (
+                <Input>
+                  <FastField name="linkUrl" type="text" placeholder="Link" />
+                  <ErrorMessage component="span" name="linkUrl" />
+                </Input>
+              ) : (
+                ''
+              )}
             </InputContainer>
-            <ImgButtonContainer>
+
+            <ContentButtonsContainer>
               <IconButton>
                 <FontAwesomeIcon icon={'image'} />
               </IconButton>
-            </ImgButtonContainer>
+              <IconButton
+                onClick={(e: SyntheticEvent) => {
+                  e.preventDefault();
+                  type === 'link' ? setType('text') : setType('link');
+                }}
+              >
+                <FontAwesomeIcon icon={'link'} />
+              </IconButton>
+            </ContentButtonsContainer>
+
             <TwButtonButtonContainer>
               <Button buttonType={'primary'} type="submit">
                 Tweet
