@@ -2,22 +2,24 @@ import React from 'react';
 import { render, waitForElement, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
-import Navbar from './Navbar';
+import Sidebar from '.';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import userEvent from '@testing-library/user-event';
 import TestWrapper from 'testUtilities/TestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 
-describe('Navbar', () => {
+describe('Sidebar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
-  it('render Navbar', async () => {
-    expect.assertions(10);
+  it('render Sidebar', async () => {
+    expect.assertions(11);
 
     const { container, getByText, rerender } = render(
-      <Navbar
+      <Sidebar
         toggleSidebar={toggleSidebar}
+        isActive={true}
         authState={defaultAuthState}
         resetAuthState={resetAuthState}
         theme={theme}
@@ -27,40 +29,44 @@ describe('Navbar', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const themeButton = await waitForElement(() => getByText('Dark mode'));
+    const themeButton = await waitForElement(() =>
+      getByTestId(container, 'theme-button'),
+    );
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
-    const mobileNavButton = await waitForElement(() =>
-      getByTestId(container, 'mobile-nav-button'),
+    const backdrop = await waitForElement(() =>
+      getByTestId(container, 'backdrop'),
     );
 
-    UserEvent.click(mobileNavButton);
+    userEvent.click(backdrop);
     UserEvent.click(themeButton);
 
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
+    expect(themeButton.textContent).toMatchSnapshot();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
-    expect(mobileNavButton).toBeTruthy();
-    expect(toggleSidebar).toHaveBeenCalledTimes(1);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
+    expect(toggleSidebar).toHaveBeenCalledTimes(1);
 
     rerender(
-      <Navbar
+      <Sidebar
         toggleSidebar={toggleSidebar}
+        isActive={true}
         resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
-        theme={'dark'}
+        theme={'light'}
         toggleTheme={toggleTheme}
       />,
     );
     const lightThemeButton = await waitForElement(() =>
-      getByText('Light mode'),
+      getByTestId(container, 'theme-button'),
     );
     const logOutButton = await waitForElement(() => getByText('Log Out'));
 
     UserEvent.click(logOutButton);
 
+    expect(themeButton.textContent).toMatchSnapshot();
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
     expect(resetAuthState).toHaveBeenCalledTimes(1);

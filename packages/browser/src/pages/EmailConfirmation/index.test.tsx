@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
 import TestWrapper from 'testUtilities/TestWrapper';
-import EmailConfirmation from './EmailConfirmation';
+import EmailConfirmation from '.';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

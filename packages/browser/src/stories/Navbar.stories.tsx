@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Navbar } from 'components/Navbar/Navbar';
+import { Navbar } from 'components/Navbar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 storiesOf('Navbar', module)
   .add(

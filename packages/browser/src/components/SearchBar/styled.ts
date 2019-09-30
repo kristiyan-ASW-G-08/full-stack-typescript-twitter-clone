@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSearchBar = styled('form')`
+export const SearchBarWrapper = styled('form')`
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: auto auto;

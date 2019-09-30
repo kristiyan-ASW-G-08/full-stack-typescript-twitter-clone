@@ -1,9 +1,9 @@
 import React, { FC, useContext } from 'react';
-import { StyledNavbar, NavIcon, Container, ThemeButton } from './StyledNavbar';
+import { NavbarWrapper, NavIcon, Container, ThemeButton } from './styled';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import Logo from 'components/Logo/Logo';
+import Logo from 'components/Logo';
 import StyledButton from 'styled/Button';
 import SearchBar from 'components/SearchBar/SearchBar';
 import Avatar from 'styled/Avatar';
@@ -25,7 +25,7 @@ export const Navbar: FC<NavbarProps> = ({
 }) => {
   const { user, token, isAuth } = authState;
   return (
-    <StyledNavbar>
+    <NavbarWrapper>
       <Link to="/">
         <Logo />
       </Link>
@@ -67,7 +67,7 @@ export const Navbar: FC<NavbarProps> = ({
           </>
         )}
       </Container>
-    </StyledNavbar>
+    </NavbarWrapper>
   );
 };
 

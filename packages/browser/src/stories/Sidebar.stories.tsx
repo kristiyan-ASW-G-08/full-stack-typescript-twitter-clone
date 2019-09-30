@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Sidebar } from 'components/Sidebar/Sidebar';
+import { Sidebar } from 'components/Sidebar';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 
 storiesOf('Sidebar', module)

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 
-export const StyledModal = styled('div')`
+export const ModalWrapper = styled('div')`
   display: grid;
   align-content: center;
   justify-items: center;

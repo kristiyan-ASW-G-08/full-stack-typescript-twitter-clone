@@ -1,6 +1,6 @@
 import React, { FC, useEffect, SyntheticEvent } from 'react';
-import TweetForm from 'components/TweetForm/TweetForm';
-import { StyledModal, Backdrop } from './StyledModal';
+import TweetForm from 'components/TweetForm';
+import { ModalWrapper, Backdrop } from './styled';
 import { observer } from 'mobx-react-lite';
 interface ModalProps {
   type: 'tweetForm';
@@ -19,9 +19,9 @@ export const Modal: FC<ModalProps> = observer(({ type, resetModalState }) => {
   }, []);
   return (
     <Backdrop onClick={() => resetModalState()}>
-      <StyledModal onClick={(e: SyntheticEvent) => e.stopPropagation()}>
+      <ModalWrapper onClick={(e: SyntheticEvent) => e.stopPropagation()}>
         {modalComponents[type]}
-      </StyledModal>
+      </ModalWrapper>
     </Backdrop>
   );
 });

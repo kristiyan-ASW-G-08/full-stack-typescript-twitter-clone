@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import PageContainer from 'styled/PageContainer';
-import { StyledH1, StyledH2, StyledP, ButtonContainer } from './StyledNotFound';
+import { StyledH1, StyledH2, StyledP, ButtonContainer } from './styled';
 import Button from 'styled/Button';
 export const NotFound: FC<RouteComponentProps> = ({ history }) => {
   return (

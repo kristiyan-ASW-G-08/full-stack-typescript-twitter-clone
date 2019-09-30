@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledNotification = styled('div')`
+export const NotificationWrapper = styled('div')`
   position: fixed;
   z-index: 2;
   width: 100vw;

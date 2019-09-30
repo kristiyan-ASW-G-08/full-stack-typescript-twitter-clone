@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Logo } from 'components/Logo/Logo';
+import { Logo } from 'components/Logo/index';
 storiesOf('Logo', module)
   .add('light theme horizontal(default)', () => <Logo />, {
     info: { inline: true },

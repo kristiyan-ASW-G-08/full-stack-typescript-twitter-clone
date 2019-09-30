@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledTweetForm = styled('div')`
+export const TweetFormWrapper = styled('div')`
   display: grid;
   grid:
     'avatar input input input .' 1fr
@@ -35,4 +35,3 @@ export const TwButtonButtonContainer = styled('div')`
   justify-content: end;
   grid-area: tw-button;
 `;
-export default StyledTweetForm;

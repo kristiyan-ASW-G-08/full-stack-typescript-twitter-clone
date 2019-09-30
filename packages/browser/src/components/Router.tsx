@@ -6,23 +6,23 @@ import {
   Switch,
 } from 'react-router-dom';
 import RootStoreContext from 'stores/RootStore/RootStore';
-import Navbar from 'components/Navbar/Navbar';
-import Home from 'pages/Home/Home';
+import Navbar from 'components/Navbar';
+import Home from 'pages/Home';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Sidebar from 'components/Sidebar/Sidebar';
+import Sidebar from 'components/Sidebar';
 import CenteredLoader from 'components/CenteredLoader';
 import MobileTweetButton from 'styled/MobileTweetButton';
 
-const Login = lazy(() => import('pages/LoginPage/LoginPage'));
-const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
-const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const Login = lazy(() => import('pages/LoginPage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage'));
+const NotFound = lazy(() => import('pages/NotFound'));
 const EmailConfirmation = lazy(() =>
-  import('pages/EmailConfirmation/EmailConfirmation'),
+  import('pages/EmailConfirmation'),
 );
-const Modal = lazy(() => import('components/Modal/Modal'));
+const Modal = lazy(() => import('components/Modal'));
 const Portal = lazy(() => import('components/Portal/Portal'));
-const Notification = lazy(() => import('components/Notification/Notification'));
+const Notification = lazy(() => import('components/Notification'));
 
 const Router: FC = observer(
   (): JSX.Element => {

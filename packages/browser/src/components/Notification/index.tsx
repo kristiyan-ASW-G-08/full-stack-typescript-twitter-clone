@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import NotificationType from 'types/Notification';
-import { StyledNotification, NotificationContent } from './StyledNotification';
+import { NotificationWrapper, NotificationContent } from './styled';
 
 interface NotificationProps {
   notification: NotificationType;
@@ -9,11 +9,11 @@ interface NotificationProps {
 export const Notification: FC<NotificationProps> = ({ notification }) => {
   const { type, content } = notification;
   return (
-    <StyledNotification>
+    <NotificationWrapper>
       <NotificationContent notificationType={type}>
         {content}
       </NotificationContent>
-    </StyledNotification>
+    </NotificationWrapper>
   );
 };
 

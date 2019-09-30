@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-interface StyledLogoProps {
+interface LogoWrapperProps {
   type: 'horizontal' | 'vertical';
 }
-export const StyledLogo = styled('div')<StyledLogoProps>`
+export const LogoWrapper = styled('div')<LogoWrapperProps>`
   display: grid;
   align-content: center;
   ${props =>
@@ -13,7 +13,7 @@ export const StyledLogo = styled('div')<StyledLogoProps>`
   width: 10rem;
   grid-gap: 0.5rem;
 `;
-export const LogoText = styled('h1')<StyledLogoProps>`
+export const LogoText = styled('h1')<LogoWrapperProps>`
   font-size: 2rem;
   font-weight: bold;
   color: ${props => props.theme.primary};

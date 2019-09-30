@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import {
-  StyledSidebar,
+  SidebarWrapper,
   Backdrop,
   Container,
   AuthenticationBar,
@@ -14,8 +14,8 @@ import {
   SidebarList,
   SidebarButton,
   SearchBarWrapper,
-} from './StyledSidebar';
-import Logo from 'components/Logo/Logo';
+} from './styled';
+import Logo from 'components/Logo';
 import SearchBar from 'components/SearchBar/SearchBar';
 import AuthState from 'types/AuthState';
 import Avatar from 'styled/Avatar';
@@ -40,7 +40,7 @@ export const Sidebar: FC<SidebarProps> = ({
   const { user, isAuth, token } = authState;
   const { username, handle, following, followers } = user;
   return (
-    <StyledSidebar on={isActive}>
+    <SidebarWrapper on={isActive}>
       <Container>
         {authState.isAuth ? (
           <AuthenticatedSidebarHeader>
@@ -146,7 +146,7 @@ export const Sidebar: FC<SidebarProps> = ({
         </SidebarBody>
       </Container>
       <Backdrop onClick={toggleSidebar} data-testid="backdrop" />
-    </StyledSidebar>
+    </SidebarWrapper>
   );
 };
 export default observer(Sidebar);

@@ -4,7 +4,7 @@ import { transparentize, darken, lighten } from 'polished';
 interface SidebarProps {
   on: boolean;
 }
-export const StyledSidebar = styled('aside')<SidebarProps>`
+export const SidebarWrapper = styled('aside')<SidebarProps>`
   display:grid;
   grid-template-columns:3fr 1fr;
   position: fixed;

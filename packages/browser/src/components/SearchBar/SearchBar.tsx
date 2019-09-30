@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { StyledSearchBar } from './StyledSearchBar';
+import { SearchBarWrapper } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const SearchBar: FC = () => {
   return (
-    <StyledSearchBar>
+    <SearchBarWrapper>
       <input type="text" placeholder="Search TwittClone" />
       <span>
         <FontAwesomeIcon icon="search" />
       </span>
-    </StyledSearchBar>
+    </SearchBarWrapper>
   );
 };
 
