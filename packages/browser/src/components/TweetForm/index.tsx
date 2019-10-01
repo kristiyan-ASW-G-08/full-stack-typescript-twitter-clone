@@ -20,6 +20,7 @@ import RootStoreContext from 'stores/RootStore/RootStore';
 import Avatar from 'styled/Avatar';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
+import useFilePicker from 'hooks/useFilePicker/useFilePicker';
 
 import {
   TweetFormWrapper,
@@ -42,11 +43,19 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const requestBody = {
-        ...e,
-        type,
-      };
-
+      const { file, linkUrl, text } = e;
+      let requestBody;
+      if (file) {
+        requestBody = new FormData();
+        requestBody.set('image', file);
+        requestBody.set('linkUrl', linkUrl);
+        requestBody.set('text', text);
+      } else {
+        requestBody = {
+          ...e,
+          type,
+        };
+      }
       const config = {
         headers: { Authorization: 'bearer ' + token },
       };
@@ -76,7 +85,7 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
   return (
     <Formik
       validationSchema={TweetValidator}
-      initialValues={{ text: '', linkUrl: '' }}
+      initialValues={{ text: '', linkUrl: '', file: null }}
       onSubmit={submitHandler}
     >
       {() => (
