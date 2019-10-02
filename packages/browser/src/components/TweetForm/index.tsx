@@ -38,7 +38,7 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
-  const { file, fileHandler } = useFilePicker();
+  const { fileData, fileHandler } = useFilePicker();
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
@@ -90,7 +90,7 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
       initialValues={{ text: '', linkUrl: '', file: '' }}
       onSubmit={submitHandler}
     >
-      {() => (
+      {({ setFieldValue }) => (
         <Form>
           <TweetFormWrapper>
             <AvatarContainer>
@@ -109,16 +109,21 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
                 <ErrorMessage component="span" name="text" />
               </Input>
               <Input>
+                {/* {fileData && fileData.fileUrl ? (
+                  <img src={fileData.fileUrl} />
+                ) : (
+                  ''
+                )} */}
                 <FastField
                   name="file"
                   type="file"
                   placeholder="Select an image"
                   onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                    const newFile = fileHandler(e);
-                    console.log(newFile);
+                    const { file, fileUrl } = fileHandler(e);
+                    setFieldValue('file', file);
                   }}
                 />
-                <ErrorMessage component="span" name="text" />
+                <ErrorMessage component="span" name="file" />
               </Input>
               {type === 'link' ? (
                 <Input>

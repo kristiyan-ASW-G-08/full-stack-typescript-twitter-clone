@@ -2,7 +2,12 @@ import React, { useRef, SyntheticEvent } from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import useFilePicker from './useFilePicker';
 
+window.URL.createObjectURL = jest.fn(() => 'mockString');
+
 describe('usePortal', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   it('returns a file', () => {
     const fileMock = {
       name: 'test.jpg',
@@ -24,8 +29,8 @@ describe('usePortal', () => {
     const { result } = renderHook(() => useFilePicker());
     act(() => {
       const { fileHandler } = result.current;
-      const newFile = fileHandler(event);
-      expect(newFile).toEqual(fileMock);
+      const fileData = fileHandler(event);
+      expect(fileData).toMatchSnapshot();
     });
   });
 });
