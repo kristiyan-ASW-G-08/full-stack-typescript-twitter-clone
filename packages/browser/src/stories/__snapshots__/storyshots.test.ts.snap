@@ -16224,6 +16224,18 @@ Array [
               value=""
             />
           </div>
+          <div
+            className="sc-htpNat flCXJV"
+          >
+            <input
+              name="file"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Select an image"
+              type="file"
+              value=""
+            />
+          </div>
           
         </div>
         <div
@@ -16954,6 +16966,18 @@ Array [
               onChange={[Function]}
               placeholder="Text"
               type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="sc-htpNat gtHIqZ"
+          >
+            <input
+              name="file"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Select an image"
+              type="file"
               value=""
             />
           </div>

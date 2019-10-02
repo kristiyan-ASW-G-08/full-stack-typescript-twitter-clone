@@ -38,34 +38,36 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
+  const { file, fileHandler } = useFilePicker();
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const { file, linkUrl, text } = e;
-      let requestBody;
-      if (file) {
-        requestBody = new FormData();
-        requestBody.set('image', file);
-        requestBody.set('linkUrl', linkUrl);
-        requestBody.set('text', text);
-      } else {
-        requestBody = {
-          ...e,
-          type,
-        };
-      }
-      const config = {
-        headers: { Authorization: 'bearer ' + token },
-      };
-      console.log(requestBody);
-      const response = await axios.post(
-        'http://localhost:8090/tweets',
-        requestBody,
-        config,
-      );
-      const { data } = response.data;
+      console.log(e);
+      // let requestBody;
+      // if (file) {
+      //   requestBody = new FormData();
+      //   requestBody.set('image', file);
+      //   requestBody.set('linkUrl', linkUrl);
+      //   requestBody.set('text', text);
+      // } else {
+      //   requestBody = {
+      //     ...e,
+      //     type,
+      //   };
+      // }
+      // const config = {
+      //   headers: { Authorization: 'bearer ' + token },
+      // };
+      // console.log(requestBody);
+      // const response = await axios.post(
+      //   'http://localhost:8090/tweets',
+      //   requestBody,
+      //   config,
+      // );
+      // const { data } = response.data;
     } catch (error) {
       if (error.response & error.response.data) {
         const { data } = error.response.data;
@@ -85,7 +87,7 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
   return (
     <Formik
       validationSchema={TweetValidator}
-      initialValues={{ text: '', linkUrl: '', file: null }}
+      initialValues={{ text: '', linkUrl: '', file: '' }}
       onSubmit={submitHandler}
     >
       {() => (
@@ -103,6 +105,18 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
                   name="text"
                   type="text"
                   placeholder="Text"
+                />
+                <ErrorMessage component="span" name="text" />
+              </Input>
+              <Input>
+                <FastField
+                  name="file"
+                  type="file"
+                  placeholder="Select an image"
+                  onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                    const newFile = fileHandler(e);
+                    console.log(newFile);
+                  }}
                 />
                 <ErrorMessage component="span" name="text" />
               </Input>
