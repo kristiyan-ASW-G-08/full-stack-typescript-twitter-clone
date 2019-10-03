@@ -1,6 +1,6 @@
 {
   "name": "@twtr/browser",
-  "version": "1.0.172",
+  "version": "1.0.173",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
