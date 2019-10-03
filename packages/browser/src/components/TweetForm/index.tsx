@@ -30,46 +30,51 @@ import {
   InputContainer,
 } from './styled';
 
-export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
-  const { modalStore, authStore, notificationStore } = useContext(
-    RootStoreContext,
-  );
-  const { token } = authStore.authState;
+interface TweetFormProps extends RouteComponentProps {
+  resetModalStore: () => void;
+  token: string;
+  setNotification: (notification: Notification) => void;
+}
+export const TweetForm: FC<TweetFormProps> = ({
+  history,
+  resetModalStore,
+  token,
+  setNotification,
+}) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
-  const { fileData, fileHandler } = useFilePicker();
+  const [hasImage, setHasImage] = useState<boolean>(false);
+  const { fileData, fileHandler, resetFileData } = useFilePicker();
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const { file, linkUrl, text } = e;
-      console.log(e);
-      // let requestBody;
-      // if (file) {
-      //   requestBody = new FormData();
-      //   requestBody.set('image', file);
-      //   requestBody.set('linkUrl', linkUrl);
-      //   requestBody.set('text', text);
-      // } else {
-      //   requestBody = {
-      //     ...e,
-      //     type,
-      //   };
-      // }
-      // const config = {
-      //   headers: { Authorization: 'bearer ' + token },
-      // };
-      // console.log(requestBody);
-      // const response = await axios.post(
-      //   'http://localhost:8090/tweets',
-      //   requestBody,
-      //   config,
-      // );
-      // const { data } = response.data;
+      const { linkUrl, text } = e;
+      const formData = new FormData();
+      if (fileData && fileData.file) {
+        formData.set('image', fileData.file);
+      }
+      formData.set('linkUrl', linkUrl);
+      formData.set('text', text);
+      formData.set('type', type);
+      const config = {
+        headers: { Authorization: 'bearer ' + token },
+      };
+      const response = await axios.post(
+        'http://localhost:8090/tweets',
+        formData,
+        config,
+      );
+      resetModalStore();
     } catch (error) {
-      if (error.response & error.response.data) {
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        Array.isArray(error.response.data)
+      ) {
         const { data } = error.response.data;
         data.forEach((validationError: ValidationError) => {
           const { name, message } = validationError;
@@ -80,17 +85,17 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
           type: 'warning',
           content: 'Something went wrong',
         };
-        notificationStore.setNotification(notification);
+        setNotification(notification);
       }
     }
   };
   return (
     <Formik
       validationSchema={TweetValidator}
-      initialValues={{ text: '', linkUrl: '', file: '' }}
+      initialValues={{ text: '', linkUrl: '' }}
       onSubmit={submitHandler}
     >
-      {({ setFieldValue }) => (
+      {() => (
         <Form>
           <TweetFormWrapper>
             <AvatarContainer>
@@ -108,23 +113,27 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
                 />
                 <ErrorMessage component="span" name="text" />
               </Input>
-              <Input>
-                {/* {fileData && fileData.fileUrl ? (
-                  <img src={fileData.fileUrl} />
-                ) : (
-                  ''
-                )} */}
-                <FastField
-                  name="file"
-                  type="file"
-                  placeholder="Select an image"
-                  onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                    const { file, fileUrl } = fileHandler(e);
-                    setFieldValue('file', file);
-                  }}
-                />
-                <ErrorMessage component="span" name="file" />
-              </Input>
+              {hasImage ? (
+                <Input>
+                  {fileData && fileData.fileUrl ? (
+                    <img src={fileData.fileUrl} />
+                  ) : (
+                    ''
+                  )}
+                  <FastField
+                    name="file"
+                    type="file"
+                    placeholder="Select an image"
+                    onChange={(e: SyntheticEvent<HTMLInputElement>) =>
+                      fileHandler(e)
+                    }
+                  />
+                  <ErrorMessage component="span" name="file" />
+                </Input>
+              ) : (
+                ''
+              )}
+
               {type === 'link' ? (
                 <Input>
                   <FastField name="linkUrl" type="text" placeholder="Link" />
@@ -136,10 +145,17 @@ export const TweetForm: FC<RouteComponentProps> = ({ history }) => {
             </InputContainer>
 
             <ContentButtonsContainer>
-              <IconButton>
+              <IconButton
+                type="button"
+                onClick={(e: SyntheticEvent) => {
+                  setHasImage(!hasImage);
+                  resetFileData();
+                }}
+              >
                 <FontAwesomeIcon icon={'image'} />
               </IconButton>
               <IconButton
+                type="button"
                 onClick={(e: SyntheticEvent) => {
                   e.preventDefault();
                   type === 'link' ? setType('text') : setType('link');

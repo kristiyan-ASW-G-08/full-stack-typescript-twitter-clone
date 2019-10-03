@@ -6,6 +6,7 @@ interface FileData {
 const useFilePicker = (): {
   fileData: FileData | undefined;
   fileHandler: (e: SyntheticEvent<HTMLInputElement>) => FileData;
+  resetFileData: () => void;
 } => {
   const [fileData, setFileData] = useState<FileData | undefined>();
   const fileHandler = (e: SyntheticEvent<HTMLInputElement>): FileData => {
@@ -19,6 +20,9 @@ const useFilePicker = (): {
     setFileData(fileData);
     return fileData;
   };
-  return { fileData, fileHandler };
+  const resetFileData = (): void => {
+    setFileData({ file: undefined, fileUrl: '' });
+  };
+  return { fileData, fileHandler, resetFileData };
 };
 export default useFilePicker;

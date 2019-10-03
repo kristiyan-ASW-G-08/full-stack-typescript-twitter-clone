@@ -7,9 +7,9 @@ const TweetSchema: Schema = new Schema({
     required: true,
     enum: ['text', 'link', 'retweet', 'reply'],
   },
-  text: { type: String, minlength: 1, maxlength: 500 },
-  image: { type: String, minlength: 1 },
-  link: { type: String, minlength: 1 },
+  text: { type: String, maxlength: 500 },
+  image: { type: String },
+  link: { type: String },
   retweet: {
     type: Schema.Types.ObjectId,
     ref: 'Tweet',

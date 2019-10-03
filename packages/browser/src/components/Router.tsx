@@ -17,9 +17,7 @@ import MobileTweetButton from 'styled/MobileTweetButton';
 const Login = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
-const EmailConfirmation = lazy(() =>
-  import('pages/EmailConfirmation'),
-);
+const EmailConfirmation = lazy(() => import('pages/EmailConfirmation'));
 const Modal = lazy(() => import('components/Modal'));
 const Portal = lazy(() => import('components/Portal/Portal'));
 const Notification = lazy(() => import('components/Notification'));
@@ -51,15 +49,7 @@ const Router: FC = observer(
           )}
           {modalStore.isActive ? (
             <Suspense fallback={<CenteredLoader />}>
-              <Portal
-                portalId={'modal'}
-                children={
-                  <Modal
-                    type={modalStore.type}
-                    resetModalState={() => modalStore.reset()}
-                  />
-                }
-              />
+              <Portal portalId={'modal'} children={<Modal />} />
             </Suspense>
           ) : (
             ''

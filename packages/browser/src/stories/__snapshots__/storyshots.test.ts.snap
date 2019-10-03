@@ -14525,7 +14525,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-htpNat flCXJV"
+      className="sc-htpNat ftGHWu"
     >
       <input
         placeholder="Placeholder"
@@ -15358,7 +15358,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-htpNat gtHIqZ"
+      className="sc-htpNat hEhUPi"
     >
       <input
         placeholder="Placeholder"
@@ -16213,7 +16213,7 @@ Array [
           className="sc-eNQAEJ myCQQ"
         >
           <div
-            className="sc-htpNat flCXJV"
+            className="sc-htpNat ftGHWu"
           >
             <textarea
               name="text"
@@ -16224,18 +16224,7 @@ Array [
               value=""
             />
           </div>
-          <div
-            className="sc-htpNat flCXJV"
-          >
-            <input
-              name="file"
-              onBlur={[Function]}
-              onChange={[Function]}
-              placeholder="Select an image"
-              type="file"
-              value=""
-            />
-          </div>
+          
           
         </div>
         <div
@@ -16243,10 +16232,14 @@ Array [
         >
           <button
             className="sc-ckVGcZ jTmJQf"
+            onClick={[Function]}
+            type="button"
           />
           <button
             className="sc-ckVGcZ jTmJQf"
+            data-testid="link-button"
             onClick={[Function]}
+            type="button"
           />
         </div>
         <div
@@ -16461,7 +16454,105 @@ Array [
                           className="token plain-text"
                         >
                           
-      &lt;withRouter(TweetForm) /&gt;
+      &lt;withRouter(TweetForm)
+        resetModalStore=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token keyword"
+                        >
+                          function
+                        </span>
+                         
+                        <span
+                          className="token function"
+                        >
+                          noRefCheck
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          (
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          )
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+        setNotification=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token keyword"
+                        >
+                          function
+                        </span>
+                         
+                        <span
+                          className="token function"
+                        >
+                          noRefCheck
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          (
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          )
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+        token=""
+      /&gt;
     
                         </span>
                         <span
@@ -16958,7 +17049,7 @@ Array [
           className="sc-eNQAEJ myCQQ"
         >
           <div
-            className="sc-htpNat gtHIqZ"
+            className="sc-htpNat hEhUPi"
           >
             <textarea
               name="text"
@@ -16969,18 +17060,7 @@ Array [
               value=""
             />
           </div>
-          <div
-            className="sc-htpNat gtHIqZ"
-          >
-            <input
-              name="file"
-              onBlur={[Function]}
-              onChange={[Function]}
-              placeholder="Select an image"
-              type="file"
-              value=""
-            />
-          </div>
+          
           
         </div>
         <div
@@ -16988,10 +17068,14 @@ Array [
         >
           <button
             className="sc-ckVGcZ rfgNb"
+            onClick={[Function]}
+            type="button"
           />
           <button
             className="sc-ckVGcZ rfgNb"
+            data-testid="link-button"
             onClick={[Function]}
+            type="button"
           />
         </div>
         <div
@@ -17206,7 +17290,105 @@ Array [
                           className="token plain-text"
                         >
                           
-      &lt;withRouter(TweetForm) /&gt;
+      &lt;withRouter(TweetForm)
+        resetModalStore=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token keyword"
+                        >
+                          function
+                        </span>
+                         
+                        <span
+                          className="token function"
+                        >
+                          noRefCheck
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          (
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          )
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+        setNotification=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token keyword"
+                        >
+                          function
+                        </span>
+                         
+                        <span
+                          className="token function"
+                        >
+                          noRefCheck
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          (
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          )
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+        token=""
+      /&gt;
     
                         </span>
                         <span

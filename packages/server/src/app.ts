@@ -24,9 +24,9 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   next();
 });
 const fileStorage = multer.diskStorage({
-  // @ts-ignore:Problem with multer and typescript
+  // @ts-ignore
   destination: (req: Request, file, cb): any => {
-    cb(null, './assets/images');
+    cb(null, path.join(__dirname, './assets/images'));
   },
   filename: (req: Request, file, cb) => {
     cb(
@@ -36,7 +36,7 @@ const fileStorage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req: Request, file: any, cb: any) => {
+const fileFilter = (req: Request, file: any, cb: any): void => {
   if (
     file.mimetype === 'image/png' ||
     file.mimetype === 'image/jpg' ||

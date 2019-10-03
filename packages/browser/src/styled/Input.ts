@@ -33,6 +33,12 @@ export const Input = styled('div')`
     font-size: 1.3rem;
     font-weight: bold;
   }
+
+  img {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+  }
 `;
 
 export default Input;
