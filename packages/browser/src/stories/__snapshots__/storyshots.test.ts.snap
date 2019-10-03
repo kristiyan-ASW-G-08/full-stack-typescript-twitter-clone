@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Avatar dark theme 1`] = `
+exports[`Storyshots Avatar dark theme - custom avatar - large size 1`] = `
 Array [
   <div>
     <div
@@ -47,7 +47,7 @@ Array [
             }
           }
         >
-          dark theme
+          dark theme - custom avatar - large size
         </h2>
       </div>
     </div>
@@ -57,11 +57,12 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa cvJIKG"
-      size="small"
+      className="sc-bdVaJa gJAkKV"
+      size="large"
     >
       <img
-        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+        alt="avatar"
+        src="logo-primary.svg"
       />
     </button>
   </div>,
@@ -277,9 +278,41 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.button
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
                           </span>
-                           
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            avatarURL
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            logo-primary.svg
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          
+        
                           <span
                             className="token attr-name"
                           >
@@ -298,94 +331,19 @@ Array [
                             >
                               "
                             </span>
-                            small
+                            large
                             <span
                               className="token punctuation"
                             >
                               "
                             </span>
                           </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
                           
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            img
-                          </span>
-                           
-                          <span
-                            className="token attr-name"
-                          >
-                            src
-                          </span>
-                          <span
-                            className="token attr-value"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              "
-                            </span>
-                            data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K
-                            <span
-                              className="token punctuation"
-                            >
-                              "
-                            </span>
-                          </span>
-                           
+      
                           <span
                             className="token punctuation"
                           >
                             /&gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-      
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            styled.button
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
                           </span>
                         </span>
                         <span
@@ -518,6 +476,22 @@ Array [
       >
         Prop Types
       </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
       <div>
         <h3
           style={
@@ -716,22 +690,6 @@ Array [
           }
         >
           "
-          StyledComponent
-          " Component
-        </h3>
-        <small>
-          No propTypes defined!
-        </small>
-      </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
           Theme
           " Component
         </h3>
@@ -755,79 +713,12 @@ Array [
           No propTypes defined!
         </small>
       </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
-          styled.button
-          " Component
-        </h3>
-        <table
-          className="info-table"
-        >
-          <thead>
-            <tr>
-              <th>
-                property
-              </th>
-              <th>
-                propType
-              </th>
-              <th>
-                required
-              </th>
-              <th>
-                default
-              </th>
-              <th>
-                description
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td
-                className="info-table-monospace"
-              >
-                size
-              </td>
-              <td
-                className="info-table-monospace"
-              >
-                <span>
-                  unknown
-                </span>
-              </td>
-              <td
-                className={null}
-              >
-                -
-              </td>
-              <td
-                className={null}
-              >
-                <span>
-                  small
-                </span>
-              </td>
-              <td
-                className={null}
-              />
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>,
 ]
 `;
 
-exports[`Storyshots Avatar light theme 1`] = `
+exports[`Storyshots Avatar dark theme - custom avatar 1`] = `
 Array [
   <div>
     <div
@@ -874,7 +765,7 @@ Array [
             }
           }
         >
-          light theme
+          dark theme - custom avatar
         </h2>
       </div>
     </div>
@@ -884,11 +775,2087 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa eXpDMB"
+      className="sc-bdVaJa owSOB"
       size="small"
     >
       <img
-        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+        alt="avatar"
+        src="logo-primary.svg"
+      />
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            dark
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            avatarURL
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            logo-primary.svg
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
+          " Component
+        </h3>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                basename
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  string
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  node
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar dark theme - default avatar - large size 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          dark theme - default avatar - large size
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa gJAkKV"
+      size="large"
+    >
+      <div
+        className="sc-bwzfXH iKSRNv"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-user-circle fa-w-16 "
+          data-icon="user-circle"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 496 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            dark
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            size
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            large
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
+          " Component
+        </h3>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                basename
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  string
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  node
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar dark theme - default avatar 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          dark theme - default avatar
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa owSOB"
+      size="small"
+    >
+      <div
+        className="sc-bwzfXH iKSRNv"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-user-circle fa-w-16 "
+          data-icon="user-circle"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 496 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            dark
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
+          " Component
+        </h3>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                basename
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  string
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  node
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar light theme - custom avatar - large size 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          light theme - custom avatar - large size
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa gJAkKV"
+      size="large"
+    >
+      <img
+        alt="avatar"
+        src="logo-primary.svg"
       />
     </button>
   </div>,
@@ -1104,9 +3071,41 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.button
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
                           </span>
-                           
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            avatarURL
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            logo-primary.svg
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          
+        
                           <span
                             className="token attr-name"
                           >
@@ -1125,94 +3124,19 @@ Array [
                             >
                               "
                             </span>
-                            small
+                            large
                             <span
                               className="token punctuation"
                             >
                               "
                             </span>
                           </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
                           
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            img
-                          </span>
-                           
-                          <span
-                            className="token attr-name"
-                          >
-                            src
-                          </span>
-                          <span
-                            className="token attr-value"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              "
-                            </span>
-                            data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K
-                            <span
-                              className="token punctuation"
-                            >
-                              "
-                            </span>
-                          </span>
-                           
+      
                           <span
                             className="token punctuation"
                           >
                             /&gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-      
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            styled.button
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
                           </span>
                         </span>
                         <span
@@ -1345,6 +3269,22 @@ Array [
       >
         Prop Types
       </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
       <div>
         <h3
           style={
@@ -1543,7 +3483,680 @@ Array [
           }
         >
           "
-          StyledComponent
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar light theme - custom avatar 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          light theme - custom avatar
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa owSOB"
+      size="small"
+    >
+      <img
+        alt="avatar"
+        src="logo-primary.svg"
+      />
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            light
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            avatarURL
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            logo-primary.svg
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
+          " Component
+        </h3>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                basename
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  string
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  node
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
           " Component
         </h3>
         <small>
@@ -1582,6 +4195,475 @@ Array [
           No propTypes defined!
         </small>
       </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar light theme - default avatar - large size 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          light theme - default avatar - large size
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa gJAkKV"
+      size="large"
+    >
+      <div
+        className="sc-bwzfXH iKSRNv"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-user-circle fa-w-16 "
+          data-icon="user-circle"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 496 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            light
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            size
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            large
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
       <div>
         <h3
           style={
@@ -1591,7 +4673,23 @@ Array [
           }
         >
           "
-          styled.button
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
           " Component
         </h3>
         <table
@@ -1621,13 +4719,13 @@ Array [
               <td
                 className="info-table-monospace"
               >
-                size
+                basename
               </td>
               <td
                 className="info-table-monospace"
               >
                 <span>
-                  unknown
+                  string
                 </span>
               </td>
               <td
@@ -1638,9 +4736,115 @@ Array [
               <td
                 className={null}
               >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
                 <span>
-                  small
+                  node
                 </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
               </td>
               <td
                 className={null}
@@ -1648,6 +4852,734 @@ Array [
             </tr>
           </tbody>
         </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots Avatar light theme - default avatar 1`] = `
+Array [
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #eee",
+            "marginBottom": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <h1
+          style={
+            Object {
+              "fontSize": "35px",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          Avatar
+        </h1>
+        <h2
+          style={
+            Object {
+              "fontSize": "22px",
+              "fontWeight": 400,
+              "margin": "0 0 10px 0",
+              "padding": 0,
+            }
+          }
+        >
+          light theme - default avatar
+        </h2>
+      </div>
+    </div>
+  </div>,
+  <div
+    id="story-root"
+    style={Object {}}
+  >
+    <button
+      className="sc-bdVaJa owSOB"
+      size="small"
+    >
+      <div
+        className="sc-bwzfXH iKSRNv"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-user-circle fa-w-16 "
+          data-icon="user-circle"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 496 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </button>
+  </div>,
+  <div>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": "2px",
+          "color": "black",
+          "fontFamily": "Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif",
+          "fontSize": "15px",
+          "fontWeight": 300,
+          "lineHeight": 1.45,
+          "padding": "20px 40px 40px",
+        }
+      }
+    >
+      
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Story Source
+      </h1>
+      <div
+        className="css-scc5fi"
+      >
+        <div
+          className="css-1si67pu"
+          data-simplebar={true}
+        >
+          <div
+            className="simplebar-wrapper"
+          >
+            <div
+              className="simplebar-height-auto-observer-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer"
+              />
+            </div>
+            <div
+              className="simplebar-mask"
+            >
+              <div
+                className="simplebar-offset"
+              >
+                <div
+                  className="simplebar-content-wrapper"
+                >
+                  <div
+                    className="simplebar-content"
+                  >
+                    <pre
+                      className="hljs css-4zr3vl"
+                    >
+                      <code
+                        className="css-1maezg8"
+                      >
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              GlobalStyleComponent
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token attr-name"
+                          >
+                            theme
+                          </span>
+                          <span
+                            className="token attr-value"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                            light
+                            <span
+                              className="token punctuation"
+                            >
+                              "
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+      
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Avatar
+                            </span>
+                          </span>
+                           
+                          <span
+                            className="token punctuation"
+                          >
+                            /&gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+    
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              BrowserRouter
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+  
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                            <span
+                              className="token class-name"
+                            >
+                              Theme
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
+
+                        </span>
+                        <span
+                          className="token tag"
+                        >
+                          <span
+                            className="token tag"
+                          >
+                            <span
+                              className="token punctuation"
+                            >
+                              &lt;/
+                            </span>
+                          </span>
+                          <span
+                            className="token punctuation"
+                          >
+                            &gt;
+                          </span>
+                        </span>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="simplebar-placeholder"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-horizontal"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+          <div
+            className="simplebar-track simplebar-vertical"
+          >
+            <div
+              className="simplebar-scrollbar"
+            />
+          </div>
+        </div>
+        <div
+          className="css-11xgcgt"
+        >
+          <button
+            className="css-1imo1gr"
+            onClick={[Function]}
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <h1
+        style={
+          Object {
+            "borderBottom": "1px solid #EEE",
+            "fontSize": "25px",
+            "margin": "20px 0 0 0",
+            "padding": "0 0 5px 0",
+          }
+        }
+      >
+        Prop Types
+      </h1>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Avatar
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          BrowserRouter
+          " Component
+        </h3>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                basename
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  string
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                children
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  node
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                forceRefresh
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  bool
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                getUserConfirmation
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  func
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                keyLength
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  number
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          GlobalStyleComponent
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Theme
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
+      </div>
+      <div>
+        <h3
+          style={
+            Object {
+              "margin": "20px 0 0 0",
+            }
+          }
+        >
+          "
+          Unknown
+          " Component
+        </h3>
+        <small>
+          No propTypes defined!
+        </small>
       </div>
     </div>
   </div>,
@@ -1711,7 +5643,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bwzfXH hlVKqE"
+      className="sc-htpNat jDmJBE"
     >
       Button
     </button>
@@ -2433,7 +6365,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bwzfXH gYLUaR"
+      className="sc-htpNat eNbiFh"
     >
       Button
     </button>
@@ -3155,7 +7087,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bwzfXH gjkOCL"
+      className="sc-htpNat hEHmRq"
     >
       Button
     </button>
@@ -3877,7 +7809,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bxivhb jakfrt"
+      className="sc-ifAKCX czkbGl"
     />
   </div>,
   <div>
@@ -4546,7 +8478,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bxivhb cfOPrt"
+      className="sc-ifAKCX cgqTPW"
     />
   </div>,
   <div>
@@ -5215,18 +9147,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX dLBROG"
+      className="sc-EHOje eZaFPF"
       type="horizontal"
     >
       <svg>
         logo-primary.svg
       </svg>
       <h1
-        className="sc-EHOje iMTCZj"
+        className="sc-bZQynM qYXPD"
         type="horizontal"
       >
         <span
-          className="sc-bZQynM iqhOTz"
+          className="sc-gzVnrw bsMPmm"
         >
           Twitt
         </span>
@@ -5888,18 +9820,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX ncoyA"
+      className="sc-EHOje bIBvpv"
       type="vertical"
     >
       <svg>
         logo-primary.svg
       </svg>
       <h1
-        className="sc-EHOje dlgjKE"
+        className="sc-bZQynM dKrtgK"
         type="vertical"
       >
         <span
-          className="sc-bZQynM iqhOTz"
+          className="sc-gzVnrw bsMPmm"
         >
           Twitt
         </span>
@@ -6587,18 +10519,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX dLBROG"
+      className="sc-EHOje eZaFPF"
       type="horizontal"
     >
       <svg>
         logo-primary.svg
       </svg>
       <h1
-        className="sc-EHOje iMTCZj"
+        className="sc-bZQynM qYXPD"
         type="horizontal"
       >
         <span
-          className="sc-bZQynM bwaTC"
+          className="sc-gzVnrw PuHPF"
         >
           Twitt
         </span>
@@ -7260,18 +11192,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX ncoyA"
+      className="sc-EHOje bIBvpv"
       type="vertical"
     >
       <svg>
         logo-primary.svg
       </svg>
       <h1
-        className="sc-EHOje dlgjKE"
+        className="sc-bZQynM dKrtgK"
         type="vertical"
       >
         <span
-          className="sc-bZQynM bwaTC"
+          className="sc-gzVnrw PuHPF"
         >
           Twitt
         </span>
@@ -7959,25 +11891,25 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-gzVnrw kPlkYi"
+      className="sc-htoDjs igMZFI"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-ifAKCX dLBROG"
+          className="sc-EHOje eZaFPF"
           type="horizontal"
         >
           <svg>
             logo-primary.svg
           </svg>
           <h1
-            className="sc-EHOje iMTCZj"
+            className="sc-bZQynM qYXPD"
             type="horizontal"
           >
             <span
-              className="sc-bZQynM iqhOTz"
+              className="sc-gzVnrw bsMPmm"
             >
               Twitt
             </span>
@@ -7986,7 +11918,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-htoDjs gupnOq"
+        className="sc-dnqmqq fmRuaR"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -8009,16 +11941,16 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-iwsKbI ZVxtm"
+        className="sc-gZMcBi kmnwWQ"
       >
         <button
-          className="sc-gZMcBi eGxmmy"
+          className="sc-gqjmRU kdzWSy"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-gqjmRU jVqWyN"
+          className="sc-VigVT kuFtfk"
         >
           <input
             placeholder="Search TwittClone"
@@ -8051,7 +11983,7 @@ Array [
         >
            
           <button
-            className="sc-bwzfXH hlVKqE"
+            className="sc-htpNat jDmJBE"
           >
             Log In
           </button>
@@ -8062,7 +11994,7 @@ Array [
         >
            
           <button
-            className="sc-bwzfXH gYLUaR"
+            className="sc-htpNat eNbiFh"
           >
             Sign Up
           </button>
@@ -9228,25 +13160,25 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-gzVnrw ccDcjJ"
+      className="sc-htoDjs gnSCQA"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-ifAKCX dLBROG"
+          className="sc-EHOje eZaFPF"
           type="horizontal"
         >
           <svg>
             logo-primary.svg
           </svg>
           <h1
-            className="sc-EHOje iMTCZj"
+            className="sc-bZQynM qYXPD"
             type="horizontal"
           >
             <span
-              className="sc-bZQynM bwaTC"
+              className="sc-gzVnrw PuHPF"
             >
               Twitt
             </span>
@@ -9255,7 +13187,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-htoDjs gupnOq"
+        className="sc-dnqmqq fmRuaR"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -9278,16 +13210,16 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-iwsKbI ZVxtm"
+        className="sc-gZMcBi kmnwWQ"
       >
         <button
-          className="sc-gZMcBi inlCEw"
+          className="sc-gqjmRU gjRQSE"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-gqjmRU dwBsNZ"
+          className="sc-VigVT fHLfEJ"
         >
           <input
             placeholder="Search TwittClone"
@@ -9320,7 +13252,7 @@ Array [
         >
            
           <button
-            className="sc-bwzfXH hlVKqE"
+            className="sc-htpNat jDmJBE"
           >
             Log In
           </button>
@@ -9331,7 +13263,7 @@ Array [
         >
            
           <button
-            className="sc-bwzfXH gjkOCL"
+            className="sc-htpNat hEHmRq"
           >
             Sign Up
           </button>
@@ -10497,7 +14429,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-gqjmRU jVqWyN"
+      className="sc-VigVT kuFtfk"
     >
       <input
         placeholder="Search TwittClone"
@@ -11178,7 +15110,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-gqjmRU dwBsNZ"
+      className="sc-VigVT fHLfEJ"
     >
       <input
         placeholder="Search TwittClone"
@@ -11859,30 +15791,30 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-VigVT isrWZc"
+      className="sc-jTzLTM dRdHUq"
     >
       <div
-        className="sc-fjdhpX gegVPv"
+        className="sc-jzJRlG feRmtu"
       >
         <div
-          className="sc-jzJRlG dKBsuF"
+          className="sc-cSHVUG jIOpPm"
         >
           <div
-            className="sc-chPdSV idGKsA"
+            className="sc-kgoBCf jhGcbV"
           >
             <div
-              className="sc-ifAKCX ncoyA"
+              className="sc-EHOje bIBvpv"
               type="vertical"
             >
               <svg>
                 logo-primary.svg
               </svg>
               <h1
-                className="sc-EHOje dlgjKE"
+                className="sc-bZQynM dKrtgK"
                 type="vertical"
               >
                 <span
-                  className="sc-bZQynM iqhOTz"
+                  className="sc-gzVnrw bsMPmm"
                 >
                   Twitt
                 </span>
@@ -11891,7 +15823,7 @@ Array [
             </div>
           </div>
           <div
-            className="sc-kgoBCf evdgxv"
+            className="sc-kGXeez dYnECL"
           >
             <button
               onClick={[Function]}
@@ -11920,14 +15852,14 @@ Array [
           </div>
         </div>
         <div
-          className="sc-kGXeez eBDAMd"
+          className="sc-kpOJdX BeRRS"
         >
           <div
-            className="sc-kAzzGY khpLGP"
+            className="sc-chPdSV hjQFic"
           >
              
             <form
-              className="sc-gqjmRU jVqWyN"
+              className="sc-VigVT kuFtfk"
             >
               <input
                 placeholder="Search TwittClone"
@@ -11955,11 +15887,11 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-kpOJdX hooXDS"
+            className="sc-dxgOiQ hhbkXN"
           >
             <li>
               <button
-                className="sc-dxgOiQ cxeyiZ"
+                className="sc-ckVGcZ gJXDud"
               >
                 <span>
                   <svg
@@ -11988,7 +15920,7 @@ Array [
             
             <li>
               <button
-                className="sc-dxgOiQ cxeyiZ"
+                className="sc-ckVGcZ gJXDud"
                 data-testid="theme-button"
                 onClick={[Function]}
               >
@@ -12021,7 +15953,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-jTzLTM iIJaMT"
+        className="sc-fjdhpX gFMXoV"
         data-testid="backdrop"
         onClick={[Function]}
       />
@@ -13192,30 +17124,30 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-VigVT isrWZc"
+      className="sc-jTzLTM dRdHUq"
     >
       <div
-        className="sc-fjdhpX caCFKI"
+        className="sc-jzJRlG hWuGMv"
       >
         <div
-          className="sc-jzJRlG cpsbUh"
+          className="sc-cSHVUG dpmxly"
         >
           <div
-            className="sc-chPdSV idGKsA"
+            className="sc-kgoBCf jhGcbV"
           >
             <div
-              className="sc-ifAKCX ncoyA"
+              className="sc-EHOje bIBvpv"
               type="vertical"
             >
               <svg>
                 logo-primary.svg
               </svg>
               <h1
-                className="sc-EHOje dlgjKE"
+                className="sc-bZQynM dKrtgK"
                 type="vertical"
               >
                 <span
-                  className="sc-bZQynM bwaTC"
+                  className="sc-gzVnrw PuHPF"
                 >
                   Twitt
                 </span>
@@ -13224,7 +17156,7 @@ Array [
             </div>
           </div>
           <div
-            className="sc-kgoBCf dBGwNx"
+            className="sc-kGXeez kisAvI"
           >
             <button
               onClick={[Function]}
@@ -13253,14 +17185,14 @@ Array [
           </div>
         </div>
         <div
-          className="sc-kGXeez eBDAMd"
+          className="sc-kpOJdX BeRRS"
         >
           <div
-            className="sc-kAzzGY khpLGP"
+            className="sc-chPdSV hjQFic"
           >
              
             <form
-              className="sc-gqjmRU dwBsNZ"
+              className="sc-VigVT fHLfEJ"
             >
               <input
                 placeholder="Search TwittClone"
@@ -13288,11 +17220,11 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-kpOJdX ebLRLl"
+            className="sc-dxgOiQ isSPea"
           >
             <li>
               <button
-                className="sc-dxgOiQ bWUkqK"
+                className="sc-ckVGcZ dhVNMz"
               >
                 <span>
                   <svg
@@ -13321,7 +17253,7 @@ Array [
             
             <li>
               <button
-                className="sc-dxgOiQ bWUkqK"
+                className="sc-ckVGcZ dhVNMz"
                 data-testid="theme-button"
                 onClick={[Function]}
               >
@@ -13354,7 +17286,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-jTzLTM bgJFCR"
+        className="sc-fjdhpX gKFoJS"
         data-testid="backdrop"
         onClick={[Function]}
       />
@@ -14525,7 +18457,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-htpNat ftGHWu"
+      className="sc-bxivhb gYSyPg"
     >
       <input
         placeholder="Placeholder"
@@ -15358,7 +19290,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-htpNat hEhUPi"
+      className="sc-bxivhb bONCfD"
     >
       <input
         placeholder="Placeholder"
@@ -16195,25 +20127,43 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-jKJlTe gvTKdb"
+        className="sc-eNQAEJ hVafgr"
       >
         <div
-          className="sc-hMqMXs ejzpUJ"
+          className="sc-kEYyzF huuyzT"
         >
           <button
-            className="sc-bdVaJa cvJIKG"
+            className="sc-bdVaJa owSOB"
             size="small"
           >
-            <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
-            />
+            <div
+              className="sc-bwzfXH iKSRNv"
+            >
+              <svg
+                aria-hidden="true"
+                className="svg-inline--fa fa-user-circle fa-w-16 "
+                data-icon="user-circle"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                style={Object {}}
+                viewBox="0 0 496 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+                  fill="currentColor"
+                  style={Object {}}
+                />
+              </svg>
+            </div>
           </button>
         </div>
         <div
-          className="sc-eNQAEJ myCQQ"
+          className="sc-hMqMXs MLuXb"
         >
           <div
-            className="sc-htpNat ftGHWu"
+            className="sc-bxivhb gYSyPg"
           >
             <textarea
               name="text"
@@ -16228,25 +20178,24 @@ Array [
           
         </div>
         <div
-          className="sc-kEYyzF irTjzt"
+          className="sc-kkGfuU GrQhO"
         >
           <button
-            className="sc-ckVGcZ jTmJQf"
+            className="sc-jKJlTe eNIgSq"
             onClick={[Function]}
             type="button"
           />
           <button
-            className="sc-ckVGcZ jTmJQf"
-            data-testid="link-button"
+            className="sc-jKJlTe eNIgSq"
             onClick={[Function]}
             type="button"
           />
         </div>
         <div
-          className="sc-kkGfuU ktzDlX"
+          className="sc-iAyFgw keShSj"
         >
           <button
-            className="sc-bwzfXH hlVKqE"
+            className="sc-htpNat jDmJBE"
             type="submit"
           >
             Tweet
@@ -17031,25 +20980,43 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-jKJlTe DFVsC"
+        className="sc-eNQAEJ bFZPXA"
       >
         <div
-          className="sc-hMqMXs ejzpUJ"
+          className="sc-kEYyzF huuyzT"
         >
           <button
-            className="sc-bdVaJa eXpDMB"
+            className="sc-bdVaJa owSOB"
             size="small"
           >
-            <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
-            />
+            <div
+              className="sc-bwzfXH iKSRNv"
+            >
+              <svg
+                aria-hidden="true"
+                className="svg-inline--fa fa-user-circle fa-w-16 "
+                data-icon="user-circle"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                style={Object {}}
+                viewBox="0 0 496 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+                  fill="currentColor"
+                  style={Object {}}
+                />
+              </svg>
+            </div>
           </button>
         </div>
         <div
-          className="sc-eNQAEJ myCQQ"
+          className="sc-hMqMXs MLuXb"
         >
           <div
-            className="sc-htpNat hEhUPi"
+            className="sc-bxivhb bONCfD"
           >
             <textarea
               name="text"
@@ -17064,25 +21031,24 @@ Array [
           
         </div>
         <div
-          className="sc-kEYyzF irTjzt"
+          className="sc-kkGfuU GrQhO"
         >
           <button
-            className="sc-ckVGcZ rfgNb"
+            className="sc-jKJlTe ipFEWU"
             onClick={[Function]}
             type="button"
           />
           <button
-            className="sc-ckVGcZ rfgNb"
-            data-testid="link-button"
+            className="sc-jKJlTe ipFEWU"
             onClick={[Function]}
             type="button"
           />
         </div>
         <div
-          className="sc-kkGfuU ktzDlX"
+          className="sc-iAyFgw keShSj"
         >
           <button
-            className="sc-bwzfXH hlVKqE"
+            className="sc-htpNat jDmJBE"
             type="submit"
           >
             Tweet

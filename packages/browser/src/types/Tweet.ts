@@ -4,4 +4,5 @@ import User from 'types/User';
 export default interface Tweet extends CommonTweet {
   user: User;
   retweet: Tweet;
+  _id: string;
 }

@@ -1,26 +1,55 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Avatar } from 'styled/Avatar';
+import { Avatar } from 'components/Avatar/index';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import Logo from 'assets/logo-primary.svg';
+library.add(faUserCircle);
+
 storiesOf('Avatar', module)
+  .add('light theme - default avatar', () => <Avatar />, {
+    info: { inline: true },
+    options: { currentTheme: 'light' },
+  })
+  .add('light theme - custom avatar', () => <Avatar avatarURL={Logo} />, {
+    info: { inline: true },
+    options: { currentTheme: 'light' },
+  })
   .add(
-    'light theme',
-    () => (
-      <Avatar>
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" />
-      </Avatar>
-    ),
+    'light theme - default avatar - large size',
+    () => <Avatar size={'large'} />,
     {
       info: { inline: true },
       options: { currentTheme: 'light' },
     },
   )
   .add(
-    'dark theme',
-    () => (
-      <Avatar>
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" />
-      </Avatar>
-    ),
+    'light theme - custom avatar - large size',
+    () => <Avatar avatarURL={Logo} size={'large'} />,
+    {
+      info: { inline: true },
+      options: { currentTheme: 'light' },
+    },
+  )
+  .add('dark theme - default avatar', () => <Avatar />, {
+    info: { inline: true },
+    options: { currentTheme: 'dark' },
+  })
+  .add('dark theme - custom avatar', () => <Avatar avatarURL={Logo} />, {
+    info: { inline: true },
+    options: { currentTheme: 'dark' },
+  })
+  .add(
+    'dark theme - default avatar - large size',
+    () => <Avatar size={'large'} />,
+    {
+      info: { inline: true },
+      options: { currentTheme: 'dark' },
+    },
+  )
+  .add(
+    'dark theme - custom avatar - large size',
+    () => <Avatar avatarURL={Logo} size={'large'} />,
     {
       info: { inline: true },
       options: { currentTheme: 'dark' },

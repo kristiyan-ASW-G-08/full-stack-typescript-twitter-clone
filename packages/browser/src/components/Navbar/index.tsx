@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Logo from 'components/Logo';
 import StyledButton from 'styled/Button';
 import SearchBar from 'components/SearchBar/SearchBar';
-import Avatar from 'styled/Avatar';
+import Avatar from 'components/Avatar/index';
 import AuthState from 'types/AuthState';
 
 interface NavbarProps {

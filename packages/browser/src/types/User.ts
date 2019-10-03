@@ -4,4 +4,5 @@ export default interface User extends CommonUser {
   following: string[];
   likes: string[];
   bookmarks: string[];
+  avatar?: string;
 }
