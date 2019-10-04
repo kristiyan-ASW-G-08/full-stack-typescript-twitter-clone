@@ -9,6 +9,11 @@ const border = css`
         : setLightness(0.2, props.theme.secondary)};
 `;
 
+const center = css`
+  display: grid;
+  justify-items: center;
+  align-content: center;
+`;
 const slide = css`
   @keyframes slide {
     from {
@@ -38,5 +43,6 @@ const mixins = {
   border,
   button,
   form,
+  center,
 };
 export default mixins;

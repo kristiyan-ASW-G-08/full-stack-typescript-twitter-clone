@@ -26,7 +26,7 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 const fileStorage = multer.diskStorage({
   // @ts-ignore
   destination: (req: Request, file, cb): any => {
-    cb(null, path.join(__dirname, './assets/images'));
+    cb(null, './images');
   },
   filename: (req: Request, file, cb) => {
     cb(
@@ -50,9 +50,7 @@ const fileFilter = (req: Request, file: any, cb: any): void => {
 };
 
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
-
-app.use('/images', express.static(path.join(__dirname, './assets/images')));
-app.use('/default', express.static(path.join(__dirname, './assets/default')));
+app.use('/images', express.static('./images'));
 
 app.use(userRoutes);
 app.use(tweetRoutes);

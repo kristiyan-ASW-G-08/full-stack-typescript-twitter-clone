@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent } from 'react';
 interface FileData {
   fileUrl: string;
   file: File | undefined;

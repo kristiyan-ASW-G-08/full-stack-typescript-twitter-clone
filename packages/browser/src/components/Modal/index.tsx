@@ -12,7 +12,7 @@ export const Modal: FC = observer(() => {
     tweetForm: (
       <TweetForm
         token={authStore.authState.token}
-        resetModalStore={modalStore.reset}
+        resetModalStore={() =>modalStore.reset()}
         setNotification={notificationStore.setNotification}
       />
     ),

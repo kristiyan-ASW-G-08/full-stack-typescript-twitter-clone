@@ -65,6 +65,9 @@ const Router: FC = observer(
             ''
           )}
           <Navbar
+            openModal={() => {
+              modalStore.openModal('tweetForm');
+            }}
             toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}
             resetAuthState={() => authStore.resetAuthState()}

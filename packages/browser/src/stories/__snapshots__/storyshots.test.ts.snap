@@ -57,7 +57,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa gJAkKV"
+      className="sc-bdVaJa yEHlf"
       size="large"
     >
       <img
@@ -775,7 +775,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa owSOB"
+      className="sc-bdVaJa fczxHe"
       size="small"
     >
       <img
@@ -1464,11 +1464,11 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa gJAkKV"
+      className="sc-bdVaJa yEHlf"
       size="large"
     >
       <div
-        className="sc-bwzfXH iKSRNv"
+        className="sc-bwzfXH hfQgjG"
       >
         <svg
           aria-hidden="true"
@@ -2170,11 +2170,11 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa owSOB"
+      className="sc-bdVaJa fczxHe"
       size="small"
     >
       <div
-        className="sc-bwzfXH iKSRNv"
+        className="sc-bwzfXH hfQgjG"
       >
         <svg
           aria-hidden="true"
@@ -2850,7 +2850,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa gJAkKV"
+      className="sc-bdVaJa yEHlf"
       size="large"
     >
       <img
@@ -3568,7 +3568,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa owSOB"
+      className="sc-bdVaJa fczxHe"
       size="small"
     >
       <img
@@ -4257,11 +4257,11 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa gJAkKV"
+      className="sc-bdVaJa yEHlf"
       size="large"
     >
       <div
-        className="sc-bwzfXH iKSRNv"
+        className="sc-bwzfXH ihIXGg"
       >
         <svg
           aria-hidden="true"
@@ -4963,11 +4963,11 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa owSOB"
+      className="sc-bdVaJa fczxHe"
       size="small"
     >
       <div
-        className="sc-bwzfXH iKSRNv"
+        className="sc-bwzfXH ihIXGg"
       >
         <svg
           aria-hidden="true"
@@ -12527,6 +12527,64 @@ Array [
                           <span
                             className="token attr-name"
                           >
+                            openModal
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token keyword"
+                            >
+                              function
+                            </span>
+                             
+                            <span
+                              className="token function"
+                            >
+                              noRefCheck
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              (
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              )
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
                             resetAuthState
                           </span>
                           <span
@@ -13780,6 +13838,64 @@ Array [
                             </span>
                             
         
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            openModal
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token keyword"
+                            >
+                              function
+                            </span>
+                             
+                            <span
+                              className="token function"
+                            >
+                              noRefCheck
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              (
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              )
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
                             <span
                               className="token punctuation"
                             >
@@ -20133,11 +20249,11 @@ Array [
           className="sc-kEYyzF huuyzT"
         >
           <button
-            className="sc-bdVaJa owSOB"
+            className="sc-bdVaJa fczxHe"
             size="small"
           >
             <div
-              className="sc-bwzfXH iKSRNv"
+              className="sc-bwzfXH hfQgjG"
             >
               <svg
                 aria-hidden="true"
@@ -20986,11 +21102,11 @@ Array [
           className="sc-kEYyzF huuyzT"
         >
           <button
-            className="sc-bdVaJa owSOB"
+            className="sc-bdVaJa fczxHe"
             size="small"
           >
             <div
-              className="sc-bwzfXH iKSRNv"
+              className="sc-bwzfXH ihIXGg"
             >
               <svg
                 aria-hidden="true"

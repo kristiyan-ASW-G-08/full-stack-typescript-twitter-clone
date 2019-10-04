@@ -4,9 +4,7 @@ interface AvatarProps {
   size?: 'small' | 'large';
 }
 export const StyledAvatar = styled('button')<AvatarProps>`
-  display: grid;
-  justify-items: center;
-  align-content: center;
+  ${props => props.theme.mixins.center}
   height: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   width: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   font-size: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
@@ -21,14 +19,12 @@ export const StyledAvatar = styled('button')<AvatarProps>`
 `;
 
 export const IconContainer = styled('div')`
+  ${props => props.theme.mixins.center}
   width: 100%;
   height: 100%;
   border-radius: 100%;
   font-size: inherit;
-  color: ${props =>
-    props.theme.theme === 'light' ? props.theme.color : props.theme.background};
-  background: ${props =>
-    props.theme.theme === 'light' ? props.theme.background : props.theme.color};
+  color: ${props => props.theme.secondary};
 `;
 StyledAvatar.defaultProps = {
   size: 'small',

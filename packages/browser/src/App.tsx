@@ -14,6 +14,10 @@ import {
   faImage,
   faLink,
   faUserCircle,
+  faHeart,
+  faShareAlt,
+  faRetweet,
+  faComment,
 } from '@fortawesome/free-solid-svg-icons';
 import Router from 'components/Router';
 import StyledApp from 'styled/App';
@@ -34,6 +38,12 @@ library.add(
   faImage,
   faLink,
   faUserCircle,
+  faBookmark,
+  faHeart,
+  faShareAlt,
+  faRetweet,
+  faBookmark,
+  faComment,
 );
 
 const App: FC = observer(() => {

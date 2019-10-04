@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledAvatar, IconContainer } from './styled';
-import DefaultAvatar from 'assets/logo-primary.svg';
 
 interface AvatarProps {
   avatarURL?: string;

@@ -140,7 +140,7 @@ describe('tweetRoutes', (): void => {
       await newUser.save();
       const userId = newUser._id;
       mockFs({
-        'assets/images': {
+        './src/assets/images': {
           'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
         },
       });
@@ -158,7 +158,7 @@ describe('tweetRoutes', (): void => {
           type,
           text,
         })
-        .attach('image', 'assets/images/test.jpg')
+        .attach('image', './src/assets/images/test.jpg')
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toEqual(200);
     });
