@@ -7,7 +7,6 @@ export const StyledAvatar = styled('button')<AvatarProps>`
   ${props => props.theme.mixins.center}
   height: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   width: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
-  font-size: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   border: none;
   border-radius: 100%;
   background: none;
@@ -18,12 +17,12 @@ export const StyledAvatar = styled('button')<AvatarProps>`
   }
 `;
 
-export const IconContainer = styled('div')`
+export const IconContainer = styled('div')<AvatarProps>`
+  font-size: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
   ${props => props.theme.mixins.center}
   width: 100%;
   height: 100%;
   border-radius: 100%;
-  font-size: inherit;
   color: ${props => props.theme.secondary};
 `;
 StyledAvatar.defaultProps = {

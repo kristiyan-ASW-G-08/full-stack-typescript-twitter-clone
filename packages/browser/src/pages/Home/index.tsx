@@ -1,10 +1,17 @@
-import React, { FC, useState, useEffect, useContext } from 'react';
+import React, {
+  FC,
+  useState,
+  useEffect,
+  useContext,
+  Suspense,
+  lazy,
+} from 'react';
 import axios from 'axios';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import TweetType from 'types/Tweet';
 import { Subtitle } from 'styled/Title';
-import Tweet from 'components/Tweet';
-import TweetsContainer from 'styled/TweetsContainer';
+import CenteredLoader from 'components/CenteredLoader';
+const TweetsContainer = lazy(() => import('components/TweetsContainer/index'));
 
 export const Home: FC = () => {
   const { authStore } = useContext(RootStoreContext);
@@ -28,11 +35,9 @@ export const Home: FC = () => {
   return (
     <section>
       {tweets.length > 0 ? (
-        <TweetsContainer>
-          {tweets.map(tweet => (
-            <Tweet key={tweet._id} tweet={tweet} />
-          ))}
-        </TweetsContainer>
+        <Suspense fallback={<CenteredLoader />}>
+          <TweetsContainer tweets={tweets} />
+        </Suspense>
       ) : (
         <Subtitle>No tweets yet</Subtitle>
       )}

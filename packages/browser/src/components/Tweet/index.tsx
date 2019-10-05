@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import {
-  StyledTweet,
+  TweetWrapper,
   UserBar,
   Username,
   Handle,
@@ -9,6 +9,7 @@ import {
   AvatarContainer,
   Time,
   Img,
+  Link,
 } from './styled';
 import TweetBar from './TweetBar/index';
 import Avatar from 'components/Avatar/index';
@@ -19,14 +20,12 @@ interface TweetProps {
   tweet: TweetType;
 }
 export const Tweet: FC<TweetProps> = ({ tweet }) => {
-  console.log(tweet);
   const { user, text, date, image, link } = tweet;
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days } = getTime(milliseconds);
-  console.log(image);
   return (
-    <StyledTweet>
+    <TweetWrapper>
       <AvatarContainer>
         <Avatar avatarURL={avatar} altText={username} />
       </AvatarContainer>
@@ -38,10 +37,17 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
       </UserBar>
       <ContentContainer>
         <Text>{text}</Text>
+        {link ? (
+          <Link href={link} target="_blank" rel="noopener noreferrer">
+            {link}
+          </Link>
+        ) : (
+          ''
+        )}
         {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
       </ContentContainer>
       <TweetBar tweet={tweet} />
-    </StyledTweet>
+    </TweetWrapper>
   );
 };
 export default memo(Tweet);

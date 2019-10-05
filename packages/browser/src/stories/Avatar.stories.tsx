@@ -1,10 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Avatar } from 'components/Avatar/index';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Logo from 'assets/logo-primary.svg';
-library.add(faUserCircle);
 
 storiesOf('Avatar', module)
   .add('light theme - default avatar', () => <Avatar />, {

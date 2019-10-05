@@ -17,7 +17,7 @@ export const Avatar: FC<AvatarProps> = ({
       {avatarURL ? (
         <img src={avatarURL} alt={altText} />
       ) : (
-        <IconContainer>
+        <IconContainer size={size}>
           <FontAwesomeIcon icon="user-circle" />
         </IconContainer>
       )}

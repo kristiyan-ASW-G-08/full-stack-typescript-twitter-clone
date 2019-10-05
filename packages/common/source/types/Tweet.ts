@@ -1,7 +1,7 @@
 export default interface Tweet {
   type: 'text' | 'link' | 'retweet' | 'reply';
   text: string;
-  date: string;
+  date: Date;
   retweets: number;
   likes: number;
   replies: number;
