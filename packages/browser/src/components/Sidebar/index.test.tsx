@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, getByTestId } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Sidebar from '.';
@@ -16,7 +16,7 @@ describe('Sidebar', () => {
   it('render Sidebar', async () => {
     expect.assertions(11);
 
-    const { container, getByText, rerender } = render(
+    const { container, getByText, getByTestId, rerender } = render(
       <Sidebar
         toggleSidebar={toggleSidebar}
         isActive={true}
@@ -29,14 +29,10 @@ describe('Sidebar', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const themeButton = await waitForElement(() =>
-      getByTestId(container, 'theme-button'),
-    );
+    const themeButton = await waitForElement(() => getByTestId('theme-button'));
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
-    const backdrop = await waitForElement(() =>
-      getByTestId(container, 'backdrop'),
-    );
+    const backdrop = await waitForElement(() => getByTestId('backdrop'));
 
     userEvent.click(backdrop);
     UserEvent.click(themeButton);
@@ -60,7 +56,7 @@ describe('Sidebar', () => {
       />,
     );
     const lightThemeButton = await waitForElement(() =>
-      getByTestId(container, 'theme-button'),
+      getByTestId('theme-button'),
     );
     const logOutButton = await waitForElement(() => getByText('Log Out'));
 

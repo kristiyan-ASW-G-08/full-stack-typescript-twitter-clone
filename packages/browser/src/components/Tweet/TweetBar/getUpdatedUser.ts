@@ -2,7 +2,7 @@ import axios from 'axios';
 import User from 'types/User';
 import Notification from 'types/Notification';
 
-export const updatedUser = async (
+export const getUpdatedUser = async (
   isAuth: boolean,
   token: string,
   url: string,
@@ -26,4 +26,4 @@ export const updatedUser = async (
   } catch (err) {}
 };
 
-export default updatedUser;
+export default getUpdatedUser;

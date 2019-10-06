@@ -19,13 +19,17 @@ export const ShareButton: FC<ShareButtonProps> = ({
   const tweetUrl = `http://localhost:3000/tweet/${_id}`;
   return (
     <ShareButtonWrapper>
-      <TweetBarButton onClick={() => setIsOpen(!isOpen)}>
+      <TweetBarButton
+        data-testid="share-button"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <FontAwesomeIcon icon={'share-alt'} />
       </TweetBarButton>
       {isOpen ? (
         <DropDown>
           <DropDownItem>
             <button
+              data-testid="clipboard-button"
               onClick={() => {
                 const notification: Notification = {
                   type: 'message',
@@ -40,6 +44,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
           </DropDownItem>
           <DropDownItem>
             <a
+              data-testid="reddit-button"
               style={{ display: 'block' }}
               href={`https://www.reddit.com/submit?url=${tweetUrl}&title=${text}`}
               target="_blank"
@@ -50,6 +55,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
           </DropDownItem>
           <DropDownItem>
             <a
+              data-testid="twitter-button"
               style={{ display: 'block' }}
               href={`https://twitter.com/intent/tweet?text=${text}&url=${tweetUrl}`}
               target="_blank"

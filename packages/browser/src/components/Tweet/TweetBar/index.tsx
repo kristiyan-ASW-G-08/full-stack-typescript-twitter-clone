@@ -1,13 +1,12 @@
 import React, { FC, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library, IconProp } from '@fortawesome/fontawesome-svg-core';
-import axios from 'axios';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { TweetBarWrapper, TweetBarButton } from './styled';
 import TweetType from 'types/Tweet';
 import AuthState from 'types/AuthState';
 import Notification from 'types/Notification';
 import User from 'types/User';
-import updatedUser from './actions';
+import getUpdatedUser from './getUpdatedUser';
 import ShareButton from './ShareButton/index';
 
 interface TweetProps {
@@ -32,7 +31,7 @@ export const TweetBar: FC<TweetProps> = ({
     {
       icon: 'heart',
       event: async () => {
-        const user = await updatedUser(
+        const user = await getUpdatedUser(
           isAuth,
           token,
           `http://localhost:8090/users/tweets/${tweet._id}/like`,
@@ -50,7 +49,7 @@ export const TweetBar: FC<TweetProps> = ({
     {
       icon: 'bookmark',
       event: async () => {
-        const user = await updatedUser(
+        const user = await getUpdatedUser(
           isAuth,
           token,
           `http://localhost:8090/users/tweets/${tweet._id}/bookmark`,
@@ -72,6 +71,7 @@ export const TweetBar: FC<TweetProps> = ({
     <TweetBarWrapper>
       {buttons.map(button => (
         <TweetBarButton
+          data-testid={`${button.icon}-button`}
           key={button.icon.toString()}
           onClick={async () => await button.event()}
           active={button.isActive()}
