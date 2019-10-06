@@ -54,9 +54,10 @@ const App: FC = observer(() => {
   const { theme } = themeStore;
   useEffect(() => {
     const expiryDate = localStorage.getItem('expiryDate');
-    if (expiryDate && new Date(expiryDate) <= new Date()) {
-      authStore.resetAuthState();
-      localStorage.removeItem('expiryDate');
+    if (expiryDate) {
+      const remainingMilliseconds =
+        new Date(expiryDate).getTime() - new Date().getTime();
+      authStore.initAuthStoreReset(remainingMilliseconds);
     }
   }, []);
   return (

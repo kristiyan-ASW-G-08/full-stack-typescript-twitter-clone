@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, autorun } from 'mobx';
 import { persist } from 'mobx-persist';
 import AuthState from 'types/AuthState';
 import User from 'types/User';
@@ -31,6 +31,14 @@ class AuthStore {
   }
   @action public updateUser(user: User | undefined): void {
     if (user) this.authState.user = user;
+  }
+  @action public initAuthStoreReset(remainingMilliseconds: number): void {
+    autorun(
+      () => {
+        this.resetAuthState();
+      },
+      { delay: remainingMilliseconds },
+    );
   }
 }
 export default AuthStore;
