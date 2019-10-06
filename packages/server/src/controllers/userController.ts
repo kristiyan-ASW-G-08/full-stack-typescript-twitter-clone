@@ -302,9 +302,7 @@ export const bookmarkTweet = async (
       user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
     }
     await user.save();
-    const { bookmarks } = user;
-
-    res.status(200).json({ data: { bookmarks } });
+    res.status(200).json({ data: { user } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -329,8 +327,7 @@ export const likeTweet = async (
     }
     await tweet.save();
     await user.save();
-    const { likes } = user;
-    res.status(200).json({ data: { likes } });
+    res.status(200).json({ data: { user } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -361,9 +358,7 @@ export const followUser = async (
     }
     await user.save();
     await authenticatedUser.save();
-    const { following } = authenticatedUser;
-
-    res.status(200).json({ data: { following } });
+    res.status(200).json({ data: { authenticatedUser } });
   } catch (err) {
     passErrorToNext(err, next);
   }

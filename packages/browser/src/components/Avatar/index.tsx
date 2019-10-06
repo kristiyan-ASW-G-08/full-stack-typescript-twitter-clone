@@ -13,7 +13,7 @@ export const Avatar: FC<AvatarProps> = ({
   altText = 'avatar',
 }) => {
   return (
-    <StyledAvatar size={size}>
+    <StyledAvatar size={size} type="button">
       {avatarURL ? (
         <img src={avatarURL} alt={altText} />
       ) : (

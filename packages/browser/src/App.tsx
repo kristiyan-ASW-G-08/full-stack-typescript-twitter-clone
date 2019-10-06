@@ -19,6 +19,7 @@ import {
   faRetweet,
   faComment,
 } from '@fortawesome/free-solid-svg-icons';
+import { faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import Router from 'components/Router';
 import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
@@ -44,6 +45,8 @@ library.add(
   faRetweet,
   faBookmark,
   faComment,
+  faReddit,
+  faTwitter,
 );
 
 const App: FC = observer(() => {

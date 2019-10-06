@@ -1,6 +1,7 @@
 import { observable, action } from 'mobx';
 import { persist } from 'mobx-persist';
 import AuthState from 'types/AuthState';
+import User from 'types/User';
 export const defaultAuthState = {
   isAuth: false,
   user: {
@@ -27,6 +28,9 @@ class AuthStore {
   }
   @action public resetAuthState(): void {
     this.authState = defaultAuthState;
+  }
+  @action public updateUser(user: User | undefined): void {
+    if (user) this.authState.user = user;
   }
 }
 export default AuthStore;

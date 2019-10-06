@@ -17,7 +17,7 @@ export const NotificationContent = styled('p')<NotificationContentProps>`
   pointer-events: auto;
   position: fixed;
   transform: translateY(20vh);
-  color: ${props => props.theme.color};
+  color: ${props => props.theme.white};
   background: ${props =>
     props.notificationType === 'message'
       ? props.theme.primary
