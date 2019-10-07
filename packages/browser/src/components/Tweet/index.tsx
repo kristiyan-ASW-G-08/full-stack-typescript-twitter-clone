@@ -1,4 +1,11 @@
-import React, { FC, memo, useContext, useMemo } from 'react';
+import React, {
+  FC,
+  memo,
+  useContext,
+  useMemo,
+  SetStateAction,
+  Dispatch,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 import {
   TweetWrapper,
