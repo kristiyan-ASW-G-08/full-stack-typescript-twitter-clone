@@ -20,6 +20,7 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons';
 import { faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Normalize } from 'styled-normalize';
 import Router from 'components/Router';
 import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
@@ -61,14 +62,15 @@ const App: FC = observer(() => {
     }
   }, []);
   return (
-    <div className="wrapper">
+    <>
       <GlobalStyle />
+      <Normalize />
       <Theme theme={theme}>
         <StyledApp>
           <Router />
         </StyledApp>
       </Theme>
-    </div>
+    </>
   );
 });
 

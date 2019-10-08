@@ -10,7 +10,7 @@ const getSortString = (sort: SortStringKey): SortStringValue => {
     replies: '-replies',
   };
   const sortString = sortStrings[sort];
-  return sortString || '-likes';
+  return sortString || '-date';
 };
 
 export default getSortString;

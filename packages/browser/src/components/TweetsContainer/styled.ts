@@ -5,7 +5,7 @@ export const TweetsWrapper = styled('section')`
   display: grid;
   grid:
     '. select . ' auto
-    'tweets tweets tweets' auto
+    'tweets tweets tweets' minmax(100vh, auto)
     '. loader .' auto/
     0.1rem auto 1fr;
   grid-gap: 1rem;
@@ -19,25 +19,28 @@ export const TweetsWrapper = styled('section')`
 export const Tweets = styled('div')`
   grid-area: tweets;
   width: 100%;
-  min-height: 90vh;
 `;
 
 export const Loader = styled('p')`
-  font-size: 2em;
+  grid-area: loader;
+background:transparent;
+  /* font-size: 2em;
   grid-area: loader;
   color: ${props => props.theme.primary};
-  background: red;
+  background: red; */
 `;
 export const Select = styled('select')`
   grid-area: select;
   ${props => props.theme.mixins.button};
   ${props => props.theme.mixins.center};
+  display: block;
   text-align: center;
+  text-align-last: center;
   background: ${props => setLightness(0.3, props.theme.secondary)};
   color: ${props => props.theme.secondary};
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   appearance: none;
 `;
