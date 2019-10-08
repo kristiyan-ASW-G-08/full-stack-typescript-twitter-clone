@@ -4,83 +4,65 @@ import React, {
   useRef,
   useEffect,
   useState,
-  Suspense,
-  lazy,
 } from 'react';
-
+import getTweets from './getTweets';
 import TweetType from 'types/Tweet';
 import { TweetsWrapper, Select, Tweets, Loader } from './styled';
-import axios from 'axios';
 import Tweet from 'components/Tweet/index';
-interface TweetProps {}
+interface TweetProps {
+  url: string;
+}
 
-export const TweetContainer: FC<TweetProps> = () => {
-  // const loader = useRef()
+export const TweetContainer: FC<TweetProps> = ({ url }) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
-  const [sort, setSort] = useState<string>('new');
   const [nextPage, setNext] = useState<string | null>(null);
-  const [prevPage, setPrev] = useState<string | null>(null);
+  const nextPageRef = useRef(nextPage);
+  const [element, setElement] = useState<HTMLParagraphElement>();
+  useEffect(() => {
+    const currentElement = element;
+    const { current } = observer;
+    if (currentElement) {
+      current.observe(currentElement);
+    }
+    return () => {
+      if (currentElement) {
+        current.unobserve(currentElement);
+      }
+    };
+  }, [element]);
+  useEffect(() => {
+    nextPageRef.current = nextPage;
+  }, [nextPage]);
+  useEffect(() => {
+    getTweets(`${url}?sort=new`).then(data => {
+      const { newTweets, next } = data;
+      setNext(next);
+      setTweets(newTweets);
+    });
+  }, [url]);
   const observer = useRef(
     new IntersectionObserver(
       async entries => {
-        console.log(entries);
-        const first = entries[0];
-        if (first.isIntersecting) {
-          if (nextPage !== null) {
-            console.log('loading more');
-            const { newTweets, next, prev } = await getTweets(sort, nextPage);
-          }
+        const intersectedElement = entries[0];
+        if (
+          intersectedElement &&
+          intersectedElement.isIntersecting &&
+          nextPageRef &&
+          nextPageRef.current
+        ) {
+          const { newTweets, next } = await getTweets(nextPageRef.current);
+          setNext(next);
+          setTweets([...tweets, ...newTweets]);
         }
       },
       { threshold: 1 },
     ),
   );
-  const [element, setElement] = useState<HTMLParagraphElement>();
-  useEffect(() => {
-    const currentElement = element;
-    const currentObserver = observer.current;
 
-    if (currentElement) {
-      currentObserver.observe(currentElement);
-    }
-    return () => {
-      if (currentElement !== undefined) {
-        currentObserver.unobserve(currentElement);
-      }
-    };
-  }, [element]);
-  useEffect(() => {
-    getTweets().then(data => {
-      const { newTweets, next, prev } = data;
-      setTweets(newTweets);
-    });
-  }, []);
-  const getTweets = async (
-    sort: string = 'new',
-    url: string = 'http://localhost:8090/tweets',
-    //@ts-ignore
-  ): Promise<{
-    newTweets: TweetType[];
-    next: null | string;
-    prev: null | string;
-  }> => {
-    try {
-      const response = await axios.get(`${url}?sort=${sort}`);
-      console.log(response.data.data);
-      const { next, prev } = response.data.data;
-      const newTweets = response.data.data.tweets;
-      return { newTweets, next, prev };
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response);
-      }
-    }
-  };
   const getTweetsHandler = async (e: SyntheticEvent) => {
-    const target = e.target as HTMLInputElement;
-    const value: string = target.value;
-    const { newTweets } = await getTweets(value);
-    setSort(value);
+    const target = e.target as HTMLSelectElement;
+    const { value } = target;
+    const { newTweets } = await getTweets(`${url}?sort=${value}`);
     setTweets(newTweets);
   };
   return (
@@ -92,14 +74,17 @@ export const TweetContainer: FC<TweetProps> = () => {
         <option value="replies">Replies</option>
       </Select>
       <Tweets>
-        {tweets.map((tweet: TweetType, index) => (
+        {tweets.map((tweet: TweetType) => (
           <Tweet key={tweet._id} tweet={tweet} />
         ))}
       </Tweets>
-
-      <Loader ref={(e: HTMLParagraphElement) => setElement(e)}>
-        ...Loading
-      </Loader>
+      {nextPage ? (
+        <Loader ref={(e: HTMLParagraphElement) => setElement(e)}>
+          ...Loading
+        </Loader>
+      ) : (
+        ''
+      )}
     </TweetsWrapper>
   );
 };

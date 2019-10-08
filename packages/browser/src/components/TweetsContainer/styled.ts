@@ -5,7 +5,7 @@ export const TweetsWrapper = styled('section')`
   display: grid;
   grid:
     '. select . ' auto
-    'tweets tweets tweets' minmax(80vh, auto)
+    'tweets tweets tweets' auto
     '. loader .' auto/
     0.1rem auto 1fr;
   grid-gap: 1rem;
@@ -19,6 +19,7 @@ export const TweetsWrapper = styled('section')`
 export const Tweets = styled('div')`
   grid-area: tweets;
   width: 100%;
+  min-height: 90vh;
 `;
 
 export const Loader = styled('p')`

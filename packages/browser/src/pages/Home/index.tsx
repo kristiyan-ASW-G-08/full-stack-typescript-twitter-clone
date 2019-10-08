@@ -11,10 +11,11 @@ export const Home: FC = () => {
   const { authStore } = useContext(RootStoreContext);
   const { isAuth } = authStore.authState;
   const [tweets, setTweets] = useState<TweetType[]>([]);
+  const [url, setUrl] = useState<string>('http://localhost:8090/tweets');
 
   return (
     <PageContainer>
-      <TweetsContainer />
+      <TweetsContainer url={url} />
     </PageContainer>
   );
 };

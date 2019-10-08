@@ -4,7 +4,7 @@ export const NavbarWrapper = styled('nav')`
   display: flex;
   justify-content: space-between;
   width: 100vw;
-  padding: 1rem;
+  padding: 1rem 1.7rem 1rem 1.7rem;
   background-color: ${props => props.theme.background};
 `;
 export const NavIcon = styled('button')`
