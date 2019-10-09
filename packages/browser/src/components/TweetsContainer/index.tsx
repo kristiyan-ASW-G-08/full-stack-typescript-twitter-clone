@@ -8,9 +8,11 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import TweetType from 'types/Tweet';
-import { TweetsWrapper, Select, Tweets, Loader } from './styled';
+import { TweetsWrapper, Select, Tweets, LoaderContainer } from './styled';
 import Tweet from 'components/Tweet/index';
 import Notification from 'types/Notification';
+import Loader from 'styled/Loader';
+
 interface TweetProps {
   url: string;
   setNotification: (notification: Notification) => void;
@@ -18,46 +20,45 @@ interface TweetProps {
 export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
-  const [element, setElement] = useState<HTMLParagraphElement>();
+  const [element, setElement] = useState<HTMLDivElement>();
   const tweetsRef = useRef(tweets);
   const nextPageRef = useRef(nextPage);
   const observer = useRef(
     new IntersectionObserver(
       async entries => {
-        const intersectedElement = entries[0];
-        if (
-          intersectedElement &&
-          intersectedElement.isIntersecting &&
-          nextPageRef &&
-          nextPageRef.current
-        ) {
-          const { newTweets, next } = await getTweets(nextPageRef.current);
-          const allTweets = [...tweetsRef.current, ...newTweets];
-          setTweets(allTweets);
-          setNext(next);
-        }
+        try {
+          const intersectedElement = entries[0];
+          if (
+            intersectedElement &&
+            intersectedElement.isIntersecting &&
+            nextPageRef &&
+            nextPageRef.current
+          ) {
+            const { newTweets, next } = await getTweets(nextPageRef.current);
+            const allTweets = [...tweetsRef.current, ...newTweets];
+            setTweets(allTweets);
+            setNext(next);
+          }
+        } catch (error) {}
       },
       { threshold: 1 },
     ),
   );
   useEffect(() => {
-    const currentElement = element;
-    const currentObserver = observer.current;
-    if (currentElement) {
-      currentObserver.observe(currentElement);
+    const { current } = observer;
+    if (element) {
+      current.observe(element);
     }
     return () => {
-      if (currentElement) {
-        currentObserver.unobserve(currentElement);
+      if (element) {
+        current.unobserve(element);
       }
     };
   }, [element]);
   useEffect(() => {
-    nextPageRef.current = nextPage;
-  }, [nextPage]);
-  useEffect(() => {
     tweetsRef.current = tweets;
-  }, [tweets]);
+    nextPageRef.current = nextPage;
+  }, [tweets, nextPage]);
   useEffect(() => {
     getTweets(`${url}?sort=new`)
       .then(data => {
@@ -116,10 +117,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
         [tweets],
       )}
       {nextPage ? (
-        <Loader
-          ref={(e: HTMLParagraphElement) => setElement(e)}
-          style={{ background: 'transparent' }}
-        />
+        <LoaderContainer ref={(e: HTMLDivElement) => setElement(e)} />
       ) : (
         ''
       )}

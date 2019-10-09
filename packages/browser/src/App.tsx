@@ -26,7 +26,6 @@ import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Theme from 'components/Theme/Theme';
 import GlobalStyle from 'styled/GlobalStyle';
-
 library.add(
   faBars,
   faUser,
