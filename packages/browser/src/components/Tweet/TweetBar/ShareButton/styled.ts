@@ -4,9 +4,10 @@ import { setLightness } from 'polished';
 
 export const ShareButtonWrapper = styled('div')`
   ${props => props.theme.mixins.center}
+  position:relative;
 `;
 export const DropDown = styled('ul')`
-  position: fixed;
+  position: absolute;
   transform: translateY(3rem);
   z-index: 2;
   display: grid;
@@ -16,7 +17,10 @@ export const DropDown = styled('ul')`
   padding:0.5rem;
   width: 10rem;
   list-style: none;
-  background: ${props => setLightness(0.2, props.theme.background)};
+  background: ${props =>
+    props.theme.theme === 'light'
+      ? props.theme.background
+      : setLightness(0.2, props.theme.background)};
 `;
 
 export const DropDownItem = styled('li')`
@@ -34,5 +38,8 @@ export const DropDownItem = styled('li')`
     height: 100%;
     font-weight: bold;
     padding: 0.3rem 0 0.3rem 0;
+    :hover {
+      color: ${props => props.theme.primary};
+    }
   }
 `;

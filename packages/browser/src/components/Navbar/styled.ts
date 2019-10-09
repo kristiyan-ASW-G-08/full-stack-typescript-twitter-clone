@@ -3,9 +3,14 @@ import styled from 'styled-components';
 export const NavbarWrapper = styled('nav')`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100vw;
   padding: 1rem 1.7rem 1rem 1.7rem;
   background-color: ${props => props.theme.background};
+  ${props =>
+    props.theme.theme === 'light'
+      ? `box-shadow: 3px 0px 4px rgba(${props.theme.dark},0.25)`
+      : ''}
 `;
 export const NavIcon = styled('button')`
   font-size: 2.5rem;
