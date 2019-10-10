@@ -11,12 +11,10 @@ import {
 import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Input from 'styled/Input';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Button from 'styled/Button';
 import ValidationError from '@twtr/common/source/types/ValidationError';
-import RootStoreContext from 'stores/RootStore/RootStore';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';

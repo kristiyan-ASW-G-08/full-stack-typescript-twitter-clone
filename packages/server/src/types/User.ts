@@ -6,5 +6,7 @@ export default interface User extends CommonUser, Document {
   confirmed: boolean;
   following: mongoose.Types.ObjectId[];
   likes: mongoose.Types.ObjectId[];
+  retweets: mongoose.Types.ObjectId[];
+  replies: mongoose.Types.ObjectId[];
   bookmarks: mongoose.Types.ObjectId[];
 }

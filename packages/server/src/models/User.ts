@@ -43,6 +43,19 @@ const UserSchema: Schema = new Schema({
       ref: 'Tweet',
     },
   ],
+  retweets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Tweet',
+    },
+  ],
+  replies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Tweet',
+    },
+  ],
+
   bookmarks: [
     {
       type: Schema.Types.ObjectId,

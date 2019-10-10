@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 import Tweet from '@models/Tweet';
 import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
@@ -7,6 +8,9 @@ import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
 import getSortString from '@utilities/getSortString';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import includesObjectId from '@utilities/includesObjectId';
+import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
+import { getUserById } from '@services/userServices';
 
 export const postTweet = async (
   req: Request,
@@ -16,6 +20,34 @@ export const postTweet = async (
   try {
     const { text, linkUrl, type, retweetedId, replyId } = req.body;
     const { userId } = req;
+
+    const user = await getUserById(userId);
+    if (retweetedId !== undefined) {
+      const retweetedTweet = await getTweetById(retweetedId);
+      if (!includesObjectId(user.retweets, retweetedId)) {
+        user.retweets = [
+          ...user.retweets,
+          mongoose.Types.ObjectId(retweetedId),
+        ];
+        retweetedTweet.retweets += 1;
+      } else {
+        user.retweets = removeObjectIdFromArr(user.retweets, retweetedId);
+        retweetedTweet.retweets -= 1;
+      }
+      await retweetedTweet.save();
+    }
+    if (replyId !== undefined) {
+      const replyTweet = await getTweetById(replyId);
+      if (!includesObjectId(user.replies, replyId)) {
+        user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
+        replyTweet.replies += 1;
+      } else {
+        user.replies = removeObjectIdFromArr(user.replies, replyId);
+        replyTweet.replies -= 1;
+      }
+      await replyTweet.save();
+    }
+
     const tweet = new Tweet({
       text,
       user: userId,
@@ -29,6 +61,7 @@ export const postTweet = async (
     }
 
     await tweet.save();
+    await user.save();
     const tweetId = tweet._id;
     res.status(200).json({ data: { tweetId } });
   } catch (err) {
