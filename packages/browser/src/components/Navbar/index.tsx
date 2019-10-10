@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, memo } from 'react';
 import { NavbarWrapper, NavIcon, Container, ThemeButton } from './styled';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -67,4 +67,4 @@ export const Navbar: FC<NavbarProps> = ({
   );
 };
 
-export default observer(Navbar);
+export default memo(observer(Navbar));

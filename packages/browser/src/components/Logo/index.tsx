@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import LogoPrimary  from 'assets/logo-primary.svg';
+import React, { FC, memo } from 'react';
+import LogoPrimary from 'assets/logo-primary.svg';
 import { LogoWrapper, LogoText, LogoSpan } from './styled';
 
 interface LogoProps {
@@ -15,4 +15,4 @@ export const Logo: FC<LogoProps> = ({ type = 'horizontal' }) => {
     </LogoWrapper>
   );
 };
-export default Logo;
+export default memo(Logo);

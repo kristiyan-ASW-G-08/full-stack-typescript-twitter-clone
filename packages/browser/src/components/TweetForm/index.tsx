@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, SyntheticEvent } from 'react';
+import React, { FC, useEffect, useState, SyntheticEvent } from 'react';
 import TweetValidator from 'validators/TweetValidator';
 import {
   Formik,
@@ -21,7 +21,7 @@ import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
 import useFilePicker from 'hooks/useFilePicker/useFilePicker';
-
+import ModalPayload from 'types/ModalPayload';
 import {
   TweetFormWrapper,
   TwButtonButtonContainer,
@@ -34,16 +34,23 @@ interface TweetFormProps extends RouteComponentProps {
   resetModalStore: () => void;
   token: string;
   setNotification: (notification: Notification) => void;
+  payload: ModalPayload;
 }
 export const TweetForm: FC<TweetFormProps> = ({
   history,
   resetModalStore,
   token,
   setNotification,
+  payload,
 }) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
+  useEffect(() => {
+    if (payload.type) {
+      setType(payload.type);
+    }
+  }, []);
   const [hasImage, setHasImage] = useState<boolean>(false);
   const { fileData, fileHandler, resetFileData } = useFilePicker();
   const submitHandler = async (
@@ -51,20 +58,35 @@ export const TweetForm: FC<TweetFormProps> = ({
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const { linkUrl, text } = e;
-      const formData = new FormData();
+      const { retweetedId, replyId } = payload;
+      const data = {
+        ...e,
+        type,
+        retweetedId,
+        replyId,
+      };
+      let formData: FormData = new FormData();
       if (fileData && fileData.file) {
-        formData.set('image', fileData.file);
+        formData = Object.entries(data).reduce(
+          (acc: FormData, [key, value]) => {
+            console.log(key, value);
+            if (key !== undefined && value !== undefined) {
+              acc.append(key, value);
+            }
+
+            return acc;
+          },
+          new FormData(),
+        );
+        formData.append('image', fileData.file);
       }
-      formData.set('linkUrl', linkUrl);
-      formData.set('text', text);
-      formData.set('type', type);
       const config = {
         headers: { Authorization: 'bearer ' + token },
       };
+      const responseBody = fileData && fileData.file ? formData : data;
       const response = await axios.post(
         'http://localhost:8090/tweets',
-        formData,
+        responseBody,
         config,
       );
       resetModalStore();

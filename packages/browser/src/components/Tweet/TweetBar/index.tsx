@@ -8,11 +8,13 @@ import Notification from 'types/Notification';
 import User from 'types/User';
 import getUpdatedUser from './getUpdatedUser';
 import ShareButton from './ShareButton/index';
+import ModalPayload from 'types/ModalPayload';
 
 interface TweetProps {
   tweet: TweetType;
   authState: AuthState;
   setNotification: (notification: Notification) => void;
+  setModalState: (type: 'tweetForm', payload?: ModalPayload) => void;
   updateUser: (user: User | undefined) => void;
 }
 interface ButtonType {
@@ -25,8 +27,10 @@ export const TweetBar: FC<TweetProps> = ({
   authState,
   setNotification,
   updateUser,
+  setModalState,
 }) => {
   const { isAuth, token, user } = authState;
+  const { _id } = tweet;
   const buttons: ButtonType[] = [
     {
       icon: 'heart',
@@ -34,16 +38,16 @@ export const TweetBar: FC<TweetProps> = ({
         const user = await getUpdatedUser(
           isAuth,
           token,
-          `http://localhost:8090/users/tweets/${tweet._id}/like`,
+          `http://localhost:8090/users/tweets/${_id}/like`,
           setNotification,
         );
         updateUser(user);
       },
-      isActive: () => (user.likes.includes(tweet._id) ? 'like' : undefined),
+      isActive: () => (user.likes.includes(_id) ? 'like' : undefined),
     },
     {
       icon: 'comment',
-      event: () => {},
+      event: () => setModalState('tweetForm', { replyId: _id, type: 'reply' }),
       isActive: () => undefined,
     },
     {
@@ -52,18 +56,18 @@ export const TweetBar: FC<TweetProps> = ({
         const user = await getUpdatedUser(
           isAuth,
           token,
-          `http://localhost:8090/users/tweets/${tweet._id}/bookmark`,
+          `http://localhost:8090/users/tweets/${_id}/bookmark`,
           setNotification,
         );
         updateUser(user);
       },
-      isActive: () =>
-        user.bookmarks.includes(tweet._id) ? 'primary' : undefined,
+      isActive: () => (user.bookmarks.includes(_id) ? 'primary' : undefined),
     },
 
     {
       icon: 'retweet',
-      event: () => {},
+      event: () =>
+        setModalState('tweetForm', { retweetedId: _id, type: 'retweet' }),
       isActive: () => undefined,
     },
   ];

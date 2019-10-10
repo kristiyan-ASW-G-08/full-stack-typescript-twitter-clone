@@ -23,7 +23,6 @@ const TweetValidator = yup.object().shape({
   text: yup
     .string()
     .trim()
-    .min(1)
     .max(500)
     .when(
       'type',

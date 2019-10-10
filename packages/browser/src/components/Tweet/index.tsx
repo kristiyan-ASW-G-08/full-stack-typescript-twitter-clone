@@ -26,12 +26,15 @@ import getTime from 'utilities/getTime';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 import User from 'types/User';
+import ModalPayload from 'types/ModalPayload';
 
 interface TweetProps {
   tweet: TweetType;
 }
 export const Tweet: FC<TweetProps> = ({ tweet }) => {
-  const { authStore, notificationStore } = useContext(RootStoreContext);
+  const { authStore, notificationStore, modalStore } = useContext(
+    RootStoreContext,
+  );
   const { user, text, date, image, link } = tweet;
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
@@ -60,6 +63,9 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
           {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
         </ContentContainer>
         <TweetBar
+          setModalState={(type: 'tweetForm', payload?: ModalPayload) =>
+            modalStore.openModal(type, payload)
+          }
           tweet={tweet}
           authState={authStore.authState}
           setNotification={(notification: Notification): void => {

@@ -5,13 +5,13 @@ import React, {
   useEffect,
   useState,
   useMemo,
+  memo,
 } from 'react';
 import axios from 'axios';
 import TweetType from 'types/Tweet';
 import { TweetsWrapper, Select, Tweets, LoaderContainer } from './styled';
 import Tweet from 'components/Tweet/index';
 import Notification from 'types/Notification';
-import Loader from 'styled/Loader';
 
 interface TweetProps {
   url: string;
@@ -124,4 +124,4 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
     </TweetsWrapper>
   );
 };
-export default TweetContainer;
+export default memo(TweetContainer);

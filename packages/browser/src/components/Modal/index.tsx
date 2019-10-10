@@ -8,9 +8,11 @@ export const Modal: FC = observer(() => {
   const { modalStore, notificationStore, authStore } = useContext(
     RootStoreContext,
   );
+  const { payload } = modalStore;
   const modalComponents = {
     tweetForm: (
       <TweetForm
+        payload={modalStore.payload}
         token={authStore.authState.token}
         resetModalStore={() => modalStore.reset()}
         setNotification={notificationStore.setNotification}

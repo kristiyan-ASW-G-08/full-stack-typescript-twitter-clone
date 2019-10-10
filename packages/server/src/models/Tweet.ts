@@ -30,7 +30,11 @@ const TweetSchema: Schema = new Schema({
 });
 
 async function preFindPopulate(this: Query<any>): Promise<any> {
-  this.populate([{ path: 'user', select: 'username handle' }]);
+  this.populate([
+    { path: 'user', select: 'username handle' },
+    { path: 'reply', select: 'user' },
+    { path: 'retweet' },
+  ]);
 }
 TweetSchema.pre('find', preFindPopulate);
 
