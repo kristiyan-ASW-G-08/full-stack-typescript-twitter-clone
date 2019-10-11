@@ -37,9 +37,9 @@ export const TweetBar: FC<TweetProps> = ({
       icon: 'heart',
       event: async () => {
         const user = await getUpdatedUser(
-          isAuth,
           token,
           `http://localhost:8090/users/tweets/${_id}/like`,
+          setNotification,
         );
         updateUser(user);
       },
@@ -54,9 +54,9 @@ export const TweetBar: FC<TweetProps> = ({
       icon: 'bookmark',
       event: async () => {
         const user = await getUpdatedUser(
-          isAuth,
           token,
           `http://localhost:8090/users/tweets/${_id}/bookmark`,
+          setNotification,
         );
         updateUser(user);
       },

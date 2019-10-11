@@ -52,8 +52,7 @@ describe('TweetBar', () => {
 
     expect(likeButton).toBeTruthy();
     expect(bookmarkButton).toBeTruthy();
-    expect(setNotification).toHaveBeenCalledTimes(2);
-    expect(setModalState).toHaveBeenCalledTimes(2);
+    expect(setNotification).toHaveBeenCalledTimes(4);
 
     rerender(
       <TweetBar
@@ -68,10 +67,13 @@ describe('TweetBar', () => {
     UserEvent.click(likeButton);
 
     UserEvent.click(bookmarkButton);
+    UserEvent.click(replyButton);
+    UserEvent.click(retweetButton);
 
     await wait(() => {
       expect(axios.patch).toHaveBeenCalledTimes(2);
     });
-    expect(updateUser).toHaveBeenCalledTimes(4);
+    expect(setModalState).toHaveBeenCalledTimes(2);
+    expect(updateUser).toHaveBeenCalledTimes(2);
   });
 });

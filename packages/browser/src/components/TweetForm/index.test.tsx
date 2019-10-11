@@ -21,6 +21,7 @@ describe('TweetForm', () => {
 
     const { container, getByText, getByPlaceholderText } = render(
       <TweetForm
+        payload={{}}
         resetModalStore={resetModalStore}
         setNotification={setNotification}
         token={token}

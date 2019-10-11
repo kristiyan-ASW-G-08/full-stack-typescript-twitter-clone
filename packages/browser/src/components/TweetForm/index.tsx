@@ -105,8 +105,7 @@ export const TweetForm: FC<TweetFormProps> = ({
           type: 'warning',
           content: 'Something went wrong',
         };
-        console.log(error);
-        // setNotification(notification);
+        setNotification(notification);
       }
     }
   };

@@ -9159,12 +9159,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje eZaFPF"
+      className="sc-EHOje cMOqDi"
       type="horizontal"
     >
-      <svg>
-        logo-primary.svg
-      </svg>
+      <img
+        src="logo-primary.svg"
+      />
       <h1
         className="sc-bZQynM qYXPD"
         type="horizontal"
@@ -9832,12 +9832,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje bIBvpv"
+      className="sc-EHOje egqKmS"
       type="vertical"
     >
-      <svg>
-        logo-primary.svg
-      </svg>
+      <img
+        src="logo-primary.svg"
+      />
       <h1
         className="sc-bZQynM dKrtgK"
         type="vertical"
@@ -10531,12 +10531,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje eZaFPF"
+      className="sc-EHOje cMOqDi"
       type="horizontal"
     >
-      <svg>
-        logo-primary.svg
-      </svg>
+      <img
+        src="logo-primary.svg"
+      />
       <h1
         className="sc-bZQynM qYXPD"
         type="horizontal"
@@ -11204,12 +11204,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje bIBvpv"
+      className="sc-EHOje egqKmS"
       type="vertical"
     >
-      <svg>
-        logo-primary.svg
-      </svg>
+      <img
+        src="logo-primary.svg"
+      />
       <h1
         className="sc-bZQynM dKrtgK"
         type="vertical"
@@ -11903,19 +11903,19 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-htoDjs igMZFI"
+      className="sc-htoDjs KDvaW"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-EHOje eZaFPF"
+          className="sc-EHOje cMOqDi"
           type="horizontal"
         >
-          <svg>
-            logo-primary.svg
-          </svg>
+          <img
+            src="logo-primary.svg"
+          />
           <h1
             className="sc-bZQynM qYXPD"
             type="horizontal"
@@ -12477,6 +12477,52 @@ Array [
                               className="token string"
                             >
                               ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            replies
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            retweets
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
                             </span>
                             <span
                               className="token punctuation"
@@ -13230,19 +13276,19 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-htoDjs gnSCQA"
+      className="sc-htoDjs eOrCSD"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-EHOje eZaFPF"
+          className="sc-EHOje cMOqDi"
           type="horizontal"
         >
-          <svg>
-            logo-primary.svg
-          </svg>
+          <img
+            src="logo-primary.svg"
+          />
           <h1
             className="sc-bZQynM qYXPD"
             type="horizontal"
@@ -13804,6 +13850,52 @@ Array [
                               className="token string"
                             >
                               ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            replies
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            retweets
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
                             </span>
                             <span
                               className="token punctuation"
@@ -15918,6 +16010,7 @@ Array [
     id="story-root"
     style={Object {}}
   >
+     
     <aside
       className="sc-jTzLTM dRdHUq"
     >
@@ -15931,12 +16024,12 @@ Array [
             className="sc-kgoBCf jhGcbV"
           >
             <div
-              className="sc-EHOje bIBvpv"
+              className="sc-EHOje egqKmS"
               type="vertical"
             >
-              <svg>
-                logo-primary.svg
-              </svg>
+              <img
+                src="logo-primary.svg"
+              />
               <h1
                 className="sc-bZQynM dKrtgK"
                 type="vertical"
@@ -16550,6 +16643,52 @@ Array [
                               className="token string"
                             >
                               ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            replies
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            retweets
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
                             </span>
                             <span
                               className="token punctuation"
@@ -17251,6 +17390,7 @@ Array [
     id="story-root"
     style={Object {}}
   >
+     
     <aside
       className="sc-jTzLTM dRdHUq"
     >
@@ -17264,12 +17404,12 @@ Array [
             className="sc-kgoBCf jhGcbV"
           >
             <div
-              className="sc-EHOje bIBvpv"
+              className="sc-EHOje egqKmS"
               type="vertical"
             >
-              <svg>
-                logo-primary.svg
-              </svg>
+              <img
+                src="logo-primary.svg"
+              />
               <h1
                 className="sc-bZQynM dKrtgK"
                 type="vertical"
@@ -17883,6 +18023,52 @@ Array [
                               className="token string"
                             >
                               ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            replies
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
+                            </span>
+                            
+            retweets
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              [
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ]
                             </span>
                             <span
                               className="token punctuation"
@@ -20411,7 +20597,7 @@ Array [
             </svg>
           </button>
           <div
-            className="sc-jAaTju hjaOHr"
+            className="sc-jAaTju eXSVYz"
           >
             <button
               className="sc-cMljjf iujWVa"
@@ -20724,7 +20910,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-06T11:32:21.009Z'
+                          '2019-10-11T16:40:14.300Z'
                         </span>
                         <span
                           className="token punctuation"
@@ -21082,6 +21268,52 @@ Array [
                           className="token string"
                         >
                           'default'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+              replies
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+              retweets
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
                         </span>
                         <span
                           className="token punctuation"
@@ -21912,6 +22144,32 @@ Array [
                         >
                           
       &lt;withRouter(TweetForm)
+        payload=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
         resetModalStore=
                         </span>
                         <span
@@ -22803,6 +23061,32 @@ Array [
                         >
                           
       &lt;withRouter(TweetForm)
+        payload=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
         resetModalStore=
                         </span>
                         <span
