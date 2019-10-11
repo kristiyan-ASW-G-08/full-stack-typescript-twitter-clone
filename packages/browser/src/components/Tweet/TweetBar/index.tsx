@@ -31,6 +31,7 @@ export const TweetBar: FC<TweetProps> = ({
 }) => {
   const { isAuth, token, user } = authState;
   const { _id } = tweet;
+  console.log(user);
   const buttons: ButtonType[] = [
     {
       icon: 'heart',
@@ -39,7 +40,6 @@ export const TweetBar: FC<TweetProps> = ({
           isAuth,
           token,
           `http://localhost:8090/users/tweets/${_id}/like`,
-          setNotification,
         );
         updateUser(user);
       },
@@ -48,7 +48,7 @@ export const TweetBar: FC<TweetProps> = ({
     {
       icon: 'comment',
       event: () => setModalState('tweetForm', { replyId: _id, type: 'reply' }),
-      isActive: () => undefined,
+      isActive: () => (user.replies.includes(_id) ? 'primary' : undefined),
     },
     {
       icon: 'bookmark',
@@ -57,7 +57,6 @@ export const TweetBar: FC<TweetProps> = ({
           isAuth,
           token,
           `http://localhost:8090/users/tweets/${_id}/bookmark`,
-          setNotification,
         );
         updateUser(user);
       },
@@ -68,7 +67,7 @@ export const TweetBar: FC<TweetProps> = ({
       icon: 'retweet',
       event: () =>
         setModalState('tweetForm', { retweetedId: _id, type: 'retweet' }),
-      isActive: () => undefined,
+      isActive: () => (user.retweets.includes(_id) ? 'primary' : undefined),
     },
   ];
   return (
@@ -77,7 +76,17 @@ export const TweetBar: FC<TweetProps> = ({
         <TweetBarButton
           data-testid={`${button.icon}-button`}
           key={button.icon.toString()}
-          onClick={async () => await button.event()}
+          onClick={async () => {
+            if (!isAuth) {
+              const notification: Notification = {
+                type: 'warning',
+                content: 'Log in or Sign up to perform this action!',
+              };
+              setNotification(notification);
+              return;
+            }
+            await button.event();
+          }}
           active={button.isActive()}
         >
           <FontAwesomeIcon icon={button.icon} />

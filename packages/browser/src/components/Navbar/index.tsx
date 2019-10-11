@@ -67,4 +67,4 @@ export const Navbar: FC<NavbarProps> = ({
   );
 };
 
-export default memo(observer(Navbar));
+export default observer(Navbar);

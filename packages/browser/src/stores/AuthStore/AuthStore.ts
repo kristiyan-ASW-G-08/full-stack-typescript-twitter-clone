@@ -16,6 +16,8 @@ export const defaultAuthState = {
     following: [],
     likes: [],
     bookmarks: [],
+    retweets: [],
+    replies: [],
   },
   token: '',
 };

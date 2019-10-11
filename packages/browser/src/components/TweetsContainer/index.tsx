@@ -83,6 +83,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
       const { next, prev } = links;
       return { newTweets: tweets, next, prev };
     } catch (error) {
+      console.log(error);
       const notification: Notification = {
         type: 'warning',
         content: 'There was an error. Please try again later.',

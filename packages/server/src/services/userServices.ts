@@ -19,8 +19,15 @@ export const getUserByEmail = async (email: string): Promise<UserType> => {
   }
   return user;
 };
-export const getUserById = async (userId: string): Promise<UserType> => {
-  const user = await User.findById(userId);
+export const getUserById = async (
+  userId: string,
+  secure: boolean = true,
+): Promise<UserType> => {
+  const user = secure
+    ? await User.findById(userId)
+    : await User.findById(userId).select('-password -email -confirmed');
+
+  console.log(user, secure);
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
       {

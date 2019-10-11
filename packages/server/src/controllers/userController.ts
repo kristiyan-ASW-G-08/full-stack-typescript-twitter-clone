@@ -144,7 +144,16 @@ export const logIn = async (
       secret,
       { expiresIn: '1h' },
     );
-    const { username, handle, following, likes, bookmarks, date } = user;
+    const {
+      username,
+      handle,
+      following,
+      likes,
+      bookmarks,
+      date,
+      replies,
+      retweets,
+    } = user;
     const userData = {
       username,
       handle,
@@ -153,6 +162,8 @@ export const logIn = async (
       bookmarks,
       email,
       date,
+      replies,
+      retweets,
     };
     res.status(200).json({ data: { token, user: userData } });
   } catch (err) {
@@ -168,7 +179,6 @@ export const verifyEmail = async (
   try {
     const secret = process.env.SECRET;
     const { token } = req.params;
-    console.log(token, 'Verify');
     const decodedToken = jwt.verify(token, secret);
     // @ts-ignore
     const { userId } = decodedToken;
@@ -295,7 +305,7 @@ export const bookmarkTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const user = await getUserById(userId);
+    const user = await getUserById(userId, false);
     if (!includesObjectId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
     } else {
@@ -316,7 +326,7 @@ export const likeTweet = async (
   try {
     const { tweetId } = req.params;
     const { userId } = req;
-    const user = await getUserById(userId);
+    const user = await getUserById(userId, false);
     const tweet = await getTweetById(tweetId);
     if (includesObjectId(user.likes, tweetId)) {
       user.likes = removeObjectIdFromArr(user.likes, tweetId);
@@ -341,7 +351,7 @@ export const followUser = async (
   try {
     const { userId } = req.params;
     const authenticatedUserId = req.userId;
-    const user = await getUserById(userId);
+    const user = await getUserById(userId, false);
     const authenticatedUser = await getUserById(authenticatedUserId);
     if (includesObjectId(authenticatedUser.following, userId)) {
       authenticatedUser.following = removeObjectIdFromArr(

@@ -43,14 +43,14 @@ export const postTweet = async (
     }
     if (replyId !== undefined) {
       const replyTweet = await getTweetById(replyId);
-      if (includesObjectId(user.retweets, replyId)) {
-        user.retweets = removeObjectIdFromArr(user.retweets, replyId);
-        replyTweet.retweets -= 1;
-        user.retweets = [...user.retweets, mongoose.Types.ObjectId(replyId)];
-        replyTweet.retweets += 1;
+      if (includesObjectId(user.replies, replyId)) {
+        user.replies = removeObjectIdFromArr(user.replies, replyId);
+        replyTweet.replies -= 1;
+        user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
+        replyTweet.replies += 1;
       } else {
-        user.retweets = [...user.retweets, mongoose.Types.ObjectId(replyId)];
-        replyTweet.retweets += 1;
+        user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
+        replyTweet.replies += 1;
       }
       await replyTweet.save();
     }
@@ -70,7 +70,7 @@ export const postTweet = async (
     await tweet.save();
     await user.save();
     const tweetId = tweet._id;
-    res.status(200).json({ data: { tweetId } });
+    res.status(200).json({ data: { tweetId, } });
   } catch (err) {
     passErrorToNext(err, next);
   }

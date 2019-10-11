@@ -12,5 +12,7 @@ const user: User = {
   following: [],
   likes: [],
   bookmarks: [],
+  retweets: [],
+  replies: [],
 };
 export default user;

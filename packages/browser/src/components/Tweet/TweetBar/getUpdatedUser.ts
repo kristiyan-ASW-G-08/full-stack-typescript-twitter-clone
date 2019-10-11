@@ -1,22 +1,12 @@
 import axios from 'axios';
 import User from 'types/User';
-import Notification from 'types/Notification';
 
 export const getUpdatedUser = async (
   isAuth: boolean,
   token: string,
   url: string,
-  setNotification: (notification: Notification) => void,
 ): Promise<User | undefined> => {
   try {
-    if (!isAuth) {
-      const notification: Notification = {
-        type: 'warning',
-        content: 'Log in or Sign up to perform this action!',
-      };
-      setNotification(notification);
-      return;
-    }
     const config = {
       headers: { Authorization: 'bearer ' + token },
     };

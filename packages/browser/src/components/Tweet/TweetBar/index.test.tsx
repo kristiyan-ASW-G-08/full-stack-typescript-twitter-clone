@@ -6,7 +6,6 @@ import axios from 'axios';
 import TweetBar from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import tweet from 'testUtilities/tweet';
-import authState from 'testUtilities/authenticatedAuthState';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 
@@ -19,10 +18,12 @@ mockedAxios.patch.mockReturnValueOnce(
 describe('TweetBar', () => {
   const updateUser = jest.fn();
   const setNotification = jest.fn();
+  const setModalState = jest.fn();
   it('render TweetBar', async () => {
-    expect.assertions(5);
+    expect.assertions(6);
     const { rerender, getByTestId } = render(
       <TweetBar
+        setModalState={setModalState}
         authState={defaultAuthState}
         tweet={tweet}
         updateUser={updateUser}
@@ -34,19 +35,29 @@ describe('TweetBar', () => {
       },
     );
     const likeButton = await waitForElement(() => getByTestId('heart-button'));
+    const replyButton = await waitForElement(() =>
+      getByTestId('comment-button'),
+    );
+    const retweetButton = await waitForElement(() =>
+      getByTestId('retweet-button'),
+    );
     const bookmarkButton = await waitForElement(() =>
       getByTestId('bookmark-button'),
     );
 
     UserEvent.click(likeButton);
     UserEvent.click(bookmarkButton);
+    UserEvent.click(replyButton);
+    UserEvent.click(retweetButton);
 
     expect(likeButton).toBeTruthy();
     expect(bookmarkButton).toBeTruthy();
     expect(setNotification).toHaveBeenCalledTimes(2);
+    expect(setModalState).toHaveBeenCalledTimes(2);
 
     rerender(
       <TweetBar
+        setModalState={setModalState}
         authState={authenticatedAuthState}
         tweet={tweet}
         updateUser={updateUser}
