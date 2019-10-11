@@ -24,26 +24,33 @@ export const postTweet = async (
     const user = await getUserById(userId);
     if (retweetedId !== undefined) {
       const retweetedTweet = await getTweetById(retweetedId);
-      if (!includesObjectId(user.retweets, retweetedId)) {
+      if (includesObjectId(user.retweets, retweetedId)) {
+        user.retweets = removeObjectIdFromArr(user.retweets, retweetedId);
+        retweetedTweet.retweets -= 1;
         user.retweets = [
           ...user.retweets,
           mongoose.Types.ObjectId(retweetedId),
         ];
         retweetedTweet.retweets += 1;
       } else {
-        user.retweets = removeObjectIdFromArr(user.retweets, retweetedId);
-        retweetedTweet.retweets -= 1;
+        user.retweets = [
+          ...user.retweets,
+          mongoose.Types.ObjectId(retweetedId),
+        ];
+        retweetedTweet.retweets += 1;
       }
       await retweetedTweet.save();
     }
     if (replyId !== undefined) {
       const replyTweet = await getTweetById(replyId);
-      if (!includesObjectId(user.replies, replyId)) {
-        user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
-        replyTweet.replies += 1;
+      if (includesObjectId(user.retweets, replyId)) {
+        user.retweets = removeObjectIdFromArr(user.retweets, replyId);
+        replyTweet.retweets -= 1;
+        user.retweets = [...user.retweets, mongoose.Types.ObjectId(replyId)];
+        replyTweet.retweets += 1;
       } else {
-        user.replies = removeObjectIdFromArr(user.replies, replyId);
-        replyTweet.replies -= 1;
+        user.retweets = [...user.retweets, mongoose.Types.ObjectId(replyId)];
+        replyTweet.retweets += 1;
       }
       await replyTweet.save();
     }

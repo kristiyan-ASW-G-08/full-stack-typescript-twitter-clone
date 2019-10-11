@@ -318,12 +318,12 @@ export const likeTweet = async (
     const { userId } = req;
     const user = await getUserById(userId);
     const tweet = await getTweetById(tweetId);
-    if (!includesObjectId(user.likes, tweetId)) {
-      user.likes = [...user.likes, mongoose.Types.ObjectId(tweetId)];
-      tweet.likes += 1;
-    } else {
+    if (includesObjectId(user.likes, tweetId)) {
       user.likes = removeObjectIdFromArr(user.likes, tweetId);
       tweet.likes -= 1;
+    } else {
+      user.likes = [...user.likes, mongoose.Types.ObjectId(tweetId)];
+      tweet.likes += 1;
     }
     await tweet.save();
     await user.save();
@@ -343,18 +343,18 @@ export const followUser = async (
     const authenticatedUserId = req.userId;
     const user = await getUserById(userId);
     const authenticatedUser = await getUserById(authenticatedUserId);
-    if (!includesObjectId(authenticatedUser.following, userId)) {
-      authenticatedUser.following = [
-        ...authenticatedUser.following,
-        mongoose.Types.ObjectId(userId),
-      ];
-      user.followers += 1;
-    } else {
+    if (includesObjectId(authenticatedUser.following, userId)) {
       authenticatedUser.following = removeObjectIdFromArr(
         authenticatedUser.following,
         userId,
       );
       user.followers -= 1;
+    } else {
+      authenticatedUser.following = [
+        ...authenticatedUser.following,
+        mongoose.Types.ObjectId(userId),
+      ];
+      user.followers += 1;
     }
     await user.save();
     await authenticatedUser.save();
