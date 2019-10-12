@@ -11,6 +11,7 @@ import axios from 'axios';
 import TweetType from 'types/Tweet';
 import { TweetsWrapper, Select, Tweets, LoaderContainer } from './styled';
 import Tweet from 'components/Tweet/index';
+import Retweet from 'components/Retweet/index';
 import Notification from 'types/Notification';
 
 interface TweetProps {
@@ -110,9 +111,15 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
       {useMemo(
         () => (
           <Tweets>
-            {tweets.map((tweet: TweetType) => (
-              <Tweet key={tweet._id} tweet={tweet} />
-            ))}
+            {tweets.map((tweet: TweetType) =>
+              tweet.retweet ? (
+                <Retweet key={tweet._id} tweet={tweet}>
+                  <Tweet key={tweet._id} tweet={tweet.retweet} />
+                </Retweet>
+              ) : (
+                <Tweet key={tweet._id} tweet={tweet} />
+              ),
+            )}
           </Tweets>
         ),
         [tweets],

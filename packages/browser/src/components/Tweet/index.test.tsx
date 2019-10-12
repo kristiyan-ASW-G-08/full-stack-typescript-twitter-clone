@@ -4,14 +4,13 @@ import {
   waitForElement,
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import UserEvent from '@testing-library/user-event';
 import Tweet from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import tweet from 'testUtilities/tweet';
 
 describe('Tweet', () => {
   it('render Tweet', async () => {
-    // expect.assertions(5);
+    expect.assertions(5);
 
     const { container, getByText, getByAltText } = render(
       <Tweet tweet={tweet} />,

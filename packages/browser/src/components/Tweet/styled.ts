@@ -7,7 +7,7 @@ export const TweetWrapper = styled('article')`
   grid:
     'avatar user-bar user-bar ' auto
     'avatar . .' 0.3rem
-    '  .   content content'
+    '  .   content content' minmax(min-content, max-content)
     'tweet-bar tweet-bar tweet-bar ' 1fr/1fr 7fr 1fr;
   grid-row-gap: 0.3rem;
   background: ${props => props.theme.background};

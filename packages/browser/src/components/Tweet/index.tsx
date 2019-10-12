@@ -33,7 +33,7 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
-  console.log(tweet);
+  console.log(tweet.retweet);
   return useMemo(() => {
     return (
       <TweetWrapper>
