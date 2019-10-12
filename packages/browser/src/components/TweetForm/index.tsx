@@ -19,7 +19,7 @@ import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
 import useFilePicker from 'hooks/useFilePicker/useFilePicker';
-import ModalPayload from 'types/ModalPayload';
+import TweetFormModalProps from 'types/TweetFormProps';
 import {
   TweetFormWrapper,
   TwButtonButtonContainer,
@@ -29,24 +29,24 @@ import {
 } from './styled';
 
 interface TweetFormProps extends RouteComponentProps {
-  resetModalStore: () => void;
+  resetModalState: () => void;
   token: string;
   setNotification: (notification: Notification) => void;
-  payload: ModalPayload;
+  tweetFormProps: TweetFormModalProps;
 }
 export const TweetForm: FC<TweetFormProps> = ({
   history,
-  resetModalStore,
+  resetModalState,
   token,
   setNotification,
-  payload,
+  tweetFormProps,
 }) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
   useEffect(() => {
-    if (payload.type) {
-      setType(payload.type);
+    if (tweetFormProps.type) {
+      setType(tweetFormProps.type);
     }
   }, []);
   const [hasImage, setHasImage] = useState<boolean>(false);
@@ -56,7 +56,7 @@ export const TweetForm: FC<TweetFormProps> = ({
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const { retweetedId, replyId } = payload;
+      const { retweetedId, replyId } = tweetFormProps;
       const data = {
         ...e,
         type,
@@ -87,7 +87,7 @@ export const TweetForm: FC<TweetFormProps> = ({
         responseBody,
         config,
       );
-      resetModalStore();
+      resetModalState();
     } catch (error) {
       if (
         error &&

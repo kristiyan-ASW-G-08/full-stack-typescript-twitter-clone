@@ -8,13 +8,13 @@ import Notification from 'types/Notification';
 import User from 'types/User';
 import getUpdatedUser from './getUpdatedUser';
 import ShareButton from './ShareButton/index';
-import ModalPayload from 'types/ModalPayload';
+import TweetFormProps from 'types/TweetFormProps';
 
 interface TweetProps {
   tweet: TweetType;
   authState: AuthState;
   setNotification: (notification: Notification) => void;
-  setModalState: (type: 'tweetForm', payload?: ModalPayload) => void;
+  setModalState: (type: 'tweetForm', tweetFormProps?: TweetFormProps) => void;
   updateUser: (user: User | undefined) => void;
 }
 interface ButtonType {

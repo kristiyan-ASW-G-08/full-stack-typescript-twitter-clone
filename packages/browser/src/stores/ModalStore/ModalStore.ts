@@ -1,24 +1,31 @@
-import { observable, action, autorun } from 'mobx';
-import ModalPayload from 'types/ModalPayload';
-
+import { observable, action } from 'mobx';
+import ModalState from 'types/ModalState';
+import TweetFormProps from 'types/TweetFormProps';
+export const defaultModalState: ModalState = {
+  isActive: false,
+  type: 'tweetForm',
+  tweetFormProps: {
+    replyId: '',
+    retweetedId: '',
+  },
+};
 class ModalStore {
-  @observable
-  public isActive: boolean = false;
-  @observable
-  public type: 'tweetForm' = 'tweetForm';
-  @observable
-  public payload: ModalPayload = {};
-  @action public openModal(type: 'tweetForm', payload?: ModalPayload): void {
-    this.isActive = true;
-    this.type = type;
-    console.log(payload);
-    if (payload) {
-      this.payload = payload;
-    }
+  @observable public modalState: ModalState = defaultModalState;
+  @action public setModalState(
+    type: 'tweetForm' | 'profileForm',
+    tweetFormProps?: TweetFormProps,
+  ): void {
+    const newModalState: ModalState = {
+      isActive: true,
+      type,
+      tweetFormProps: tweetFormProps
+        ? tweetFormProps
+        : defaultModalState.tweetFormProps,
+    };
+    this.modalState = newModalState;
   }
-  @action public reset(): void {
-    console.log('reset');
-    this.isActive = false;
+  @action public resetModalState(): void {
+    this.modalState = defaultModalState;
   }
 }
 export default ModalStore;

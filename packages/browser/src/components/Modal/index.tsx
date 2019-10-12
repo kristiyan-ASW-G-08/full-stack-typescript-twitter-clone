@@ -8,16 +8,17 @@ export const Modal: FC = observer(() => {
   const { modalStore, notificationStore, authStore } = useContext(
     RootStoreContext,
   );
-  const { payload } = modalStore;
+  const { modalState } = modalStore;
   const modalComponents = {
     tweetForm: (
       <TweetForm
-        payload={modalStore.payload}
+        tweetFormProps={modalState.tweetFormProps}
         token={authStore.authState.token}
-        resetModalStore={() => modalStore.reset()}
+        resetModalState={() => modalStore.resetModalState()}
         setNotification={notificationStore.setNotification}
       />
     ),
+    profileForm: () => <div></div>,
   };
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -27,9 +28,9 @@ export const Modal: FC = observer(() => {
     };
   }, []);
   return (
-    <Backdrop onClick={() => modalStore.reset()}>
+    <Backdrop onClick={() => modalStore.resetModalState()}>
       <ModalWrapper onClick={(e: SyntheticEvent) => e.stopPropagation()}>
-        {modalComponents[modalStore.type]}
+        {modalComponents[modalState.type]}
       </ModalWrapper>
     </Backdrop>
   );

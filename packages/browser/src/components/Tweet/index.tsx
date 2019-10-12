@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  memo,
-  useContext,
-  useMemo,
-} from 'react';
+import React, { FC, memo, useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import {
   TweetWrapper,
@@ -24,7 +19,7 @@ import getTime from 'utilities/getTime';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 import User from 'types/User';
-import ModalPayload from 'types/ModalPayload';
+import TweetFormProps from 'types/TweetFormProps';
 
 interface TweetProps {
   tweet: TweetType;
@@ -61,8 +56,8 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
           {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
         </ContentContainer>
         <TweetBar
-          setModalState={(type: 'tweetForm', payload?: ModalPayload) =>
-            modalStore.openModal(type, payload)
+          setModalState={(type: 'tweetForm', payload?: TweetFormProps) =>
+            modalStore.setModalState(type, payload)
           }
           tweet={tweet}
           authState={authStore.authState}

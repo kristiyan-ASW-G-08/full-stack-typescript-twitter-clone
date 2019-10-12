@@ -1,16 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import TweetForm from 'components/TweetForm/index';
-import ModalPayload from 'types/ModalPayload';
+import TweetFormProps from 'types/TweetFormProps';
 
-const payload: ModalPayload = {};
+const tweetFormProps: TweetFormProps = {};
 storiesOf('TweetForm', module)
   .add(
     'light theme',
     () => (
       <TweetForm
-        payload={payload}
-        resetModalStore={() => {}}
+        tweetFormProps={tweetFormProps}
+        resetModalState={() => {}}
         setNotification={() => {}}
         token={''}
       />
@@ -24,8 +24,8 @@ storiesOf('TweetForm', module)
     'dark theme',
     () => (
       <TweetForm
-        payload={payload}
-        resetModalStore={() => {}}
+        tweetFormProps={tweetFormProps}
+        resetModalState={() => {}}
         setNotification={() => {}}
         token={''}
       />
@@ -35,3 +35,5 @@ storiesOf('TweetForm', module)
       options: { currentTheme: 'dark' },
     },
   );
+
+export default {};

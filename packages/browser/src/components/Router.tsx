@@ -34,12 +34,13 @@ const Router: FC = observer(
     const { isAuth } = authStore.authState;
     const { theme } = themeStore;
     const { notification, isNotificationActive } = notificationStore;
+    const { modalState } = modalStore;
     return (
       <BrowserRouter>
         <>
           {isAuth ? (
             <MobileTweetButton
-              onClick={() => modalStore.openModal('tweetForm')}
+              onClick={() => modalStore.setModalState('tweetForm')}
             >
               {' '}
               <FontAwesomeIcon icon="feather-alt" />
@@ -47,7 +48,7 @@ const Router: FC = observer(
           ) : (
             ''
           )}
-          {modalStore.isActive ? (
+          {modalState.isActive ? (
             <Suspense fallback={<CenteredLoader />}>
               <Portal portalId={'modal'} children={<Modal />} />
             </Suspense>
@@ -66,7 +67,7 @@ const Router: FC = observer(
           )}
           <Navbar
             openModal={() => {
-              modalStore.openModal('tweetForm');
+              modalStore.setModalState('tweetForm');
             }}
             toggleSidebar={() => sidebarStore.toggleSidebar()}
             theme={theme}
