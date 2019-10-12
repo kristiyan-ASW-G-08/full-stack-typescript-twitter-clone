@@ -11,6 +11,9 @@ const tweet: Tweet = {
   likes: 0,
   retweets: 0,
   replies: 0,
-  reply: '',
+  reply: {
+    _id: 'id',
+    user,
+  },
 };
 export default tweet;

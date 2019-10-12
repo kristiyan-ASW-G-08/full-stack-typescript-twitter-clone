@@ -7,5 +7,4 @@ export default interface Tweet {
   replies: number;
   image: string;
   link: string;
-  reply: string;
 }

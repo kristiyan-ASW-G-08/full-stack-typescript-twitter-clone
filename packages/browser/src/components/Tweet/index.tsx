@@ -6,6 +6,7 @@ import {
   Username,
   Handle,
   Text,
+  Reply,
   ContentContainer,
   AvatarContainer,
   Time,
@@ -28,10 +29,11 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
   const { authStore, notificationStore, modalStore } = useContext(
     RootStoreContext,
   );
-  const { user, text, date, image, link } = tweet;
+  const { user, text, date, image, link, reply } = tweet;
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
-  const { hours, days } = getTime(milliseconds);
+  const { hours, days, minutes } = getTime(milliseconds);
+  console.log(tweet);
   return useMemo(() => {
     return (
       <TweetWrapper>
@@ -41,8 +43,16 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
         <UserBar>
           <Username>{username}</Username> <Handle>@{handle}</Handle>{' '}
           <Time>
-            {days}d:{hours}h
+            {days <= 0 ? '' : `${days}d:`}
+            {hours}h{hours <= 0 ? `:${days}d:` : ''}
           </Time>
+          {reply ? (
+            <Reply>
+              Replying to <span>@{reply.user.handle}</span>
+            </Reply>
+          ) : (
+            ''
+          )}
         </UserBar>
         <ContentContainer>
           <Text>{text}</Text>
