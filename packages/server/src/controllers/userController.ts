@@ -442,14 +442,16 @@ export const getUsersList = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { searchTerm } = req.params;
+    const { searchQuery } = req.params;
+    const searchRegex = new RegExp(searchQuery, 'g');
     const users = await User.find(
       {
-        $text: { $search: searchTerm },
+        handle: { $regex: searchRegex },
       },
       'username handle profilePhoto',
     )
       .select({ score: { $meta: 'textScore' } })
+      .limit(10)
       .exec();
     res.status(200).json({ data: { users } });
   } catch (err) {

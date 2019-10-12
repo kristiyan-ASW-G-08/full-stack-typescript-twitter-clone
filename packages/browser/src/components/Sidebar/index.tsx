@@ -16,7 +16,7 @@ import {
   SearchBarWrapper,
 } from './styled';
 import Logo from 'components/Logo';
-import SearchBar from 'components/SearchBar/SearchBar';
+import SearchBar from 'components/SearchBar';
 import AuthState from 'types/AuthState';
 import Avatar from 'components/Avatar/index';
 

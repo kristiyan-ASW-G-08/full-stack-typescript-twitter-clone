@@ -1,7 +1,7 @@
 import User from 'types/User';
 const user: User = {
-  username: 'mockUserName',
-  handle: 'mockUserHandle',
+  username: 'username',
+  handle: 'userHandle',
   email: 'mockUserEmail@mail.com',
   profilePhoto: 'default',
   headerPhoto: 'default',
@@ -14,5 +14,6 @@ const user: User = {
   bookmarks: [],
   retweets: [],
   replies: [],
+  _id: 'id',
 };
 export default user;

@@ -70,7 +70,7 @@ router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
 
 router.get('/users/:userId/likes', getUserLikes);
 
-router.get('/users/:searchTerm', getUsersList);
+router.get('/users/:searchQuery', getUsersList);
 
 router.get('/users/user/tweets', isAuth, getUserFeed);
 

@@ -7,4 +7,5 @@ export default interface User extends CommonUser {
   replies: string[];
   retweets: string[];
   avatar?: string;
+  _id: string;
 }

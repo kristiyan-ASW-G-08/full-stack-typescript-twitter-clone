@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Logo from 'components/Logo';
 import StyledButton from 'styled/Button';
-import SearchBar from 'components/SearchBar/SearchBar';
+import SearchBar from 'components/SearchBar';
 import Avatar from 'components/Avatar/index';
 import AuthState from 'types/AuthState';
 
