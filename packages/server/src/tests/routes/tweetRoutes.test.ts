@@ -70,7 +70,7 @@ describe('tweetRoutes', (): void => {
           text,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
     it('should create a new link tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -98,7 +98,42 @@ describe('tweetRoutes', (): void => {
           linkUrl: link,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
+    });
+    it('should create a new retweet', async (): Promise<void> => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const tweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await tweet.save();
+      const retweetedId = tweet._id;
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const type = 'retweet';
+      const response = await request(app)
+        .post('/tweets')
+        .send({
+          type,
+          text,
+          retweetedId,
+        })
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toBe(200);
     });
     it('should create a new reply tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -110,7 +145,13 @@ describe('tweetRoutes', (): void => {
       });
       await newUser.save();
       const userId = newUser._id;
-      const replyId = mongoose.Types.ObjectId();
+      const tweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await tweet.save();
+      const replyId = tweet._id;
       const token = jwt.sign(
         {
           userId,
@@ -127,7 +168,7 @@ describe('tweetRoutes', (): void => {
           replyId,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
     it('should create a new image tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -140,7 +181,7 @@ describe('tweetRoutes', (): void => {
       await newUser.save();
       const userId = newUser._id;
       mockFs({
-        './src/assets/images': {
+        './images': {
           'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
         },
       });
@@ -158,9 +199,9 @@ describe('tweetRoutes', (): void => {
           type,
           text,
         })
-        .attach('image', './src/assets/images/test.jpg')
+        .attach('image', './images/test.jpg')
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
 
     it("should throw an error with a status of 400: BadRequest when the tweet type and the content don't match", async (): Promise<
@@ -191,7 +232,7 @@ describe('tweetRoutes', (): void => {
           text,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(400);
     });
     it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
@@ -204,7 +245,7 @@ describe('tweetRoutes', (): void => {
           type,
           text,
         });
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(401);
     });
   });
   describe('patch /tweets/:tweetId', (): void => {
@@ -237,7 +278,7 @@ describe('tweetRoutes', (): void => {
       if (!tweet) {
         return;
       }
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(tweet.text).toMatch(newText);
     });
     it('should update a link tweet', async (): Promise<void> => {
@@ -269,52 +310,8 @@ describe('tweetRoutes', (): void => {
       if (!tweet) {
         return;
       }
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(tweet.link).toMatch(newLink);
-    });
-    it('should throw an error with a status of 404: NotFound when the tweet is not found', async (): Promise<
-      void
-    > => {
-      const newLink = 'https://fakeNewLink.com';
-      expect.assertions(1);
-      const userId = mongoose.Types.ObjectId().toString();
-      const tweetId = mongoose.Types.ObjectId();
-      const token = jwt.sign(
-        {
-          userId,
-        },
-        secret,
-        { expiresIn: '1h' },
-      );
-      const response = await request(app)
-        .patch(`/tweets/${tweetId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          type: 'link',
-          linkUrl: newLink,
-        });
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const newLink = 'https://fakeNewLink.com';
-      const userId = mongoose.Types.ObjectId().toString();
-      const newTweet = new Tweet({
-        type: 'link',
-        link,
-        user: userId,
-      });
-      await newTweet.save();
-      const tweetId = newTweet._id;
-      const response = await request(app)
-        .patch(`/tweets/${tweetId}`)
-        .send({
-          type: 'link',
-          linkUrl: newLink,
-        });
-      expect(response.status).toEqual(401);
     });
     it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
@@ -338,7 +335,51 @@ describe('tweetRoutes', (): void => {
       const response = await request(app)
         .patch(`/tweets/${tweetId}`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(400);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const newLink = 'https://fakeNewLink.com';
+      const userId = mongoose.Types.ObjectId().toString();
+      const newTweet = new Tweet({
+        type: 'link',
+        link,
+        user: userId,
+      });
+      await newTweet.save();
+      const tweetId = newTweet._id;
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .send({
+          type: 'link',
+          linkUrl: newLink,
+        });
+      expect(response.status).toBe(401);
+    });
+    it('should throw an error with a status of 404: NotFound when the tweet is not found', async (): Promise<
+      void
+    > => {
+      const newLink = 'https://fakeNewLink.com';
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId().toString();
+      const tweetId = mongoose.Types.ObjectId();
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+      const response = await request(app)
+        .patch(`/tweets/${tweetId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          type: 'link',
+          linkUrl: newLink,
+        });
+      expect(response.status).toBe(404);
     });
   });
   describe('delete /tweets/:tweetId', (): void => {
@@ -363,7 +404,7 @@ describe('tweetRoutes', (): void => {
         .delete(`/tweets/${tweetId}`)
         .set('Authorization', `Bearer ${token}`);
       const tweet = await Tweet.findById(tweetId);
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(tweet).toBeNull();
     });
     it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
@@ -390,7 +431,7 @@ describe('tweetRoutes', (): void => {
         .delete(`/tweets/${tweetId}`)
         .set('Authorization', `Bearer ${token}`);
       const tweet = await Tweet.findById(tweetId);
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(401);
       expect(tweet).not.toBeNull();
     });
     it('should throw an error with a status of 404: NotFound when the tweet is not found', async (): Promise<
@@ -409,7 +450,7 @@ describe('tweetRoutes', (): void => {
       const response = await request(app)
         .delete(`/tweets/${tweetId}`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('get /tweets/:tweetId', (): void => {
@@ -432,7 +473,7 @@ describe('tweetRoutes', (): void => {
       const tweetId = newTweet._id;
       const response = await request(app).get(`/tweets/${tweetId}`);
       const { tweet } = response.body.data;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(tweet._id.toString()).toMatch(tweetId.toString());
     });
     it('should throw an error with a status of 404: NotFound when the tweet is not found', async (): Promise<
@@ -441,7 +482,7 @@ describe('tweetRoutes', (): void => {
       expect.assertions(1);
       const tweetId = mongoose.Types.ObjectId();
       const response = await request(app).get(`/tweets/${tweetId}`);
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('get /users/:userId/tweets', (): void => {
@@ -455,7 +496,7 @@ describe('tweetRoutes', (): void => {
       });
       await newTweet.save();
       const response = await request(app).get(`/users/${userId}/tweets`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
   });
   describe('get /tweets', (): void => {
@@ -469,7 +510,7 @@ describe('tweetRoutes', (): void => {
       });
       await newTweet.save();
       const response = await request(app).get(`/tweets`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
   });
   describe('get /tweets/:tweetId/replies', (): void => {
@@ -485,7 +526,7 @@ describe('tweetRoutes', (): void => {
       });
       await newReply.save();
       const response = await request(app).get(`/tweets/${tweetId}/replies`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
   });
   describe('get /users/:userId/replies', (): void => {
@@ -501,7 +542,7 @@ describe('tweetRoutes', (): void => {
       });
       await newReply.save();
       const response = await request(app).get(`/users/${userId}/replies`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
   });
 });

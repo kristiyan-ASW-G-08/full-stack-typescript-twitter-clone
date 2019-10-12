@@ -9,7 +9,7 @@ export const getTweetById = async (tweetId: string): Promise<TweetType> => {
     const validationErrorsArr: ValidationError[] = [
       {
         name: '',
-        message: 'Tweet does not exist',
+        message: 'Tweet not found!',
       },
     ];
     const { status, message } = errors.NotFound;

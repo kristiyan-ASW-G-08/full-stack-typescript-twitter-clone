@@ -10,7 +10,7 @@ export const getUserByEmail = async (email: string): Promise<UserType> => {
     const validationErrorsArr: ValidationError[] = [
       {
         name: 'email',
-        message: 'User with this email does not exist',
+        message: 'User not found!',
       },
     ];
     const { status, message } = errors.NotFound;
@@ -32,7 +32,7 @@ export const getUserById = async (
     const validationErrorsArr: ValidationError[] = [
       {
         name: '',
-        message: 'User does not exist',
+        message: 'User not found!',
       },
     ];
     const { status, message } = errors.NotFound;
@@ -46,7 +46,7 @@ export const checkUserConfirmation = async (user: UserType): Promise<void> => {
     const validationErrorsArr: ValidationError[] = [
       {
         name: 'email',
-        message: 'Confirm your email to login.',
+        message: 'Confirm your email to proceed.',
       },
     ];
     const { status, message } = errors.Unauthorized;

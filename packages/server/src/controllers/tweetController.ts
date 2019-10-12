@@ -22,6 +22,7 @@ export const postTweet = async (
     const { userId } = req;
 
     const user = await getUserById(userId);
+    console.log(user);
     if (retweetedId !== undefined) {
       const retweetedTweet = await getTweetById(retweetedId);
       if (includesObjectId(user.retweets, retweetedId)) {
@@ -70,7 +71,7 @@ export const postTweet = async (
     await tweet.save();
     await user.save();
     const tweetId = tweet._id;
-    res.status(200).json({ data: { tweetId, } });
+    res.status(200).json({ data: { tweetId } });
   } catch (err) {
     passErrorToNext(err, next);
   }

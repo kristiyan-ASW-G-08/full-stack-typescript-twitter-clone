@@ -57,7 +57,7 @@ describe('userRoutes', (): void => {
           password,
           confirmPassword: password,
         });
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(sendEmail).toHaveBeenCalledTimes(1);
     });
     it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
@@ -73,7 +73,16 @@ describe('userRoutes', (): void => {
           password: invalidPassword,
           confirmPassword: password,
         });
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(400);
+      expect(response.body).toMatchSnapshot();
+      expect(sendEmail).not.toHaveBeenCalled();
+    });
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
+      expect.assertions(3);
+      const response = await request(app).post('/users');
+      expect(response.status).toBe(400);
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
@@ -91,16 +100,7 @@ describe('userRoutes', (): void => {
           password,
           confirmPassword: password,
         });
-      expect(response.status).toEqual(409);
-      expect(response.body).toMatchSnapshot();
-      expect(sendEmail).not.toHaveBeenCalled();
-    });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
-      void
-    > => {
-      expect.assertions(3);
-      const response = await request(app).post('/users');
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(409);
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
@@ -125,11 +125,19 @@ describe('userRoutes', (): void => {
           password,
         });
       const { token, user } = response.body.data;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(typeof token).toMatch('string');
       expect(user.username).toMatch(username);
       expect(user.handle).toMatch(handle);
       expect(user.email).toMatch(email);
+    });
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
+      expect.assertions(2);
+      const response = await request(app).post('/users/user/tokens');
+      expect(response.status).toBe(400);
+      expect(response.body).toMatchSnapshot();
     });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
@@ -141,15 +149,7 @@ describe('userRoutes', (): void => {
           email,
           password,
         });
-      expect(response.status).toEqual(404);
-    });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
-      void
-    > => {
-      expect.assertions(2);
-      const response = await request(app).post('/users/user/tokens');
-      expect(response.status).toEqual(400);
-      expect(response.body).toMatchSnapshot();
+      expect(response.status).toBe(404);
     });
   });
   describe('patch /users/user/:token/confirm', (): void => {
@@ -177,7 +177,7 @@ describe('userRoutes', (): void => {
       if (!confirmedUser) {
         return;
       }
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(confirmedUser.confirmed).toBeTruthy();
     });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
@@ -193,7 +193,7 @@ describe('userRoutes', (): void => {
         { expiresIn: '1h' },
       );
       const response = await request(app).patch(`/users/user/${token}/confirm`);
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('post /users/user', (): void => {
@@ -210,7 +210,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .post(`/users/user`)
         .send({ email });
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
     });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
@@ -219,7 +219,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .post(`/users/user`)
         .send({ email });
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('patch /users/user/reset', (): void => {
@@ -248,7 +248,7 @@ describe('userRoutes', (): void => {
           password: newPassword,
           confirmPassword: newPassword,
         });
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
     });
     it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
@@ -277,7 +277,7 @@ describe('userRoutes', (): void => {
           password: newPassword,
           confirmPassword: newPassword,
         });
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(400);
     });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
@@ -299,7 +299,7 @@ describe('userRoutes', (): void => {
           password: newPassword,
           confirmPassword: newPassword,
         });
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('patch /users/user/profile', (): void => {
@@ -340,11 +340,75 @@ describe('userRoutes', (): void => {
       if (!user) {
         return;
       }
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
       expect(user.username).toMatch(newUsername);
       expect(user.handle).toMatch(newHandle);
       expect(user.website).toMatch(website);
     });
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toBe(400);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .send({
+          username: newUsername,
+          handle: newHandle,
+          website,
+        });
+      expect(response.status).toBe(401);
+    });
+    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+
+      const token = jwt.sign(
+        {
+          userId,
+        },
+        secret,
+        { expiresIn: '1h' },
+      );
+
+      const response = await request(app)
+        .patch(`/users/user/profile`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          username: newUsername,
+          handle: newHandle,
+          website,
+        });
+      expect(response.status).toBe(404);
+    });
+
     it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
       void
     > => {
@@ -374,70 +438,7 @@ describe('userRoutes', (): void => {
           handle,
           website,
         });
-      expect(response.status).toEqual(409);
-    });
-    it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const userId = mongoose.Types.ObjectId();
-
-      const token = jwt.sign(
-        {
-          userId,
-        },
-        secret,
-        { expiresIn: '1h' },
-      );
-
-      const response = await request(app)
-        .patch(`/users/user/profile`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          username: newUsername,
-          handle: newHandle,
-          website,
-        });
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const response = await request(app)
-        .patch(`/users/user/profile`)
-        .send({
-          username: newUsername,
-          handle: newHandle,
-          website,
-        });
-      expect(response.status).toEqual(401);
-    });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
-
-      const token = jwt.sign(
-        {
-          userId,
-        },
-        secret,
-        { expiresIn: '1h' },
-      );
-
-      const response = await request(app)
-        .patch(`/users/user/profile`)
-        .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(400);
+      expect(response.status).toBe(409);
     });
   });
   describe('patch /users/tweets/:tweetId/bookmark', (): void => {
@@ -470,7 +471,7 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
       if (!user) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(user.bookmarks.length).toBe(1);
       expect(user.bookmarks[0].equals(tweetId)).toBeTruthy();
     });
@@ -505,11 +506,20 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       const user = await User.findById(userId);
       if (!user) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(user.bookmarks.length).toBe(0);
       expect(user.bookmarks[0]).toBeUndefined();
     });
-
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const tweetId = mongoose.Types.ObjectId();
+      const response = await request(app).patch(
+        `/users/tweets/${tweetId}/bookmark`,
+      );
+      expect(response.status).toBe(401);
+    });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
     > => {
@@ -532,17 +542,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .patch(`/users/tweets/${tweetId}/bookmark`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const tweetId = mongoose.Types.ObjectId();
-      const response = await request(app).patch(
-        `/users/tweets/${tweetId}/bookmark`,
-      );
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(404);
     });
   });
   describe('patch /users/tweets/:tweetId/like', (): void => {
@@ -576,7 +576,7 @@ describe('userRoutes', (): void => {
       const user = await User.findById(userId);
       const tweet = await Tweet.findById(tweetId);
       if (!user || !tweet) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(user.likes.length).toBe(1);
       expect(user.likes[0].equals(tweetId)).toBeTruthy();
       expect(tweet.likes).toBe(1);
@@ -614,12 +614,21 @@ describe('userRoutes', (): void => {
       const user = await User.findById(userId);
       const tweet = await Tweet.findById(tweetId);
       if (!user || !tweet) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(user.likes.length).toBe(0);
       expect(user.likes[0]).toBeUndefined();
       expect(tweet.likes).toBe(0);
     });
-
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const tweetId = mongoose.Types.ObjectId();
+      const response = await request(app).patch(
+        `/users/tweets/${tweetId}/like`,
+      );
+      expect(response.status).toBe(401);
+    });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
     > => {
@@ -642,17 +651,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .patch(`/users/tweets/${tweetId}/like`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const tweetId = mongoose.Types.ObjectId();
-      const response = await request(app).patch(
-        `/users/tweets/${tweetId}/like`,
-      );
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(404);
     });
   });
   describe('patch /users/:userId/', (): void => {
@@ -687,7 +686,7 @@ describe('userRoutes', (): void => {
       const authenticatedUser = await User.findById(authenticatedUserId);
       const user = await User.findById(userId);
       if (!authenticatedUser || !user) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(authenticatedUser.following.length).toBe(1);
       expect(authenticatedUser.following[0].equals(userId)).toBeTruthy();
       expect(user.followers).toBe(1);
@@ -726,12 +725,19 @@ describe('userRoutes', (): void => {
       const authenticatedUser = await User.findById(authenticatedUserId);
       const user = await User.findById(userId);
       if (!authenticatedUser || !user) return;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(authenticatedUser.following.length).toBe(0);
       expect(authenticatedUser.following[0]).toBeUndefined();
       expect(user.followers).toBe(0);
     });
-
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const userId = mongoose.Types.ObjectId();
+      const response = await request(app).patch(`/users/${userId}`);
+      expect(response.status).toBe(401);
+    });
     it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
       void
     > => {
@@ -748,15 +754,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .patch(`/users/${userId}`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const userId = mongoose.Types.ObjectId();
-      const response = await request(app).patch(`/users/${userId}`);
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(404);
     });
   });
   describe('get /users/user/bookmarks', (): void => {
@@ -788,14 +786,14 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .get(`/users/user/bookmarks`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
     it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
       const response = await request(app).get(`/users/user/bookmarks`);
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(401);
     });
   });
   describe('get /users/:userId/likes', (): void => {
@@ -820,7 +818,7 @@ describe('userRoutes', (): void => {
       await newUser.save();
       const userId = newUser._id;
       const response = await request(app).get(`/users/${userId}/likes`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
     it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
@@ -828,7 +826,7 @@ describe('userRoutes', (): void => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId();
       const response = await request(app).get(`/users/${userId}/likes`);
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('get /users/:searchTerm', (): void => {
@@ -859,7 +857,7 @@ describe('userRoutes', (): void => {
       const searchTerm = 'userHandle';
       const response = await request(app).get(`/users/${searchTerm}`);
       const { users } = response.body.data;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(users).toHaveLength(1);
     });
   });
@@ -902,7 +900,7 @@ describe('userRoutes', (): void => {
         .get(`/users/user/tweets`)
         .set('Authorization', `Bearer ${token}`);
       const { tweets } = response.body.data;
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
       expect(tweets).toHaveLength(1);
     });
     it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
@@ -932,7 +930,7 @@ describe('userRoutes', (): void => {
       });
       await newUser.save();
       const response = await request(app).get(`/users/user/tweets`);
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(401);
     });
     it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
@@ -970,7 +968,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .get(`/users/user/tweets`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
+      expect(response.status).toBe(404);
     });
   });
   describe('delete /users', (): void => {
@@ -994,7 +992,14 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .delete(`/users`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(204);
+      expect(response.status).toBe(204);
+    });
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+      void
+    > => {
+      expect.assertions(1);
+      const response = await request(app).delete(`/users`);
+      expect(response.status).toBe(401);
     });
     it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
@@ -1011,14 +1016,7 @@ describe('userRoutes', (): void => {
       const response = await request(app)
         .delete(`/users`)
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(404);
-    });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const response = await request(app).delete(`/users`);
-      expect(response.status).toEqual(401);
+      expect(response.status).toBe(404);
     });
   });
 });
