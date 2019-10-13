@@ -1,24 +1,33 @@
 import styled from 'styled-components';
 
 interface AvatarProps {
-  size?: 'small' | 'large';
+  size?: 'small' | 'large' | 'larger';
 }
+const sizes = {
+  small: '2.7rem',
+  large: '4rem',
+  larger: '8rem',
+};
+const getSize = (size: 'small' | 'large' | 'larger' = 'small'): string => {
+  return sizes[size];
+};
 export const StyledAvatar = styled('button')<AvatarProps>`
-  ${props => props.theme.mixins.center}
-  height: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
-  width: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
+  ${props => props.theme.mixins.center};
+  height: ${props => getSize(props.size)};
+  width: ${props => getSize(props.size)};
   border: none;
   border-radius: 100%;
   background: none;
   img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+    border-radius: 100%;
+    height: inherit;
+    width: inherit;
+    object-fit: cover;
   }
 `;
 
 export const IconContainer = styled('div')<AvatarProps>`
-  font-size: ${props => (props.size === 'small' ? '2.7rem' : '4rem')};
+  font-size: ${props => getSize(props.size)};
   ${props => props.theme.mixins.center}
   width: 100%;
   height: 100%;

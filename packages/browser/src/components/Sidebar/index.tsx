@@ -86,18 +86,23 @@ export const Sidebar: FC<SidebarProps> = ({
 
                 <SidebarList>
                   <li>
-                    <SidebarButton>
-                      <span>
-                        <FontAwesomeIcon icon={'home'} />
-                      </span>
-                      <p>Home</p>
-                    </SidebarButton>
+                    <Link to={'/'} onClick={toggleSidebar}>
+                      <SidebarButton>
+                        <span>
+                          <FontAwesomeIcon icon={'home'} />
+                        </span>
+                        <p>Home</p>
+                      </SidebarButton>
+                    </Link>
                   </li>
                   {authState.isAuth ? (
                     <>
                       {' '}
                       <li>
-                        <Link to={`/profile/${authState.user._id}`}>
+                        <Link
+                          to={`/profile/${authState.user._id}`}
+                          onClick={toggleSidebar}
+                        >
                           <SidebarButton>
                             <span>
                               <FontAwesomeIcon icon={'user'} />

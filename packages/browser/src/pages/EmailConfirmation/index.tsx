@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { useParams, useHistory } from 'react-router';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';

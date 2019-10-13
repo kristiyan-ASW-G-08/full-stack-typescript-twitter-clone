@@ -8,7 +8,7 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import Input from 'styled/Input';

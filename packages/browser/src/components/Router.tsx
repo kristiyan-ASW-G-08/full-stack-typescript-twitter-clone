@@ -17,6 +17,7 @@ import MobileTweetButton from 'styled/MobileTweetButton';
 const Login = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
+const Profile = lazy(() => import('pages/Profile'));
 const EmailConfirmation = lazy(() => import('pages/EmailConfirmation'));
 const Modal = lazy(() => import('components/Modal'));
 const Portal = lazy(() => import('components/Portal/Portal'));
@@ -117,7 +118,7 @@ const Router: FC = observer(
               path="/profile/:userId"
               render={(props: RouteComponentProps): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <div>User</div>
+                  <Profile authState={authStore.authState} />
                 </Suspense>
               )}
             />
@@ -125,7 +126,7 @@ const Router: FC = observer(
               exact
               render={(): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <NotFound  />
+                  <NotFound />
                 </Suspense>
               )}
             />

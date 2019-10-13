@@ -4,7 +4,7 @@ import { StyledAvatar, IconContainer } from './styled';
 
 interface AvatarProps {
   avatarURL?: string;
-  size?: 'small' | 'large';
+  size?: 'small' | 'large' | 'larger';
   altText?: string;
 }
 export const Avatar: FC<AvatarProps> = ({

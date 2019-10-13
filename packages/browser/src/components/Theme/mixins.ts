@@ -1,8 +1,12 @@
 import { css } from 'styled-components';
 import { setLightness } from 'polished';
 
-const border = css`
-  border: solid 1px
+interface BorderProps {
+  direction?: 'top' | 'bottom' | 'right' | 'left';
+}
+const border = css<BorderProps>`
+  ${props => (props.direction ? `border-${props.direction}` : 'border')}: solid
+    1px
     ${props =>
       props.theme.currentTheme === 'light'
         ? setLightness(0.8, props.theme.secondary)
