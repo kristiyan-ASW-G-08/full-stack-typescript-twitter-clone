@@ -88,38 +88,47 @@ const Router: FC = observer(
             <Route
               exact
               path="/log-in"
-              render={(props: RouteComponentProps): JSX.Element => (
+              render={(): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <Login {...props} />
+                  <Login />
                 </Suspense>
               )}
             />
             <Route
               exact
               path="/sign-up"
-              render={(props: RouteComponentProps): JSX.Element => (
+              render={(): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <SignUpPage {...props} />
+                  <SignUpPage />
                 </Suspense>
               )}
             />
             <Route
               exact
               path="/confirmation/:token"
-              render={(props: RouteComponentProps): JSX.Element => (
+              render={(): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <EmailConfirmation {...props} />
+                  <EmailConfirmation />
                 </Suspense>
               )}
             />
             <Route
               exact
+              path="/profile/:userId"
               render={(props: RouteComponentProps): JSX.Element => (
                 <Suspense fallback={<CenteredLoader />}>
-                  <NotFound {...props} />
+                  <div>User</div>
                 </Suspense>
               )}
-            />{' '}
+            />
+            <Route
+              exact
+              render={(): JSX.Element => (
+                <Suspense fallback={<CenteredLoader />}>
+                  <NotFound  />
+                </Suspense>
+              )}
+            />
           </Switch>
         </>
       </BrowserRouter>

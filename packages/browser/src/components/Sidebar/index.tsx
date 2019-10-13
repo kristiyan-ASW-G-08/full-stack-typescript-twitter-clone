@@ -39,6 +39,7 @@ export const Sidebar: FC<SidebarProps> = ({
 }) => {
   const { user, isAuth, token } = authState;
   const { username, handle, following, followers } = user;
+  console.log(user);
   return (
     <>
       {' '}
@@ -96,12 +97,14 @@ export const Sidebar: FC<SidebarProps> = ({
                     <>
                       {' '}
                       <li>
-                        <SidebarButton>
-                          <span>
-                            <FontAwesomeIcon icon={'user'} />
-                          </span>
-                          <p>Profile</p>
-                        </SidebarButton>
+                        <Link to={`/profile/${authState.user._id}`}>
+                          <SidebarButton>
+                            <span>
+                              <FontAwesomeIcon icon={'user'} />
+                            </span>
+                            <p>Profile</p>
+                          </SidebarButton>
+                        </Link>
                       </li>
                       <li>
                         <SidebarButton>

@@ -8,10 +8,10 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import Input from 'styled/Input';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
@@ -20,8 +20,9 @@ import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 
-export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
+export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
+  const history = useHistory();
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
@@ -92,4 +93,4 @@ export const LoginPage: FC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default withRouter(observer(LoginPage));
+export default observer(LoginPage);

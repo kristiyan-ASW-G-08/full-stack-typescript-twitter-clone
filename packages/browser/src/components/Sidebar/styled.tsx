@@ -130,6 +130,9 @@ export const SidebarList = styled('ul')`
   li {
     width: 10rem;
     margin-top: 1.5rem;
+    a {
+      display: block;
+    }
   }
 `;
 

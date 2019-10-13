@@ -153,6 +153,7 @@ export const logIn = async (
       date,
       replies,
       retweets,
+      _id,
     } = user;
     const userData = {
       username,
@@ -164,6 +165,7 @@ export const logIn = async (
       date,
       replies,
       retweets,
+      _id,
     };
     res.status(200).json({ data: { token, user: userData } });
   } catch (err) {

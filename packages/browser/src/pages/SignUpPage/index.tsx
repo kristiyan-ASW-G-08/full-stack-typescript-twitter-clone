@@ -8,9 +8,9 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import Input from 'styled/Input';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
@@ -19,7 +19,8 @@ import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 
-export const SignUpPage: FC<RouteComponentProps> = ({ history }) => {
+export const SignUpPage: FC = () => {
+  const history = useHistory();
   const { notificationStore } = useContext(RootStoreContext);
   const submitHandler = async (
     e: FormikValues,
@@ -104,4 +105,4 @@ export const SignUpPage: FC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default withRouter(SignUpPage);
+export default SignUpPage;

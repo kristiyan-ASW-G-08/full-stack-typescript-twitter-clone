@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router';
 import axios from 'axios';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
@@ -7,15 +7,10 @@ import { Title, Paragraph, Container } from 'styled/Title';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 
-interface MatchParams {
-  token: string;
-}
-export const EmailConfirmation: FC<RouteComponentProps<MatchParams>> = ({
-  history,
-  match,
-}) => {
+export const EmailConfirmation: FC = () => {
   const { notificationStore } = useContext(RootStoreContext);
-  const { token } = match.params;
+  const { token } = useParams();
+  const history = useHistory();
   const confirmationHandler = async () => {
     try {
       const response = await axios.patch(
@@ -52,4 +47,4 @@ export const EmailConfirmation: FC<RouteComponentProps<MatchParams>> = ({
     </PageContainer>
   );
 };
-export default withRouter(EmailConfirmation);
+export default EmailConfirmation;
