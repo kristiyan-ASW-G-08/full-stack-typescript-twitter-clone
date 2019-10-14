@@ -1,9 +1,17 @@
 import styled from 'styled-components';
+export const LoaderWrapper = styled('div')`
+  ${props => props.theme.mixins.center};
+  top: 0;
+  position: fixed;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+`;
 
-export const Loader = styled('div')`
+export const Spinner = styled('div')`
+  ${props => props.theme.mixins.flexCenter};
   ::before {
     content: '';
-    box-sizing: border-box;
     position: absolute;
     width: 6rem;
     height: 6rem;
@@ -11,14 +19,12 @@ export const Loader = styled('div')`
     border: 3px solid ${props => props.theme.color};
     border-top-color: ${props => props.theme.primary};
     border-bottom-color: ${props => props.theme.primary};
-    animation: spinner 0.7s linear infinite;
+    animation: spin 0.7s linear infinite;
   }
 
-  @keyframes spinner {
+  @keyframes spin {
     to {
       transform: rotate(360deg);
     }
   }
 `;
-
-export default Loader;

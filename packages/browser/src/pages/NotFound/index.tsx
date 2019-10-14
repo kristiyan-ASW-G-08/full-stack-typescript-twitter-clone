@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import PageContainer from 'styled/PageContainer';
 import { StyledH1, StyledH2, StyledP, ButtonContainer } from './styled';

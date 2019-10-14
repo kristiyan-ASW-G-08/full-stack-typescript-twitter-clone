@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Loader } from 'styled/Loader';
+import { Loader } from 'components/Loader/index';
 storiesOf('Loader', module)
   .add('light theme', () => <Loader />, {
     info: { inline: true },

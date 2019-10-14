@@ -57,7 +57,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa kwdvND"
+      className="sc-bdVaJa gOhfmJ"
       size="large"
       type="button"
     >
@@ -776,7 +776,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa sgPjo"
+      className="sc-bdVaJa fVfPId"
       size="small"
       type="button"
     >
@@ -1466,12 +1466,12 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa kwdvND"
+      className="sc-bdVaJa gOhfmJ"
       size="large"
       type="button"
     >
       <div
-        className="sc-bwzfXH cnIQko"
+        className="sc-bwzfXH dkixWx"
         size="large"
       >
         <svg
@@ -2174,7 +2174,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa sgPjo"
+      className="sc-bdVaJa fVfPId"
       size="small"
       type="button"
     >
@@ -2856,7 +2856,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa kwdvND"
+      className="sc-bdVaJa gOhfmJ"
       size="large"
       type="button"
     >
@@ -3575,7 +3575,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa sgPjo"
+      className="sc-bdVaJa fVfPId"
       size="small"
       type="button"
     >
@@ -4265,12 +4265,12 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa kwdvND"
+      className="sc-bdVaJa gOhfmJ"
       size="large"
       type="button"
     >
       <div
-        className="sc-bwzfXH dyAUQz"
+        className="sc-bwzfXH AsBUz"
         size="large"
       >
         <svg
@@ -4973,7 +4973,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-bdVaJa sgPjo"
+      className="sc-bdVaJa fVfPId"
       size="small"
       type="button"
     >
@@ -7821,8 +7821,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX czkbGl"
-    />
+      className="sc-ifAKCX kawGTw"
+    >
+      <div
+        className="sc-EHOje gfCvBm"
+      />
+    </div>
   </div>,
   <div>
     <div
@@ -8036,7 +8040,11 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.div
+                            <span
+                              className="token class-name"
+                            >
+                              Loader
+                            </span>
                           </span>
                            
                           <span
@@ -8373,7 +8381,7 @@ Array [
           }
         >
           "
-          StyledComponent
+          Loader
           " Component
         </h3>
         <small>
@@ -8406,22 +8414,6 @@ Array [
         >
           "
           Unknown
-          " Component
-        </h3>
-        <small>
-          No propTypes defined!
-        </small>
-      </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
-          styled.div
           " Component
         </h3>
         <small>
@@ -8490,8 +8482,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-ifAKCX cgqTPW"
-    />
+      className="sc-ifAKCX kawGTw"
+    >
+      <div
+        className="sc-EHOje fCiNXV"
+      />
+    </div>
   </div>,
   <div>
     <div
@@ -8705,7 +8701,11 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.div
+                            <span
+                              className="token class-name"
+                            >
+                              Loader
+                            </span>
                           </span>
                            
                           <span
@@ -9042,7 +9042,7 @@ Array [
           }
         >
           "
-          StyledComponent
+          Loader
           " Component
         </h3>
         <small>
@@ -9075,22 +9075,6 @@ Array [
         >
           "
           Unknown
-          " Component
-        </h3>
-        <small>
-          No propTypes defined!
-        </small>
-      </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
-          styled.div
           " Component
         </h3>
         <small>
@@ -9159,18 +9143,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje cMOqDi"
+      className="sc-bZQynM jECSUB"
       type="horizontal"
     >
       <img
         src="logo-primary.svg"
       />
       <h1
-        className="sc-bZQynM qYXPD"
+        className="sc-gzVnrw bLQvsB"
         type="horizontal"
       >
         <span
-          className="sc-gzVnrw bsMPmm"
+          className="sc-htoDjs fcbIpw"
         >
           Twitt
         </span>
@@ -9832,18 +9816,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje egqKmS"
+      className="sc-bZQynM jzqbBp"
       type="vertical"
     >
       <img
         src="logo-primary.svg"
       />
       <h1
-        className="sc-bZQynM dKrtgK"
+        className="sc-gzVnrw eoFolR"
         type="vertical"
       >
         <span
-          className="sc-gzVnrw bsMPmm"
+          className="sc-htoDjs fcbIpw"
         >
           Twitt
         </span>
@@ -10531,18 +10515,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje cMOqDi"
+      className="sc-bZQynM jECSUB"
       type="horizontal"
     >
       <img
         src="logo-primary.svg"
       />
       <h1
-        className="sc-bZQynM qYXPD"
+        className="sc-gzVnrw bLQvsB"
         type="horizontal"
       >
         <span
-          className="sc-gzVnrw PuHPF"
+          className="sc-htoDjs czjOar"
         >
           Twitt
         </span>
@@ -11204,18 +11188,18 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-EHOje egqKmS"
+      className="sc-bZQynM jzqbBp"
       type="vertical"
     >
       <img
         src="logo-primary.svg"
       />
       <h1
-        className="sc-bZQynM dKrtgK"
+        className="sc-gzVnrw eoFolR"
         type="vertical"
       >
         <span
-          className="sc-gzVnrw PuHPF"
+          className="sc-htoDjs czjOar"
         >
           Twitt
         </span>
@@ -11903,25 +11887,25 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-htoDjs KDvaW"
+      className="sc-dnqmqq kZjsyy"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-EHOje cMOqDi"
+          className="sc-bZQynM jECSUB"
           type="horizontal"
         >
           <img
             src="logo-primary.svg"
           />
           <h1
-            className="sc-bZQynM qYXPD"
+            className="sc-gzVnrw bLQvsB"
             type="horizontal"
           >
             <span
-              className="sc-gzVnrw bsMPmm"
+              className="sc-htoDjs fcbIpw"
             >
               Twitt
             </span>
@@ -11930,7 +11914,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-dnqmqq fmRuaR"
+        className="sc-iwsKbI keziLq"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -11953,20 +11937,26 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-gZMcBi kmnwWQ"
+        className="sc-gqjmRU jklDRZ"
       >
         <button
-          className="sc-gqjmRU kdzWSy"
+          className="sc-VigVT kMZOHz"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-VigVT kuFtfk"
+          className="sc-jTzLTM efqEAX"
         >
           <input
+            list="users"
+            onChange={[Function]}
             placeholder="Search TwittClone"
             type="text"
+          />
+          <ul
+            className="sc-fjdhpX ipdUDE"
+            data-testid="datalist"
           />
           <span>
             <svg
@@ -12305,6 +12295,24 @@ Array [
                               className="token punctuation"
                             >
                               {
+                            </span>
+                            
+            _id
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
                             </span>
                             
             bookmarks
@@ -13276,25 +13284,25 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-htoDjs eOrCSD"
+      className="sc-dnqmqq ksQIiA"
     >
       <a
         href="/"
         onClick={[Function]}
       >
         <div
-          className="sc-EHOje cMOqDi"
+          className="sc-bZQynM jECSUB"
           type="horizontal"
         >
           <img
             src="logo-primary.svg"
           />
           <h1
-            className="sc-bZQynM qYXPD"
+            className="sc-gzVnrw bLQvsB"
             type="horizontal"
           >
             <span
-              className="sc-gzVnrw PuHPF"
+              className="sc-htoDjs czjOar"
             >
               Twitt
             </span>
@@ -13303,7 +13311,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-dnqmqq fmRuaR"
+        className="sc-iwsKbI keziLq"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -13326,20 +13334,26 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-gZMcBi kmnwWQ"
+        className="sc-gqjmRU jklDRZ"
       >
         <button
-          className="sc-gqjmRU gjRQSE"
+          className="sc-VigVT ctTTyQ"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-VigVT fHLfEJ"
+          className="sc-jTzLTM kLidDW"
         >
           <input
+            list="users"
+            onChange={[Function]}
             placeholder="Search TwittClone"
             type="text"
+          />
+          <ul
+            className="sc-fjdhpX lmHMsa"
+            data-testid="datalist"
           />
           <span>
             <svg
@@ -13678,6 +13692,24 @@ Array [
                               className="token punctuation"
                             >
                               {
+                            </span>
+                            
+            _id
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
                             </span>
                             
             bookmarks
@@ -14649,11 +14681,17 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-VigVT kuFtfk"
+      className="sc-jTzLTM efqEAX"
     >
       <input
+        list="users"
+        onChange={[Function]}
         placeholder="Search TwittClone"
         type="text"
+      />
+      <ul
+        className="sc-fjdhpX ipdUDE"
+        data-testid="datalist"
       />
       <span>
         <svg
@@ -15330,11 +15368,17 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-VigVT fHLfEJ"
+      className="sc-jTzLTM kLidDW"
     >
       <input
+        list="users"
+        onChange={[Function]}
         placeholder="Search TwittClone"
         type="text"
+      />
+      <ul
+        className="sc-fjdhpX lmHMsa"
+        data-testid="datalist"
       />
       <span>
         <svg
@@ -16012,30 +16056,30 @@ Array [
   >
      
     <aside
-      className="sc-jTzLTM dRdHUq"
+      className="sc-cSHVUG korSFP"
     >
       <div
-        className="sc-jzJRlG feRmtu"
+        className="sc-chPdSV igLrYx"
       >
         <div
-          className="sc-cSHVUG jIOpPm"
+          className="sc-kgoBCf hSjfOU"
         >
           <div
-            className="sc-kgoBCf jhGcbV"
+            className="sc-dxgOiQ dIXsGp"
           >
             <div
-              className="sc-EHOje egqKmS"
+              className="sc-bZQynM jzqbBp"
               type="vertical"
             >
               <img
                 src="logo-primary.svg"
               />
               <h1
-                className="sc-bZQynM dKrtgK"
+                className="sc-gzVnrw eoFolR"
                 type="vertical"
               >
                 <span
-                  className="sc-gzVnrw bsMPmm"
+                  className="sc-htoDjs fcbIpw"
                 >
                   Twitt
                 </span>
@@ -16044,7 +16088,7 @@ Array [
             </div>
           </div>
           <div
-            className="sc-kGXeez dYnECL"
+            className="sc-ckVGcZ ciotUA"
           >
             <button
               onClick={[Function]}
@@ -16073,18 +16117,24 @@ Array [
           </div>
         </div>
         <div
-          className="sc-kpOJdX BeRRS"
+          className="sc-jKJlTe lnXJyP"
         >
           <div
-            className="sc-chPdSV hjQFic"
+            className="sc-kpOJdX cfHRvA"
           >
              
             <form
-              className="sc-VigVT kuFtfk"
+              className="sc-jTzLTM efqEAX"
             >
               <input
+                list="users"
+                onChange={[Function]}
                 placeholder="Search TwittClone"
                 type="text"
+              />
+              <ul
+                className="sc-fjdhpX ipdUDE"
+                data-testid="datalist"
               />
               <span>
                 <svg
@@ -16108,40 +16158,45 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-dxgOiQ hhbkXN"
+            className="sc-eNQAEJ eqbWSv"
           >
             <li>
-              <button
-                className="sc-ckVGcZ gJXDud"
+              <a
+                href="/"
+                onClick={[Function]}
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    className="svg-inline--fa fa-home fa-w-18 "
-                    data-icon="home"
-                    data-prefix="fas"
-                    focusable="false"
-                    role="img"
-                    style={Object {}}
-                    viewBox="0 0 576 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
-                      fill="currentColor"
+                <button
+                  className="sc-hMqMXs jbfKRg"
+                >
+                  <span>
+                    <svg
+                      aria-hidden="true"
+                      className="svg-inline--fa fa-home fa-w-18 "
+                      data-icon="home"
+                      data-prefix="fas"
+                      focusable="false"
+                      role="img"
                       style={Object {}}
-                    />
-                  </svg>
-                </span>
-                <p>
-                  Home
-                </p>
-              </button>
+                      viewBox="0 0 576 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
+                        fill="currentColor"
+                        style={Object {}}
+                      />
+                    </svg>
+                  </span>
+                  <p>
+                    Home
+                  </p>
+                </button>
+              </a>
             </li>
             
             <li>
               <button
-                className="sc-ckVGcZ gJXDud"
+                className="sc-hMqMXs jbfKRg"
                 data-testid="theme-button"
                 onClick={[Function]}
               >
@@ -16174,7 +16229,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-fjdhpX gFMXoV"
+        className="sc-kAzzGY cziKfm"
         data-testid="backdrop"
         onClick={[Function]}
       />
@@ -16471,6 +16526,24 @@ Array [
                               className="token punctuation"
                             >
                               {
+                            </span>
+                            
+            _id
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
                             </span>
                             
             bookmarks
@@ -17392,30 +17465,30 @@ Array [
   >
      
     <aside
-      className="sc-jTzLTM dRdHUq"
+      className="sc-cSHVUG korSFP"
     >
       <div
-        className="sc-jzJRlG hWuGMv"
+        className="sc-chPdSV cklzNA"
       >
         <div
-          className="sc-cSHVUG dpmxly"
+          className="sc-kgoBCf uqwRL"
         >
           <div
-            className="sc-kgoBCf jhGcbV"
+            className="sc-dxgOiQ dIXsGp"
           >
             <div
-              className="sc-EHOje egqKmS"
+              className="sc-bZQynM jzqbBp"
               type="vertical"
             >
               <img
                 src="logo-primary.svg"
               />
               <h1
-                className="sc-bZQynM dKrtgK"
+                className="sc-gzVnrw eoFolR"
                 type="vertical"
               >
                 <span
-                  className="sc-gzVnrw PuHPF"
+                  className="sc-htoDjs czjOar"
                 >
                   Twitt
                 </span>
@@ -17424,7 +17497,7 @@ Array [
             </div>
           </div>
           <div
-            className="sc-kGXeez kisAvI"
+            className="sc-ckVGcZ bzYMaD"
           >
             <button
               onClick={[Function]}
@@ -17453,18 +17526,24 @@ Array [
           </div>
         </div>
         <div
-          className="sc-kpOJdX BeRRS"
+          className="sc-jKJlTe lnXJyP"
         >
           <div
-            className="sc-chPdSV hjQFic"
+            className="sc-kpOJdX cfHRvA"
           >
              
             <form
-              className="sc-VigVT fHLfEJ"
+              className="sc-jTzLTM kLidDW"
             >
               <input
+                list="users"
+                onChange={[Function]}
                 placeholder="Search TwittClone"
                 type="text"
+              />
+              <ul
+                className="sc-fjdhpX lmHMsa"
+                data-testid="datalist"
               />
               <span>
                 <svg
@@ -17488,40 +17567,45 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-dxgOiQ isSPea"
+            className="sc-eNQAEJ csKayz"
           >
             <li>
-              <button
-                className="sc-ckVGcZ dhVNMz"
+              <a
+                href="/"
+                onClick={[Function]}
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    className="svg-inline--fa fa-home fa-w-18 "
-                    data-icon="home"
-                    data-prefix="fas"
-                    focusable="false"
-                    role="img"
-                    style={Object {}}
-                    viewBox="0 0 576 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
-                      fill="currentColor"
+                <button
+                  className="sc-hMqMXs kcJOux"
+                >
+                  <span>
+                    <svg
+                      aria-hidden="true"
+                      className="svg-inline--fa fa-home fa-w-18 "
+                      data-icon="home"
+                      data-prefix="fas"
+                      focusable="false"
+                      role="img"
                       style={Object {}}
-                    />
-                  </svg>
-                </span>
-                <p>
-                  Home
-                </p>
-              </button>
+                      viewBox="0 0 576 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
+                        fill="currentColor"
+                        style={Object {}}
+                      />
+                    </svg>
+                  </span>
+                  <p>
+                    Home
+                  </p>
+                </button>
+              </a>
             </li>
             
             <li>
               <button
-                className="sc-ckVGcZ dhVNMz"
+                className="sc-hMqMXs kcJOux"
                 data-testid="theme-button"
                 onClick={[Function]}
               >
@@ -17554,7 +17638,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-fjdhpX gKFoJS"
+        className="sc-kAzzGY dpfbVw"
         data-testid="backdrop"
         onClick={[Function]}
       />
@@ -17851,6 +17935,24 @@ Array [
                               className="token punctuation"
                             >
                               {
+                            </span>
+                            
+            _id
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              ,
                             </span>
                             
             bookmarks
@@ -20438,57 +20540,66 @@ Array [
   >
     <div>
       <article
-        className="sc-jKJlTe jNDtXK"
+        className="sc-kEYyzF dcfnUf"
       >
         <div
-          className="sc-hMqMXs jTLrCu"
+          className="sc-iAyFgw fEvii"
         >
           <button
-            className="sc-bdVaJa sgPjo"
+            className="sc-bdVaJa fVfPId"
             size="small"
             type="button"
           >
             <img
-              alt="mockUserName"
+              alt="username"
               src="avatar"
             />
           </button>
         </div>
         <div
-          className="sc-eNQAEJ gztbOx"
+          className="sc-kkGfuU jCGcYV"
         >
           <h3
-            className="sc-kEYyzF kSpSqk"
+            className="sc-hSdWYo fMIYxH"
           >
-            mockUserName
+            username
           </h3>
            
           <h4
-            className="sc-kkGfuU ldJdEo"
+            className="sc-eHgmQL gYAzYP"
           >
             @
-            mockUserHandle
+            userHandle
           </h4>
            
           <time
-            className="sc-iAyFgw bzhBHY"
+            className="sc-cvbbAY nwrgQ"
           >
-            0
-            d:
+            
             0
             h
+            :0m:
           </time>
+          <p
+            className="sc-cMljjf oSMwv"
+          >
+            Replying to 
+            <span>
+              @
+              userHandle
+            </span>
+          </p>
         </div>
         <div
-          className="sc-hSdWYo hibFzM"
+          className="sc-jWBwVP ishpPi"
         >
           <p
-            className="sc-eHgmQL eqQnFn"
+            className="sc-brqgnP eAjXnA"
           >
             Text
           </p>
           <a
-            className="sc-cvbbAY kJPmUR"
+            className="sc-jAaTju ijHvCc"
             href="mockLink"
             rel="noopener noreferrer"
             target="_blank"
@@ -20497,15 +20608,15 @@ Array [
           </a>
           <img
             alt=""
-            className="sc-jWBwVP ibYVJF"
+            className="sc-jDwBTQ RGjzb"
             src="http://localhost:8090/mockImage"
           />
         </div>
         <div
-          className="sc-brqgnP gbMKTU"
+          className="sc-gPEVay iQCvpN"
         >
           <button
-            className="sc-cMljjf iujWVa"
+            className="sc-iRbamj kKCtCL"
             data-testid="heart-button"
             onClick={[Function]}
           >
@@ -20528,7 +20639,7 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-cMljjf iujWVa"
+            className="sc-iRbamj kKCtCL"
             data-testid="comment-button"
             onClick={[Function]}
           >
@@ -20551,7 +20662,7 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-cMljjf iujWVa"
+            className="sc-iRbamj kKCtCL"
             data-testid="bookmark-button"
             onClick={[Function]}
           >
@@ -20574,7 +20685,7 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-cMljjf iujWVa"
+            className="sc-iRbamj kKCtCL"
             data-testid="retweet-button"
             onClick={[Function]}
           >
@@ -20597,10 +20708,10 @@ Array [
             </svg>
           </button>
           <div
-            className="sc-jAaTju eXSVYz"
+            className="sc-jlyJG eYPAef"
           >
             <button
-              className="sc-cMljjf iujWVa"
+              className="sc-iRbamj kKCtCL"
               data-testid="share-button"
               onClick={[Function]}
             >
@@ -20910,7 +21021,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-11T16:40:14.300Z'
+                          '2019-10-14T15:39:10.851Z'
                         </span>
                         <span
                           className="token punctuation"
@@ -21003,9 +21114,344 @@ Array [
                         </span>
                          
                         <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        
+              _id
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
                           className="token string"
                         >
-                          ''
+                          'id'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+              user
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        
+                _id
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'id'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                avatar
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'avatar'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                bookmarks
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                date
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'mockDate'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                email
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'mockUserEmail@mail.com'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                followers
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token number"
+                        >
+                          0
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                following
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                handle
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'userHandle'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                headerPhoto
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'default'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                likes
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                profilePhoto
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'default'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                replies
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                retweets
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          [
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ]
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                username
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'username'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
+                        </span>
+                        
+                website
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'mockWebsite'
+                        </span>
+                        
+              
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        
+            
+                        <span
+                          className="token punctuation"
+                        >
+                          }
                         </span>
                         <span
                           className="token punctuation"
@@ -21078,6 +21524,24 @@ Array [
                           className="token punctuation"
                         >
                           {
+                        </span>
+                        
+              _id
+                        <span
+                          className="token punctuation"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          className="token string"
+                        >
+                          'id'
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          ,
                         </span>
                         
               avatar
@@ -21208,7 +21672,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          'mockUserHandle'
+                          'userHandle'
                         </span>
                         <span
                           className="token punctuation"
@@ -21331,7 +21795,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          'mockUserName'
+                          'username'
                         </span>
                         <span
                           className="token punctuation"
@@ -21829,13 +22293,13 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-jlyJG eusxnX"
+        className="sc-bRBYWo fdLldc"
       >
         <div
-          className="sc-csuQGl bZespi"
+          className="sc-jhAzac fADNTQ"
         >
           <button
-            className="sc-bdVaJa sgPjo"
+            className="sc-bdVaJa fVfPId"
             size="small"
             type="button"
           >
@@ -21864,7 +22328,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-gipzik iOkMZo"
+          className="sc-hzDkRC iprVR"
         >
           <div
             className="sc-bxivhb gYSyPg"
@@ -21882,10 +22346,10 @@ Array [
           
         </div>
         <div
-          className="sc-Rmtcm dtJPfV"
+          className="sc-fBuWsC cJnPgh"
         >
           <button
-            className="sc-iRbamj gNcwiR"
+            className="sc-Rmtcm hFaHQI"
             onClick={[Function]}
             type="button"
           >
@@ -21908,7 +22372,7 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-iRbamj gNcwiR"
+            className="sc-Rmtcm hFaHQI"
             onClick={[Function]}
             type="button"
           >
@@ -21932,7 +22396,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bRBYWo fwqtud"
+          className="sc-fMiknA LfUSN"
         >
           <button
             className="sc-htpNat jDmJBE"
@@ -22144,33 +22608,7 @@ Array [
                         >
                           
       &lt;withRouter(TweetForm)
-        payload=
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          {
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          {
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          }
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          }
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-        resetModalStore=
+        resetModalState=
                         </span>
                         <span
                           className="token punctuation"
@@ -22267,6 +22705,32 @@ Array [
                         >
                           
         token=""
+        tweetFormProps=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
       /&gt;
     
                         </span>
@@ -22746,13 +23210,13 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-jlyJG dPPTmd"
+        className="sc-bRBYWo kfcyVd"
       >
         <div
-          className="sc-csuQGl bZespi"
+          className="sc-jhAzac fADNTQ"
         >
           <button
-            className="sc-bdVaJa sgPjo"
+            className="sc-bdVaJa fVfPId"
             size="small"
             type="button"
           >
@@ -22781,7 +23245,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-gipzik iOkMZo"
+          className="sc-hzDkRC iprVR"
         >
           <div
             className="sc-bxivhb bONCfD"
@@ -22799,10 +23263,10 @@ Array [
           
         </div>
         <div
-          className="sc-Rmtcm dtJPfV"
+          className="sc-fBuWsC cJnPgh"
         >
           <button
-            className="sc-iRbamj ddRBxL"
+            className="sc-Rmtcm gKAxcl"
             onClick={[Function]}
             type="button"
           >
@@ -22825,7 +23289,7 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-iRbamj ddRBxL"
+            className="sc-Rmtcm gKAxcl"
             onClick={[Function]}
             type="button"
           >
@@ -22849,7 +23313,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bRBYWo fwqtud"
+          className="sc-fMiknA LfUSN"
         >
           <button
             className="sc-htpNat jDmJBE"
@@ -23061,33 +23525,7 @@ Array [
                         >
                           
       &lt;withRouter(TweetForm)
-        payload=
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          {
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          {
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          }
-                        </span>
-                        <span
-                          className="token punctuation"
-                        >
-                          }
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-        resetModalStore=
+        resetModalState=
                         </span>
                         <span
                           className="token punctuation"
@@ -23184,6 +23622,32 @@ Array [
                         >
                           
         token=""
+        tweetFormProps=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
       /&gt;
     
                         </span>

@@ -11,7 +11,7 @@ import Home from 'pages/Home';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Sidebar from 'components/Sidebar';
-import CenteredLoader from 'components/CenteredLoader';
+import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
 
 const Login = lazy(() => import('pages/LoginPage'));
@@ -50,14 +50,14 @@ const Router: FC = observer(
             ''
           )}
           {modalState.isActive ? (
-            <Suspense fallback={<CenteredLoader />}>
+            <Suspense fallback={<Loader />}>
               <Portal portalId={'modal'} children={<Modal />} />
             </Suspense>
           ) : (
             ''
           )}
           {isNotificationActive ? (
-            <Suspense fallback={<CenteredLoader />}>
+            <Suspense fallback={<Loader />}>
               <Portal
                 portalId={'notification'}
                 children={<Notification notification={notification} />}
@@ -90,7 +90,7 @@ const Router: FC = observer(
               exact
               path="/log-in"
               render={(): JSX.Element => (
-                <Suspense fallback={<CenteredLoader />}>
+                <Suspense fallback={<Loader />}>
                   <Login />
                 </Suspense>
               )}
@@ -99,7 +99,7 @@ const Router: FC = observer(
               exact
               path="/sign-up"
               render={(): JSX.Element => (
-                <Suspense fallback={<CenteredLoader />}>
+                <Suspense fallback={<Loader />}>
                   <SignUpPage />
                 </Suspense>
               )}
@@ -108,16 +108,16 @@ const Router: FC = observer(
               exact
               path="/confirmation/:token"
               render={(): JSX.Element => (
-                <Suspense fallback={<CenteredLoader />}>
+                <Suspense fallback={<Loader />}>
                   <EmailConfirmation />
                 </Suspense>
               )}
             />
             <Route
               exact
-              path="/profile/:userId"
+              path="/users/:userId"
               render={(props: RouteComponentProps): JSX.Element => (
-                <Suspense fallback={<CenteredLoader />}>
+                <Suspense fallback={<Loader />}>
                   <Profile authState={authStore.authState} />
                 </Suspense>
               )}
@@ -125,7 +125,7 @@ const Router: FC = observer(
             <Route
               exact
               render={(): JSX.Element => (
-                <Suspense fallback={<CenteredLoader />}>
+                <Suspense fallback={<Loader />}>
                   <NotFound />
                 </Suspense>
               )}

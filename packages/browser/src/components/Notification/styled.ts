@@ -4,9 +4,7 @@ export const NotificationWrapper = styled('div')`
   position: fixed;
   z-index: 2;
   width: 100vw;
-  display: grid;
-  justify-items: center;
-  background: red;
+  ${props => props.theme.mixins.flexCenter}
   pointer-events: none;
 `;
 

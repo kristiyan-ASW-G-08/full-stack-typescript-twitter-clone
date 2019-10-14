@@ -14,15 +14,15 @@ mockedAxios.post.mockReturnValueOnce(
 
 describe('TweetForm', () => {
   const token = 'mockToken';
-  const resetModalStore = jest.fn();
+  const resetModalState = jest.fn();
   const setNotification = jest.fn();
   it('render TweetForm', async () => {
     expect.assertions(3);
 
     const { container, getByText, getByPlaceholderText } = render(
       <TweetForm
-        payload={{}}
-        resetModalStore={resetModalStore}
+        tweetFormProps={{}}
+        resetModalState={resetModalState}
         setNotification={setNotification}
         token={token}
       />,
@@ -42,7 +42,7 @@ describe('TweetForm', () => {
       expect(axios.post).toHaveBeenCalledTimes(1);
     });
     await wait(() => {
-      expect(resetModalStore).toHaveBeenCalledTimes(1);
+      expect(resetModalState).toHaveBeenCalledTimes(1);
     });
   });
 });

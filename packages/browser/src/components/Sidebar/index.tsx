@@ -49,7 +49,7 @@ export const Sidebar: FC<SidebarProps> = ({
             <Container>
               {authState.isAuth ? (
                 <AuthenticatedSidebarHeader>
-                  <Avatar size="large" />
+                  <Avatar size="medium" />
                   <h3>{username}</h3>
                   <h4>@{handle}</h4>
                   <div>
@@ -100,7 +100,7 @@ export const Sidebar: FC<SidebarProps> = ({
                       {' '}
                       <li>
                         <Link
-                          to={`/profile/${authState.user._id}`}
+                          to={`/users/${authState.user._id}`}
                           onClick={toggleSidebar}
                         >
                           <SidebarButton>

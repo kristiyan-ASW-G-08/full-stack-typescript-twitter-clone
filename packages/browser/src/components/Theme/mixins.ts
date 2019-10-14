@@ -18,6 +18,11 @@ const center = css`
   justify-items: center;
   align-content: center;
 `;
+const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const slide = css`
   @keyframes slide {
     from {
@@ -48,5 +53,6 @@ const mixins = {
   button,
   form,
   center,
+  flexCenter,
 };
 export default mixins;

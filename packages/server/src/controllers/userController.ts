@@ -445,7 +445,7 @@ export const getUsersList = async (
 ): Promise<void> => {
   try {
     const { searchQuery } = req.params;
-    const searchRegex = new RegExp(searchQuery, 'g');
+    const searchRegex = new RegExp(searchQuery, 'gi');
     const users = await User.find(
       {
         handle: { $regex: searchRegex },

@@ -24,7 +24,7 @@ describe('SearchBar', () => {
   it('render SearchBar', async () => {
     expect.assertions(4);
 
-    const { container, getByTestId, getByPlaceholderText } = render(
+    const { container, getByTestId, getByPlaceholderText, getByText } = render(
       <SearchBar />,
 
       {
@@ -43,10 +43,10 @@ describe('SearchBar', () => {
       //axios.get is called every type the user types
       expect(axios.get).toHaveBeenCalledTimes(4);
     });
-    const usersList = await waitForElement(() => getByTestId('users-list'));
+    const usersList = await waitForElement(() => getByTestId('datalist'));
     expect(usersList.childElementCount).toBe(1);
 
-    const userOption = await waitForElement(() => getByTestId(user._id));
+    const userOption = await waitForElement(() => getByText(`@${user.handle}`));
     expect(userOption).toBeTruthy();
   });
 });

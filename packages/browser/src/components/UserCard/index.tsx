@@ -30,12 +30,7 @@ export const Logo: FC<UserCardProps> = ({ user }) => {
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar
-            size={'larger'}
-            avatarURL={
-              'https://d33wubrfki0l68.cloudfront.net/c69d2eb089fe0e8a8729c5a1ad8fd5b3d7ca6468/support.f8bcb7f8.png'
-            }
-          ></Avatar>
+          <Avatar size={'large'}></Avatar>
         </AvatarContainer>
       </Cover>
       <Container>

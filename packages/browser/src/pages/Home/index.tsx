@@ -9,14 +9,15 @@ export const Home: FC = () => {
   const [url, setUrl] = useState<string>('http://localhost:8090/tweets');
 
   return (
-    <PageContainer>
-      <TweetsContainer
-        url={url}
-        setNotification={(notification: Notification) =>
-          notificationStore.setNotification(notification)
-        }
-      />
-    </PageContainer>
+
+      <PageContainer>
+        <TweetsContainer
+          url={url}
+          setNotification={(notification: Notification) =>
+            notificationStore.setNotification(notification)
+          }
+        />
+      </PageContainer>
   );
 };
 export default Home;

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { setLightness } from 'polished';
 
 export const SearchBarWrapper = styled('form')`
   display: grid;
+  position: relative;
   grid-gap: 3rem;
   grid-template-columns: auto auto;
   align-content: center;
@@ -23,4 +25,18 @@ export const SearchBarWrapper = styled('form')`
   span {
     font-size: 1.3rem;
   }
+`;
+
+export const Datalist = styled('ul')`
+  position: absolute;
+  transform: translateY(4rem);
+  list-style: none;
+  width: 25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 0.3rem;
+  ${props =>
+    props.theme.theme === 'light'
+      ? `box-shadow: 0 1rem 20rem   ${props.theme.color}`
+      : ''}
 `;
