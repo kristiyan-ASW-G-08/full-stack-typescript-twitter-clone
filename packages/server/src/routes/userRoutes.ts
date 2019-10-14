@@ -15,6 +15,7 @@ import {
   getUsersList,
   getUserLikes,
   getUserFeed,
+  getUser,
 } from '@controllers/userController';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -73,5 +74,7 @@ router.get('/users/:userId/likes', getUserLikes);
 router.get('/users/:searchQuery', getUsersList);
 
 router.get('/users/user/tweets', isAuth, getUserFeed);
+
+router.get('/users/user/:userId', getUser);
 
 export default router;

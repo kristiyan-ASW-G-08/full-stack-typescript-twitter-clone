@@ -861,6 +861,7 @@ describe('userRoutes', (): void => {
       expect(users).toHaveLength(1);
     });
   });
+
   describe('get /users/user/tweets', (): void => {
     it("should get a list of tweets based on user's following", async (): Promise<
       void
@@ -969,6 +970,23 @@ describe('userRoutes', (): void => {
         .get(`/users/user/tweets`)
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(404);
+    });
+  });
+  describe('get /users/user/:userId', (): void => {
+    it('should get a user  based on id', async (): Promise<void> => {
+      expect.assertions(2);
+      const newUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await newUser.save();
+      const userId = newUser._id;
+      const response = await request(app).get(`/users/user/${userId}`);
+      const { user } = response.body.data;
+      expect(response.status).toBe(200);
+      expect(user._id.toString()).toMatch(userId.toString());
     });
   });
   describe('delete /users', (): void => {

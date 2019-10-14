@@ -506,3 +506,21 @@ export const getUserFeed = async (
     passErrorToNext(err, next);
   }
 };
+
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const user = await getUserById(userId, false);
+    res.status(200).json({
+      data: {
+        user,
+      },
+    });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
