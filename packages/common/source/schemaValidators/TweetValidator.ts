@@ -16,7 +16,7 @@ const TweetValidator = yup.object().shape({
       (
         type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
-      ): any => {
+      ): StringSchema<string | undefined> => {
         return type === 'reply' ? schema.required() : schema.notRequired();
       },
     ),
@@ -29,7 +29,7 @@ const TweetValidator = yup.object().shape({
       (
         type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
-      ): any => {
+      ): StringSchema<string | undefined> => {
         return type === 'text' ? schema.required() : schema.notRequired();
       },
     ),
@@ -41,7 +41,7 @@ const TweetValidator = yup.object().shape({
       (
         type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
-      ): any => {
+      ): StringSchema<string | undefined> => {
         return type === 'retweet' ? schema.required() : schema.notRequired();
       },
     ),
@@ -54,7 +54,7 @@ const TweetValidator = yup.object().shape({
       (
         type: 'text' | 'link' | 'retweet' | 'reply',
         schema: StringSchema,
-      ): any => {
+      ): StringSchema<string | undefined> => {
         return type === 'link' ? schema.required() : schema.notRequired();
       },
     ),
