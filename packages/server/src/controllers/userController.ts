@@ -370,7 +370,7 @@ export const followUser = async (
     }
     await user.save();
     await authenticatedUser.save();
-    res.status(200).json({ data: { authenticatedUser } });
+    res.status(200).json({ data: { user: authenticatedUser } });
   } catch (err) {
     passErrorToNext(err, next);
   }

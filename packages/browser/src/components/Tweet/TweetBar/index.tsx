@@ -97,4 +97,4 @@ export const TweetBar: FC<TweetProps> = ({
     </TweetBarWrapper>
   );
 };
-export default memo(TweetBar);
+export default TweetBar;

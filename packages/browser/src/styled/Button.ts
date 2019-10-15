@@ -21,8 +21,13 @@ export const Button = styled('button')<ButtonProps>`
     background: ${props => props.theme.white};
     color: ${props => {
       const color = props.theme[props.buttonType];
-      return color;
+      return color ? color : props.theme.primary;
     }};
+
+    ${props =>
+      props.buttonType === 'transparent'
+        ? `border:solid 0.1rem ${props.theme.primary}`
+        : ''}
   }
   a {
     color: inherit;

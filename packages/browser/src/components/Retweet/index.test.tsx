@@ -25,7 +25,7 @@ describe('Retweet', () => {
 
     const children = await waitForElement(() => getByTestId('children'));
     const replyText = await waitForElement(() =>
-      getByText(`@${tweet.user.handle} Retweet`),
+      getByText(`@${tweet.user.handle} Retweeted`),
     );
 
     expect(container).toBeTruthy();

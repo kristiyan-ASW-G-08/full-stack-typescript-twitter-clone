@@ -11,9 +11,10 @@ export const UserItemWrapper = styled('li')`
     padding: 0.5rem;
     background: ${props =>
       props.theme.theme === 'light'
-        ?  props.theme.background
+        ? props.theme.background
         : setLightness(0.3, props.theme.background)};
     color: ${props => props.theme.primary};
-    /* ${props => props.theme.mixins.border}; */
+    border-radius:0.3rem;
+  ${props => props.theme.mixins.border}
   }
 `;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 export const SearchBarWrapper = styled('form')`
   display: grid;
@@ -35,8 +34,4 @@ export const Datalist = styled('ul')`
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 0.3rem;
-  ${props =>
-    props.theme.theme === 'light'
-      ? `box-shadow: 0 1rem 20rem   ${props.theme.color}`
-      : ''}
 `;

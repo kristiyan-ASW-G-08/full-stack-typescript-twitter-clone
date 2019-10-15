@@ -8,14 +8,25 @@ import {
   Container,
   Handle,
   FollowBar,
+  FollowButtonWrapper,
 } from './styled';
+import { observer } from 'mobx-react-lite';
 import User from 'types/User';
 import Avatar from 'components/Avatar/index';
+import AuthState from 'types/AuthState';
+import FollowButton from 'components/UserCard/FollowButton/index';
+
 interface UserCardProps {
   user: User;
+  authState: AuthState;
+  updateUser: (user: User | undefined) => void;
 }
-export const Logo: FC<UserCardProps> = ({ user }) => {
-  const { username, handle, avatar, followers, following } = user;
+export const UserCard: FC<UserCardProps> = ({
+  user,
+  authState,
+  updateUser,
+}) => {
+  const { username, handle, avatar, followers, following, _id } = user;
   return (
     <UserCardWrapper direction={'bottom'}>
       <Cover>
@@ -33,9 +44,21 @@ export const Logo: FC<UserCardProps> = ({ user }) => {
           <Avatar size={'large'}></Avatar>
         </AvatarContainer>
       </Cover>
+
       <Container>
         <Username>{username}</Username>
         <Handle>@{handle}</Handle>
+        <FollowButtonWrapper>
+          {_id !== authState.user._id ? (
+            <FollowButton
+              authState={authState}
+              currentUser={user}
+              updateUser={updateUser}
+            />
+          ) : (
+            ''
+          )}
+        </FollowButtonWrapper>
         <FollowBar>
           <p>
             {' '}
@@ -49,4 +72,4 @@ export const Logo: FC<UserCardProps> = ({ user }) => {
     </UserCardWrapper>
   );
 };
-export default memo(Logo);
+export default observer(UserCard);

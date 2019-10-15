@@ -19,10 +19,9 @@ import Loader from 'components/Loader';
 
 const UserCard = lazy(() => import('components/UserCard/index'));
 
-interface ProfileProps {
-  authState: AuthState;
-}
-export const Profile: FC<ProfileProps> = ({ authState }) => {
+export const Profile: FC = () => {
+  const { authStore } = useContext(RootStoreContext);
+  const { authState } = authStore;
   const [user, setUser] = useState<User>();
   const { userId } = useParams();
 
@@ -49,7 +48,11 @@ export const Profile: FC<ProfileProps> = ({ authState }) => {
     <>
       {user ? (
         <Suspense fallback={<Loader />}>
-          <UserCard user={user} />
+          <UserCard
+            user={user}
+            authState={authState}
+            updateUser={(user: User | undefined) => authStore.updateUser(user)}
+          />
         </Suspense>
       ) : (
         <Loader />

@@ -12,7 +12,7 @@ export const UserCardWrapper = styled('article')<BorderProps>`
   grid:
     'img-cover' 12rem
     'container' 8rem/1fr;
-  grid-row-gap: 5rem;
+  grid-row-gap: 2rem;
   ${props => props.theme.mixins.border};
 `;
 
@@ -41,14 +41,23 @@ export const AvatarContainer = styled('div')`
   border-radius: 100%;
   transform: translate(1.5rem, -5rem);
 `;
+export const FollowButtonWrapper = styled('div')`
+  grid-area: follow-button;
+`;
 
 export const Container = styled('div')`
   grid-area: container;
   display: grid;
-  grid-template-columns: minmax(min-content, max-content);
+  grid:
+    '. . follow-button' 2rem
+    'username . . ' 1fr
+    'handle . .' 1fr
+    'follow-bar . .' 1fr/1fr 3fr 2fr;
+  grid-row-gap: 0.7rem;
   padding-left: 1.5rem;
 `;
 export const Username = styled('p')`
+  grid-area: username;
   font-size: 2rem;
   color: ${props => {
     const lightness = props.theme.theme === 'light' ? 0.3 : 1;
@@ -57,14 +66,17 @@ export const Username = styled('p')`
   font-weight: bold;
 `;
 export const Handle = styled('p')`
+  grid-area: handle;
   font-size: 1.6rem;
   color: ${props => setLightness(0.6, props.theme.secondary)};
 `;
 
 export const FollowBar = styled('div')`
+  grid-area: follow-bar;
   color: ${props => setLightness(0.6, props.theme.secondary)};
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
   p,
   span {
     font-size: 1.4rem;
