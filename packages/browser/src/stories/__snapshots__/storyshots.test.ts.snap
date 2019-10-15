@@ -11947,12 +11947,12 @@ Array [
         </button>
         <form
           className="sc-jTzLTM efqEAX"
+          role="search"
         >
           <input
-            list="users"
             onChange={[Function]}
             placeholder="Search TwittClone"
-            type="text"
+            type="search"
           />
           <ul
             className="sc-fjdhpX ipdUDE"
@@ -13344,12 +13344,12 @@ Array [
         </button>
         <form
           className="sc-jTzLTM kLidDW"
+          role="search"
         >
           <input
-            list="users"
             onChange={[Function]}
             placeholder="Search TwittClone"
-            type="text"
+            type="search"
           />
           <ul
             className="sc-fjdhpX lmHMsa"
@@ -14682,12 +14682,12 @@ Array [
   >
     <form
       className="sc-jTzLTM efqEAX"
+      role="search"
     >
       <input
-        list="users"
         onChange={[Function]}
         placeholder="Search TwittClone"
-        type="text"
+        type="search"
       />
       <ul
         className="sc-fjdhpX ipdUDE"
@@ -15369,12 +15369,12 @@ Array [
   >
     <form
       className="sc-jTzLTM kLidDW"
+      role="search"
     >
       <input
-        list="users"
         onChange={[Function]}
         placeholder="Search TwittClone"
-        type="text"
+        type="search"
       />
       <ul
         className="sc-fjdhpX lmHMsa"
@@ -16125,12 +16125,12 @@ Array [
              
             <form
               className="sc-jTzLTM efqEAX"
+              role="search"
             >
               <input
-                list="users"
                 onChange={[Function]}
                 placeholder="Search TwittClone"
-                type="text"
+                type="search"
               />
               <ul
                 className="sc-fjdhpX ipdUDE"
@@ -17534,12 +17534,12 @@ Array [
              
             <form
               className="sc-jTzLTM kLidDW"
+              role="search"
             >
               <input
-                list="users"
                 onChange={[Function]}
                 placeholder="Search TwittClone"
-                type="text"
+                type="search"
               />
               <ul
                 className="sc-fjdhpX lmHMsa"
@@ -21021,7 +21021,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-14T15:39:10.851Z'
+                          '2019-10-15T04:57:03.690Z'
                         </span>
                         <span
                           className="token punctuation"

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { setLightness } from 'polished';
 
-export const RetweetWrapper = styled('div')`
+export const RetweetWrapper = styled('article')`
   width: 100%;
 `;
 

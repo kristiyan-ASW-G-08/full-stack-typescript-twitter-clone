@@ -17,19 +17,18 @@ export const SearchBar: FC = () => {
       console.log(error);
     }
   };
+  const searchHandler = async (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
+    await getUsers(value);
+  };
   return (
     <>
-      <SearchBarWrapper>
+      <SearchBarWrapper role="search">
         <input
-          type="text"
-          list="users"
+          type="search"
           placeholder="Search TwittClone"
-          onChange={async (e: SyntheticEvent) => {
-            const target = e.target as HTMLInputElement;
-            const { value } = target;
-            console.log(value);
-            await getUsers(value);
-          }}
+          onChange={searchHandler}
         />
         <Datalist data-testid="datalist">
           {users.map(user => (

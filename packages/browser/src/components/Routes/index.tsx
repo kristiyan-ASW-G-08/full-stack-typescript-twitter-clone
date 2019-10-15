@@ -1,6 +1,5 @@
 import React, { FC, lazy, Suspense, useContext } from 'react';
 import {
-  BrowserRouter,
   Route,
   RouteComponentProps,
   Switch,
@@ -14,7 +13,7 @@ import Sidebar from 'components/Sidebar';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
 
-const Login = lazy(() => import('pages/LoginPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const Profile = lazy(() => import('pages/Profile'));
@@ -37,7 +36,6 @@ const Router: FC = observer(
     const { notification, isNotificationActive } = notificationStore;
     const { modalState } = modalStore;
     return (
-      <BrowserRouter>
         <>
           {isAuth ? (
             <MobileTweetButton
@@ -91,7 +89,7 @@ const Router: FC = observer(
               path="/log-in"
               render={(): JSX.Element => (
                 <Suspense fallback={<Loader />}>
-                  <Login />
+                  <LoginPage />
                 </Suspense>
               )}
             />
@@ -132,7 +130,6 @@ const Router: FC = observer(
             />
           </Switch>
         </>
-      </BrowserRouter>
     );
   },
 );

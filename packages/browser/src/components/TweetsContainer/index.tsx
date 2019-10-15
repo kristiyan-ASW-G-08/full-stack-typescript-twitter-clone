@@ -110,7 +110,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
       </Select>
       {useMemo(
         () => (
-          <Tweets>
+          <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (
                 <Retweet key={tweet._id} tweet={tweet}>

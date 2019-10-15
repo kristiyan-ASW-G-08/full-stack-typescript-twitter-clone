@@ -10,7 +10,7 @@ export const Notification: FC<NotificationProps> = ({ notification }) => {
   const { type, content } = notification;
   return (
     <NotificationWrapper>
-      <NotificationContent notificationType={type}>
+      <NotificationContent notificationType={type} role="alert">
         {content}
       </NotificationContent>
     </NotificationWrapper>
