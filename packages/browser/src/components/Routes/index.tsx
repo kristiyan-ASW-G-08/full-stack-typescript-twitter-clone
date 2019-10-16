@@ -15,18 +15,14 @@ const NotFound = lazy(() => import('pages/NotFound'));
 const Profile = lazy(() => import('pages/Profile'));
 const EmailConfirmation = lazy(() => import('pages/EmailConfirmation'));
 const Modal = lazy(() => import('components/Modal'));
-const Portal = lazy(() => import('components/Portal/Portal'));
+const Portal = lazy(() => import('components/Portal'));
 const Notification = lazy(() => import('components/Notification'));
 
 const Router: FC = observer(
   (): JSX.Element => {
-    const {
-      modalStore,
-      themeStore,
-      authStore,
-      sidebarStore,
-      notificationStore,
-    } = useContext(RootStoreContext);
+    const { modalStore, themeStore, authStore, notificationStore } = useContext(
+      RootStoreContext,
+    );
     const { isAuth } = authStore.authState;
     const { theme } = themeStore;
     const { notification, isNotificationActive } = notificationStore;
@@ -64,16 +60,7 @@ const Router: FC = observer(
           openModal={() => {
             modalStore.setModalState('tweetForm');
           }}
-          toggleSidebar={() => sidebarStore.toggleSidebar()}
           theme={theme}
-          resetAuthState={() => authStore.resetAuthState()}
-          toggleTheme={() => themeStore.toggleTheme()}
-          authState={authStore.authState}
-        />
-        <Sidebar
-          toggleSidebar={() => sidebarStore.toggleSidebar()}
-          theme={theme}
-          isActive={sidebarStore.isActive}
           resetAuthState={() => authStore.resetAuthState()}
           toggleTheme={() => themeStore.toggleTheme()}
           authState={authStore.authState}

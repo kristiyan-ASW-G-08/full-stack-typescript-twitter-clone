@@ -102,25 +102,27 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   };
   return (
     <TweetsWrapper>
-      <Select onChange={getTweetsHandler}>
-        <option value="new">New</option>
-        <option value="top">Top</option>
-        <option value="trending">Trending</option>
-        <option value="replies">Replies</option>
-      </Select>
       {useMemo(
         () => (
-          <Tweets role="feed">
-            {tweets.map((tweet: TweetType) =>
-              tweet.retweet ? (
-                <Retweet key={tweet._id} tweet={tweet}>
-                  <Tweet key={tweet._id} tweet={tweet.retweet} />
-                </Retweet>
-              ) : (
-                <Tweet key={tweet._id} tweet={tweet} />
-              ),
-            )}
-          </Tweets>
+          <>
+            <Select onChange={getTweetsHandler}>
+              <option value="new">New</option>
+              <option value="top">Top</option>
+              <option value="trending">Trending</option>
+              <option value="replies">Replies</option>
+            </Select>
+            <Tweets role="feed">
+              {tweets.map((tweet: TweetType) =>
+                tweet.retweet ? (
+                  <Retweet key={tweet._id} tweet={tweet}>
+                    <Tweet key={tweet._id} tweet={tweet.retweet} />
+                  </Retweet>
+                ) : (
+                  <Tweet key={tweet._id} tweet={tweet} />
+                ),
+              )}
+            </Tweets>
+          </>
         ),
         [tweets],
       )}

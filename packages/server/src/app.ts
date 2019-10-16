@@ -6,7 +6,6 @@ import compression from 'compression';
 import userRoutes from '@routes/userRoutes';
 import tweetRoutes from '@routes/tweetRoutes';
 import { CustomError } from '@utilities/CustomError';
-import Tweet from '@models/Tweet';
 
 const app: Application = express();
 

@@ -19,7 +19,6 @@ describe('Navbar', () => {
     const { container, getByText, getByTestId, rerender } = render(
       <Navbar
         openModal={openModal}
-        toggleSidebar={toggleSidebar}
         authState={defaultAuthState}
         resetAuthState={resetAuthState}
         theme={theme}
@@ -50,7 +49,6 @@ describe('Navbar', () => {
     rerender(
       <Navbar
         openModal={openModal}
-        toggleSidebar={toggleSidebar}
         resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
         theme={'dark'}

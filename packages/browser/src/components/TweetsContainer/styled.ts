@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { setLightness } from 'polished';
 export const TweetsWrapper = styled('section')`
-  margin-top: 1rem;
   width: 100vw;
   display: grid;
   grid:
@@ -12,10 +11,14 @@ export const TweetsWrapper = styled('section')`
   grid-gap: 1rem;
   padding-top: 1rem;
   background: ${props => props.theme.background};
-  @media ${props => props.theme.mediaQueries.desktop} {
-    width: 60rem;
+  @media ${props => props.theme.mediaQueries.tablet} {
+    width:80vw;
+    margin-top: 1rem;
     ${props => props.theme.mixins.border}
     border-radius:1rem;
+  }
+  @media ${props => props.theme.mediaQueries.desktop} {
+    width: 60rem;
   }
 `;
 export const Tweets = styled('div')`

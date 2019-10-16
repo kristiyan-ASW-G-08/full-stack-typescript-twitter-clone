@@ -11,9 +11,6 @@ describe('RootStore', (): void => {
   it('themeStore should exist', (): void => {
     expect(rootStore.themeStore).toBeTruthy();
   });
-  it('sidebarStore should exist', (): void => {
-    expect(rootStore.sidebarStore).toBeTruthy();
-  });
   it('modalStore should exist', (): void => {
     expect(rootStore.modalStore).toBeTruthy();
   });

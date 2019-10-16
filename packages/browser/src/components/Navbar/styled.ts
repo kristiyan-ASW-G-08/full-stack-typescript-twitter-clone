@@ -16,10 +16,7 @@ export const NavIcon = styled('button')`
   font-size: 2.5rem;
   color: ${props => props.theme.primary};
   ${props => props.theme.mixins.button};
-  display: grid;
   background: none;
-  align-content: center;
-  justify-items: center;
   border: none;
   @media ${props => props.theme.mediaQueries.desktop} {
     display: none;

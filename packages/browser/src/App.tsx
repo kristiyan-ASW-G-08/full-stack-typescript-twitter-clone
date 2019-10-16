@@ -22,7 +22,7 @@ import {
 import { faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Normalize } from 'styled-normalize';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from 'components/Routes/index';
+import Routes from 'components/Routes';
 import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Theme from 'components/Theme/Theme';

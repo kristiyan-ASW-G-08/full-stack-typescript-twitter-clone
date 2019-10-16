@@ -1,23 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize, darken, lighten } from 'polished';
 
 interface SidebarProps {
-  on: boolean;
+  isActive: boolean;
 }
+const header = css`
+  width: 100%;
+  height: 20%;
+  min-height: 15rem;
+`;
 export const SidebarWrapper = styled('aside')<SidebarProps>`
-  display:grid;
-  grid-template-columns:3fr 1fr;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   position: fixed;
   transform: translateX(-100vw);
   z-index: 3;
-  top: 0;
   width: 100vw;
   height: 100vh;
-  background: none;
   ${props => props.theme.mixins.slide};
-  ${props => (props.on ? `animation: slide 200ms linear forwards` : '')}
+  ${props => (props.isActive ? `animation: slide 200ms linear forwards` : '')};
+  @media (max-height: 30rem) {
+    overflow: scroll;
+  }
   @media ${props => props.theme.mediaQueries.tablet} {
-    display:none;
+    grid-template-columns: 2fr 3fr;
+  }
+  @media ${props => props.theme.mediaQueries.desktop} {
+    display: none;
   }
 `;
 
@@ -26,13 +35,11 @@ export const Backdrop = styled('div')`
 `;
 
 export const Container = styled('div')`
-  height: 100%;
   background: ${props => props.theme.background};
 `;
 
 export const SidebarHeader = styled('div')`
-  width: 100%;
-  height: 20%;
+  ${header};
   display: grid;
   grid:
     ' . . . ' 1fr
@@ -42,8 +49,7 @@ export const SidebarHeader = styled('div')`
 `;
 
 export const AuthenticatedSidebarHeader = styled('div')`
-  width: 100%;
-  height: 20%;
+  ${header};
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 0.2rem;
@@ -66,10 +72,16 @@ export const AuthenticatedSidebarHeader = styled('div')`
     ${props => props.theme.mixins.button}
     color: ${props => props.theme.secondary};
     span {
-      color: ${props =>
-        props.theme.currentTheme === 'light'
-          ? darken(0.4, props.theme.secondary)
-          : lighten(0.2, props.theme.secondary)};
+      color: ${(props: {
+        theme: { [key: string]: string; theme: 'light' | 'dark' };
+      }) => {
+        const colors: { light: string; dark: string } = {
+          light: darken(0.4, props.theme.secondary),
+          dark: lighten(0.2, props.theme.secondary),
+        };
+        const color = colors[props.theme.theme];
+        return color;
+      }};
     }
     margin-right: 0.7rem;
   }
@@ -84,6 +96,7 @@ export const LogoContainer = styled('div')`
   justify-items: center;
   grid-area: logo;
 `;
+
 export const AuthenticationBar = styled('div')`
   grid-area: authentication-bar;
   display: grid;
@@ -115,6 +128,7 @@ export const SidebarBody = styled('div')`
   padding-top: 2rem;
   width: 100%;
   height: 80%;
+  min-height: 10rem;
 `;
 
 export const SidebarList = styled('ul')`
@@ -123,6 +137,7 @@ export const SidebarList = styled('ul')`
   flex-direction: column;
   width: 100%;
   height: 60%;
+  min-height: 30rem;
   margin-bottom: 1rem;
   ${props => props.theme.mixins.border};
   border-top: none;
