@@ -6,17 +6,18 @@ import User from 'types/User';
 import Button from 'styled/Button';
 
 interface FollowButtonProps {
-  authState: AuthState;
+  authenticatedUser: User;
   currentUser: User;
+  token: string;
   updateUser: (user: User | undefined) => void;
 }
 export const FollowButton: FC<FollowButtonProps> = ({
-  authState,
+  authenticatedUser,
+  token,
   currentUser,
   updateUser,
 }) => {
-  const { token } = authState;
-  const { following } = authState.user;
+  const { following } = authenticatedUser;
   const isFollowing = following.includes(currentUser._id);
   useEffect(() => {}, [following]);
   const followHandler = async () => {

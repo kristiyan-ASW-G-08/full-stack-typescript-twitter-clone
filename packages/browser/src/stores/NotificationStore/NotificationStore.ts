@@ -1,5 +1,4 @@
 import { observable, action, autorun } from 'mobx';
-import { persist } from 'mobx-persist';
 import Notification from 'types/Notification';
 
 export const defaultNotification: Notification = {
@@ -8,23 +7,18 @@ export const defaultNotification: Notification = {
 };
 
 class NotificationStore {
-  @persist('object')
-  @observable
-  public notification: Notification = defaultNotification;
-  @observable public isNotificationActive: boolean = false;
+  @observable public notification: Notification | undefined = undefined;
   @action public setNotification(notification: Notification): void {
-    this.isNotificationActive = true;
     this.notification = notification;
     autorun(
       () => {
-        this.resetNotification();
+        this.resetNotification()
       },
       { delay: 4000 },
     );
   }
   @action public resetNotification(): void {
-    this.isNotificationActive = false;
-    this.notification = defaultNotification;
+    this.notification = undefined;
   }
 }
 export default NotificationStore;

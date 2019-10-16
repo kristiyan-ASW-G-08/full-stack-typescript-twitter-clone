@@ -37,24 +37,22 @@ export const Sidebar: FC<SidebarProps> = ({
   toggleTheme,
   toggleSidebar,
 }) => {
-  const { user, isAuth } = authState;
-  const { username, handle, following, followers } = user;
-  console.log(user);
+  const { user } = authState;
   return (
     <>
       <SidebarWrapper isActive={isActive}>
         <Container>
-          {authState.isAuth ? (
+          {user ? (
             <AuthenticatedSidebarHeader>
               <Avatar size="medium" />
-              <h3>{username}</h3>
-              <h4>@{handle}</h4>
+              <h3>{user.username}</h3>
+              <h4>@{user.handle}</h4>
               <div>
                 <button>
                   <span>0</span> Followers
                 </button>
                 <button>
-                  <span>{following.length}</span> Following
+                  <span>{user.following.length}</span> Following
                 </button>
               </div>
             </AuthenticatedSidebarHeader>
@@ -92,14 +90,11 @@ export const Sidebar: FC<SidebarProps> = ({
                   </SidebarButton>
                 </Link>
               </li>
-              {authState.isAuth ? (
+              {user ? (
                 <>
                   {' '}
                   <li>
-                    <Link
-                      to={`/users/${authState.user._id}`}
-                      onClick={toggleSidebar}
-                    >
+                    <Link to={`/users/${user._id}`} onClick={toggleSidebar}>
                       <SidebarButton>
                         <span>
                           <FontAwesomeIcon icon={'user'} />
@@ -143,7 +138,7 @@ export const Sidebar: FC<SidebarProps> = ({
                 </SidebarButton>
               </li>
             </SidebarList>
-            {isAuth ? (
+            {user ? (
               <SidebarButton onClick={resetAuthState}>
                 <span>
                   <FontAwesomeIcon icon={'sign-out-alt'} />

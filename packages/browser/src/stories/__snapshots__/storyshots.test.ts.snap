@@ -11914,7 +11914,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-iwsKbI keziLq"
+        className="sc-iwsKbI eyUsHF"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -12003,6 +12003,7 @@ Array [
         </a>
       </div>
     </nav>
+    
   </div>,
   <div>
     <div
@@ -12248,24 +12249,6 @@ Array [
                               {
                             </span>
                             
-          isAuth
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token boolean"
-                            >
-                              false
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
           token
                             <span
                               className="token punctuation"
@@ -12292,288 +12275,9 @@ Array [
                             </span>
                              
                             <span
-                              className="token punctuation"
+                              className="token keyword"
                             >
-                              {
-                            </span>
-                            
-            _id
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            bookmarks
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            date
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            email
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            followers
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token number"
-                            >
-                              0
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            following
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            handle
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            headerPhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            likes
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            profilePhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            replies
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            retweets
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            username
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            website
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            
-          
-                            <span
-                              className="token punctuation"
-                            >
-                              }
+                              undefined
                             </span>
                             
         
@@ -12729,64 +12433,6 @@ Array [
                               className="token punctuation"
                             >
                               "
-                            </span>
-                          </span>
-                          
-        
-                          <span
-                            className="token attr-name"
-                          >
-                            toggleSidebar
-                          </span>
-                          <span
-                            className="token script language-javascript"
-                          >
-                            <span
-                              className="token script-punctuation punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token keyword"
-                            >
-                              function
-                            </span>
-                             
-                            <span
-                              className="token function"
-                            >
-                              noRefCheck
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              (
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              )
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
                             </span>
                           </span>
                           
@@ -13311,7 +12957,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-iwsKbI keziLq"
+        className="sc-iwsKbI eyUsHF"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -13400,6 +13046,7 @@ Array [
         </a>
       </div>
     </nav>
+    
   </div>,
   <div>
     <div
@@ -13645,24 +13292,6 @@ Array [
                               {
                             </span>
                             
-          isAuth
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token boolean"
-                            >
-                              false
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
           token
                             <span
                               className="token punctuation"
@@ -13689,288 +13318,9 @@ Array [
                             </span>
                              
                             <span
-                              className="token punctuation"
+                              className="token keyword"
                             >
-                              {
-                            </span>
-                            
-            _id
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            bookmarks
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            date
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            email
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            followers
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token number"
-                            >
-                              0
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            following
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            handle
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            headerPhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            likes
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            profilePhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            replies
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            retweets
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            username
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            website
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            
-          
-                            <span
-                              className="token punctuation"
-                            >
-                              }
+                              undefined
                             </span>
                             
         
@@ -14126,64 +13476,6 @@ Array [
                               className="token punctuation"
                             >
                               "
-                            </span>
-                          </span>
-                          
-        
-                          <span
-                            className="token attr-name"
-                          >
-                            toggleSidebar
-                          </span>
-                          <span
-                            className="token script language-javascript"
-                          >
-                            <span
-                              className="token script-punctuation punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token keyword"
-                            >
-                              function
-                            </span>
-                             
-                            <span
-                              className="token function"
-                            >
-                              noRefCheck
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              (
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              )
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
                             </span>
                           </span>
                           
@@ -16054,15 +15346,14 @@ Array [
     id="story-root"
     style={Object {}}
   >
-     
     <aside
-      className="sc-cSHVUG korSFP"
+      className="sc-cSHVUG cMhMpk"
     >
       <div
-        className="sc-chPdSV igLrYx"
+        className="sc-chPdSV jZizUM"
       >
         <div
-          className="sc-kgoBCf hSjfOU"
+          className="sc-kgoBCf flPTgK"
         >
           <div
             className="sc-dxgOiQ dIXsGp"
@@ -16117,7 +15408,7 @@ Array [
           </div>
         </div>
         <div
-          className="sc-jKJlTe lnXJyP"
+          className="sc-jKJlTe bhRLJC"
         >
           <div
             className="sc-kpOJdX cfHRvA"
@@ -16158,7 +15449,7 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-eNQAEJ eqbWSv"
+            className="sc-eNQAEJ eVJkVe"
           >
             <li>
               <a
@@ -16479,24 +15770,6 @@ Array [
                               {
                             </span>
                             
-          isAuth
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token boolean"
-                            >
-                              false
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
           token
                             <span
                               className="token punctuation"
@@ -16523,288 +15796,9 @@ Array [
                             </span>
                              
                             <span
-                              className="token punctuation"
+                              className="token keyword"
                             >
-                              {
-                            </span>
-                            
-            _id
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            bookmarks
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            date
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            email
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            followers
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token number"
-                            >
-                              0
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            following
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            handle
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            headerPhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            likes
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            profilePhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            replies
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            retweets
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            username
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            website
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            
-          
-                            <span
-                              className="token punctuation"
-                            >
-                              }
+                              undefined
                             </span>
                             
         
@@ -17463,15 +16457,14 @@ Array [
     id="story-root"
     style={Object {}}
   >
-     
     <aside
-      className="sc-cSHVUG korSFP"
+      className="sc-cSHVUG cMhMpk"
     >
       <div
-        className="sc-chPdSV cklzNA"
+        className="sc-chPdSV dWqtYr"
       >
         <div
-          className="sc-kgoBCf uqwRL"
+          className="sc-kgoBCf dCNklo"
         >
           <div
             className="sc-dxgOiQ dIXsGp"
@@ -17526,7 +16519,7 @@ Array [
           </div>
         </div>
         <div
-          className="sc-jKJlTe lnXJyP"
+          className="sc-jKJlTe bhRLJC"
         >
           <div
             className="sc-kpOJdX cfHRvA"
@@ -17567,7 +16560,7 @@ Array [
             </form>
           </div>
           <ul
-            className="sc-eNQAEJ csKayz"
+            className="sc-eNQAEJ kAhZYt"
           >
             <li>
               <a
@@ -17888,24 +16881,6 @@ Array [
                               {
                             </span>
                             
-          isAuth
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token boolean"
-                            >
-                              false
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
           token
                             <span
                               className="token punctuation"
@@ -17932,288 +16907,9 @@ Array [
                             </span>
                              
                             <span
-                              className="token punctuation"
+                              className="token keyword"
                             >
-                              {
-                            </span>
-                            
-            _id
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            bookmarks
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            date
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            email
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            followers
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token number"
-                            >
-                              0
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            following
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            handle
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            headerPhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            likes
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            profilePhoto
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            replies
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            retweets
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              [
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ]
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            username
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              ,
-                            </span>
-                            
-            website
-                            <span
-                              className="token punctuation"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              className="token string"
-                            >
-                              ''
-                            </span>
-                            
-          
-                            <span
-                              className="token punctuation"
-                            >
-                              }
+                              undefined
                             </span>
                             
         
@@ -21021,7 +19717,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-15T13:46:23.274Z'
+                          '2019-10-16T12:15:04.494Z'
                         </span>
                         <span
                           className="token punctuation"

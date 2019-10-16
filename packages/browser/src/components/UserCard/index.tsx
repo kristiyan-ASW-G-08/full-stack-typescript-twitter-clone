@@ -49,9 +49,10 @@ export const UserCard: FC<UserCardProps> = ({
         <Username>{username}</Username>
         <Handle>@{handle}</Handle>
         <FollowButtonWrapper>
-          {_id !== authState.user._id ? (
+          {authState.user && _id !== authState.user._id ? (
             <FollowButton
-              authState={authState}
+              authenticatedUser={authState.user}
+              token={authState.token}
               currentUser={user}
               updateUser={updateUser}
             />

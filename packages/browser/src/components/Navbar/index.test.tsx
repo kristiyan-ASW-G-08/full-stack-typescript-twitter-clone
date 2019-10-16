@@ -11,12 +11,11 @@ describe('Navbar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
-  const toggleSidebar = jest.fn();
   const openModal = jest.fn();
   it('render Navbar', async () => {
-    expect.assertions(10);
+    expect.assertions(8);
 
-    const { container, getByText, getByTestId, rerender } = render(
+    const { container, getByText, rerender } = render(
       <Navbar
         openModal={openModal}
         authState={defaultAuthState}
@@ -31,19 +30,13 @@ describe('Navbar', () => {
     const themeButton = await waitForElement(() => getByText('Dark mode'));
     const logInButton = await waitForElement(() => getByText('Log In'));
     const signUpButton = await waitForElement(() => getByText('Sign Up'));
-    const mobileNavButton = await waitForElement(() =>
-      getByTestId('mobile-nav-button'),
-    );
 
-    UserEvent.click(mobileNavButton);
     UserEvent.click(themeButton);
 
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(logInButton).toBeTruthy();
     expect(signUpButton).toBeTruthy();
-    expect(mobileNavButton).toBeTruthy();
-    expect(toggleSidebar).toHaveBeenCalledTimes(1);
     expect(toggleTheme).toHaveBeenCalledTimes(1);
 
     rerender(

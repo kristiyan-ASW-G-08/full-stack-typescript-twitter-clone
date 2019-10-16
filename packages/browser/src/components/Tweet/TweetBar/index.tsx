@@ -29,9 +29,8 @@ export const TweetBar: FC<TweetProps> = ({
   updateUser,
   setModalState,
 }) => {
-  const { isAuth, token, user } = authState;
+  const { token, user } = authState;
   const { _id } = tweet;
-  console.log(user);
   const buttons: ButtonType[] = [
     {
       icon: 'heart',
@@ -43,12 +42,13 @@ export const TweetBar: FC<TweetProps> = ({
         );
         updateUser(user);
       },
-      isActive: () => (user.likes.includes(_id) ? 'like' : undefined),
+      isActive: () => (user && user.likes.includes(_id) ? 'like' : undefined),
     },
     {
       icon: 'comment',
       event: () => setModalState('tweetForm', { replyId: _id, type: 'reply' }),
-      isActive: () => (user.replies.includes(_id) ? 'primary' : undefined),
+      isActive: () =>
+        user && user.replies.includes(_id) ? 'primary' : undefined,
     },
     {
       icon: 'bookmark',
@@ -60,14 +60,16 @@ export const TweetBar: FC<TweetProps> = ({
         );
         updateUser(user);
       },
-      isActive: () => (user.bookmarks.includes(_id) ? 'primary' : undefined),
+      isActive: () =>
+        user && user.bookmarks.includes(_id) ? 'primary' : undefined,
     },
 
     {
       icon: 'retweet',
       event: () =>
         setModalState('tweetForm', { retweetedId: _id, type: 'retweet' }),
-      isActive: () => (user.retweets.includes(_id) ? 'primary' : undefined),
+      isActive: () =>
+        user && user.retweets.includes(_id) ? 'primary' : undefined,
     },
   ];
   return (
@@ -77,7 +79,7 @@ export const TweetBar: FC<TweetProps> = ({
           data-testid={`${button.icon}-button`}
           key={button.icon.toString()}
           onClick={async () => {
-            if (!isAuth) {
+            if (!user) {
               const notification: Notification = {
                 type: 'warning',
                 content: 'Log in or Sign up to perform this action!',

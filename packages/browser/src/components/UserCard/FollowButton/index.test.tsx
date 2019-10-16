@@ -1,10 +1,9 @@
-import React, { Context, Provider } from 'react';
+import React, from 'react';
 import { render, waitForElement, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import FollowButton from './index';
 import axios from 'axios';
 import TestWrapper from 'testUtilities/TestWrapper';
-import user from 'testUtilities/user';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import userEvent from '@testing-library/user-event';
 
@@ -16,12 +15,14 @@ mockedAxios.patch.mockReturnValue(
 
 describe('FollowButton', () => {
   it('render FollowButton', async () => {
-    // expect.assertions(3);
+    expect.assertions(3);
+    const { user, token } = authenticatedAuthState;
     const updateUser = jest.fn();
     const { getByText } = render(
       <FollowButton
         updateUser={updateUser}
-        authState={authenticatedAuthState}
+        authenticatedUser={authenticatedAuthState.user}
+        token={token}
         currentUser={user}
       />,
 

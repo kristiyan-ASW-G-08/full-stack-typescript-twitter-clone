@@ -5,7 +5,6 @@ import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Sidebar from 'components/Sidebar';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
 
@@ -23,13 +22,12 @@ const Router: FC = observer(
     const { modalStore, themeStore, authStore, notificationStore } = useContext(
       RootStoreContext,
     );
-    const { isAuth } = authStore.authState;
+    const { user } = authStore.authState;
     const { theme } = themeStore;
-    const { notification, isNotificationActive } = notificationStore;
     const { modalState } = modalStore;
     return (
       <>
-        {isAuth ? (
+        {user ? (
           <MobileTweetButton
             onClick={() => modalStore.setModalState('tweetForm')}
           >
@@ -46,11 +44,13 @@ const Router: FC = observer(
         ) : (
           ''
         )}
-        {isNotificationActive ? (
+        {notificationStore.notification !== undefined ? (
           <Suspense fallback={<Loader />}>
             <Portal
               portalId={'notification'}
-              children={<Notification notification={notification} />}
+              children={
+                <Notification notification={notificationStore.notification} />
+              }
             ></Portal>
           </Suspense>
         ) : (

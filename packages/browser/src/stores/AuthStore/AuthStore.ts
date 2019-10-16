@@ -3,23 +3,7 @@ import { persist } from 'mobx-persist';
 import AuthState from 'types/AuthState';
 import User from 'types/User';
 export const defaultAuthState = {
-  isAuth: false,
-  user: {
-    username: '',
-    handle: '',
-    email: '',
-    website: '',
-    profilePhoto: '',
-    headerPhoto: '',
-    date: '',
-    followers: 0,
-    following: [],
-    likes: [],
-    bookmarks: [],
-    retweets: [],
-    replies: [],
-    _id: '',
-  },
+  user: undefined,
   token: '',
 };
 class AuthStore {

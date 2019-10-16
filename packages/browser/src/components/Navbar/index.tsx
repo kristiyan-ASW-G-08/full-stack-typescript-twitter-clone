@@ -27,7 +27,7 @@ export const Navbar: FC<NavbarProps> = ({
   resetAuthState,
   openModal,
 }) => {
-  const { isAuth } = authState;
+  const { user } = authState;
   const [isActive, setIsActive] = useState<boolean>(false);
   const toggleSidebar = () => setIsActive(!isActive);
   return (
@@ -44,7 +44,7 @@ export const Navbar: FC<NavbarProps> = ({
             {theme === 'light' ? 'Dark mode' : 'Light mode'}
           </ThemeButton>
           <SearchBar />
-          {isAuth ? (
+          {user ? (
             <>
               <Avatar />
               <StyledButton buttonType={'primary'} onClick={openModal}>
