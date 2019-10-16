@@ -16,3 +16,9 @@ export const dark = {
   color: '#ffffff',
   white: '#ffffff',
 };
+
+const themes = {
+  light,
+  dark,
+};
+export default themes;

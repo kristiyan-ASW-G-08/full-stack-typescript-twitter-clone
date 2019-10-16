@@ -65,7 +65,7 @@ const App: FC = observer(() => {
     <>
       <GlobalStyle />
       <Normalize />
-      <Theme theme={theme}>
+      <Theme currentTheme={theme}>
         <StyledApp>
           <BrowserRouter>
             <Routes />
