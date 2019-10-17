@@ -7,13 +7,13 @@ import React, {
   useMemo,
   memo,
 } from 'react';
-import axios from 'axios';
 import TweetType from 'types/Tweet';
 import { TweetsWrapper, Select, Tweets, LoaderContainer } from './styled';
 import Tweet from 'components/Tweet/index';
 import Retweet from 'components/Retweet/index';
 import Notification from 'types/Notification';
-
+import useIntersection from 'hooks/useIntersection';
+import { getTweets } from './actions';
 interface TweetProps {
   url: string;
   setNotification: (notification: Notification) => void;
@@ -21,82 +21,43 @@ interface TweetProps {
 export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
-  const [element, setElement] = useState<HTMLDivElement>();
   const tweetsRef = useRef(tweets);
   const nextPageRef = useRef(nextPage);
-  const observer = useRef(
-    new IntersectionObserver(
-      async entries => {
-        try {
-          const intersectedElement = entries[0];
-          if (
-            intersectedElement &&
-            intersectedElement.isIntersecting &&
-            nextPageRef &&
-            nextPageRef.current
-          ) {
-            const { newTweets, next } = await getTweets(nextPageRef.current);
-            const allTweets = [...tweetsRef.current, ...newTweets];
-            setTweets(allTweets);
-            setNext(next);
-          }
-        } catch (error) {}
-      },
-      { threshold: 1 },
-    ),
-  );
-  useEffect(() => {
-    const { current } = observer;
-    if (element) {
-      current.observe(element);
+  const loadMore = async () => {
+    if (nextPageRef.current) {
+      const { newTweets, next } = await getTweets(
+        nextPageRef.current,
+        setNotification,
+      );
+      const allTweets = [...tweetsRef.current, ...newTweets];
+      setTweets(allTweets);
+      setNext(next);
     }
-    return () => {
-      if (element) {
-        current.unobserve(element);
-      }
-    };
-  }, [element]);
+  };
+  const { setElement } = useIntersection(loadMore);
+
   useEffect(() => {
     tweetsRef.current = tweets;
     nextPageRef.current = nextPage;
   }, [tweets, nextPage]);
   useEffect(() => {
-    getTweets(`${url}?sort=new`)
+    getTweets(`${url}?sort=new`, setNotification)
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
         setTweets(newTweets);
       })
-      .catch(error => {});
+      .catch(error => {
+        //Error is being handled in getTweets
+      });
   }, [url]);
-
-  const getTweets = async (
-    url: string,
-    //@ts-ignore,
-  ): Promise<{
-    newTweets: TweetType[];
-    next: string | null;
-    prev: string | null;
-  }> => {
-    try {
-      const response = await axios.get(`${url}`);
-      const { links, tweets } = response.data.data;
-      const { next, prev } = links;
-      return { newTweets: tweets, next, prev };
-    } catch (error) {
-      console.log(error);
-      const notification: Notification = {
-        type: 'warning',
-        content: 'There was an error. Please try again later.',
-      };
-      setNotification(notification);
-    }
-  };
-
   const getTweetsHandler = async (e: SyntheticEvent) => {
     const target = e.target as HTMLSelectElement;
     const { value } = target;
-    const { newTweets, next } = await getTweets(`${url}?sort=${value}`);
+    const { newTweets, next } = await getTweets(
+      `${url}?sort=${value}`,
+      setNotification,
+    );
     setNext(next);
     setTweets(newTweets);
   };
