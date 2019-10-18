@@ -18,7 +18,7 @@ export const SidebarWrapper = styled('aside')<SidebarProps>`
   width: 100vw;
   height: 100vh;
   ${props => props.theme.mixins.slide};
-  ${props => (props.isActive ? `animation: slide 200ms linear forwards` : '')};
+  ${props => (props.isActive ? `animation: slide 200ms ease-in forwards` : '')};
   @media (max-height: 30rem) {
     overflow: scroll;
   }

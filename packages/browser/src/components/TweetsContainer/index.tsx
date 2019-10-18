@@ -4,16 +4,18 @@ import React, {
   useRef,
   useEffect,
   useState,
-  useMemo,
-  memo,
+  Suspense,
+  lazy,
 } from 'react';
 import TweetType from 'types/Tweet';
-import { TweetsWrapper, Select, Tweets, LoaderContainer } from './styled';
-import Tweet from 'components/Tweet/index';
-import Retweet from 'components/Retweet/index';
+import { TweetsWrapper, Select, Tweets, TextLoader } from './styled';
 import Notification from 'types/Notification';
 import useIntersection from 'hooks/useIntersection';
-import { getTweets } from './actions';
+import getTweets from './getTweets';
+
+const Tweet = lazy(() => import('components/Tweet'));
+const Retweet = lazy(() => import('components/Retweet'));
+
 interface TweetProps {
   url: string;
   setNotification: (notification: Notification) => void;
@@ -63,36 +65,43 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   };
   return (
     <TweetsWrapper>
-      {useMemo(
-        () => (
-          <>
-            <Select onChange={getTweetsHandler}>
-              <option value="new">New</option>
-              <option value="top">Top</option>
-              <option value="trending">Trending</option>
-              <option value="replies">Replies</option>
-            </Select>
-            <Tweets role="feed">
-              {tweets.map((tweet: TweetType) =>
-                tweet.retweet ? (
-                  <Retweet key={tweet._id} tweet={tweet}>
-                    <Tweet key={tweet._id} tweet={tweet.retweet} />
-                  </Retweet>
-                ) : (
-                  <Tweet key={tweet._id} tweet={tweet} />
-                ),
-              )}
-            </Tweets>
-          </>
-        ),
-        [tweets],
-      )}
+      <>
+        <Select onChange={getTweetsHandler}>
+          <option value="new">New</option>
+          <option value="top">Top</option>
+          <option value="trending">Trending</option>
+          <option value="replies">Replies</option>
+        </Select>
+        <Suspense
+          fallback={
+            <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
+              <p>...Loading</p>
+            </TextLoader>
+          }
+        >
+          <Tweets role="feed">
+            {tweets.map((tweet: TweetType) =>
+              tweet.retweet ? (
+                <Retweet key={tweet._id} tweet={tweet}>
+                  <Tweet key={tweet._id} tweet={tweet.retweet} />
+                </Retweet>
+              ) : (
+                <Tweet key={tweet._id} tweet={tweet} />
+              ),
+            )}
+          </Tweets>
+        </Suspense>
+      </>
       {nextPage ? (
-        <LoaderContainer ref={(e: HTMLDivElement) => setElement(e)} />
+        <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
+          <p>...Loading</p>
+        </TextLoader>
       ) : (
-        ''
+        <TextLoader>
+          <p>No Tweets Available</p>
+        </TextLoader>
       )}
     </TweetsWrapper>
   );
 };
-export default memo(TweetContainer);
+export default TweetContainer;

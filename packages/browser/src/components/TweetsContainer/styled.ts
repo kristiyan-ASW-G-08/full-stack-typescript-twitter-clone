@@ -6,13 +6,13 @@ export const TweetsWrapper = styled('section')`
   grid:
     '. select . ' auto
     'tweets tweets tweets' minmax(100vh, auto)
-    '. loader .' auto/
+    'loader loader loader' auto/
     0.1rem 5rem 1fr;
   grid-gap: 1rem;
   padding-top: 1rem;
   background: ${props => props.theme.background};
   @media ${props => props.theme.mediaQueries.tablet} {
-    width:80vw;
+    width: 80vw;
     margin-top: 1rem;
     ${props => props.theme.mixins.border}
     border-radius:1rem;
@@ -26,9 +26,15 @@ export const Tweets = styled('div')`
   width: 100%;
 `;
 
-export const LoaderContainer = styled('div')`
+export const TextLoader = styled('div')`
   grid-area: loader;
-  ${props => props.theme.mixins.center}
+  ${props => props.theme.mixins.center};
+  p {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.7rem;
+    color: ${props => props.theme.secondary};
+  }
 `;
 export const Select = styled('select')`
   grid-area: select;

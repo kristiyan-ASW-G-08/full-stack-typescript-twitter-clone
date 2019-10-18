@@ -29,13 +29,13 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
   const { authStore, notificationStore, modalStore } = useContext(
     RootStoreContext,
   );
-  const { user, text, date, image, link, reply } = tweet;
+  const { user, text, date, image, link, reply, _id } = tweet;
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
   return useMemo(() => {
     return (
-      <TweetWrapper>
+      <TweetWrapper data-testid={_id}>
         <AvatarContainer>
           <Avatar avatarURL={avatar} altText={username} />
         </AvatarContainer>

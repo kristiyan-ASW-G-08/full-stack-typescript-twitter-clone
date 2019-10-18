@@ -52,7 +52,7 @@ const ThemeWrapper = makeDecorator({
     return (
       <>
         <GlobalStyle />
-        <Theme theme={currentTheme}>
+        <Theme currentTheme={currentTheme}>
           <BrowserRouter>{storyFn(context)}</BrowserRouter>
         </Theme>
       </>

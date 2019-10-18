@@ -8,9 +8,7 @@ import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.post.mockReturnValueOnce(
-  Promise.resolve({ data: {}, status: 200 }),
-);
+mockedAxios.post.mockResolvedValue({ data: {}, status: 200 });
 
 describe('TweetForm', () => {
   const token = 'mockToken';

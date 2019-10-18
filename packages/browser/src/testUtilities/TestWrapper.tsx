@@ -6,7 +6,7 @@ interface TestWrapperProps {
   theme?: 'light' | 'dark';
 }
 const TestWrapper: FC<TestWrapperProps> = ({ children, theme = 'light' }) => (
-  <Theme theme={theme}>
+  <Theme currentTheme={theme}>
     <BrowserRouter>{children}</BrowserRouter>
   </Theme>
 );

@@ -2,7 +2,7 @@ import axios from 'axios';
 import Tweet from 'types/Tweet';
 import Notification from 'types/Notification';
 
-export const getTweets = async (
+const getTweets = async (
   url: string,
   setNotification: (notification: Notification) => void,
   //@ts-ignore
@@ -13,6 +13,7 @@ export const getTweets = async (
 }> => {
   try {
     const response = await axios.get(`${url}`);
+    console.log(response);
     const { links, tweets } = response.data.data;
     const { next, prev } = links;
     return { newTweets: tweets, next, prev };
@@ -24,3 +25,5 @@ export const getTweets = async (
     setNotification(notification);
   }
 };
+
+export default getTweets;

@@ -17,7 +17,7 @@ const utilities = {
 };
 
 const Theme: FunctionComponent<ThemeProps> = ({ children, currentTheme }) => {
-  const theme = { ...utilities, ...themes[currentTheme], theme: currentTheme };
+  const theme = { ...utilities, ...themes[currentTheme] };
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 

@@ -1,4 +1,4 @@
-import React, from 'react';
+import React from 'react';
 import { render, waitForElement, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import FollowButton from './index';

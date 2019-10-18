@@ -12,7 +12,7 @@ describe('Routes', () => {
     history.push('/unknown-route');
     const { getByText } = render(<Routes />, {
       wrapper: ({ children }) => (
-        <Theme theme="light">
+        <Theme currentTheme="light">
           <Router history={history}>{children}</Router>
         </Theme>
       ),

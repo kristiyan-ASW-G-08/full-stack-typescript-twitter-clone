@@ -205,7 +205,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -924,7 +924,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -1632,7 +1632,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -2340,7 +2340,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -3004,7 +3004,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -3723,7 +3723,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -4431,7 +4431,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -5139,7 +5139,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -5798,7 +5798,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -6520,7 +6520,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -7242,7 +7242,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -7966,7 +7966,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -8627,7 +8627,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -9300,7 +9300,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -9973,7 +9973,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -10672,7 +10672,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -11345,7 +11345,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -12143,7 +12143,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -13186,7 +13186,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -14144,7 +14144,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -14831,7 +14831,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -15347,7 +15347,7 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-cSHVUG cMhMpk"
+      className="sc-cSHVUG beVHer"
     >
       <div
         className="sc-chPdSV jZizUM"
@@ -15664,7 +15664,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -16458,7 +16458,7 @@ Array [
     style={Object {}}
   >
     <aside
-      className="sc-cSHVUG cMhMpk"
+      className="sc-cSHVUG beVHer"
     >
       <div
         className="sc-chPdSV dWqtYr"
@@ -16775,7 +16775,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -17718,7 +17718,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -18551,7 +18551,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -19237,6 +19237,7 @@ Array [
     <div>
       <article
         className="sc-kEYyzF dcfnUf"
+        data-testid="id"
       >
         <div
           className="sc-iAyFgw fEvii"
@@ -19573,7 +19574,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -19717,7 +19718,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-16T12:15:04.494Z'
+                          '2019-10-18T12:37:42.198Z'
                         </span>
                         <span
                           className="token punctuation"
@@ -21242,7 +21243,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"
@@ -22159,7 +22160,7 @@ Array [
                           <span
                             className="token attr-name"
                           >
-                            theme
+                            currentTheme
                           </span>
                           <span
                             className="token attr-value"

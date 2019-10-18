@@ -1,5 +1,5 @@
 export const light = {
-  currentTheme: 'light',
+  theme: 'light',
   primary: '#1da1f2',
   secondary: '#657786',
   background: '#ffffff',
@@ -8,7 +8,7 @@ export const light = {
   white: '#ffffff',
 };
 export const dark = {
-  currentTheme: 'dark',
+  theme: 'dark',
   secondary: '#8899a6',
   primary: '#1da1f2',
   background: '#1c2938',
