@@ -66,11 +66,19 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   return (
     <TweetsWrapper>
       <>
-        <Select onChange={getTweetsHandler}>
-          <option value="new">New</option>
-          <option value="top">Top</option>
-          <option value="trending">Trending</option>
-          <option value="replies">Replies</option>
+        <Select data-testid="sort" onChange={getTweetsHandler}>
+          <option data-testid="new" value="new">
+            New
+          </option>
+          <option data-testid="top" value="top">
+            Top
+          </option>
+          <option data-testid="trending" value="trending">
+            Trending
+          </option>
+          <option data-testid="replies" value="replies">
+            Replies
+          </option>
         </Select>
         <Suspense
           fallback={

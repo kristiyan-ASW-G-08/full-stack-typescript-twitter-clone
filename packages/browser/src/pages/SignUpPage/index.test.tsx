@@ -7,10 +7,8 @@ import SignUpPage from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.post.mockReturnValueOnce(
-  Promise.resolve({ data: {}, status: 200 }),
-);
+const axiosMock = axios as jest.Mocked<typeof axios>;
+axiosMock.post.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('SignUpPage', () => {
   const username = 'newUsername';
   const handle = 'newHandle';

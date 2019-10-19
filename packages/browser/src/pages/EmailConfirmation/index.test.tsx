@@ -7,10 +7,8 @@ import TestWrapper from 'testUtilities/TestWrapper';
 import EmailConfirmation from '.';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.patch.mockReturnValueOnce(
-  Promise.resolve({ data: {}, status: 200 }),
-);
+const axiosMock = axios as jest.Mocked<typeof axios>;
+axiosMock.patch.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('EmailConfirmation', () => {
   it('renders', async () => {
     expect.assertions(3);

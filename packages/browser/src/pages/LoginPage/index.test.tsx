@@ -7,8 +7,8 @@ import LoginPage from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.post.mockReturnValueOnce(
+const axiosMock = axios as jest.Mocked<typeof axios>;
+axiosMock.post.mockReturnValueOnce(
   Promise.resolve({ data: {}, status: 200 }),
 );
 describe('LoginPage', () => {

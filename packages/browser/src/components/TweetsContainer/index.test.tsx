@@ -22,7 +22,7 @@ describe('TweetsContainer', () => {
   const setNotification = jest.fn();
   const url = 'url';
   it('render TweetsContainer', async () => {
-    expect.assertions(6);
+    expect.assertions(15);
 
     const { container, getByRole, getByTestId } = render(
       <TweetsContainer url={url} setNotification={setNotification} />,
@@ -38,9 +38,26 @@ describe('TweetsContainer', () => {
         setNotification,
       );
     });
+
     const tweetsFeed = await waitForElement(() => getByRole('feed'));
     const tweetElement = await waitForElement(() => getByTestId(tweet._id));
+    const sortSelect = await waitForElement(() => getByTestId('sort'));
 
+    const options = ['trending', 'new', 'top', 'replies'];
+    for await (const option of options) {
+      const sortOption = await waitForElement(
+        () => getByTestId(option) as HTMLOptionElement,
+      );
+
+      UserEvent.selectOptions(sortSelect, option);
+      expect(sortOption.selected).toBe(true);
+      expect(getTweets).toHaveBeenCalledWith(
+        `${url}?sort=${option}`,
+        setNotification,
+      );
+    }
+    
+    expect(getTweets).toHaveBeenCalledTimes(5);
     expect(setElement).toHaveBeenCalledTimes(2);
     expect(tweetsFeed.childElementCount).toBe(1);
     expect(tweetElement).toBeTruthy();
