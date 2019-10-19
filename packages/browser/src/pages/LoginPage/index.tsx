@@ -33,11 +33,10 @@ export const LoginPage: FC = () => {
         e,
       );
       const { data } = response.data;
-      const authState = { ...data, isAuth: true };
       const remainingMilliseconds = 60 * 60 * 1000;
       const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
       localStorage.setItem('expiryDate', expiryDate.toISOString());
-      authStore.setAuthState(authState);
+      authStore.setAuthState(data);
       const notification: Notification = {
         type: 'message',
         content: 'You have logged in successfully.',

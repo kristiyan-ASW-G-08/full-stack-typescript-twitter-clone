@@ -13,7 +13,6 @@ const getTweets = async (
 }> => {
   try {
     const response = await axios.get(`${url}`);
-    console.log(response);
     const { links, tweets } = response.data.data;
     const { next, prev } = links;
     return { newTweets: tweets, next, prev };

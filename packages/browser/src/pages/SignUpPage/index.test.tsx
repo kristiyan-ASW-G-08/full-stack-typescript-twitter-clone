@@ -10,56 +10,45 @@ jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('SignUpPage', () => {
-  const username = 'newUsername';
-  const handle = 'newHandle';
-  const email = 'testmail@test.test';
-  const password = 'passwordpassword';
-  const confirmPassword = 'passwordpassword';
-
   it('it renders', async () => {
-    expect.assertions(8);
-
-    const { container, getByText, getByPlaceholderText } = render(
-      <SignUpPage />,
+    expect.assertions(6);
+    const password = 'passwordpassword';
+    const credentials = [
+      { value: 'newUsername', placeholder: 'Username' },
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        value: 'newHandle',
+        placeholder: 'Handle',
       },
-    );
+      {
+        value: 'testmail@test.test',
+        placeholder: 'Email address',
+      },
+      {
+        value: password,
+        placeholder: 'Password',
+      },
+      {
+        value: password,
+        placeholder: 'Repeat Password',
+      },
+    ];
+    const { getByText, getByPlaceholderText } = render(<SignUpPage />, {
+      wrapper: ({ children }) => <TestWrapper children={children} />,
+    });
 
-    expect(container).toBeTruthy();
+    for await (const { value, placeholder } of credentials) {
+      const input = await waitForElement(() =>
+        getByPlaceholderText(placeholder),
+      );
 
-    const usernameInput = await waitForElement(() =>
-      getByPlaceholderText('Username'),
-    );
-    const handleInput = await waitForElement(() =>
-      getByPlaceholderText('Handle'),
-    );
-    const emailInput = await waitForElement(() =>
-      getByPlaceholderText('Email address'),
-    );
-    const passwordInput = await waitForElement(() =>
-      getByPlaceholderText('Password'),
-    );
-    const confirmPasswordInput = await waitForElement(() =>
-      getByPlaceholderText('Repeat Password'),
-    );
-
-    UserEvent.type(usernameInput, username);
-    UserEvent.type(handleInput, handle);
-    UserEvent.type(emailInput, email);
-    UserEvent.type(passwordInput, password);
-    UserEvent.type(confirmPasswordInput, confirmPassword);
-
-    expect(usernameInput).toHaveAttribute('value', username);
-    expect(handleInput).toHaveAttribute('value', handle);
-    expect(emailInput).toHaveAttribute('value', email);
-    expect(passwordInput).toHaveAttribute('value', password);
-    expect(confirmPasswordInput).toHaveAttribute('value', confirmPassword);
+      UserEvent.type(input, value);
+      expect(input).toHaveAttribute('value', value);
+    }
 
     const submitButton = await waitForElement(() => getByText('Sign Up'));
-    expect(submitButton).toBeTruthy();
 
     UserEvent.click(submitButton);
+
     await wait(() => {
       expect(axios.post).toHaveBeenCalledTimes(1);
     });

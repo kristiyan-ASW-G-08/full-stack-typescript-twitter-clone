@@ -22,7 +22,7 @@ describe('TweetsContainer', () => {
   const setNotification = jest.fn();
   const url = 'url';
   it('render TweetsContainer', async () => {
-    expect.assertions(15);
+    expect.assertions(14);
 
     const { container, getByRole, getByTestId } = render(
       <TweetsContainer url={url} setNotification={setNotification} />,
@@ -56,9 +56,8 @@ describe('TweetsContainer', () => {
         setNotification,
       );
     }
-    
+
     expect(getTweets).toHaveBeenCalledTimes(5);
-    expect(setElement).toHaveBeenCalledTimes(2);
     expect(tweetsFeed.childElementCount).toBe(1);
     expect(tweetElement).toBeTruthy();
     expect(container).toBeTruthy();

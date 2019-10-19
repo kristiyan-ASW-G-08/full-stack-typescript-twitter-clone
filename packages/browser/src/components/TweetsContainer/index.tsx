@@ -65,28 +65,28 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   };
   return (
     <TweetsWrapper>
-      <>
-        <Select data-testid="sort" onChange={getTweetsHandler}>
-          <option data-testid="new" value="new">
-            New
-          </option>
-          <option data-testid="top" value="top">
-            Top
-          </option>
-          <option data-testid="trending" value="trending">
-            Trending
-          </option>
-          <option data-testid="replies" value="replies">
-            Replies
-          </option>
-        </Select>
+      {tweets.length > 0 ? (
         <Suspense
           fallback={
-            <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
+            <TextLoader>
               <p>...Loading</p>
             </TextLoader>
           }
         >
+          <Select data-testid="sort" onChange={getTweetsHandler}>
+            <option data-testid="new" value="new">
+              New
+            </option>
+            <option data-testid="top" value="top">
+              Top
+            </option>
+            <option data-testid="trending" value="trending">
+              Trending
+            </option>
+            <option data-testid="replies" value="replies">
+              Replies
+            </option>
+          </Select>
           <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (
@@ -99,7 +99,12 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
             )}
           </Tweets>
         </Suspense>
-      </>
+      ) : (
+        <TextLoader>
+          <p>...Loading</p>
+        </TextLoader>
+      )}
+
       {nextPage ? (
         <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
           <p>...Loading</p>

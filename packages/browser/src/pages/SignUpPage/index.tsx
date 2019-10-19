@@ -27,7 +27,7 @@ export const SignUpPage: FC = () => {
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const response = await axios.post('http://localhost:8090/users', e);
+      await axios.post('http://localhost:8090/users', e);
       const notification: Notification = {
         type: 'message',
         content:

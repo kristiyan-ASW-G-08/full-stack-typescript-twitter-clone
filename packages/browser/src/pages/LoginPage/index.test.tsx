@@ -8,17 +8,23 @@ import TestWrapper from 'testUtilities/TestWrapper';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
-axiosMock.post.mockReturnValueOnce(
-  Promise.resolve({ data: {}, status: 200 }),
-);
+axiosMock.post.mockResolvedValue({ data: {} });
 describe('LoginPage', () => {
   const email = 'testmail@test.test';
   const password = 'passwordpassword';
 
-
   it('it renders', async () => {
-    expect.assertions(5);
-
+    expect.assertions(3);
+    const credentials = [
+      {
+        value: 'testmail@test.test',
+        placeholder: 'Email address',
+      },
+      {
+        value: password,
+        placeholder: 'Password',
+      },
+    ];
     const { container, getByText, getByPlaceholderText } = render(
       <LoginPage />,
       {
@@ -26,28 +32,22 @@ describe('LoginPage', () => {
       },
     );
 
-    expect(container).toBeTruthy();
+    for await (const { value, placeholder } of credentials) {
+      const input = await waitForElement(() =>
+        getByPlaceholderText(placeholder),
+      );
 
-    const emailInput = await waitForElement(() =>
-      getByPlaceholderText('Email address'),
-    );
-    const passwordInput = await waitForElement(() =>
-      getByPlaceholderText('Password'),
-    );
+      UserEvent.type(input, value);
+      expect(input).toHaveAttribute('value', value);
+    }
+
     const submitButton = await waitForElement(() => getByText('Log In'));
 
-    UserEvent.type(emailInput, email);
-    UserEvent.type(passwordInput, password);
     UserEvent.click(submitButton);
 
     UserEvent.click(submitButton);
     await wait(() => {
       expect(axios.post).toHaveBeenCalledTimes(1);
     });
-
-    expect(emailInput).toHaveAttribute('value', email);
-    expect(passwordInput).toHaveAttribute('value', password);
-
-    expect(submitButton).toBeTruthy();
   });
 });
