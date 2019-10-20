@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Input from 'styled/Input';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Button from 'styled/Button';
-import ValidationError from '@twtr/common/source/types/ValidationError';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
@@ -28,6 +27,7 @@ import {
   InputContainer,
 } from './styled';
 import populateFormData from 'utilities/populateFormData';
+import transformValidationErrors from 'utilities/transformValidationErrors';
 
 interface TweetFormProps extends RouteComponentProps {
   resetModalState: () => void;
@@ -53,7 +53,7 @@ export const TweetForm: FC<TweetFormProps> = ({
   }, []);
   const submitHandler = async (
     e: FormikValues,
-    { setFieldError }: FormikActions<FormikValues>,
+    { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const { retweetedId, replyId } = tweetFormProps;
@@ -87,10 +87,8 @@ export const TweetForm: FC<TweetFormProps> = ({
         Array.isArray(error.response.data)
       ) {
         const { data } = error.response.data;
-        data.forEach((validationError: ValidationError) => {
-          const { name, message } = validationError;
-          setFieldError(name, message);
-        });
+        const errors = transformValidationErrors(data);
+        setErrors(errors);
       } else {
         const notification: Notification = {
           type: 'warning',

@@ -6,6 +6,7 @@ import {
   ErrorMessage,
   FormikValues,
   FormikActions,
+  FormikErrors,
 } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -16,16 +17,16 @@ import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
-import ValidationError from '@twtr/common/source/types/ValidationError';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
+import transformValidationErrors from 'utilities/transformValidationErrors';
 
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const history = useHistory();
   const submitHandler = async (
     e: FormikValues,
-    { setFieldError }: FormikActions<FormikValues>,
+    { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const response = await axios.post(
@@ -46,11 +47,8 @@ export const LoginPage: FC = () => {
     } catch (error) {
       if (error.response) {
         const { data } = error.response.data;
-
-        data.forEach((validationError: ValidationError) => {
-          const { name, message } = validationError;
-          setFieldError(name, message);
-        });
+        const errors = transformValidationErrors(data);
+        setErrors(errors);
       }
     }
   };
