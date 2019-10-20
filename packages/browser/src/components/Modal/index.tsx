@@ -15,7 +15,7 @@ export const Modal: FC = observer(() => {
         tweetFormProps={modalState.tweetFormProps}
         token={authStore.authState.token}
         resetModalState={() => modalStore.resetModalState()}
-        setNotification={notificationStore.setNotification}
+        setNotification={() => notificationStore.setNotification}
       />
     ),
     profileForm: () => <div></div>,

@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 import Tweet from '@models/Tweet';
 import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
-import { CustomError, errors } from '@utilities/CustomError';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
 import getSortString from '@utilities/getSortString';
-import ValidationError from '@twtr/common/source/types/ValidationError';
 import includesObjectId from '@utilities/includesObjectId';
 import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
 import { getUserById } from '@services/userServices';
+import ValidationError from '@twtr/common/source/types/ValidationError';
+import { CustomError, errors } from '@utilities/CustomError';
 
 export const postTweet = async (
   req: Request,
@@ -22,9 +22,20 @@ export const postTweet = async (
     const { userId } = req;
 
     const user = await getUserById(userId);
-    console.log(user);
-    if (retweetedId !== undefined) {
+
+    const tweet = new Tweet({
+      text,
+      user: userId,
+      type,
+      link: linkUrl,
+    });
+    if (req.file) {
+      tweet.image = req.file.path;
+    }
+
+    if (retweetedId) {
       const retweetedTweet = await getTweetById(retweetedId);
+      tweet.retweet = retweetedId;
       if (includesObjectId(user.retweets, retweetedId)) {
         user.retweets = removeObjectIdFromArr(user.retweets, retweetedId);
         retweetedTweet.retweets -= 1;
@@ -42,8 +53,9 @@ export const postTweet = async (
       }
       await retweetedTweet.save();
     }
-    if (replyId !== undefined) {
+    if (replyId) {
       const replyTweet = await getTweetById(replyId);
+      tweet.reply = replyId;
       if (includesObjectId(user.replies, replyId)) {
         user.replies = removeObjectIdFromArr(user.replies, replyId);
         replyTweet.replies -= 1;
@@ -54,18 +66,6 @@ export const postTweet = async (
         replyTweet.replies += 1;
       }
       await replyTweet.save();
-    }
-
-    const tweet = new Tweet({
-      text,
-      user: userId,
-      type,
-      link: linkUrl,
-      reply: replyId,
-      retweet: retweetedId,
-    });
-    if (req.file) {
-      tweet.image = req.file.path;
     }
 
     await tweet.save();
@@ -88,12 +88,9 @@ export const updateTweet = async (
     const tweet = await getTweetById(tweetId);
     const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
-    if (tweet.link && linkUrl) {
-      tweet.link = linkUrl;
-    }
-    if (tweet.text && text) {
-      tweet.text = text;
-    }
+
+    tweet.text = text;
+    tweet.link = linkUrl;
     if (tweet.image) {
       if (!req.file) {
         const errorData: ValidationError[] = [

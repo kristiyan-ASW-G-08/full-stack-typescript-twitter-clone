@@ -96,6 +96,20 @@ export const TweetBar: FC<TweetProps> = ({
       ))}
 
       <ShareButton tweet={tweet} setNotification={setNotification} />
+      {user && user._id === tweet.user._id ? (
+        <TweetBarButton
+          data-testid={`edit-button`}
+          key={'edit'}
+          onClick={async () =>
+            setModalState('tweetForm', { tweet, type: tweet.type })
+          }
+          active={undefined}
+        >
+          <FontAwesomeIcon icon={'edit'} />
+        </TweetBarButton>
+      ) : (
+        ''
+      )}
     </TweetBarWrapper>
   );
 };

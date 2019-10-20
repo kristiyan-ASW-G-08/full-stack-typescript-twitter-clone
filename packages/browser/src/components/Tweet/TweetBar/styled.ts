@@ -5,8 +5,7 @@ import { setLightness } from 'polished';
 export const TweetBarWrapper = styled('div')`
   grid-area: tweet-bar;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fit, minmax(1rem, 1fr));
 `;
 
 interface TweetBarButtonProps {

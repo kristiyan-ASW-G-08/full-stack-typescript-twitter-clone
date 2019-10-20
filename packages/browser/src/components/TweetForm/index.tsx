@@ -27,6 +27,7 @@ import {
   AvatarContainer,
   InputContainer,
 } from './styled';
+import populateFormData from 'utilities/populateFormData';
 
 interface TweetFormProps extends RouteComponentProps {
   resetModalState: () => void;
@@ -34,8 +35,8 @@ interface TweetFormProps extends RouteComponentProps {
   setNotification: (notification: Notification) => void;
   tweetFormProps: TweetFormModalProps;
 }
+
 export const TweetForm: FC<TweetFormProps> = ({
-  history,
   resetModalState,
   token,
   setNotification,
@@ -44,49 +45,39 @@ export const TweetForm: FC<TweetFormProps> = ({
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     'text',
   );
-  useEffect(() => {
-    if (tweetFormProps.type) {
-      setType(tweetFormProps.type);
-    }
-  }, []);
   const [hasImage, setHasImage] = useState<boolean>(false);
   const { fileData, fileHandler, resetFileData } = useFilePicker();
+  const { tweet } = tweetFormProps;
+  useEffect(() => {
+    setType(tweetFormProps.type || 'text');
+  }, []);
   const submitHandler = async (
     e: FormikValues,
     { setFieldError }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const { retweetedId, replyId } = tweetFormProps;
-      const data = {
+      const formData: FormData = populateFormData({
         ...e,
         type,
         retweetedId,
         replyId,
-      };
-      let formData: FormData = new FormData();
+      });
       if (fileData && fileData.file) {
-        formData = Object.entries(data).reduce(
-          (acc: FormData, [key, value]) => {
-            console.log(key, value);
-            if (key !== undefined && value !== undefined) {
-              acc.append(key, value);
-            }
-
-            return acc;
-          },
-          new FormData(),
-        );
         formData.append('image', fileData.file);
       }
       const config = {
         headers: { Authorization: 'bearer ' + token },
       };
-      const responseBody = fileData && fileData.file ? formData : data;
-      const response = await axios.post(
-        'http://localhost:8090/tweets',
-        responseBody,
-        config,
-      );
+      if (tweet) {
+        await axios.patch(
+          `http://localhost:8090/tweets/${tweet._id}`,
+          formData,
+          config,
+        );
+      } else {
+        await axios.post('http://localhost:8090/tweets', formData, config);
+      }
       resetModalState();
     } catch (error) {
       if (
@@ -112,7 +103,10 @@ export const TweetForm: FC<TweetFormProps> = ({
   return (
     <Formik
       validationSchema={TweetValidator}
-      initialValues={{ text: '', linkUrl: '' }}
+      initialValues={{
+        text: tweet ? tweet.text : '',
+        linkUrl: tweet ? tweet.link : '',
+      }}
       onSubmit={submitHandler}
     >
       {() => (
@@ -173,6 +167,7 @@ export const TweetForm: FC<TweetFormProps> = ({
                 <FontAwesomeIcon icon={'image'} />
               </IconButton>
               <IconButton
+                data-testid="link-button"
                 type="button"
                 onClick={(e: SyntheticEvent) => {
                   e.preventDefault();

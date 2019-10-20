@@ -10,14 +10,14 @@ const TweetSchema: Schema = new Schema({
   text: { type: String, maxlength: 500 },
   image: { type: String },
   link: { type: String },
-  retweet: {
-    type: Schema.Types.ObjectId,
-    ref: 'Tweet',
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+  },
+  retweet: {
+    type: Schema.Types.ObjectId,
+    ref: 'Tweet',
   },
   reply: { type: Schema.Types.ObjectId, ref: 'Tweet' },
   retweets: { type: Number, default: 0 },

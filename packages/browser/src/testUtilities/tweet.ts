@@ -3,7 +3,7 @@ import Tweet from 'types/Tweet';
 const tweet: Tweet = {
   user,
   text: 'Text',
-  link: 'mockLink',
+  link: 'https://github.com/',
   type: 'link',
   image: 'mockImage',
   _id: 'id',
