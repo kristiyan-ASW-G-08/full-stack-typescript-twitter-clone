@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Sidebar from '.';
@@ -13,7 +13,7 @@ describe('Sidebar', () => {
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
-  it('render Sidebar', async () => {
+  it('render Sidebar', () => {
     expect.assertions(11);
 
     const { container, getByText, getByTestId, rerender } = render(
@@ -29,10 +29,10 @@ describe('Sidebar', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const themeButton = await waitForElement(() => getByTestId('theme-button'));
-    const logInButton = await waitForElement(() => getByText('Log In'));
-    const signUpButton = await waitForElement(() => getByText('Sign Up'));
-    const backdrop = await waitForElement(() => getByTestId('backdrop'));
+    const themeButton = getByTestId('theme-button');
+    const logInButton = getByText('Log In');
+    const signUpButton = getByText('Sign Up');
+    const backdrop = getByTestId('backdrop');
 
     userEvent.click(backdrop);
     UserEvent.click(themeButton);
@@ -55,10 +55,9 @@ describe('Sidebar', () => {
         toggleTheme={toggleTheme}
       />,
     );
-    const lightThemeButton = await waitForElement(() =>
-      getByTestId('theme-button'),
-    );
-    const logOutButton = await waitForElement(() => getByText('Log Out'));
+
+    const lightThemeButton = getByTestId('theme-button');
+    const logOutButton = getByText('Log Out');
 
     UserEvent.click(logOutButton);
 

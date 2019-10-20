@@ -63,6 +63,9 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
     setNext(next);
     setTweets(newTweets);
   };
+  const deleteTweetHandler = (tweetId: string): void => {
+    setTweets(tweets.filter(tweet => tweet._id !== tweetId));
+  };
   return (
     <TweetsWrapper>
       {tweets.length > 0 ? (
@@ -91,10 +94,18 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (
                 <Retweet key={tweet._id} tweet={tweet}>
-                  <Tweet key={tweet._id} tweet={tweet.retweet} />
+                  <Tweet
+                    deleteTweetHandler={deleteTweetHandler}
+                    key={tweet._id}
+                    tweet={tweet.retweet}
+                  />
                 </Retweet>
               ) : (
-                <Tweet key={tweet._id} tweet={tweet} />
+                <Tweet
+                  deleteTweetHandler={deleteTweetHandler}
+                  key={tweet._id}
+                  tweet={tweet}
+                />
               ),
             )}
           </Tweets>

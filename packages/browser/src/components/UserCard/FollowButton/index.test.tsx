@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, wait } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import FollowButton from './index';
 import axios from 'axios';
@@ -31,7 +31,7 @@ describe('FollowButton', () => {
       },
     );
 
-    const followButton = await waitForElement(() => getByText('Follow'));
+    const followButton = getByText('Follow');
     expect(followButton).toBeTruthy();
     userEvent.click(followButton);
     await wait(() => {

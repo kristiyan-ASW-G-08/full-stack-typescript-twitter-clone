@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Navbar from '.';
@@ -12,7 +12,7 @@ describe('Navbar', () => {
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const openModal = jest.fn();
-  it('render Navbar', async () => {
+  it('render Navbar', () => {
     expect.assertions(8);
 
     const { container, getByText, rerender } = render(
@@ -27,9 +27,9 @@ describe('Navbar', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const themeButton = await waitForElement(() => getByText('Dark mode'));
-    const logInButton = await waitForElement(() => getByText('Log In'));
-    const signUpButton = await waitForElement(() => getByText('Sign Up'));
+    const themeButton = getByText('Dark mode');
+    const logInButton = getByText('Log In');
+    const signUpButton = getByText('Sign Up');
 
     UserEvent.click(themeButton);
 
@@ -48,10 +48,9 @@ describe('Navbar', () => {
         toggleTheme={toggleTheme}
       />,
     );
-    const lightThemeButton = await waitForElement(() =>
-      getByText('Light mode'),
-    );
-    const logOutButton = await waitForElement(() => getByText('Log Out'));
+    const lightThemeButton = getByText('Light mode');
+
+    const logOutButton = getByText('Log Out');
 
     UserEvent.click(logOutButton);
 

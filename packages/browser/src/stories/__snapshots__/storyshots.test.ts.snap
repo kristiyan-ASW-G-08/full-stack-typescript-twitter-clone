@@ -19297,11 +19297,11 @@ Array [
           </p>
           <a
             className="sc-jAaTju ijHvCc"
-            href="mockLink"
+            href="https://github.com/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            mockLink
+            https://github.com/
           </a>
           <img
             alt=""
@@ -19310,7 +19310,7 @@ Array [
           />
         </div>
         <div
-          className="sc-gPEVay iQCvpN"
+          className="sc-gPEVay iwTHOp"
         >
           <button
             className="sc-iRbamj kKCtCL"
@@ -19404,6 +19404,8 @@ Array [
               />
             </svg>
           </button>
+          
+          
           <div
             className="sc-jlyJG eYPAef"
           >
@@ -19661,6 +19663,54 @@ Array [
                         >
                           
         &lt;[object Object]
+          deleteTweetHandler=
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token keyword"
+                        >
+                          function
+                        </span>
+                         
+                        <span
+                          className="token function"
+                        >
+                          noRefCheck
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          (
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          )
+                        </span>
+                         
+                        <span
+                          className="token punctuation"
+                        >
+                          {
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token punctuation"
+                        >
+                          }
+                        </span>
+                        <span
+                          className="token plain-text"
+                        >
+                          
           tweet=
                         </span>
                         <span
@@ -19718,7 +19768,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-18T12:37:42.198Z'
+                          '2019-10-20T17:40:18.934Z'
                         </span>
                         <span
                           className="token punctuation"
@@ -19777,7 +19827,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          'mockLink'
+                          'https://github.com/'
                         </span>
                         <span
                           className="token punctuation"
@@ -20535,7 +20585,7 @@ Array [
                           className="token plain-text"
                         >
                           
-         /&gt;
+        /&gt;
       
                         </span>
                         <span
@@ -21070,6 +21120,7 @@ Array [
           </button>
           <button
             className="sc-Rmtcm hFaHQI"
+            data-testid="link-button"
             onClick={[Function]}
             type="button"
           >
@@ -21987,6 +22038,7 @@ Array [
           </button>
           <button
             className="sc-Rmtcm gKAxcl"
+            data-testid="link-button"
             onClick={[Function]}
             type="button"
           >

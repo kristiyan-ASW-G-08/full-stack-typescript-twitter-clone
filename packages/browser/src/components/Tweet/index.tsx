@@ -24,8 +24,9 @@ import TweetFormProps from 'types/TweetFormProps';
 
 interface TweetProps {
   tweet: TweetType;
+  deleteTweetHandler: (tweetId: string) => void;
 }
-export const Tweet: FC<TweetProps> = ({ tweet }) => {
+export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { authStore, notificationStore, modalStore } = useContext(
     RootStoreContext,
   );
@@ -33,52 +34,51 @@ export const Tweet: FC<TweetProps> = ({ tweet }) => {
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
-  return useMemo(() => {
-    return (
-      <TweetWrapper data-testid={_id}>
-        <AvatarContainer>
-          <Avatar avatarURL={avatar} altText={username} />
-        </AvatarContainer>
-        <UserBar>
-          <Username>{username}</Username> <Handle>@{handle}</Handle>{' '}
-          <Time>
-            {days <= 0 ? '' : `${days}d:`}
-            {hours}h{hours <= 0 ? `:${minutes}m:` : ''}
-          </Time>
-          {reply ? (
-            <Reply>
-              Replying to <span>@{reply.user.handle}</span>
-            </Reply>
-          ) : (
-            ''
-          )}
-        </UserBar>
-        <ContentContainer>
-          <Text>{text}</Text>
-          {link ? (
-            <Link href={link} target="_blank" rel="noopener noreferrer">
-              {link}
-            </Link>
-          ) : (
-            ''
-          )}
-          {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
-        </ContentContainer>
-        <TweetBar
-          setModalState={(type: 'tweetForm', payload?: TweetFormProps) =>
-            modalStore.setModalState(type, payload)
-          }
-          tweet={tweet}
-          authState={authStore.authState}
-          setNotification={(notification: Notification): void => {
-            notificationStore.setNotification(notification);
-          }}
-          updateUser={(user: User | undefined): void => {
-            authStore.updateUser(user);
-          }}
-        />
-      </TweetWrapper>
-    );
-  }, [authStore.authState.user]);
+  return (
+    <TweetWrapper data-testid={_id}>
+      <AvatarContainer>
+        <Avatar avatarURL={avatar} altText={username} />
+      </AvatarContainer>
+      <UserBar>
+        <Username>{username}</Username> <Handle>@{handle}</Handle>{' '}
+        <Time>
+          {days <= 0 ? '' : `${days}d:`}
+          {hours}h{hours <= 0 ? `:${minutes}m:` : ''}
+        </Time>
+        {reply ? (
+          <Reply>
+            Replying to <span>@{reply.user.handle}</span>
+          </Reply>
+        ) : (
+          ''
+        )}
+      </UserBar>
+      <ContentContainer>
+        <Text>{text}</Text>
+        {link ? (
+          <Link href={link} target="_blank" rel="noopener noreferrer">
+            {link}
+          </Link>
+        ) : (
+          ''
+        )}
+        {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
+      </ContentContainer>
+      <TweetBar
+        deleteTweetHandler={deleteTweetHandler}
+        setModalState={(type: 'tweetForm', payload?: TweetFormProps) =>
+          modalStore.setModalState(type, payload)
+        }
+        tweet={tweet}
+        authState={authStore.authState}
+        setNotification={(notification: Notification): void => {
+          notificationStore.setNotification(notification);
+        }}
+        updateUser={(user: User | undefined): void => {
+          authStore.updateUser(user);
+        }}
+      />
+    </TweetWrapper>
+  );
 };
 export default memo(observer(Tweet));

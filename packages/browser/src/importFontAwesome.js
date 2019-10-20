@@ -17,9 +17,11 @@ import {
   faRetweet,
   faComment,
   faEdit,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons';
 library.add(
+  faTrash,
   faBars,
   faUser,
   faSearch,

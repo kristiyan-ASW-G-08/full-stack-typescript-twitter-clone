@@ -43,14 +43,11 @@ export const TweetForm: FC<TweetFormProps> = ({
   tweetFormProps,
 }) => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
-    'text',
+    tweetFormProps.type || 'text',
   );
   const [hasImage, setHasImage] = useState<boolean>(false);
   const { fileData, fileHandler, resetFileData } = useFilePicker();
   const { tweet } = tweetFormProps;
-  useEffect(() => {
-    setType(tweetFormProps.type || 'text');
-  }, []);
   const submitHandler = async (
     e: FormikValues,
     { setErrors }: FormikActions<FormikValues>,

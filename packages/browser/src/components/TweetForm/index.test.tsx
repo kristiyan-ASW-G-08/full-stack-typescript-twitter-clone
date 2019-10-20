@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, wait } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
@@ -35,13 +35,13 @@ describe('TweetForm', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const submitButton = await waitForElement(() => getByText('Tweet'));
-    const linkButton = await waitForElement(() => getByTestId('link-button'));
+    const submitButton = getByText('Tweet');
+    const linkButton = getByTestId('link-button');
 
     userEvent.click(linkButton);
 
-    const textInput = await waitForElement(() => getByPlaceholderText('Text'));
-    const linkInput = await waitForElement(() => getByPlaceholderText('Link'));
+    const textInput = getByPlaceholderText('Text');
+    const linkInput = getByPlaceholderText('Link');
 
     UserEvent.type(textInput, text);
     UserEvent.type(linkInput, link);
@@ -72,9 +72,9 @@ describe('TweetForm', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const submitButton = await waitForElement(() => getByText('Tweet'));
-    const textInput = await waitForElement(() => getByPlaceholderText('Text'));
-    const linkInput = await waitForElement(() => getByPlaceholderText('Link'));
+    const submitButton = getByText('Tweet');
+    const textInput = getByPlaceholderText('Text');
+    const linkInput = getByPlaceholderText('Link');
 
     expect(textInput.textContent).toMatch(tweet.text);
     expect(linkInput).toHaveAttribute('value', tweet.link);

@@ -1,12 +1,12 @@
-import React, { FC, Context, Provider } from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import React, { FC } from 'react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Retweet from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import tweet from 'testUtilities/tweet';
 
 describe('Retweet', () => {
-  it('render Retweet', async () => {
+  it('render Retweet', () => {
     expect.assertions(3);
     const Children: FC = () => (
       <>
@@ -23,10 +23,8 @@ describe('Retweet', () => {
       },
     );
 
-    const children = await waitForElement(() => getByTestId('children'));
-    const replyText = await waitForElement(() =>
-      getByText(`@${tweet.user.handle} Retweeted`),
-    );
+    const children = getByTestId('children');
+    const replyText = getByText(`@${tweet.user.handle} Retweeted`);
 
     expect(container).toBeTruthy();
     expect(children).toBeTruthy();

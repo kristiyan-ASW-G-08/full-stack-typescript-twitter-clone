@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, wait } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
@@ -10,7 +10,6 @@ jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockResolvedValue({ data: {} });
 describe('LoginPage', () => {
-  const email = 'testmail@test.test';
   const password = 'passwordpassword';
 
   it('it renders', async () => {
@@ -32,16 +31,13 @@ describe('LoginPage', () => {
       },
     );
 
-    for await (const { value, placeholder } of credentials) {
-      const input = await waitForElement(() =>
-        getByPlaceholderText(placeholder),
-      );
-
+    credentials.forEach(({ value, placeholder }) => {
+      const input = getByPlaceholderText(placeholder);
       UserEvent.type(input, value);
       expect(input).toHaveAttribute('value', value);
-    }
+    });
 
-    const submitButton = await waitForElement(() => getByText('Log In'));
+    const submitButton = getByText('Log In');
 
     UserEvent.click(submitButton);
 

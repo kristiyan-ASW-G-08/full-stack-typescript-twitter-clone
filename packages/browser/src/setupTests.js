@@ -1,1 +1,1 @@
-import '../src/utilities/importFontAwesome';
+import './importFontAwesome';

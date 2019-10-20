@@ -13,15 +13,10 @@ describe('EmailConfirmation', () => {
   it('renders', async () => {
     expect.assertions(3);
 
-    const { container, getByText, getByPlaceholderText } = render(
-      <EmailConfirmation />,
-      {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
-      },
-    );
-    const confirmationButton = await waitForElement(() =>
-      getByText('Confirm Email'),
-    );
+    const { container, getByText } = render(<EmailConfirmation />, {
+      wrapper: ({ children }) => <TestWrapper children={children} />,
+    });
+    const confirmationButton = getByText('Confirm Email');
 
     UserEvent.click(confirmationButton);
 

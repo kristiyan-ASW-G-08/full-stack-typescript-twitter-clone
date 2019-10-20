@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, wait } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
@@ -36,16 +36,13 @@ describe('SignUpPage', () => {
       wrapper: ({ children }) => <TestWrapper children={children} />,
     });
 
-    for await (const { value, placeholder } of credentials) {
-      const input = await waitForElement(() =>
-        getByPlaceholderText(placeholder),
-      );
-
+    credentials.forEach(({ value, placeholder }) => {
+      const input = getByPlaceholderText(placeholder);
       UserEvent.type(input, value);
       expect(input).toHaveAttribute('value', value);
-    }
+    });
 
-    const submitButton = await waitForElement(() => getByText('Sign Up'));
+    const submitButton = getByText('Sign Up');
 
     UserEvent.click(submitButton);
 

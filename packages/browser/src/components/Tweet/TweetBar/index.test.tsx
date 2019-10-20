@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, wait } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
@@ -19,10 +19,12 @@ describe('TweetBar', () => {
   const updateUser = jest.fn();
   const setNotification = jest.fn();
   const setModalState = jest.fn();
+  const deleteTweetHandle = jest.fn();
   it('render TweetBar', async () => {
-    expect.assertions(6);
-    const { rerender, getByTestId } = render(
+    // expect.assertions(6);
+    const { rerender, getByTestId, queryByTestId } = render(
       <TweetBar
+        deleteTweetHandler={deleteTweetHandle}
         setModalState={setModalState}
         authState={defaultAuthState}
         tweet={tweet}
@@ -34,28 +36,25 @@ describe('TweetBar', () => {
         wrapper: ({ children }) => <TestWrapper children={children} />,
       },
     );
-    const likeButton = await waitForElement(() => getByTestId('heart-button'));
-    const replyButton = await waitForElement(() =>
-      getByTestId('comment-button'),
-    );
-    const retweetButton = await waitForElement(() =>
-      getByTestId('retweet-button'),
-    );
-    const bookmarkButton = await waitForElement(() =>
-      getByTestId('bookmark-button'),
-    );
+    const likeButton = getByTestId('heart-button');
+    const replyButton = getByTestId('comment-button');
+    const retweetButton = getByTestId('retweet-button');
+    const bookmarkButton = getByTestId('bookmark-button');
+    const deleteButton = queryByTestId('trash-button');
+    const editButtonButton = queryByTestId('editButton-button');
 
     UserEvent.click(likeButton);
     UserEvent.click(bookmarkButton);
     UserEvent.click(replyButton);
     UserEvent.click(retweetButton);
 
-    expect(likeButton).toBeTruthy();
-    expect(bookmarkButton).toBeTruthy();
+    expect(deleteButton).toBeFalsy();
+    expect(editButtonButton).toBeFalsy();
     expect(setNotification).toHaveBeenCalledTimes(4);
 
     rerender(
       <TweetBar
+        deleteTweetHandler={deleteTweetHandle}
         setModalState={setModalState}
         authState={authenticatedAuthState}
         tweet={tweet}
@@ -65,7 +64,6 @@ describe('TweetBar', () => {
     );
 
     UserEvent.click(likeButton);
-
     UserEvent.click(bookmarkButton);
     UserEvent.click(replyButton);
     UserEvent.click(retweetButton);

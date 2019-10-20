@@ -8,7 +8,7 @@ import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Theme from 'components/Theme/Theme';
 import GlobalStyle from 'styled/GlobalStyle';
-import 'utilities/importFontAwesome.js';
+import 'importFontAwesome.js';
 
 const App: FC = observer(() => {
   const { themeStore, authStore } = useContext(RootStoreContext);

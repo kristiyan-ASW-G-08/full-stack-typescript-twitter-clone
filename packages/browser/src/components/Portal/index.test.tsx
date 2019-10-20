@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import Portal from '.';
 
 describe('Portal', () => {
-  it('renders', async () => {
+  it('renders', () => {
     expect.assertions(3);
     const id = 'portal';
     const children = <h1>Child Element</h1>;
