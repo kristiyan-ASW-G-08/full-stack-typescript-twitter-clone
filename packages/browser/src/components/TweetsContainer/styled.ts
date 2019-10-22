@@ -4,8 +4,9 @@ export const TweetsWrapper = styled('section')`
   width: 100vw;
   display: grid;
   grid:
+    'feed-bar feed-bar feed-bar' auto
     '. select . ' auto
-    'tweets tweets tweets' minmax(100vh, auto)
+    'tweets tweets tweets' minmax(80vh, auto)
     'loader loader loader' auto/
     0.1rem 5rem 1fr;
   grid-gap: 1rem;

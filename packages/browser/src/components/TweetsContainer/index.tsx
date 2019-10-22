@@ -6,21 +6,34 @@ import React, {
   useState,
   Suspense,
   lazy,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import TweetType from 'types/Tweet';
 import { TweetsWrapper, Select, Tweets, TextLoader } from './styled';
 import Notification from 'types/Notification';
+import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import getTweets from './getTweets';
+import FeedBar from 'components/FeedBar';
 
 const Tweet = lazy(() => import('components/Tweet'));
 const Retweet = lazy(() => import('components/Retweet'));
 
-interface TweetProps {
+interface TweetsContainerProps {
   url: string;
   setNotification: (notification: Notification) => void;
+  setUrl: Dispatch<SetStateAction<string>>;
+  feeds: Feed[];
+  token: string;
 }
-export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
+export const TweetsContainer: FC<TweetsContainerProps> = ({
+  url,
+  setNotification,
+  setUrl,
+  feeds,
+  token,
+}) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
   const tweetsRef = useRef(tweets);
@@ -30,6 +43,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
       const { newTweets, next } = await getTweets(
         nextPageRef.current,
         setNotification,
+        token,
       );
       const allTweets = [...tweetsRef.current, ...newTweets];
       setTweets(allTweets);
@@ -43,7 +57,8 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
     nextPageRef.current = nextPage;
   }, [tweets, nextPage]);
   useEffect(() => {
-    getTweets(`${url}?sort=new`, setNotification)
+    console.log('fetch');
+    getTweets(`${url}?sort=new`, setNotification, token)
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
@@ -59,6 +74,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
     const { newTweets, next } = await getTweets(
       `${url}?sort=${value}`,
       setNotification,
+      token,
     );
     setNext(next);
     setTweets(newTweets);
@@ -68,6 +84,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
   };
   return (
     <TweetsWrapper>
+      <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
           fallback={
@@ -111,9 +128,7 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
           </Tweets>
         </Suspense>
       ) : (
-        <TextLoader>
-          <p>...Loading</p>
-        </TextLoader>
+        ''
       )}
 
       {nextPage ? (
@@ -128,4 +143,4 @@ export const TweetContainer: FC<TweetProps> = ({ url, setNotification }) => {
     </TweetsWrapper>
   );
 };
-export default TweetContainer;
+export default TweetsContainer;

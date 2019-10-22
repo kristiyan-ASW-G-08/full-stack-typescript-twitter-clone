@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StyledAvatar, IconContainer } from './styled';
+import { AvatarWrapper, IconContainer } from './styled';
 
 interface AvatarProps {
   avatarURL?: string;
@@ -13,7 +13,7 @@ export const Avatar: FC<AvatarProps> = ({
   altText = 'avatar',
 }) => {
   return (
-    <StyledAvatar size={size} type="button">
+    <AvatarWrapper size={size} type="button">
       {avatarURL ? (
         <img src={avatarURL} alt={altText} />
       ) : (
@@ -21,7 +21,7 @@ export const Avatar: FC<AvatarProps> = ({
           <FontAwesomeIcon icon="user-circle" />
         </IconContainer>
       )}
-    </StyledAvatar>
+    </AvatarWrapper>
   );
 };
 
