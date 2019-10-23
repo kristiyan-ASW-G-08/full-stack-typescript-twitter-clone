@@ -488,14 +488,14 @@ export const getUserFeed = async (
       next: null,
       prev: null,
     };
-    // if (tweetsCount > 0) {
-    //   links.next = `${SERVER_URL}/users/users/tweets/feed?page=${page +
-    //     1}&limit=${limit}&sort=${sort}`;
-    // }
-    // if (page > 1) {
-    //   links.prev = `${SERVER_URL}/users/user/tweets/feed?page=${page -
-    //     1}&limit=${limit}&sort=${sort}`;
-    // }
+    if (tweetsCount > 0) {
+      links.next = `${SERVER_URL}/users/user/tweets?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/user/tweets?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
     res.status(200).json({
       data: {
         tweets,

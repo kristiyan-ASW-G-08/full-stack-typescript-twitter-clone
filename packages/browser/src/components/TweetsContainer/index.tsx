@@ -26,6 +26,7 @@ interface TweetsContainerProps {
   setUrl: Dispatch<SetStateAction<string>>;
   feeds: Feed[];
   token: string;
+  hasBorderRadius?: boolean;
 }
 export const TweetsContainer: FC<TweetsContainerProps> = ({
   url,
@@ -33,6 +34,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   setUrl,
   feeds,
   token,
+  hasBorderRadius,
 }) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
@@ -83,7 +85,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     setTweets(tweets.filter(tweet => tweet._id !== tweetId));
   };
   return (
-    <TweetsWrapper>
+    <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
@@ -107,6 +109,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
               Replies
             </option>
           </Select>
+
           <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (

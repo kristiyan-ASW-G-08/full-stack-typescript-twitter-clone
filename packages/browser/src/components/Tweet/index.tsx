@@ -1,5 +1,5 @@
-import React, { FC, memo, useContext, useMemo } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { FC, memo, useContext } from 'react';
+import { Link as NavLink, useLocation } from 'react-router-dom';
 import {
   TweetWrapper,
   UserBar,
@@ -10,8 +10,8 @@ import {
   ContentContainer,
   AvatarContainer,
   Time,
-  Img,
   Link,
+  Img,
 } from './styled';
 import TweetBar from './TweetBar/index';
 import Avatar from 'components/Avatar/index';
@@ -30,6 +30,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { authStore, notificationStore, modalStore } = useContext(
     RootStoreContext,
   );
+  const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
@@ -54,7 +55,15 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
         )}
       </UserBar>
       <ContentContainer>
-        <Text>{text}</Text>
+        <NavLink
+          to={{
+            pathname: `/tweet/${tweet._id}`,
+            state: { tweet: location },
+          }}
+        >
+          <Text>{text}</Text>
+        </NavLink>
+
         {link ? (
           <Link href={link} target="_blank" rel="noopener noreferrer">
             {link}
@@ -62,7 +71,19 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
         ) : (
           ''
         )}
-        {image ? <Img src={`http://localhost:8090/${image}`} alt="" /> : ''}
+
+        {image ? (
+          <NavLink
+            to={{
+              pathname: `/tweet/${tweet._id}`,
+              state: { tweet: location },
+            }}
+          >
+            <Img src={`http://localhost:8090/${image}`} alt="" />
+          </NavLink>
+        ) : (
+          ''
+        )}
       </ContentContainer>
       <TweetBar
         deleteTweetHandler={deleteTweetHandler}
@@ -81,4 +102,4 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
     </TweetWrapper>
   );
 };
-export default memo(observer(Tweet));
+export default memo(Tweet);

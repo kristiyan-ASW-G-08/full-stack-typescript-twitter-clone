@@ -142,7 +142,11 @@ export const getTweet = async (
     const { tweetId } = req.params;
     const tweet = await getTweetById(tweetId);
     const populatedTweet = await tweet
-      .populate('user', 'username handle')
+      .populate([
+        { path: 'user', select: 'username handle' },
+        { path: 'reply', select: 'user' },
+        { path: 'retweet' },
+      ])
       .execPopulate();
     res.status(200).json({ data: { tweet: populatedTweet } });
   } catch (err) {
@@ -233,7 +237,7 @@ export const getReplies = async (
     const page = parseInt(req.query.page, 10) || 1;
     const { SERVER_URL } = process.env;
     const sortString = getSortString(sort);
-    const replies = await Tweet.countDocuments()
+    const tweets = await Tweet.countDocuments()
       .find({ reply: tweetId })
       .sort(sortString)
       .skip((page - 1) * limit)
@@ -251,7 +255,7 @@ export const getReplies = async (
       links.prev = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { replies, links } });
+    res.status(200).json({ data: { tweets, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }

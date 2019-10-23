@@ -1,6 +1,5 @@
-import React, { FC, memo, useState, useEffect, SyntheticEvent } from 'react';
+import React, { FC, memo, useState, SyntheticEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { SearchBarWrapper, Datalist } from './styled';
 import User from 'types/User';
