@@ -62,18 +62,23 @@ const Router: FC = observer(
             ]}
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
-                <Modal
-                  backdropHandler={history.goBack}
+                <Portal
+                  portalId={'tweet-form'}
                   children={
-                    <>
-                      {' '}
-                      <TweetForm
-                        token={token}
-                        setNotification={(notification: NotificationType) =>
-                          notificationStore.setNotification(notification)
-                        }
-                      />
-                    </>
+                    <Modal
+                      backdropHandler={history.goBack}
+                      children={
+                        <>
+                          {' '}
+                          <TweetForm
+                            token={token}
+                            setNotification={(notification: NotificationType) =>
+                              notificationStore.setNotification(notification)
+                            }
+                          />
+                        </>
+                      }
+                    />
                   }
                 />
               </Suspense>

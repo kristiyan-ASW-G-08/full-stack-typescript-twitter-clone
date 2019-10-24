@@ -22,6 +22,7 @@ import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginVa
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
 import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
+import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
 import isAuth from '@customMiddleware/isAuth';
 
 const router = express.Router();
@@ -71,7 +72,11 @@ router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
 
 router.get('/users/:userId/likes', getUserLikes);
 
-router.get('/users/:searchQuery', getUsersList);
+router.get(
+  '/users/:handle',
+  validate([{ schema: UserHandleValidator, target: 'params' }]),
+  getUsersList,
+);
 
 router.get('/users/user/tweets', isAuth, getUserFeed);
 

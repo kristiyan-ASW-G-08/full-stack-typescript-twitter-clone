@@ -39,16 +39,10 @@ export const postTweet = async (
       if (includesObjectId(user.retweets, retweetId)) {
         user.retweets = removeObjectIdFromArr(user.retweets, retweetId);
         retweetedTweet.retweets -= 1;
-        user.retweets = [
-          ...user.retweets,
-          mongoose.Types.ObjectId(retweetId),
-        ];
+        user.retweets = [...user.retweets, mongoose.Types.ObjectId(retweetId)];
         retweetedTweet.retweets += 1;
       } else {
-        user.retweets = [
-          ...user.retweets,
-          mongoose.Types.ObjectId(retweetId),
-        ];
+        user.retweets = [...user.retweets, mongoose.Types.ObjectId(retweetId)];
         retweetedTweet.retweets += 1;
       }
       await retweetedTweet.save();

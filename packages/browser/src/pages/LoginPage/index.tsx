@@ -25,13 +25,13 @@ export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const history = useHistory();
   const submitHandler = async (
-    e: FormikValues,
+    formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const response = await axios.post(
         'http://localhost:8090/users/user/tokens',
-        e,
+        formValues,
       );
       const { data } = response.data;
       const remainingMilliseconds = 60 * 60 * 1000;

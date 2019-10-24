@@ -68,43 +68,6 @@ Object {
 }
 `;
 
-exports[`userRoutes get /users/:searchQuery should get a list of users based on search term 1`] = `
-Array [
-  Object {
-    "_id": "5db1482e72b37523b87c98f3",
-    "handle": "testUserHandle",
-    "score": 0,
-    "username": "username",
-  },
-  Object {
-    "_id": "5db1482e72b37523b87c98f5",
-    "handle": "userHandle",
-    "score": 0,
-    "username": "newOtherUsername",
-  },
-]
-`;
-
-exports[`userRoutes get /users/user/tweets should get a list of tweets based on user's following 1`] = `
-Array [
-  Object {
-    "__v": 0,
-    "_id": "5db148b5f58ab223b86b6475",
-    "date": "2019-10-24T06:46:13.349Z",
-    "likes": 0,
-    "replies": 0,
-    "retweets": 0,
-    "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.",
-    "type": "text",
-    "user": Object {
-      "_id": "5db148b5f58ab223b86b6474",
-      "handle": "followedUserHandle",
-      "username": "followedUser",
-    },
-  },
-]
-`;
-
 exports[`userRoutes post /users/user/tokens should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
 Object {
   "data": Array [

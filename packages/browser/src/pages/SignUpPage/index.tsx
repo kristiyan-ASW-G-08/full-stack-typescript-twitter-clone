@@ -23,11 +23,11 @@ export const SignUpPage: FC = () => {
   const history = useHistory();
   const { notificationStore } = useContext(RootStoreContext);
   const submitHandler = async (
-    e: FormikValues,
+    formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      await axios.post('http://localhost:8090/users', e);
+      await axios.post('http://localhost:8090/users', formValues);
       const notification: Notification = {
         type: 'message',
         content:

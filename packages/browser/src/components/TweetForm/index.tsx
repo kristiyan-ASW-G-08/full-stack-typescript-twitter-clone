@@ -52,12 +52,12 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
     }
   }, []);
   const submitHandler = async (
-    e: FormikValues,
+    formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
       const formData: FormData = populateFormData({
-        ...e,
+        ...formValues,
         type,
         retweetId,
         replyId,

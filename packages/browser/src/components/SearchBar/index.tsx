@@ -9,12 +9,9 @@ export const SearchBar: FC = () => {
   const getUsers = async (query: string): Promise<void> => {
     try {
       const response = await axios.get(`http://localhost:8090/users/${query}`);
-      console.log(response);
       const { users } = response.data.data;
       setUsers(users);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const searchHandler = async (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
@@ -22,23 +19,22 @@ export const SearchBar: FC = () => {
     await getUsers(value);
   };
   return (
-    <>
-      <SearchBarWrapper role="search">
-        <input
-          type="search"
-          placeholder="Search TwittClone"
-          onChange={searchHandler}
-        />
-        <Datalist data-testid="datalist">
-          {users.map(user => (
-            <UserItem user={user} key={user._id} />
-          ))}
-        </Datalist>
-        <span>
-          <FontAwesomeIcon icon="search" />
-        </span>
-      </SearchBarWrapper>
-    </>
+    <SearchBarWrapper role="search">
+      <input
+        name="file"
+        type="search"
+        placeholder="Search TwittClone"
+        onChange={(e: SyntheticEvent) => searchHandler(e)}
+      />
+      <Datalist data-testid="datalist">
+        {users.map(user => (
+          <UserItem user={user} key={user._id} />
+        ))}
+      </Datalist>
+      <span>
+        <FontAwesomeIcon icon="search" />
+      </span>
+    </SearchBarWrapper>
   );
 };
 

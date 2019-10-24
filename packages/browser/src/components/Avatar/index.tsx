@@ -11,18 +11,16 @@ export const Avatar: FC<AvatarProps> = ({
   avatarURL,
   size = 'small',
   altText = 'avatar',
-}) => {
-  return (
-    <AvatarWrapper size={size} type="button">
-      {avatarURL ? (
-        <img src={avatarURL} alt={altText} />
-      ) : (
-        <IconContainer size={size}>
-          <FontAwesomeIcon icon="user-circle" />
-        </IconContainer>
-      )}
-    </AvatarWrapper>
-  );
-};
+}) => (
+  <AvatarWrapper size={size} type="button">
+    {avatarURL ? (
+      <img src={avatarURL} alt={altText} />
+    ) : (
+      <IconContainer size={size}>
+        <FontAwesomeIcon icon="user-circle" />
+      </IconContainer>
+    )}
+  </AvatarWrapper>
+);
 
 export default memo(Avatar);
