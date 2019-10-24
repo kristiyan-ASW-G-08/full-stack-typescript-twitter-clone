@@ -116,7 +116,7 @@ describe('tweetRoutes', (): void => {
         user: userId,
       });
       await tweet.save();
-      const retweetedId = tweet._id;
+      const retweetId = tweet._id;
       const token = jwt.sign(
         {
           userId,
@@ -130,7 +130,7 @@ describe('tweetRoutes', (): void => {
         .send({
           type,
           text,
-          retweetedId,
+          retweetId,
         })
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(200);

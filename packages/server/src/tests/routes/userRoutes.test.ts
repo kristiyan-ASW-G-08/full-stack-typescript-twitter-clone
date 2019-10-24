@@ -829,7 +829,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toBe(404);
     });
   });
-  describe('get /users/:searchTerm', (): void => {
+  describe('get /users/:searchQuery', (): void => {
     it('should get a list of users based on search term', async (): Promise<
       void
     > => {
@@ -858,7 +858,7 @@ describe('userRoutes', (): void => {
       const response = await request(app).get(`/users/${searchTerm}`);
       const { users } = response.body.data;
       expect(response.status).toBe(200);
-      expect(users).toHaveLength(1);
+      expect(users).toHaveLength(2);
     });
   });
 
