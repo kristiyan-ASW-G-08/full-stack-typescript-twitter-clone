@@ -33,7 +33,7 @@ const TweetValidator = yup.object().shape({
         return type === 'text' ? schema.required() : schema.notRequired();
       },
     ),
-  retweetedId: yup
+  retweetId: yup
     .string()
     .trim()
     .when(

@@ -18,7 +18,7 @@ export const postTweet = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, linkUrl, type, retweetedId, replyId } = req.body;
+    const { text, linkUrl, type, retweetId, replyId } = req.body;
     const { userId } = req;
 
     const user = await getUserById(userId);
@@ -33,21 +33,21 @@ export const postTweet = async (
       tweet.image = req.file.path;
     }
 
-    if (retweetedId) {
-      const retweetedTweet = await getTweetById(retweetedId);
-      tweet.retweet = retweetedId;
-      if (includesObjectId(user.retweets, retweetedId)) {
-        user.retweets = removeObjectIdFromArr(user.retweets, retweetedId);
+    if (retweetId) {
+      const retweetedTweet = await getTweetById(retweetId);
+      tweet.retweet = retweetId;
+      if (includesObjectId(user.retweets, retweetId)) {
+        user.retweets = removeObjectIdFromArr(user.retweets, retweetId);
         retweetedTweet.retweets -= 1;
         user.retweets = [
           ...user.retweets,
-          mongoose.Types.ObjectId(retweetedId),
+          mongoose.Types.ObjectId(retweetId),
         ];
         retweetedTweet.retweets += 1;
       } else {
         user.retweets = [
           ...user.retweets,
-          mongoose.Types.ObjectId(retweetedId),
+          mongoose.Types.ObjectId(retweetId),
         ];
         retweetedTweet.retweets += 1;
       }

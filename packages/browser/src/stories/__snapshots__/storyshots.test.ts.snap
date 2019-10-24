@@ -11887,7 +11887,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-dnqmqq kZjsyy"
+      className="sc-dnqmqq cVuIIo"
     >
       <a
         href="/"
@@ -12281,64 +12281,6 @@ Array [
                             </span>
                             
         
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                          </span>
-                          
-        
-                          <span
-                            className="token attr-name"
-                          >
-                            openModal
-                          </span>
-                          <span
-                            className="token script language-javascript"
-                          >
-                            <span
-                              className="token script-punctuation punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token keyword"
-                            >
-                              function
-                            </span>
-                             
-                            <span
-                              className="token function"
-                            >
-                              noRefCheck
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              (
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              )
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
                             <span
                               className="token punctuation"
                             >
@@ -12930,7 +12872,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-dnqmqq ksQIiA"
+      className="sc-dnqmqq kchCqs"
     >
       <a
         href="/"
@@ -13324,64 +13266,6 @@ Array [
                             </span>
                             
         
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              }
-                            </span>
-                          </span>
-                          
-        
-                          <span
-                            className="token attr-name"
-                          >
-                            openModal
-                          </span>
-                          <span
-                            className="token script language-javascript"
-                          >
-                            <span
-                              className="token script-punctuation punctuation"
-                            >
-                              =
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
-                            <span
-                              className="token keyword"
-                            >
-                              function
-                            </span>
-                             
-                            <span
-                              className="token function"
-                            >
-                              noRefCheck
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              (
-                            </span>
-                            <span
-                              className="token punctuation"
-                            >
-                              )
-                            </span>
-                             
-                            <span
-                              className="token punctuation"
-                            >
-                              {
-                            </span>
                             <span
                               className="token punctuation"
                             >
@@ -19290,11 +19174,16 @@ Array [
         <div
           className="sc-jWBwVP ishpPi"
         >
-          <p
-            className="sc-brqgnP eAjXnA"
+          <a
+            href="/tweet/id"
+            onClick={[Function]}
           >
-            Text
-          </p>
+            <p
+              className="sc-brqgnP eAjXnA"
+            >
+              Text
+            </p>
+          </a>
           <a
             className="sc-jAaTju ijHvCc"
             href="https://github.com/"
@@ -19303,11 +19192,16 @@ Array [
           >
             https://github.com/
           </a>
-          <img
-            alt=""
-            className="sc-jDwBTQ RGjzb"
-            src="http://localhost:8090/mockImage"
-          />
+          <a
+            href="/tweet/id"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="sc-jDwBTQ RGjzb"
+              src="http://localhost:8090/mockImage"
+            />
+          </a>
         </div>
         <div
           className="sc-gPEVay iwTHOp"
@@ -19768,7 +19662,7 @@ Array [
                         <span
                           className="token string"
                         >
-                          '2019-10-20T17:40:18.934Z'
+                          '2019-10-24T06:30:22.464Z'
                         </span>
                         <span
                           className="token punctuation"

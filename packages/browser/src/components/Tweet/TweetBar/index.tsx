@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { TweetBarWrapper, TweetBarButton } from './styled';
 import TweetType from 'types/Tweet';
 import AuthState from 'types/AuthState';
@@ -15,7 +16,6 @@ interface TweetProps {
   tweet: TweetType;
   authState: AuthState;
   setNotification: (notification: Notification) => void;
-  setModalState: (type: 'tweetForm', tweetFormProps?: TweetFormProps) => void;
   updateUser: (user: User | undefined) => void;
   deleteTweetHandler: (tweetId: string) => void;
 }
@@ -30,10 +30,11 @@ export const TweetBar: FC<TweetProps> = ({
   authState,
   setNotification,
   updateUser,
-  setModalState,
   deleteTweetHandler,
 }) => {
   const { token, user } = authState;
+  const location = useLocation();
+  const history = useHistory();
   const { _id } = tweet;
   const buttons: ButtonType[] = [
     {
@@ -52,7 +53,13 @@ export const TweetBar: FC<TweetProps> = ({
     {
       show: true,
       icon: 'comment',
-      event: () => setModalState('tweetForm', { replyId: _id, type: 'reply' }),
+      event: () =>
+        history.push({
+          pathname: `/reply/${_id}`,
+          state: {
+            tweetForm: location,
+          },
+        }),
       isActive: () =>
         user && user.replies.includes(_id) ? 'primary' : undefined,
     },
@@ -75,7 +82,12 @@ export const TweetBar: FC<TweetProps> = ({
       show: true,
       icon: 'retweet',
       event: () =>
-        setModalState('tweetForm', { retweetedId: _id, type: 'retweet' }),
+        history.push({
+          pathname: `/retweet/${_id}`,
+          state: {
+            tweetForm: location,
+          },
+        }),
       isActive: () =>
         user && user.retweets.includes(_id) ? 'primary' : undefined,
     },
@@ -102,7 +114,14 @@ export const TweetBar: FC<TweetProps> = ({
     {
       show: user && user._id === tweet.user._id ? true : false,
       icon: 'edit',
-      event: () => setModalState('tweetForm', { tweet, type: tweet.type }),
+      event: () =>
+        history.push({
+          pathname: `/update/tweet/${_id}`,
+          state: {
+            tweetForm: location,
+            tweet,
+          },
+        }),
       isActive: () => undefined,
     },
   ];
@@ -132,7 +151,6 @@ export const TweetBar: FC<TweetProps> = ({
           ''
         );
       })}
-
       <ShareButton tweet={tweet} setNotification={setNotification} />
     </TweetBarWrapper>
   );

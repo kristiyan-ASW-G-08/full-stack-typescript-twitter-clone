@@ -23,7 +23,7 @@ describe('getTweets', () => {
     });
     await wait(() => {
       expect(axios.get).toHaveBeenCalledTimes(1);
-      expect(axios.get).toHaveBeenCalledWith(url);
+      expect(axios.get).toHaveBeenCalledWith(url, {});
     });
   });
 

@@ -8,6 +8,7 @@ storiesOf('TweetForm', module)
   .add(
     'light theme',
     () => (
+      //@ts-ignore
       <TweetForm
         tweetFormProps={tweetFormProps}
         resetModalState={() => {}}
@@ -23,6 +24,7 @@ storiesOf('TweetForm', module)
   .add(
     'dark theme',
     () => (
+      //@ts-ignore
       <TweetForm
         tweetFormProps={tweetFormProps}
         resetModalState={() => {}}

@@ -10,6 +10,7 @@ jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockResolvedValue({ data: {} });
 describe('LoginPage', () => {
+  afterAll(() => jest.restoreAllMocks());
   const password = 'passwordpassword';
 
   it('it renders', async () => {

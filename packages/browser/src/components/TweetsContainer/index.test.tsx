@@ -20,12 +20,21 @@ getTweetsMock.mockResolvedValue({ newTweets: [tweet], next: null, prev: null });
 
 describe('TweetsContainer', () => {
   const setNotification = jest.fn();
+  const setUrl = jest.fn();
   const url = 'url';
+  const token = 'token';
+
   it('render TweetsContainer', async () => {
     expect.assertions(14);
 
     const { container, getByRole, getByTestId } = render(
-      <TweetsContainer url={url} setNotification={setNotification} />,
+      <TweetsContainer
+        token={token}
+        feeds={[]}
+        url={url}
+        setNotification={setNotification}
+        setUrl={setUrl}
+      />,
 
       {
         wrapper: ({ children }) => <TestWrapper children={children} />,
@@ -36,6 +45,7 @@ describe('TweetsContainer', () => {
       expect(getTweets).toHaveBeenCalledWith(
         `${url}?sort=new`,
         setNotification,
+        token,
       );
     });
 
@@ -53,6 +63,7 @@ describe('TweetsContainer', () => {
       expect(getTweets).toHaveBeenCalledWith(
         `${url}?sort=${option}`,
         setNotification,
+        token,
       );
     });
     expect(getTweets).toHaveBeenCalledTimes(5);

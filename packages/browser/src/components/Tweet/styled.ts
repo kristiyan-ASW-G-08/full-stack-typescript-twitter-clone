@@ -91,3 +91,4 @@ export const Img = styled('img')`
   object-fit: cover;
   border-radius: 1rem;
 `;
+

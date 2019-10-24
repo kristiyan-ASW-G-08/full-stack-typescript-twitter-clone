@@ -9,16 +9,14 @@ import {
   FormikActions,
 } from 'formik';
 import axios from 'axios';
-import { observer } from 'mobx-react-lite';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Input from 'styled/Input';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
 import useFilePicker from 'hooks/useFilePicker/useFilePicker';
-import TweetFormModalProps from 'types/TweetFormProps';
 import {
   TweetFormWrapper,
   TwButtonButtonContainer,
@@ -29,35 +27,39 @@ import {
 import populateFormData from 'utilities/populateFormData';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 
-interface TweetFormProps extends RouteComponentProps {
-  resetModalState: () => void;
+interface TweetFormProps {
   token: string;
   setNotification: (notification: Notification) => void;
-  tweetFormProps: TweetFormModalProps;
 }
 
-export const TweetForm: FC<TweetFormProps> = ({
-  resetModalState,
-  token,
-  setNotification,
-  tweetFormProps,
-}) => {
+export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
+  const { replyId, retweetId } = useParams();
+  const params = useParams();
+  const history = useHistory();
+  const location = useLocation();
+  const { tweet } = location.state;
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
-    tweetFormProps.type || 'text',
+    tweet && tweet.type ? tweet.type : 'text',
   );
   const [hasImage, setHasImage] = useState<boolean>(false);
   const { fileData, fileHandler, resetFileData } = useFilePicker();
-  const { tweet } = tweetFormProps;
+  useEffect(() => {
+    if (replyId) {
+      setType('reply');
+    }
+    if (retweetId) {
+      setType('retweet');
+    }
+  }, []);
   const submitHandler = async (
     e: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const { retweetedId, replyId } = tweetFormProps;
       const formData: FormData = populateFormData({
         ...e,
         type,
-        retweetedId,
+        retweetId,
         replyId,
       });
       if (fileData && fileData.file) {
@@ -75,7 +77,7 @@ export const TweetForm: FC<TweetFormProps> = ({
       } else {
         await axios.post('http://localhost:8090/tweets', formData, config);
       }
-      resetModalState();
+      history.goBack();
     } catch (error) {
       if (
         error &&
@@ -185,4 +187,4 @@ export const TweetForm: FC<TweetFormProps> = ({
   );
 };
 
-export default withRouter(observer(TweetForm));
+export default TweetForm;

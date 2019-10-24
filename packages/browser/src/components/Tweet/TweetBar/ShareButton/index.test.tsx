@@ -10,6 +10,7 @@ import setClipboard from 'utilities/setClipboard';
 jest.mock('utilities/setClipboard');
 
 describe('ShareButton', () => {
+  afterAll(() => jest.restoreAllMocks());
   it('render ShareButton', () => {
     expect.assertions(9);
     const setNotification = jest.fn();

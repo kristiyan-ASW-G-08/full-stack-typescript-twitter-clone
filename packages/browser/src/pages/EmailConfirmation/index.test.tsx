@@ -10,6 +10,7 @@ jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.patch.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('EmailConfirmation', () => {
+  afterAll(() => jest.restoreAllMocks());
   it('renders', async () => {
     expect.assertions(3);
 

@@ -11,7 +11,6 @@ storiesOf('Navbar', module)
         theme={'light'}
         resetAuthState={() => {}}
         toggleTheme={() => {}}
-        openModal={() => {}}
       />
     ),
     {
@@ -23,7 +22,6 @@ storiesOf('Navbar', module)
     'dark theme',
     () => (
       <Navbar
-        openModal={() => {}}
         authState={defaultAuthState}
         theme={'light'}
         resetAuthState={() => {}}

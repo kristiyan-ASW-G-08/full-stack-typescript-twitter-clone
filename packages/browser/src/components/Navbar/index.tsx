@@ -2,7 +2,7 @@ import React, { FC, useState, Suspense, lazy } from 'react';
 import { NavbarWrapper, NavIcon, Container, ThemeButton } from './styled';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from 'components/Logo';
 import StyledButton from 'styled/Button';
 import SearchBar from 'components/SearchBar';
@@ -16,7 +16,6 @@ const Sidebar = lazy(() => import('components/Sidebar'));
 interface NavbarProps {
   authState: AuthState;
   resetAuthState: () => void;
-  openModal: () => void;
   toggleTheme: () => void;
   theme: 'light' | 'dark';
 }
@@ -25,10 +24,10 @@ export const Navbar: FC<NavbarProps> = ({
   authState,
   theme,
   resetAuthState,
-  openModal,
 }) => {
   const { user } = authState;
   const [isActive, setIsActive] = useState<boolean>(false);
+  const location = useLocation();
   const toggleSidebar = () => setIsActive(!isActive);
   return (
     <>
@@ -47,8 +46,16 @@ export const Navbar: FC<NavbarProps> = ({
           {user ? (
             <>
               <Avatar />
-              <StyledButton buttonType={'primary'} onClick={openModal}>
-                Tweet
+              <StyledButton buttonType={'primary'}>
+                <Link
+                  to={{
+                    pathname: `/create/tweet`,
+                    state: { tweetForm: location },
+                  }}
+                >
+                  {' '}
+                  Tweet
+                </Link>
               </StyledButton>
               <StyledButton buttonType={'secondary'} onClick={resetAuthState}>
                 Log Out

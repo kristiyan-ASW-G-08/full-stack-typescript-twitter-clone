@@ -14,8 +14,4 @@ describe('RootStore', (): void => {
     expect.assertions(1);
     expect(rootStore.themeStore).toBeTruthy();
   });
-  it('modalStore should exist', (): void => {
-    expect.assertions(1);
-    expect(rootStore.modalStore).toBeTruthy();
-  });
 });

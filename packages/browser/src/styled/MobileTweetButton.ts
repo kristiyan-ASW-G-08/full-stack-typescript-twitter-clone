@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MobileTweetButton = styled('button')`
   position: fixed;
   z-index: 2;
-  transform: translate(85vw, 90vh);
+  transform: translate(85vw, 80vh);
   ${props => props.theme.mixins.button}
   border-radius:100%;
   width: 5rem;

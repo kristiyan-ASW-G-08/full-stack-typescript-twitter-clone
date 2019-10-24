@@ -20,16 +20,13 @@ import getTime from 'utilities/getTime';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 import User from 'types/User';
-import TweetFormProps from 'types/TweetFormProps';
 
 interface TweetProps {
   tweet: TweetType;
   deleteTweetHandler: (tweetId: string) => void;
 }
 export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
-  const { authStore, notificationStore, modalStore } = useContext(
-    RootStoreContext,
-  );
+  const { authStore, notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
   const { username, handle, avatar } = user;
@@ -87,9 +84,6 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
       </ContentContainer>
       <TweetBar
         deleteTweetHandler={deleteTweetHandler}
-        setModalState={(type: 'tweetForm', payload?: TweetFormProps) =>
-          modalStore.setModalState(type, payload)
-        }
         tweet={tweet}
         authState={authStore.authState}
         setNotification={(notification: Notification): void => {
