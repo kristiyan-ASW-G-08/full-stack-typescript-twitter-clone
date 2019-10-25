@@ -6,7 +6,7 @@ interface ModalProps {
   backdropHandler: () => void;
 }
 export const Modal: FC<ModalProps> = ({ children, backdropHandler }) => (
-  <Backdrop onClick={backdropHandler}>
+  <Backdrop data-testid="backdrop" onClick={backdropHandler}>
     <ModalWrapper onClick={(e: SyntheticEvent) => e.stopPropagation()}>
       {children}
     </ModalWrapper>

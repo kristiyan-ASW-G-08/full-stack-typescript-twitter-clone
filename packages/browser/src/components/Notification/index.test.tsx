@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import Notification from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
 import activeNotification from 'testUtilities/activeNotification';
@@ -17,7 +16,7 @@ describe('Notification', () => {
     );
 
     const notificationContent = getByText(activeNotification.content);
-    
+
     expect(notificationContent).toBeTruthy();
   });
 });

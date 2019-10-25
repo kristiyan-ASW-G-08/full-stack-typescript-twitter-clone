@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Sidebar from '.';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
@@ -14,9 +13,9 @@ describe('Sidebar', () => {
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
   it('render Sidebar', () => {
-    expect.assertions(11);
+    expect.assertions(13);
 
-    const { container, getByText, getByTestId, rerender } = render(
+    const { rerender, getByTestId, queryByText, getByText } = render(
       <Sidebar
         toggleSidebar={toggleSidebar}
         isActive={true}
@@ -30,20 +29,20 @@ describe('Sidebar', () => {
       },
     );
     const themeButton = getByTestId('theme-button');
-    const logInButton = getByText('Log In');
-    const signUpButton = getByText('Sign Up');
+    let logInButton = queryByText('Log In');
+    let signUpButton = queryByText('Sign Up');
+    let logOutButton = queryByText('Log Out');
     const backdrop = getByTestId('backdrop');
 
     userEvent.click(backdrop);
     UserEvent.click(themeButton);
 
-    expect(container).toBeTruthy();
-    expect(themeButton).toBeTruthy();
     expect(themeButton.textContent).toMatchSnapshot();
-    expect(logInButton).toBeTruthy();
-    expect(signUpButton).toBeTruthy();
     expect(toggleTheme).toHaveBeenCalledTimes(1);
     expect(toggleSidebar).toHaveBeenCalledTimes(1);
+    expect(logInButton).toBeTruthy();
+    expect(signUpButton).toBeTruthy();
+    expect(logOutButton).toBeNull();
 
     rerender(
       <Sidebar
@@ -57,9 +56,15 @@ describe('Sidebar', () => {
     );
 
     const lightThemeButton = getByTestId('theme-button');
-    const logOutButton = getByText('Log Out');
+    logInButton = queryByText('Log In');
+    signUpButton = queryByText('Sign Up');
+    logOutButton = getByText('Log Out');
 
     UserEvent.click(logOutButton);
+
+    expect(logInButton).toBeFalsy();
+    expect(signUpButton).toBeFalsy();
+    expect(logOutButton).toBeTruthy();
 
     expect(themeButton.textContent).toMatchSnapshot();
     expect(lightThemeButton).toBeTruthy();

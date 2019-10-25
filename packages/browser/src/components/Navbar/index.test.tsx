@@ -17,7 +17,6 @@ describe('Navbar', () => {
 
     const { container, getByText, rerender } = render(
       <Navbar
-        openModal={openModal}
         authState={defaultAuthState}
         resetAuthState={resetAuthState}
         theme={theme}
@@ -41,7 +40,6 @@ describe('Navbar', () => {
 
     rerender(
       <Navbar
-        openModal={openModal}
         resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
         theme={'dark'}
