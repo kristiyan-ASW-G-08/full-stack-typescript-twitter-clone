@@ -1,6 +1,5 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-
 import { Normalize } from 'styled-normalize';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from 'components/Routes';

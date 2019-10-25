@@ -14,8 +14,9 @@ mockedAxios.patch.mockReturnValue(
 );
 
 describe('FollowButton', () => {
+  afterEach(() => jest.restoreAllMocks());
   it('render FollowButton', async () => {
-    expect.assertions(3);
+    expect.assertions(2);
     const { user, token } = authenticatedAuthState;
     const updateUser = jest.fn();
     const { getByText } = render(
@@ -32,7 +33,7 @@ describe('FollowButton', () => {
     );
 
     const followButton = getByText('Follow');
-    expect(followButton).toBeTruthy();
+
     userEvent.click(followButton);
     await wait(() => {
       expect(axios.patch).toHaveBeenCalledTimes(1);
