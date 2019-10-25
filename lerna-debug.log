@@ -7,26 +7,101 @@
 0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js' }
 1 notice cli v3.14.1
 2 verbose rootPath C:\Users\PC\Desktop\typescript-twitter-clone
-3 info current version 1.0.188
+3 info current version 1.0.220
 4 silly isAnythingCommitted
 5 verbose isAnythingCommitted 1
 6 silly currentBranch
 7 verbose currentBranch master
 8 silly remoteBranchExists
 9 silly isBehindUpstream
-10 error Error: Command failed: git remote update
-10 error ssh: Could not resolve hostname github.com: Name or service not known
-10 error fatal: Could not read from remote repository.
-10 error
-10 error Please make sure you have the correct access rights
-10 error and the repository exists.
-10 error error: Could not fetch origin
-10 error
-10 error Fetching origin
-10 error
-10 error     at makeError (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:174:9)
-10 error     at Function.module.exports.sync (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:338:15)
-10 error     at Object.execSync (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\child-process\index.js:23:16)
-10 error     at updateRemote (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\lib\is-behind-upstream.js:26:16)
-10 error     at isBehindUpstream (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\lib\is-behind-upstream.js:11:3)
-10 error     at VersionCommand.initialize (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\@lerna\version\index.js:152:9)
+10 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 1
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v1.0.220-1-gae272c3" => {"lastTagName":"v1.0.220","lastVersion":"v1.0.220","refCount":"1","sha":"ae272c3","isDirty":false}
+14 info Looking for changed packages since v1.0.220
+15 silly checking diff packages/browser
+16 silly found diff in packages/browser/src/components/Avatar/styled.ts
+16 silly found diff in packages/browser/src/components/FeedBar/index.tsx
+16 silly found diff in packages/browser/src/components/Navbar/index.test.tsx
+16 silly found diff in packages/browser/src/hooks/useFilePicker/__snapshots__/useFilePicker.test.ts.snap
+16 silly found diff in packages/browser/src/hooks/useFilePicker/useFilePicker.test.ts
+16 silly found diff in packages/browser/src/hooks/usePortal/usePortal.test.tsx
+16 silly found diff in packages/browser/src/index.tsx
+16 silly found diff in packages/browser/src/stories/Input.stories.tsx
+16 silly found diff in packages/browser/src/stories/Notification.stories.tsx
+16 silly found diff in packages/browser/src/stories/Sidebar.stories.tsx
+16 silly found diff in packages/browser/src/stories/Tweet.stories.tsx
+16 silly found diff in packages/browser/src/stories/TweetForm.stories.tsx
+16 silly found diff in packages/browser/src/stories/__snapshots__/storyshots.test.ts.snap
+17 verbose filtered diff [ 'packages/browser/src/components/Avatar/styled.ts',
+17 verbose filtered diff   'packages/browser/src/components/FeedBar/index.tsx',
+17 verbose filtered diff   'packages/browser/src/components/Navbar/index.test.tsx',
+17 verbose filtered diff   'packages/browser/src/hooks/useFilePicker/__snapshots__/useFilePicker.test.ts.snap',
+17 verbose filtered diff   'packages/browser/src/hooks/useFilePicker/useFilePicker.test.ts',
+17 verbose filtered diff   'packages/browser/src/hooks/usePortal/usePortal.test.tsx',
+17 verbose filtered diff   'packages/browser/src/index.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/Input.stories.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/Notification.stories.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/Sidebar.stories.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/Tweet.stories.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/TweetForm.stories.tsx',
+17 verbose filtered diff   'packages/browser/src/stories/__snapshots__/storyshots.test.ts.snap' ]
+18 silly checking diff packages/common
+19 silly no diff found in @twtr/common
+20 silly checking diff packages/server
+21 silly no diff found in @twtr/server
+22 verbose updated @twtr/browser
+23 verbose git-describe undefined => "v1.0.220-1-gae272c3"
+24 silly git-describe parsed => {"lastTagName":"v1.0.220","lastVersion":"v1.0.220","refCount":"1","sha":"ae272c3","isDirty":false}
+25 silly fixed for @twtr/browser at C:\Users\PC\Desktop\typescript-twitter-clone\packages\browser
+26 verbose getChangelogConfig using preset "conventional-changelog-angular"
+27 silly npa { type: 'tag',
+27 silly npa   registry: true,
+27 silly npa   where: undefined,
+27 silly npa   raw: 'conventional-changelog-angular',
+27 silly npa   name: 'conventional-changelog-angular',
+27 silly npa   escapedName: 'conventional-changelog-angular',
+27 silly npa   scope: undefined,
+27 silly npa   rawSpec: '',
+27 silly npa   saveSpec: null,
+27 silly npa   fetchSpec: 'latest',
+27 silly npa   gitRange: undefined,
+27 silly npa   gitCommittish: undefined,
+27 silly npa   hosted: undefined }
+28 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
+29 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
+30 verbose fixed increment 1.0.220 by patch
+31 info auto-confirmed
+32 info execute Skipping GitHub releases
+33 silly lifecycle No script for "preversion" in "twtr", continuing
+34 silly lifecycle No script for "preversion" in "@twtr/browser", continuing
+35 silly lifecycle No script for "version" in "@twtr/browser", continuing
+36 silly fixed for @twtr/browser at C:\Users\PC\Desktop\typescript-twitter-clone\packages\browser
+37 silly fixed writing new entry: "## [1.0.221](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.220...v1.0.221) (2019-10-25)\n\n**Note:** Version bump only for package @twtr/browser\n\n\n\n"
+38 verbose fixed wrote C:\Users\PC\Desktop\typescript-twitter-clone\packages\browser\CHANGELOG.md
+39 silly root for twtr at C:\Users\PC\Desktop\typescript-twitter-clone
+40 silly root writing new entry: "## [1.0.221](https://github.com/krisScript/full-stack-typescript-twitter-clone/compare/v1.0.220...v1.0.221) (2019-10-25)\n\n**Note:** Version bump only for package twtr\n\n\n\n"
+41 verbose root wrote C:\Users\PC\Desktop\typescript-twitter-clone\CHANGELOG.md
+42 silly lifecycle No script for "version" in "twtr", continuing
+43 silly gitAdd [ 'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\browser\\package.json',
+43 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\packages\\browser\\CHANGELOG.md',
+43 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\CHANGELOG.md',
+43 silly gitAdd   'C:\\Users\\PC\\Desktop\\typescript-twitter-clone\\lerna.json' ]
+44 silly gitCommit v1.0.221
+45 verbose git [ 'commit', '-m', 'v1.0.221' ]
+46 silly gitTag v1.0.221
+47 verbose git [ 'tag', 'v1.0.221', '-m', 'v1.0.221' ]
+48 silly lifecycle No script for "postversion" in "@twtr/browser", continuing
+49 silly lifecycle No script for "postversion" in "twtr", continuing
+50 info git Pushing tags...
+51 silly gitPush origin master
+52 error Error: Command failed: git push --follow-tags --no-verify origin master
+52 error Received disconnect from 140.82.118.3 port 22:11: Bye Bye
+52 error Disconnected from 140.82.118.3 port 22
+52 error fatal: Could not read from remote repository.
+52 error
+52 error Please make sure you have the correct access rights
+52 error and the repository exists.
+52 error
+52 error     at makeError (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:174:9)
+52 error     at Promise.all.then.arr (C:\Users\PC\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\index.js:278:16)
