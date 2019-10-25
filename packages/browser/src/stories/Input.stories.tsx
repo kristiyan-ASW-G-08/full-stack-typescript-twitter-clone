@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StyledInput from 'styled/Input';
-storiesOf('StyledInput', module)
+import Input from 'styled/Input';
+storiesOf('Input', module)
   .add(
     'light theme',
     () => (
-      <StyledInput>
+      <Input>
         <input type="text" placeholder="Placeholder"></input>
         <span>Placeholder is invalid</span>
-      </StyledInput>
+      </Input>
     ),
     {
       info: { inline: true },
@@ -18,10 +18,10 @@ storiesOf('StyledInput', module)
   .add(
     'dark theme',
     () => (
-      <StyledInput>
+      <Input>
         <input type="text" placeholder="Placeholder"></input>
         <span>Placeholder is invalid</span>
-      </StyledInput>
+      </Input>
     ),
     {
       info: { inline: true },

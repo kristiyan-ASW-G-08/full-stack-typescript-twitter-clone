@@ -1,10 +1,7 @@
 import React, { FC, Dispatch, SetStateAction, useEffect, memo } from 'react';
 import { FeedBarWrapper, FeedBarButton } from './styled';
+import Feed from 'types/Feed';
 
-interface Feed {
-  url: string;
-  name: string;
-}
 interface FeedBarProps {
   feeds: Feed[];
   setUrl: Dispatch<SetStateAction<string>>;

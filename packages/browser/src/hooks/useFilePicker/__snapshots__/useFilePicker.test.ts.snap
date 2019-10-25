@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`usePortal returns a file 1`] = `
+exports[`useFilePicker returns a file 1`] = `
 Object {
   "file": Object {
     "name": "test.jpg",

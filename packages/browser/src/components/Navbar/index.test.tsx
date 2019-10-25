@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import Navbar from '.';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
@@ -11,7 +10,6 @@ describe('Navbar', () => {
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
-  const openModal = jest.fn();
   it('render Navbar', () => {
     expect.assertions(8);
 
