@@ -1,8 +1,9 @@
-type SortStringKey = 'top' | 'trending' | 'new' | 'replies';
-type SortStringValue = '-likes' | '-retweets' | '-date' | '-replies';
-const getSortString = (sort: SortStringKey): SortStringValue => {
+type SortKey = 'top' | 'trending' | 'new' | 'replies';
+type SortString = '-likes' | '-retweets' | '-date' | '-replies';
+
+const getSortString = (sort: SortKey): SortString => {
   const sortStrings: {
-    [key in SortStringKey]: SortStringValue;
+    [key in SortKey]: SortString;
   } = {
     top: '-likes',
     trending: '-retweets',

@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import {
   UserCardWrapper,
   Cover,
@@ -10,7 +10,6 @@ import {
   FollowBar,
   FollowButtonWrapper,
 } from './styled';
-import { observer } from 'mobx-react-lite';
 import User from 'types/User';
 import Avatar from 'components/Avatar/index';
 import AuthState from 'types/AuthState';
@@ -73,4 +72,4 @@ export const UserCard: FC<UserCardProps> = ({
     </UserCardWrapper>
   );
 };
-export default observer(UserCard);
+export default UserCard;

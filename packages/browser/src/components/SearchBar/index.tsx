@@ -19,7 +19,7 @@ export const SearchBar: FC = () => {
     await getUsers(value);
   };
   return (
-    <SearchBarWrapper role="search">
+    <SearchBarWrapper role="search" onSubmit={e => e.preventDefault()}>
       <input
         name="file"
         type="search"

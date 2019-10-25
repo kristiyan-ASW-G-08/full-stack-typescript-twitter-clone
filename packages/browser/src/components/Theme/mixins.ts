@@ -15,8 +15,7 @@ const border = css<BorderProps>`
 
 const center = css`
   display: grid;
-  justify-items: center;
-  align-content: center;
+  place-items: center center;
 `;
 const flexCenter = css`
   display: flex;

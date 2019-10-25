@@ -1,7 +1,7 @@
 import React, { FC, useState, useContext, useMemo } from 'react';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import PageContainer from 'styled/PageContainer';
-import TweetsContainer from 'components/TweetsContainer/index';
+import TweetsContainer from 'components/TweetsContainer';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 

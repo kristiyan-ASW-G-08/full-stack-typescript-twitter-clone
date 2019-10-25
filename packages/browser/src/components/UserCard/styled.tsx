@@ -5,7 +5,6 @@ interface BorderProps {
   direction?: 'top' | 'bottom' | 'right' | 'left';
 }
 export const UserCardWrapper = styled('article')<BorderProps>`
-  background: ${props => props.theme.background};
   width: 100%;
   height: 30rem;
   display: grid;
@@ -14,6 +13,7 @@ export const UserCardWrapper = styled('article')<BorderProps>`
     'container' 8rem/1fr;
   grid-row-gap: 2rem;
   ${props => props.theme.mixins.border};
+  background: ${props => props.theme.background};
 `;
 
 export const Cover = styled('div')`
@@ -49,10 +49,10 @@ export const Container = styled('div')`
   grid-area: container;
   display: grid;
   grid:
-    '. . follow-button' 2rem
-    'username . . ' 1fr
-    'handle . .' 1fr
-    'follow-bar . .' 1fr/1fr 3fr 2fr;
+    '.  follow-button .' 2rem
+    'username  .  .' 1fr
+    'handle  . .' 1fr
+    'follow-bar  . .' 1fr/8fr 3fr 1rem;
   grid-row-gap: 0.7rem;
   padding-left: 1.5rem;
 `;
@@ -73,10 +73,10 @@ export const Handle = styled('p')`
 
 export const FollowBar = styled('div')`
   grid-area: follow-bar;
-  color: ${props => setLightness(0.6, props.theme.secondary)};
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 7rem);
   grid-gap: 1rem;
+  color: ${props => setLightness(0.6, props.theme.secondary)};
   p,
   span {
     font-size: 1.4rem;

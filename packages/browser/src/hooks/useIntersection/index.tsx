@@ -7,6 +7,7 @@ const useIntersection = (cb: () => void | Promise<void>) => {
         try {
           const intersectedElement = entries[0];
           if (intersectedElement && intersectedElement.isIntersecting) {
+            console.log('intersection');
             await cb();
           }
         } catch (error) {}

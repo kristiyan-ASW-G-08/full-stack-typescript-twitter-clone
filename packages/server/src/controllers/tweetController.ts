@@ -267,17 +267,17 @@ export const getUserReplies = async (
     const page = parseInt(req.query.page, 10) || 1;
     const { SERVER_URL } = process.env;
     const sortString = getSortString(sort);
-    const replies = await Tweet.countDocuments()
+    const tweets = await Tweet.countDocuments()
       .find({ user: userId, type: 'reply' })
       .sort(sortString)
       .skip((page - 1) * limit)
       .limit(limit);
-    const repliesCount = (await Tweet.countDocuments()) - page * limit;
+    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (repliesCount > 0) {
+    if (tweetsCount > 0) {
       links.next = `${SERVER_URL}/users/${userId}/replies?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -285,7 +285,7 @@ export const getUserReplies = async (
       links.prev = `${SERVER_URL}/users/${userId}/replies?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { replies, links } });
+    res.status(200).json({ data: { tweets, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }

@@ -1,7 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import axios from 'axios';
 import { observer } from 'mobx-react-lite';
-import AuthState from 'types/AuthState';
 import User from 'types/User';
 import Button from 'styled/Button';
 

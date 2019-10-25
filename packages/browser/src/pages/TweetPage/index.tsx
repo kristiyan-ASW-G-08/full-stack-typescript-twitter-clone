@@ -6,6 +6,7 @@ import TweetsContainer from 'components/TweetsContainer/index';
 import Notification from 'types/Notification';
 import TweetType from 'types/Tweet';
 import Tweet from 'components/Tweet';
+
 import { TweetPageWrapper, P } from './styled';
 
 export const TweetPage: FC = () => {

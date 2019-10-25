@@ -53,17 +53,16 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     }
   };
   const { setElement } = useIntersection(loadMore);
-
   useEffect(() => {
     tweetsRef.current = tweets;
     nextPageRef.current = nextPage;
   }, [tweets, nextPage]);
   useEffect(() => {
-    console.log('fetch');
     getTweets(`${url}?sort=new`, setNotification, token)
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
+        console.log(next);
         setTweets(newTweets);
       })
       .catch(error => {

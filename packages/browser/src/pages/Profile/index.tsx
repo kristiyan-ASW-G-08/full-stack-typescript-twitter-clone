@@ -10,21 +10,31 @@ import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import RootStoreContext from 'stores/RootStore/RootStore';
-import PageContainer from 'styled/PageContainer';
-import TweetsContainer from 'components/TweetsContainer/index';
 import Notification from 'types/Notification';
-import AuthState from 'types/AuthState';
+import Feed from 'types/Feed';
 import User from 'types/User';
 import Loader from 'components/Loader';
+import TweetsContainer from 'components/TweetsContainer';
+import { ProfileWrapper, UserCardWrapper, TweetsWrapper } from './styled';
 
 const UserCard = lazy(() => import('components/UserCard/index'));
 
 export const Profile: FC = () => {
-  const { authStore } = useContext(RootStoreContext);
+  const { authStore, notificationStore } = useContext(RootStoreContext);
   const { authState } = authStore;
   const [user, setUser] = useState<User>();
   const { userId } = useParams();
+  const { token } = authStore.authState;
+  const [url, setUrl] = useState<string>('');
 
+  useEffect(() => {
+    getUser(userId)
+      .then(user => {
+        setUser(user);
+        setUrl(`http://localhost:8090/users/${user._id}/tweets`);
+      })
+      .catch(err => {});
+  }, [userId]);
   //@ts-ignore
   const getUser = async (userId: string): Promise<User> => {
     try {
@@ -32,28 +42,50 @@ export const Profile: FC = () => {
         `http://localhost:8090/users/user/${userId}`,
       );
       const { user } = response.data.data;
-      console.log(user);
+
       return user;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
-  useEffect(() => {
-    getUser(userId)
-      .then(user => setUser(user))
-      .catch(err => {});
-  }, [userId]);
-  console.log(userId);
+  const feeds: Feed[] =
+    user !== undefined
+      ? [
+          {
+            name: 'Tweets',
+            url: `http://localhost:8090/users/${user._id}/tweets`,
+          },
+          {
+            name: 'Replies',
+            url: `http://localhost:8090/users/${user._id}/replies`,
+          },
+        ]
+      : [];
   return (
     <>
-      {user ? (
-        <Suspense fallback={<Loader />}>
-          <UserCard
-            user={user}
-            authState={authState}
-            updateUser={(user: User | undefined) => authStore.updateUser(user)}
-          />
-        </Suspense>
+      {user && url ? (
+        <ProfileWrapper>
+          <Suspense fallback={<Loader />}>
+            <UserCardWrapper>
+              <UserCard
+                user={user}
+                authState={authState}
+                updateUser={(user: User | undefined) =>
+                  authStore.updateUser(user)
+                }
+              />
+            </UserCardWrapper>
+            <TweetsWrapper>
+              <TweetsContainer
+                feeds={feeds}
+                setUrl={setUrl}
+                url={url}
+                setNotification={(notification: Notification) =>
+                  notificationStore.setNotification(notification)
+                }
+                token={token}
+              />
+            </TweetsWrapper>
+          </Suspense>
+        </ProfileWrapper>
       ) : (
         <Loader />
       )}

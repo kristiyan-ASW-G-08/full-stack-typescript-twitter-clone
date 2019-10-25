@@ -54,7 +54,6 @@ describe('TweetsContainer', () => {
     const sortSelect = getByTestId('sort');
 
     const options = ['trending', 'new', 'top', 'replies'];
-
     options.forEach(option => {
       const sortOption = getByTestId(option) as HTMLOptionElement;
 

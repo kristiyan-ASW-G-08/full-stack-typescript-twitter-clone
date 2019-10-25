@@ -8,6 +8,7 @@ import Home from 'pages/Home';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
 import NotificationType from 'types/Notification';
+import PageContainer from 'styled/PageContainer';
 
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
@@ -43,7 +44,7 @@ const Router: FC = observer(
                   backdropHandler={history.goBack}
                   children={
                     <>
-                      <TweetPage />
+                      <TweetPage  />
                     </>
                   }
                 />
@@ -152,6 +153,17 @@ const Router: FC = observer(
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
                 <Profile />
+              </Suspense>
+            )}
+          />
+          <Route
+            exact
+            path="/tweet/:tweetId"
+            render={(): JSX.Element => (
+              <Suspense fallback={<Loader />}>
+                <PageContainer>
+                  <TweetPage />
+                </PageContainer>
               </Suspense>
             )}
           />
