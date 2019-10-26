@@ -26,8 +26,6 @@ export const getUserById = async (
   const user = secure
     ? await User.findById(userId)
     : await User.findById(userId).select('-password -email -confirmed');
-
-  console.log(user, secure);
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
       {

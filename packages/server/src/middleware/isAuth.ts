@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { CustomError, errors } from '@utilities/CustomError';
 
 const isAuth = (req: Request, res: Response, next: NextFunction): void => {
-  const secret = process.env.SECRET;
+  const { SECRET } = process.env;
   const authHeader = req.get('Authorization');
   const { status, message } = errors.Unauthorized;
   const error = new CustomError(status, message);
@@ -11,7 +11,7 @@ const isAuth = (req: Request, res: Response, next: NextFunction): void => {
     throw error;
   }
   const token = authHeader.split(' ')[1];
-  const decodedToken = verify(token, secret);
+  const decodedToken = verify(token, SECRET);
   // @ts-ignore
   const { userId } = decodedToken;
   if (!decodedToken || !userId) {

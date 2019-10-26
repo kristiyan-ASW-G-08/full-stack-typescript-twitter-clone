@@ -13,11 +13,7 @@ const rateLimiter = (): ((
   res: Response,
   next: NextFunction,
 ) => Promise<void>) => {
-  return async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> => {
+  return async (req: Request): Promise<void> => {
     try {
       const { ip } = req;
       await idRateLimiter.consume(ip);

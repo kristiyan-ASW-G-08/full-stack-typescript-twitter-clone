@@ -4,13 +4,12 @@ import { CustomError, errors } from '@utilities/CustomError';
 
 const sendEmail = (mailOptions: MailOptions): void => {
   try {
-    const email = process.env.EMAIL;
-    const emailPassword = process.env.EMAIL_PASSWORD;
+    const { EMAIL, EMAIL_PASSWORD } = process.env;
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: email,
-        pass: emailPassword,
+        user: EMAIL,
+        pass: EMAIL_PASSWORD,
       },
     });
     transporter.sendMail(mailOptions);

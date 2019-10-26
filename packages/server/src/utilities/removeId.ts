@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const removeFromArr = (
+const removeId = (
   itemsArr: mongoose.Types.ObjectId[],
   stringId: string,
 ): mongoose.Types.ObjectId[] => {
@@ -13,4 +13,4 @@ const removeFromArr = (
   return filteredItemsArr;
 };
 
-export default removeFromArr;
+export default removeId;

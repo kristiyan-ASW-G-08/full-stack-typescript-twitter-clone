@@ -14,8 +14,7 @@ const validate = (
   ): Promise<void> => {
     let isError = false;
     try {
-      for await (const validator of validators) {
-        const { schema, target } = validator;
+      for await (const { schema, target } of validators) {
         const validationTarget = req[target];
         await schema.validate(validationTarget, {
           abortEarly: false,
@@ -24,8 +23,7 @@ const validate = (
     } catch (err) {
       isError = true;
       const validationErrors = err.inner.map(
-        (error: ValidationError): CustomValidationError => {
-          const { path, message } = error;
+        ({ path, message }: ValidationError): CustomValidationError => {
           return { name: path, message };
         },
       );

@@ -24,10 +24,10 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 });
 const fileStorage = multer.diskStorage({
   // @ts-ignore
-  destination: (req: Request, file, cb): any => {
+  destination: (req: Request, file, cb: (...args: any) => any): void => {
     cb(null, './images');
   },
-  filename: (req: Request, file, cb) => {
+  filename: (req: Request, file, cb: (...args: any) => any): void => {
     cb(
       null,
       `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`,
@@ -35,17 +35,13 @@ const fileStorage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req: Request, file: any, cb: any): void => {
-  if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg' ||
-    file.mimetype === 'image/svg+xml'
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
+const fileFilter = (
+  req: Request,
+  file: any,
+  cb: (...args: any) => any,
+): void => {
+  const formats = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'];
+  cb(null, formats.includes(file.mimetype));
 };
 
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));

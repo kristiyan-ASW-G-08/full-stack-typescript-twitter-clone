@@ -12,7 +12,7 @@ import {
 import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
-import removeObjectIdFromArr from '@utilities/removeObjectIdFromArr';
+import removeId from '@utilities/removeId';
 import getSortString from '@utilities/getSortString';
 import MailOptions from '@customTypes/MailOptions';
 import User from '@models/User';
@@ -46,15 +46,13 @@ export const signUp = async (
     });
     await user.save();
     const userId = user._id;
-    const secret = process.env.SECRET;
-    const appEmail = process.env.EMAIL;
-    const clientUri = process.env.CLIENT_URL;
+    const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const { status, message } = errors.InternalServerError;
-    if (!secret) {
+    if (!SECRET) {
       const error = new CustomError(status, message);
       throw error;
     }
-    if (!appEmail) {
+    if (!EMAIL) {
       const error = new CustomError(status, message);
       throw error;
     }
@@ -62,10 +60,10 @@ export const signUp = async (
       {
         userId,
       },
-      secret,
+      SECRET,
       { expiresIn: '1h' },
     );
-    const url = `${clientUri}/confirmation/${token}`;
+    const url = `${CLIENT_URL}/confirmation/${token}`;
     const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
     const options = {
       validationLevel,
@@ -103,7 +101,7 @@ export const signUp = async (
       options,
     );
     const mailOptions: MailOptions = {
-      from: appEmail,
+      from: EMAIL,
       to: email,
       subject: 'TwittClone Email Confirmation',
       html: htmlOutput.html,
@@ -122,7 +120,7 @@ export const logIn = async (
 ): Promise<void> => {
   try {
     const { email, password } = req.body;
-    const secret = process.env.SECRET;
+    const { SECRET } = process.env;
     const user = await getUserByEmail(email);
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
@@ -141,7 +139,7 @@ export const logIn = async (
       {
         userId: user._id,
       },
-      secret,
+      SECRET,
       { expiresIn: '1h' },
     );
     const {
@@ -179,9 +177,9 @@ export const verifyEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const secret = process.env.SECRET;
+    const { SECRET } = process.env;
     const { token } = req.params;
-    const decodedToken = jwt.verify(token, secret);
+    const decodedToken = jwt.verify(token, SECRET);
     // @ts-ignore
     const { userId } = decodedToken;
     const user = await getUserById(userId);
@@ -202,15 +200,13 @@ export const requestPasswordResetEmail = async (
     const { email } = req.body;
     const user = await getUserByEmail(email);
     await checkUserConfirmation(user);
-    const secret = process.env.SECRET;
-    const appEmail = process.env.EMAIL;
-    const clientUri = process.env.CLIENT_URI;
+    const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const { status, message } = errors.InternalServerError;
-    if (!secret) {
+    if (!SECRET) {
       const error = new CustomError(status, message);
       throw error;
     }
-    if (!appEmail) {
+    if (!EMAIL) {
       const error = new CustomError(status, message);
       throw error;
     }
@@ -218,10 +214,10 @@ export const requestPasswordResetEmail = async (
       {
         userId: user._id,
       },
-      secret,
+      SECRET,
       { expiresIn: '1h' },
     );
-    const url = `${clientUri}/reset/${token}`;
+    const url = `${CLIENT_URL}/reset/${token}`;
     const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
     const options = {
       validationLevel,
@@ -256,7 +252,7 @@ export const requestPasswordResetEmail = async (
       options,
     );
     const mailOptions: MailOptions = {
-      from: appEmail,
+      from: EMAIL,
       to: email,
       subject: 'TwittClone Password Reset',
       html: htmlOutput.html,
@@ -276,8 +272,7 @@ export const resetPassword = async (
     const { password } = req.body;
     const { userId } = req;
     const user = await getUserById(userId);
-    const hashedPassword = await bcrypt.hash(password, 12);
-    user.password = hashedPassword;
+    user.password = await bcrypt.hash(password, 12);
     await user.save();
     res.sendStatus(204);
   } catch (err) {
@@ -311,7 +306,7 @@ export const bookmarkTweet = async (
     if (!includesObjectId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
     } else {
-      user.bookmarks = removeObjectIdFromArr(user.bookmarks, tweetId);
+      user.bookmarks = removeId(user.bookmarks, tweetId);
     }
     await user.save();
     res.status(200).json({ data: { user } });
@@ -331,7 +326,7 @@ export const likeTweet = async (
     const user = await getUserById(userId, false);
     const tweet = await getTweetById(tweetId);
     if (includesObjectId(user.likes, tweetId)) {
-      user.likes = removeObjectIdFromArr(user.likes, tweetId);
+      user.likes = removeId(user.likes, tweetId);
       tweet.likes -= 1;
     } else {
       user.likes = [...user.likes, mongoose.Types.ObjectId(tweetId)];
@@ -356,7 +351,7 @@ export const followUser = async (
     const user = await getUserById(userId, false);
     const authenticatedUser = await getUserById(authenticatedUserId);
     if (includesObjectId(authenticatedUser.following, userId)) {
-      authenticatedUser.following = removeObjectIdFromArr(
+      authenticatedUser.following = removeId(
         authenticatedUser.following,
         userId,
       );
@@ -450,7 +445,7 @@ export const getUsersList = async (
       {
         handle: { $regex: searchRegex },
       },
-      'username handle profilePhoto',
+      'username handle avatar cover',
     )
       .select({ score: { $meta: 'textScore' } })
       .limit(10)
