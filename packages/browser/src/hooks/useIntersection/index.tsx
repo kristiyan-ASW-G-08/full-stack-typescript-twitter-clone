@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+
 const useIntersection = (cb: () => void | Promise<void>) => {
   const [element, setElement] = useState<HTMLDivElement | null>();
   const observer = useRef(
@@ -7,7 +8,6 @@ const useIntersection = (cb: () => void | Promise<void>) => {
         try {
           const intersectedElement = entries[0];
           if (intersectedElement && intersectedElement.isIntersecting) {
-            console.log('intersection');
             await cb();
           }
         } catch (error) {}

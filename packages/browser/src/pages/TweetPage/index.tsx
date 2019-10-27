@@ -16,25 +16,34 @@ export const TweetPage: FC = () => {
   const { token } = authStore.authState;
   const { tweetId } = useParams();
   const history = useHistory();
-  const getTweet = async () => {
-    try {
-      const request = await axios.get(
-        `http://localhost:8090/tweets/${tweetId}`,
-      );
-      const { tweet } = request.data.data;
-      setTweet(tweet);
-      setUrl(`http://localhost:8090/tweets/${tweet._id}/replies`);
-    } catch (error) {
-      const notification: Notification = {
-        type: 'warning',
-        content: 'Something went wrong. Try again later.',
-      };
-      notificationStore.setNotification(notification);
-    }
-  };
+
   useEffect(() => {
-    getTweet().then(data => {});
-  }, [tweetId]);
+    // @ts-ignore
+    const getTweet = async (): Promise<{ tweet: TweetType; url: string }> => {
+      try {
+        const request = await axios.get(
+          `http://localhost:8090/tweets/${tweetId}`,
+        );
+        const { tweet } = request.data.data;
+        setTweet(tweet);
+        setUrl(`http://localhost:8090/tweets/${tweet._id}/replies`);
+        return {
+          url: `http://localhost:8090/tweets/${tweet._id}/replies`,
+          tweet,
+        };
+      } catch (error) {
+        const notification: Notification = {
+          type: 'warning',
+          content: 'Something went wrong. Try again later.',
+        };
+        notificationStore.setNotification(notification);
+      }
+    };
+    getTweet().then(({ tweet, url }) => {
+      setTweet(tweet);
+      setUrl(url);
+    });
+  }, [notificationStore, tweetId]);
   return (
     <>
       {tweet && url ? (

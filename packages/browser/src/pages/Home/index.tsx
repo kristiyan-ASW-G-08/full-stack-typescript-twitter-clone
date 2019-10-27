@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, useMemo } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import PageContainer from 'styled/PageContainer';
 import TweetsContainer from 'components/TweetsContainer';

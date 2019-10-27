@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Tweet from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import tweet from 'testUtilities/tweet';
+import Tweet from './index';
 
 describe('Tweet', () => {
   it('render Tweet', async () => {
@@ -13,7 +13,7 @@ describe('Tweet', () => {
       <Tweet tweet={tweet} deleteTweetHandler={deleteTweetHandler} />,
 
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
 

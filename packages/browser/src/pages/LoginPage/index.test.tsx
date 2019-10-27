@@ -3,12 +3,12 @@ import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import LoginPage from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
+import LoginPage from '.';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
-axiosMock.post.mockResolvedValue({ data: {} })
+axiosMock.post.mockResolvedValue({ data: {} });
 
 describe('LoginPage', () => {
   afterAll(() => jest.restoreAllMocks());
@@ -26,12 +26,9 @@ describe('LoginPage', () => {
         placeholder: 'Password',
       },
     ];
-    const { container, getByText, getByPlaceholderText } = render(
-      <LoginPage />,
-      {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
-      },
-    );
+    const { getByText, getByPlaceholderText } = render(<LoginPage />, {
+      wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
+    });
 
     credentials.forEach(({ value, placeholder }) => {
       const input = getByPlaceholderText(placeholder);

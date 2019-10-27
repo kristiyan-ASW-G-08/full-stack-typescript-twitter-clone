@@ -7,7 +7,7 @@ interface LogoProps {
 }
 export const Logo: FC<LogoProps> = ({ type = 'horizontal' }) => (
   <LogoWrapper type={type}>
-    <img src={LogoPrimary} />
+    <img src={LogoPrimary} alt="logo" />
     <LogoText type={type}>
       <LogoSpan>Twitt</LogoSpan>Clone
     </LogoText>

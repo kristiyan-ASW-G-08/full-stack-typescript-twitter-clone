@@ -1,6 +1,6 @@
 import axios from 'axios';
-import getTweets from './getTweets';
 import { wait } from '@testing-library/react';
+import getTweets from './getTweets';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
@@ -29,7 +29,7 @@ describe('getTweets', () => {
 
   it('rejects', async () => {
     expect.assertions(2);
-    axiosMock.get.mockReturnValue(Promise.reject({ status: 500 }));
+    axiosMock.get.mockReturnValue(Promise.reject(new Error()));
     await expect(getTweets(url, setNotification)).resolves.toBeUndefined();
     expect(setNotification).toHaveBeenCalledTimes(1);
   });

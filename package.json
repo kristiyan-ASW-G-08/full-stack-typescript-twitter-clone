@@ -19,7 +19,9 @@
     ],
     "nohoist": [
       "**/jest",
-      "**/jest/**"
+      "**/jest/**",
+      "**/babel-loader",
+      "**/babel-loader/**"
     ]
   }
 }

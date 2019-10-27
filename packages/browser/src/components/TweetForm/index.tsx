@@ -17,6 +17,9 @@ import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
 import useFilePicker from 'hooks/useFilePicker/useFilePicker';
+
+import populateFormData from 'utilities/populateFormData';
+import transformValidationErrors from 'utilities/transformValidationErrors';
 import {
   TweetFormWrapper,
   TwButtonButtonContainer,
@@ -24,8 +27,6 @@ import {
   AvatarContainer,
   InputContainer,
 } from './styled';
-import populateFormData from 'utilities/populateFormData';
-import transformValidationErrors from 'utilities/transformValidationErrors';
 
 interface TweetFormProps {
   token: string;
@@ -34,7 +35,6 @@ interface TweetFormProps {
 
 export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
   const { replyId, retweetId } = useParams();
-  const params = useParams();
   const history = useHistory();
   const location = useLocation();
   const { tweet } = location.state;
@@ -50,7 +50,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
     if (retweetId) {
       setType('retweet');
     }
-  }, []);
+  }, [replyId, retweetId]);
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
@@ -66,7 +66,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
         formData.append('image', fileData.file);
       }
       const config = {
-        headers: { Authorization: 'bearer ' + token },
+        headers: { Authorization: `bearer ${token}` },
       };
       if (tweet) {
         await axios.patch(
@@ -115,7 +115,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
             <InputContainer>
               <Input>
                 <FastField
-                  component={'textarea'}
+                  component="textarea"
                   name="text"
                   type="text"
                   placeholder="Text"
@@ -125,7 +125,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
               {hasImage ? (
                 <Input>
                   {fileData && fileData.fileUrl ? (
-                    <img src={fileData.fileUrl} />
+                    <img src={fileData.fileUrl} alt="" />
                   ) : (
                     ''
                   )}
@@ -156,27 +156,27 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
             <ContentButtonsContainer>
               <IconButton
                 type="button"
-                onClick={(e: SyntheticEvent) => {
+                onClick={() => {
                   setHasImage(!hasImage);
                   resetFileData();
                 }}
               >
-                <FontAwesomeIcon icon={'image'} />
+                <FontAwesomeIcon icon="image" />
               </IconButton>
               <IconButton
                 data-testid="link-button"
                 type="button"
                 onClick={(e: SyntheticEvent) => {
                   e.preventDefault();
-                  type === 'link' ? setType('text') : setType('link');
+                  setType(type === 'link' ? 'text' : 'link');
                 }}
               >
-                <FontAwesomeIcon icon={'link'} />
+                <FontAwesomeIcon icon="link" />
               </IconButton>
             </ContentButtonsContainer>
 
             <TwButtonButtonContainer>
-              <Button buttonType={'primary'} type="submit">
+              <Button buttonType="primary" type="submit">
                 Tweet
               </Button>
             </TwButtonButtonContainer>

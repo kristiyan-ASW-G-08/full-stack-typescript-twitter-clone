@@ -5,6 +5,7 @@ type Theme = 'dark' | 'light';
 
 class ThemeStore {
   @persist @observable public theme: Theme = 'light';
+
   @action public toggleTheme(): void {
     this.theme = this.theme === 'light' ? 'dark' : 'light';
   }

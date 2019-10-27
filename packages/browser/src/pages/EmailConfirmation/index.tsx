@@ -39,7 +39,7 @@ export const EmailConfirmation: FC = () => {
         <Title>Email Confirmation</Title>
         <Paragraph>Confirm your email to use TwittClone</Paragraph>
         <div>
-          <Button buttonType={'primary'} onClick={confirmationHandler}>
+          <Button buttonType="primary" onClick={confirmationHandler}>
             Confirm Email
           </Button>
         </div>

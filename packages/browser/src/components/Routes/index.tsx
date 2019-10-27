@@ -40,14 +40,9 @@ const Router: FC = observer(
             path="/tweet/:tweetId"
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
-                <Modal
-                  backdropHandler={history.goBack}
-                  children={
-                    <>
-                      <TweetPage  />
-                    </>
-                  }
-                />
+                <Modal backdropHandler={history.goBack}>
+                  <TweetPage />
+                </Modal>
               </Suspense>
             )}
           />
@@ -63,37 +58,25 @@ const Router: FC = observer(
             ]}
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
-                <Portal
-                  portalId={'tweet-form'}
-                  children={
-                    <Modal
-                      backdropHandler={history.goBack}
-                      children={
-                        <>
-                          {' '}
-                          <TweetForm
-                            token={token}
-                            setNotification={(notification: NotificationType) =>
-                              notificationStore.setNotification(notification)
-                            }
-                          />
-                        </>
+                <Portal portalId="tweet-form">
+                  <Modal backdropHandler={history.goBack}>
+                    <TweetForm
+                      token={token}
+                      setNotification={(notification: NotificationType) =>
+                        notificationStore.setNotification(notification)
                       }
                     />
-                  }
-                />
+                  </Modal>
+                </Portal>
               </Suspense>
             )}
           />
         )}
         {notificationStore.notification !== undefined ? (
           <Suspense fallback={<Loader />}>
-            <Portal
-              portalId={'notification'}
-              children={
-                <Notification notification={notificationStore.notification} />
-              }
-            ></Portal>
+            <Portal portalId="notification">
+              <Notification notification={notificationStore.notification} />
+            </Portal>
           </Suspense>
         ) : (
           ''

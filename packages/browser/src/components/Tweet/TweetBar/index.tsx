@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { TweetBarWrapper, TweetBarButton } from './styled';
+import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
 import AuthState from 'types/AuthState';
 import Notification from 'types/Notification';
 import User from 'types/User';
+import axios from 'axios';
 import getUpdatedUser from './getUpdatedUser';
 import ShareButton from './ShareButton/index';
-import TweetFormProps from 'types/TweetFormProps';
-import axios from 'axios';
+import { TweetBarWrapper, TweetBarButton } from './styled';
 
 interface TweetProps {
   tweet: TweetType;
@@ -92,12 +91,12 @@ export const TweetBar: FC<TweetProps> = ({
         user && user.retweets.includes(_id) ? 'primary' : undefined,
     },
     {
-      show: user && user._id === tweet.user._id ? true : false,
+      show: !!(user && user._id === tweet.user._id),
       icon: 'trash',
       event: async () => {
         try {
           const config = {
-            headers: { Authorization: 'bearer ' + token },
+            headers: { Authorization: `bearer ${token}` },
           };
           await axios.delete(`http://localhost:8090/tweets/${_id}`, config);
           deleteTweetHandler(tweet._id);
@@ -112,7 +111,7 @@ export const TweetBar: FC<TweetProps> = ({
       isActive: () => undefined,
     },
     {
-      show: user && user._id === tweet.user._id ? true : false,
+      show: !!(user && user._id === tweet.user._id),
       icon: 'edit',
       event: () =>
         history.push({

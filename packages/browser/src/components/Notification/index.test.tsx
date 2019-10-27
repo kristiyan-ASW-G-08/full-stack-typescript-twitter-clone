@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Notification from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
 import activeNotification from 'testUtilities/activeNotification';
+import Notification from '.';
 
 describe('Notification', () => {
   it('renders', () => {
@@ -11,7 +11,7 @@ describe('Notification', () => {
     const { getByText } = render(
       <Notification notification={activeNotification} />,
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
 

@@ -8,15 +8,17 @@ export const defaultNotification: Notification = {
 
 class NotificationStore {
   @observable public notification: Notification | undefined = undefined;
+
   @action public setNotification(notification: Notification): void {
     this.notification = notification;
     autorun(
       () => {
-        this.resetNotification()
+        this.resetNotification();
       },
       { delay: 4000 },
     );
   }
+
   @action public resetNotification(): void {
     this.notification = undefined;
   }

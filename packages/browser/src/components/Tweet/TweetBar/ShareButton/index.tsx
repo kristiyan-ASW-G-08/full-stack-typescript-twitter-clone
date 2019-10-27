@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TweetBarButton } from '../styled';
-import { ShareButtonWrapper, DropDown, DropDownItem } from './styled';
 import setClipboard from 'utilities/setClipboard';
 import Tweet from 'types/Tweet';
 import Notification from 'types/Notification';
+import { ShareButtonWrapper, DropDown, DropDownItem } from './styled';
+import { TweetBarButton } from '../styled';
 
 interface ShareButtonProps {
   tweet: Tweet;
@@ -23,12 +23,13 @@ export const ShareButton: FC<ShareButtonProps> = ({
         data-testid="share-button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <FontAwesomeIcon icon={'share-alt'} />
+        <FontAwesomeIcon icon="share-alt" />
       </TweetBarButton>
       {isOpen ? (
         <DropDown>
           <DropDownItem>
             <button
+              type="button"
               data-testid="clipboard-button"
               onClick={() => {
                 const notification: Notification = {
@@ -39,7 +40,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
                 setClipboard(tweetUrl);
               }}
             >
-              <FontAwesomeIcon icon={'share-alt'} /> Link
+              <FontAwesomeIcon icon="share-alt" /> Link
             </button>
           </DropDownItem>
           <DropDownItem>
@@ -64,7 +65,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
               <FontAwesomeIcon icon={['fab', 'twitter']} /> Twitter
             </a>
           </DropDownItem>
-          <DropDownItem></DropDownItem>
+          <DropDownItem />
         </DropDown>
       ) : (
         ''

@@ -1,23 +1,22 @@
 import React, { Children } from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Modal from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
+import Modal from './index';
 
 describe('Modal', () => {
   const backdropHandler = jest.fn();
   it('renders', () => {
     expect.assertions(2);
     const childrenElement = <div data-testid="children" />;
-    const { getByTestId, queryByTestId } = render(
-      <Modal backdropHandler={backdropHandler} children={childrenElement} />,
+    const { getByTestId } = render(
+      <Modal backdropHandler={backdropHandler}>{childrenElement}</Modal>,
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
 
     const backdrop = getByTestId('backdrop');
-    const children = queryByTestId('children');
 
     userEvent.click(backdrop);
 

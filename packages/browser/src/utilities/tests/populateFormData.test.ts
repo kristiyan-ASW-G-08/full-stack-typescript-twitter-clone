@@ -1,4 +1,5 @@
 import populateFormData from 'utilities/populateFormData';
+
 describe('populateFormData', () => {
   it('removes all keys with value of undefined', () => {
     const formValues = {

@@ -1,4 +1,9 @@
 import React, { FC } from 'react';
+
+import User from 'types/User';
+import Avatar from 'components/Avatar';
+import AuthState from 'types/AuthState';
+import FollowButton from 'components/UserCard/FollowButton';
 import {
   UserCardWrapper,
   Cover,
@@ -10,10 +15,6 @@ import {
   FollowBar,
   FollowButtonWrapper,
 } from './styled';
-import User from 'types/User';
-import Avatar from 'components/Avatar/index';
-import AuthState from 'types/AuthState';
-import FollowButton from 'components/UserCard/FollowButton/index';
 
 interface UserCardProps {
   user: User;
@@ -25,9 +26,9 @@ export const UserCard: FC<UserCardProps> = ({
   authState,
   updateUser,
 }) => {
-  const { username, handle, avatar, followers, following, _id } = user;
+  const { username, handle, following, _id } = user;
   return (
-    <UserCardWrapper direction={'bottom'}>
+    <UserCardWrapper direction="bottom">
       <Cover>
         <CoverBackground>
           {user.cover ? (
@@ -40,7 +41,7 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar size={'large'}></Avatar>
+          <Avatar size="large" />
         </AvatarContainer>
       </Cover>
 
@@ -62,10 +63,12 @@ export const UserCard: FC<UserCardProps> = ({
         <FollowBar>
           <p>
             {' '}
-            <span>0</span>Followers
+            <span>0</span>
+            Followers
           </p>
           <p>
-            <span>{following.length}</span>Following
+            <span>{following.length}</span>
+            Following
           </p>
         </FollowBar>
       </Container>

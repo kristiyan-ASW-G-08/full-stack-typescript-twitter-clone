@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+
 import PageContainer from 'styled/PageContainer';
-import { StyledH1, StyledH2, StyledP, ButtonContainer } from './styled';
 import Button from 'styled/Button';
+import { StyledH1, StyledH2, StyledP, ButtonContainer } from './styled';
+
 export const NotFound: FC = () => {
   const history = useHistory();
   return (
@@ -14,10 +15,10 @@ export const NotFound: FC = () => {
         The page you were looking for was moved, removed or never existed
       </StyledP>
       <ButtonContainer>
-        <Button buttonType={'primary'}>
+        <Button buttonType="primary">
           <Link to="/">Go Home</Link>
         </Button>
-        <Button buttonType={'secondary'} onClick={history.goBack}>
+        <Button buttonType="secondary" onClick={history.goBack}>
           Previous Page
         </Button>
       </ButtonContainer>

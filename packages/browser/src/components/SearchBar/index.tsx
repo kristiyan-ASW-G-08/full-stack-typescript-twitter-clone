@@ -1,9 +1,10 @@
 import React, { FC, memo, useState, SyntheticEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { SearchBarWrapper, Datalist } from './styled';
 import User from 'types/User';
+import { SearchBarWrapper, Datalist } from './styled';
 import UserItem from './UserItem/index';
+
 export const SearchBar: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const getUsers = async (query: string): Promise<void> => {

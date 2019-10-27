@@ -24,28 +24,34 @@ export const Profile: FC = () => {
   const { authState } = authStore;
   const [user, setUser] = useState<User>();
   const { userId } = useParams();
-  const { token } = authStore.authState;
   const [url, setUrl] = useState<string>('');
+  const { token } = authStore.authState;
 
   useEffect(() => {
-    getUser(userId)
-      .then(user => {
-        setUser(user);
-        setUrl(`http://localhost:8090/users/${user._id}/tweets`);
-      })
-      .catch(err => {});
-  }, [userId]);
-  //@ts-ignore
-  const getUser = async (userId: string): Promise<User> => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8090/users/user/${userId}`,
-      );
-      const { user } = response.data.data;
+    const getUser = async (userId: string): Promise<any> => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8090/users/user/${userId}`,
+        );
+        const { user } = response.data.data;
 
-      return user;
-    } catch (err) {}
-  };
+        return user;
+      } catch (err) {
+        const notification: Notification = {
+          type: 'warning',
+          content: 'Something went wrong',
+        };
+        notificationStore.setNotification(notification);
+      }
+    };
+    getUser(userId || '').then((userData: User) => {
+      setUser(userData);
+      setUrl(
+        userData ? `http://localhost:8090/users/${userData._id}/tweets` : '',
+      );
+    });
+  }, [notificationStore, user, userId]);
+
   const feeds: Feed[] =
     user !== undefined
       ? [
@@ -68,14 +74,24 @@ export const Profile: FC = () => {
               <UserCard
                 user={user}
                 authState={authState}
-                updateUser={(user: User | undefined) =>
-                  authStore.updateUser(user)
+                updateUser={(updatedUser: User | undefined) =>
+                  authStore.updateUser(updatedUser)
                 }
               />
             </UserCardWrapper>
             <TweetsWrapper>
               <TweetsContainer
-                feeds={feeds}
+                feeds={
+                  authState.user && userId === authState.user._id
+                    ? [
+                        ...feeds,
+                        {
+                          name: 'Bookmarks',
+                          url: `http://localhost:8090/users/user/bookmarks`,
+                        },
+                      ]
+                    : feeds
+                }
                 setUrl={setUrl}
                 url={url}
                 setNotification={(notification: Notification) =>

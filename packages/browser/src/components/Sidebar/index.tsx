@@ -1,7 +1,11 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import Logo from 'components/Logo';
+import SearchBar from 'components/SearchBar';
+import AuthState from 'types/AuthState';
+import Avatar from 'components/Avatar/index';
 import {
   SidebarWrapper,
   Backdrop,
@@ -15,10 +19,6 @@ import {
   SidebarButton,
   SearchBarWrapper,
 } from './styled';
-import Logo from 'components/Logo';
-import SearchBar from 'components/SearchBar';
-import AuthState from 'types/AuthState';
-import Avatar from 'components/Avatar/index';
 
 interface SidebarProps {
   isActive: boolean;
@@ -48,10 +48,10 @@ export const Sidebar: FC<SidebarProps> = ({
               <h3>{user.username}</h3>
               <h4>@{user.handle}</h4>
               <div>
-                <button>
+                <button type="button">
                   <span>0</span> Followers
                 </button>
-                <button>
+                <button type="button">
                   <span>{user.following.length}</span> Following
                 </button>
               </div>
@@ -62,11 +62,11 @@ export const Sidebar: FC<SidebarProps> = ({
                 <Logo type="vertical" />
               </LogoContainer>
               <AuthenticationBar>
-                <button onClick={toggleSidebar}>
+                <button type="button" onClick={toggleSidebar}>
                   <Link to="/log-in">Log In</Link>
                 </button>
                 <span>or</span>
-                <button onClick={toggleSidebar}>
+                <button type="button" onClick={toggleSidebar}>
                   {' '}
                   <Link to="/sign-up">Sign Up</Link>
                 </button>
@@ -81,10 +81,10 @@ export const Sidebar: FC<SidebarProps> = ({
 
             <SidebarList>
               <li>
-                <Link to={'/'} onClick={toggleSidebar}>
+                <Link to="/" onClick={toggleSidebar}>
                   <SidebarButton>
                     <span>
-                      <FontAwesomeIcon icon={'home'} />
+                      <FontAwesomeIcon icon="home" />
                     </span>
                     <p>Home</p>
                   </SidebarButton>
@@ -97,40 +97,29 @@ export const Sidebar: FC<SidebarProps> = ({
                     <Link to={`/users/${user._id}`} onClick={toggleSidebar}>
                       <SidebarButton>
                         <span>
-                          <FontAwesomeIcon icon={'user'} />
+                          <FontAwesomeIcon icon="user" />
                         </span>
                         <p>Profile</p>
                       </SidebarButton>
                     </Link>
-                  </li>
-                  <li>
-                    <SidebarButton>
-                      <span>
-                        <FontAwesomeIcon icon={'bookmark'} />
-                      </span>
-                      <p>Bookmarks</p>
-                    </SidebarButton>
                   </li>
                 </>
               ) : (
                 ''
               )}
               <li>
-                <SidebarButton
-                  onClick={toggleTheme}
-                  data-testid={'theme-button'}
-                >
+                <SidebarButton onClick={toggleTheme} data-testid="theme-button">
                   {theme === 'light' ? (
                     <>
                       <span>
-                        <FontAwesomeIcon icon={'moon'} />
+                        <FontAwesomeIcon icon="moon" />
                       </span>
                       <p>Dark Theme</p>
                     </>
                   ) : (
                     <>
                       <span>
-                        <FontAwesomeIcon icon={'sun'} />
+                        <FontAwesomeIcon icon="sun" />
                       </span>
                       <p>Light Theme</p>
                     </>
@@ -141,7 +130,7 @@ export const Sidebar: FC<SidebarProps> = ({
             {user ? (
               <SidebarButton onClick={resetAuthState}>
                 <span>
-                  <FontAwesomeIcon icon={'sign-out-alt'} />
+                  <FontAwesomeIcon icon="sign-out-alt" />
                 </span>
                 <p>Log Out</p>
               </SidebarButton>

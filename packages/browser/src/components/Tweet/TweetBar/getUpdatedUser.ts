@@ -9,7 +9,7 @@ export const getUpdatedUser = async (
 ): Promise<User | undefined> => {
   try {
     const config = {
-      headers: { Authorization: 'bearer ' + token },
+      headers: { Authorization: `bearer ${token}` },
     };
     const response = await axios.patch(url, {}, config);
     const { user } = response.data.data;

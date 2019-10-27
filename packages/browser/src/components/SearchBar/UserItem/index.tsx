@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Avatar from 'components/Avatar';
 import User from 'types/User';
 import { UserItemWrapper } from './styled';
+
 interface UserItemProps {
   user: User;
 }

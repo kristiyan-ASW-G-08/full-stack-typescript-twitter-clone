@@ -7,7 +7,7 @@ import StyledApp from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Theme from 'components/Theme/Theme';
 import GlobalStyle from 'styled/GlobalStyle';
-import 'importFontAwesome.js';
+import 'importFontAwesome';
 
 const App: FC = observer(() => {
   const { themeStore, authStore } = useContext(RootStoreContext);
@@ -19,7 +19,7 @@ const App: FC = observer(() => {
         new Date(expiryDate).getTime() - new Date().getTime();
       authStore.initAuthStoreReset(remainingMilliseconds);
     }
-  }, []);
+  }, [authStore]);
   return (
     <>
       <GlobalStyle />

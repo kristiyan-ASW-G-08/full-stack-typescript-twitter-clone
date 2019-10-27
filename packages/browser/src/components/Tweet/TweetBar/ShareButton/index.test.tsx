@@ -2,10 +2,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
-import ShareButton from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import tweet from 'testUtilities/tweet';
 import setClipboard from 'utilities/setClipboard';
+import ShareButton from './index';
 
 jest.mock('utilities/setClipboard');
 
@@ -18,7 +18,7 @@ describe('ShareButton', () => {
       <ShareButton tweet={tweet} setNotification={setNotification} />,
 
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
 

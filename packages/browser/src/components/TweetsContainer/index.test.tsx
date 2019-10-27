@@ -2,11 +2,11 @@ import React from 'react';
 import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
-import getTweets from './getTweets';
-import TweetsContainer from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import useIntersection from 'hooks/useIntersection';
 import tweet from 'testUtilities/tweet';
+import TweetsContainer from './index';
+import getTweets from './getTweets';
 
 jest.mock('hooks/useIntersection');
 jest.mock('./getTweets');
@@ -37,7 +37,7 @@ describe('TweetsContainer', () => {
       />,
 
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
     await wait(() => {

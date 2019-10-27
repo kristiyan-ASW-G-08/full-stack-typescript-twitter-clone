@@ -1,6 +1,6 @@
-import React, { FC, Dispatch, SetStateAction, useEffect, memo } from 'react';
-import { FeedBarWrapper, FeedBarButton } from './styled';
+import React, { FC, Dispatch, SetStateAction, memo } from 'react';
 import Feed from 'types/Feed';
+import { FeedBarWrapper, FeedBarButton } from './styled';
 
 interface FeedBarProps {
   feeds: Feed[];

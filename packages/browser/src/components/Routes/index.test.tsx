@@ -4,9 +4,9 @@ import '@testing-library/jest-dom/extend-expect';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import axios from 'axios';
-import Routes from './index';
 import Theme from 'components/Theme/Theme';
 import tweet from 'testUtilities/tweet';
+import Routes from './index';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;

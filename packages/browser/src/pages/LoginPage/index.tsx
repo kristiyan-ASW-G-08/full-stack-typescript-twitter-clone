@@ -6,7 +6,6 @@ import {
   ErrorMessage,
   FormikValues,
   FormikActions,
-  FormikErrors,
 } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -79,7 +78,7 @@ export const LoginPage: FC = () => {
                 />
                 <ErrorMessage component="span" name="password" />
               </Input>
-              <Button buttonType={'primary'} type="submit">
+              <Button buttonType="primary" type="submit">
                 Log In
               </Button>
             </StyledForm>

@@ -3,9 +3,10 @@ import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import { SearchBar } from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import user from 'testUtilities/user';
+import { SearchBar } from './index';
+
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.get.mockResolvedValue({
@@ -16,9 +17,8 @@ axiosMock.get.mockResolvedValue({
 });
 
 describe('SearchBar', () => {
-
   afterAll(() => jest.restoreAllMocks());
-  
+
   it('render SearchBar', async () => {
     expect.assertions(4);
 
@@ -26,7 +26,7 @@ describe('SearchBar', () => {
       <SearchBar />,
 
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
     const input = getByPlaceholderText('Search TwittClone');
@@ -36,7 +36,7 @@ describe('SearchBar', () => {
     expect(container).toBeTruthy();
 
     await wait(() => {
-      //axios.get is called every type the user types
+      // axios.get is called every type the user types
       expect(axios.get).toHaveBeenCalledTimes(4);
     });
     const usersList = getByTestId('datalist');

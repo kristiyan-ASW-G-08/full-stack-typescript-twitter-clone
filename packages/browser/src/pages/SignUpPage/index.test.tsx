@@ -3,8 +3,8 @@ import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import SignUpPage from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
+import SignUpPage from '.';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
@@ -34,7 +34,7 @@ describe('SignUpPage', () => {
       },
     ];
     const { getByText, getByPlaceholderText } = render(<SignUpPage />, {
-      wrapper: ({ children }) => <TestWrapper children={children} />,
+      wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
     });
 
     credentials.forEach(({ value, placeholder }) => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import UserEvent from '@testing-library/user-event';
-import Sidebar from '.';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import userEvent from '@testing-library/user-event';
 import TestWrapper from 'testUtilities/TestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
+
+import Sidebar from '.';
 
 describe('Sidebar', () => {
   const theme = 'light';
@@ -18,14 +18,14 @@ describe('Sidebar', () => {
     const { rerender, getByTestId, queryByText, getByText } = render(
       <Sidebar
         toggleSidebar={toggleSidebar}
-        isActive={true}
+        isActive
         authState={defaultAuthState}
         resetAuthState={resetAuthState}
         theme={theme}
         toggleTheme={toggleTheme}
       />,
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
     const themeButton = getByTestId('theme-button');
@@ -35,7 +35,7 @@ describe('Sidebar', () => {
     const backdrop = getByTestId('backdrop');
 
     userEvent.click(backdrop);
-    UserEvent.click(themeButton);
+    userEvent.click(themeButton);
 
     expect(themeButton.textContent).toMatchSnapshot();
     expect(toggleTheme).toHaveBeenCalledTimes(1);
@@ -47,10 +47,10 @@ describe('Sidebar', () => {
     rerender(
       <Sidebar
         toggleSidebar={toggleSidebar}
-        isActive={true}
+        isActive
         resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
-        theme={'light'}
+        theme="light"
         toggleTheme={toggleTheme}
       />,
     );
@@ -60,7 +60,7 @@ describe('Sidebar', () => {
     signUpButton = queryByText('Sign Up');
     logOutButton = getByText('Log Out');
 
-    UserEvent.click(logOutButton);
+    userEvent.click(logOutButton);
 
     expect(logInButton).toBeFalsy();
     expect(signUpButton).toBeFalsy();

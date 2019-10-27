@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import NotificationType from 'types/Notification';
 import { NotificationWrapper, NotificationContent } from './styled';
 

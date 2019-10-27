@@ -11,8 +11,11 @@ const hydrate = create({
 });
 export class RootStore {
   @observable public authStore = new AuthStore();
+
   @observable public themeStore = new ThemeStore();
+
   @observable public notificationStore = new NotificationStore();
+
   public constructor() {
     hydrate('authStore', this.authStore);
     hydrate('themeStore', this.themeStore);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Avatar from '.';
 import TestWrapper from 'testUtilities/TestWrapper';
+import Avatar from '.';
 
 describe('Avatar', () => {
   const avatarURL = 'mockAvatarURL';
@@ -13,7 +13,7 @@ describe('Avatar', () => {
     const { container, getByAltText } = render(
       <Avatar avatarURL={avatarURL} altText={mockAltText} />,
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
     const img = getByAltText(mockAltText);

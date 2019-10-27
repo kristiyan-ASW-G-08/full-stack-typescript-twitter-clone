@@ -8,7 +8,7 @@ describe('Portal', () => {
     expect.assertions(3);
     const id = 'portal';
     const children = <h1>Child Element</h1>;
-    const { getByText } = render(<Portal portalId={id} children={children} />);
+    const { getByText } = render(<Portal portalId={id}>{children}</Portal>);
     const rootElement = document.querySelector(`#${id}`);
     const childElement = getByText('Child Element');
 

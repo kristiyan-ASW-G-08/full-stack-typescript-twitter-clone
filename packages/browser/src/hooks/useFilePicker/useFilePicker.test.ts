@@ -17,7 +17,7 @@ describe('useFilePicker', () => {
       length: 1,
       item: () => null,
       0: fileMock,
-      [Symbol.iterator]: function*() {},
+      *[Symbol.iterator]() {},
     };
 
     const event = {
@@ -27,7 +27,7 @@ describe('useFilePicker', () => {
     } as React.ChangeEvent<HTMLInputElement>;
     const { result } = renderHook(() => useFilePicker());
     act(() => {
-      const { fileHandler, resetFileData } = result.current;
+      const { fileHandler } = result.current;
       const fileData = fileHandler(event);
       expect(fileData).toMatchSnapshot();
     });

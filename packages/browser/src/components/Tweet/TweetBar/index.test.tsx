@@ -3,12 +3,12 @@ import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import TweetBar from './index';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import tweet from 'testUtilities/tweet';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { createMemoryHistory } from 'history';
+import TweetBar from './index';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -44,7 +44,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -83,7 +83,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -122,7 +122,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -159,7 +159,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -197,7 +197,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -235,7 +235,7 @@ describe('TweetBar', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );

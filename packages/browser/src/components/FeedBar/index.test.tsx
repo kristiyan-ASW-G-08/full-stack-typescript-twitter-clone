@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import FeedBar from './index';
 import TestWrapper from 'testUtilities/TestWrapper';
 import userEvent from '@testing-library/user-event';
+import FeedBar from './index';
 
 describe('FeedBar', () => {
   it('render FeedBar', () => {
@@ -17,7 +17,7 @@ describe('FeedBar', () => {
       <FeedBar currentUrl={currentUrl} feeds={feeds} setUrl={setUrl} />,
 
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
 

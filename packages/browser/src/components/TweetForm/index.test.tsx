@@ -1,16 +1,13 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
-import TweetForm from './index';
 import tweet from 'testUtilities/tweet';
 import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import Theme from 'components/Theme/Theme';
 import populateFormData from 'utilities/populateFormData';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
+import TweetForm from './index';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
@@ -41,7 +38,7 @@ describe('TweetForm', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -53,13 +50,13 @@ describe('TweetForm', () => {
     const textInput = getByPlaceholderText('Text');
     const linkInput = getByPlaceholderText('Link');
 
-    UserEvent.type(textInput, text);
-    UserEvent.type(linkInput, link);
+    userEvent.type(textInput, text);
+    userEvent.type(linkInput, link);
 
     expect(textInput.textContent).toMatch(text);
     expect(linkInput).toHaveAttribute('value', link);
 
-    UserEvent.click(submitButton);
+    userEvent.click(submitButton);
 
     await wait(() => {
       expect(populateFormData).toHaveBeenCalledTimes(1);
@@ -93,7 +90,7 @@ describe('TweetForm', () => {
 
       {
         wrapper: ({ children }) => (
-          <RouterTestWrapper children={children} history={history} />
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
         ),
       },
     );
@@ -104,13 +101,13 @@ describe('TweetForm', () => {
     expect(textInput.textContent).toMatch(tweet.text);
     expect(linkInput).toHaveAttribute('value', tweet.link);
 
-    UserEvent.type(textInput, text);
-    UserEvent.type(linkInput, link);
+    userEvent.type(textInput, text);
+    userEvent.type(linkInput, link);
 
     expect(textInput.textContent).toMatch(text);
     expect(linkInput).toHaveAttribute('value', link);
 
-    UserEvent.click(submitButton);
+    userEvent.click(submitButton);
 
     await wait(() => {
       expect(populateFormData).toHaveBeenCalledTimes(1);

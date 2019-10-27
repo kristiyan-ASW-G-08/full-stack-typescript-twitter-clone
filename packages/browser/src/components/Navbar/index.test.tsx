@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import UserEvent from '@testing-library/user-event';
-import Navbar from '.';
+import useEvent from '@testing-library/user-event';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import TestWrapper from 'testUtilities/TestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
+import Navbar from '.';
 
 describe('Navbar', () => {
   const theme = 'light';
@@ -21,14 +21,14 @@ describe('Navbar', () => {
         toggleTheme={toggleTheme}
       />,
       {
-        wrapper: ({ children }) => <TestWrapper children={children} />,
+        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
     const themeButton = getByText('Dark mode');
     const logInButton = getByText('Log In');
     const signUpButton = getByText('Sign Up');
 
-    UserEvent.click(themeButton);
+    useEvent.click(themeButton);
 
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
@@ -40,7 +40,7 @@ describe('Navbar', () => {
       <Navbar
         resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
-        theme={'dark'}
+        theme="dark"
         toggleTheme={toggleTheme}
       />,
     );
@@ -48,7 +48,7 @@ describe('Navbar', () => {
 
     const logOutButton = getByText('Log Out');
 
-    UserEvent.click(logOutButton);
+    useEvent.click(logOutButton);
 
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();

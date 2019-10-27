@@ -1,4 +1,5 @@
 import ThemeStore from 'stores/ThemeStore/ThemeStore';
+
 describe('ThemeStore', (): void => {
   it('theme should be light by default', (): void => {
     expect.assertions(1);
