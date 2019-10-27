@@ -11,9 +11,10 @@ describe('getSortString', (): void => {
     { sortKey: 'replies', sortString: '-replies' },
   ];
 
-  test.each(sortArr)(
+  it.each(sortArr)(
     'should return the proper sort string',
     ({ sortKey, sortString }): void => {
+      expect.assertions(1);
       expect(getSortString(sortKey)).toMatch(sortString);
     },
   );

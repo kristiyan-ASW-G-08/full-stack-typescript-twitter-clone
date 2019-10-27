@@ -6,6 +6,7 @@ import compression from 'compression';
 import userRoutes from '@routes/userRoutes';
 import tweetRoutes from '@routes/tweetRoutes';
 import { CustomError } from '@utilities/CustomError';
+import fileFilter from '@customMiddleware/fileFilter';
 
 const app: Application = express();
 
@@ -34,15 +35,6 @@ const fileStorage = multer.diskStorage({
     );
   },
 });
-
-const fileFilter = (
-  req: Request,
-  file: any,
-  cb: (...args: any) => any,
-): void => {
-  const formats = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg+xml'];
-  cb(null, formats.includes(file.mimetype));
-};
 
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 app.use('/images', express.static('./images'));
