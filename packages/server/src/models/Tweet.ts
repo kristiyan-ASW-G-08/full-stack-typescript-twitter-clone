@@ -29,13 +29,15 @@ const TweetSchema: Schema = new Schema({
   },
 });
 
-async function preFindPopulate(this: Query<any>): Promise<any> {
+async function populateFields(this: Query<any>): Promise<any> {
   this.populate([
     { path: 'user', select: 'username handle' },
     { path: 'reply', select: 'user' },
     { path: 'retweet' },
   ]);
 }
-TweetSchema.pre('find', preFindPopulate);
+TweetSchema.pre('find', populateFields);
+
+TweetSchema.pre('populate', populateFields);
 
 export default mongoose.model<Tweet>('Tweet', TweetSchema);

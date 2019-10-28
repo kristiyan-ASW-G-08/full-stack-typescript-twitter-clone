@@ -17,6 +17,7 @@ describe('useFilePicker', () => {
       length: 1,
       item: () => null,
       0: fileMock,
+      // eslint-disable-next-line no-empty-function
       *[Symbol.iterator]() {},
     };
 

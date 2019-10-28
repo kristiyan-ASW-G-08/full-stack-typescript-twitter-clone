@@ -8,12 +8,17 @@ import Feed from 'types/Feed';
 export const Home: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const { token, user } = authStore.authState;
-  const [url, setUrl] = useState<string>('http://localhost:8090/tweets');
+  const [url, setUrl] = useState<string>(
+    'http://localhost:8090/tweets',
+  );
   const feeds: Feed[] =
     user !== undefined
       ? [
           { name: 'All', url: 'http://localhost:8090/tweets' },
-          { name: 'Feed', url: 'http://localhost:8090/users/user/tweets' },
+          {
+            name: 'Feed',
+            url: 'http://localhost:8090/users/user/tweets',
+          },
         ]
       : [];
   return (

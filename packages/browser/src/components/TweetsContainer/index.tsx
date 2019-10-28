@@ -10,12 +10,12 @@ import React, {
   SetStateAction,
 } from 'react';
 import TweetType from 'types/Tweet';
-import { TweetsWrapper, Select, Tweets, TextLoader } from './styled';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
-import getTweets from './getTweets';
 import FeedBar from 'components/FeedBar';
+import getTweets from './getTweets';
+import { TweetsWrapper, Select, Tweets, TextLoader } from './styled';
 
 const Tweet = lazy(() => import('components/Tweet'));
 const Retweet = lazy(() => import('components/Retweet'));
@@ -62,13 +62,14 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
-        console.log(next);
+        console.log(data);
         setTweets(newTweets);
       })
       .catch(error => {
-        //Error is being handled in getTweets
+        console.log(error);
+        // Error is being handled in getTweets
       });
-  }, [url]);
+  }, [setNotification, token, url]);
   const getTweetsHandler = async (e: SyntheticEvent) => {
     const target = e.target as HTMLSelectElement;
     const { value } = target;
@@ -88,11 +89,11 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
-          fallback={
+          fallback={() => (
             <TextLoader>
               <p>...Loading</p>
             </TextLoader>
-          }
+          )}
         >
           <Select data-testid="sort" onChange={getTweetsHandler}>
             <option data-testid="new" value="new">

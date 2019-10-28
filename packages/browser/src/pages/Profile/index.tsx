@@ -33,10 +33,12 @@ export const Profile: FC = () => {
         const response = await axios.get(
           `http://localhost:8090/users/user/${userId}`,
         );
-        const { user } = response.data.data;
 
+        const { user } = response.data.data;
+        console.log(user);
         return user;
       } catch (err) {
+        console.log(err);
         const notification: Notification = {
           type: 'warning',
           content: 'Something went wrong',
@@ -45,12 +47,13 @@ export const Profile: FC = () => {
       }
     };
     getUser(userId || '').then((userData: User) => {
+      console.log(userData);
       setUser(userData);
       setUrl(
         userData ? `http://localhost:8090/users/${userData._id}/tweets` : '',
       );
     });
-  }, [notificationStore, user, userId]);
+  }, [notificationStore, userId]);
 
   const feeds: Feed[] =
     user !== undefined

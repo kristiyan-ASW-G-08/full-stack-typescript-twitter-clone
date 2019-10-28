@@ -10,7 +10,9 @@ const useIntersection = (cb: () => void | Promise<void>) => {
           if (intersectedElement && intersectedElement.isIntersecting) {
             await cb();
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error);
+        }
       },
       { threshold: 1 },
     ),

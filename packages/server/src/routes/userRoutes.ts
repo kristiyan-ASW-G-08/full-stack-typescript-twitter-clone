@@ -21,9 +21,11 @@ import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUp
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPasswordValidator';
+import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
 import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
 import isAuth from '@customMiddleware/isAuth';
+import paginate from '@customMiddleware/paginate';
 
 const router = express.Router();
 
@@ -68,9 +70,20 @@ router.patch('/users/:userId', isAuth, followUser);
 
 router.delete('/users', isAuth, deleteUser);
 
-router.get('/users/user/bookmarks', isAuth, getUserBookmarks);
+router.get(
+  '/users/user/bookmarks',
+  isAuth,
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  paginate,
+  getUserBookmarks,
+);
 
-router.get('/users/:userId/likes', getUserLikes);
+router.get(
+  '/users/:userId/likes',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  paginate,
+  getUserLikes,
+);
 
 router.get(
   '/users/:handle',
@@ -78,7 +91,13 @@ router.get(
   getUsersList,
 );
 
-router.get('/users/user/tweets', isAuth, getUserFeed);
+router.get(
+  '/users/user/tweets',
+  isAuth,
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  paginate,
+  getUserFeed,
+);
 
 router.get('/users/user/:userId', getUser);
 

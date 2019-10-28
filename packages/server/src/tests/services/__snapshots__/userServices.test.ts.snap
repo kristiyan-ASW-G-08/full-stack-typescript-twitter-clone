@@ -2,8 +2,6 @@
 
 exports[`userServices areCredentialsAvailable should throw an error when the user credentials are already taken 1`] = `[Error: Conflict]`;
 
-exports[`userServices checkUserConfirmation shouldn't throw an error when the user confirmed his email address 1`] = `[Error: Authentication credentials not valid]`;
-
 exports[`userServices checkUserConfirmation should throw an error the user hasn't confirmed his email address 1`] = `[Error: Authentication credentials not valid]`;
 
 exports[`userServices getUserByEmail should throw an error when the user is not found 1`] = `[Error: Resource not found]`;

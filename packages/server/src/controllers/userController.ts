@@ -13,7 +13,6 @@ import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeId from '@utilities/removeId';
-import getSortString from '@utilities/getSortString';
 import MailOptions from '@customTypes/MailOptions';
 import User from '@models/User';
 import Tweet from '@models/Tweet';
@@ -378,12 +377,34 @@ export const getUserBookmarks = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
+    const { page, limit, sort, sortString } = req.pagination;
     const user = await getUserById(userId);
+    const { SERVER_URL } = process.env;
     const populatedUser = await user
-      .populate('bookmarks.source')
+      .populate({
+        path: 'bookmarks',
+        options: {
+          sort: sortString,
+          skip: (page - 1) * limit,
+          limit,
+        },
+      })
       .execPopulate();
     const { bookmarks } = populatedUser;
-    res.status(200).json({ data: { bookmarks } });
+    const bookmarksCount = bookmarks.length - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (bookmarksCount > 0) {
+      links.next = `${SERVER_URL}/users/user/bookmarks?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/user/bookmarks?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { tweets: bookmarks, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -397,9 +418,33 @@ export const getUserLikes = async (
   try {
     const { userId } = req.params;
     const user = await getUserById(userId);
-    const populatedUser = await user.populate('likes.source').execPopulate();
+    const { page, limit, sort, sortString } = req.pagination;
+    const { SERVER_URL } = process.env;
+    const populatedUser = await user
+      .populate({
+        path: 'likes',
+        options: {
+          sort: sortString,
+          skip: (page - 1) * limit,
+          limit,
+        },
+      })
+      .execPopulate();
     const { likes } = populatedUser;
-    res.status(200).json({ data: { likes } });
+    const likesCount = likes.length - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (likesCount > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/likes?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/likes?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({ data: { tweets: likes, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -463,10 +508,7 @@ export const getUserFeed = async (
 ): Promise<void> => {
   try {
     const { userId } = req;
-    const sort = req.query.sort || 'top';
-    const sortString = getSortString(sort);
-    const limit = parseInt(req.query.limit, 10) || 25;
-    const page = parseInt(req.query.page, 10) || 1;
+    const { page, limit, sort, sortString } = req.pagination;
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const { following } = user;

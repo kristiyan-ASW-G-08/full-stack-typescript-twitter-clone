@@ -5,7 +5,6 @@ import { getTweetById } from '@services/tweetServices';
 import passErrorToNext from '@utilities/passErrorToNext';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
-import getSortString from '@utilities/getSortString';
 import includesObjectId from '@utilities/includesObjectId';
 import removeId from '@utilities/removeId';
 import { getUserById } from '@services/userServices';
@@ -154,11 +153,8 @@ export const getAllTweets = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const sort = req.query.sort || 'top';
-    const limit = parseInt(req.query.limit, 10) || 25;
-    const page = parseInt(req.query.page, 10) || 1;
+    const { page, limit, sort, sortString } = req.pagination;
     const { SERVER_URL } = process.env;
-    const sortString = getSortString(sort);
     const tweets = await Tweet.countDocuments()
       .find()
       .sort(sortString)
@@ -190,11 +186,8 @@ export const getUserTweets = async (
 ): Promise<void> => {
   try {
     const { userId } = req.params;
-    const sort = req.query.sort || 'top';
-    const limit = parseInt(req.query.limit, 10) || 25;
-    const page = parseInt(req.query.page, 10) || 1;
+    const { page, limit, sort, sortString } = req.pagination;
     const { SERVER_URL } = process.env;
-    const sortString = getSortString(sort);
     const tweets = await Tweet.countDocuments()
       .find({ user: userId })
       .sort(sortString)
@@ -226,11 +219,8 @@ export const getReplies = async (
 ): Promise<void> => {
   try {
     const { tweetId } = req.params;
-    const sort = req.query.sort || 'top';
-    const limit = parseInt(req.query.limit, 10) || 25;
-    const page = parseInt(req.query.page, 10) || 1;
+    const { page, limit, sort, sortString } = req.pagination;
     const { SERVER_URL } = process.env;
-    const sortString = getSortString(sort);
     const tweets = await Tweet.countDocuments()
       .find({ reply: tweetId })
       .sort(sortString)
@@ -262,11 +252,8 @@ export const getUserReplies = async (
 ): Promise<void> => {
   try {
     const { userId } = req.params;
-    const sort = req.query.sort || 'top';
-    const limit = parseInt(req.query.limit, 10) || 25;
-    const page = parseInt(req.query.page, 10) || 1;
+    const { page, limit, sort, sortString } = req.pagination;
     const { SERVER_URL } = process.env;
-    const sortString = getSortString(sort);
     const tweets = await Tweet.countDocuments()
       .find({ user: userId, type: 'reply' })
       .sort(sortString)
