@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { setLightness } from 'polished';
-
 export const ShareButtonWrapper = styled('div')`
   ${props => props.theme.mixins.center}
   position:relative;
@@ -17,10 +15,7 @@ export const DropDown = styled('ul')`
   padding:0.5rem;
   width: 10rem;
   list-style: none;
-  background: ${props =>
-    props.theme.theme === 'light'
-      ? props.theme.background
-      : setLightness(0.2, props.theme.background)};
+  background: ${props => props.theme.background};
 `;
 
 export const DropDownItem = styled('li')`

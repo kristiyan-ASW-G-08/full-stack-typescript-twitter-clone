@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+
 export const Input = styled('div')`
   width: 100%;
   input,
@@ -10,14 +10,7 @@ export const Input = styled('div')`
     border: none;
     border-radius: 0.5rem;
     width: 100%;
-    background-color: ${props => {
-      const color =
-        props.theme.theme === 'light'
-          ? lighten(0.45, props.theme.secondary)
-          : lighten(0.1, props.theme.background);
-
-      return color;
-    }};
+    background-color: ${props => props.theme.light};
     color: ${props => props.theme.secondary};
     ::placeholder {
       color: ${props => props.theme.secondary};

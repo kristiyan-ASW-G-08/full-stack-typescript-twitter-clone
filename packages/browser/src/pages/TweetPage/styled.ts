@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const TweetPageWrapper = styled('h1')`
   display: grid;
   justify-items: center;

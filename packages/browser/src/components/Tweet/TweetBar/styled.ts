@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { setLightness } from 'polished';
-
 export const TweetBarWrapper = styled('div')`
   grid-area: tweet-bar;
   display: grid;
@@ -17,9 +15,7 @@ export const TweetBarButton = styled('button')<TweetBarButtonProps>`
   font-size: 1.5rem;
   height: 100%;
   color: ${props => {
-    const color = props.active
-      ? props.theme[props.active]
-      : setLightness(0.5, props.theme.secondary);
+    const color = props.active ? props.theme[props.active] : props.theme.dark;
     return color;
   }};
   padding: 0.5rem 0 0.5rem 0;

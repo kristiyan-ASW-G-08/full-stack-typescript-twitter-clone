@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { transparentize } from 'polished';
 
 export const ModalWrapper = styled('div')`
   ${props => props.theme.mixins.center}
@@ -11,5 +10,5 @@ export const Backdrop = styled('div')`
   width: 100vw;
   min-height:100vh;
   ${props => props.theme.mixins.center}
-  background: ${props => transparentize(0.5, props.theme.secondary)};
+  background: ${props => props.theme.transparentBackground};
 `;

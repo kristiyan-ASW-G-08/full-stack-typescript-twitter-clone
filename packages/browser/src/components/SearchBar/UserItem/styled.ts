@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 export const UserItemWrapper = styled('li')`
   a {
@@ -9,12 +8,10 @@ export const UserItemWrapper = styled('li')`
     grid-template-columns: 1fr 7fr;
     align-items: center;
     padding: 0.5rem;
-    background: ${props =>
-      props.theme.theme === 'light'
-        ? props.theme.background
-        : setLightness(0.3, props.theme.background)};
+    background: ${props => props.theme.background};
     color: ${props => props.theme.primary};
-    border-radius:0.3rem;
-  ${props => props.theme.mixins.border}
+    border-radius: 0.3rem;
+    ${props => props.theme.mixins.border}
   }
 `;
+export default UserItemWrapper;

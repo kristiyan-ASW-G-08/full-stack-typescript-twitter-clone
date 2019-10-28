@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
+
 interface TweetsWrapperProps {
   hasBorderRadius?: boolean | undefined;
 }
@@ -51,13 +51,9 @@ export const Select = styled('select')`
   text-align: center;
   text-align-last: center;
   background: ${props =>
-    props.theme.theme === 'light'
-      ? props.theme.secondary
-      : setLightness(0.3, props.theme.secondary)};
+    props.theme.theme === 'light' ? props.theme.secondary : props.theme.light};
   color: ${props =>
-    props.theme.theme === 'light'
-      ? setLightness(0.8, props.theme.secondary)
-      : props.theme.secondary};
+    props.theme.theme === 'light' ? props.theme.light : props.theme.secondary};
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: bold;

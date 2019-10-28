@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 export const TweetWrapper = styled('article')`
   width: 100%;
@@ -45,13 +44,13 @@ export const Username = styled('h3')`
 `;
 export const Handle = styled('h4')`
   grid-area: handle;
-  color: ${props => setLightness(0.5, props.theme.secondary)};
+  color: ${props => props.theme.dark};
   font-size: 1.2rem;
 `;
 
 export const Time = styled('time')`
   grid-area: time;
-  color: ${props => setLightness(0.5, props.theme.secondary)};
+  color: ${props => props.theme.dark};
   font-size: 1.2rem;
 `;
 
@@ -91,4 +90,3 @@ export const Img = styled('img')`
   object-fit: cover;
   border-radius: 1rem;
 `;
-

@@ -62,7 +62,6 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
-        console.log(data);
         setTweets(newTweets);
       })
       .catch(error => {
@@ -88,13 +87,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
-        <Suspense
-          fallback={() => (
-            <TextLoader>
-              <p>...Loading</p>
-            </TextLoader>
-          )}
-        >
+        <Suspense fallback={<TextLoader>...Loading</TextLoader>}>
           <Select data-testid="sort" onChange={getTweetsHandler}>
             <option data-testid="new" value="new">
               New
@@ -136,12 +129,10 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
 
       {nextPage ? (
         <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
-          <p>...Loading</p>
+          ...Loading
         </TextLoader>
       ) : (
-        <TextLoader>
-          <p>No Tweets Available</p>
-        </TextLoader>
+        <TextLoader>No Tweets Available</TextLoader>
       )}
     </TweetsWrapper>
   );

@@ -35,7 +35,7 @@ export const Profile: FC = () => {
         );
 
         const { user } = response.data.data;
-        console.log(user);
+
         return user;
       } catch (err) {
         console.log(err);
@@ -47,7 +47,6 @@ export const Profile: FC = () => {
       }
     };
     getUser(userId || '').then((userData: User) => {
-      console.log(userData);
       setUser(userData);
       setUrl(
         userData ? `http://localhost:8090/users/${userData._id}/tweets` : '',
@@ -65,6 +64,10 @@ export const Profile: FC = () => {
           {
             name: 'Replies',
             url: `http://localhost:8090/users/${user._id}/replies`,
+          },
+          {
+            name: 'Likes',
+            url: `http://localhost:8090/users/${user._id}/likes`,
           },
         ]
       : [];

@@ -21,7 +21,7 @@ export const Button = styled('button')<ButtonProps>`
     background: ${props => props.theme.white};
     color: ${props => {
       const color = props.theme[props.buttonType];
-      return color ? color : props.theme.primary;
+      return color || props.theme.primary;
     }};
 
     ${props =>

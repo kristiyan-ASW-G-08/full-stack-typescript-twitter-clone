@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { transparentize, darken, lighten } from 'polished';
 
 interface SidebarProps {
   isActive: boolean;
@@ -31,7 +30,7 @@ export const SidebarWrapper = styled('aside')<SidebarProps>`
 `;
 
 export const Backdrop = styled('div')`
-  background: ${props => transparentize(0.5, props.theme.secondary)};
+  background: ${props => props.theme.transparentBackground};
 `;
 
 export const Container = styled('div')`
@@ -72,16 +71,7 @@ export const AuthenticatedSidebarHeader = styled('div')`
     ${props => props.theme.mixins.button}
     color: ${props => props.theme.secondary};
     span {
-      color: ${(props: {
-        theme: { [key: string]: string; theme: 'light' | 'dark' };
-      }) => {
-        const colors: { light: string; dark: string } = {
-          light: darken(0.4, props.theme.secondary),
-          dark: lighten(0.2, props.theme.secondary),
-        };
-        const color = colors[props.theme.theme];
-        return color;
-      }};
+      color: ${props => props.theme.dark};
     }
     margin-right: 0.7rem;
   }

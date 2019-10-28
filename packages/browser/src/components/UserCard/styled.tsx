@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { setLightness } from 'polished';
 
 interface BorderProps {
   direction?: 'top' | 'bottom' | 'right' | 'left';
@@ -59,16 +58,13 @@ export const Container = styled('div')`
 export const Username = styled('p')`
   grid-area: username;
   font-size: 2rem;
-  color: ${props => {
-    const lightness = props.theme.theme === 'light' ? 0.3 : 1;
-    return setLightness(lightness, props.theme.color);
-  }};
+  color: ${props => props.theme.dark};
   font-weight: bold;
 `;
 export const Handle = styled('p')`
   grid-area: handle;
   font-size: 1.6rem;
-  color: ${props => setLightness(0.6, props.theme.secondary)};
+  color: ${props => props.theme.light};
 `;
 
 export const FollowBar = styled('div')`
@@ -76,16 +72,13 @@ export const FollowBar = styled('div')`
   display: grid;
   grid-template-columns: repeat(auto-fit, 7rem);
   grid-gap: 1rem;
-  color: ${props => setLightness(0.6, props.theme.secondary)};
+  color: ${props => props.theme.light};
   p,
   span {
     font-size: 1.4rem;
   }
   span {
     margin-right: 0.3rem;
-    color: ${props => {
-      const lightness = props.theme.theme === 'light' ? 0.3 : 0.8;
-      return setLightness(lightness, props.theme.secondary);
-    }};
+    color: ${props => props.theme.dark};
   }
 `;
