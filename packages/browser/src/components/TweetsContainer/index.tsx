@@ -4,6 +4,7 @@ import React, {
   useRef,
   useEffect,
   useState,
+  useMemo,
   Suspense,
   lazy,
   Dispatch,
@@ -38,48 +39,52 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
 }) => {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
+  const [query, setQuery] = useState<string>(`${url}?sort=new`);
   const tweetsRef = useRef(tweets);
   const nextPageRef = useRef(nextPage);
-  const loadMore = async () => {
-    if (nextPageRef.current) {
-      const { newTweets, next } = await getTweets(
-        nextPageRef.current,
-        setNotification,
-        token,
-      );
-      const allTweets = [...tweetsRef.current, ...newTweets];
-      setTweets(allTweets);
-      setNext(next);
+  const errorNotification: Notification = useMemo(() => {
+    return {
+      type: 'warning',
+      content: 'There was an error. Please try again later.',
+    };
+  }, []);
+  const loadNext = async () => {
+    try {
+      if (nextPageRef.current) {
+        const { newTweets, next } = await getTweets(nextPageRef.current, token);
+        const allTweets = [...tweetsRef.current, ...newTweets];
+        setTweets(allTweets);
+        setNext(next);
+      }
+    } catch {
+      setNotification(errorNotification);
     }
   };
-  const { setElement } = useIntersection(loadMore);
+  const { setElement } = useIntersection(loadNext);
+
   useEffect(() => {
     tweetsRef.current = tweets;
     nextPageRef.current = nextPage;
   }, [tweets, nextPage]);
+
   useEffect(() => {
-    getTweets(`${url}?sort=new`, setNotification, token)
+    getTweets(query, token)
       .then(data => {
         const { newTweets, next } = data;
         setNext(next);
         setTweets(newTweets);
       })
-      .catch(error => {
-        console.log(error);
-        // Error is being handled in getTweets
+      .catch(() => {
+        setNotification(errorNotification);
       });
-  }, [setNotification, token, url]);
-  const getTweetsHandler = async (e: SyntheticEvent) => {
+  }, [token, url, setNotification, errorNotification, query]);
+
+  const getTweetsHandler = (e: SyntheticEvent) => {
     const target = e.target as HTMLSelectElement;
     const { value } = target;
-    const { newTweets, next } = await getTweets(
-      `${url}?sort=${value}`,
-      setNotification,
-      token,
-    );
-    setNext(next);
-    setTweets(newTweets);
+    setQuery(`${url}?sort=${value}`);
   };
+
   const deleteTweetHandler = (tweetId: string): void => {
     setTweets(tweets.filter(tweet => tweet._id !== tweetId));
   };

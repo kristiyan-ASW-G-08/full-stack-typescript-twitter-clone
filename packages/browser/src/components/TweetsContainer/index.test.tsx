@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, wait, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import TestWrapper from 'testUtilities/TestWrapper';
@@ -42,11 +42,7 @@ describe('TweetsContainer', () => {
     );
     await wait(() => {
       expect(getTweets).toHaveBeenCalledTimes(1);
-      expect(getTweets).toHaveBeenCalledWith(
-        `${url}?sort=new`,
-        setNotification,
-        token,
-      );
+      expect(getTweets).toHaveBeenCalledWith(`${url}?sort=new`, token);
     });
 
     const tweetsFeed = getByRole('feed');
@@ -57,13 +53,9 @@ describe('TweetsContainer', () => {
     options.forEach(option => {
       const sortOption = getByTestId(option) as HTMLOptionElement;
 
-      UserEvent.selectOptions(sortSelect, option);
+      act(() => UserEvent.selectOptions(sortSelect, option));
       expect(sortOption.selected).toBe(true);
-      expect(getTweets).toHaveBeenCalledWith(
-        `${url}?sort=${option}`,
-        setNotification,
-        token,
-      );
+      expect(getTweets).toHaveBeenCalledWith(`${url}?sort=${option}`, token);
     });
     expect(getTweets).toHaveBeenCalledTimes(5);
     expect(tweetsFeed.childElementCount).toBe(1);

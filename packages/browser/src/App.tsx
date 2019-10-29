@@ -25,11 +25,13 @@ const App: FC = observer(() => {
       <GlobalStyle />
       <Normalize />
       <Theme currentTheme={theme}>
-        <StyledApp>
-          <BrowserRouter>
-            <Routes />
-          </BrowserRouter>
-        </StyledApp>
+        <React.StrictMode>
+          <StyledApp>
+            <BrowserRouter>
+              <Routes />
+            </BrowserRouter>
+          </StyledApp>
+        </React.StrictMode>
       </Theme>
     </>
   );

@@ -12,11 +12,10 @@ axiosMock.get.mockResolvedValue({
 });
 
 describe('getTweets', () => {
-  const setNotification = jest.fn();
   const url = 'url';
   it('resolves', async () => {
     expect.assertions(3);
-    await expect(getTweets(url, setNotification)).resolves.toEqual({
+    await expect(getTweets(url)).resolves.toEqual({
       newTweets: [],
       next: null,
       prev: null,
@@ -25,12 +24,5 @@ describe('getTweets', () => {
       expect(axios.get).toHaveBeenCalledTimes(1);
       expect(axios.get).toHaveBeenCalledWith(url, {});
     });
-  });
-
-  it('rejects', async () => {
-    expect.assertions(2);
-    axiosMock.get.mockReturnValue(Promise.reject(new Error()));
-    await expect(getTweets(url, setNotification)).resolves.toBeUndefined();
-    expect(setNotification).toHaveBeenCalledTimes(1);
   });
 });

@@ -10813,6 +10813,7 @@ Array [
       type="horizontal"
     >
       <img
+        alt="logo"
         src="logo-primary.svg"
       />
       <h1
@@ -11486,6 +11487,7 @@ Array [
       type="vertical"
     >
       <img
+        alt="logo"
         src="logo-primary.svg"
       />
       <h1
@@ -12185,6 +12187,7 @@ Array [
       type="horizontal"
     >
       <img
+        alt="logo"
         src="logo-primary.svg"
       />
       <h1
@@ -12858,6 +12861,7 @@ Array [
       type="vertical"
     >
       <img
+        alt="logo"
         src="logo-primary.svg"
       />
       <h1
@@ -13553,7 +13557,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-dnqmqq cVuIIo"
+      className="sc-gqjmRU hPjKtz"
     >
       <a
         href="/"
@@ -13564,6 +13568,7 @@ Array [
           type="horizontal"
         >
           <img
+            alt="logo"
             src="logo-primary.svg"
           />
           <h1
@@ -13580,7 +13585,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-iwsKbI eyUsHF"
+        className="sc-VigVT kJCPPL"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -13603,16 +13608,16 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-gqjmRU jklDRZ"
+        className="sc-fjdhpX kdlJcR"
       >
         <button
-          className="sc-VigVT kMZOHz"
+          className="sc-jzJRlG foOXzB"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-jTzLTM efqEAX"
+          className="sc-dnqmqq hrbhQs"
           onSubmit={[Function]}
           role="search"
         >
@@ -13623,7 +13628,7 @@ Array [
             type="search"
           />
           <ul
-            className="sc-fjdhpX pYKgp"
+            className="sc-iwsKbI fupBcl"
             data-testid="datalist"
           />
           <span>
@@ -14540,7 +14545,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-dnqmqq kchCqs"
+      className="sc-gqjmRU uBYbO"
     >
       <a
         href="/"
@@ -14551,6 +14556,7 @@ Array [
           type="horizontal"
         >
           <img
+            alt="logo"
             src="logo-primary.svg"
           />
           <h1
@@ -14567,7 +14573,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-iwsKbI eyUsHF"
+        className="sc-VigVT kJCPPL"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -14590,16 +14596,16 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-gqjmRU jklDRZ"
+        className="sc-fjdhpX kdlJcR"
       >
         <button
-          className="sc-VigVT ctTTyQ"
+          className="sc-jzJRlG bwXoBu"
           onClick={[Function]}
         >
           Dark mode
         </button>
         <form
-          className="sc-jTzLTM kLidDW"
+          className="sc-dnqmqq cIjdXj"
           onSubmit={[Function]}
           role="search"
         >
@@ -14610,7 +14616,7 @@ Array [
             type="search"
           />
           <ul
-            className="sc-fjdhpX pYKgp"
+            className="sc-iwsKbI fupBcl"
             data-testid="datalist"
           />
           <span>
@@ -16995,7 +17001,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-jTzLTM efqEAX"
+      className="sc-dnqmqq hrbhQs"
       onSubmit={[Function]}
       role="search"
     >
@@ -17006,7 +17012,7 @@ Array [
         type="search"
       />
       <ul
-        className="sc-fjdhpX pYKgp"
+        className="sc-iwsKbI fupBcl"
         data-testid="datalist"
       />
       <span>
@@ -17684,7 +17690,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-jTzLTM kLidDW"
+      className="sc-dnqmqq cIjdXj"
       onSubmit={[Function]}
       role="search"
     >
@@ -17695,7 +17701,7 @@ Array [
         type="search"
       />
       <ul
-        className="sc-fjdhpX pYKgp"
+        className="sc-iwsKbI fupBcl"
         data-testid="datalist"
       />
       <span>
