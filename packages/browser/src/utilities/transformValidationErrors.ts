@@ -5,10 +5,10 @@ const transformValidationErrors = (
   validationErrors: ValidationError[],
 ): FormikErrors<FormikValues> => {
   return validationErrors.reduce(
-    (acc: { [key: string]: string }, { name, message }: ValidationError) => {
+    (acc: { [key: string]: string }, { path, message }: ValidationError) => {
       return {
         ...acc,
-        [name]: message,
+        [path]: message,
       };
     },
     {},

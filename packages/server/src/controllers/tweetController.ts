@@ -88,7 +88,7 @@ export const updateTweet = async (
       if (!req.file) {
         const errorData: ValidationError[] = [
           {
-            name: 'image',
+            path: 'image',
             message: 'Upload an image',
           },
         ];

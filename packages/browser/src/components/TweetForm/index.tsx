@@ -63,12 +63,13 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
         retweetId,
         replyId,
       });
-      if (fileData && fileData.file) {
-        formData.append('image', fileData.file);
+      if (fileData && fileData.image.file) {
+        formData.append('image', fileData.image.file);
       }
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
+
       if (tweet) {
         await axios.patch(
           `http://localhost:8090/tweets/${tweet._id}`,
@@ -121,8 +122,8 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
             />
             {hasImage ? (
               <InputWrapper>
-                {fileData && fileData.fileUrl ? (
-                  <img src={fileData.fileUrl} alt="" />
+                {fileData && fileData.image ? (
+                  <img src={fileData.image.fileUrl} alt="" />
                 ) : (
                   ''
                 )}
@@ -131,7 +132,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
                   type="file"
                   placeholder="Select an image"
                   onChange={(e: SyntheticEvent<HTMLInputElement>) =>
-                    fileHandler(e)
+                    fileHandler(e, 'image')
                   }
                 />
                 <ErrorMessage component="label" name="file" />

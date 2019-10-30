@@ -4,6 +4,7 @@ import User from 'types/User';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
 import FollowButton from 'components/UserCard/FollowButton';
+import Button from 'styled/Button';
 import {
   UserCardWrapper,
   Cover,
@@ -42,15 +43,18 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Link
-            to={{
-              pathname: `/user/edit`,
-              state: { userForm: location },
-            }}
-          >
-            {' '}
+          {authState.user && authState.user._id === user._id ? (
+            <Link
+              to={{
+                pathname: `/user/customize`,
+                state: { customization: location },
+              }}
+            >
+              <Avatar size="large" />
+            </Link>
+          ) : (
             <Avatar size="large" />
-          </Link>
+          )}
         </AvatarContainer>
       </Cover>
 
@@ -66,7 +70,14 @@ export const UserCard: FC<UserCardProps> = ({
               updateUser={updateUser}
             />
           ) : (
-            ''
+            <Link
+              to={{
+                pathname: `/user/edit`,
+                state: { userForm: location },
+              }}
+            >
+              <Button buttonType="primary">Edit</Button>
+            </Link>
           )}
         </FollowButtonWrapper>
         <FollowBar>

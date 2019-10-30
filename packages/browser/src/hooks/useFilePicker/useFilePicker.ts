@@ -1,28 +1,36 @@
 import { useState, SyntheticEvent } from 'react';
 
 interface FileData {
-  fileUrl: string;
-  file: File | undefined;
+  [key: string]: {
+    fileUrl: string;
+    file: File | undefined;
+  };
 }
 const useFilePicker = (): {
-  fileData: FileData | undefined;
-  fileHandler: (e: SyntheticEvent<HTMLInputElement>) => FileData;
+  fileData: FileData;
+  fileHandler: (e: SyntheticEvent<HTMLInputElement>, key: string) => FileData;
   resetFileData: () => void;
 } => {
-  const [fileData, setFileData] = useState<FileData | undefined>();
-  const fileHandler = (e: SyntheticEvent<HTMLInputElement>): FileData => {
+  const [fileData, setFileData] = useState<FileData>({});
+  const fileHandler = (
+    e: SyntheticEvent<HTMLInputElement>,
+    key: string,
+  ): FileData => {
     const target = e.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
     const fileUrl = window.URL.createObjectURL(file);
-    const fileData: FileData = {
-      file,
-      fileUrl,
+    const newFileData: FileData = {
+      ...fileData,
+      [key]: {
+        file,
+        fileUrl,
+      },
     };
-    setFileData(fileData);
-    return fileData;
+    setFileData(newFileData);
+    return newFileData;
   };
   const resetFileData = (): void => {
-    setFileData({ file: undefined, fileUrl: '' });
+    setFileData({});
   };
   return { fileData, fileHandler, resetFileData };
 };

@@ -5,8 +5,8 @@ describe('transformValidationErrors', () => {
   it('transforms ValidationErrors to FormikErrors', () => {
     expect.assertions(1);
     const validationErrors: ValidationError[] = [
-      { name: 'email', message: 'must be a valid email' },
-      { name: 'password', message: 'must be at least 12 characters' },
+      { path: 'email', message: 'must be a valid email' },
+      { path: 'password', message: 'must be at least 12 characters' },
     ];
     const errors = transformValidationErrors(validationErrors);
 

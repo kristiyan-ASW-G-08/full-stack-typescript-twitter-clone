@@ -19,7 +19,6 @@ import Tweet from '@models/Tweet';
 import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
-import isAuthorized from '@utilities/isAuthorized';
 
 export const signUp = async (
   req: Request,
@@ -29,12 +28,12 @@ export const signUp = async (
   try {
     const { username, handle, email, password } = req.body;
     const credentials: {
-      name: 'username' | 'handle' | 'email';
+      path: 'username' | 'handle' | 'email';
       value: string;
     }[] = [
-      { name: 'username', value: username },
-      { name: 'handle', value: handle },
-      { name: 'email', value: email },
+      { path: 'username', value: username },
+      { path: 'handle', value: handle },
+      { path: 'email', value: email },
     ];
     await areCredentialsAvailable(credentials);
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -126,7 +125,7 @@ export const logIn = async (
     if (!passwordMatch) {
       const validationErrorsArr: ValidationError[] = [
         {
-          name: 'password',
+          path: 'password',
           message: 'Wrong password. Try again',
         },
       ];
@@ -152,8 +151,10 @@ export const logIn = async (
       replies,
       retweets,
       _id,
+      website,
     } = user;
     const userData = {
+      website,
       username,
       handle,
       following,
@@ -451,6 +452,22 @@ export const getUserLikes = async (
   }
 };
 
+export const patchCustomization = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { username, handle, website } = req.body;
+    const { userId } = req;
+    console.log(req.files);
+    const user = await getUserById(userId, false);
+    await user.save();
+    res.status(200).json({ data: { user } });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
 export const patchProfile = async (
   req: Request,
   res: Response,
@@ -460,11 +477,11 @@ export const patchProfile = async (
     const { username, handle, website } = req.body;
     const { userId } = req;
     const credentials: {
-      name: 'username' | 'handle' | 'email';
+      path: 'username' | 'handle' | 'email';
       value: string;
     }[] = [
-      { name: 'username', value: username },
-      { name: 'handle', value: handle },
+      { path: 'username', value: username },
+      { path: 'handle', value: handle },
     ];
     await areCredentialsAvailable(credentials, userId);
     const user = await getUserById(userId, false);

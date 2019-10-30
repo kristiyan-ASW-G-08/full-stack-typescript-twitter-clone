@@ -8,7 +8,7 @@ describe('CustomError', (): void => {
 
     const validationErrorArr: ValidationError[] = [
       {
-        name: 'test',
+        path: 'test',
         message: 'error',
       },
     ];

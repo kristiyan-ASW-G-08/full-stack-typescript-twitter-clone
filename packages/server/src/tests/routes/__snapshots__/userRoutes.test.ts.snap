@@ -5,15 +5,15 @@ Object {
   "data": Array [
     Object {
       "message": "username is already taken",
-      "name": "username",
+      "path": "username",
     },
     Object {
       "message": "handle is already taken",
-      "name": "handle",
+      "path": "handle",
     },
     Object {
       "message": "email is already taken",
-      "name": "email",
+      "path": "email",
     },
   ],
   "message": "Conflict",
@@ -25,15 +25,15 @@ Object {
   "data": Array [
     Object {
       "message": "email must be a valid email",
-      "name": "email",
+      "path": "email",
     },
     Object {
       "message": "password must be at least 12 characters",
-      "name": "password",
+      "path": "password",
     },
     Object {
       "message": "Passwords don't match",
-      "name": "confirmPassword",
+      "path": "confirmPassword",
     },
   ],
   "message": "Request has wrong format",
@@ -45,23 +45,23 @@ Object {
   "data": Array [
     Object {
       "message": "username is a required field",
-      "name": "username",
+      "path": "username",
     },
     Object {
       "message": "handle is a required field",
-      "name": "handle",
+      "path": "handle",
     },
     Object {
       "message": "email is a required field",
-      "name": "email",
+      "path": "email",
     },
     Object {
       "message": "password is a required field",
-      "name": "password",
+      "path": "password",
     },
     Object {
       "message": "confirmPassword is a required field",
-      "name": "confirmPassword",
+      "path": "confirmPassword",
     },
   ],
   "message": "Request has wrong format",
@@ -73,11 +73,11 @@ Object {
   "data": Array [
     Object {
       "message": "email is a required field",
-      "name": "email",
+      "path": "email",
     },
     Object {
       "message": "password is a required field",
-      "name": "password",
+      "path": "password",
     },
   ],
   "message": "Request has wrong format",

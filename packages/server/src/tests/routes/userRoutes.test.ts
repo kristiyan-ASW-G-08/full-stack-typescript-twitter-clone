@@ -340,7 +340,7 @@ describe('userRoutes', (): void => {
       if (!user) {
         return;
       }
-      expect(response.status).toBe(204);
+      expect(response.status).toBe(200);
       expect(user.username).toMatch(newUsername);
       expect(user.handle).toMatch(newHandle);
       expect(user.website).toMatch(website);

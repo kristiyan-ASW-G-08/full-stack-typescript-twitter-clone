@@ -8,7 +8,7 @@ export const getTweetById = async (tweetId: string): Promise<TweetType> => {
   if (!tweet) {
     const validationErrorsArr: ValidationError[] = [
       {
-        name: '',
+        path: '',
         message: 'Tweet not found!',
       },
     ];

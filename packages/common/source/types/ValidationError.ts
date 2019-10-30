@@ -1,4 +1,4 @@
 export default interface ValidationError {
-  name: string;
+  path: string;
   message: string;
 }

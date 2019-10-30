@@ -24,7 +24,7 @@ const validate = (
       isError = true;
       const validationErrors = err.inner.map(
         ({ path, message }: ValidationError): CustomValidationError => {
-          return { name: path, message };
+          return { path, message };
         },
       );
       const { status, message } = errors.BadRequest;

@@ -29,7 +29,7 @@ describe('useFilePicker', () => {
     const { result } = renderHook(() => useFilePicker());
     act(() => {
       const { fileHandler } = result.current;
-      const fileData = fileHandler(event);
+      const fileData = fileHandler(event, 'image');
       expect(fileData).toMatchSnapshot();
     });
   });

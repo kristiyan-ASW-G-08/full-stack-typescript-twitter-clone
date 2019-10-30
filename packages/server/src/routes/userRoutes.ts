@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 import validate from '@customMiddleware/validate';
 import {
   signUp,
@@ -16,6 +17,7 @@ import {
   getUserLikes,
   getUserFeed,
   getUser,
+  patchCustomization,
 } from '@controllers/userController';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -26,6 +28,8 @@ import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator'
 import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
 import isAuth from '@customMiddleware/isAuth';
 import paginate from '@customMiddleware/paginate';
+import fileFilter from '@customMiddleware/fileFilter';
+import storage from '@customMiddleware/fileStorage';
 
 const router = express.Router();
 
@@ -55,6 +59,17 @@ router.patch(
   validate([{ schema: ResetPasswordValidator, target: 'body' }]),
   resetPassword,
 );
+
+router.patch(
+  '/users/user/customization',
+  isAuth,
+  multer({ storage, fileFilter }).fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'cover', maxCount: 1 },
+  ]),
+  patchCustomization,
+);
+
 router.patch(
   '/users/user/profile',
   isAuth,

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {
   areCredentialsAvailable,
@@ -99,12 +98,12 @@ describe('userServices', (): void => {
     > => {
       expect.assertions(2);
       const credentials: {
-        name: 'username' | 'handle' | 'email';
+        path: 'username' | 'handle' | 'email';
         value: string;
       }[] = [
-        { name: 'username', value: username },
-        { name: 'handle', value: handle },
-        { name: 'email', value: email },
+        { path: 'username', value: username },
+        { path: 'handle', value: handle },
+        { path: 'email', value: email },
       ];
       await User.insertMany({ username, handle, email, password });
       await expect(areCredentialsAvailable(credentials)).rejects.toThrow();
@@ -116,12 +115,12 @@ describe('userServices', (): void => {
       void
     > => {
       const credentials: {
-        name: 'username' | 'handle' | 'email';
+        path: 'username' | 'handle' | 'email';
         value: string;
       }[] = [
-        { name: 'username', value: username },
-        { name: 'handle', value: handle },
-        { name: 'email', value: email },
+        { path: 'username', value: username },
+        { path: 'handle', value: handle },
+        { path: 'email', value: email },
       ];
       expect.assertions(1);
       await expect(

@@ -9,7 +9,7 @@ export const getUserByEmail = async (email: string): Promise<UserType> => {
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
       {
-        name: 'email',
+        path: 'email',
         message: 'User not found!',
       },
     ];
@@ -29,7 +29,7 @@ export const getUserById = async (
   if (!user) {
     const validationErrorsArr: ValidationError[] = [
       {
-        name: '',
+        path: '',
         message: 'User not found!',
       },
     ];
@@ -43,7 +43,7 @@ export const checkUserConfirmation = async (user: UserType): Promise<void> => {
   if (!user.confirmed) {
     const validationErrorsArr: ValidationError[] = [
       {
-        name: 'email',
+        path: 'email',
         message: 'Confirm your email to proceed.',
       },
     ];
@@ -54,22 +54,22 @@ export const checkUserConfirmation = async (user: UserType): Promise<void> => {
 };
 
 export const areCredentialsAvailable = async (
-  credentials: { name: 'username' | 'handle' | 'email'; value: string }[],
+  credentials: { path: 'username' | 'handle' | 'email'; value: string }[],
   userId?: string,
 ): Promise<void> => {
   let validationErrorsArr: ValidationError[] = [];
   const userObjectId = mongoose.Types.ObjectId(userId);
   for await (const credential of credentials) {
-    const { name } = credential;
+    const { path } = credential;
     const query: { [key: string]: string } = {};
-    query[credential.name] = credential.value;
+    query[credential.path] = credential.value;
     const user = await User.findOne(query);
     if (user && !userObjectId.equals(user._id)) {
       validationErrorsArr = [
         ...validationErrorsArr,
         {
-          name,
-          message: `${name} is already taken`,
+          path,
+          message: `${path} is already taken`,
         },
       ];
     }

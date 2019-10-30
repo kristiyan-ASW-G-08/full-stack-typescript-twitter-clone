@@ -7,6 +7,7 @@ import userRoutes from '@routes/userRoutes';
 import tweetRoutes from '@routes/tweetRoutes';
 import { CustomError } from '@utilities/CustomError';
 import fileFilter from '@customMiddleware/fileFilter';
+import storage from '@customMiddleware/fileStorage';
 
 const app: Application = express();
 
@@ -23,20 +24,9 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-const fileStorage = multer.diskStorage({
-  // @ts-ignore
-  destination: (req: Request, file, cb: (...args: any) => any): void => {
-    cb(null, './images');
-  },
-  filename: (req: Request, file, cb: (...args: any) => any): void => {
-    cb(
-      null,
-      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`,
-    );
-  },
-});
 
-app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
+app.use(multer({ storage, fileFilter }).single('image'));
+
 app.use('/images', express.static('./images'));
 
 app.use(userRoutes);
