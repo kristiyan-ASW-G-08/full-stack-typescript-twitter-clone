@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled('div')`
+export const InputWrapper = styled('div')`
   width: 100%;
   input,
   textarea {
@@ -34,4 +34,4 @@ export const Input = styled('div')`
   }
 `;
 
-export default Input;
+export default InputWrapper;

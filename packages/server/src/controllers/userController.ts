@@ -467,12 +467,12 @@ export const patchProfile = async (
     ];
 
     await areCredentialsAvailable(credentials, userId);
-    const user = await getUserById(userId);
+    const user = await getUserById(userId, false);
     user.username = username;
     user.handle = handle;
     user.website = website;
     await user.save();
-    res.sendStatus(204);
+    res.status(200).json({ data: { user } });
   } catch (err) {
     passErrorToNext(err, next);
   }

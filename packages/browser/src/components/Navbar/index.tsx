@@ -8,7 +8,16 @@ import SearchBar from 'components/SearchBar';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
 import Loader from 'components/Loader';
-import { NavbarWrapper, NavIcon, Container, ThemeButton } from './styled';
+import { SidebarButton } from 'components/Sidebar/styled';
+import {
+  NavbarWrapper,
+  NavIcon,
+  Container,
+  ThemeButton,
+  AvatarWrapper,
+  DropDown,
+  DropDownWrapper,
+} from './styled';
 
 const Portal = lazy(() => import('components/Portal'));
 const Sidebar = lazy(() => import('components/Sidebar'));
@@ -27,8 +36,10 @@ export const Navbar: FC<NavbarProps> = ({
 }) => {
   const { user } = authState;
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
   const location = useLocation();
   const toggleSidebar = () => setIsActive(!isActive);
+  const toggleMenu = () => setIsMenuActive(!isMenuActive);
   return (
     <>
       <NavbarWrapper>
@@ -40,12 +51,43 @@ export const Navbar: FC<NavbarProps> = ({
         </NavIcon>
         <Container>
           <ThemeButton onClick={toggleTheme}>
-            {theme === 'light' ? 'Dark mode' : 'Light mode'}
+            {theme === 'light' ? 'Light Theme' : 'Dark Theme'}
           </ThemeButton>
           <SearchBar />
           {user ? (
             <>
-              <Avatar />
+              <DropDownWrapper>
+                <AvatarWrapper onClick={toggleMenu}>
+                  <Avatar />
+                </AvatarWrapper>
+                {isMenuActive ? (
+                  <DropDown>
+                    <li>
+                      <Link to="/" onClick={toggleMenu}>
+                        <SidebarButton>
+                          <span>
+                            <FontAwesomeIcon icon="home" />
+                          </span>
+                          <p>Home</p>
+                        </SidebarButton>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={`/users/${user._id}`} onClick={toggleMenu}>
+                        <SidebarButton>
+                          <span>
+                            <FontAwesomeIcon icon="user" />
+                          </span>
+                          <p>Profile</p>
+                        </SidebarButton>
+                      </Link>
+                    </li>
+                  </DropDown>
+                ) : (
+                  ''
+                )}
+              </DropDownWrapper>
+
               <StyledButton buttonType="primary">
                 <Link
                   to={{

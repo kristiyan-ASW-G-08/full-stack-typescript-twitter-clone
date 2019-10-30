@@ -62,7 +62,7 @@ export const areCredentialsAvailable = async (
   for await (const credential of credentials) {
     const { name } = credential;
     const query: { [key: string]: string } = {};
-    query[`${credential.name}`] = credential.value;
+    query[credential.name] = credential.value;
     const user = await User.findOne(query);
     if (user && !userObjectId.equals(user._id)) {
       validationErrorsArr = [

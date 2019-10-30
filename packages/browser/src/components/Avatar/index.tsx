@@ -12,7 +12,7 @@ export const Avatar: FC<AvatarProps> = ({
   size = 'small',
   altText = 'avatar',
 }) => (
-  <AvatarWrapper size={size} type="button">
+  <AvatarWrapper size={size}>
     {avatarURL ? (
       <img src={avatarURL} alt={altText} />
     ) : (

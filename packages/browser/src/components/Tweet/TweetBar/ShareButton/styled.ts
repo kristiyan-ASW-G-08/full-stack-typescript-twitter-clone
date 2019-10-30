@@ -6,7 +6,7 @@ export const ShareButtonWrapper = styled('div')`
 `;
 export const DropDown = styled('ul')`
   position: absolute;
-  transform: translateY(3rem);
+  transform: translateY(5rem);
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr;

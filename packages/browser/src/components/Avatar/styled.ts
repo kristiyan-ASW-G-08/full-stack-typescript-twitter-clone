@@ -11,7 +11,7 @@ const sizes = {
 const getSize = (size: 'small' | 'medium' | 'large' = 'small'): string => {
   return sizes[size];
 };
-export const AvatarWrapper = styled('button')<AvatarProps>`
+export const AvatarWrapper = styled('div')<AvatarProps>`
   ${props => props.theme.mixins.center};
   height: ${props => getSize(props.size)};
   width: ${props => getSize(props.size)};

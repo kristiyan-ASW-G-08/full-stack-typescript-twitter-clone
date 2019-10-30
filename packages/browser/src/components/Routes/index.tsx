@@ -8,6 +8,7 @@ import Home from 'pages/Home';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
 import NotificationType from 'types/Notification';
+import User from 'types/User';
 import PageContainer from 'styled/PageContainer';
 
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -20,6 +21,7 @@ const Modal = lazy(() => import('components/Modal'));
 const Portal = lazy(() => import('components/Portal'));
 const Notification = lazy(() => import('components/Notification'));
 const TweetForm = lazy(() => import('components/TweetForm'));
+const UserForm = lazy(() => import('components/UserForm'));
 
 const Router: FC = observer(
   (): JSX.Element => {
@@ -32,8 +34,28 @@ const Router: FC = observer(
     const { theme } = themeStore;
     const tweet = location.state && location.state.tweet;
     const tweetForm = location.state && location.state.tweetForm;
+    const userForm = location.state && location.state.userForm;
     return (
       <>
+        {userForm && (
+          <Route
+            exact
+            path="/user/edit"
+            render={(): JSX.Element => (
+              <Suspense fallback={<Loader />}>
+                <Modal backdropHandler={history.goBack}>
+                  <UserForm
+                    setNotification={(notification: NotificationType) =>
+                      notificationStore.setNotification(notification)
+                    }
+                    updateUser={(user: User) => authStore.updateUser(user)}
+                    token={token}
+                  />
+                </Modal>
+              </Suspense>
+            )}
+          />
+        )}
         {tweet && (
           <Route
             exact
@@ -101,7 +123,7 @@ const Router: FC = observer(
         ) : (
           ''
         )}
-        <Switch location={tweetForm || tweet || location}>
+        <Switch location={userForm || tweetForm || tweet || location}>
           <Route exact path="/" component={Home} />
           <Route
             exact

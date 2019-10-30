@@ -47,3 +47,30 @@ export const ThemeButton = styled('button')`
   background: none;
   color: ${props => props.theme.secondary};
 `;
+
+export const AvatarWrapper = styled('button')`
+  ${props => props.theme.mixins.button}
+  background:transparent;
+`;
+export const DropDownWrapper = styled('div')``;
+
+export const DropDown = styled('ul')`
+  position: absolute;
+  transform: translateY(1rem);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  ${props => props.theme.mixins.border}
+  padding:0.5rem;
+  width: 12rem;
+  list-style: none;
+  background: ${props => props.theme.background};
+  li {
+    width: 10rem;
+    margin-top: 1.5rem;
+    a {
+      display: block;
+    }
+  }
+`;

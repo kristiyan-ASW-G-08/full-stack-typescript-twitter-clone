@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import Logo from 'components/Logo';
 import SearchBar from 'components/SearchBar';
 import AuthState from 'types/AuthState';
-import Avatar from 'components/Avatar/index';
+import Avatar from 'components/Avatar';
+import ThemeButton from 'components/ThemeButton';
 import {
   SidebarWrapper,
   Backdrop,
@@ -91,39 +92,22 @@ export const Sidebar: FC<SidebarProps> = ({
                 </Link>
               </li>
               {user ? (
-                <>
-                  {' '}
-                  <li>
-                    <Link to={`/users/${user._id}`} onClick={toggleSidebar}>
-                      <SidebarButton>
-                        <span>
-                          <FontAwesomeIcon icon="user" />
-                        </span>
-                        <p>Profile</p>
-                      </SidebarButton>
-                    </Link>
-                  </li>
-                </>
+                <li>
+                  <Link to={`/users/${user._id}`} onClick={toggleSidebar}>
+                    <SidebarButton>
+                      <span>
+                        <FontAwesomeIcon icon="user" />
+                      </span>
+                      <p>Profile</p>
+                    </SidebarButton>
+                  </Link>
+                </li>
               ) : (
                 ''
               )}
               <li>
                 <SidebarButton onClick={toggleTheme} data-testid="theme-button">
-                  {theme === 'light' ? (
-                    <>
-                      <span>
-                        <FontAwesomeIcon icon="moon" />
-                      </span>
-                      <p>Dark Theme</p>
-                    </>
-                  ) : (
-                    <>
-                      <span>
-                        <FontAwesomeIcon icon="sun" />
-                      </span>
-                      <p>Light Theme</p>
-                    </>
-                  )}
+                  <ThemeButton theme={theme} />
                 </SidebarButton>
               </li>
             </SidebarList>

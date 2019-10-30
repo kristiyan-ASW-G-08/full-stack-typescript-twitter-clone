@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-
+import { Link, useLocation } from 'react-router-dom';
 import User from 'types/User';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
@@ -26,6 +26,7 @@ export const UserCard: FC<UserCardProps> = ({
   authState,
   updateUser,
 }) => {
+  const location = useLocation();
   const { username, handle, following, _id } = user;
   return (
     <UserCardWrapper direction="bottom">
@@ -41,7 +42,15 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar size="large" />
+          <Link
+            to={{
+              pathname: `/user/edit`,
+              state: { user, userForm: location },
+            }}
+          >
+            {' '}
+            <Avatar size="large" />
+          </Link>
         </AvatarContainer>
       </Cover>
 

@@ -147,6 +147,7 @@ export const SidebarButton = styled('button')`
   display: flex;
   flex-flow: row;
   background:none;
+  ${props => props.theme.mixins.flexCenter}
   border: none;
   ${props => props.theme.mixins.button}
   color: ${props => props.theme.color};

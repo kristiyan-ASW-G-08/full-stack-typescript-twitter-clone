@@ -9,12 +9,9 @@ export const Form = styled('div')`
   padding: 2rem;
   background: ${props => props.theme.background};
   ${props => props.theme.mixins.border}
-  border-radius: 10px;
+  border-radius: 1rem;
   @media ${props => props.theme.mediaQueries.tablet} {
-    width: 90vw;
-  }
-  @media ${props => props.theme.mediaQueries.desktop} {
-    width: 30vw;
+    width: 50rem;
   }
 `;
 export default Form;

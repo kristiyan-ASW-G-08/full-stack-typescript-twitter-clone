@@ -63,6 +63,9 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const { setElement } = useIntersection(loadNext);
 
   useEffect(() => {
+    setQuery(`${url}?sort=new`);
+  }, [url]);
+  useEffect(() => {
     tweetsRef.current = tweets;
     nextPageRef.current = nextPage;
   }, [tweets, nextPage]);
