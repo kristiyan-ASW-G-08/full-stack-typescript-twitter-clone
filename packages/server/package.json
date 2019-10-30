@@ -1,6 +1,6 @@
 {
   "name": "@twtr/server",
-  "version": "1.0.227",
+  "version": "1.0.230",
   "main": "index.js",
   "author": "Kristiyan Todorov",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "build": "tsc src/index.ts"
   },
   "dependencies": {
-    "@twtr/common": "^1.0.219",
+    "@twtr/common": "^1.0.230",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
