@@ -33,6 +33,7 @@ describe('UserForm', () => {
     });
     const { getByText, getByPlaceholderText } = render(
       <UserForm
+        user={user}
         setNotification={setNotification}
         updateUser={updateUser}
         token={token}

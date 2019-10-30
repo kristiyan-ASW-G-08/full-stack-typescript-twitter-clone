@@ -56,16 +56,15 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa gEOqjc"
       size="large"
-      type="button"
     >
       <img
         alt="avatar"
         src="logo-primary.svg"
       />
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -775,16 +774,15 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa cgkugK"
       size="small"
-      type="button"
     >
       <img
         alt="avatar"
         src="logo-primary.svg"
       />
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -1465,10 +1463,9 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa gEOqjc"
       size="large"
-      type="button"
     >
       <div
         className="sc-bwzfXH gwVTCd"
@@ -1492,7 +1489,7 @@ Array [
           />
         </svg>
       </div>
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -2173,10 +2170,9 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa cgkugK"
       size="small"
-      type="button"
     >
       <div
         className="sc-bwzfXH jqDpqf"
@@ -2200,7 +2196,7 @@ Array [
           />
         </svg>
       </div>
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -2855,16 +2851,15 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa gEOqjc"
       size="large"
-      type="button"
     >
       <img
         alt="avatar"
         src="logo-primary.svg"
       />
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -3574,16 +3569,15 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa cgkugK"
       size="small"
-      type="button"
     >
       <img
         alt="avatar"
         src="logo-primary.svg"
       />
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -4264,10 +4258,9 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa gEOqjc"
       size="large"
-      type="button"
     >
       <div
         className="sc-bwzfXH dJUzll"
@@ -4291,7 +4284,7 @@ Array [
           />
         </svg>
       </div>
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -4972,10 +4965,9 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <button
+    <div
       className="sc-bdVaJa cgkugK"
       size="small"
-      type="button"
     >
       <div
         className="sc-bwzfXH brhImj"
@@ -4999,7 +4991,7 @@ Array [
           />
         </svg>
       </div>
-    </button>
+    </div>
   </div>,
   <div>
     <div
@@ -7820,17 +7812,23 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <div
-      className="sc-bxivhb gYSyPg"
+    <form
+      onReset={[Function]}
+      onSubmit={[Function]}
     >
-      <input
-        placeholder="Placeholder"
-        type="text"
-      />
-      <span>
-        Placeholder is invalid
-      </span>
-    </div>
+      <div
+        className="sc-bxivhb iJxEyv"
+      >
+        <input
+          name="username"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
   </div>,
   <div>
     <div
@@ -8044,169 +8042,203 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.div
+                            <span
+                              className="token class-name"
+                            >
+                              Formik
+                            </span>
                           </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
                           
         
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            input
-                          </span>
-                          
-          
                           <span
                             className="token attr-name"
                           >
-                            placeholder
+                            enableReinitialize
                           </span>
                           <span
-                            className="token attr-value"
+                            className="token script language-javascript"
                           >
                             <span
-                              className="token punctuation"
+                              className="token script-punctuation punctuation"
                             >
                               =
                             </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
                             </span>
-                            Placeholder
+                            <span
+                              className="token boolean"
+                            >
+                              false
+                            </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              }
                             </span>
                           </span>
                           
-          
+        
                           <span
                             className="token attr-name"
                           >
-                            type
+                            initialValues
                           </span>
                           <span
-                            className="token attr-value"
+                            className="token script language-javascript"
                           >
                             <span
-                              className="token punctuation"
+                              className="token script-punctuation punctuation"
                             >
                               =
                             </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
                             </span>
-                            text
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
+                            </span>
+                            
+          username
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            
+        
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
                             </span>
                           </span>
                           
         
+                          <span
+                            className="token attr-name"
+                          >
+                            isInitialValid
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token boolean"
+                            >
+                              false
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            onSubmit
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token keyword"
+                            >
+                              function
+                            </span>
+                             
+                            <span
+                              className="token function"
+                            >
+                              noRefCheck
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              (
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              )
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            validateOnBlur
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            validateOnChange
+                          </span>
+                          
+      
                           <span
                             className="token punctuation"
                           >
                             /&gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            span
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-          Placeholder is invalid
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            span
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-      
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            styled.div
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
                           </span>
                         </span>
                         <span
@@ -8521,12 +8553,150 @@ Array [
           }
         >
           "
-          GlobalStyleComponent
+          Formik
           " Component
         </h3>
-        <small>
-          No propTypes defined!
-        </small>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                validateOnChange
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  true
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                validateOnBlur
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  true
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                isInitialValid
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  false
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                enableReinitialize
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  false
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div>
         <h3
@@ -8537,7 +8707,7 @@ Array [
           }
         >
           "
-          StyledComponent
+          GlobalStyleComponent
           " Component
         </h3>
         <small>
@@ -8570,22 +8740,6 @@ Array [
         >
           "
           Unknown
-          " Component
-        </h3>
-        <small>
-          No propTypes defined!
-        </small>
-      </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
-          styled.div
           " Component
         </h3>
         <small>
@@ -8653,17 +8807,23 @@ Array [
     id="story-root"
     style={Object {}}
   >
-    <div
-      className="sc-bxivhb bONCfD"
+    <form
+      onReset={[Function]}
+      onSubmit={[Function]}
     >
-      <input
-        placeholder="Placeholder"
-        type="text"
-      />
-      <span>
-        Placeholder is invalid
-      </span>
-    </div>
+      <div
+        className="sc-bxivhb fhZgNJ"
+      >
+        <input
+          name="username"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
   </div>,
   <div>
     <div
@@ -8877,169 +9037,203 @@ Array [
                             >
                               &lt;
                             </span>
-                            styled.div
+                            <span
+                              className="token class-name"
+                            >
+                              Formik
+                            </span>
                           </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
                           
         
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            input
-                          </span>
-                          
-          
                           <span
                             className="token attr-name"
                           >
-                            placeholder
+                            enableReinitialize
                           </span>
                           <span
-                            className="token attr-value"
+                            className="token script language-javascript"
                           >
                             <span
-                              className="token punctuation"
+                              className="token script-punctuation punctuation"
                             >
                               =
                             </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
                             </span>
-                            Placeholder
+                            <span
+                              className="token boolean"
+                            >
+                              false
+                            </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              }
                             </span>
                           </span>
                           
-          
+        
                           <span
                             className="token attr-name"
                           >
-                            type
+                            initialValues
                           </span>
                           <span
-                            className="token attr-value"
+                            className="token script language-javascript"
                           >
                             <span
-                              className="token punctuation"
+                              className="token script-punctuation punctuation"
                             >
                               =
                             </span>
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
                             </span>
-                            text
                             <span
                               className="token punctuation"
                             >
-                              "
+                              {
+                            </span>
+                            
+          username
+                            <span
+                              className="token punctuation"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              className="token string"
+                            >
+                              ''
+                            </span>
+                            
+        
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
                             </span>
                           </span>
                           
         
+                          <span
+                            className="token attr-name"
+                          >
+                            isInitialValid
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token boolean"
+                            >
+                              false
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            onSubmit
+                          </span>
+                          <span
+                            className="token script language-javascript"
+                          >
+                            <span
+                              className="token script-punctuation punctuation"
+                            >
+                              =
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token keyword"
+                            >
+                              function
+                            </span>
+                             
+                            <span
+                              className="token function"
+                            >
+                              noRefCheck
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              (
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              )
+                            </span>
+                             
+                            <span
+                              className="token punctuation"
+                            >
+                              {
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                            <span
+                              className="token punctuation"
+                            >
+                              }
+                            </span>
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            validateOnBlur
+                          </span>
+                          
+        
+                          <span
+                            className="token attr-name"
+                          >
+                            validateOnChange
+                          </span>
+                          
+      
                           <span
                             className="token punctuation"
                           >
                             /&gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;
-                            </span>
-                            span
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-          Placeholder is invalid
-        
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            span
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
-                          </span>
-                        </span>
-                        <span
-                          className="token plain-text"
-                        >
-                          
-      
-                        </span>
-                        <span
-                          className="token tag"
-                        >
-                          <span
-                            className="token tag"
-                          >
-                            <span
-                              className="token punctuation"
-                            >
-                              &lt;/
-                            </span>
-                            styled.div
-                          </span>
-                          <span
-                            className="token punctuation"
-                          >
-                            &gt;
                           </span>
                         </span>
                         <span
@@ -9354,12 +9548,150 @@ Array [
           }
         >
           "
-          GlobalStyleComponent
+          Formik
           " Component
         </h3>
-        <small>
-          No propTypes defined!
-        </small>
+        <table
+          className="info-table"
+        >
+          <thead>
+            <tr>
+              <th>
+                property
+              </th>
+              <th>
+                propType
+              </th>
+              <th>
+                required
+              </th>
+              <th>
+                default
+              </th>
+              <th>
+                description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                validateOnChange
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  true
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                validateOnBlur
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  true
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                isInitialValid
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  false
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+            <tr>
+              <td
+                className="info-table-monospace"
+              >
+                enableReinitialize
+              </td>
+              <td
+                className="info-table-monospace"
+              >
+                <span>
+                  unknown
+                </span>
+              </td>
+              <td
+                className={null}
+              >
+                -
+              </td>
+              <td
+                className={null}
+              >
+                <span>
+                  false
+                </span>
+              </td>
+              <td
+                className={null}
+              />
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div>
         <h3
@@ -9370,7 +9702,7 @@ Array [
           }
         >
           "
-          StyledComponent
+          GlobalStyleComponent
           " Component
         </h3>
         <small>
@@ -9403,22 +9735,6 @@ Array [
         >
           "
           Unknown
-          " Component
-        </h3>
-        <small>
-          No propTypes defined!
-        </small>
-      </div>
-      <div>
-        <h3
-          style={
-            Object {
-              "margin": "20px 0 0 0",
-            }
-          }
-        >
-          "
-          styled.div
           " Component
         </h3>
         <small>
@@ -13557,7 +13873,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-gqjmRU hPjKtz"
+      className="sc-dxgOiQ btUzMc"
     >
       <a
         href="/"
@@ -13585,7 +13901,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-VigVT kJCPPL"
+        className="sc-ckVGcZ jZlcLP"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -13608,10 +13924,10 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-fjdhpX kdlJcR"
+        className="sc-eNQAEJ hMeAdL"
       >
         <button
-          className="sc-jzJRlG foOXzB"
+          className="sc-hMqMXs daTyuo"
           onClick={[Function]}
         >
           Dark mode
@@ -14545,7 +14861,7 @@ Array [
     style={Object {}}
   >
     <nav
-      className="sc-gqjmRU uBYbO"
+      className="sc-dxgOiQ jsaIXF"
     >
       <a
         href="/"
@@ -14573,7 +14889,7 @@ Array [
         </div>
       </a>
       <button
-        className="sc-VigVT kJCPPL"
+        className="sc-ckVGcZ jZlcLP"
         data-testid="mobile-nav-button"
         onClick={[Function]}
       >
@@ -14596,10 +14912,10 @@ Array [
         </svg>
       </button>
       <div
-        className="sc-fjdhpX kdlJcR"
+        className="sc-eNQAEJ hMeAdL"
       >
         <button
-          className="sc-jzJRlG bwXoBu"
+          className="sc-hMqMXs eHQIWW"
           onClick={[Function]}
         >
           Dark mode
@@ -15533,10 +15849,10 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-cSHVUG CXmHP"
+      className="sc-hSdWYo jZDDZH"
     >
       <p
-        className="sc-kAzzGY jtnoBH"
+        className="sc-eHgmQL uJzjw"
         role="alert"
       >
         Message
@@ -16267,10 +16583,10 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-cSHVUG CXmHP"
+      className="sc-hSdWYo jZDDZH"
     >
       <p
-        className="sc-kAzzGY hSKybB"
+        className="sc-eHgmQL fVUrHS"
         role="alert"
       >
         Warning

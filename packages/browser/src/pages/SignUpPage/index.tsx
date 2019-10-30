@@ -1,16 +1,9 @@
 import React, { FC, useContext } from 'react';
-import {
-  Formik,
-  Form,
-  FastField,
-  ErrorMessage,
-  FormikValues,
-  FormikActions,
-} from 'formik';
+import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
-import Input from 'styled/Input';
+import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
+import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
@@ -45,7 +38,7 @@ export const SignUpPage: FC = () => {
   };
   return (
     <Formik
-      validationSchema={UserLoginValidator}
+      validationSchema={UserSignUpValidator}
       initialValues={{
         username: '',
         handle: '',
@@ -55,50 +48,31 @@ export const SignUpPage: FC = () => {
       }}
       onSubmit={submitHandler}
     >
-      {() => (
-        <PageContainer>
-          <Form>
-            <StyledForm>
-              <Logo type="vertical" />
-              <Input>
-                <FastField name="username" type="text" placeholder="Username" />
-                <ErrorMessage component="span" name="username" />
-              </Input>
-              <Input>
-                <FastField name="handle" type="text" placeholder="Handle" />
-                <ErrorMessage component="span" name="handle" />
-              </Input>
-              <Input>
-                <FastField
-                  name="email"
-                  type="email"
-                  placeholder="Email address"
-                />
-                <ErrorMessage component="span" name="email" />
-              </Input>
-              <Input>
-                <FastField
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <ErrorMessage component="span" name="password" />
-              </Input>
-              <Input>
-                <FastField
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Repeat Password"
-                />
-                <ErrorMessage component="span" name="confirmPassword" />
-              </Input>
-              <Button buttonType={'primary'} type="submit">
-                Sign Up
-              </Button>
-            </StyledForm>
-          </Form>
-        </PageContainer>
-      )}
+      <PageContainer>
+        <Form>
+          <StyledForm>
+            <Logo type="vertical" />
+
+            <Input name="username" type="text" placeholder="Username" />
+
+            <Input name="handle" type="text" placeholder="Handle" />
+
+            <Input name="email" type="email" placeholder="Email address" />
+
+            <Input name="password" type="password" placeholder="Password" />
+
+            <Input
+              name="confirmPassword"
+              type="password"
+              placeholder="Repeat Password"
+            />
+
+            <Button buttonType="primary" type="submit">
+              Sign Up
+            </Button>
+          </StyledForm>
+        </Form>
+      </PageContainer>
     </Formik>
   );
 };

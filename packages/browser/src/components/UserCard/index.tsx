@@ -45,7 +45,7 @@ export const UserCard: FC<UserCardProps> = ({
           <Link
             to={{
               pathname: `/user/edit`,
-              state: { user, userForm: location },
+              state: { userForm: location },
             }}
           >
             {' '}

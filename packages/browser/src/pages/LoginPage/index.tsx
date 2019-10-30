@@ -1,17 +1,9 @@
 import React, { FC, useContext } from 'react';
-import {
-  Formik,
-  Form,
-  FastField,
-  ErrorMessage,
-  FormikValues,
-  FormikActions,
-} from 'formik';
 import axios from 'axios';
+import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
-import Input from 'styled/Input';
 import StyledForm from 'styled/Form';
 import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
@@ -19,6 +11,7 @@ import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+import Input from 'components/Input';
 
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
@@ -57,34 +50,21 @@ export const LoginPage: FC = () => {
       initialValues={{ email: '', password: '' }}
       onSubmit={submitHandler}
     >
-      {() => (
-        <PageContainer>
-          <Form>
-            <StyledForm>
-              <Logo type="vertical" />
-              <Input>
-                <FastField
-                  name="email"
-                  type="email"
-                  placeholder="Email address"
-                />
-                <ErrorMessage component="span" name="email" />
-              </Input>
-              <Input>
-                <FastField
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <ErrorMessage component="span" name="password" />
-              </Input>
-              <Button buttonType="primary" type="submit">
-                Log In
-              </Button>
-            </StyledForm>
-          </Form>
-        </PageContainer>
-      )}
+      <PageContainer>
+        <Form>
+          <StyledForm>
+            <Logo type="vertical" />
+
+            <Input name="email" type="email" placeholder="Email address" />
+
+            <Input name="password" type="password" placeholder="Password" />
+
+            <Button buttonType="primary" type="submit">
+              Log In
+            </Button>
+          </StyledForm>
+        </Form>
+      </PageContainer>
     </Formik>
   );
 };

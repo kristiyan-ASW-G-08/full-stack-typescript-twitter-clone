@@ -19,6 +19,7 @@ import Tweet from '@models/Tweet';
 import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import isAuthorized from '@utilities/isAuthorized';
 
 export const signUp = async (
   req: Request,
@@ -465,7 +466,6 @@ export const patchProfile = async (
       { name: 'username', value: username },
       { name: 'handle', value: handle },
     ];
-
     await areCredentialsAvailable(credentials, userId);
     const user = await getUserById(userId, false);
     user.username = username;

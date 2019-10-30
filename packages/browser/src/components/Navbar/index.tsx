@@ -51,7 +51,7 @@ export const Navbar: FC<NavbarProps> = ({
         </NavIcon>
         <Container>
           <ThemeButton onClick={toggleTheme}>
-            {theme === 'light' ? 'Light Theme' : 'Dark Theme'}
+            {theme === 'light' ? 'Dark mode' : 'Light mode'}
           </ThemeButton>
           <SearchBar />
           {user ? (

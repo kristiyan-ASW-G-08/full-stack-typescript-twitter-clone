@@ -37,7 +37,7 @@ const Router: FC = observer(
     const userForm = location.state && location.state.userForm;
     return (
       <>
-        {userForm && (
+        {userForm && user && (
           <Route
             exact
             path="/user/edit"
@@ -50,6 +50,7 @@ const Router: FC = observer(
                     }
                     updateUser={(user: User) => authStore.updateUser(user)}
                     token={token}
+                    user={user}
                   />
                 </Modal>
               </Suspense>

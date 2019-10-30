@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import axios from 'axios';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
 import Input from 'components/Input';
 import StyledForm from 'styled/Form';
@@ -15,14 +15,15 @@ interface UserFormProps {
   token: string;
   setNotification: (notification: Notification) => void;
   updateUser: (user: User) => void;
+  user: User;
 }
 export const UserForm: FC<UserFormProps> = ({
   setNotification,
   token,
   updateUser,
+  user,
 }) => {
   const history = useHistory();
-  const { user } = useLocation().state;
   const { username, handle } = user;
   const submitHandler = async (
     formValues: FormikValues,
@@ -63,23 +64,21 @@ export const UserForm: FC<UserFormProps> = ({
       }}
       onSubmit={submitHandler}
     >
-      {() => (
-        <Form>
-          <StyledForm>
-            <Logo type="vertical" />
+      <Form>
+        <StyledForm>
+          <Logo type="vertical" />
 
-            <Input name="username" type="text" placeholder="Username" />
+          <Input name="username" type="text" placeholder="Username" />
 
-            <Input name="handle" type="text" placeholder="Handle" />
+          <Input name="handle" type="text" placeholder="Handle" />
 
-            <Input name="website" type="url" placeholder="Website" />
+          <Input name="website" type="url" placeholder="Website" />
 
-            <Button buttonType="primary" type="submit">
-              Save Changes
-            </Button>
-          </StyledForm>
-        </Form>
-      )}
+          <Button buttonType="primary" type="submit">
+            Save Changes
+          </Button>
+        </StyledForm>
+      </Form>
     </Formik>
   );
 };

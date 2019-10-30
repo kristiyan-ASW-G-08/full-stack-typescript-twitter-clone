@@ -11,7 +11,8 @@ import {
 import axios from 'axios';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Input from 'styled/Input';
+import Input from 'components/Input';
+import { InputWrapper } from 'components/Input/styled';
 import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
@@ -106,83 +107,75 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
       }}
       onSubmit={submitHandler}
     >
-      {() => (
-        <Form>
-          <TweetFormWrapper>
-            <AvatarContainer>
-              <Avatar />
-            </AvatarContainer>
-            <InputContainer>
-              <Input>
+      <Form>
+        <TweetFormWrapper>
+          <AvatarContainer>
+            <Avatar />
+          </AvatarContainer>
+          <InputContainer>
+            <Input
+              component="textarea"
+              name="text"
+              type="text"
+              placeholder="Text"
+            />
+            {hasImage ? (
+              <InputWrapper>
+                {fileData && fileData.fileUrl ? (
+                  <img src={fileData.fileUrl} alt="" />
+                ) : (
+                  ''
+                )}
                 <FastField
-                  component="textarea"
-                  name="text"
-                  type="text"
-                  placeholder="Text"
+                  name="file"
+                  type="file"
+                  placeholder="Select an image"
+                  onChange={(e: SyntheticEvent<HTMLInputElement>) =>
+                    fileHandler(e)
+                  }
                 />
-                <ErrorMessage component="span" name="text" />
-              </Input>
-              {hasImage ? (
-                <Input>
-                  {fileData && fileData.fileUrl ? (
-                    <img src={fileData.fileUrl} alt="" />
-                  ) : (
-                    ''
-                  )}
-                  <FastField
-                    name="file"
-                    type="file"
-                    placeholder="Select an image"
-                    onChange={(e: SyntheticEvent<HTMLInputElement>) =>
-                      fileHandler(e)
-                    }
-                  />
-                  <ErrorMessage component="span" name="file" />
-                </Input>
-              ) : (
-                ''
-              )}
+                <ErrorMessage component="label" name="file" />
+              </InputWrapper>
+            ) : (
+              ''
+            )}
 
-              {type === 'link' ? (
-                <Input>
-                  <FastField name="linkUrl" type="text" placeholder="Link" />
-                  <ErrorMessage component="span" name="linkUrl" />
-                </Input>
-              ) : (
-                ''
-              )}
-            </InputContainer>
+            {type === 'link' ? (
+              <Input name="linkUrl" type="text" placeholder="Link" />
+            ) : (
+              ''
+            )}
+          </InputContainer>
 
-            <ContentButtonsContainer>
-              <IconButton
-                type="button"
-                onClick={() => {
-                  setHasImage(!hasImage);
-                  resetFileData();
-                }}
-              >
-                <FontAwesomeIcon icon="image" />
-              </IconButton>
-              <IconButton
-                data-testid="link-button"
-                type="button"
-                onClick={(e: SyntheticEvent) => {
-                  e.preventDefault();
-                  setType(type === 'link' ? 'text' : 'link');
-                }}
-              >
-                <FontAwesomeIcon icon="link" />
-              </IconButton>
-            </ContentButtonsContainer>
+          <ContentButtonsContainer>
+            <IconButton
+              type="button"
+              onClick={() => {
+                setHasImage(!hasImage);
+                resetFileData();
+              }}
+            >
+              <FontAwesomeIcon icon="image" />
+            </IconButton>
+            <IconButton
+              data-testid="link-button"
+              type="button"
+              onClick={(e: SyntheticEvent) => {
+                e.preventDefault();
+                setType(type === 'link' ? 'text' : 'link');
+              }}
+            >
+              <FontAwesomeIcon icon="link" />
+            </IconButton>
+          </ContentButtonsContainer>
 
-            <TwButtonButtonContainer>
-              <Button buttonType="primary" type="submit">
-                Tweet
-              </Button>
-            </TwButtonButtonContainer>
-          </TweetFormWrapper>
-        </Form>
-      )}
+          <TwButtonButtonContainer>
+            <Button buttonType="primary" type="submit">
+              Tweet
+            </Button>
+          </TwButtonButtonContainer>
+        </TweetFormWrapper>
+      </Form>
     </Formik>
   );
 };

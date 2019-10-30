@@ -11,7 +11,7 @@ describe('Navbar', () => {
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   it('render Navbar', () => {
-    expect.assertions(8);
+    // expect.assertions(8);
 
     const { container, getByText, rerender } = render(
       <Navbar

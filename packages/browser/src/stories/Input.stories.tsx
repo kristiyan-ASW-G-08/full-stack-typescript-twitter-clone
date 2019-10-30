@@ -1,14 +1,24 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Input from 'styled/Input';
+import Input from 'components/Input';
+import { Formik, Form } from 'formik';
+
 storiesOf('Input', module)
   .add(
     'light theme',
     () => (
-      <Input>
-        <input type="text" placeholder="Placeholder"></input>
-        <span>Placeholder is invalid</span>
-      </Input>
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          username: '',
+        }}
+      >
+        {() => (
+          <Form>
+            <Input name="username" type="text" placeholder="Username" />
+          </Form>
+        )}
+      </Formik>
     ),
     {
       info: { inline: true },
@@ -18,10 +28,18 @@ storiesOf('Input', module)
   .add(
     'dark theme',
     () => (
-      <Input>
-        <input type="text" placeholder="Placeholder"></input>
-        <span>Placeholder is invalid</span>
-      </Input>
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          username: '',
+        }}
+      >
+        {() => (
+          <Form>
+            <Input name="username" type="text" placeholder="Username" />
+          </Form>
+        )}
+      </Formik>
     ),
     {
       info: { inline: true },

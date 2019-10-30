@@ -6,11 +6,22 @@ interface InputProps {
   name: string;
   placeholder: string;
   type: string;
+  component?: 'input' | 'textarea';
 }
 
-export const Input: FC<InputProps> = ({ name, placeholder, type }) => (
+export const Input: FC<InputProps> = ({
+  name,
+  placeholder,
+  type,
+  component = 'input',
+}) => (
   <InputWrapper>
-    <FastField name={name} type={type} placeholder={placeholder} />
+    <FastField
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      component={component}
+    />
     <ErrorMessage component="label" name={name} />
   </InputWrapper>
 );
