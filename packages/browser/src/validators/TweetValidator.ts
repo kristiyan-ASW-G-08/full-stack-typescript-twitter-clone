@@ -11,6 +11,5 @@ const TweetValidator = yup.object().shape({
     .string()
     .trim()
     .url(),
-  file: yup.mixed(),
 });
 export default TweetValidator;
