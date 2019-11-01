@@ -10,8 +10,7 @@ const getSortString = (sort: SortKey): SortString => {
     new: '-date',
     replies: '-replies',
   };
-  const sortString = sortStrings[sort];
-  return sortString || '-date';
+  return sortStrings[sort] || '-date';
 };
 
 export default getSortString;

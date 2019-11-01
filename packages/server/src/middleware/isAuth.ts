@@ -11,10 +11,9 @@ const isAuth = (req: Request, _: Response, next: NextFunction): void => {
     throw error;
   }
   const token = authHeader.split(' ')[1];
-  const decodedToken = verify(token, SECRET);
   // @ts-ignore
-  const { userId } = decodedToken;
-  if (!decodedToken || !userId) {
+  const { userId } = verify(token, SECRET);
+  if (!userId) {
     throw error;
   }
   req.userId = userId;

@@ -13,9 +13,8 @@ const rateLimiter = (): ((
   res: Response,
   next: NextFunction,
 ) => Promise<void>) => {
-  return async (req: Request): Promise<void> => {
+  return async ({ ip }: Request): Promise<void> => {
     try {
-      const { ip } = req;
       await idRateLimiter.consume(ip);
     } catch (err) {
       const { status, message } = errors.TooManyRequests;

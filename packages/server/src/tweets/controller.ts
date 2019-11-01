@@ -5,7 +5,7 @@ import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
-import includesObjectId from '@utilities/includesObjectId';
+import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
 import ValidationError from '@twtr/common/source/types/ValidationError';
@@ -32,7 +32,7 @@ export const postTweet = async (
     if (retweetId) {
       const retweetedTweet = await getTweetById(retweetId);
       tweet.retweet = retweetId;
-      if (includesObjectId(user.retweets, retweetId)) {
+      if (includesId(user.retweets, retweetId)) {
         user.retweets = removeId(user.retweets, retweetId);
         retweetedTweet.retweets -= 1;
         user.retweets = [...user.retweets, mongoose.Types.ObjectId(retweetId)];
@@ -46,7 +46,7 @@ export const postTweet = async (
     if (replyId) {
       const replyTweet = await getTweetById(replyId);
       tweet.reply = replyId;
-      if (includesObjectId(user.replies, replyId)) {
+      if (includesId(user.replies, replyId)) {
         user.replies = removeId(user.replies, replyId);
         replyTweet.replies -= 1;
         user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];

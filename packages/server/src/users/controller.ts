@@ -11,7 +11,7 @@ import {
 } from 'src/users/services';
 import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
-import includesObjectId from '@utilities/includesObjectId';
+import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import MailOptions from '@customTypes/MailOptions';
 import User from 'src/users/User';
@@ -301,7 +301,7 @@ export const bookmarkTweet = async (
   try {
     const { tweetId } = params;
     const user = await getUserById(userId, false);
-    if (!includesObjectId(user.bookmarks, tweetId)) {
+    if (!includesId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
     } else {
       user.bookmarks = removeId(user.bookmarks, tweetId);
@@ -322,7 +322,7 @@ export const likeTweet = async (
     const { tweetId } = params;
     const user = await getUserById(userId, false);
     const tweet = await getTweetById(tweetId);
-    if (includesObjectId(user.likes, tweetId)) {
+    if (includesId(user.likes, tweetId)) {
       user.likes = removeId(user.likes, tweetId);
       tweet.likes -= 1;
     } else {
@@ -347,7 +347,7 @@ export const followUser = async (
     const authenticatedUserId = req.userId;
     const user = await getUserById(userId, false);
     const authenticatedUser = await getUserById(authenticatedUserId);
-    if (includesObjectId(authenticatedUser.following, userId)) {
+    if (includesId(authenticatedUser.following, userId)) {
       authenticatedUser.following = removeId(
         authenticatedUser.following,
         userId,
