@@ -4,16 +4,16 @@ exports[`userRoutes /users should throw an error with a status of 409: Co
 Object {
   "data": Array [
     Object {
-      "message": "username is already taken",
-      "path": "username",
+      "message": "testmail@mail.com is already taken",
+      "path": "email",
     },
     Object {
-      "message": "handle is already taken",
+      "message": "testUserHandle is already taken",
       "path": "handle",
     },
     Object {
-      "message": "email is already taken",
-      "path": "email",
+      "message": "username is already taken",
+      "path": "username",
     },
   ],
   "message": "Conflict",

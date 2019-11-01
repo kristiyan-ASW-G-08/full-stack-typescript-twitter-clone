@@ -53,30 +53,40 @@ export const checkUserConfirmation = async (user: UserType): Promise<void> => {
   }
 };
 
+interface Credential {
+  path: 'username' | 'handle' | 'email';
+  value: string;
+}
 export const areCredentialsAvailable = async (
-  credentials: { path: 'username' | 'handle' | 'email'; value: string }[],
+  credentials: Credential[],
   userId?: string,
 ): Promise<void> => {
-  let validationErrorsArr: ValidationError[] = [];
   const userObjectId = mongoose.Types.ObjectId(userId);
-  for await (const { path, value } of credentials) {
-    const query = {
-      [path]: value,
-    };
-    const user = await User.findOne(query);
-    if (user && !userObjectId.equals(user._id)) {
-      validationErrorsArr = [
-        ...validationErrorsArr,
-        {
+  const validationErrors: ValidationError[] = await credentials.reduce(
+    async (
+      acc: Promise<ValidationError[]>,
+      { path, value }: Credential,
+    ): Promise<ValidationError[]> => {
+      const resolvedAcc = await acc;
+      const query = {
+        [path]: value,
+      };
+      const user = await User.findOne(query);
+      if (user && !userObjectId.equals(user._id)) {
+        const validationError = {
           path,
-          message: `${path} is already taken`,
-        },
-      ];
-    }
-  }
-  if (validationErrorsArr.length !== 0) {
+          message: `${value} is already taken`,
+        };
+        return [validationError, ...resolvedAcc];
+      }
+      return [...resolvedAcc];
+    },
+    Promise.resolve([]),
+  );
+
+  if (validationErrors.length !== 0) {
     const { message, status } = errors.Conflict;
-    const error = new CustomError(status, message, validationErrorsArr);
+    const error = new CustomError(status, message, validationErrors);
     throw error;
   }
 };
