@@ -23,7 +23,6 @@ export const ImageInput: FC<InputProps> = ({ name, setFieldValue }) => {
         name={name}
         type="file"
         onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-          e.preventDefault();
           const { file, fileUrl } = getFile(e);
           setFileUrl(fileUrl);
           setFieldValue(name, file);

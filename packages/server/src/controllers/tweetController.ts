@@ -12,24 +12,21 @@ import ValidationError from '@twtr/common/source/types/ValidationError';
 import { CustomError, errors } from '@utilities/CustomError';
 
 export const postTweet = async (
-  req: Request,
+  { userId, body, file }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, linkUrl, type, retweetId, replyId } = req.body;
-    const { userId } = req;
-
+    const { text, linkUrl, type, retweetId, replyId } = body;
     const user = await getUserById(userId);
-
     const tweet = new Tweet({
       text,
       user: userId,
       type,
       link: linkUrl,
     });
-    if (req.file) {
-      tweet.image = req.file.path;
+    if (file) {
+      tweet.image = file.path;
     }
 
     if (retweetId) {
@@ -71,21 +68,20 @@ export const postTweet = async (
 };
 
 export const updateTweet = async (
-  req: Request,
+  { userId, body, params, file }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
-    const { userId } = req;
+    const { tweetId } = params;
+    const { text, linkUrl } = body;
     const tweet = await getTweetById(tweetId);
-    const { text, linkUrl } = req.body;
     isAuthorized(tweet.user.toString(), userId);
 
     tweet.text = text;
     tweet.link = linkUrl;
     if (tweet.image) {
-      if (!req.file) {
+      if (!file) {
         const errorData: ValidationError[] = [
           {
             path: 'image',
@@ -97,7 +93,7 @@ export const updateTweet = async (
         throw error;
       }
       await deleteFile(tweet.image);
-      tweet.image = req.file.path;
+      tweet.image = file.path;
     }
     await tweet.save();
     res.sendStatus(204);
@@ -107,13 +103,12 @@ export const updateTweet = async (
 };
 
 export const deleteTweet = async (
-  req: Request,
+  { params, userId }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
-    const { userId } = req;
+    const { tweetId } = params;
     const tweet = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
     if (tweet.image) {
@@ -127,12 +122,12 @@ export const deleteTweet = async (
 };
 
 export const getTweet = async (
-  req: Request,
+  { params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
+    const { tweetId } = params;
     const tweet = await getTweetById(tweetId);
     const populatedTweet = await tweet
       .populate([
@@ -148,12 +143,12 @@ export const getTweet = async (
 };
 
 export const getAllTweets = async (
-  req: Request,
+  { pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = req.pagination;
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const tweets = await Tweet.countDocuments()
       .find()
@@ -180,13 +175,13 @@ export const getAllTweets = async (
 };
 
 export const getUserTweets = async (
-  req: Request,
+  { params, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req.params;
-    const { page, limit, sort, sortString } = req.pagination;
+    const { userId } = params;
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const tweets = await Tweet.countDocuments()
       .find({ user: userId })
@@ -213,13 +208,13 @@ export const getUserTweets = async (
 };
 
 export const getReplies = async (
-  req: Request,
+  { params, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
-    const { page, limit, sort, sortString } = req.pagination;
+    const { tweetId } = params;
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const tweets = await Tweet.countDocuments()
       .find({ reply: tweetId })
@@ -246,13 +241,13 @@ export const getReplies = async (
 };
 
 export const getUserReplies = async (
-  req: Request,
+  { params, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req.params;
-    const { page, limit, sort, sortString } = req.pagination;
+    const { userId } = params;
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const tweets = await Tweet.countDocuments()
       .find({ user: userId, type: 'reply' })

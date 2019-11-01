@@ -62,18 +62,16 @@ export const UserCustomizationForm: FC<UserCustomizationFormProps> = () => {
       onSubmit={submitHandler}
     >
       {({ setFieldValue }) => (
-        <>
-          <Form>
-            <StyledForm>
-              <Logo type="vertical" />
-              <ImageInput name="avatar" setFieldValue={setFieldValue} />
-              <ImageInput name="cover" setFieldValue={setFieldValue} />
-              <Button buttonType="primary" type="submit">
-                Save Changes
-              </Button>
-            </StyledForm>
-          </Form>
-        </>
+        <Form>
+          <StyledForm>
+            <Logo type="vertical" />
+            <ImageInput name="avatar" setFieldValue={setFieldValue} />
+            <ImageInput name="cover" setFieldValue={setFieldValue} />
+            <Button buttonType="primary" type="submit">
+              Save Changes
+            </Button>
+          </StyledForm>
+        </Form>
       )}
     </Formik>
   );

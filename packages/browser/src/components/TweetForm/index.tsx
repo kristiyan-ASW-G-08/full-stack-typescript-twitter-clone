@@ -48,7 +48,6 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      console.log(formValues);
       const formData: FormData = populateFormData({
         ...formValues,
         type,

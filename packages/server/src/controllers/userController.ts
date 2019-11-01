@@ -21,12 +21,12 @@ import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
 export const signUp = async (
-  req: Request,
+  { body }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { username, handle, email, password } = req.body;
+    const { username, handle, email, password } = body;
     const credentials: {
       path: 'username' | 'handle' | 'email';
       value: string;
@@ -113,12 +113,12 @@ export const signUp = async (
 };
 
 export const logIn = async (
-  req: Request,
+  { body }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = body;
     const { SECRET } = process.env;
     const user = await getUserByEmail(email);
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -173,13 +173,13 @@ export const logIn = async (
 };
 
 export const verifyEmail = async (
-  req: Request,
+  { params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
     const { SECRET } = process.env;
-    const { token } = req.params;
+    const { token } = params;
     const decodedToken = jwt.verify(token, SECRET);
     // @ts-ignore
     const { userId } = decodedToken;
@@ -193,12 +193,12 @@ export const verifyEmail = async (
 };
 
 export const requestPasswordResetEmail = async (
-  req: Request,
+  { body }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email } = req.body;
+    const { email } = body;
     const user = await getUserByEmail(email);
     await checkUserConfirmation(user);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
@@ -265,13 +265,12 @@ export const requestPasswordResetEmail = async (
   }
 };
 export const resetPassword = async (
-  req: Request,
+  { userId, body }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { password } = req.body;
-    const { userId } = req;
+    const { password } = body;
     const user = await getUserById(userId);
     user.password = await bcrypt.hash(password, 12);
     await user.save();
@@ -281,12 +280,11 @@ export const resetPassword = async (
   }
 };
 export const deleteUser = async (
-  req: Request,
+  { userId }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req;
     const user = await getUserById(userId);
     await user.remove();
     res.sendStatus(204);
@@ -296,13 +294,12 @@ export const deleteUser = async (
 };
 
 export const bookmarkTweet = async (
-  req: Request,
+  { userId, params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
-    const { userId } = req;
+    const { tweetId } = params;
     const user = await getUserById(userId, false);
     if (!includesObjectId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
@@ -317,13 +314,12 @@ export const bookmarkTweet = async (
 };
 
 export const likeTweet = async (
-  req: Request,
+  { userId, params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = req.params;
-    const { userId } = req;
+    const { tweetId } = params;
     const user = await getUserById(userId, false);
     const tweet = await getTweetById(tweetId);
     if (includesObjectId(user.likes, tweetId)) {
@@ -373,13 +369,12 @@ export const followUser = async (
 };
 
 export const getUserBookmarks = async (
-  req: Request,
+  { userId, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req;
-    const { page, limit, sort, sortString } = req.pagination;
+    const { page, limit, sort, sortString } = pagination;
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const populatedUser = await user
@@ -413,15 +408,15 @@ export const getUserBookmarks = async (
 };
 
 export const getUserLikes = async (
-  req: Request,
+  { pagination, params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req.params;
-    const user = await getUserById(userId);
-    const { page, limit, sort, sortString } = req.pagination;
+    const { userId } = params;
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
+    const user = await getUserById(userId);
     const populatedUser = await user
       .populate({
         path: 'likes',
@@ -453,14 +448,12 @@ export const getUserLikes = async (
 };
 
 export const patchCustomization = async (
-  req: Request,
+  { files, userId, body }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { username, handle, website } = req.body;
-    const { userId } = req;
-    console.log(req.files);
+    const { username, handle, website } = body;
     const user = await getUserById(userId, false);
     await user.save();
     res.status(200).json({ data: { user } });
@@ -469,13 +462,12 @@ export const patchCustomization = async (
   }
 };
 export const patchProfile = async (
-  req: Request,
+  { body, userId }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { username, handle, website } = req.body;
-    const { userId } = req;
+    const { username, handle, website } = body;
     const credentials: {
       path: 'username' | 'handle' | 'email';
       value: string;
@@ -496,12 +488,12 @@ export const patchProfile = async (
 };
 
 export const getUsersList = async (
-  req: Request,
+  { params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { handle } = req.params;
+    const { handle } = params;
     const searchRegex = new RegExp(handle, 'gi');
     const users = await User.find(
       {
@@ -519,13 +511,12 @@ export const getUsersList = async (
 };
 
 export const getUserFeed = async (
-  req: Request,
+  { userId, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req;
-    const { page, limit, sort, sortString } = req.pagination;
+    const { page, limit, sort, sortString } = pagination;
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const { following } = user;
@@ -562,12 +553,12 @@ export const getUserFeed = async (
 };
 
 export const getUser = async (
-  req: Request,
+  { params }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = req.params;
+    const { userId } = params;
     const user = await getUserById(userId, false);
     res.status(200).json({
       data: {

@@ -2,7 +2,7 @@ import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { CustomError, errors } from '@utilities/CustomError';
 
-const isAuth = (req: Request, res: Response, next: NextFunction): void => {
+const isAuth = (req: Request, _: Response, next: NextFunction): void => {
   const { SECRET } = process.env;
   const authHeader = req.get('Authorization');
   const { status, message } = errors.Unauthorized;

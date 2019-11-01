@@ -59,10 +59,10 @@ export const areCredentialsAvailable = async (
 ): Promise<void> => {
   let validationErrorsArr: ValidationError[] = [];
   const userObjectId = mongoose.Types.ObjectId(userId);
-  for await (const credential of credentials) {
-    const { path } = credential;
-    const query: { [key: string]: string } = {};
-    query[credential.path] = credential.value;
+  for await (const { path, value } of credentials) {
+    const query = {
+      [path]: value,
+    };
     const user = await User.findOne(query);
     if (user && !userObjectId.equals(user._id)) {
       validationErrorsArr = [
