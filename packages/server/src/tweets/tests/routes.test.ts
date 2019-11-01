@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 import mockFs from 'mock-fs';
 import mjml from 'mjml';
 import app from 'src/app';
-import User from '@models/User';
+import User from 'src/users/User';
 import db from 'src/db';
-import Tweet from '@models/Tweet';
+import Tweet from 'src/tweets/Tweet';
 
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';

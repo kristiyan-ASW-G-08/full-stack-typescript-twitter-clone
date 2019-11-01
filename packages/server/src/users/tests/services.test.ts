@@ -5,8 +5,8 @@ import {
   checkUserConfirmation,
   getUserById,
   getUserByEmail,
-} from '@services/userServices';
-import User from '@models/User';
+} from 'src/users/services';
+import User from 'src/users/User';
 import db from 'src/db';
 
 jest.mock('jsonwebtoken');

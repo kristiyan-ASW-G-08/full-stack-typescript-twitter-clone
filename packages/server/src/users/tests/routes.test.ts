@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mjml from 'mjml';
 import app from 'src/app';
-import User from '@models/User';
-import Tweet from '@models/Tweet';
+import User from 'src/users/User';
+import Tweet from 'src/tweets/Tweet';
 import db from 'src/db';
 import sendEmail from '@utilities/sendEmail';
 

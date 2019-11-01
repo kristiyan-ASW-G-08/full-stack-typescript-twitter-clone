@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import multer from 'multer';
 import compression from 'compression';
-import userRoutes from '@routes/userRoutes';
-import tweetRoutes from '@routes/tweetRoutes';
+import userRoutes from 'src/users/routes';
+import tweetRoutes from 'src/tweets/routes';
 import { CustomError } from '@utilities/CustomError';
 import fileFilter from '@customMiddleware/fileFilter';
 import storage from '@customMiddleware/fileStorage';
@@ -33,12 +33,7 @@ app.use(userRoutes);
 app.use(tweetRoutes);
 
 app.use(
-  (
-    error: CustomError,
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): void => {
+  (error: CustomError, req: Request, res: Response, _: NextFunction): void => {
     console.log(error);
     const status = error.status || 500;
     const { message } = error;

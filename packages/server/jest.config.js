@@ -15,6 +15,7 @@ module.exports = {
     'customTypes/(.*)$': '<rootDir>/src/types/$1',
     'utilities/(.*)$': '<rootDir>/src/utilities/$1',
     'customMiddleware/(.*)$': '<rootDir>/src/middleware/$1',
-    'services/(.*)$': '<rootDir>/src/services/$1',
+    'users/(.*)$': '<rootDir>/src/users/$1',
+    'tweets/(.*)$': '<rootDir>/src/tweets/$1',
   },
 };

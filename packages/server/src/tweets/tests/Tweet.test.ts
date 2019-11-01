@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Tweet from '@models/Tweet';
-import User from '@models/User';
+import Tweet from 'src/tweets/Tweet';
+import User from 'src/users/User';
 import TweetType from '@customTypes/Tweet';
 import db from 'src/db';
 

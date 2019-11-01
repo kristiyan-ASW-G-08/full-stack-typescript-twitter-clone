@@ -1,4 +1,4 @@
-import Tweet from '@models/Tweet';
+import Tweet from 'src/tweets/Tweet';
 import TweetType from '@customTypes/Tweet';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import { CustomError, errors } from '@utilities/CustomError';

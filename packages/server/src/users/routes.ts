@@ -1,6 +1,5 @@
 import express from 'express';
 import multer from 'multer';
-import validate from '@customMiddleware/validate';
 import {
   signUp,
   logIn,
@@ -18,7 +17,7 @@ import {
   getUserFeed,
   getUser,
   patchCustomization,
-} from '@controllers/userController';
+} from 'src/users/controller';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
@@ -26,6 +25,7 @@ import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPa
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
 import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
+import validate from '@customMiddleware/validate';
 import isAuth from '@customMiddleware/isAuth';
 import paginate from '@customMiddleware/paginate';
 import fileFilter from '@customMiddleware/fileFilter';

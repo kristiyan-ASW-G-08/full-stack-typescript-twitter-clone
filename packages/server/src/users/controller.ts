@@ -8,14 +8,14 @@ import {
   getUserById,
   areCredentialsAvailable,
   checkUserConfirmation,
-} from '@services/userServices';
-import { getTweetById } from '@services/tweetServices';
+} from 'src/users/services';
+import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesObjectId from '@utilities/includesObjectId';
 import removeId from '@utilities/removeId';
 import MailOptions from '@customTypes/MailOptions';
-import User from '@models/User';
-import Tweet from '@models/Tweet';
+import User from 'src/users/User';
+import Tweet from 'src/tweets/Tweet';
 import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';

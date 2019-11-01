@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import User from '@models/User';
+import User from 'src/users/User';
 import UserType from '@customTypes/User';
 import db from 'src/db';
 

@@ -1,5 +1,4 @@
 import express from 'express';
-import validate from '@customMiddleware/validate';
 import {
   postTweet,
   deleteTweet,
@@ -9,9 +8,10 @@ import {
   getReplies,
   getUserReplies,
   getUserTweets,
-} from '@controllers/tweetController';
+} from 'src/tweets/controller';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
+import validate from '@customMiddleware/validate';
 import isAuth from '@customMiddleware/isAuth';
 import paginate from '@customMiddleware/paginate';
 

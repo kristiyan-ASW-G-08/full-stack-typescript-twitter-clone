@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import { getTweetById } from '@services/tweetServices';
-import User from '@models/User';
-import Tweet from '@models/Tweet';
+import { getTweetById } from 'src/tweets/services';
+import User from 'src/users/User';
+import Tweet from 'src/tweets/Tweet';
 import db from 'src/db';
 
 jest.mock('@utilities/sendEmail');

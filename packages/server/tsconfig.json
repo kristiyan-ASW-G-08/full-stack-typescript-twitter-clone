@@ -2,13 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@routes/*": ["src/routes/*"],
+      "@src/*": ["src/*"],
+      "@tweets/*": ["src/tweets/*"],
       "@models/*": ["src/models/*"],
       "@controllers/*": ["src/controllers/*"],
       "@customTypes/*": ["src/types/*"],
       "@utilities/*": ["src/utilities/*"],
       "@customMiddleware/*": ["src/middleware/*"],
-      "@services/*": ["src/services/*"]
+      "@users/*": ["src/users/*"]
     },
     "target": "es6",
     "lib": ["esnext"],

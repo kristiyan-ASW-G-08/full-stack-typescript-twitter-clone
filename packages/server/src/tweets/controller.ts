@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import Tweet from '@models/Tweet';
-import { getTweetById } from '@services/tweetServices';
+import Tweet from 'src/tweets/Tweet';
+import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
 import isAuthorized from '@utilities/isAuthorized';
 import deleteFile from '@utilities/deleteFile';
 import includesObjectId from '@utilities/includesObjectId';
 import removeId from '@utilities/removeId';
-import { getUserById } from '@services/userServices';
+import { getUserById } from 'src/users/services';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import { CustomError, errors } from '@utilities/CustomError';
 

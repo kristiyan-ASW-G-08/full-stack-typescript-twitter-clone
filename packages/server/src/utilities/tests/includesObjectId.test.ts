@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import includesObjectId from '../../utilities/includesObjectId';
+import includesObjectId from '../includesObjectId';
 
 describe('includesObjectId', (): void => {
   const id = mongoose.Types.ObjectId();
