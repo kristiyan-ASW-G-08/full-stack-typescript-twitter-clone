@@ -23,16 +23,7 @@ const TweetValidator = yup.object().shape({
   text: yup
     .string()
     .trim()
-    .max(500)
-    .when(
-      'type',
-      (
-        type: 'text' | 'link' | 'retweet' | 'reply',
-        schema: StringSchema,
-      ): StringSchema<string | undefined> => {
-        return type === 'text' ? schema.required() : schema.notRequired();
-      },
-    ),
+    .max(500),
   retweetId: yup
     .string()
     .trim()
@@ -48,15 +39,6 @@ const TweetValidator = yup.object().shape({
   linkUrl: yup
     .string()
     .trim()
-    .url()
-    .when(
-      'type',
-      (
-        type: 'text' | 'link' | 'retweet' | 'reply',
-        schema: StringSchema,
-      ): StringSchema<string | undefined> => {
-        return type === 'link' ? schema.required() : schema.notRequired();
-      },
-    ),
+    .url(),
 });
 export default TweetValidator;

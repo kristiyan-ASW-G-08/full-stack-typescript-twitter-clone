@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import User from 'types/User';
@@ -43,21 +44,9 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </CoverBackground>
         <AvatarContainer>
-          {authState.user && authState.user._id === user._id ? (
-            <Link
-              to={{
-                pathname: `/user/customize`,
-                state: { customization: location },
-              }}
-            >
-              <Avatar size="large" />
-            </Link>
-          ) : (
-            <Avatar size="large" />
-          )}
+          <Avatar size="large" />
         </AvatarContainer>
       </Cover>
-
       <Container>
         <Username>{username}</Username>
         <Handle>@{handle}</Handle>

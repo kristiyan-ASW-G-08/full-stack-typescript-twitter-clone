@@ -38,29 +38,8 @@ const Router: FC = observer(
     const tweet = location.state && location.state.tweet;
     const tweetForm = location.state && location.state.tweetForm;
     const userForm = location.state && location.state.userForm;
-    const userCustomization = location.state && location.state.customization;
     return (
       <>
-        {userCustomization && user && (
-          <Route
-            exact
-            path="/user/customize"
-            render={(): JSX.Element => (
-              <Suspense fallback={<Loader />}>
-                <Modal backdropHandler={history.goBack}>
-                  <UserCustomizationForm
-                    setNotification={(notification: NotificationType) =>
-                      notificationStore.setNotification(notification)
-                    }
-                    updateUser={(user: User) => authStore.updateUser(user)}
-                    token={token}
-                    user={user}
-                  />
-                </Modal>
-              </Suspense>
-            )}
-          />
-        )}
         {userForm && user && (
           <Route
             exact
@@ -148,11 +127,7 @@ const Router: FC = observer(
         ) : (
           ''
         )}
-        <Switch
-          location={
-            userCustomization || userForm || tweetForm || tweet || location
-          }
-        >
+        <Switch location={userForm || tweetForm || tweet || location}>
           <Route exact path="/" component={Home} />
           <Route
             exact
