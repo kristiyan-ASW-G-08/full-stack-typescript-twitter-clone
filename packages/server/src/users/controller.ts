@@ -447,22 +447,8 @@ export const getUserLikes = async (
   }
 };
 
-export const patchCustomization = async (
-  { files, userId, body }: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
-  try {
-    const { username, handle, website } = body;
-    const user = await getUserById(userId, false);
-    await user.save();
-    res.status(200).json({ data: { user } });
-  } catch (err) {
-    passErrorToNext(err, next);
-  }
-};
 export const patchProfile = async (
-  { body, userId }: Request,
+  { body, userId, files }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -477,6 +463,13 @@ export const patchProfile = async (
     ];
     await areCredentialsAvailable(credentials, userId);
     const user = await getUserById(userId, false);
+
+    if (!Array.isArray(files) && files && files.avatar) {
+      user.avatar = files.avatar[0].path;
+    }
+    if (!Array.isArray(files) && files && files.cover) {
+      user.cover = files.cover[0].path;
+    }
     user.username = username;
     user.handle = handle;
     user.website = website;

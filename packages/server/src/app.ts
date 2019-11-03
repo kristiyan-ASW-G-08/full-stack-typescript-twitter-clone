@@ -1,13 +1,10 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
-import multer from 'multer';
 import compression from 'compression';
 import userRoutes from 'src/users/routes';
 import tweetRoutes from 'src/tweets/routes';
 import { CustomError } from '@utilities/CustomError';
-import fileFilter from '@customMiddleware/fileFilter';
-import storage from '@customMiddleware/fileStorage';
 
 const app: Application = express();
 
@@ -24,8 +21,6 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
-app.use(multer({ storage, fileFilter }).single('image'));
 
 app.use('/images', express.static('./images'));
 

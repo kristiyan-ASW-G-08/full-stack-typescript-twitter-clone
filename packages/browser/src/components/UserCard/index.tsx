@@ -36,15 +36,18 @@ export const UserCard: FC<UserCardProps> = ({
         <CoverBackground>
           {user.cover ? (
             <img
-              src="https://d33wubrfki0l68.cloudfront.net/ca8962315fd188209b57905f1b1dc0e52ee7a57e/header.31d00de4.png"
-              alt=""
+              src={`http://localhost:8090/${user.cover}`}
+              alt={`${username}'s cover`}
             />
           ) : (
             ''
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar size="large" />
+          <Avatar
+            size="large"
+            avatarURL={`http://localhost:8090/${user.avatar}`}
+          />
         </AvatarContainer>
       </Cover>
       <Container>

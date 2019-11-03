@@ -7,4 +7,6 @@ export default interface User {
   headerPhoto: string;
   date: string;
   followers: number;
+  avatar: string;
+  cover: string;
 }

@@ -22,7 +22,7 @@ export const AvatarWrapper = styled('div')<AvatarProps>`
     border-radius: 100%;
     height: inherit;
     width: inherit;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 

@@ -3,6 +3,7 @@ import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
+import ImageInput from 'components/ImageInput';
 import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
@@ -10,6 +11,7 @@ import Logo from 'components/Logo';
 import Notification from 'types/Notification';
 import User from 'types/User';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+import populateFormData from 'utilities/populateFormData';
 
 interface UserFormProps {
   token: string;
@@ -30,27 +32,41 @@ export const UserForm: FC<UserFormProps> = ({
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
+      const formData = populateFormData(formValues);
+
       const request = await axios.patch(
         'http://localhost:8090/users/user/profile',
-        formValues,
+        formData,
         {
           headers: { Authorization: `bearer ${token}` },
         },
       );
       const { user } = request.data.data;
+      console.log(user);
       updateUser(user);
       const notification: Notification = {
         type: 'message',
-        content:
-          'You have signed up successfully.Confirm your email to log in.',
+        content: 'Changes saved.',
       };
       setNotification(notification);
       history.goBack();
     } catch (error) {
-      if (error.response) {
+      console.log(error);
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        Array.isArray(error.response.data)
+      ) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);
+      } else {
+        const notification: Notification = {
+          type: 'warning',
+          content: 'Something went wrong',
+        };
+        setNotification(notification);
       }
     }
   };
@@ -64,21 +80,33 @@ export const UserForm: FC<UserFormProps> = ({
       }}
       onSubmit={submitHandler}
     >
-      <Form>
-        <StyledForm>
-          <Logo type="vertical" />
+      {({ setFieldValue }) => (
+        <Form>
+          <StyledForm>
+            <Logo type="vertical" />
 
-          <Input name="username" type="text" placeholder="Username" />
+            <Input name="username" type="text" placeholder="Username" />
 
-          <Input name="handle" type="text" placeholder="Handle" />
+            <Input name="handle" type="text" placeholder="Handle" />
 
-          <Input name="website" type="url" placeholder="Website" />
+            <Input name="website" type="url" placeholder="Website" />
+            <ImageInput
+              name="avatar"
+              setFieldValue={setFieldValue}
+              text="Upload avatar photo"
+            />
 
-          <Button buttonType="primary" type="submit">
-            Save Changes
-          </Button>
-        </StyledForm>
-      </Form>
+            <ImageInput
+              name="cover"
+              setFieldValue={setFieldValue}
+              text="Upload cover photo"
+            />
+            <Button buttonType="primary" type="submit">
+              Save Changes
+            </Button>
+          </StyledForm>
+        </Form>
+      )}
     </Formik>
   );
 };

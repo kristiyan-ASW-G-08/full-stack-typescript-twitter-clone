@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 import {
   postTweet,
   deleteTweet,
@@ -14,12 +15,16 @@ import SortStringValidator from '@twtr/common/source/schemaValidators/SortString
 import validate from '@customMiddleware/validate';
 import isAuth from '@customMiddleware/isAuth';
 import paginate from '@customMiddleware/paginate';
+import fileFilter from '@customMiddleware/fileFilter';
+import storage from '@customMiddleware/fileStorage';
 
+const multerStorage = multer({ storage, fileFilter }).single('image');
 const router = express.Router();
 
 router.post(
   '/tweets',
   isAuth,
+  multerStorage,
   validate([{ schema: TweetValidator, target: 'body' }]),
   postTweet,
 );
@@ -27,6 +32,7 @@ router.post(
 router.patch(
   '/tweets/:tweetId',
   isAuth,
+  multerStorage,
   validate([{ schema: TweetValidator, target: 'body' }]),
   updateTweet,
 );

@@ -21,7 +21,9 @@ class AuthStore {
   }
 
   @action public updateUser(user: User | undefined): void {
-    if (user) this.authState.user = user;
+    if (user) {
+      this.authState.user = user;
+    }
   }
 
   @action public initAuthStoreReset(remainingMilliseconds: number): void {

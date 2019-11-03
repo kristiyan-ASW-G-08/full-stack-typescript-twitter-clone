@@ -29,7 +29,7 @@ export const InputWrapper = styled('div')`
 
   img {
     width: 100%;
-    height: 20rem;
+    height: 10rem;
     object-fit: cover;
   }
 `;

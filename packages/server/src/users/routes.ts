@@ -16,7 +16,6 @@ import {
   getUserLikes,
   getUserFeed,
   getUser,
-  patchCustomization,
 } from 'src/users/controller';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -61,19 +60,14 @@ router.patch(
 );
 
 router.patch(
-  '/users/user/customization',
+  '/users/user/profile',
   isAuth,
   multer({ storage, fileFilter }).fields([
     { name: 'avatar', maxCount: 1 },
     { name: 'cover', maxCount: 1 },
   ]),
-  patchCustomization,
-);
-
-router.patch(
-  '/users/user/profile',
-  isAuth,
   validate([{ schema: UserProfileValidator, target: 'body' }]),
+
   patchProfile,
 );
 

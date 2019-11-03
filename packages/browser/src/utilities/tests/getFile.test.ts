@@ -1,15 +1,10 @@
 import { ChangeEvent } from 'react';
 import getFile from 'utilities/getFile';
 
-declare global {
-  interface URL {
-    createObjectUrl: (file: File) => string;
-  }
-}
 describe('getFile', () => {
   it('should return a file and a file url', () => {
     expect.assertions(2);
-
+    //@ts-ignore
     global.URL.createObjectURL = jest.fn(() => 'fileUrl');
 
     const fileMock = new File(['file'], 'test.png', { type: 'image/png' });

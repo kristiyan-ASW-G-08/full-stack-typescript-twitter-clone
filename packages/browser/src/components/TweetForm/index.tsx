@@ -57,6 +57,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
+
       if (tweet) {
         await axios.patch(
           `http://localhost:8090/tweets/${tweet._id}`,
