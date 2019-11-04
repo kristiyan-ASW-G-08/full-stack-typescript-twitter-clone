@@ -14,7 +14,7 @@ export const Avatar: FC<AvatarProps> = ({
 }) => (
   <AvatarWrapper size={size}>
     {avatarURL !== undefined ? (
-      <img src={avatarURL} alt={altText} />
+      <img src={`http://localhost:8090/${avatarURL}`} alt={altText} />
     ) : (
       <IconContainer size={size}>
         <FontAwesomeIcon icon="user-circle" />

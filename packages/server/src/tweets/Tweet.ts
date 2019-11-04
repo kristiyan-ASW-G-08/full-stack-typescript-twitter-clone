@@ -31,11 +31,12 @@ const TweetSchema: Schema = new Schema({
 
 async function populateFields(this: Query<any>): Promise<any> {
   this.populate([
-    { path: 'user', select: 'username handle' },
+    { path: 'user', select: 'username handle avatar' },
     { path: 'reply', select: 'user' },
     { path: 'retweet' },
   ]);
 }
+
 TweetSchema.pre('find', populateFields);
 
 TweetSchema.pre('populate', populateFields);

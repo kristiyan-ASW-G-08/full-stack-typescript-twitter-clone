@@ -63,6 +63,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const { setElement } = useIntersection(loadNext);
 
   useEffect(() => {
+    console.log(url, 'setQuery');
     setQuery(`${url}?sort=new`);
   }, [url]);
   useEffect(() => {
@@ -80,7 +81,8 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       .catch(() => {
         setNotification(errorNotification);
       });
-  }, [token, url, setNotification, errorNotification, query]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, query]);
 
   const getTweetsHandler = (e: SyntheticEvent) => {
     const target = e.target as HTMLSelectElement;

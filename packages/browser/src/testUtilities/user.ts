@@ -1,4 +1,5 @@
 import User from 'types/User';
+
 const user: User = {
   username: 'username',
   handle: 'userHandle',
@@ -8,6 +9,7 @@ const user: User = {
   date: 'mockDate',
   website: 'mockWebsite',
   avatar: 'avatar',
+  cover: 'cover',
   followers: 0,
   following: [],
   likes: [],

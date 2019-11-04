@@ -58,7 +58,7 @@ export const Navbar: FC<NavbarProps> = ({
             <>
               <DropDownWrapper>
                 <AvatarWrapper onClick={toggleMenu}>
-                  <Avatar />
+                  <Avatar avatarURL={user.avatar} />
                 </AvatarWrapper>
                 {isMenuActive ? (
                   <DropDown>

@@ -19,6 +19,7 @@ import Tweet from 'src/tweets/Tweet';
 import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import deleteFile from '@src/utilities/deleteFile';
 
 export const signUp = async (
   { body }: Request,
@@ -152,21 +153,29 @@ export const logIn = async (
       retweets,
       _id,
       website,
+      cover,
+      avatar,
     } = user;
-    const userData = {
-      website,
-      username,
-      handle,
-      following,
-      likes,
-      bookmarks,
-      email,
-      date,
-      replies,
-      retweets,
-      _id,
-    };
-    res.status(200).json({ data: { token, user: userData } });
+    res.status(200).json({
+      data: {
+        token,
+        user: {
+          website,
+          username,
+          handle,
+          following,
+          likes,
+          bookmarks,
+          email,
+          date,
+          replies,
+          retweets,
+          _id,
+          cover,
+          avatar,
+        },
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -465,9 +474,11 @@ export const patchProfile = async (
     const user = await getUserById(userId, false);
 
     if (!Array.isArray(files) && files && files.avatar) {
+      deleteFile(user.avatar);
       user.avatar = files.avatar[0].path;
     }
     if (!Array.isArray(files) && files && files.cover) {
+      deleteFile(user.cover);
       user.cover = files.cover[0].path;
     }
     user.username = username;

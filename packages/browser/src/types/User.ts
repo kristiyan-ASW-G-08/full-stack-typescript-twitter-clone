@@ -6,7 +6,5 @@ export default interface User extends CommonUser {
   bookmarks: string[];
   replies: string[];
   retweets: string[];
-  avatar?: string;
-  cover?: string;
   _id: string;
 }

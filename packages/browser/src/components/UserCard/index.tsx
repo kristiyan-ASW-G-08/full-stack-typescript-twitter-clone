@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import User from 'types/User';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
 import FollowButton from 'components/UserCard/FollowButton';
 import Button from 'styled/Button';
+import RootStoreContext from 'stores/RootStore/RootStore';
+import Notification from 'types/Notification';
 import {
   UserCardWrapper,
   Cover,
@@ -28,6 +30,7 @@ export const UserCard: FC<UserCardProps> = ({
   authState,
   updateUser,
 }) => {
+  const { notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { username, handle, following, _id } = user;
   return (
@@ -44,10 +47,7 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar
-            size="large"
-            avatarURL={`http://localhost:8090/${user.avatar}`}
-          />
+          <Avatar size="large" avatarURL={user.avatar} />
         </AvatarContainer>
       </Cover>
       <Container>
@@ -60,8 +60,14 @@ export const UserCard: FC<UserCardProps> = ({
               token={authState.token}
               currentUser={user}
               updateUser={updateUser}
+              setNotification={(notification: Notification): void => {
+                notificationStore.setNotification(notification);
+              }}
             />
           ) : (
+            ''
+          )}
+          {authState.user && _id === authState.user._id ? (
             <Link
               to={{
                 pathname: `/user/edit`,
@@ -70,6 +76,8 @@ export const UserCard: FC<UserCardProps> = ({
             >
               <Button buttonType="primary">Edit</Button>
             </Link>
+          ) : (
+            ''
           )}
         </FollowButtonWrapper>
         <FollowBar>

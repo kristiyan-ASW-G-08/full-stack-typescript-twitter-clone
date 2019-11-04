@@ -45,7 +45,7 @@ export const Sidebar: FC<SidebarProps> = ({
         <Container>
           {user ? (
             <AuthenticatedSidebarHeader>
-              <Avatar size="medium" />
+              <Avatar size="medium" avatarURL={user.avatar} />
               <h3>{user.username}</h3>
               <h4>@{user.handle}</h4>
               <div>

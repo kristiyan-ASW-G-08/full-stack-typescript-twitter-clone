@@ -3,7 +3,7 @@ import multer from 'multer';
 import {
   postTweet,
   deleteTweet,
-  updateTweet,
+  patchTweet,
   getTweet,
   getAllTweets,
   getReplies,
@@ -34,7 +34,7 @@ router.patch(
   isAuth,
   multerStorage,
   validate([{ schema: TweetValidator, target: 'body' }]),
-  updateTweet,
+  patchTweet,
 );
 
 router.delete('/tweets/:tweetId', isAuth, deleteTweet);

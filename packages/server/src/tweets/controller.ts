@@ -8,8 +8,6 @@ import deleteFile from '@utilities/deleteFile';
 import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
-import ValidationError from '@twtr/common/source/types/ValidationError';
-import { CustomError, errors } from '@utilities/CustomError';
 
 export const postTweet = async (
   { userId, body, file }: Request,
@@ -67,7 +65,7 @@ export const postTweet = async (
   }
 };
 
-export const updateTweet = async (
+export const patchTweet = async (
   { userId, body, params, file }: Request,
   res: Response,
   next: NextFunction,
@@ -80,18 +78,7 @@ export const updateTweet = async (
 
     tweet.text = text;
     tweet.link = linkUrl;
-    if (tweet.image) {
-      if (!file) {
-        const errorData: ValidationError[] = [
-          {
-            path: 'image',
-            message: 'Upload an image',
-          },
-        ];
-        const { status, message } = errors.BadRequest;
-        const error = new CustomError(status, message, errorData);
-        throw error;
-      }
+    if (tweet.image && file) {
       await deleteFile(tweet.image);
       tweet.image = file.path;
     }
