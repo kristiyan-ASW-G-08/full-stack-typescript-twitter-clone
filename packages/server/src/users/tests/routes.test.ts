@@ -60,7 +60,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toBe(204);
       expect(sendEmail).toHaveBeenCalledTimes(1);
     });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
     > => {
       expect.assertions(3);
@@ -77,7 +77,7 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
     > => {
       expect.assertions(3);
@@ -86,7 +86,7 @@ describe('userRoutes', (): void => {
       expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
-    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
+    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
       void
     > => {
       expect.assertions(3);
@@ -131,7 +131,7 @@ describe('userRoutes', (): void => {
       expect(user.handle).toMatch(handle);
       expect(user.email).toMatch(email);
     });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
     > => {
       expect.assertions(2);
@@ -250,7 +250,7 @@ describe('userRoutes', (): void => {
         });
       expect(response.status).toBe(204);
     });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -345,7 +345,7 @@ describe('userRoutes', (): void => {
       expect(user.handle).toMatch(newHandle);
       expect(user.website).toMatch(website);
     });
-    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
+    it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -409,7 +409,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toBe(404);
     });
 
-    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
+    it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -510,7 +510,7 @@ describe('userRoutes', (): void => {
       expect(user.bookmarks.length).toBe(0);
       expect(user.bookmarks[0]).toBeUndefined();
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -619,7 +619,7 @@ describe('userRoutes', (): void => {
       expect(user.likes[0]).toBeUndefined();
       expect(tweet.likes).toBe(0);
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -730,7 +730,7 @@ describe('userRoutes', (): void => {
       expect(authenticatedUser.following[0]).toBeUndefined();
       expect(user.followers).toBe(0);
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -788,7 +788,7 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(200);
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -820,7 +820,7 @@ describe('userRoutes', (): void => {
       const response = await request(app).get(`/users/${userId}/likes`);
       expect(response.status).toBe(200);
     });
-    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -904,7 +904,7 @@ describe('userRoutes', (): void => {
       expect(response.status).toBe(200);
       expect(tweets).toHaveLength(1);
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -933,7 +933,7 @@ describe('userRoutes', (): void => {
       const response = await request(app).get(`/users/user/tweets`);
       expect(response.status).toBe(401);
     });
-    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
     > => {
       expect.assertions(1);
@@ -1012,14 +1012,14 @@ describe('userRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(204);
     });
-    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
+    it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', async (): Promise<
       void
     > => {
       expect.assertions(1);
       const response = await request(app).delete(`/users`);
       expect(response.status).toBe(401);
     });
-    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+    it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
       void
     > => {
       expect.assertions(1);

@@ -5,6 +5,7 @@ import mockFs from 'mock-fs';
 import mjml from 'mjml';
 import app from 'src/app';
 import User from 'src/users/User';
+import UserType from '@customTypes/User';
 import db from 'src/db';
 import Tweet from 'src/tweets/Tweet';
 
@@ -14,13 +15,25 @@ const mockTemplate = 'MockTemplate';
 jest.mock('mjml');
 
 describe('tweetRoutes', (): void => {
-  beforeAll(
+  const username = 'username';
+  const handle = 'testUserHandle';
+  const email = 'testmail@mail.com';
+  const password = 'testPassword';
+  const text =
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
+  const link = 'https://fakeLink.fakeLink';
+  const secret = process.env.SECRET;
+  let testUser: UserType;
+
+  beforeEach(
     async (): Promise<void> => {
-      await mongoose.disconnect();
-      await db();
-      app.listen(port);
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
+      testUser = new User({
+        username,
+        handle,
+        email,
+        password,
+      });
+      await testUser.save();
     },
   );
   afterEach(
@@ -30,31 +43,26 @@ describe('tweetRoutes', (): void => {
       await User.deleteMany({}).exec();
     },
   );
+  beforeAll(
+    async (): Promise<void> => {
+      await mongoose.disconnect();
+      await db();
+      app.listen(port);
+      await Tweet.deleteMany({}).exec();
+      await User.deleteMany({}).exec();
+    },
+  );
+
   afterAll(
     async (): Promise<void> => {
       await mongoose.disconnect();
     },
   );
-  const username = 'username';
-  const handle = 'testUserHandle';
-  const email = 'testmail@mail.com';
-  const password = 'testPassword';
-  const text =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
-  const link = 'https://fakeLink.fakeLink';
-  const secret = process.env.SECRET;
+
   describe('post /tweets', (): void => {
     it('should create a new text tweet', async (): Promise<void> => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
-
+      const userId = testUser._id;
       const token = jwt.sign(
         {
           userId,
@@ -74,15 +82,7 @@ describe('tweetRoutes', (): void => {
     });
     it('should create a new link tweet', async (): Promise<void> => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
-
+      const userId = testUser._id;
       const token = jwt.sign(
         {
           userId,
@@ -102,14 +102,7 @@ describe('tweetRoutes', (): void => {
     });
     it('should create a new retweet', async (): Promise<void> => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
+      const userId = testUser._id;
       const tweet = new Tweet({
         type: 'link',
         link,
@@ -137,14 +130,7 @@ describe('tweetRoutes', (): void => {
     });
     it('should create a new reply tweet', async (): Promise<void> => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
+      const userId = testUser._id;
       const tweet = new Tweet({
         type: 'link',
         link,
@@ -172,14 +158,7 @@ describe('tweetRoutes', (): void => {
     });
     it('should create a new image tweet', async (): Promise<void> => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
+      const userId = testUser._id;
       mockFs({
         './images': {
           'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
@@ -208,14 +187,7 @@ describe('tweetRoutes', (): void => {
       void
     > => {
       expect.assertions(1);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
+      const userId = testUser._id;
 
       const token = jwt.sign(
         {
@@ -224,7 +196,7 @@ describe('tweetRoutes', (): void => {
         secret,
         { expiresIn: '1h' },
       );
-      const type = 'link';
+      const type = 'retweet';
       const response = await request(app)
         .post('/tweets')
         .send({
@@ -456,14 +428,7 @@ describe('tweetRoutes', (): void => {
   describe('get /tweets/:tweetId', (): void => {
     it('should get a tweet', async (): Promise<void> => {
       expect.assertions(2);
-      const user = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await user.save();
-      const userId = user._id;
+      const userId = testUser._id;
       const newTweet = new Tweet({
         type: 'text',
         text,

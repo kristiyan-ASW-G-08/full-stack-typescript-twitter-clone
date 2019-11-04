@@ -14,14 +14,13 @@ const App: FC = observer(() => {
   const { theme } = themeStore;
   useEffect(() => {
     const expiryDate = localStorage.getItem('expiryDate');
-    console.log(expiryDate);
     if (expiryDate) {
       const remainingMilliseconds =
         new Date(expiryDate).getTime() - new Date().getTime();
-      console.log(remainingMilliseconds);
       authStore.initAuthStoreReset(remainingMilliseconds);
     }
-  }, [authStore]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <GlobalStyle />

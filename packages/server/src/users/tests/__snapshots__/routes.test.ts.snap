@@ -1,26 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userRoutes /users should throw an error with a status of 409: Conflict when the user credentials are already taken 1`] = `
-Object {
-  "data": Array [
-    Object {
-      "message": "testmail@mail.com is already taken",
-      "path": "email",
-    },
-    Object {
-      "message": "testUserHandle is already taken",
-      "path": "handle",
-    },
-    Object {
-      "message": "username is already taken",
-      "path": "username",
-    },
-  ],
-  "message": "Conflict",
-}
-`;
-
-exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
+exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
 Object {
   "data": Array [
     Object {
@@ -40,7 +20,7 @@ Object {
 }
 `;
 
-exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 2`] = `
+exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 2`] = `
 Object {
   "data": Array [
     Object {
@@ -68,7 +48,27 @@ Object {
 }
 `;
 
-exports[`userRoutes post /users/user/tokens should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
+exports[`userRoutes /users should throw an error with a status of 409: Conflict when the user credentials are already taken 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "testmail@mail.com is already taken",
+      "path": "email",
+    },
+    Object {
+      "message": "testUserHandle is already taken",
+      "path": "handle",
+    },
+    Object {
+      "message": "username is already taken",
+      "path": "username",
+    },
+  ],
+  "message": "Conflict",
+}
+`;
+
+exports[`userRoutes post /users/user/tokens should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
 Object {
   "data": Array [
     Object {
