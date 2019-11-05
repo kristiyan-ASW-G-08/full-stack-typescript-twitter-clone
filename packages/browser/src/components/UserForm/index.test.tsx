@@ -25,7 +25,7 @@ describe('UserForm', () => {
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
   it('render UserForm', async () => {
-    expect.assertions(7);
+    expect.assertions(9);
     const history = createMemoryHistory();
     history.push({
       pathname: ``,
@@ -70,14 +70,16 @@ describe('UserForm', () => {
     userEvent.click(submitButton);
 
     await wait(() => {
+      expect(populateFormData).toHaveBeenCalledTimes(1);
+      expect(populateFormData).toHaveBeenCalledWith({
+        handle: 'newHandle',
+        username: 'newUsername',
+        website: 'https://github.com',
+      });
       expect(axios.patch).toHaveBeenCalledTimes(1);
       expect(axios.patch).toHaveBeenCalledWith(
         'http://localhost:8090/users/user/profile',
-        {
-          handle: 'newHandle',
-          username: 'newUsername',
-          website: 'https://github.com',
-        },
+        new FormData(),
         {
           headers: { Authorization: 'bearer mockToken' },
         },

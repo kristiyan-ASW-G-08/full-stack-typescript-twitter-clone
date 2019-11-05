@@ -11,8 +11,8 @@ export const UserCardWrapper = styled('article')<BorderProps>`
     'img-cover' 12rem
     'container' 8rem/1fr;
   grid-row-gap: 2rem;
-  ${props => props.theme.mixins.border};
-  background: ${props => props.theme.background};
+  ${({ theme }) => theme.mixins.border};
+  background: ${({ theme }) => theme.background};
 `;
 
 export const Cover = styled('div')`
@@ -23,17 +23,17 @@ export const Cover = styled('div')`
 export const HoverContainer = styled('div')`
   position: absolute;
   transform: translateY(6rem);
-  ${props => props.theme.mixins.border}
-  background: ${props => props.theme.background};
+ ${({ theme }) => theme.mixins.border}
+  background:${({ theme }) => theme.background};
   z-index:2;
   border-radius:0.5rem;
 `;
 export const CoverBackground = styled('button')`
   width: 100%;
   height: 100%;
-  ${props => props.theme.mixins.center};
-  ${props => props.theme.mixins.button};
-  background: ${props => props.theme.primary};
+  ${({ theme }) => theme.mixins.center};
+  ${({ theme }) => theme.mixins.button};
+  background: ${({ theme }) => theme.primary};
   font-size: 3rem;
   img {
     width: 100%;
@@ -43,11 +43,11 @@ export const CoverBackground = styled('button')`
 `;
 
 export const AvatarContainer = styled('button')`
-  ${props => props.theme.mixins.button};
-  ${props => props.theme.mixins.center};
+  ${({ theme }) => theme.mixins.button};
+  ${({ theme }) => theme.mixins.center};
   width: 8.5rem;
   height: 8.5rem;
-  background: ${props => props.theme.white};
+  background: ${({ theme }) => theme.white};
   border-radius: 100%;
   transform: translate(1.5rem, -5rem);
 `;
@@ -69,13 +69,13 @@ export const Container = styled('div')`
 export const Username = styled('p')`
   grid-area: username;
   font-size: 2rem;
-  color: ${props => props.theme.dark};
+  color: ${({ theme }) => theme.dark};
   font-weight: bold;
 `;
 export const Handle = styled('p')`
   grid-area: handle;
   font-size: 1.6rem;
-  color: ${props => props.theme.light};
+  color: ${({ theme }) => theme.light};
 `;
 
 export const FollowBar = styled('div')`
@@ -83,13 +83,13 @@ export const FollowBar = styled('div')`
   display: grid;
   grid-template-columns: repeat(auto-fit, 7rem);
   grid-gap: 1rem;
-  color: ${props => props.theme.light};
+  color: ${({ theme }) => theme.light};
   p,
   span {
     font-size: 1.4rem;
   }
   span {
     margin-right: 0.3rem;
-    color: ${props => props.theme.dark};
+    color: ${({ theme }) => theme.dark};
   }
 `;

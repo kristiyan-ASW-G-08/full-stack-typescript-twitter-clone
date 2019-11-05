@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled('div')`
-  ${props => props.theme.mixins.center}
+  margin-top: 7vh;
+  ${({ theme }) => theme.mixins.center}
   width: 100vw;
   min-height: 90vh;
 `;

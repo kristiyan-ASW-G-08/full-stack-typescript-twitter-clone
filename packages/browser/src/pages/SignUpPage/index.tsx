@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import Input from 'components/Input';
-import StyledForm from 'styled/Form';
-import PageContainer from 'styled/PageContainer';
+import { FormWrapper, FieldsWrapper } from 'styled/Form';
+
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore/RootStore';
@@ -48,9 +48,9 @@ export const SignUpPage: FC = () => {
       }}
       onSubmit={submitHandler}
     >
-      <PageContainer>
+      <FormWrapper>
         <Form>
-          <StyledForm>
+          <FieldsWrapper>
             <Logo type="vertical" />
 
             <Input name="username" type="text" placeholder="Username" />
@@ -70,9 +70,9 @@ export const SignUpPage: FC = () => {
             <Button buttonType="primary" type="submit">
               Sign Up
             </Button>
-          </StyledForm>
+          </FieldsWrapper>
         </Form>
-      </PageContainer>
+      </FormWrapper>
     </Formik>
   );
 };

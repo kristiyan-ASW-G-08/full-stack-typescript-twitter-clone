@@ -16,25 +16,26 @@ export const SidebarWrapper = styled('aside')<SidebarProps>`
   z-index: 3;
   width: 100vw;
   height: 100vh;
-  ${props => props.theme.mixins.slide};
-  ${props => (props.isActive ? `animation: slide 200ms ease-in forwards` : '')};
+  ${({ theme }) => theme.mixins.slide};
+  ${({ isActive }) =>
+    isActive ? `animation: slide 200ms ease-in forwards` : ''};
   @media (max-height: 30rem) {
     overflow: scroll;
   }
-  @media ${props => props.theme.mediaQueries.tablet} {
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
     grid-template-columns: 2fr 3fr;
   }
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     display: none;
   }
 `;
 
 export const Backdrop = styled('div')`
-  background: ${props => props.theme.transparentBackground};
+  background: ${({ theme }) => theme.transparentBackground};
 `;
 
 export const Container = styled('div')`
-  background: ${props => props.theme.background};
+  background: ${({ theme }) => theme.background};
 `;
 
 export const SidebarHeader = styled('div')`
@@ -44,7 +45,7 @@ export const SidebarHeader = styled('div')`
     ' . . . ' 1fr
     'logo logo logo ' 3fr
     ' authentication-bar . .' 1fr/1fr 1fr 1fr;
-  ${props => props.theme.mixins.border}
+  ${({ theme }) => theme.mixins.border}
 `;
 
 export const AuthenticatedSidebarHeader = styled('div')`
@@ -54,24 +55,24 @@ export const AuthenticatedSidebarHeader = styled('div')`
   grid-gap: 0.2rem;
   padding-top: 3rem;
   padding-left: 0.7rem;
-  ${props => props.theme.mixins.border}
+  ${({ theme }) => theme.mixins.border}
   
   h3 {
     font-size: 1.3rem;
-    color: ${props => props.theme.color}
+    color: ${({ theme }) => theme.color}
   }
   h4 {
     font-size: 1rem;
-    color: ${props => props.theme.secondary};
+    color: ${({ theme }) => theme.secondary};
   }
   button {
     font-size: 1.1rem;
     font-weight: bold;
     background: none;
-    ${props => props.theme.mixins.button}
-    color: ${props => props.theme.secondary};
+    ${({ theme }) => theme.mixins.button}
+    color: ${({ theme }) => theme.secondary};
     span {
-      color: ${props => props.theme.dark};
+      color: ${({ theme }) => theme.dark};
     }
     margin-right: 0.7rem;
   }
@@ -102,14 +103,14 @@ export const AuthenticationBar = styled('div')`
   span {
     display: block;
     text-align: center;
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.primary};
   }
   button {
-    ${props => props.theme.mixins.button}
+    ${({ theme }) => theme.mixins.button}
     background: none;
 
     a {
-      color: ${props => props.theme.color};
+      color: ${({ theme }) => theme.color};
     }
   }
 `;
@@ -129,7 +130,7 @@ export const SidebarList = styled('ul')`
   height: 60%;
   min-height: 30rem;
   margin-bottom: 1rem;
-  ${props => props.theme.mixins.border};
+  ${({ theme }) => theme.mixins.border};
   border-top: none;
   border-left: none;
   li {
@@ -147,11 +148,12 @@ export const SidebarButton = styled('button')`
   display: flex;
   flex-flow: row;
   background:none;
-  ${props => props.theme.mixins.flexCenter}
+  ${({ theme }) => theme.mixins.flexCenter}
   border: none;
-  ${props => props.theme.mixins.button}
-  color: ${props => props.theme.color};
+  ${({ theme }) => theme.mixins.button}
+  color:   ${({ theme }) => theme.color};
    
+ 
   p {
     display: block;
     font-size: 1.3rem;

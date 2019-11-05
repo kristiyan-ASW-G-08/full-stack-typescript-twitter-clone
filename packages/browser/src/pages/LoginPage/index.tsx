@@ -4,8 +4,7 @@ import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
-import StyledForm from 'styled/Form';
-import PageContainer from 'styled/PageContainer';
+import { FormWrapper, FieldsWrapper } from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore/RootStore';
@@ -50,9 +49,9 @@ export const LoginPage: FC = () => {
       initialValues={{ email: '', password: '' }}
       onSubmit={submitHandler}
     >
-      <PageContainer>
+      <FormWrapper>
         <Form>
-          <StyledForm>
+          <FieldsWrapper>
             <Logo type="vertical" />
 
             <Input name="email" type="email" placeholder="Email address" />
@@ -62,9 +61,9 @@ export const LoginPage: FC = () => {
             <Button buttonType="primary" type="submit">
               Log In
             </Button>
-          </StyledForm>
+          </FieldsWrapper>
         </Form>
-      </PageContainer>
+      </FormWrapper>
     </Formik>
   );
 };

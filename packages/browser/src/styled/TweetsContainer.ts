@@ -5,7 +5,7 @@ export const TweetsContainer = styled('section')`
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     width: 50vw;
   }
 `;

@@ -14,14 +14,14 @@ export const TweetsWrapper = styled('section')<TweetsWrapperProps>`
     0.1rem 5rem 1fr;
   grid-gap: 1rem;
   padding-top: 1rem;
-  background: ${props => props.theme.background};
-  @media ${props => props.theme.mediaQueries.tablet} {
+  background: ${({ theme }) => theme.background};
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 80vw;
     margin-top: 1rem;
-    ${props => props.theme.mixins.border}
-    ${props => (props.hasBorderRadius ? `border-radius:1rem` : '')};
+    ${({ theme }) => theme.mixins.border}
+    ${({ hasBorderRadius }) => (hasBorderRadius ? `border-radius:1rem` : '')};
   }
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     width: 60rem;
   }
 `;
@@ -35,25 +35,22 @@ export const Tweets = styled('div')`
 
 export const TextLoader = styled('div')`
   grid-area: loader;
-  ${props => props.theme.mixins.center};
-  p {
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.7rem;
-    color: ${props => props.theme.secondary};
-  }
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.7rem;
+  color: ${({ theme }) => theme.secondary};
 `;
 export const Select = styled('select')`
   grid-area: select;
-  ${props => props.theme.mixins.button};
-  ${props => props.theme.mixins.center};
+  ${({ theme }) => theme.mixins.button};
+  ${({ theme }) => theme.mixins.center};
   display: block;
   text-align: center;
   text-align-last: center;
-  background: ${props =>
-    props.theme.theme === 'light' ? props.theme.secondary : props.theme.light};
-  color: ${props =>
-    props.theme.theme === 'light' ? props.theme.light : props.theme.secondary};
+  background: ${({ theme }) =>
+    theme.theme === 'light' ? theme.secondary : theme.light};
+  color: ${({ theme }) =>
+    theme.theme === 'light' ? theme.light : theme.secondary};
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: bold;

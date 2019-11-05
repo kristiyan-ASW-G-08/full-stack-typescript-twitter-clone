@@ -14,7 +14,7 @@ storiesOf('Avatar', module)
   })
   .add(
     'light theme - default avatar - large size',
-    () => <Avatar size={'large'} />,
+    () => <Avatar size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'light' },
@@ -22,7 +22,7 @@ storiesOf('Avatar', module)
   )
   .add(
     'light theme - custom avatar - large size',
-    () => <Avatar avatarURL={Logo} size={'large'} />,
+    () => <Avatar avatarURL={Logo} size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'light' },
@@ -38,7 +38,7 @@ storiesOf('Avatar', module)
   })
   .add(
     'dark theme - default avatar - large size',
-    () => <Avatar size={'large'} />,
+    () => <Avatar size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'dark' },
@@ -46,7 +46,7 @@ storiesOf('Avatar', module)
   )
   .add(
     'dark theme - custom avatar - large size',
-    () => <Avatar avatarURL={Logo} size={'large'} />,
+    () => <Avatar avatarURL={Logo} size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'dark' },

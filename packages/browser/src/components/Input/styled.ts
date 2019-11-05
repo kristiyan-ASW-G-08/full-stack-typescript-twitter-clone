@@ -10,10 +10,10 @@ export const InputWrapper = styled('div')`
     border: none;
     border-radius: 0.5rem;
     width: 100%;
-    background-color: ${props => props.theme.light};
-    color: ${props => props.theme.secondary};
+    background-color: ${({ theme }) => theme.light};
+    color: ${({ theme }) => theme.secondary};
     ::placeholder {
-      color: ${props => props.theme.dark};
+      color: ${({ theme }) => theme.dark};
     }
   }
   textarea {
@@ -22,7 +22,7 @@ export const InputWrapper = styled('div')`
   label {
     display: block;
     padding: 1rem;
-    color: ${props => props.theme.like};
+    color: ${({ theme }) => theme.like};
     font-size: 1.3rem;
     font-weight: bold;
   }

@@ -26,7 +26,6 @@ describe('TweetsContainer', () => {
 
   it('render TweetsContainer', async () => {
     expect.assertions(14);
-
     const { container, getByRole, getByTestId } = render(
       <TweetsContainer
         token={token}
@@ -52,7 +51,6 @@ describe('TweetsContainer', () => {
     const options = ['trending', 'new', 'top', 'replies'];
     options.forEach(option => {
       const sortOption = getByTestId(option) as HTMLOptionElement;
-
       act(() => UserEvent.selectOptions(sortSelect, option));
       expect(sortOption.selected).toBe(true);
       expect(getTweets).toHaveBeenCalledWith(`${url}?sort=${option}`, token);

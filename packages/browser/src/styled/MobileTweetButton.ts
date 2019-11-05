@@ -4,18 +4,18 @@ export const MobileTweetButton = styled('button')`
   position: fixed;
   z-index: 2;
   transform: translate(85vw, 80vh);
-  ${props => props.theme.mixins.button}
+  ${({ theme }) => theme.mixins.button}
   border-radius:100%;
   width: 5rem;
   height: 5rem;
-  background: ${props => props.theme.primary};
-  color: ${props => props.theme.white};
+  background: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.white};
   font-size: 2rem;
   :hover {
-    background: ${props => props.theme.white};
-    color: ${props => props.theme.primary};
+    background: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.primary};
   }
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     display: none;
   }
 `;

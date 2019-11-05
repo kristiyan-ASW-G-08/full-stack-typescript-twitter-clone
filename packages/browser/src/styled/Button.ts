@@ -1,33 +1,23 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
-  buttonType: 'primary' | 'secondary' | 'transparent';
+  buttonType: 'primary' | 'secondary';
 }
+
 export const Button = styled('button')<ButtonProps>`
-  height: 2.7rem;
+  ${({ theme }) => theme.mixins.button};
+  height: 2.4rem;
   min-width: 7rem;
-  padding: 0 1rem 0 1rem;
-  ${props => props.theme.mixins.button};
+  padding: 0 0.7rem 0 0.7rem;
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
-  color: ${props => props.theme.white};
+  color: ${({ theme }) => theme.white};
   border-radius: 3rem;
-  background: ${props => {
-    const color = props.theme[props.buttonType];
-    return color;
-  }};
+  background: ${({ theme, buttonType }) => theme[buttonType]};
   :hover {
-    background: ${props => props.theme.white};
-    color: ${props => {
-      const color = props.theme[props.buttonType];
-      return color || props.theme.primary;
-    }};
-
-    ${props =>
-      props.buttonType === 'transparent'
-        ? `border:solid 0.1rem ${props.theme.primary}`
-        : ''}
+    background: ${({ theme }) => theme.white};
+    color: ${({ theme, buttonType }) => theme[buttonType]};
   }
   a {
     color: inherit;

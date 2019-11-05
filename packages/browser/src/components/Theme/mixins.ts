@@ -4,13 +4,13 @@ interface BorderProps {
   direction?: 'top' | 'bottom' | 'right' | 'left';
 }
 const border = css<BorderProps>`
-  ${props => (props.direction ? `border-${props.direction}` : 'border')}: solid
-    1px ${props => props.theme.border};
+  ${({ direction }) => (direction ? `border-${direction}` : 'border')}: solid
+    1px ${({ theme }) => theme.border};
 `;
 
 const center = css`
   display: grid;
-  place-items: center center;
+  place-content: center center;
 `;
 const flexCenter = css`
   display: flex;
@@ -37,8 +37,8 @@ const button = css`
 const form = css`
   width: 95vw;
   padding: 2rem;
-  background: ${props => props.theme.background};
-  ${props => props.theme.mixins.border}
+  background: ${({ theme }) => theme.background};
+  ${({ theme }) => theme.mixins.border}
   border-radius: 10px;
 `;
 const mixins = {

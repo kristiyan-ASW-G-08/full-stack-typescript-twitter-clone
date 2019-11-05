@@ -14,7 +14,7 @@ storiesOf('Input', module)
         }}
       >
         {() => (
-          <Form>
+          <Form style={{ width: '300px', textAlign: 'center' }}>
             <Input name="username" type="text" placeholder="Username" />
           </Form>
         )}
@@ -35,7 +35,7 @@ storiesOf('Input', module)
         }}
       >
         {() => (
-          <Form>
+          <Form style={{ width: '300px', textAlign: 'center' }}>
             <Input name="username" type="text" placeholder="Username" />
           </Form>
         )}

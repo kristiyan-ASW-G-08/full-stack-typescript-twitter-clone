@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Normalize } from 'styled-normalize';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from 'components/Routes';
-import StyledApp from 'styled/App';
+import AppWrapper from 'styled/App';
 import RootStoreContext from 'stores/RootStore/RootStore';
 import Theme from 'components/Theme/Theme';
 import GlobalStyle from 'styled/GlobalStyle';
@@ -27,11 +27,11 @@ const App: FC = observer(() => {
       <Normalize />
       <Theme currentTheme={theme}>
         <React.StrictMode>
-          <StyledApp>
+          <AppWrapper>
             <BrowserRouter>
               <Routes />
             </BrowserRouter>
-          </StyledApp>
+          </AppWrapper>
         </React.StrictMode>
       </Theme>
     </>

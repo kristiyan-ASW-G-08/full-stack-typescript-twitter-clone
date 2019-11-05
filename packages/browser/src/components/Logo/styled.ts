@@ -6,8 +6,8 @@ interface LogoWrapperProps {
 export const LogoWrapper = styled('div')<LogoWrapperProps>`
   display: grid;
   align-items: center;
-  ${props =>
-    props.type === 'horizontal'
+  ${({ type }) =>
+    type === 'horizontal'
       ? 'grid-template-columns: auto auto'
       : 'grid-template-columns:1fr; justify-items:center '};
 
@@ -18,13 +18,13 @@ export const LogoWrapper = styled('div')<LogoWrapperProps>`
 export const LogoText = styled('h1')<LogoWrapperProps>`
   font-size: 2rem;
   font-weight: bold;
-  color: ${props => props.theme.primary};
-  @media ${props => props.theme.mediaQueries.mobile} {
-    ${props => (props.type === 'horizontal' ? ' display: none' : '')}
+  color: ${({ theme }) => theme.primary};
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
+    ${({ type }) => (type === 'horizontal' ? ' display: none' : '')}
   }
 `;
 
 export const LogoSpan = styled('span')`
   font-size: 2rem;
-  color: ${props => props.theme.color};
+  color: ${({ theme }) => theme.color};
 `;

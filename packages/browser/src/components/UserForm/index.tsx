@@ -3,7 +3,7 @@ import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import UserProfileValidator from '@twtr/common/source/schemaValidators/UserProfileValidator';
-import ImageInput from 'components/ImageInput';
+import ImageInput from 'components/ImageUploadButton';
 import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
@@ -93,13 +93,13 @@ export const UserForm: FC<UserFormProps> = ({
             <ImageInput
               name="avatar"
               setFieldValue={setFieldValue}
-              text="Upload avatar photo"
+              buttonText="Upload avatar photo"
             />
 
             <ImageInput
               name="cover"
               setFieldValue={setFieldValue}
-              text="Upload cover photo"
+              buttonText="Upload cover photo"
             />
             <Button buttonType="primary" type="submit">
               Save Changes

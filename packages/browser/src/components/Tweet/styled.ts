@@ -9,8 +9,8 @@ export const TweetWrapper = styled('article')`
     '  .   content content' minmax(min-content, max-content)
     'tweet-bar tweet-bar tweet-bar ' 1fr/1fr 7fr 1fr;
   grid-row-gap: 0.3rem;
-  background: ${props => props.theme.background};
-  ${props => props.theme.mixins.border};
+  background: ${({ theme }) => theme.background};
+  ${({ theme }) => theme.mixins.border};
   border-top: none;
   border-left: none;
   border-right: none;
@@ -25,7 +25,7 @@ export const UserBar = styled('div')`
     'reply reply .' auto/1fr 1fr 1fr;
   grid-gap: 0.5rem;
   align-items: end;
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     grid:
       'username handle time .' auto
       'reply reply . . ' auto/1fr 1fr 1fr 2fr;
@@ -33,24 +33,24 @@ export const UserBar = styled('div')`
 `;
 
 export const AvatarContainer = styled('div')`
-  ${props => props.theme.mixins.center}
+  ${({ theme }) => theme.mixins.center}
   grid-area: avatar;
 `;
 export const Username = styled('h3')`
   grid-area: username;
-  color: ${props => props.theme.color};
+  color: ${({ theme }) => theme.color};
   font-size: 1.4rem;
   font-weight: bold;
 `;
 export const Handle = styled('h4')`
   grid-area: handle;
-  color: ${props => props.theme.dark};
+  color: ${({ theme }) => theme.dark};
   font-size: 1.2rem;
 `;
 
 export const Time = styled('time')`
   grid-area: time;
-  color: ${props => props.theme.dark};
+  color: ${({ theme }) => theme.dark};
   font-size: 1.2rem;
 `;
 
@@ -66,24 +66,24 @@ export const ContentContainer = styled('div')`
 
 export const Text = styled('p')`
   display: block;
-  color: ${props => props.theme.color};
+  color: ${({ theme }) => theme.color};
   overflow-wrap: break-word;
 `;
 
 export const Reply = styled('p')`
   grid-area: reply;
   display: block;
-  color: ${props => props.theme.secondary};
+  color: ${({ theme }) => theme.secondary};
   font-size: 1.2rem;
   span {
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.primary};
     font-size: inherit;
   }
 `;
 
 export const Link = styled('a')`
   display: block;
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
 `;
 export const Img = styled('img')`
   height: 15rem;

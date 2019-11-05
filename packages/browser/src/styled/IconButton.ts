@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const IconButton = styled('button')`
   background: none;
-  ${props => props.theme.mixins.button};
+  ${({ theme }) => theme.mixins.button};
   font-size: 2.3rem;
   font-weight: bold;
   text-align: center;
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
   :hover {
-    color: ${props => props.theme.color};
+    color: ${({ theme }) => theme.color};
   }
   a {
     color: inherit;

@@ -4,7 +4,7 @@ export const NotificationWrapper = styled('div')`
   position: fixed;
   z-index: 2;
   width: 100vw;
-  ${props => props.theme.mixins.flexCenter}
+  ${({ theme }) => theme.mixins.flexCenter}
   pointer-events: none;
 `;
 
@@ -16,10 +16,13 @@ export const NotificationContent = styled('p')<NotificationContentProps>`
   position: fixed;
   transform: translateY(20vh);
   color: ${props => props.theme.white};
-  background: ${props =>
-    props.notificationType === 'message'
-      ? props.theme.primary
-      : props.theme.like};
+  background: ${({ notificationType, theme }) => {
+    const type = {
+      message: theme.primary,
+      warning: theme.like,
+    };
+    return type[notificationType];
+  }};
   border-radius: 5px;
   padding: 1rem 2rem 1rem 2rem;
   font-size: 1.2rem;

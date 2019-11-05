@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalWrapper = styled('div')`
-  ${props => props.theme.mixins.center}
+  ${({ theme }) => theme.mixins.center}
   overflow: hidden;
 `;
 export const Backdrop = styled('div')`
@@ -9,6 +9,6 @@ export const Backdrop = styled('div')`
   z-index: 3;
   width: 100vw;
   min-height:100vh;
-  ${props => props.theme.mixins.center}
-  background: ${props => props.theme.transparentBackground};
+  ${({ theme }) => theme.mixins.center}
+  background: ${({ theme }) => theme.transparentBackground};
 `;

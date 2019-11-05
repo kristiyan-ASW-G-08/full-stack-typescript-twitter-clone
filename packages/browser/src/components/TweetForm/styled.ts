@@ -7,9 +7,9 @@ export const TweetFormWrapper = styled('div')`
     'avatar input input input .' 1fr
     'avatar  input input input .' 1fr
     '. buttons buttons tw-button . ' 2rem/4rem 10fr 10fr 10fr 0.3rem
-    ${props => props.theme.mixins.form};
+    ${({ theme }) => theme.mixins.form};
   row-gap: 1rem;
-  @media ${props => props.theme.mediaQueries.tablet} {
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 50rem;
   }
 `;

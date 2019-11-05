@@ -22,9 +22,6 @@ const Portal = lazy(() => import('components/Portal'));
 const Notification = lazy(() => import('components/Notification'));
 const TweetForm = lazy(() => import('components/TweetForm'));
 const UserForm = lazy(() => import('components/UserForm'));
-const UserCustomizationForm = lazy(() =>
-  import('components/UserCustomizationForm'),
-);
 
 const Router: FC = observer(
   (): JSX.Element => {

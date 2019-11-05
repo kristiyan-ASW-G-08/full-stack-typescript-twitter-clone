@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const ProfileWrapper = styled('section')`
-  @media ${props => props.theme.mediaQueries.desktop} {
+  margin-top: 7vh;
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     padding-top: 2rem;
     display: grid;
     grid:
@@ -13,18 +14,18 @@ export const ProfileWrapper = styled('section')`
 
 export const UserCardWrapper = styled('div')`
   grid-area: user-card;
-  @media ${props => props.theme.mediaQueries.tablet} {
-    ${props => props.theme.mixins.center}
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    ${({ theme }) => theme.mixins.center}
     background:red;
   }
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     width: auto;
   }
 `;
 
 export const TweetsWrapper = styled('div')`
   grid-area: tweets;
-  @media ${props => props.theme.mediaQueries.desktopMax} {
-    ${props => props.theme.mixins.center};
+  @media ${({ theme }) => theme.mediaQueries.desktopMax} {
+    ${({ theme }) => theme.mixins.center};
   }
 `;

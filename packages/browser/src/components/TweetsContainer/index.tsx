@@ -61,9 +61,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     }
   };
   const { setElement } = useIntersection(loadNext);
-
   useEffect(() => {
-    console.log(url, 'setQuery');
     setQuery(`${url}?sort=new`);
   }, [url]);
   useEffect(() => {
@@ -97,7 +95,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
-        <Suspense fallback={<TextLoader>...Loading</TextLoader>}>
+        <Suspense fallback="">
           <Select data-testid="sort" onChange={getTweetsHandler}>
             <option data-testid="new" value="new">
               New

@@ -12,9 +12,9 @@ const getSize = (size: 'small' | 'medium' | 'large' = 'small'): string => {
   return sizes[size];
 };
 export const AvatarWrapper = styled('div')<AvatarProps>`
-  ${props => props.theme.mixins.center};
-  height: ${props => getSize(props.size)};
-  width: ${props => getSize(props.size)};
+  ${({ theme }) => theme.mixins.center};
+  height: ${({ size }) => getSize(size)};
+  width: ${({ size }) => getSize(size)};
   border: none;
   border-radius: 100%;
   background: none;
@@ -27,8 +27,8 @@ export const AvatarWrapper = styled('div')<AvatarProps>`
 `;
 
 export const IconContainer = styled('div')<AvatarProps>`
-  font-size: ${props => getSize(props.size)};
-  ${props => props.theme.mixins.center}
+  font-size: ${({ size }) => getSize(size)};
+  ${({ theme }) => theme.mixins.center};
   width: 100%;
   height: 100%;
   border-radius: 100%;

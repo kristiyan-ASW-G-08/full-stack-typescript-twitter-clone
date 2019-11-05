@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
-export const TweetPageWrapper = styled('h1')`
+export const TweetPageWrapper = styled('div')`
+  margin-top: 1rem;
   display: grid;
   justify-items: center;
   overflow: auto;
-  background: ${props => props.theme.background};
+  background: ${({ theme }) => theme.background};
   border-radius: 10px;
-
-  @media ${props => props.theme.mediaQueries.mobile} {
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
     width: 100vw;
   }
-  @media ${props => props.theme.mediaQueries.tablet} {
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 70vw;
   }
-  @media ${props => props.theme.mediaQueries.desktop} {
+  @media ${({ theme }) => theme.mediaQueries.desktop} {
     width: 60rem;
   }
 `;
@@ -23,5 +23,5 @@ export const P = styled('p')`
   font-size: 1.5rem;
   padding: 1rem;
   text-align: center;
-  color: ${props => props.theme.color};
+  color: ${({ theme }) => theme.color};
 `;

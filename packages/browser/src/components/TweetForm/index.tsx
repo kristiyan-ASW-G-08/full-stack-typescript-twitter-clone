@@ -9,7 +9,7 @@ import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import Notification from 'types/Notification';
-import ImageInput from 'components/ImageInput';
+import ImageInput from 'components/ImageUploadButton';
 
 import populateFormData from 'utilities/populateFormData';
 import transformValidationErrors from 'utilities/transformValidationErrors';

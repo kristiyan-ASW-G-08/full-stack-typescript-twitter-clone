@@ -8,10 +8,10 @@ export const UserItemWrapper = styled('li')`
     grid-template-columns: 1fr 7fr;
     align-items: center;
     padding: 0.5rem;
-    background: ${props => props.theme.background};
-    color: ${props => props.theme.primary};
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.primary};
     border-radius: 0.3rem;
-    ${props => props.theme.mixins.border}
+    ${({ theme }) => theme.mixins.border}
   }
 `;
 export default UserItemWrapper;

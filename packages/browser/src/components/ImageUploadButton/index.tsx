@@ -8,9 +8,13 @@ import { getFile, clickHandler } from './handlers';
 interface InputProps {
   name: string;
   setFieldValue: (...args: any) => any;
-  text?: string;
+  buttonText?: string;
 }
-export const ImageInput: FC<InputProps> = ({ name, setFieldValue, text }) => {
+export const ImageUploadButton: FC<InputProps> = ({
+  name,
+  setFieldValue,
+  buttonText,
+}) => {
   const [fileUrl, setFileUrl] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
   const uploadHandler = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -30,11 +34,11 @@ export const ImageInput: FC<InputProps> = ({ name, setFieldValue, text }) => {
         hidden
       />
       <UploadButton type="button" onClick={() => clickHandler(inputRef)}>
-        {text || 'Upload photo'}
+        {buttonText || 'Upload photo'}
       </UploadButton>
       <ErrorMessage component="label" name={name} />
     </InputWrapper>
   );
 };
 
-export default ImageInput;
+export default ImageUploadButton;

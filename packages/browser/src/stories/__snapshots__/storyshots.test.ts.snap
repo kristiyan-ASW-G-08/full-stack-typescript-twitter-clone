@@ -57,12 +57,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa gEOqjc"
+      className="sc-bdVaJa bByTTE"
       size="large"
     >
       <img
         alt="avatar"
-        src="logo-primary.svg"
+        src="http://localhost:8090/logo-primary.svg"
       />
     </div>
   </div>,
@@ -775,12 +775,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa cgkugK"
+      className="sc-bdVaJa hUtEbw"
       size="small"
     >
       <img
         alt="avatar"
-        src="logo-primary.svg"
+        src="http://localhost:8090/logo-primary.svg"
       />
     </div>
   </div>,
@@ -1464,7 +1464,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa gEOqjc"
+      className="sc-bdVaJa bByTTE"
       size="large"
     >
       <div
@@ -2171,7 +2171,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa cgkugK"
+      className="sc-bdVaJa hUtEbw"
       size="small"
     >
       <div
@@ -2852,12 +2852,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa gEOqjc"
+      className="sc-bdVaJa bByTTE"
       size="large"
     >
       <img
         alt="avatar"
-        src="logo-primary.svg"
+        src="http://localhost:8090/logo-primary.svg"
       />
     </div>
   </div>,
@@ -3570,12 +3570,12 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa cgkugK"
+      className="sc-bdVaJa hUtEbw"
       size="small"
     >
       <img
         alt="avatar"
-        src="logo-primary.svg"
+        src="http://localhost:8090/logo-primary.svg"
       />
     </div>
   </div>,
@@ -4259,7 +4259,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa gEOqjc"
+      className="sc-bdVaJa bByTTE"
       size="large"
     >
       <div
@@ -4966,7 +4966,7 @@ Array [
     style={Object {}}
   >
     <div
-      className="sc-bdVaJa cgkugK"
+      className="sc-bdVaJa hUtEbw"
       size="small"
     >
       <div
@@ -7817,7 +7817,7 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-bxivhb iJxEyv"
+        className="sc-bxivhb ghwijQ"
       >
         <input
           name="username"
@@ -8812,7 +8812,7 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-bxivhb fhZgNJ"
+        className="sc-bxivhb ZIrCd"
       >
         <input
           name="username"

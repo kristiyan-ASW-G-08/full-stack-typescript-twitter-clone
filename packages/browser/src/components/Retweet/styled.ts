@@ -10,7 +10,7 @@ export const RetweetText = styled('div')`
   align-content: start;
   font-size: 1.2rem;
   padding: 1rem;
-  color: ${props => props.theme.dark};
+  color: ${({ theme }) => theme.dark};
   p {
     margin-left: 0.5rem;
     font-size: 1.3rem;

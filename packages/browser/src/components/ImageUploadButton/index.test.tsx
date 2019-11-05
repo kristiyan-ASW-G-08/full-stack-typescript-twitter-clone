@@ -17,16 +17,21 @@ getFileMock.mockReturnValue({ fileUrl: 'mockFileUrl', file: mockFile });
 describe('ImageInput', () => {
   const name = 'image';
   const setFieldValue = jest.fn();
+  const buttonText = 'Upload avatar';
   afterAll(() => jest.restoreAllMocks());
   it('render ImageInput', () => {
     expect.assertions(3);
     const { getByTestId, getByText } = render(
-      <ImageInput name={name} setFieldValue={setFieldValue} />,
+      <ImageInput
+        name={name}
+        setFieldValue={setFieldValue}
+        buttonText={buttonText}
+      />,
       {
         wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },
     );
-    const uploadButton = getByText(`Upload ${name}`);
+    const uploadButton = getByText(buttonText);
     const imageInput = getByTestId('input');
     userEvent.click(uploadButton);
 
