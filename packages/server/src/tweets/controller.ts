@@ -175,7 +175,8 @@ export const getUserTweets = async (
       .sort(sortString)
       .skip((page - 1) * limit)
       .limit(limit);
-    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
+    const tweetsCount =
+      (await Tweet.countDocuments({ user: userId })) - page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
@@ -208,7 +209,8 @@ export const getReplies = async (
       .sort(sortString)
       .skip((page - 1) * limit)
       .limit(limit);
-    const repliesCount = (await Tweet.countDocuments()) - page * limit;
+    const repliesCount =
+      (await Tweet.countDocuments({ reply: tweetId })) - page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
@@ -241,7 +243,9 @@ export const getUserReplies = async (
       .sort(sortString)
       .skip((page - 1) * limit)
       .limit(limit);
-    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
+    const tweetsCount =
+      (await Tweet.countDocuments({ user: userId, type: 'reply' })) -
+      page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,

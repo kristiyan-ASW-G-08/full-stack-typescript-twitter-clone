@@ -531,8 +531,7 @@ export const getUserFeed = async (
       .skip((page - 1) * limit)
       .limit(limit);
     const tweetsCount =
-      (await Tweet.find({ user: { $in: following } }).countDocuments()) -
-      page * limit;
+      (await Tweet.countDocuments({ user: { $in: following } })) - page * limit;
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,

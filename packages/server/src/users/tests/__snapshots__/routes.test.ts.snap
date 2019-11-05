@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "email must be a valid email",
+      "path": "email",
+    },
+    Object {
+      "message": "password must be at least 12 characters",
+      "path": "password",
+    },
+    Object {
+      "message": "Passwords don't match",
+      "path": "confirmPassword",
+    },
+  ],
+  "message": "Request has wrong format",
+}
+`;
+
+exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 2`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "username is a required field",
+      "path": "username",
+    },
+    Object {
+      "message": "handle is a required field",
+      "path": "handle",
+    },
+    Object {
+      "message": "email is a required field",
+      "path": "email",
+    },
+    Object {
+      "message": "password is a required field",
+      "path": "password",
+    },
+    Object {
+      "message": "confirmPassword is a required field",
+      "path": "confirmPassword",
+    },
+  ],
+  "message": "Request has wrong format",
+}
+`;
+
+exports[`userRoutes /users should throw an error with a status of 409: Conflict when the user credentials are already taken 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "testmail@mail.com is already taken",
+      "path": "email",
+    },
+    Object {
+      "message": "testUserHandle is already taken",
+      "path": "handle",
+    },
+    Object {
+      "message": "username is already taken",
+      "path": "username",
+    },
+  ],
+  "message": "Conflict",
+}
+`;
+
+exports[`userRoutes post /users/user/tokens should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "message": "email is a required field",
+      "path": "email",
+    },
+    Object {
+      "message": "password is a required field",
+      "path": "password",
+    },
+  ],
+  "message": "Request has wrong format",
+}
+`;
