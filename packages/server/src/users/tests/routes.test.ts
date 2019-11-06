@@ -920,6 +920,67 @@ describe('userRoutes', (): void => {
         expect(user._id.toString()).toMatch(userId.toString());
       });
     });
+    describe('get /users/:userId/following ', (): void => {
+      it('should get a list of users', async (): Promise<void> => {
+        expect.assertions(3);
+        const followedUser = new User({
+          username: 'followedUser',
+          handle: 'followedUserHandle',
+          email: 'followedUserMail@mail.com',
+          password,
+        });
+        await followedUser.save();
+        const followedUserId = followedUser._id.toString();
+        testUser.following = [followedUserId];
+        await testUser.save();
+        const userId = testUser._id;
+        const response = await request(app).get(`/users/${userId}/following`);
+        const { users } = response.body.data;
+        expect(response.status).toBe(200);
+        expect(users).toHaveLength(1);
+        expect(users[0]._id).toMatch(followedUserId);
+      });
+
+      it('should throw an error with a status of 404: NotFound when the user is not found', async (): Promise<
+        void
+      > => {
+        expect.assertions(1);
+        const userId = mongoose.Types.ObjectId();
+        const token = jwt.sign(
+          {
+            userId,
+          },
+          secret,
+          { expiresIn: '1h' },
+        );
+        const response = await request(app).get(`/users/${userId}/following`);
+        expect(response.status).toBe(404);
+      });
+    });
+
+    describe('get /users/:userId/followers ', (): void => {
+      it('should get a list of users', async (): Promise<void> => {
+        // expect.assertions(3);
+        const followedUser = new User({
+          username: 'followedUser',
+          handle: 'followedUserHandle',
+          email: 'followedUserMail@mail.com',
+          password,
+        });
+        await followedUser.save();
+        const followedUserId = followedUser._id.toString();
+        testUser.following = [followedUserId];
+        await testUser.save();
+        const userId = testUser._id;
+        const response = await request(app).get(
+          `/users/${followedUserId}/followers`,
+        );
+        const { users } = response.body.data;
+        expect(response.status).toBe(200);
+        expect(users).toHaveLength(1);
+        expect(users[0]._id).toMatch(userId.toString());
+      });
+    });
     describe('delete /users', (): void => {
       it('should delete a user', async (): Promise<void> => {
         expect.assertions(1);
