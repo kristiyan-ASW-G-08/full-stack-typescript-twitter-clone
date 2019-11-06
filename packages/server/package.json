@@ -1,6 +1,6 @@
 {
   "name": "@twtr/server",
-  "version": "1.0.244",
+  "version": "1.0.245",
   "main": "index.js",
   "author": "Kristiyan Todorov",
   "license": "MIT",
