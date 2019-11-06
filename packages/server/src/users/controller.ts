@@ -572,3 +572,94 @@ export const getUser = async (
     passErrorToNext(err, next);
   }
 };
+
+export const getUserFollowing = async (
+  { params, pagination }: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { page, limit, sort, sortString } = pagination;
+    const { userId } = params;
+    const user = await getUserById(userId);
+    const { SERVER_URL } = process.env;
+    const populatedUser = await user
+      .populate({
+        path: 'following',
+        options: {
+          sort: sortString,
+          skip: (page - 1) * limit,
+          limit,
+          select: 'username handle avatar cover website following followers',
+        },
+      })
+      .execPopulate();
+    const { following } = populatedUser;
+    const count = following.length - page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (count > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/following?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/following?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({
+      data: {
+        users: following,
+        links,
+      },
+    });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};
+
+export const getUserFollowers = async (
+  { params, pagination }: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { page, limit, sort, sortString } = pagination;
+    const { userId } = params;
+    const { SERVER_URL } = process.env;
+    const users = await User.countDocuments()
+      .find({
+        following: { $in: [userId] },
+      })
+      .sort(sortString)
+      .select('username handle avatar cover website following followers')
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const usersCount =
+      (await User.countDocuments({
+        following: { $in: [userId] },
+      })) -
+      page * limit;
+    const links: { next: null | string; prev: null | string } = {
+      next: null,
+      prev: null,
+    };
+    if (usersCount > 0) {
+      links.next = `${SERVER_URL}/users/${userId}/followers?page=${page +
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    if (page > 1) {
+      links.prev = `${SERVER_URL}/users/${userId}/followers?page=${page -
+        1}&limit=${limit}&sort=${sort}`;
+    }
+    res.status(200).json({
+      data: {
+        users,
+        links,
+      },
+    });
+  } catch (err) {
+    passErrorToNext(err, next);
+  }
+};

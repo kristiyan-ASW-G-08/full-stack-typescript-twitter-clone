@@ -16,6 +16,8 @@ import {
   getUserLikes,
   getUserFeed,
   getUser,
+  getUserFollowing,
+  getUserFollowers,
 } from 'src/users/controller';
 import UserSignUpValidator from '@twtr/common/source/schemaValidators/UserSignUpValidator';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
@@ -109,5 +111,19 @@ router.get(
 );
 
 router.get('/users/user/:userId', getUser);
+
+router.get(
+  '/users/:userId/following',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  paginate,
+  getUserFollowing,
+);
+
+router.get(
+  '/users/:userId/followers',
+  validate([{ schema: SortStringValidator, target: 'query' }]),
+  paginate,
+  getUserFollowers,
+);
 
 export default router;
