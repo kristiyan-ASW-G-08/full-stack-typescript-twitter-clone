@@ -18,23 +18,13 @@ export const UserCardWrapper = styled('article')<BorderProps>`
 export const Cover = styled('div')`
   width: 100%;
   grid-area: img-cover;
-  position: relative;
 `;
-export const HoverContainer = styled('div')`
-  position: absolute;
-  transform: translateY(6rem);
- ${({ theme }) => theme.mixins.border}
-  background:${({ theme }) => theme.background};
-  z-index:2;
-  border-radius:0.5rem;
-`;
-export const CoverBackground = styled('button')`
+
+export const CoverBackground = styled('div')`
   width: 100%;
   height: 100%;
   ${({ theme }) => theme.mixins.center};
-  ${({ theme }) => theme.mixins.button};
   background: ${({ theme }) => theme.primary};
-  font-size: 3rem;
   img {
     width: 100%;
     height: 100%;
@@ -42,8 +32,7 @@ export const CoverBackground = styled('button')`
   }
 `;
 
-export const AvatarContainer = styled('button')`
-  ${({ theme }) => theme.mixins.button};
+export const AvatarContainer = styled('div')`
   ${({ theme }) => theme.mixins.center};
   width: 8.5rem;
   height: 8.5rem;

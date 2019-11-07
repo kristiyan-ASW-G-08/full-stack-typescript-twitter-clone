@@ -22,6 +22,8 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   next();
 });
 
+
+
 app.use('/images', express.static('./images'));
 
 app.use(userRoutes);

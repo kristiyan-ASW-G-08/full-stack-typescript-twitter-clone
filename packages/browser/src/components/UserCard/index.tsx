@@ -32,22 +32,15 @@ export const UserCard: FC<UserCardProps> = ({
 }) => {
   const { notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
-  const { username, handle, following, _id } = user;
+  const { username, handle, following, followers, _id, avatar, cover } = user;
   return (
-    <UserCardWrapper direction="bottom">
+    <UserCardWrapper direction="bottom" data-testid={_id}>
       <Cover>
         <CoverBackground>
-          {user.cover ? (
-            <img
-              src={`http://localhost:8090/${user.cover}`}
-              alt={`${username}'s cover`}
-            />
-          ) : (
-            ''
-          )}
+          {cover ? <img src={cover} alt={`${username}'s cover`} /> : ''}
         </CoverBackground>
         <AvatarContainer>
-          <Avatar size="large" avatarURL={user.avatar} />
+          <Avatar size="large" avatarURL={avatar} />
         </AvatarContainer>
       </Cover>
       <Container>
@@ -81,15 +74,12 @@ export const UserCard: FC<UserCardProps> = ({
           )}
         </FollowButtonWrapper>
         <FollowBar>
-          <p>
-            {' '}
-            <span>0</span>
-            Followers
-          </p>
-          <p>
-            <span>{following.length}</span>
-            Following
-          </p>
+          <Link to={`/users/${user._id}/followers`}>
+            <span>{followers}</span> Followers
+          </Link>
+          <Link to={`/users/${user._id}/following`}>
+            <span>{following.length}</span> Following
+          </Link>
         </FollowBar>
       </Container>
     </UserCardWrapper>

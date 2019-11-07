@@ -29,6 +29,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
+  console.log(image);
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
@@ -76,7 +77,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               state: { tweet: location },
             }}
           >
-            <Img src={`http://localhost:8090/${image}`} alt="" />
+            <Img src={image} alt="" />
           </NavLink>
         ) : (
           ''

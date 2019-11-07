@@ -12,7 +12,7 @@ export const UserItem: FC<UserItemProps> = ({ user }) => {
   return (
     <UserItemWrapper>
       <Link to={`/users/${_id}`} key={_id}>
-        <Avatar />
+        <Avatar avatarURL={user.avatar} />
         <span>@{handle}</span>
       </Link>
     </UserItemWrapper>

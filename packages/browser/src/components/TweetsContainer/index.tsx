@@ -52,8 +52,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     try {
       if (nextPageRef.current) {
         const { newTweets, next } = await getTweets(nextPageRef.current, token);
-        const allTweets = [...tweetsRef.current, ...newTweets];
-        setTweets(allTweets);
+        setTweets([...tweetsRef.current, ...newTweets]);
         setNext(next);
       }
     } catch {

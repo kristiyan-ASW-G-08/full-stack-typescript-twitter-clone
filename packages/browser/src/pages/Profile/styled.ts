@@ -14,10 +14,6 @@ export const ProfileWrapper = styled('section')`
 
 export const UserCardWrapper = styled('div')`
   grid-area: user-card;
-  @media ${({ theme }) => theme.mediaQueries.tablet} {
-    ${({ theme }) => theme.mixins.center}
-    background:red;
-  }
   @media ${({ theme }) => theme.mediaQueries.desktop} {
     width: auto;
   }

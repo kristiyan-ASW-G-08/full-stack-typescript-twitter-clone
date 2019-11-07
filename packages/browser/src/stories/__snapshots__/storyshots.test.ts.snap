@@ -62,7 +62,7 @@ Array [
     >
       <img
         alt="avatar"
-        src="http://localhost:8090/logo-primary.svg"
+        src="logo-primary.svg"
       />
     </div>
   </div>,
@@ -780,7 +780,7 @@ Array [
     >
       <img
         alt="avatar"
-        src="http://localhost:8090/logo-primary.svg"
+        src="logo-primary.svg"
       />
     </div>
   </div>,
@@ -2857,7 +2857,7 @@ Array [
     >
       <img
         alt="avatar"
-        src="http://localhost:8090/logo-primary.svg"
+        src="logo-primary.svg"
       />
     </div>
   </div>,
@@ -3575,7 +3575,7 @@ Array [
     >
       <img
         alt="avatar"
-        src="http://localhost:8090/logo-primary.svg"
+        src="logo-primary.svg"
       />
     </div>
   </div>,

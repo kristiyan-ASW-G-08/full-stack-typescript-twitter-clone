@@ -5,6 +5,7 @@ import PageContainer from 'styled/PageContainer';
 import TweetsContainer from 'components/TweetsContainer';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
+import HomeWrapper from './styled';
 
 export const Home: FC = observer(() => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
@@ -23,15 +24,18 @@ export const Home: FC = observer(() => {
 
   return (
     <PageContainer>
-      <TweetsContainer
-        feeds={feeds}
-        setUrl={setUrl}
-        url={url}
-        setNotification={(notification: Notification) =>
-          notificationStore.setNotification(notification)
-        }
-        token={token}
-      />
+      <HomeWrapper>
+        {' '}
+        <TweetsContainer
+          feeds={feeds}
+          setUrl={setUrl}
+          url={url}
+          setNotification={(notification: Notification) =>
+            notificationStore.setNotification(notification)
+          }
+          token={token}
+        />
+      </HomeWrapper>
     </PageContainer>
   );
 });

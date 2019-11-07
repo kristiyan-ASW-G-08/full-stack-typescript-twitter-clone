@@ -15,6 +15,7 @@ const LoginPage = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const TweetPage = lazy(() => import('pages/TweetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
+const UsersPage = lazy(() => import('pages/UsersPage'));
 const Profile = lazy(() => import('pages/Profile'));
 const EmailConfirmation = lazy(() => import('pages/EmailConfirmation'));
 const Modal = lazy(() => import('components/Modal'));
@@ -169,6 +170,17 @@ const Router: FC = observer(
               <Suspense fallback={<Loader />}>
                 <PageContainer>
                   <TweetPage />
+                </PageContainer>
+              </Suspense>
+            )}
+          />
+          <Route
+            exact
+            path="/users/:userId/:feed/"
+            render={(): JSX.Element => (
+              <Suspense fallback={<Loader />}>
+                <PageContainer>
+                  <UsersPage />
                 </PageContainer>
               </Suspense>
             )}

@@ -50,10 +50,14 @@ export const Sidebar: FC<SidebarProps> = ({
               <h4>@{user.handle}</h4>
               <div>
                 <button type="button">
-                  <span>0</span> Followers
+                  <Link to={`/users/${user._id}/followers`}>
+                    <span>{user.followers}</span> Followers
+                  </Link>
                 </button>
                 <button type="button">
-                  <span>{user.following.length}</span> Following
+                  <Link to={`/users/${user._id}/following`}>
+                    <span>{user.following.length}</span> Following
+                  </Link>
                 </button>
               </div>
             </AuthenticatedSidebarHeader>

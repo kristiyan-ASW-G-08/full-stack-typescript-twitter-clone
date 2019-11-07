@@ -56,10 +56,10 @@ export const AuthenticatedSidebarHeader = styled('div')`
   padding-top: 3rem;
   padding-left: 0.7rem;
   ${({ theme }) => theme.mixins.border}
-  
+
   h3 {
     font-size: 1.3rem;
-    color: ${({ theme }) => theme.color}
+    color: ${({ theme }) => theme.color};
   }
   h4 {
     font-size: 1rem;
@@ -69,10 +69,14 @@ export const AuthenticatedSidebarHeader = styled('div')`
     font-size: 1.1rem;
     font-weight: bold;
     background: none;
-    ${({ theme }) => theme.mixins.button}
-    color: ${({ theme }) => theme.secondary};
-    span {
-      color: ${({ theme }) => theme.dark};
+    ${({ theme }) => theme.mixins.button};
+    a {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: ${({ theme }) => theme.secondary};
+      span {
+        color: ${({ theme }) => theme.dark};
+      }
     }
     margin-right: 0.7rem;
   }
