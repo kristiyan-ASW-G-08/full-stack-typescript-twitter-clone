@@ -33,6 +33,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
+  console.log(image)
   return (
     <TweetWrapper data-testid={_id}>
       <AvatarContainer>

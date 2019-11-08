@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`userRoutes  get /users/:userId/following  should get a list of users 1`] = `
-Array [
-  Object {
-    "_id": "5dc29d89f61bbd38e0e21055",
-    "followers": 0,
-    "following": Array [],
-    "handle": "followedUserHandle",
-    "username": "followedUser",
-  },
-]
-`;
-
 exports[`userRoutes /users should throw an error with a status of 400: BadRequest when the req body doesn't pass validation 1`] = `
 Object {
   "data": Array [

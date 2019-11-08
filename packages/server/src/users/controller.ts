@@ -107,7 +107,7 @@ export const signUp = async (
       html: htmlOutput.html,
     };
     sendEmail(mailOptions);
-    res.sendStatus(204);
+    res.sendStatus(201);
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -475,11 +475,11 @@ export const patchProfile = async (
 
     if (!Array.isArray(files) && files && files.avatar) {
       deleteFile(user.avatar);
-      user.avatar = files.avatar[0].path;
+      user.avatar = `${process.env.SERVER_URL}/${files.avatar[0].path}`;
     }
     if (!Array.isArray(files) && files && files.cover) {
       deleteFile(user.cover);
-      user.cover = files.cover[0].path;
+      user.cover = `${process.env.SERVER_URL}/${files.cover[0].path}`;
     }
     user.username = username;
     user.handle = handle;

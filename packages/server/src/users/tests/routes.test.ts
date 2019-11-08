@@ -58,7 +58,7 @@ describe('userRoutes', (): void => {
           password,
           confirmPassword: password,
         });
-      expect(response.status).toBe(204);
+      expect(response.status).toBe(201);
       expect(sendEmail).toHaveBeenCalledTimes(1);
     });
     it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
@@ -872,7 +872,6 @@ describe('userRoutes', (): void => {
         await newTweet.save();
         testUser.following = [followedUserId];
         await testUser.save();
-        const userId = testUser._id;
         const response = await request(app).get(`/users/user/tweets`);
         expect(response.status).toBe(401);
       });

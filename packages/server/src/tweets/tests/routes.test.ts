@@ -78,7 +78,7 @@ describe('tweetRoutes', (): void => {
           text,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('should create a new link tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -98,7 +98,7 @@ describe('tweetRoutes', (): void => {
           linkUrl: link,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('should create a new retweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -126,7 +126,7 @@ describe('tweetRoutes', (): void => {
           retweetId,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('should create a new reply tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -154,7 +154,7 @@ describe('tweetRoutes', (): void => {
           replyId,
         })
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('should create a new image tweet', async (): Promise<void> => {
       expect.assertions(1);
@@ -180,7 +180,7 @@ describe('tweetRoutes', (): void => {
         })
         .attach('image', './images/test.jpg')
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
 
     it("should throw an error with a status of 400: BadRequest when the tweet type and the content don't match", async (): Promise<

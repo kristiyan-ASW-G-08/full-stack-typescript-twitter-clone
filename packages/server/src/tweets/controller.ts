@@ -24,7 +24,7 @@ export const postTweet = async (
       link: linkUrl,
     });
     if (file) {
-      tweet.image = file.path;
+      tweet.image = `${process.env.SERVER_URL}/${file.path}`;
     }
 
     if (retweetId) {
@@ -59,7 +59,7 @@ export const postTweet = async (
     await tweet.save();
     await user.save();
     const tweetId = tweet._id;
-    res.status(200).json({ data: { tweetId } });
+    res.status(201).json({ data: { tweetId } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -80,7 +80,7 @@ export const patchTweet = async (
     tweet.link = linkUrl;
     if (tweet.image && file) {
       await deleteFile(tweet.image);
-      tweet.image = file.path;
+      tweet.image = `${process.env.SERVER_URL}/${file.path}`;
     }
     await tweet.save();
     res.sendStatus(204);

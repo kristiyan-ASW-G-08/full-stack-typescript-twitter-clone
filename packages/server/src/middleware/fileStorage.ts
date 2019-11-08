@@ -7,12 +7,9 @@ const fileStorage = multer.diskStorage({
   },
   // @ts-ignore
   filename: (_: Request, file, cb: (...args: any) => any): void => {
-    const { SERVER_URL } = process.env;
     cb(
       null,
-      `${SERVER_URL}/${new Date().toISOString().replace(/:/g, '-')}-${
-        file.originalname
-      }`,
+      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`,
     );
   },
 });
