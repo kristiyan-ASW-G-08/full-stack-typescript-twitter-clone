@@ -20,7 +20,11 @@ mockedAxios.delete.mockResolvedValue({ data: {}, status: 204 });
 const history = createMemoryHistory();
 
 const historyPushSpy = jest.spyOn(history, 'push');
+
 describe('TweetBar', () => {
+  afterEach(() => jest.clearAllMocks());
+  afterAll(() => jest.restoreAllMocks());
+
   const updateUser = jest.fn();
   const setNotification = jest.fn();
   const deleteTweetHandler = jest.fn();
@@ -29,8 +33,6 @@ describe('TweetBar', () => {
     content: 'Log in or Sign up to perform this action!',
   };
 
-  afterEach(() => jest.clearAllMocks());
-  afterAll(() => jest.restoreAllMocks());
   it('render TweetBar (bookmark button)', async () => {
     expect.assertions(4);
     const { rerender, getByTestId } = render(

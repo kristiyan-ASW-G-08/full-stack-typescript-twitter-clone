@@ -44,16 +44,18 @@ const Router: FC = observer(
             path="/user/edit"
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
-                <Modal backdropHandler={history.goBack}>
-                  <UserForm
-                    setNotification={(notification: NotificationType) =>
-                      notificationStore.setNotification(notification)
-                    }
-                    updateUser={(user: User) => authStore.updateUser(user)}
-                    token={token}
-                    user={user}
-                  />
-                </Modal>
+                <Portal portalId="user-form">
+                  <Modal backdropHandler={history.goBack}>
+                    <UserForm
+                      setNotification={(notification: NotificationType) =>
+                        notificationStore.setNotification(notification)
+                      }
+                      updateUser={(user: User) => authStore.updateUser(user)}
+                      token={token}
+                      user={user}
+                    />
+                  </Modal>
+                </Portal>
               </Suspense>
             )}
           />
@@ -64,9 +66,11 @@ const Router: FC = observer(
             path="/tweet/:tweetId"
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
-                <Modal backdropHandler={history.goBack}>
-                  <TweetPage />
-                </Modal>
+                <Portal portalId="tweet">
+                  <Modal backdropHandler={history.goBack}>
+                    <TweetPage />
+                  </Modal>
+                </Portal>
               </Suspense>
             )}
           />

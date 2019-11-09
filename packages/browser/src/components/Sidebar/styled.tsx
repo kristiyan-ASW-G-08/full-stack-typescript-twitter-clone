@@ -12,7 +12,6 @@ export const SidebarWrapper = styled('aside')<SidebarProps>`
   display: grid;
   grid-template-columns: 3fr 1fr;
   position: fixed;
-  transform: translateX(-100vw);
   z-index: 3;
   width: 100vw;
   height: 100vh;
@@ -56,30 +55,6 @@ export const AuthenticatedSidebarHeader = styled('div')`
   padding-top: 3rem;
   padding-left: 0.7rem;
   ${({ theme }) => theme.mixins.border}
-
-  h3 {
-    font-size: 1.3rem;
-    color: ${({ theme }) => theme.color};
-  }
-  h4 {
-    font-size: 1rem;
-    color: ${({ theme }) => theme.secondary};
-  }
-  button {
-    font-size: 1.1rem;
-    font-weight: bold;
-    background: none;
-    ${({ theme }) => theme.mixins.button};
-    a {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: ${({ theme }) => theme.secondary};
-      span {
-        color: ${({ theme }) => theme.dark};
-      }
-    }
-    margin-right: 0.7rem;
-  }
 `;
 
 export const SearchBarWrapper = styled('div')`
@@ -100,22 +75,9 @@ export const AuthenticationBar = styled('div')`
   align-items: center;
   padding-left: 0.5rem;
   width: 15rem;
-  * {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
   span {
-    display: block;
-    text-align: center;
     color: ${({ theme }) => theme.primary};
-  }
-  button {
-    ${({ theme }) => theme.mixins.button}
-    background: none;
-
-    a {
-      color: ${({ theme }) => theme.color};
-    }
+    font-size: 1.4rem;
   }
 `;
 
@@ -146,6 +108,14 @@ export const SidebarList = styled('ul')`
   }
 `;
 
+export const AuthenticationButton = styled('button')`
+  ${({ theme }) => theme.mixins.button}
+  background:none;
+  a {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.color};
+  }
+`;
 export const SidebarButton = styled('button')`
   margin-left: 0.7rem;
   width:auto;

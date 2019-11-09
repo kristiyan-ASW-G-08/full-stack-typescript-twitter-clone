@@ -15,8 +15,9 @@ import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
+import Select from 'styled/Select';
 import getTweets from './getTweets';
-import { TweetsWrapper, Select, Tweets, TextLoader } from './styled';
+import { TweetsWrapper, SelectWrapper, Tweets, TextLoader } from './styled';
 
 const Tweet = lazy(() => import('components/Tweet'));
 const Retweet = lazy(() => import('components/Retweet'));
@@ -95,20 +96,22 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense fallback="">
-          <Select data-testid="sort" onChange={getTweetsHandler}>
-            <option data-testid="new" value="new">
-              New
-            </option>
-            <option data-testid="top" value="top">
-              Top
-            </option>
-            <option data-testid="trending" value="trending">
-              Trending
-            </option>
-            <option data-testid="replies" value="replies">
-              Replies
-            </option>
-          </Select>
+          <SelectWrapper>
+            <Select data-testid="sort" onChange={getTweetsHandler}>
+              <option data-testid="new" value="new">
+                New
+              </option>
+              <option data-testid="top" value="top">
+                Top
+              </option>
+              <option data-testid="trending" value="trending">
+                Trending
+              </option>
+              <option data-testid="replies" value="replies">
+                Replies
+              </option>
+            </Select>
+          </SelectWrapper>
 
           <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>

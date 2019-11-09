@@ -48,37 +48,12 @@ export const Container = styled('div')`
   grid-area: container;
   display: grid;
   grid:
-    '.  follow-button .' 2rem
-    'username  .  .' 1fr
-    'handle  . .' 1fr
-    'follow-bar  . .' 1fr/8fr 3fr 1rem;
+    '.  follow-button .' 2em
+    'credentials  .  .' 1fr/8fr 3fr 1rem;
   grid-row-gap: 0.7rem;
   padding-left: 1.5rem;
 `;
-export const Username = styled('p')`
-  grid-area: username;
-  font-size: 2rem;
-  color: ${({ theme }) => theme.dark};
-  font-weight: bold;
-`;
-export const Handle = styled('p')`
-  grid-area: handle;
-  font-size: 1.6rem;
-  color: ${({ theme }) => theme.light};
-`;
 
-export const FollowBar = styled('div')`
-  grid-area: follow-bar;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 7rem);
-  grid-gap: 1rem;
-  color: ${({ theme }) => theme.light};
-  p,
-  span {
-    font-size: 1.4rem;
-  }
-  span {
-    margin-right: 0.3rem;
-    color: ${({ theme }) => theme.dark};
-  }
+export const CredentialsContainer = styled('div')`
+  grid-area: credentials;
 `;

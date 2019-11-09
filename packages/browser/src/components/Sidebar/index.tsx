@@ -6,7 +6,7 @@ import Logo from 'components/Logo';
 import SearchBar from 'components/SearchBar';
 import AuthState from 'types/AuthState';
 import Avatar from 'components/Avatar';
-import ThemeButton from 'components/ThemeButton';
+import UserCredentials from 'components/UserCredentials';
 import {
   SidebarWrapper,
   Backdrop,
@@ -19,6 +19,7 @@ import {
   SidebarList,
   SidebarButton,
   SearchBarWrapper,
+  AuthenticationButton,
 } from './styled';
 
 interface SidebarProps {
@@ -45,21 +46,19 @@ export const Sidebar: FC<SidebarProps> = ({
         <Container>
           {user ? (
             <AuthenticatedSidebarHeader>
-              <Avatar size="medium" avatarURL={user.avatar} />
-              <h3>{user.username}</h3>
-              <h4>@{user.handle}</h4>
-              <div>
-                <button type="button">
-                  <Link to={`/users/${user._id}/followers`}>
-                    <span>{user.followers}</span> Followers
-                  </Link>
-                </button>
-                <button type="button">
-                  <Link to={`/users/${user._id}/following`}>
-                    <span>{user.following.length}</span> Following
-                  </Link>
-                </button>
-              </div>
+              <Link
+                to={`/users/${user._id}`}
+                data-testid="profile-link-sidebar"
+              >
+                <Avatar size="medium" avatarURL={user.avatar} />
+              </Link>
+              <UserCredentials
+                username={user.username}
+                handle={user.handle}
+                _id={user._id}
+                followers={user.followers}
+                following={user.following.length}
+              />
             </AuthenticatedSidebarHeader>
           ) : (
             <SidebarHeader>
@@ -67,23 +66,21 @@ export const Sidebar: FC<SidebarProps> = ({
                 <Logo type="vertical" />
               </LogoContainer>
               <AuthenticationBar>
-                <button type="button" onClick={toggleSidebar}>
+                <AuthenticationButton type="button" onClick={toggleSidebar}>
                   <Link to="/log-in">Log In</Link>
-                </button>
+                </AuthenticationButton>
                 <span>or</span>
-                <button type="button" onClick={toggleSidebar}>
+                <AuthenticationButton type="button" onClick={toggleSidebar}>
                   {' '}
                   <Link to="/sign-up">Sign Up</Link>
-                </button>
+                </AuthenticationButton>
               </AuthenticationBar>
             </SidebarHeader>
           )}
           <SidebarBody>
             <SearchBarWrapper>
-              {' '}
               <SearchBar />
             </SearchBarWrapper>
-
             <SidebarList>
               <li>
                 <Link to="/" onClick={toggleSidebar}>
@@ -111,7 +108,12 @@ export const Sidebar: FC<SidebarProps> = ({
               )}
               <li>
                 <SidebarButton onClick={toggleTheme} data-testid="theme-button">
-                  <ThemeButton theme={theme} />
+                  <span>
+                    <FontAwesomeIcon
+                      icon={theme === 'light' ? 'sun' : 'moon'}
+                    />
+                  </span>
+                  <p>{theme} mode</p>
                 </SidebarButton>
               </li>
             </SidebarList>

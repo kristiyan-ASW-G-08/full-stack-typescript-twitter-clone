@@ -1,7 +1,8 @@
 import user from './user';
+
 const authenticatedAuthState = {
   isAuth: true,
-  user,
+  user: { ...user },
   token: 'mockToken',
 };
 

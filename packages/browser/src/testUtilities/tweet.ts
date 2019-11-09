@@ -1,12 +1,13 @@
 import user from './user';
 import Tweet from 'types/Tweet';
+
 const tweet: Tweet = {
   user,
   text: 'Text',
   link: 'https://github.com/',
   type: 'link',
   image: 'mockImage',
-  _id: 'id',
+  _id: 'mockId',
   date: new Date(),
   likes: 0,
   retweets: 0,

@@ -2,8 +2,9 @@
 import React, { FC, SyntheticEvent, useState, useRef } from 'react';
 import { ErrorMessage } from 'formik';
 import { InputWrapper } from 'components/Input/styled';
+import getFile from 'utilities/getFile';
 import { UploadButton } from './styled';
-import { getFile, clickHandler } from './handlers';
+import clickHandler from './clickHandler';
 
 interface InputProps {
   name: string;

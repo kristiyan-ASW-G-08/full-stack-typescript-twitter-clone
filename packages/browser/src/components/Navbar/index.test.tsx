@@ -1,57 +1,101 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import useEvent from '@testing-library/user-event';
+import { render, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
-import TestWrapper from 'testUtilities/TestWrapper';
+import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import Navbar from '.';
 
+const history = createMemoryHistory();
+
+jest.spyOn(history, 'push');
 describe('Navbar', () => {
-  const theme = 'light';
+  afterEach(() => jest.resetAllMocks());
+  afterAll(() => jest.restoreAllMocks());
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
-  it('render Navbar', () => {
-    // expect.assertions(8);
+  it('render Navbar:logged out', async () => {
+    expect.assertions(9);
 
-    const { container, getByText, rerender } = render(
+    const { container, queryByText } = render(
       <Navbar
         authState={defaultAuthState}
         resetAuthState={resetAuthState}
-        theme={theme}
+        theme="dark"
         toggleTheme={toggleTheme}
       />,
       {
-        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
+        wrapper: ({ children }) => (
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+        ),
       },
     );
-    const themeButton = getByText('Dark mode');
-    const logInButton = getByText('Log In');
-    const signUpButton = getByText('Sign Up');
-
-    useEvent.click(themeButton);
+    const themeButton = queryByText('Light mode');
+    const logInButton = queryByText('Log In');
+    const signUpButton = queryByText('Sign Up');
+    const logOutButton = queryByText('Log Out');
 
     expect(container).toBeTruthy();
     expect(themeButton).toBeTruthy();
     expect(logInButton).toBeTruthy();
+    expect(logOutButton).toBeFalsy();
+
+    // @ts-ignore
+    userEvent.click(themeButton);
+
+    // @ts-ignore
+    userEvent.click(signUpButton);
+
+    // @ts-ignore
+    userEvent.click(logInButton);
+
+    await wait(() => {
+      expect(history.push).toHaveBeenCalledTimes(2);
+      expect(history.push).toHaveBeenNthCalledWith(1, '/sign-up');
+      expect(history.push).toHaveBeenNthCalledWith(2, '/log-in');
+    });
+
     expect(signUpButton).toBeTruthy();
     expect(toggleTheme).toHaveBeenCalledTimes(1);
+  });
 
-    rerender(
+  it('render Navbar:logged in', () => {
+    expect.assertions(8);
+
+    const { container, queryByText } = render(
       <Navbar
-        resetAuthState={resetAuthState}
         authState={authenticatedAuthState}
-        theme="dark"
+        resetAuthState={resetAuthState}
+        theme="light"
         toggleTheme={toggleTheme}
       />,
+      {
+        wrapper: ({ children }) => (
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+        ),
+      },
     );
-    const lightThemeButton = getByText('Light mode');
+    const themeButton = queryByText('Dark mode');
+    const logInButton = queryByText('Log In');
+    const signUpButton = queryByText('Sign Up');
+    const logOutButton = queryByText('Log Out');
 
-    const logOutButton = getByText('Log Out');
+    // @ts-ignore
+    userEvent.click(themeButton);
 
-    useEvent.click(logOutButton);
-
-    expect(lightThemeButton).toBeTruthy();
+    expect(container).toBeTruthy();
+    expect(themeButton).toBeTruthy();
+    expect(logInButton).toBeFalsy();
     expect(logOutButton).toBeTruthy();
+    expect(signUpButton).toBeFalsy();
+    expect(toggleTheme).toHaveBeenCalledTimes(1);
+
+    expect(logOutButton).toBeTruthy();
+
+    // @ts-ignore
+    userEvent.click(logOutButton);
+
     expect(resetAuthState).toHaveBeenCalledTimes(1);
   });
 });

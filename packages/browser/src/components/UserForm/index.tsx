@@ -42,7 +42,6 @@ export const UserForm: FC<UserFormProps> = ({
         },
       );
       const { user } = request.data.data;
-      console.log(user);
       updateUser(user);
       const notification: Notification = {
         type: 'message',
@@ -51,7 +50,6 @@ export const UserForm: FC<UserFormProps> = ({
       setNotification(notification);
       history.goBack();
     } catch (error) {
-      console.log(error);
       if (
         error &&
         error.response &&

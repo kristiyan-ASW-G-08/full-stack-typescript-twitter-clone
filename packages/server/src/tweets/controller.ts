@@ -118,7 +118,7 @@ export const getTweet = async (
     const tweet = await getTweetById(tweetId);
     const populatedTweet = await tweet
       .populate([
-        { path: 'user', select: 'username handle' },
+        { path: 'user', select: 'username handle avatar' },
         { path: 'reply', select: 'user' },
         { path: 'retweet' },
       ])

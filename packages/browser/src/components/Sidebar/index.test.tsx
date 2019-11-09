@@ -1,21 +1,30 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import { defaultAuthState } from 'stores/AuthStore/AuthStore';
 import userEvent from '@testing-library/user-event';
-import TestWrapper from 'testUtilities/TestWrapper';
+import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 
 import Sidebar from '.';
 
 describe('Sidebar', () => {
+  afterAll(() => jest.restoreAllMocks());
   const theme = 'light';
   const toggleTheme = jest.fn();
   const resetAuthState = jest.fn();
   const toggleSidebar = jest.fn();
-  it('render Sidebar', () => {
-    expect.assertions(13);
-
-    const { rerender, getByTestId, queryByText, getByText } = render(
+  it('render Sidebar', async () => {
+    expect.assertions(18);
+    const history = createMemoryHistory();
+    jest.spyOn(history, 'push');
+    const {
+      rerender,
+      getByTestId,
+      queryByText,
+      getByText,
+      queryByTestId,
+    } = render(
       <Sidebar
         toggleSidebar={toggleSidebar}
         isActive
@@ -25,7 +34,9 @@ describe('Sidebar', () => {
         toggleTheme={toggleTheme}
       />,
       {
-        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
+        wrapper: ({ children }) => (
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+        ),
       },
     );
     const themeButton = getByTestId('theme-button');
@@ -44,6 +55,12 @@ describe('Sidebar', () => {
     expect(signUpButton).toBeTruthy();
     expect(logOutButton).toBeNull();
 
+    // @ts-ignore
+    userEvent.click(logInButton);
+
+    // @ts-ignore
+    userEvent.click(signUpButton);
+
     rerender(
       <Sidebar
         toggleSidebar={toggleSidebar}
@@ -59,6 +76,7 @@ describe('Sidebar', () => {
     logInButton = queryByText('Log In');
     signUpButton = queryByText('Sign Up');
     logOutButton = getByText('Log Out');
+    const profileLink = queryByTestId(`profile-link-sidebar`);
 
     userEvent.click(logOutButton);
 
@@ -70,5 +88,20 @@ describe('Sidebar', () => {
     expect(lightThemeButton).toBeTruthy();
     expect(logOutButton).toBeTruthy();
     expect(resetAuthState).toHaveBeenCalledTimes(1);
+
+    expect(profileLink).toBeTruthy();
+
+    // @ts-ignore
+    userEvent.click(profileLink);
+
+    await wait(() => {
+      expect(history.push).toHaveBeenCalledTimes(3);
+      expect(history.push).toHaveBeenNthCalledWith(1, `/log-in`);
+      expect(history.push).toHaveBeenNthCalledWith(2, `/sign-up`);
+      expect(history.push).toHaveBeenNthCalledWith(
+        3,
+        `/users/${authenticatedAuthState.user._id}`,
+      );
+    });
   });
 });

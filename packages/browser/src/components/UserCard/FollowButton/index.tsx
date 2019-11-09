@@ -45,6 +45,7 @@ export const FollowButton: FC<FollowButtonProps> = ({
   };
   return (
     <Button
+      data-testid="follow-button"
       buttonType={isFollowing ? 'primary' : 'secondary'}
       onClick={followHandler}
     >

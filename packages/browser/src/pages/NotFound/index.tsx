@@ -13,7 +13,7 @@ export const NotFound: FC = () => {
       <Subtitle>Page Not Found</Subtitle>
       <ButtonContainer>
         <Button buttonType="primary">
-          <Link to="/">Go Home</Link>
+          <Link to="/">Home</Link>
         </Button>
         <Button buttonType="secondary" onClick={history.goBack}>
           Previous Page

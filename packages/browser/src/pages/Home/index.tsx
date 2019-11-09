@@ -25,7 +25,6 @@ export const Home: FC = observer(() => {
   return (
     <PageContainer>
       <HomeWrapper>
-        {' '}
         <TweetsContainer
           feeds={feeds}
           setUrl={setUrl}

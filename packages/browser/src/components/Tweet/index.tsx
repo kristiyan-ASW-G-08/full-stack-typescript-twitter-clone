@@ -29,15 +29,15 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
-  console.log(image);
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
-  console.log(image)
   return (
     <TweetWrapper data-testid={_id}>
       <AvatarContainer>
-        <Avatar avatarURL={avatar} altText={username} />
+        <NavLink to={`/users/${user._id}`} data-testid="profile-link">
+          <Avatar avatarURL={avatar} altText={username} />
+        </NavLink>
       </AvatarContainer>
       <UserBar>
         <Username>{username}</Username> <Handle>@{handle}</Handle>{' '}

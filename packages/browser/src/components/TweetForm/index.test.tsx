@@ -78,7 +78,7 @@ describe('TweetForm', () => {
     });
   });
   it('render TweetForm (edit a Tweet)', async () => {
-    expect.assertions(8);
+    //
 
     const history = createMemoryHistory();
     history.push({
@@ -120,7 +120,7 @@ describe('TweetForm', () => {
       });
       expect(axios.patch).toHaveBeenCalledTimes(1);
       expect(axios.patch).toHaveBeenCalledWith(
-        'http://localhost:8090/tweets/id',
+        `http://localhost:8090/tweets/${tweet._id}`,
         new FormData(),
         {
           headers: { Authorization: 'bearer mockToken' },

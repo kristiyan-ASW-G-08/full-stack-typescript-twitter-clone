@@ -12,7 +12,6 @@ export const Retweet: FC<RetweetProps> = ({ children, tweet }) => {
   return (
     <RetweetWrapper>
       <RetweetText>
-        {' '}
         <FontAwesomeIcon icon="retweet" />
         <p>@{handle} Retweeted</p>
       </RetweetText>

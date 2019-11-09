@@ -24,9 +24,8 @@ export const TweetPage: FC = () => {
         const request = await axios.get(
           `http://localhost:8090/tweets/${tweetId}`,
         );
+
         const { tweet } = request.data.data;
-        setTweet(tweet);
-        setUrl(`http://localhost:8090/tweets/${tweet._id}/replies`);
         return {
           url: `http://localhost:8090/tweets/${tweet._id}/replies`,
           tweet,

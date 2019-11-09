@@ -1,31 +1,46 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import TestWrapper from 'testUtilities/TestWrapper';
+import { render, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import tweet from 'testUtilities/tweet';
 import Tweet from './index';
 
 describe('Tweet', () => {
   it('render Tweet', async () => {
-    expect.assertions(5);
+    expect.assertions(8);
+    const history = createMemoryHistory();
+    jest.spyOn(history, 'push');
     const deleteTweetHandler = jest.fn();
-    const { container, getByText, getByAltText } = render(
+    const { container, queryByText, queryByAltText, queryByTestId } = render(
       <Tweet tweet={tweet} deleteTweetHandler={deleteTweetHandler} />,
 
       {
-        wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
+        wrapper: ({ children }) => (
+          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+        ),
       },
     );
 
-    const text = getByText(tweet.text);
-    const link = getByText(tweet.link);
-    const image = getByAltText('');
-    const avatar = getByAltText(tweet.user.username);
+    const text = queryByText(tweet.text);
+    const link = queryByText(tweet.link);
+    const image = queryByAltText('');
+    const avatar = queryByAltText(tweet.user.username);
+    const profileLink = queryByTestId(`profile-link`);
 
     expect(container).toBeTruthy();
     expect(link).toBeTruthy();
     expect(image).toBeTruthy();
     expect(avatar).toBeTruthy();
     expect(text).toBeTruthy();
+    expect(profileLink).toBeTruthy();
+
+    // @ts-ignore
+    userEvent.click(profileLink);
+
+    await wait(() => {
+      expect(history.push).toHaveBeenCalledTimes(1);
+      expect(history.push).toHaveBeenCalledWith(`/users/${tweet.user._id}`);
+    });
   });
 });
