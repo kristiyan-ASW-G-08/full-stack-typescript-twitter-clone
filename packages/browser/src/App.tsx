@@ -4,7 +4,7 @@ import { Normalize } from 'styled-normalize';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from 'components/Routes';
 import AppWrapper from 'styled/App';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Theme from 'components/Theme/Theme';
 import GlobalStyle from 'styled/GlobalStyle';
 import 'importFontAwesome';

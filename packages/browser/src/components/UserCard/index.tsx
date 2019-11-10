@@ -7,7 +7,7 @@ import AuthState from 'types/AuthState';
 import FollowButton from 'components/UserCard/FollowButton';
 import UserCredentials from 'components/UserCredentials';
 import Button from 'styled/Button';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import {
   UserCardWrapper,

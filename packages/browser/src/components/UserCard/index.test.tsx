@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import user from 'testUtilities/user';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
-import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import { defaultAuthState } from 'stores/AuthStore';
 import UserCard from '.';
 
 describe('UserCard', () => {

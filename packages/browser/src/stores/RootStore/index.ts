@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 import { observable } from 'mobx';
 import { create } from 'mobx-persist';
-import AuthStore from 'stores/AuthStore/AuthStore';
-import ThemeStore from 'stores/ThemeStore/ThemeStore';
-import NotificationStore from 'stores/NotificationStore/NotificationStore';
+import AuthStore from 'stores/AuthStore';
+import ThemeStore from 'stores/ThemeStore';
+import NotificationStore from 'stores/NotificationStore';
 
 const hydrate = create({
   storage: localStorage,

@@ -8,7 +8,7 @@ import clickHandler from './clickHandler';
 
 interface InputProps {
   name: string;
-  setFieldValue: (...args: any) => any;
+  setFieldValue: (name: string, value: File) => any;
   buttonText?: string;
 }
 export const ImageUploadButton: FC<InputProps> = ({

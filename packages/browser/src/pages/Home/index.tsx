@@ -1,6 +1,6 @@
 import React, { FC, useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import PageContainer from 'styled/PageContainer';
 import TweetsContainer from 'components/TweetsContainer';
 import Notification from 'types/Notification';

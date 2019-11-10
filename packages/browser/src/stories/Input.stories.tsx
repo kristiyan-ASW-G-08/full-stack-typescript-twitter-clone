@@ -26,6 +26,32 @@ storiesOf('Input', module)
     },
   )
   .add(
+    'light theme: textarea',
+    () => (
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          username: '',
+        }}
+      >
+        {() => (
+          <Form style={{ width: '300px', textAlign: 'center' }}>
+            <Input
+              name="username"
+              type="text"
+              placeholder="Username"
+              component="textarea"
+            />
+          </Form>
+        )}
+      </Formik>
+    ),
+    {
+      info: { inline: true },
+      options: { currentTheme: 'light' },
+    },
+  )
+  .add(
     'dark theme',
     () => (
       <Formik
@@ -37,6 +63,32 @@ storiesOf('Input', module)
         {() => (
           <Form style={{ width: '300px', textAlign: 'center' }}>
             <Input name="username" type="text" placeholder="Username" />
+          </Form>
+        )}
+      </Formik>
+    ),
+    {
+      info: { inline: true },
+      options: { currentTheme: 'dark' },
+    },
+  )
+  .add(
+    'dark theme: textarea',
+    () => (
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          username: '',
+        }}
+      >
+        {() => (
+          <Form style={{ width: '300px', textAlign: 'center' }}>
+            <Input
+              name="username"
+              type="text"
+              placeholder="Username"
+              component="textarea"
+            />
           </Form>
         )}
       </Formik>

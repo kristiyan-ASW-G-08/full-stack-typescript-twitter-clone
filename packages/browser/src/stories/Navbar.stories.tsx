@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Navbar } from 'components/Navbar';
-import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 
 storiesOf('Navbar', module)

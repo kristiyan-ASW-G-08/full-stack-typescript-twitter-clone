@@ -5,7 +5,7 @@ import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import tweet from 'testUtilities/tweet';
-import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { createMemoryHistory } from 'history';
 import TweetBar from './index';

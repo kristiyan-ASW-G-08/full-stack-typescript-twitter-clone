@@ -33,8 +33,6 @@ export const postTweet = async (
       if (includesId(user.retweets, retweetId)) {
         user.retweets = removeId(user.retweets, retweetId);
         retweetedTweet.retweets -= 1;
-        user.retweets = [...user.retweets, mongoose.Types.ObjectId(retweetId)];
-        retweetedTweet.retweets += 1;
       } else {
         user.retweets = [...user.retweets, mongoose.Types.ObjectId(retweetId)];
         retweetedTweet.retweets += 1;
@@ -47,8 +45,6 @@ export const postTweet = async (
       if (includesId(user.replies, replyId)) {
         user.replies = removeId(user.replies, replyId);
         replyTweet.replies -= 1;
-        user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
-        replyTweet.replies += 1;
       } else {
         user.replies = [...user.replies, mongoose.Types.ObjectId(replyId)];
         replyTweet.replies += 1;

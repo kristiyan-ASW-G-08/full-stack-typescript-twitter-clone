@@ -3,7 +3,7 @@ import { Link as NavLink, useLocation } from 'react-router-dom';
 import Avatar from 'components/Avatar/index';
 import TweetType from 'types/Tweet';
 import getTime from 'utilities/getTime';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import User from 'types/User';
 import TweetBar from './TweetBar/index';

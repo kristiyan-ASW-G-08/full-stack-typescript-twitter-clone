@@ -2,7 +2,7 @@ import React, { FC, lazy, Suspense, useContext } from 'react';
 import { Route, Switch, useLocation, useHistory, Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import Loader from 'components/Loader/index';

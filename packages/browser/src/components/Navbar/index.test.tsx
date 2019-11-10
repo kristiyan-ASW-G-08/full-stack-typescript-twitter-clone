@@ -2,7 +2,7 @@ import React from 'react';
 import { render, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
-import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import { defaultAuthState } from 'stores/AuthStore';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import Navbar from '.';

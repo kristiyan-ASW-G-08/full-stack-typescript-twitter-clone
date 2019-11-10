@@ -1,4 +1,4 @@
-import AuthStore, { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import AuthStore, { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { when } from 'mobx';
 

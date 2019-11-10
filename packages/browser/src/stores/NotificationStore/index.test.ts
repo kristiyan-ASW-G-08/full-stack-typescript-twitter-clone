@@ -1,4 +1,4 @@
-import NotificationStore from 'stores/NotificationStore/NotificationStore';
+import NotificationStore from 'stores/NotificationStore';
 import activeNotification from 'testUtilities/activeNotification';
 import { when } from 'mobx';
 

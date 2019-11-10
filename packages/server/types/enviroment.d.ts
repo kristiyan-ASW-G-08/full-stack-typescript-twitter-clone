@@ -6,5 +6,6 @@ declare namespace NodeJS {
     SERVER_URL: string;
     PORT: number;
     CLIENT_URL: string;
+    ALLOW_IMAGES: string;
   }
 }

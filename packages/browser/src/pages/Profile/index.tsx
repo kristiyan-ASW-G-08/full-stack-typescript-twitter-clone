@@ -9,7 +9,7 @@ import React, {
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import User from 'types/User';

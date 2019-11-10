@@ -1,4 +1,4 @@
-import { RootStore } from 'stores/RootStore/RootStore';
+import { RootStore } from 'stores/RootStore';
 
 describe('RootStore', (): void => {
   const rootStore = new RootStore();

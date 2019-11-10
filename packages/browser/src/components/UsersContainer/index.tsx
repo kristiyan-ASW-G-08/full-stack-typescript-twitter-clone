@@ -15,7 +15,7 @@ import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import getUsers from './getUsers';
 import { UsersWrapper, TextLoader, Users } from './styled';
 

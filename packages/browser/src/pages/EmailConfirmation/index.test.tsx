@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
 import TestWrapper from 'testUtilities/TestWrapper';
@@ -14,7 +13,7 @@ describe('EmailConfirmation', () => {
   it('renders', async () => {
     expect.assertions(2);
 
-    const { container, getByText } = render(<EmailConfirmation />, {
+    const { getByText } = render(<EmailConfirmation />, {
       wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
     });
     const confirmationButton = getByText('Confirm Email');

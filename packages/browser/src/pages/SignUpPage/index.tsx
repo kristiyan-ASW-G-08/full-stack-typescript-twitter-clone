@@ -8,7 +8,7 @@ import { FormWrapper, FieldsWrapper } from 'styled/Form';
 
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 

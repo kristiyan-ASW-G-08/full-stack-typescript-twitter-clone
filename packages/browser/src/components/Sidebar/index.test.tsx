@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import { defaultAuthState } from 'stores/AuthStore/AuthStore';
+import { defaultAuthState } from 'stores/AuthStore';
 import userEvent from '@testing-library/user-event';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';

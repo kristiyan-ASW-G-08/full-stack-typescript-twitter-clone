@@ -1,7 +1,7 @@
 import React, { FC, useState, useContext, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import RootStoreContext from 'stores/RootStore/RootStore';
+import RootStoreContext from 'stores/RootStore';
 import TweetsContainer from 'components/TweetsContainer/index';
 import Notification from 'types/Notification';
 import TweetType from 'types/Tweet';
