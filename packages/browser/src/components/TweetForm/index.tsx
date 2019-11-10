@@ -63,10 +63,11 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
           formData,
           config,
         );
+        history.push(`/tweet/${tweet._id}`);
       } else {
         await axios.post('http://localhost:8090/tweets', formData, config);
+        history.goBack();
       }
-      history.goBack();
     } catch (error) {
       if (
         error &&

@@ -27,12 +27,14 @@ describe('TweetForm', () => {
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
   it('render TweetForm (post a new Tweet)', async () => {
-    expect.assertions(6);
+    expect.assertions(7);
     const history = createMemoryHistory();
     history.push({
       pathname: ``,
       state: {},
     });
+
+    jest.spyOn(history, 'goBack');
     const { getByText, getByPlaceholderText, getByTestId } = render(
       <TweetForm setNotification={setNotification} token={token} />,
 
@@ -75,16 +77,18 @@ describe('TweetForm', () => {
           headers: { Authorization: 'bearer mockToken' },
         },
       );
+      expect(history.goBack).toHaveBeenCalledTimes(1);
     });
   });
   it('render TweetForm (edit a Tweet)', async () => {
-    //
+    expect.assertions(10);
 
     const history = createMemoryHistory();
     history.push({
       pathname: ``,
       state: { tweet },
     });
+    jest.spyOn(history, 'push');
     const { getByText, getByPlaceholderText } = render(
       <TweetForm setNotification={setNotification} token={token} />,
 
@@ -126,6 +130,9 @@ describe('TweetForm', () => {
           headers: { Authorization: 'bearer mockToken' },
         },
       );
+
+      expect(history.push).toHaveBeenCalledTimes(1);
+      expect(history.push).toHaveBeenCalledWith(`/tweet/${tweet._id}`);
     });
   });
 });
