@@ -8,7 +8,8 @@ import Notification from 'types/Notification';
 import User from 'types/User';
 import axios from 'axios';
 import getUrl from 'utilities/getUrl';
-import getUpdatedUser from './getUpdatedUser';
+import defaultWarning from 'utilities/defaultWarning';
+import updateUserHandler from './utilities/updateUserHandler';
 import ShareButton from './ShareButton/index';
 import { TweetBarWrapper, TweetBarButton } from './styled';
 
@@ -21,10 +22,11 @@ interface TweetProps {
 }
 interface ButtonType {
   icon: IconProp;
-  event: () => void | Promise<void>;
+  event: (...args: any) => Promise<void> | void;
   isActive: () => 'primary' | 'like' | undefined;
   show: boolean;
 }
+
 export const TweetBar: FC<TweetProps> = ({
   tweet,
   authState,
@@ -36,17 +38,15 @@ export const TweetBar: FC<TweetProps> = ({
   const location = useLocation();
   const history = useHistory();
   const { _id } = tweet;
+  const updateUserEvent = async (urlExtension: string) => {
+    await updateUserHandler(token, urlExtension, setNotification, updateUser);
+  };
   const buttons: ButtonType[] = [
     {
       show: true,
       icon: 'heart',
       event: async () => {
-        const user = await getUpdatedUser(
-          token,
-          getUrl(`/users/tweets/${_id}/like`),
-          setNotification,
-        );
-        updateUser(user);
+        await updateUserEvent(`/users/tweets/${_id}/like`);
       },
       isActive: () => (user && user.likes.includes(_id) ? 'like' : undefined),
     },
@@ -67,17 +67,11 @@ export const TweetBar: FC<TweetProps> = ({
       show: true,
       icon: 'bookmark',
       event: async () => {
-        const user = await getUpdatedUser(
-          token,
-          getUrl(`/users/tweets/${_id}/bookmark`),
-          setNotification,
-        );
-        updateUser(user);
+        await updateUserEvent(`/users/tweets/${_id}/bookmark`);
       },
       isActive: () =>
         user && user.bookmarks.includes(_id) ? 'primary' : undefined,
     },
-
     {
       show: true,
       icon: 'retweet',
@@ -102,11 +96,7 @@ export const TweetBar: FC<TweetProps> = ({
           await axios.delete(getUrl(`/tweets/${_id}`), config);
           deleteTweetHandler(tweet._id);
         } catch (err) {
-          const notification: Notification = {
-            type: 'warning',
-            content: 'There was an error. Please try again later.',
-          };
-          setNotification(notification);
+          setNotification(defaultWarning);
         }
       },
       isActive: () => undefined,

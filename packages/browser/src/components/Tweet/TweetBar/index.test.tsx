@@ -8,13 +8,13 @@ import tweet from 'testUtilities/tweet';
 import { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { createMemoryHistory } from 'history';
+import user from 'testUtilities/user';
 import TweetBar from './index';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.patch.mockReturnValueOnce(
-  Promise.resolve({ data: {}, status: 200 }),
-);
+
+mockedAxios.patch.mockResolvedValue({ data: { data: { user } }, status: 200 });
 mockedAxios.delete.mockResolvedValue({ data: {}, status: 204 });
 
 const history = createMemoryHistory();
@@ -34,7 +34,7 @@ describe('TweetBar', () => {
   };
 
   it('render TweetBar (bookmark button)', async () => {
-    expect.assertions(4);
+    // expect.assertions(4);
     const { rerender, getByTestId } = render(
       <TweetBar
         deleteTweetHandler={deleteTweetHandler}
