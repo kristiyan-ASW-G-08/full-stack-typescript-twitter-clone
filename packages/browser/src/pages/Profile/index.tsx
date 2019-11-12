@@ -15,6 +15,8 @@ import Feed from 'types/Feed';
 import User from 'types/User';
 import Loader from 'components/Loader';
 import TweetsContainer from 'components/TweetsContainer';
+import getUrl from 'utilities/getUrl';
+import defaultWarning from 'utilities/defaultWarning';
 import { ProfileWrapper, UserCardWrapper, TweetsWrapper } from './styled';
 
 const UserCard = lazy(() => import('components/UserCard/index'));
@@ -30,27 +32,18 @@ export const Profile: FC = () => {
   useEffect(() => {
     const getUser = async (userId: string): Promise<any> => {
       try {
-        const response = await axios.get(
-          `http://localhost:8090/users/user/${userId}`,
-        );
+        const response = await axios.get(getUrl(`/users/user/${userId}`));
 
         const { user } = response.data.data;
 
         return user;
       } catch (err) {
-        console.log(err);
-        const notification: Notification = {
-          type: 'warning',
-          content: 'Something went wrong',
-        };
-        notificationStore.setNotification(notification);
+        notificationStore.setNotification(defaultWarning);
       }
     };
     getUser(userId || '').then((userData: User) => {
       setUser(userData);
-      setUrl(
-        userData ? `http://localhost:8090/users/${userData._id}/tweets` : '',
-      );
+      setUrl(userData ? getUrl(`/users/${userData._id}/tweets`) : '');
     });
   }, [notificationStore, userId]);
 
@@ -59,15 +52,15 @@ export const Profile: FC = () => {
       ? [
           {
             name: 'Tweets',
-            url: `http://localhost:8090/users/${user._id}/tweets`,
+            url: getUrl(`/users/${user._id}/tweets`),
           },
           {
             name: 'Replies',
-            url: `http://localhost:8090/users/${user._id}/replies`,
+            url: getUrl(`/users/${user._id}/replies`),
           },
           {
             name: 'Likes',
-            url: `http://localhost:8090/users/${user._id}/likes`,
+            url: getUrl(`/users/${user._id}/likes`),
           },
         ]
       : [];

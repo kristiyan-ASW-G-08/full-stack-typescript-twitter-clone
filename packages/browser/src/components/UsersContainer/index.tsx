@@ -3,7 +3,6 @@ import React, {
   useRef,
   useEffect,
   useState,
-  useMemo,
   Suspense,
   lazy,
   Dispatch,
@@ -11,11 +10,11 @@ import React, {
   useContext,
 } from 'react';
 import UserType from 'types/User';
-import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
 import RootStoreContext from 'stores/RootStore';
+import defaultWarning from 'utilities/defaultWarning';
 import getUsers from './getUsers';
 import { UsersWrapper, TextLoader, Users } from './styled';
 
@@ -40,12 +39,6 @@ export const UsersContainer: FC<UsersContainerProps> = ({
   const [query, setQuery] = useState<string>(`${url}?sort=new`);
   const usersRef = useRef(users);
   const nextPageRef = useRef(nextPage);
-  const errorNotification: Notification = useMemo(() => {
-    return {
-      type: 'warning',
-      content: 'There was an error. Please try again later.',
-    };
-  }, []);
   const loadNext = async () => {
     try {
       if (nextPageRef.current) {
@@ -54,7 +47,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
         setNext(next);
       }
     } catch {
-      notificationStore.setNotification(errorNotification);
+      notificationStore.setNotification(defaultWarning);
     }
   };
   const { setElement } = useIntersection(loadNext);
@@ -74,7 +67,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
         setUsers(nextUsers);
       })
       .catch(() => {
-        notificationStore.setNotification(errorNotification);
+        notificationStore.setNotification(defaultWarning);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);

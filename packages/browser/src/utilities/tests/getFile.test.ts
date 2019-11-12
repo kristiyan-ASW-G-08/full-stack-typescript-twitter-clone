@@ -4,7 +4,7 @@ import getFile from 'utilities/getFile';
 describe('getFile', () => {
   it('should return a file and a file url', () => {
     expect.assertions(2);
-    //@ts-ignore
+    // @ts-ignore
     global.URL.createObjectURL = jest.fn(() => 'fileUrl');
 
     const fileMock = new File(['file'], 'test.png', { type: 'image/png' });

@@ -7,6 +7,7 @@ import AuthState from 'types/AuthState';
 import Notification from 'types/Notification';
 import User from 'types/User';
 import axios from 'axios';
+import getUrl from 'utilities/getUrl';
 import getUpdatedUser from './getUpdatedUser';
 import ShareButton from './ShareButton/index';
 import { TweetBarWrapper, TweetBarButton } from './styled';
@@ -42,7 +43,7 @@ export const TweetBar: FC<TweetProps> = ({
       event: async () => {
         const user = await getUpdatedUser(
           token,
-          `http://localhost:8090/users/tweets/${_id}/like`,
+          getUrl(`/users/tweets/${_id}/like`),
           setNotification,
         );
         updateUser(user);
@@ -68,7 +69,7 @@ export const TweetBar: FC<TweetProps> = ({
       event: async () => {
         const user = await getUpdatedUser(
           token,
-          `http://localhost:8090/users/tweets/${_id}/bookmark`,
+          getUrl(`/users/tweets/${_id}/bookmark`),
           setNotification,
         );
         updateUser(user);
@@ -98,7 +99,7 @@ export const TweetBar: FC<TweetProps> = ({
           const config = {
             headers: { Authorization: `bearer ${token}` },
           };
-          await axios.delete(`http://localhost:8090/tweets/${_id}`, config);
+          await axios.delete(getUrl(`/tweets/${_id}`), config);
           deleteTweetHandler(tweet._id);
         } catch (err) {
           const notification: Notification = {

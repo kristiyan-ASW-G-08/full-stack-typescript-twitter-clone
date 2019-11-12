@@ -5,6 +5,7 @@ import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import { Title, Paragraph, Container } from 'styled/Title';
 import RootStoreContext from 'stores/RootStore';
+import defaultWarning from 'utilities/defaultWarning';
 import Notification from 'types/Notification';
 
 export const EmailConfirmation: FC = () => {
@@ -20,13 +21,7 @@ export const EmailConfirmation: FC = () => {
       };
       notificationStore.setNotification(notification);
     } catch (error) {
-      if (error.response) {
-        const notification: Notification = {
-          type: 'warning',
-          content: 'There was an error.Try again later.',
-        };
-        notificationStore.setNotification(notification);
-      }
+      notificationStore.setNotification(defaultWarning);
     }
     history.replace('/');
   };

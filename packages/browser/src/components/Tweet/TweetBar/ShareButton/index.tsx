@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import setClipboard from 'utilities/setClipboard';
 import Tweet from 'types/Tweet';
 import Notification from 'types/Notification';
+import getUrl from 'utilities/getUrl';
 import { ShareButtonWrapper, DropDown, DropDownItem } from './styled';
 import { TweetBarButton } from '../styled';
 
@@ -16,7 +17,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { _id, text } = tweet;
-  const tweetUrl = `http://localhost:3000/tweet/${_id}`;
+  const tweetUrl = getUrl(`/tweet/${_id}`);
   return (
     <ShareButtonWrapper>
       <TweetBarButton

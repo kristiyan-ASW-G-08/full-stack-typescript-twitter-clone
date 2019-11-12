@@ -5,20 +5,21 @@ import PageContainer from 'styled/PageContainer';
 import TweetsContainer from 'components/TweetsContainer';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
+import getUrl from 'utilities/getUrl';
 import HomeWrapper from './styled';
 
 export const Home: FC = observer(() => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const { token, user } = authStore.authState;
-  const [url, setUrl] = useState<string>('http://localhost:8090/tweets');
+  const [url, setUrl] = useState<string>(getUrl('/tweets'));
   const feeds: Feed[] =
     user !== undefined
       ? [
           {
             name: 'Feed',
-            url: 'http://localhost:8090/users/user/tweets',
+            url: getUrl('/users/user/tweets'),
           },
-          { name: 'All', url: 'http://localhost:8090/tweets' },
+          { name: 'All', url: getUrl('/tweets') },
         ]
       : [];
 

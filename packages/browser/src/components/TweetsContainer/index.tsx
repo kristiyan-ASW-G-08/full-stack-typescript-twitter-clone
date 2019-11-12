@@ -4,7 +4,6 @@ import React, {
   useRef,
   useEffect,
   useState,
-  useMemo,
   Suspense,
   lazy,
   Dispatch,
@@ -14,6 +13,7 @@ import TweetType from 'types/Tweet';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
+import defaultWarning from 'utilities/defaultWarning';
 import FeedBar from 'components/FeedBar';
 import Select from 'styled/Select';
 import getTweets from './getTweets';
@@ -43,12 +43,6 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const [query, setQuery] = useState<string>(`${url}?sort=new`);
   const tweetsRef = useRef(tweets);
   const nextPageRef = useRef(nextPage);
-  const errorNotification: Notification = useMemo(() => {
-    return {
-      type: 'warning',
-      content: 'There was an error. Please try again later.',
-    };
-  }, []);
   const loadNext = async () => {
     try {
       if (nextPageRef.current) {
@@ -57,7 +51,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
         setNext(next);
       }
     } catch {
-      setNotification(errorNotification);
+      setNotification(defaultWarning);
     }
   };
   const { setElement } = useIntersection(loadNext);
@@ -77,7 +71,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
         setTweets(newTweets);
       })
       .catch(() => {
-        setNotification(errorNotification);
+        setNotification(defaultWarning);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, query]);

@@ -11,6 +11,8 @@ import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+import getUrl from 'utilities/getUrl';
+import defaultWarning from 'utilities/defaultWarning';
 
 export const SignUpPage: FC = () => {
   const history = useHistory();
@@ -20,7 +22,7 @@ export const SignUpPage: FC = () => {
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      await axios.post('http://localhost:8090/users', formValues);
+      await axios.post(getUrl('/users'), formValues);
       const notification: Notification = {
         type: 'message',
         content:
@@ -29,10 +31,12 @@ export const SignUpPage: FC = () => {
       notificationStore.setNotification(notification);
       history.replace('/');
     } catch (error) {
-      if (error.response) {
+      if (error.response && Array.isArray(error.response.data.data)) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);
+      } else {
+        notificationStore.setNotification(defaultWarning);
       }
     }
   };

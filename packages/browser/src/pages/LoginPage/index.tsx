@@ -11,6 +11,8 @@ import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 import Input from 'components/Input';
+import getUrl from 'utilities/getUrl';
+import defaultWarning from 'utilities/defaultWarning';
 
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
@@ -21,7 +23,7 @@ export const LoginPage: FC = () => {
   ): Promise<void> => {
     try {
       const response = await axios.post(
-        'http://localhost:8090/users/user/tokens',
+        getUrl('/users/user/tokens'),
         formValues,
       );
       const { data } = response.data;
@@ -36,10 +38,12 @@ export const LoginPage: FC = () => {
       notificationStore.setNotification(notification);
       history.replace('/');
     } catch (error) {
-      if (error.response) {
+      if (error.response && Array.isArray(error.response.data.data)) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);
+      } else {
+        notificationStore.setNotification(defaultWarning);
       }
     }
   };

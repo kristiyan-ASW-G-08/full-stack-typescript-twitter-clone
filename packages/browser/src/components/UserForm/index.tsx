@@ -12,6 +12,7 @@ import Notification from 'types/Notification';
 import User from 'types/User';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 import populateFormData from 'utilities/populateFormData';
+import getUrl from 'utilities/getUrl';
 
 interface UserFormProps {
   token: string;
@@ -35,7 +36,7 @@ export const UserForm: FC<UserFormProps> = ({
       const formData = populateFormData(formValues);
 
       const request = await axios.patch(
-        'http://localhost:8090/users/user/profile',
+        getUrl('/users/user/profile'),
         formData,
         {
           headers: { Authorization: `bearer ${token}` },

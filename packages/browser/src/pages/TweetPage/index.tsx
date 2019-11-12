@@ -4,9 +4,10 @@ import axios from 'axios';
 import RootStoreContext from 'stores/RootStore';
 import TweetsContainer from 'components/TweetsContainer/index';
 import Notification from 'types/Notification';
+import defaultWarning from 'utilities/defaultWarning';
 import TweetType from 'types/Tweet';
 import Tweet from 'components/Tweet';
-
+import getUrl from 'utilities/getUrl';
 import { TweetPageWrapper, P } from './styled';
 
 export const TweetPage: FC = () => {
@@ -21,21 +22,15 @@ export const TweetPage: FC = () => {
     // @ts-ignore
     const getTweet = async (): Promise<{ tweet: TweetType; url: string }> => {
       try {
-        const request = await axios.get(
-          `http://localhost:8090/tweets/${tweetId}`,
-        );
+        const request = await axios.get(getUrl(`/tweets/${tweetId}`));
 
         const { tweet } = request.data.data;
         return {
-          url: `http://localhost:8090/tweets/${tweet._id}/replies`,
+          url: getUrl(`/tweets/${tweet._id}/replies`),
           tweet,
         };
       } catch (error) {
-        const notification: Notification = {
-          type: 'warning',
-          content: 'Something went wrong. Try again later.',
-        };
-        notificationStore.setNotification(notification);
+        notificationStore.setNotification(defaultWarning);
       }
     };
     getTweet().then(({ tweet, url }) => {
