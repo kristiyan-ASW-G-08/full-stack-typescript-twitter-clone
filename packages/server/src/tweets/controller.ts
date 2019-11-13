@@ -8,6 +8,8 @@ import deleteFile from '@utilities/deleteFile';
 import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
+import findDocs from '@utilities/findDocs';
+import TweetType from '@customTypes/Tweet';
 
 export const postTweet = async (
   { userId, body, file }: Request,
@@ -133,17 +135,18 @@ export const getAllTweets = async (
   try {
     const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
-    const tweets = await Tweet.countDocuments()
-      .find()
-      .sort(sortString)
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const tweetsCount = (await Tweet.countDocuments()) - page * limit;
+    const { documents, count } = await findDocs<TweetType>(
+      Tweet,
+      page,
+      limit,
+      sortString,
+      {},
+    );
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (tweetsCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/tweets?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -151,7 +154,7 @@ export const getAllTweets = async (
       links.prev = `${SERVER_URL}/tweets?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { tweets, links } });
+    res.status(200).json({ data: { tweets: documents, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -166,18 +169,18 @@ export const getUserTweets = async (
     const { userId } = params;
     const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
-    const tweets = await Tweet.countDocuments()
-      .find({ user: userId })
-      .sort(sortString)
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const tweetsCount =
-      (await Tweet.countDocuments({ user: userId })) - page * limit;
+    const { documents, count } = await findDocs<TweetType>(
+      Tweet,
+      page,
+      limit,
+      sortString,
+      { user: userId },
+    );
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (tweetsCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/users/${userId}/tweets?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -185,7 +188,7 @@ export const getUserTweets = async (
       links.prev = `${SERVER_URL}/users/${userId}/tweets?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { tweets, links } });
+    res.status(200).json({ data: { tweets: documents, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -200,18 +203,18 @@ export const getReplies = async (
     const { tweetId } = params;
     const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
-    const tweets = await Tweet.countDocuments()
-      .find({ reply: tweetId })
-      .sort(sortString)
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const repliesCount =
-      (await Tweet.countDocuments({ reply: tweetId })) - page * limit;
+    const { documents, count } = await findDocs<TweetType>(
+      Tweet,
+      page,
+      limit,
+      sortString,
+      { reply: tweetId },
+    );
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (repliesCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -219,7 +222,7 @@ export const getReplies = async (
       links.prev = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { tweets, links } });
+    res.status(200).json({ data: { tweets: documents, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -234,19 +237,18 @@ export const getUserReplies = async (
     const { userId } = params;
     const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
-    const tweets = await Tweet.countDocuments()
-      .find({ user: userId, type: 'reply' })
-      .sort(sortString)
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const tweetsCount =
-      (await Tweet.countDocuments({ user: userId, type: 'reply' })) -
-      page * limit;
+    const { documents, count } = await findDocs<TweetType>(
+      Tweet,
+      page,
+      limit,
+      sortString,
+      { user: userId, type: 'reply' },
+    );
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (tweetsCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/users/${userId}/replies?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -254,7 +256,7 @@ export const getUserReplies = async (
       links.prev = `${SERVER_URL}/users/${userId}/replies?page=${page -
         1}&limit=${limit}&sort=${sort}`;
     }
-    res.status(200).json({ data: { tweets, links } });
+    res.status(200).json({ data: { tweets: documents, links } });
   } catch (err) {
     passErrorToNext(err, next);
   }

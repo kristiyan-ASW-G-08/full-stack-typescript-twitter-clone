@@ -20,6 +20,9 @@ import { CustomError, errors } from '@utilities/CustomError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import deleteFile from '@src/utilities/deleteFile';
+import findDocs from '@utilities/findDocs';
+import TweetType from '@customTypes/Tweet';
+import UserType from '@customTypes/User';
 
 export const signUp = async (
   { body }: Request,
@@ -524,19 +527,15 @@ export const getUserFeed = async (
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const { following } = user;
-    const tweets = await Tweet.find()
-      .countDocuments()
-      .find({ user: { $in: following } })
-      .sort(sortString)
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const tweetsCount =
-      (await Tweet.countDocuments({ user: { $in: following } })) - page * limit;
+    const { documents, count } = await findDocs<
+      TweetType,
+      { user: { [key: string]: mongoose.Types.ObjectId[] } }
+    >(Tweet, page, limit, sortString, { user: { $in: following } });
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (tweetsCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/users/user/tweets?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -546,7 +545,7 @@ export const getUserFeed = async (
     }
     res.status(200).json({
       data: {
-        tweets,
+        tweets: documents,
         links,
       },
     });
@@ -628,24 +627,17 @@ export const getUserFollowers = async (
     const { page, limit, sort, sortString } = pagination;
     const { userId } = params;
     const { SERVER_URL } = process.env;
-    const users = await User.countDocuments()
-      .find({
-        following: { $in: [userId] },
-      })
-      .sort(sortString)
-      .select('username handle avatar cover website following followers')
-      .skip((page - 1) * limit)
-      .limit(limit);
-    const usersCount =
-      (await User.countDocuments({
-        following: { $in: [userId] },
-      })) -
-      page * limit;
+    const { documents, count } = await findDocs<
+      UserType,
+      { following: { $in: [string] } }
+    >(User, page, limit, sortString, {
+      following: { $in: [userId] },
+    });
     const links: { next: null | string; prev: null | string } = {
       next: null,
       prev: null,
     };
-    if (usersCount > 0) {
+    if (count > 0) {
       links.next = `${SERVER_URL}/users/${userId}/followers?page=${page +
         1}&limit=${limit}&sort=${sort}`;
     }
@@ -655,7 +647,7 @@ export const getUserFollowers = async (
     }
     res.status(200).json({
       data: {
-        users,
+        users: documents,
         links,
       },
     });

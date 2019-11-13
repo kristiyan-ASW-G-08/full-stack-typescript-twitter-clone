@@ -1,7 +1,7 @@
 import mongoose, { Schema, Query } from 'mongoose';
 import Tweet from '@customTypes/Tweet';
 
-const TweetSchema: Schema = new Schema({
+export const TweetSchema: Schema = new Schema({
   type: {
     type: String,
     required: true,
