@@ -16,8 +16,9 @@ import useIntersection from 'hooks/useIntersection';
 import defaultWarning from 'utilities/defaultWarning';
 import FeedBar from 'components/FeedBar';
 import Select from 'styled/Select';
+import TextLoader from 'styled/TextLoader';
 import getTweets from './getTweets';
-import { TweetsWrapper, SelectWrapper, Tweets, TextLoader } from './styled';
+import { TweetsWrapper, SelectWrapper, Tweets, LoaderWrapper } from './styled';
 
 const Tweet = lazy(() => import('components/Tweet'));
 const Retweet = lazy(() => import('components/Retweet'));
@@ -89,7 +90,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
-        <Suspense fallback="">
+        <Suspense fallback={<TextLoader>...Loading</TextLoader>}>
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>
               <option data-testid="new" value="new">
@@ -130,14 +131,15 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       ) : (
         ''
       )}
-
-      {nextPage ? (
-        <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
-          ...Loading
-        </TextLoader>
-      ) : (
-        <TextLoader>No Tweets Available</TextLoader>
-      )}
+      <LoaderWrapper>
+        {nextPage ? (
+          <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
+            ...Loading
+          </TextLoader>
+        ) : (
+          <TextLoader>No Tweets Available</TextLoader>
+        )}
+      </LoaderWrapper>
     </TweetsWrapper>
   );
 };

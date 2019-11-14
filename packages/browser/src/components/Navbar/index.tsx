@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'components/Logo';
-import StyledButton from 'styled/Button';
+import Button from 'styled/Button';
 import SearchBar from 'components/SearchBar';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
@@ -88,31 +88,27 @@ export const Navbar: FC<NavbarProps> = ({
                 )}
               </DropDownWrapper>
 
-              <StyledButton buttonType="primary">
+              <Button buttonType="primary">
                 <Link
                   to={{
                     pathname: `/create/tweet`,
                     state: { tweetForm: location },
                   }}
                 >
-                  {' '}
                   Tweet
                 </Link>
-              </StyledButton>
-              <StyledButton buttonType="secondary" onClick={resetAuthState}>
+              </Button>
+              <Button buttonType="secondary" onClick={resetAuthState}>
                 Log Out
-              </StyledButton>
+              </Button>
             </>
           ) : (
             <>
-              {' '}
               <Link to="/log-in">
-                {' '}
-                <StyledButton buttonType="primary">Log In</StyledButton>
+                <Button buttonType="primary">Log In</Button>
               </Link>
               <Link to="/sign-up">
-                {' '}
-                <StyledButton buttonType="secondary">Sign Up</StyledButton>
+                <Button buttonType="secondary">Sign Up</Button>
               </Link>
             </>
           )}

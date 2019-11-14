@@ -20,6 +20,8 @@ export const Button = styled('button')<ButtonProps>`
     color: ${({ theme, buttonType }) => theme[buttonType]};
   }
   a {
+    display: block;
+    ${({ theme }) => theme.mixins.center}
     color: inherit;
     font-size: inherit;
     text-decoration: none;

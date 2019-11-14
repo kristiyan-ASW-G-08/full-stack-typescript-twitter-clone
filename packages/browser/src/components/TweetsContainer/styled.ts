@@ -33,12 +33,8 @@ export const Tweets = styled('div')`
   width: 100%;
 `;
 
-export const TextLoader = styled('div')`
+export const LoaderWrapper = styled('div')`
   grid-area: loader;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.7rem;
-  color: ${({ theme }) => theme.secondary};
 `;
 export const SelectWrapper = styled('div')`
   grid-area: select;
