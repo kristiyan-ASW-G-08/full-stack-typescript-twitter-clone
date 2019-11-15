@@ -9,7 +9,7 @@ import { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { createMemoryHistory } from 'history';
 import user from 'testUtilities/user';
-import TweetBar from './index';
+import TweetBar from '.';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -89,7 +89,7 @@ describe('TweetBar', () => {
         ),
       },
     );
-    const likeButton = getByTestId('heart-button');
+    const likeButton = getByTestId('like-button');
     UserEvent.click(likeButton);
 
     expect(setNotification).toHaveBeenCalledTimes(1);
@@ -149,8 +149,8 @@ describe('TweetBar', () => {
     expect(historyPushSpy).toHaveBeenCalledTimes(1);
   });
   it('render TweetBar (reply button)', async () => {
-    expect.assertions(3);
-    const { rerender, getByTestId, queryByTestId } = render(
+    expect.assertions(4);
+    const { rerender, getByTestId } = render(
       <TweetBar
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
@@ -165,9 +165,12 @@ describe('TweetBar', () => {
         ),
       },
     );
-    let replyButton = queryByTestId('reply-button');
+    const replyButton = getByTestId('reply-button');
 
-    expect(replyButton).toBeFalsy();
+    UserEvent.click(replyButton);
+
+    expect(setNotification).toHaveBeenCalledTimes(1);
+    expect(setNotification).toHaveBeenCalledWith(notification);
 
     rerender(
       <TweetBar
@@ -178,7 +181,6 @@ describe('TweetBar', () => {
         setNotification={setNotification}
       />,
     );
-    replyButton = getByTestId('comment-button');
 
     expect(replyButton).toBeTruthy();
 
@@ -241,7 +243,7 @@ describe('TweetBar', () => {
         ),
       },
     );
-    let deleteButton = queryByTestId('trash-button');
+    let deleteButton = queryByTestId('delete-button');
 
     expect(deleteButton).toBeFalsy();
 
@@ -254,7 +256,7 @@ describe('TweetBar', () => {
         setNotification={setNotification}
       />,
     );
-    deleteButton = getByTestId('trash-button');
+    deleteButton = getByTestId('delete-button');
 
     expect(deleteButton).toBeTruthy();
 

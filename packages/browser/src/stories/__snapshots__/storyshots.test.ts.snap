@@ -5647,7 +5647,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-htpNat ljCPII"
+      className="sc-htpNat gtKdcM"
     >
       Button
     </button>
@@ -6369,7 +6369,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-htpNat fhbVQH"
+      className="sc-htpNat bNVStM"
     >
       Button
     </button>
@@ -7091,7 +7091,7 @@ Array [
     style={Object {}}
   >
     <button
-      className="sc-htpNat cVxFRM"
+      className="sc-htpNat dYpiEy"
     >
       Button
     </button>
@@ -7895,7 +7895,7 @@ Array [
             </button>
           </div>
           <button
-            className="sc-htpNat ljCPII"
+            className="sc-htpNat gtKdcM"
             type="submit"
           >
             Submit
@@ -8964,7 +8964,7 @@ Array [
             </button>
           </div>
           <button
-            className="sc-htpNat ljCPII"
+            className="sc-htpNat gtKdcM"
             type="submit"
           >
             Submit
@@ -19917,7 +19917,7 @@ Array [
           Dark mode
         </button>
         <form
-          className="sc-gqjmRU bsoiAJ"
+          className="sc-gqjmRU cAMlll"
           onSubmit={[Function]}
           role="search"
         >
@@ -19951,14 +19951,12 @@ Array [
             </svg>
           </span>
         </form>
-         
         <a
           href="/log-in"
           onClick={[Function]}
         >
-           
           <button
-            className="sc-htpNat ljCPII"
+            className="sc-htpNat gtKdcM"
           >
             Log In
           </button>
@@ -19967,9 +19965,8 @@ Array [
           href="/sign-up"
           onClick={[Function]}
         >
-           
           <button
-            className="sc-htpNat fhbVQH"
+            className="sc-htpNat bNVStM"
           >
             Sign Up
           </button>
@@ -20905,7 +20902,7 @@ Array [
           Light mode
         </button>
         <form
-          className="sc-gqjmRU bsoiAJ"
+          className="sc-gqjmRU cAMlll"
           onSubmit={[Function]}
           role="search"
         >
@@ -20959,18 +20956,17 @@ Array [
           
         </div>
         <button
-          className="sc-htpNat ljCPII"
+          className="sc-htpNat gtKdcM"
         >
           <a
             href="/create/tweet"
             onClick={[Function]}
           >
-             
             Tweet
           </a>
         </button>
         <button
-          className="sc-htpNat fhbVQH"
+          className="sc-htpNat bNVStM"
           onClick={[Function]}
         >
           Log Out
@@ -22239,7 +22235,7 @@ Array [
           Dark mode
         </button>
         <form
-          className="sc-gqjmRU lhugCG"
+          className="sc-gqjmRU exRhfA"
           onSubmit={[Function]}
           role="search"
         >
@@ -22273,14 +22269,12 @@ Array [
             </svg>
           </span>
         </form>
-         
         <a
           href="/log-in"
           onClick={[Function]}
         >
-           
           <button
-            className="sc-htpNat ljCPII"
+            className="sc-htpNat gtKdcM"
           >
             Log In
           </button>
@@ -22289,9 +22283,8 @@ Array [
           href="/sign-up"
           onClick={[Function]}
         >
-           
           <button
-            className="sc-htpNat cVxFRM"
+            className="sc-htpNat dYpiEy"
           >
             Sign Up
           </button>
@@ -23227,7 +23220,7 @@ Array [
           Dark mode
         </button>
         <form
-          className="sc-gqjmRU lhugCG"
+          className="sc-gqjmRU exRhfA"
           onSubmit={[Function]}
           role="search"
         >
@@ -23281,18 +23274,17 @@ Array [
           
         </div>
         <button
-          className="sc-htpNat ljCPII"
+          className="sc-htpNat gtKdcM"
         >
           <a
             href="/create/tweet"
             onClick={[Function]}
           >
-             
             Tweet
           </a>
         </button>
         <button
-          className="sc-htpNat cVxFRM"
+          className="sc-htpNat dYpiEy"
           onClick={[Function]}
         >
           Log Out
@@ -25969,7 +25961,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-gqjmRU bsoiAJ"
+      className="sc-gqjmRU cAMlll"
       onSubmit={[Function]}
       role="search"
     >
@@ -26658,7 +26650,7 @@ Array [
     style={Object {}}
   >
     <form
-      className="sc-gqjmRU lhugCG"
+      className="sc-gqjmRU exRhfA"
       onSubmit={[Function]}
       role="search"
     >
@@ -29114,7 +29106,7 @@ Array [
           >
             
             <button
-              className="sc-htpNat ljCPII"
+              className="sc-htpNat gtKdcM"
             >
               <a
                 href="/user/edit"
@@ -30804,7 +30796,7 @@ Array [
           >
             
             <button
-              className="sc-htpNat ljCPII"
+              className="sc-htpNat gtKdcM"
             >
               <a
                 href="/user/edit"

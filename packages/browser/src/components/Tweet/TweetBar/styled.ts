@@ -19,4 +19,9 @@ export const TweetBarButton = styled('button')<TweetBarButtonProps>`
     return color;
   }};
   padding: 0.5rem 0 0.5rem 0;
+  span {
+    font-weight: bold;
+    margin-left: 0.3rem;
+    font-size: 1.5rem;
+  }
 `;

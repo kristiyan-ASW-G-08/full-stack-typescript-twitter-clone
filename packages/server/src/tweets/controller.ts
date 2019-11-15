@@ -96,8 +96,21 @@ export const deleteTweet = async (
     const { tweetId } = params;
     const tweet = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
+    const user = await getUserById(tweet.user, false);
     if (tweet.image) {
       await deleteFile(tweet.image);
+    }
+    if (tweet.type === 'reply') {
+      const repliedToTweet = await getTweetById(tweet.reply);
+      user.replies = removeId(user.replies, tweet.reply);
+      repliedToTweet.replies -= 1;
+      await repliedToTweet.save();
+    }
+    if (tweet.type === 'retweet') {
+      const repliedToTweet = await getTweetById(tweet.reply);
+      user.retweets = removeId(user.retweets, tweet.reply);
+      repliedToTweet.retweets -= 1;
+      await repliedToTweet.save();
     }
     await tweet.remove();
     res.sendStatus(204);
