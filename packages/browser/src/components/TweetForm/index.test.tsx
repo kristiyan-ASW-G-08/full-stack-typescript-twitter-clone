@@ -10,18 +10,18 @@ import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import TweetForm from './index';
 
 jest.mock('axios');
+jest.mock('utilities/populateFormData');
+
+const setNotification = jest.fn();
+
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockResolvedValue({ data: {}, status: 200 });
 axiosMock.patch.mockResolvedValue({ data: {}, status: 200 });
-
-jest.mock('utilities/populateFormData');
-
-const populateFormDataMock = populateFormData as jest.Mock<any>;
+const populateFormDataMock = populateFormData as jest.Mocked<any>;
 populateFormDataMock.mockReturnValue(new FormData());
 
 describe('TweetForm', () => {
   const token = 'mockToken';
-  const setNotification = jest.fn();
   const text = 'text';
   const link = 'https://testing-library.com/';
   afterEach(() => jest.clearAllMocks());

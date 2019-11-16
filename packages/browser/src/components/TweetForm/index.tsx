@@ -12,9 +12,9 @@ import Notification from 'types/Notification';
 import ImageInput from 'components/ImageUploadButton';
 import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
-
 import populateFormData from 'utilities/populateFormData';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+
 import {
   TweetFormWrapper,
   TwButtonButtonContainer,
@@ -59,6 +59,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
+      setNotification(defaultWarning);
       if (tweet) {
         await axios.patch(getUrl(`/tweets/${tweet._id}`), formData, config);
         history.push(`/tweet/${tweet._id}`);

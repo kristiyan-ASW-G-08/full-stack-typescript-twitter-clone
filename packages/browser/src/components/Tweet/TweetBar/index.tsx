@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
 import AuthState from 'types/AuthState';
@@ -19,12 +18,6 @@ interface TweetProps {
   setNotification: (notification: Notification) => void;
   updateUser: (user: User | undefined) => void;
   deleteTweetHandler: (tweetId: string) => void;
-}
-interface ButtonType {
-  icon: IconProp;
-  event: (...args: any) => Promise<void> | void;
-  isActive: () => 'primary' | 'like' | undefined;
-  show: boolean;
 }
 
 export const TweetBar: FC<TweetProps> = ({
