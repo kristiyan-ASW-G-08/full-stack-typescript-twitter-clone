@@ -4,35 +4,38 @@ import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
 import AuthState from 'types/AuthState';
 import Notification from 'types/Notification';
-import User from 'types/User';
 import axios from 'axios';
 import getUrl from 'utilities/getUrl';
+import useStores from 'hooks/useStores';
 import defaultWarning from 'utilities/defaultWarning';
 import updateUserHandler from './utilities/updateUserHandler';
 import ShareButton from './ShareButton/index';
+
 import { TweetBarWrapper, TweetBarButton } from './styled';
 
 interface TweetProps {
   tweet: TweetType;
   authState: AuthState;
-  setNotification: (notification: Notification) => void;
-  updateUser: (user: User | undefined) => void;
   deleteTweetHandler: (tweetId: string) => void;
 }
 
 export const TweetBar: FC<TweetProps> = ({
   tweet,
   authState,
-  setNotification,
-  updateUser,
   deleteTweetHandler,
 }) => {
+  const { notificationStore, authStore } = useStores();
   const { token, user } = authState;
   const location = useLocation();
   const history = useHistory();
   const { _id } = tweet;
   const updateUserEvent = async (urlExtension: string) => {
-    await updateUserHandler(token, urlExtension, setNotification, updateUser);
+    await updateUserHandler(
+      token,
+      urlExtension,
+      notificationStore.setNotification,
+      authStore.updateUser,
+    );
   };
   const notification: Notification = {
     type: 'warning',
@@ -47,7 +50,7 @@ export const TweetBar: FC<TweetProps> = ({
           data-testid="like-button"
           onClick={async () => {
             if (!user) {
-              setNotification(notification);
+              notificationStore.setNotification(notification);
               return;
             }
             await updateUserEvent(`/users/tweets/${_id}/like`);
@@ -61,7 +64,7 @@ export const TweetBar: FC<TweetProps> = ({
           data-testid="bookmark-button"
           onClick={async () => {
             if (!user) {
-              setNotification(notification);
+              notificationStore.setNotification(notification);
               return;
             }
             await updateUserEvent(`/users/tweets/${_id}/bookmark`);
@@ -76,7 +79,7 @@ export const TweetBar: FC<TweetProps> = ({
               data-testid="delete-button"
               onClick={async () => {
                 if (!user) {
-                  setNotification(notification);
+                  notificationStore.setNotification(notification);
                   return;
                 }
                 try {
@@ -86,7 +89,7 @@ export const TweetBar: FC<TweetProps> = ({
                   await axios.delete(getUrl(`/tweets/${_id}`), config);
                   deleteTweetHandler(tweet._id);
                 } catch (err) {
-                  setNotification(defaultWarning);
+                  notificationStore.setNotification(defaultWarning);
                 }
               }}
             >
@@ -96,7 +99,7 @@ export const TweetBar: FC<TweetProps> = ({
               data-testid="edit-button"
               onClick={async () => {
                 if (!user) {
-                  setNotification(notification);
+                  notificationStore.setNotification(notification);
                   return;
                 }
                 history.push({
@@ -119,7 +122,7 @@ export const TweetBar: FC<TweetProps> = ({
           active={user && user.replies.includes(_id) ? 'primary' : undefined}
           onClick={async () => {
             if (!user) {
-              setNotification(notification);
+              notificationStore.setNotification(notification);
               return;
             }
             history.push({
@@ -139,7 +142,7 @@ export const TweetBar: FC<TweetProps> = ({
           data-testid="retweet-button"
           onClick={async () => {
             if (!user) {
-              setNotification(notification);
+              notificationStore.setNotification(notification);
               return;
             }
             history.push({
@@ -154,7 +157,10 @@ export const TweetBar: FC<TweetProps> = ({
           <span>{tweet.retweets}</span>
         </TweetBarButton>
 
-        <ShareButton tweet={tweet} setNotification={setNotification} />
+        <ShareButton
+          tweet={tweet}
+          setNotification={notificationStore.setNotification}
+        />
       </TweetBarWrapper>
     </>
   );

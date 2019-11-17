@@ -14,6 +14,7 @@ import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 import populateFormData from 'utilities/populateFormData';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+import useStores from 'hooks/useStores';
 
 import {
   TweetFormWrapper,
@@ -25,10 +26,10 @@ import {
 
 interface TweetFormProps {
   token: string;
-  setNotification: (notification: Notification) => void;
 }
 
-export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
+export const TweetForm: FC<TweetFormProps> = ({ token }) => {
+  const { notificationStore } = useStores();
   const { replyId, retweetId } = useParams();
   const history = useHistory();
   const location = useLocation();
@@ -59,7 +60,6 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
-      setNotification(defaultWarning);
       if (tweet) {
         await axios.patch(getUrl(`/tweets/${tweet._id}`), formData, config);
         history.push(`/tweet/${tweet._id}`);
@@ -78,7 +78,7 @@ export const TweetForm: FC<TweetFormProps> = ({ token, setNotification }) => {
         const errors = transformValidationErrors(data);
         setErrors(errors);
       } else {
-        setNotification(defaultWarning);
+        notificationStore.setNotification(defaultWarning);
       }
     }
   };

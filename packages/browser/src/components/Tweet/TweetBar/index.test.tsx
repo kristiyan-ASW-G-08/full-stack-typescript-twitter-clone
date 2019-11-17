@@ -9,13 +9,27 @@ import { defaultAuthState } from 'stores/AuthStore';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
 import { createMemoryHistory } from 'history';
 import user from 'testUtilities/user';
+import useStores from 'hooks/useStores';
 import TweetBar from '.';
 
 jest.mock('axios');
+jest.mock('hooks/useStores');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 mockedAxios.patch.mockResolvedValue({ data: { data: { user } }, status: 200 });
 mockedAxios.delete.mockResolvedValue({ data: {}, status: 204 });
+
+const setNotification = jest.fn();
+const updateUser = jest.fn();
+const useStoresMock = useStores as jest.Mocked<any>;
+useStoresMock.mockReturnValue({
+  notificationStore: {
+    setNotification,
+  },
+  authStore: {
+    updateUser,
+  },
+});
 
 const history = createMemoryHistory();
 
@@ -25,8 +39,6 @@ describe('TweetBar', () => {
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
 
-  const updateUser = jest.fn();
-  const setNotification = jest.fn();
   const deleteTweetHandler = jest.fn();
   const notification = {
     type: 'warning',
@@ -40,8 +52,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -61,8 +71,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
 
@@ -79,8 +87,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -100,8 +106,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
 
@@ -118,8 +122,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -139,8 +141,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
 
@@ -155,8 +155,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -177,8 +175,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
 
@@ -195,8 +191,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -214,8 +208,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
     editButton = getByTestId('edit-button');
@@ -233,8 +225,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={defaultAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
 
       {
@@ -252,8 +242,6 @@ describe('TweetBar', () => {
         deleteTweetHandler={deleteTweetHandler}
         authState={authenticatedAuthState}
         tweet={tweet}
-        updateUser={updateUser}
-        setNotification={setNotification}
       />,
     );
     deleteButton = getByTestId('delete-button');

@@ -88,12 +88,7 @@ const Router: FC = observer(
               <Suspense fallback={<Loader />}>
                 <Portal portalId="tweet-form">
                   <Modal backdropHandler={history.goBack}>
-                    <TweetForm
-                      token={token}
-                      setNotification={(notification: NotificationType) =>
-                        notificationStore.setNotification(notification)
-                      }
-                    />
+                    <TweetForm token={token} />
                   </Modal>
                 </Portal>
               </Suspense>

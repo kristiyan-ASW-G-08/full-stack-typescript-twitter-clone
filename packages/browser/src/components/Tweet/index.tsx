@@ -26,7 +26,7 @@ interface TweetProps {
   deleteTweetHandler: (tweetId: string) => void;
 }
 export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
-  const { authStore, notificationStore } = useContext(RootStoreContext);
+  const { authStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
   const { username, handle, avatar } = user;
@@ -88,12 +88,6 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
         deleteTweetHandler={deleteTweetHandler}
         tweet={tweet}
         authState={authStore.authState}
-        setNotification={(notification: Notification): void => {
-          notificationStore.setNotification(notification);
-        }}
-        updateUser={(user: User | undefined): void => {
-          authStore.updateUser(user);
-        }}
       />
     </TweetWrapper>
   );
