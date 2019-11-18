@@ -7,8 +7,6 @@ import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
-import NotificationType from 'types/Notification';
-import User from 'types/User';
 import PageContainer from 'styled/PageContainer';
 
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -46,14 +44,7 @@ const Router: FC = observer(
               <Suspense fallback={<Loader />}>
                 <Portal portalId="user-form">
                   <Modal backdropHandler={history.goBack}>
-                    <UserForm
-                      setNotification={(notification: NotificationType) =>
-                        notificationStore.setNotification(notification)
-                      }
-                      updateUser={(user: User) => authStore.updateUser(user)}
-                      token={token}
-                      user={user}
-                    />
+                    <UserForm />
                   </Modal>
                 </Portal>
               </Suspense>

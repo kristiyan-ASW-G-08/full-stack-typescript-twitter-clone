@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import populateFormData from 'utilities/populateFormData';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
+import useStores from 'hooks/useStores';
 import UserForm from './index';
 
 jest.mock('axios');
@@ -18,10 +19,24 @@ jest.mock('utilities/populateFormData');
 const populateFormDataMock = populateFormData as jest.Mock<any>;
 populateFormDataMock.mockReturnValue(new FormData());
 
+const token = 'mockToken';
+const setNotification = jest.fn();
+const updateUser = jest.fn();
+const useStoresMock = useStores as jest.Mocked<any>;
+useStoresMock.mockReturnValue({
+  authStore: {
+    authState: {
+      user,
+      token,
+    },
+    updateUser,
+  },
+  notificationStore: {
+    setNotification,
+  },
+});
+jest.mock('hooks/useStores');
 describe('UserForm', () => {
-  const token = 'mockToken';
-  const setNotification = jest.fn();
-  const updateUser = jest.fn();
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
   it('render UserForm', async () => {
@@ -32,12 +47,7 @@ describe('UserForm', () => {
       state: { user },
     });
     const { getByText, getByPlaceholderText } = render(
-      <UserForm
-        user={user}
-        setNotification={setNotification}
-        updateUser={updateUser}
-        token={token}
-      />,
+      <UserForm />,
 
       {
         wrapper: ({ children }) => (

@@ -9,25 +9,15 @@ import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import Notification from 'types/Notification';
-import User from 'types/User';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 import populateFormData from 'utilities/populateFormData';
 import getUrl from 'utilities/getUrl';
+import useStores from 'hooks/useStores';
 
-interface UserFormProps {
-  token: string;
-  setNotification: (notification: Notification) => void;
-  updateUser: (user: User) => void;
-  user: User;
-}
-export const UserForm: FC<UserFormProps> = ({
-  setNotification,
-  token,
-  updateUser,
-  user,
-}) => {
+export const UserForm: FC = () => {
+  const { authStore, notificationStore } = useStores();
   const history = useHistory();
-  const { username, handle } = user;
+  const { user, token } = authStore.authState;
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
@@ -43,12 +33,12 @@ export const UserForm: FC<UserFormProps> = ({
         },
       );
       const { user } = request.data.data;
-      updateUser(user);
+      authStore.updateUser(user);
       const notification: Notification = {
         type: 'message',
         content: 'Changes saved.',
       };
-      setNotification(notification);
+      notificationStore.setNotification(notification);
       history.goBack();
     } catch (error) {
       if (
@@ -65,7 +55,7 @@ export const UserForm: FC<UserFormProps> = ({
           type: 'warning',
           content: 'Something went wrong',
         };
-        setNotification(notification);
+        notificationStore.setNotification(notification);
       }
     }
   };
@@ -73,9 +63,9 @@ export const UserForm: FC<UserFormProps> = ({
     <Formik
       validationSchema={UserProfileValidator}
       initialValues={{
-        username,
-        handle,
-        website: user.website ? user.website : '',
+        username: user && user.username ? user.username : '',
+        handle: user && user.handle ? user.handle : '',
+        website: user && user.website ? user.website : '',
       }}
       onSubmit={submitHandler}
     >
