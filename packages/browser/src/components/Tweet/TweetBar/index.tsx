@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { observer } from 'mobx-react-lite';
 import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
-import AuthState from 'types/AuthState';
+
 import Notification from 'types/Notification';
 import axios from 'axios';
 import getUrl from 'utilities/getUrl';
@@ -15,17 +16,13 @@ import { TweetBarWrapper, TweetBarButton } from './styled';
 
 interface TweetProps {
   tweet: TweetType;
-  authState: AuthState;
+
   deleteTweetHandler: (tweetId: string) => void;
 }
 
-export const TweetBar: FC<TweetProps> = ({
-  tweet,
-  authState,
-  deleteTweetHandler,
-}) => {
+export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { notificationStore, authStore } = useStores();
-  const { token, user } = authState;
+  const { token, user } = authStore.authState;
   const location = useLocation();
   const history = useHistory();
   const { _id } = tweet;
@@ -50,9 +47,11 @@ export const TweetBar: FC<TweetProps> = ({
           data-testid="like-button"
           onClick={async () => {
             if (!user) {
+              console.log('No User');
               notificationStore.setNotification(notification);
               return;
             }
+            console.log('user');
             await updateUserEvent(`/users/tweets/${_id}/like`);
           }}
         >
@@ -165,4 +164,4 @@ export const TweetBar: FC<TweetProps> = ({
     </>
   );
 };
-export default TweetBar;
+export default observer(TweetBar);

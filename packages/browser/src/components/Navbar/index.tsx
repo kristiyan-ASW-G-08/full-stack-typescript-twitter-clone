@@ -6,8 +6,8 @@ import Logo from 'components/Logo';
 import Button from 'styled/Button';
 import SearchBar from 'components/SearchBar';
 import Avatar from 'components/Avatar';
-import AuthState from 'types/AuthState';
 import Loader from 'components/Loader';
+import useStores from 'hooks/useStores';
 import { SidebarButton } from 'components/Sidebar/styled';
 import {
   NavbarWrapper,
@@ -22,19 +22,9 @@ import {
 const Portal = lazy(() => import('components/Portal'));
 const Sidebar = lazy(() => import('components/Sidebar'));
 
-interface NavbarProps {
-  authState: AuthState;
-  resetAuthState: () => void;
-  toggleTheme: () => void;
-  theme: 'light' | 'dark';
-}
-export const Navbar: FC<NavbarProps> = ({
-  toggleTheme,
-  authState,
-  theme,
-  resetAuthState,
-}) => {
-  const { user } = authState;
+export const Navbar: FC = () => {
+  const { authStore, themeStore } = useStores();
+  const { user } = authStore.authState;
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
   const location = useLocation();
@@ -50,8 +40,8 @@ export const Navbar: FC<NavbarProps> = ({
           <FontAwesomeIcon icon="bars" />
         </NavIcon>
         <Container>
-          <ThemeButton onClick={toggleTheme}>
-            {theme === 'light' ? 'Dark mode' : 'Light mode'}
+          <ThemeButton onClick={() => themeStore.toggleTheme()}>
+            {themeStore.theme === 'light' ? 'Dark mode' : 'Light mode'}
           </ThemeButton>
           <SearchBar />
           {user ? (
@@ -98,7 +88,7 @@ export const Navbar: FC<NavbarProps> = ({
                   Tweet
                 </Link>
               </Button>
-              <Button buttonType="secondary" onClick={resetAuthState}>
+              <Button buttonType="secondary" onClick={authStore.resetAuthState}>
                 Log Out
               </Button>
             </>
@@ -119,11 +109,11 @@ export const Navbar: FC<NavbarProps> = ({
           <Portal portalId="sidebar">
             <Sidebar
               toggleSidebar={toggleSidebar}
-              theme={theme}
+              theme={themeStore.theme}
               isActive={isActive}
-              resetAuthState={() => resetAuthState()}
-              toggleTheme={() => toggleTheme()}
-              authState={authState}
+              resetAuthState={() => authStore.resetAuthState()}
+              toggleTheme={() => themeStore.toggleTheme()}
+              authState={authStore.authState}
             />
           </Portal>
         </Suspense>

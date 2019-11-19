@@ -12,6 +12,7 @@ const updateUserHandler = async (
 ): Promise<void> => {
   try {
     const user = await getUpdatedUser(token, getUrl(urlExtension));
+
     updateUser(user);
   } catch (error) {
     setNotification(defaultWarning);

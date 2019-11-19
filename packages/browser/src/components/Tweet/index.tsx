@@ -1,11 +1,8 @@
-import React, { FC, memo, useContext } from 'react';
+import React, { FC, memo } from 'react';
 import { Link as NavLink, useLocation } from 'react-router-dom';
 import Avatar from 'components/Avatar';
 import TweetType from 'types/Tweet';
 import getTime from 'utilities/getTime';
-import RootStoreContext from 'stores/RootStore';
-import Notification from 'types/Notification';
-import User from 'types/User';
 import TweetBar from './TweetBar';
 import {
   TweetWrapper,
@@ -26,7 +23,6 @@ interface TweetProps {
   deleteTweetHandler: (tweetId: string) => void;
 }
 export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
-  const { authStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { user, text, date, image, link, reply, _id } = tweet;
   const { username, handle, avatar } = user;
@@ -84,11 +80,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
           ''
         )}
       </ContentContainer>
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        tweet={tweet}
-        authState={authStore.authState}
-      />
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />
     </TweetWrapper>
   );
 };

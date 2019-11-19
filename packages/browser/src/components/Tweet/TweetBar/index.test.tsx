@@ -27,6 +27,7 @@ useStoresMock.mockReturnValue({
     setNotification,
   },
   authStore: {
+    authState: defaultAuthState,
     updateUser,
   },
 });
@@ -46,13 +47,9 @@ describe('TweetBar', () => {
   };
 
   it('render TweetBar (bookmark button)', async () => {
-    // expect.assertions(4);
+    expect.assertions(4);
     const { rerender, getByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -66,12 +63,18 @@ describe('TweetBar', () => {
     expect(setNotification).toHaveBeenCalledTimes(1);
     expect(setNotification).toHaveBeenCalledWith(notification);
 
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
+
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
 
     UserEvent.click(bookmarkButton);
@@ -83,11 +86,7 @@ describe('TweetBar', () => {
   it('render TweetBar (like button)', async () => {
     expect.assertions(4);
     const { rerender, getByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -101,12 +100,17 @@ describe('TweetBar', () => {
     expect(setNotification).toHaveBeenCalledTimes(1);
     expect(setNotification).toHaveBeenCalledWith(notification);
 
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
 
     UserEvent.click(likeButton);
@@ -118,11 +122,7 @@ describe('TweetBar', () => {
   it('render TweetBar (retweet button)', async () => {
     expect.assertions(3);
     const { rerender, getByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -135,13 +135,17 @@ describe('TweetBar', () => {
 
     expect(setNotification).toHaveBeenCalledTimes(1);
     expect(setNotification).toHaveBeenCalledWith(notification);
-
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
 
     UserEvent.click(retweetButton);
@@ -151,11 +155,7 @@ describe('TweetBar', () => {
   it('render TweetBar (reply button)', async () => {
     expect.assertions(4);
     const { rerender, getByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -169,13 +169,17 @@ describe('TweetBar', () => {
 
     expect(setNotification).toHaveBeenCalledTimes(1);
     expect(setNotification).toHaveBeenCalledWith(notification);
-
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
 
     expect(replyButton).toBeTruthy();
@@ -187,11 +191,7 @@ describe('TweetBar', () => {
   it('render TweetBar (edit button)', async () => {
     expect.assertions(3);
     const { rerender, getByTestId, queryByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -202,13 +202,17 @@ describe('TweetBar', () => {
     let editButton = queryByTestId('edit-button');
 
     expect(editButton).toBeFalsy();
-
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
     editButton = getByTestId('edit-button');
 
@@ -221,11 +225,7 @@ describe('TweetBar', () => {
   it('render TweetBar (delete button)', async () => {
     expect.assertions(3);
     const { rerender, getByTestId, queryByTestId } = render(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={defaultAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
 
       {
         wrapper: ({ children }) => (
@@ -236,13 +236,17 @@ describe('TweetBar', () => {
     let deleteButton = queryByTestId('delete-button');
 
     expect(deleteButton).toBeFalsy();
-
+    useStoresMock.mockReturnValueOnce({
+      notificationStore: {
+        setNotification,
+      },
+      authStore: {
+        authState: authenticatedAuthState,
+        updateUser,
+      },
+    });
     rerender(
-      <TweetBar
-        deleteTweetHandler={deleteTweetHandler}
-        authState={authenticatedAuthState}
-        tweet={tweet}
-      />,
+      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />,
     );
     deleteButton = getByTestId('delete-button');
 

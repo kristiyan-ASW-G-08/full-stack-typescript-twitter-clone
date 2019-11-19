@@ -5,11 +5,17 @@ import { createMemoryHistory } from 'history';
 import { defaultAuthState } from 'stores/AuthStore';
 import RouterTestWrapper from 'testUtilities/RouterTestWrapper';
 import authenticatedAuthState from 'testUtilities/authenticatedAuthState';
+import useStores from 'hooks/useStores';
 import Navbar from '.';
 
 const history = createMemoryHistory();
 
 jest.spyOn(history, 'push');
+
+jest.mock('hooks/useStores');
+
+const useStoresMock = useStores as jest.Mocked<any>;
+
 describe('Navbar', () => {
   afterEach(() => jest.resetAllMocks());
   afterAll(() => jest.restoreAllMocks());
@@ -17,21 +23,23 @@ describe('Navbar', () => {
   const resetAuthState = jest.fn();
   it('render Navbar:logged out', async () => {
     expect.assertions(9);
-
-    const { container, queryByText } = render(
-      <Navbar
-        authState={defaultAuthState}
-        resetAuthState={resetAuthState}
-        theme="dark"
-        toggleTheme={toggleTheme}
-      />,
-      {
-        wrapper: ({ children }) => (
-          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
-        ),
+    useStoresMock.mockReturnValue({
+      themeStore: {
+        toggleTheme,
+        theme: 'light',
       },
-    );
-    const themeButton = queryByText('Light mode');
+
+      authStore: {
+        resetAuthState,
+        authState: defaultAuthState,
+      },
+    });
+    const { container, queryByText } = render(<Navbar />, {
+      wrapper: ({ children }) => (
+        <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+      ),
+    });
+    const themeButton = queryByText('Dark mode');
     const logInButton = queryByText('Log In');
     const signUpButton = queryByText('Sign Up');
     const logOutButton = queryByText('Log Out');
@@ -61,21 +69,22 @@ describe('Navbar', () => {
   });
 
   it('render Navbar:logged in', () => {
-    expect.assertions(8);
-
-    const { container, queryByText } = render(
-      <Navbar
-        authState={authenticatedAuthState}
-        resetAuthState={resetAuthState}
-        theme="light"
-        toggleTheme={toggleTheme}
-      />,
-      {
-        wrapper: ({ children }) => (
-          <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
-        ),
+    // expect.assertions(8);
+    useStoresMock.mockReturnValue({
+      themeStore: {
+        toggleTheme,
+        theme: 'light',
       },
-    );
+      authStore: {
+        resetAuthState,
+        authState: authenticatedAuthState,
+      },
+    });
+    const { container, queryByText } = render(<Navbar />, {
+      wrapper: ({ children }) => (
+        <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
+      ),
+    });
     const themeButton = queryByText('Dark mode');
     const logInButton = queryByText('Log In');
     const signUpButton = queryByText('Sign Up');
