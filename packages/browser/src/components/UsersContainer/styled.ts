@@ -27,7 +27,7 @@ export const UsersWrapper = styled('section')<UsersWrapperProps>`
 UsersWrapper.defaultProps = {
   hasBorderRadius: true,
 };
-export const Users = styled('div')`
+export const Users = styled('section')`
   grid-area: users;
   width: 100%;
   padding: 1rem;
@@ -36,10 +36,7 @@ export const Users = styled('div')`
   grid-gap: 1rem;
 `;
 
-export const TextLoader = styled('div')`
-  grid-area: loader;
-  font-weight: bold;
+export const Center = styled('div')`
+  width: inherit;
   text-align: center;
-  font-size: 1.7rem;
-  color: ${({ theme }) => theme.secondary};
 `;

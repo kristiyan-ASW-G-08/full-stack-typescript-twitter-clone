@@ -95,12 +95,7 @@ const Router: FC = observer(
         ) : (
           ''
         )}
-        <Navbar
-          theme={theme}
-          resetAuthState={() => authStore.resetAuthState()}
-          toggleTheme={() => themeStore.toggleTheme()}
-          authState={authStore.authState}
-        />
+        <Navbar />
         {user ? (
           <Link
             to={{

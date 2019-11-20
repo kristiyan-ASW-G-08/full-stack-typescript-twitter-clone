@@ -21,10 +21,10 @@ export const UserCredentials: FC<UserCredentialsProps> = ({
     <Handle>@{handle}</Handle>
     <LinksContainer>
       <Link to={`/users/${_id}/followers`} data-testid="followers-link">
-        <span>{followers || 0}</span> Followers
+        {followers} Followers
       </Link>
       <Link to={`/users/${_id}/following`} data-testid="following-link">
-        <span>{following}</span> Following
+        {following} Following
       </Link>
     </LinksContainer>
   </CredentialsWrapper>

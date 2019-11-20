@@ -43,7 +43,16 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
         </Time>
         {reply ? (
           <Reply>
-            Replying to <span>@{reply.user.handle}</span>
+            Replying to
+            <NavLink
+              to={{
+                pathname: `/tweet/${reply._id}`,
+                state: { tweet: location },
+              }}
+              data-testid="reply-tweet-link"
+            >
+              @{reply.user.handle}
+            </NavLink>{' '}
           </Reply>
         ) : (
           ''

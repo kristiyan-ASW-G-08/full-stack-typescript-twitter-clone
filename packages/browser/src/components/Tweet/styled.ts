@@ -75,9 +75,10 @@ export const Reply = styled('p')`
   display: block;
   color: ${({ theme }) => theme.secondary};
   font-size: 1.2rem;
-  span {
+  a {
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
     color: ${({ theme }) => theme.primary};
-    font-size: inherit;
   }
 `;
 

@@ -15,8 +15,9 @@ import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
 import RootStoreContext from 'stores/RootStore';
 import defaultWarning from 'utilities/defaultWarning';
+import TextLoader from 'styled/TextLoader';
 import getUsers from './getUsers';
-import { UsersWrapper, TextLoader, Users } from './styled';
+import { UsersWrapper, Users, Center } from './styled';
 
 const UserCard = lazy(() => import('components/UserCard'));
 
@@ -76,7 +77,14 @@ export const UsersContainer: FC<UsersContainerProps> = ({
     <UsersWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {users.length > 0 ? (
-        <Suspense fallback="">
+        // eslint-disable-next-line prettier/prettier
+        <Suspense
+          fallback={(
+            <Users>
+              <TextLoader>...Loading</TextLoader>
+            </Users>
+          )}
+        >
           <Users role="feed">
             {users.map(user => (
               <UserCard
@@ -92,13 +100,15 @@ export const UsersContainer: FC<UsersContainerProps> = ({
         ''
       )}
 
-      {nextPage ? (
-        <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
-          ...Loading
-        </TextLoader>
-      ) : (
-        <TextLoader>No Users Available</TextLoader>
-      )}
+      <Center>
+        {nextPage ? (
+          <TextLoader ref={(e: HTMLDivElement) => setElement(e)}>
+            ...Loading
+          </TextLoader>
+        ) : (
+          <TextLoader>No Users Available</TextLoader>
+        )}
+      </Center>
     </UsersWrapper>
   );
 };

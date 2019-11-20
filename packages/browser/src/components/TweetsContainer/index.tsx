@@ -90,7 +90,10 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
-        <Suspense fallback={<TextLoader>...Loading</TextLoader>}>
+        <Suspense
+          // eslint-disable-next-line prettier/prettier
+          fallback={<Tweets><TextLoader>...Loading</TextLoader></Tweets>}
+        >
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>
               <option data-testid="new" value="new">

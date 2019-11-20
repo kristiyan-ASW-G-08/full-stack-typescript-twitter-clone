@@ -357,17 +357,16 @@ describe('tweetRoutes', (): void => {
   describe('delete /tweets/:tweetId', (): void => {
     it('should delete a tweet', async (): Promise<void> => {
       expect.assertions(2);
-      const userId = mongoose.Types.ObjectId().toString();
       const newTweet = new Tweet({
         type: 'text',
         text,
-        user: userId,
+        user: testUser._id,
       });
       await newTweet.save();
       const tweetId = newTweet._id;
       const token = jwt.sign(
         {
-          userId,
+          userId: testUser._id,
         },
         secret,
         { expiresIn: '1h' },
@@ -383,12 +382,12 @@ describe('tweetRoutes', (): void => {
       void
     > => {
       expect.assertions(2);
-      const userId = mongoose.Types.ObjectId().toString();
+
       const unauthorizedUserId = mongoose.Types.ObjectId().toString();
       const newTweet = new Tweet({
         type: 'text',
         text,
-        user: userId,
+        user: testUser._id,
       });
       await newTweet.save();
       const tweetId = newTweet._id;

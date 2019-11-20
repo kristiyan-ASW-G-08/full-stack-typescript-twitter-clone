@@ -22,17 +22,13 @@ export const LinksContainer = styled('div')`
   justify-items: start;
   grid-gap: 0.3rem;
   a {
+    display: flex;
+    flex-flow: row;
     ${({ theme }) => theme.mixins.button};
     font-size: 1.3rem;
     font-weight: bold;
-    background: none;
     ${({ theme }) => theme.mixins.button};
     color: ${({ theme }) => theme.secondary};
-    span {
-      display: inline;
-      color: ${({ theme }) => theme.dark};
-      font-size: 1.2rem;
-    }
   }
 `;
 

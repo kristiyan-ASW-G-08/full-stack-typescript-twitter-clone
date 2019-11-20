@@ -11,7 +11,8 @@ export const RetweetText = styled('div')`
   font-size: 1.2rem;
   padding: 1rem;
   color: ${({ theme }) => theme.dark};
-  p {
+  a {
+    color: ${({ theme }) => theme.dark};
     margin-left: 0.5rem;
     font-size: 1.3rem;
   }
