@@ -47,6 +47,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const loadNext = async () => {
     try {
       if (nextPageRef.current) {
+        console.log('observe', nextPageRef.current);
         const { newTweets, next } = await getTweets(nextPageRef.current, token);
         setTweets([...tweetsRef.current, ...newTweets]);
         setNext(next);
@@ -68,6 +69,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     getTweets(query, token)
       .then(data => {
         const { newTweets, next } = data;
+        console.log(next);
         setNext(next);
         setTweets(newTweets);
       })
@@ -92,7 +94,11 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       {tweets.length > 0 ? (
         <Suspense
           // eslint-disable-next-line prettier/prettier
-          fallback={<Tweets><TextLoader>...Loading</TextLoader></Tweets>}
+          fallback={(
+            <Tweets>
+              <TextLoader>...Loading</TextLoader>
+            </Tweets>
+          )}
         >
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>

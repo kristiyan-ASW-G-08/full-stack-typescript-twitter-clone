@@ -9,6 +9,7 @@ import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
 import findDocs from '@utilities/findDocs';
+import renderUrl from '@utilities/renderUrl';
 import TweetType from '@customTypes/Tweet';
 
 export const postTweet = async (
@@ -155,19 +156,34 @@ export const getAllTweets = async (
       sortString,
       {},
     );
-    const links: { next: null | string; prev: null | string } = {
-      next: null,
-      prev: null,
-    };
-    if (count > 0) {
-      links.next = `${SERVER_URL}/tweets?page=${page +
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    if (page > 1) {
-      links.prev = `${SERVER_URL}/tweets?page=${page -
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    res.status(200).json({ data: { tweets: documents, links } });
+
+    const nextPage =
+      count > 0
+        ? renderUrl(SERVER_URL, 'tweets', {
+            page: page + 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    const prev =
+      page > 1
+        ? renderUrl(SERVER_URL, 'tweets', {
+            page: page - 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    res.status(200).json({
+      data: {
+        tweets: documents,
+        links: {
+          next: nextPage,
+          prev,
+        },
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -189,19 +205,33 @@ export const getUserTweets = async (
       sortString,
       { user: userId },
     );
-    const links: { next: null | string; prev: null | string } = {
-      next: null,
-      prev: null,
-    };
-    if (count > 0) {
-      links.next = `${SERVER_URL}/users/${userId}/tweets?page=${page +
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    if (page > 1) {
-      links.prev = `${SERVER_URL}/users/${userId}/tweets?page=${page -
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    res.status(200).json({ data: { tweets: documents, links } });
+
+    const nextPage =
+      count > 0
+        ? renderUrl(SERVER_URL, `users/${userId}/tweets`, {
+            page: page + 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    const prev =
+      page > 1
+        ? renderUrl(SERVER_URL, `users/${userId}/tweets`, {
+            page: page - 1,
+            limit,
+            sort,
+          })
+        : null;
+    res.status(200).json({
+      data: {
+        tweets: documents,
+        links: {
+          next: nextPage,
+          prev,
+        },
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -223,19 +253,33 @@ export const getReplies = async (
       sortString,
       { reply: tweetId },
     );
-    const links: { next: null | string; prev: null | string } = {
-      next: null,
-      prev: null,
-    };
-    if (count > 0) {
-      links.next = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page +
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    if (page > 1) {
-      links.prev = `${SERVER_URL}/tweets/${tweetId}/replies?page=${page -
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    res.status(200).json({ data: { tweets: documents, links } });
+
+    const nextPage =
+      count > 0
+        ? renderUrl(SERVER_URL, `tweets/${tweetId}/replies`, {
+            page: page + 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    const prev =
+      page > 1
+        ? renderUrl(SERVER_URL, `tweets/${tweetId}/replies`, {
+            page: page - 1,
+            limit,
+            sort,
+          })
+        : null;
+    res.status(200).json({
+      data: {
+        tweets: documents,
+        links: {
+          next: nextPage,
+          prev,
+        },
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
@@ -257,19 +301,34 @@ export const getUserReplies = async (
       sortString,
       { user: userId, type: 'reply' },
     );
-    const links: { next: null | string; prev: null | string } = {
-      next: null,
-      prev: null,
-    };
-    if (count > 0) {
-      links.next = `${SERVER_URL}/users/${userId}/replies?page=${page +
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    if (page > 1) {
-      links.prev = `${SERVER_URL}/users/${userId}/replies?page=${page -
-        1}&limit=${limit}&sort=${sort}`;
-    }
-    res.status(200).json({ data: { tweets: documents, links } });
+
+    const nextPage =
+      count > 0
+        ? renderUrl(SERVER_URL, `users/${userId}/replies`, {
+            page: page + 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    const prev =
+      page > 1
+        ? renderUrl(SERVER_URL, `users/${userId}/replies`, {
+            page: page - 1,
+            limit,
+            sort,
+          })
+        : null;
+
+    res.status(200).json({
+      data: {
+        tweets: documents,
+        links: {
+          next: nextPage,
+          prev,
+        },
+      },
+    });
   } catch (err) {
     passErrorToNext(err, next);
   }
