@@ -24,13 +24,10 @@ const UserForm = lazy(() => import('components/UserForm'));
 
 const Router: FC = observer(
   (): JSX.Element => {
-    const { themeStore, authStore, notificationStore } = useContext(
-      RootStoreContext,
-    );
+    const { authStore, notificationStore } = useContext(RootStoreContext);
     const history = useHistory();
     const location = useLocation();
-    const { user, token } = authStore.authState;
-    const { theme } = themeStore;
+    const { user } = authStore.authState;
     const tweet = location.state && location.state.tweet;
     const tweetForm = location.state && location.state.tweetForm;
     const userForm = location.state && location.state.userForm;
@@ -79,7 +76,7 @@ const Router: FC = observer(
               <Suspense fallback={<Loader />}>
                 <Portal portalId="tweet-form">
                   <Modal backdropHandler={history.goBack}>
-                    <TweetForm token={token} />
+                    <TweetForm />
                   </Modal>
                 </Portal>
               </Suspense>

@@ -8,7 +8,6 @@ import Input from 'components/Input';
 import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
-import Notification from 'types/Notification';
 import ImageInput from 'components/ImageUploadButton';
 import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
@@ -24,12 +23,9 @@ import {
   InputContainer,
 } from './styled';
 
-interface TweetFormProps {
-  token: string;
-}
-
-export const TweetForm: FC<TweetFormProps> = ({ token }) => {
-  const { notificationStore } = useStores();
+export const TweetForm: FC = () => {
+  const { notificationStore, authStore } = useStores();
+  const { token } = authStore.authState;
   const { replyId, retweetId } = useParams();
   const history = useHistory();
   const location = useLocation();
