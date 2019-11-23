@@ -4,15 +4,25 @@ import '@testing-library/jest-dom/extend-expect';
 import UserEvent from '@testing-library/user-event';
 import axios from 'axios';
 import TestWrapper from 'testUtilities/TestWrapper';
+import useStores from 'hooks/useStores';
 import SignUpPage from '.';
 
 jest.mock('axios');
+jest.mock('hooks/useStores');
+
+const setNotification = jest.fn();
+const useStoresMock = useStores as jest.Mocked<any>;
+useStoresMock.mockReturnValue({
+  notificationStore: {
+    setNotification,
+  },
+});
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('SignUpPage', () => {
   afterAll(() => jest.restoreAllMocks());
   it('it renders', async () => {
-    expect.assertions(6);
+    expect.assertions(8);
     const password = 'passwordpassword';
     const credentials = [
       { value: 'newUsername', placeholder: 'Username' },
@@ -49,6 +59,12 @@ describe('SignUpPage', () => {
 
     await wait(() => {
       expect(axios.post).toHaveBeenCalledTimes(1);
+      expect(setNotification).toHaveBeenCalledTimes(1);
+      expect(setNotification).toHaveBeenLastCalledWith({
+        type: 'message',
+        content:
+          'You have signed up successfully.Confirm your email to log in.',
+      });
     });
   });
 });
