@@ -46,6 +46,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const nextPageRef = useRef(nextPage);
   const loadNext = async () => {
     try {
+      if (nextPageRef && nextPageRef.current) {
         const { newTweets, next } = await getTweets(nextPageRef.current, token);
         setTweets([...tweetsRef.current, ...newTweets]);
         setNext(next);

@@ -8,19 +8,18 @@ const idRateLimiter = new RateLimiterMemory({
   duration: 1,
 });
 
-const rateLimiter = (): ((
+const rateLimiter = async (
   req: Request,
   res: Response,
   next: NextFunction,
-) => Promise<void>) => {
-  return async ({ ip }: Request): Promise<void> => {
-    try {
-      await idRateLimiter.consume(ip);
-    } catch (err) {
-      const { status, message } = errors.TooManyRequests;
-      const error = new CustomError(status, message);
-      throw error;
-    }
-  };
+): Promise<void> => {
+  try {
+    await idRateLimiter.consume(req.ip);
+    next();
+  } catch (err) {
+    const { status, message } = errors.TooManyRequests;
+    const error = new CustomError(status, message);
+    throw error;
+  }
 };
 export default rateLimiter;
