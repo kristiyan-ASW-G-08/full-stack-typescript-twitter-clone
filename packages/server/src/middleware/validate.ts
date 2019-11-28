@@ -12,7 +12,6 @@ const validate = (
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    let isError = false;
     try {
       for await (const { schema, target } of validators) {
         const validationTarget = req[target];
@@ -20,8 +19,8 @@ const validate = (
           abortEarly: false,
         });
       }
+      next();
     } catch (err) {
-      isError = true;
       const validationErrors = err.inner.map(
         ({ path, message }: ValidationError): CustomValidationError => {
           return { path, message };
@@ -30,8 +29,6 @@ const validate = (
       const { status, message } = errors.BadRequest;
       const error = new CustomError(status, message, validationErrors);
       next(error);
-    } finally {
-      if (!isError) next();
     }
   };
 };
