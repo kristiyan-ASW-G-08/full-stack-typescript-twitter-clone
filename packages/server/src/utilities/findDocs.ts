@@ -1,9 +1,9 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, Document } from 'mongoose';
 import User from '@customTypes/User';
 import Tweet from '@customTypes/Tweet';
 
 const findDocs = async <
-  T extends User | Tweet,
+  T extends Document,
   Y = { [key: string]: string | mongoose.Types.ObjectId }
 >(
   model: Model<T>,

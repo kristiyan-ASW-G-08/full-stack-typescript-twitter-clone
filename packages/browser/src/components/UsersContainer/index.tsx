@@ -42,7 +42,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
   const nextPageRef = useRef(nextPage);
   const loadNext = async () => {
     try {
-      if (nextPageRef.current) {
+      if (nextPageRef?.current) {
         const { nextUsers, next } = await getUsers(nextPageRef.current);
         setUsers([...usersRef.current, ...nextUsers]);
         setNext(next);

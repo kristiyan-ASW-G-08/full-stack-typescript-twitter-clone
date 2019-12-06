@@ -31,7 +31,7 @@ export const TweetForm: FC = () => {
   const location = useLocation();
   const { tweet } = location.state;
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
-    tweet && tweet.type ? tweet.type : 'text',
+    tweet?.type ? tweet.type : 'text',
   );
   const [hasImage, setHasImage] = useState<boolean>(false);
   useEffect(() => {
@@ -64,12 +64,7 @@ export const TweetForm: FC = () => {
         history.goBack();
       }
     } catch (error) {
-      if (
-        error &&
-        error.response &&
-        error.response.data &&
-        Array.isArray(error.response.data)
-      ) {
+      if (error?.response?.data && Array.isArray(error.response.data)) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);

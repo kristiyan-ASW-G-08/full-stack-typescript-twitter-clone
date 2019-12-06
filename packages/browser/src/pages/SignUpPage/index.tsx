@@ -28,7 +28,10 @@ export const SignUpPage: FC = () => {
       });
       history.replace('/');
     } catch (error) {
-      if (error.response && Array.isArray(error.response.data.data)) {
+      if (
+        error?.response?.data?.data &&
+        Array.isArray(error.response.data.data)
+      ) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);

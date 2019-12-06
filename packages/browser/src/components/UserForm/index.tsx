@@ -41,12 +41,7 @@ export const UserForm: FC = () => {
       notificationStore.setNotification(notification);
       history.goBack();
     } catch (error) {
-      if (
-        error &&
-        error.response &&
-        error.response.data &&
-        Array.isArray(error.response.data)
-      ) {
+      if (error?.response?.data && Array.isArray(error.response.data)) {
         const { data } = error.response.data;
         const errors = transformValidationErrors(data);
         setErrors(errors);
@@ -63,9 +58,9 @@ export const UserForm: FC = () => {
     <Formik
       validationSchema={UserProfileValidator}
       initialValues={{
-        username: user && user.username ? user.username : '',
-        handle: user && user.handle ? user.handle : '',
-        website: user && user.website ? user.website : '',
+        username: user?.username ? user.username : '',
+        handle: user?.handle ? user.handle : '',
+        website: user?.website ? user.website : '',
       }}
       onSubmit={submitHandler}
     >

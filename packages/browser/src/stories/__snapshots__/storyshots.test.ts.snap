@@ -27586,16 +27586,14 @@ Array [
                 userHandle
               </h4>
               <div
-                className="sc-jlyJG gRNwjW"
+                className="sc-jlyJG jEIgwX"
               >
                 <a
                   data-testid="followers-link"
                   href="/users/id/followers"
                   onClick={[Function]}
                 >
-                  <span>
-                    0
-                  </span>
+                  0
                    Followers
                 </a>
                 <a
@@ -27603,9 +27601,7 @@ Array [
                   href="/users/id/following"
                   onClick={[Function]}
                 >
-                  <span>
-                    0
-                  </span>
+                  0
                    Following
                 </a>
               </div>
@@ -29276,16 +29272,14 @@ Array [
                 userHandle
               </h4>
               <div
-                className="sc-jlyJG bBKodE"
+                className="sc-jlyJG grtLUM"
               >
                 <a
                   data-testid="followers-link"
                   href="/users/id/followers"
                   onClick={[Function]}
                 >
-                  <span>
-                    0
-                  </span>
+                  0
                    Followers
                 </a>
                 <a
@@ -29293,9 +29287,7 @@ Array [
                   href="/users/id/following"
                   onClick={[Function]}
                 >
-                  <span>
-                    0
-                  </span>
+                  0
                    Following
                 </a>
               </div>

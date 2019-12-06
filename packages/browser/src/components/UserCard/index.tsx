@@ -60,7 +60,7 @@ export const UserCard: FC<UserCardProps> = ({
           ) : (
             ''
           )}
-          {authState.user && _id === authState.user._id ? (
+          {_id === authState?.user?._id ? (
             <Button buttonType="primary">
               <Link
                 to={{
