@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const fileStorage = multer.diskStorage({
   // @ts-ignore
@@ -7,7 +7,7 @@ const fileStorage = multer.diskStorage({
     console.log(typeof process.env.ALLOW_IMAGES);
     if (process.env.ALLOW_IMAGES === 'false') {
       const { message, status } = errors.UnprocessableEntity;
-      const error = new CustomError(status, message);
+      const error = new RESTError(status, message);
       throw error;
     }
     cb(null, './images');

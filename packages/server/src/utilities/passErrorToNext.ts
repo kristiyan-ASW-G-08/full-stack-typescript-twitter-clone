@@ -1,11 +1,11 @@
 import { NextFunction } from 'express';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const passErrorToNext = (err: any, next: NextFunction): void => {
   let error = err;
   if (!err.status) {
     const { status, message } = errors.InternalServerError;
-    error = new CustomError(status, message, err);
+    error = new RESTError(status, message, err);
   }
   next(error);
 };

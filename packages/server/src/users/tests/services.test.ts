@@ -2,12 +2,16 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import {
   areCredentialsAvailable,
-  checkUserConfirmation,
   getUserById,
   getUserByEmail,
 } from 'src/users/services';
 import User from 'src/users/User';
 import db from 'src/db';
+import getResource from '@utilities/getResource';
+
+jest.mock('@utilities/getResource');
+
+const getResourceMock = getResource as jest.MockedFunction<typeof getResource>;
 
 jest.mock('jsonwebtoken');
 
@@ -36,59 +40,32 @@ describe('userServices', (): void => {
   const email = 'testmail@mail.com';
   const password = 'testPassword';
   describe('getUserByEmail', (): void => {
-    expect.assertions(3);
-    it(`should get a user`, async (): Promise<void> => {
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const user = await getUserByEmail(email);
-      if (!user) {
-        return;
-      }
-      expect(user.username).toMatch(username);
-      expect(user.handle).toMatch(handle);
-      expect(user.email).toMatch(email);
-    });
-
-    it('should throw an error when the user is not found', async (): Promise<
-      void
-    > => {
+    it(`should call getResource`, async (): Promise<void> => {
       expect.assertions(2);
-      await expect(getUserByEmail(email)).rejects.toThrow();
-      await expect(getUserByEmail(email)).rejects.toMatchSnapshot();
+      await getUserByEmail(email);
+
+      expect(getResource).toHaveBeenCalledTimes(1);
+      expect(getResourceMock).toHaveBeenCalledWith(User, {
+        name: 'email',
+        value: email,
+      });
     });
   });
   describe('getUserById', (): void => {
-    it(`should get a user`, async (): Promise<void> => {
-      expect.assertions(3);
-      const newUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await newUser.save();
-      const userId = newUser._id;
-      const user = await getUserById(userId);
-      if (!user) {
-        return;
-      }
-      expect(user.username).toMatch(username);
-      expect(user.handle).toMatch(handle);
-      expect(user.email).toMatch(email);
-    });
-
-    it('should throw an error should throw an error when the user is not found', async (): Promise<
-      void
-    > => {
+    it(`should call getResource`, async (): Promise<void> => {
       expect.assertions(2);
-      const userId = mongoose.Types.ObjectId().toString();
-      await expect(getUserById(userId)).rejects.toThrow();
-      await expect(getUserById(userId)).rejects.toMatchSnapshot();
+      const userId = 'userId';
+      await getUserById(userId);
+
+      expect(getResource).toHaveBeenCalledTimes(1);
+      expect(getResourceMock).toHaveBeenCalledWith(
+        User,
+        {
+          name: '_id',
+          value: userId,
+        },
+        '',
+      );
     });
   });
 
@@ -126,36 +103,6 @@ describe('userServices', (): void => {
       await expect(
         areCredentialsAvailable(credentials),
       ).resolves.toBeUndefined();
-    });
-  });
-  describe('checkUserConfirmation', (): void => {
-    it("should throw an error the user hasn't confirmed his email address", async (): Promise<
-      void
-    > => {
-      expect.assertions(2);
-      const user = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await user.save();
-      await expect(checkUserConfirmation(user)).rejects.toThrow();
-      await expect(checkUserConfirmation(user)).rejects.toMatchSnapshot();
-    });
-    it("shouldn't throw an error when the user confirmed his email address", async (): Promise<
-      void
-    > => {
-      expect.assertions(1);
-      const user = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      user.confirmed = true;
-      await user.save();
-      await expect(checkUserConfirmation(user)).toEqual(Promise.resolve());
     });
   });
 });

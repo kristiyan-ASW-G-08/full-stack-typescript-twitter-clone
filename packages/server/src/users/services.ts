@@ -1,57 +1,22 @@
 import mongoose from 'mongoose';
 import User from 'src/users/User';
 import UserType from '@customTypes/User';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 import ValidationError from '@twtr/common/source/types/ValidationError';
+import getResource from '@utilities/getResource';
 
-export const getUserByEmail = async (email: string): Promise<UserType> => {
-  const user = await User.findOne({ email });
-  if (!user) {
-    const validationErrorsArr: ValidationError[] = [
-      {
-        path: 'email',
-        message: 'User not found!',
-      },
-    ];
-    const { status, message } = errors.NotFound;
-    const error = new CustomError(status, message, validationErrorsArr);
-    throw error;
-  }
-  return user;
-};
+export const getUserByEmail = async (email: string): Promise<UserType> =>
+  getResource<UserType>(User, { name: 'email', value: email });
+
 export const getUserById = async (
   userId: string,
   secure: boolean = true,
-): Promise<UserType> => {
-  const user = secure
-    ? await User.findById(userId)
-    : await User.findById(userId).select('-password -email -confirmed');
-  if (!user) {
-    const validationErrorsArr: ValidationError[] = [
-      {
-        path: '',
-        message: 'User not found!',
-      },
-    ];
-    const { status, message } = errors.NotFound;
-    const error = new CustomError(status, message, validationErrorsArr);
-    throw error;
-  }
-  return user;
-};
-export const checkUserConfirmation = async (user: UserType): Promise<void> => {
-  if (!user.confirmed) {
-    const validationErrorsArr: ValidationError[] = [
-      {
-        path: 'email',
-        message: 'Confirm your email to proceed.',
-      },
-    ];
-    const { status, message } = errors.Unauthorized;
-    const error = new CustomError(status, message, validationErrorsArr);
-    throw error;
-  }
-};
+): Promise<UserType> =>
+  getResource<UserType>(
+    User,
+    { name: '_id', value: userId },
+    secure ? '' : '-password -email -confirmed',
+  );
 
 interface Credential {
   path: 'username' | 'handle' | 'email';
@@ -86,7 +51,7 @@ export const areCredentialsAvailable = async (
 
   if (validationErrors.length !== 0) {
     const { message, status } = errors.Conflict;
-    const error = new CustomError(status, message, validationErrors);
+    const error = new RESTError(status, message, validationErrors);
     throw error;
   }
 };

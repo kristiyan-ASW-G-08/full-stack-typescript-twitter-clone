@@ -1,9 +1,9 @@
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const isAuthorized = (authorizedUserId: string, userId: string): void => {
   if (authorizedUserId !== userId) {
     const { status, message } = errors.Unauthorized;
-    const error = new CustomError(status, message);
+    const error = new RESTError(status, message);
     throw error;
   }
 };

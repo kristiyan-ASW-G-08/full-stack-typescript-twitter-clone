@@ -1,12 +1,12 @@
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const isAuth = (req: Request, _: Response, next: NextFunction): void => {
   const { SECRET } = process.env;
   const authHeader = req.get('Authorization');
   const { status, message } = errors.Unauthorized;
-  const error = new CustomError(status, message);
+  const error = new RESTError(status, message);
   if (!authHeader) {
     throw error;
   }

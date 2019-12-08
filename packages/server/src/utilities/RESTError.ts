@@ -7,7 +7,7 @@ const errors = {
   },
   Unauthorized: {
     status: 401,
-    message: 'Authentication credentials not valid',
+    message: 'Authentication credentials not valid or missing',
   },
   Forbidden: {
     status: 403,
@@ -35,7 +35,7 @@ const errors = {
   },
 };
 
-class CustomError extends Error {
+export default class RESTError extends Error {
   public status: number;
 
   public message: string;
@@ -48,11 +48,11 @@ class CustomError extends Error {
     data?: ValidationError[] | string,
   ) {
     super();
-    Object.setPrototypeOf(this, CustomError.prototype);
+    Object.setPrototypeOf(this, RESTError.prototype);
     this.status = status;
     this.message = message;
     this.data = data;
   }
 }
 
-export { CustomError, errors };
+export { RESTError, errors };

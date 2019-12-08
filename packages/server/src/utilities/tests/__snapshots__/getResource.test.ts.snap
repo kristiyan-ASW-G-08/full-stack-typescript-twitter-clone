@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getResource should throw an error if find and select resolve to falsy value 1`] = `"Resource not found"`;

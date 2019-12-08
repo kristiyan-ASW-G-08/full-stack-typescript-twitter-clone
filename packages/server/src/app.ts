@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import userRoutes from 'src/users/routes';
 import tweetRoutes from 'src/tweets/routes';
-import { CustomError } from '@utilities/CustomError';
+import { RESTError } from '@utilities/RESTError';
 
 const app: Application = express();
 
@@ -29,7 +29,7 @@ app.use(userRoutes);
 app.use(tweetRoutes);
 
 app.use(
-  (error: CustomError, req: Request, res: Response, _: NextFunction): void => {
+  (error: RESTError, req: Request, res: Response, _: NextFunction): void => {
     console.log(error);
     const status = error.status || 500;
     const { message } = error;

@@ -1,6 +1,6 @@
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 import { Request, Response, NextFunction } from 'express';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const idRateLimiter = new RateLimiterMemory({
   keyPrefix: 'middleware',
@@ -18,7 +18,7 @@ const rateLimiter = async (
     next();
   } catch (err) {
     const { status, message } = errors.TooManyRequests;
-    const error = new CustomError(status, message);
+    const error = new RESTError(status, message);
     throw error;
   }
 };

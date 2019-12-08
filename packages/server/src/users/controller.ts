@@ -7,7 +7,6 @@ import {
   getUserByEmail,
   getUserById,
   areCredentialsAvailable,
-  checkUserConfirmation,
 } from 'src/users/services';
 import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
@@ -16,12 +15,13 @@ import removeId from '@utilities/removeId';
 import MailOptions from '@customTypes/MailOptions';
 import User from 'src/users/User';
 import Tweet from 'src/tweets/Tweet';
-import { CustomError, errors } from '@utilities/CustomError';
+import RESTError, { errors } from '@utilities/RESTError';
 import sendEmail from '@utilities/sendEmail';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import deleteFile from '@src/utilities/deleteFile';
 import findDocs from '@utilities/findDocs';
 import renderUrl from '@utilities/renderUrl';
+import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
 import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
 
@@ -53,11 +53,11 @@ export const signUp = async (
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const { status, message } = errors.InternalServerError;
     if (!SECRET) {
-      const error = new CustomError(status, message);
+      const error = new RESTError(status, message);
       throw error;
     }
     if (!EMAIL) {
-      const error = new CustomError(status, message);
+      const error = new RESTError(status, message);
       throw error;
     }
     const token = jwt.sign(
@@ -135,10 +135,10 @@ export const logIn = async (
         },
       ];
       const { status, message } = errors.Unauthorized;
-      const error = new CustomError(status, message, validationErrorsArr);
+      const error = new RESTError(status, message, validationErrorsArr);
       throw error;
     }
-    await checkUserConfirmation(user);
+    hasConfirmedEmail(user.confirmed);
     const token = jwt.sign(
       {
         userId: user._id,
@@ -213,15 +213,15 @@ export const requestPasswordResetEmail = async (
   try {
     const { email } = body;
     const user = await getUserByEmail(email);
-    await checkUserConfirmation(user);
+    hasConfirmedEmail(user.confirmed);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const { status, message } = errors.InternalServerError;
     if (!SECRET) {
-      const error = new CustomError(status, message);
+      const error = new RESTError(status, message);
       throw error;
     }
     if (!EMAIL) {
-      const error = new CustomError(status, message);
+      const error = new RESTError(status, message);
       throw error;
     }
     const token = jwt.sign(

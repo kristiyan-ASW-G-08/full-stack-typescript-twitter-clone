@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Validator from '@customTypes/Validator';
 import { ValidationError } from 'yup';
 import CustomValidationError from '@twtr/common/source/types/ValidationError';
-import { errors, CustomError } from '@utilities/CustomError';
+import { errors, RESTError } from '@utilities/RESTError';
 
 const validate = (
   validators: Validator[],
@@ -27,7 +27,7 @@ const validate = (
         },
       );
       const { status, message } = errors.BadRequest;
-      const error = new CustomError(status, message, validationErrors);
+      const error = new RESTError(status, message, validationErrors);
       next(error);
     }
   };

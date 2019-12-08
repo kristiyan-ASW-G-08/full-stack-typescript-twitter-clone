@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import MailOptions from '@customTypes/MailOptions';
-import { CustomError, errors } from '@utilities/CustomError';
+import { RESTError, errors } from '@utilities/RESTError';
 
 const sendEmail = (mailOptions: MailOptions): void => {
   try {
@@ -15,7 +15,7 @@ const sendEmail = (mailOptions: MailOptions): void => {
     transporter.sendMail(mailOptions);
   } catch (err) {
     const { status, message } = errors.UnprocessableEntity;
-    const error = new CustomError(status, message);
+    const error = new RESTError(status, message);
     throw error;
   }
 };
