@@ -22,4 +22,12 @@ module.exports = {
   env: {
     'jest/globals': true,
   },
+  overrides: [
+    {
+      files: ['*.test.ts'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 0,
+      },
+    },
+  ],
 };
