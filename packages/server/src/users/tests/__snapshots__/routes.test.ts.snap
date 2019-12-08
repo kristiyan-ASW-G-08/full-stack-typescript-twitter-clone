@@ -52,16 +52,16 @@ exports[`userRoutes /users should throw an error with a status of 409: Conflict 
 Object {
   "data": Array [
     Object {
-      "message": "testmail@mail.com is already taken",
-      "path": "email",
-    },
-    Object {
       "message": "testUserHandle is already taken",
       "path": "handle",
     },
     Object {
       "message": "username is already taken",
       "path": "username",
+    },
+    Object {
+      "message": "testmail@mail.com is already taken",
+      "path": "email",
     },
   ],
   "message": "Conflict",

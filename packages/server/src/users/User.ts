@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import User from '@customTypes/User';
+import duplicationErrorHandler from '@customMiddleware/duplicationErrorHandler';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const UserSchema: Schema = new Schema({
   username: {
@@ -64,5 +66,9 @@ const UserSchema: Schema = new Schema({
 });
 
 UserSchema.index({ handle: 'text' });
+
+UserSchema.plugin(uniqueValidator);
+UserSchema.post('save', duplicationErrorHandler);
+UserSchema.post('update', duplicationErrorHandler);
 
 export default mongoose.model<User>('User', UserSchema);

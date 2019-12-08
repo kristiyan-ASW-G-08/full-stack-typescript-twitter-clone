@@ -3,11 +3,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import mjml2html from 'mjml';
-import {
-  getUserByEmail,
-  getUserById,
-  areCredentialsAvailable,
-} from 'src/users/services';
+import { getUserByEmail, getUserById } from 'src/users/services';
 import { getTweetById } from 'src/tweets/services';
 import passErrorToNext from '@utilities/passErrorToNext';
 import includesId from '@src/utilities/includesId';
@@ -32,15 +28,7 @@ export const signUp = async (
 ): Promise<void> => {
   try {
     const { username, handle, email, password } = body;
-    const credentials: {
-      path: 'username' | 'handle' | 'email';
-      value: string;
-    }[] = [
-      { path: 'username', value: username },
-      { path: 'handle', value: handle },
-      { path: 'email', value: email },
-    ];
-    await areCredentialsAvailable(credentials);
+
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       username,
@@ -503,7 +491,7 @@ export const patchProfile = async (
       { path: 'username', value: username },
       { path: 'handle', value: handle },
     ];
-    await areCredentialsAvailable(credentials, userId);
+
     const user = await getUserById(userId, false);
 
     if (!Array.isArray(files) && files && files.avatar) {

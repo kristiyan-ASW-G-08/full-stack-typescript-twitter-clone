@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`userServices areCredentialsAvailable should throw an error when the user credentials are already taken 1`] = `[Error: Conflict]`;
