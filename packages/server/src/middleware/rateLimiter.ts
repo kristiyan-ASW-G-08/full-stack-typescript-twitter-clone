@@ -18,8 +18,7 @@ const rateLimiter = async (
     next();
   } catch (err) {
     const { status, message } = errors.TooManyRequests;
-    const error = new RESTError(status, message);
-    throw error;
+    throw new RESTError(status, message);
   }
 };
 export default rateLimiter;

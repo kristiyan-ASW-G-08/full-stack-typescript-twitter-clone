@@ -1,10 +1,10 @@
 import httpMocks from 'node-mocks-http';
-import paginate from '@customMiddleware/paginate';
+import paginationHandler from '@src/middleware/paginationHandler';
 
 type SortKey = 'top' | 'trending' | 'new' | 'replies';
 type SortString = '-likes' | '-retweets' | '-date' | '-replies';
 
-describe('paginate', (): void => {
+describe('paginationHandler', (): void => {
   afterEach(() => jest.clearAllMocks());
 
   const sortArr: { sort: SortKey; sortString: SortString }[] = [
@@ -28,7 +28,7 @@ describe('paginate', (): void => {
         },
       });
       const resMock = httpMocks.createResponse();
-      paginate(reqMock, resMock, nextMock);
+      paginationHandler(reqMock, resMock, nextMock);
       expect(nextMock).toBeCalledTimes(1);
       expect(reqMock.pagination).toEqual({
         limit: 25,
@@ -49,7 +49,7 @@ describe('paginate', (): void => {
       },
     });
     const resMock = httpMocks.createResponse();
-    paginate(reqMock, resMock, nextMock);
+    paginationHandler(reqMock, resMock, nextMock);
     expect(nextMock).toBeCalledTimes(1);
     expect(reqMock.pagination).toEqual({
       limit,

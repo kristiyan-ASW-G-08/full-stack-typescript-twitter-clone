@@ -13,7 +13,6 @@ import User from 'src/users/User';
 import Tweet from 'src/tweets/Tweet';
 import RESTError, { errors } from '@utilities/RESTError';
 import sendEmail from '@utilities/sendEmail';
-import ValidationError from '@twtr/common/source/types/ValidationError';
 import deleteFile from '@src/utilities/deleteFile';
 import findDocs from '@utilities/findDocs';
 import renderUrl from '@utilities/renderUrl';
@@ -28,26 +27,15 @@ export const signUp = async (
 ): Promise<void> => {
   try {
     const { username, handle, email, password } = body;
-
-    const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       username,
       handle,
       email,
-      password: hashedPassword,
+      password: await bcrypt.hash(password, 12),
     });
     await user.save();
     const userId = user._id;
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
-    const { status, message } = errors.InternalServerError;
-    if (!SECRET) {
-      const error = new RESTError(status, message);
-      throw error;
-    }
-    if (!EMAIL) {
-      const error = new RESTError(status, message);
-      throw error;
-    }
     const token = jwt.sign(
       {
         userId,
@@ -116,15 +104,13 @@ export const logIn = async (
     const user = await getUserByEmail(email);
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      const validationErrorsArr: ValidationError[] = [
+      const { status, message } = errors.Unauthorized;
+      throw new RESTError(status, message, [
         {
           path: 'password',
           message: 'Wrong password. Try again',
         },
-      ];
-      const { status, message } = errors.Unauthorized;
-      const error = new RESTError(status, message, validationErrorsArr);
-      throw error;
+      ]);
     }
     hasConfirmedEmail(user.confirmed);
     const token = jwt.sign(
@@ -203,15 +189,6 @@ export const requestPasswordResetEmail = async (
     const user = await getUserByEmail(email);
     hasConfirmedEmail(user.confirmed);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
-    const { status, message } = errors.InternalServerError;
-    if (!SECRET) {
-      const error = new RESTError(status, message);
-      throw error;
-    }
-    if (!EMAIL) {
-      const error = new RESTError(status, message);
-      throw error;
-    }
     const token = jwt.sign(
       {
         userId: user._id,
@@ -484,14 +461,6 @@ export const patchProfile = async (
 ): Promise<void> => {
   try {
     const { username, handle, website } = body;
-    const credentials: {
-      path: 'username' | 'handle' | 'email';
-      value: string;
-    }[] = [
-      { path: 'username', value: username },
-      { path: 'handle', value: handle },
-    ];
-
     const user = await getUserById(userId, false);
 
     if (!Array.isArray(files) && files && files.avatar) {

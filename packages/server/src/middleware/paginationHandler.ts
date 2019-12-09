@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import getSortString from '@utilities/getSortString';
 
-const paginate = (req: Request, _: Response, next: NextFunction): void => {
+const paginationHandler = (
+  req: Request,
+  _: Response,
+  next: NextFunction,
+): void => {
   const sort = req.query.sort || 'new';
   req.pagination = {
     limit: parseInt(req.query.limit, 10) || 25,
@@ -11,4 +15,4 @@ const paginate = (req: Request, _: Response, next: NextFunction): void => {
   };
   next();
 };
-export default paginate;
+export default paginationHandler;

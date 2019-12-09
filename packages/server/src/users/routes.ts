@@ -26,9 +26,9 @@ import ResetPasswordValidator from '@twtr/common/source/schemaValidators/ResetPa
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
 import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
-import validate from '@customMiddleware/validate';
+import validationHandler from '@src/middleware/validationHandler';
 import authenticationHandler from '@src/middleware/authenticationHandler';
-import paginate from '@customMiddleware/paginate';
+import paginationHandler from '@src/middleware/paginationHandler';
 import fileFilter from '@customMiddleware/fileFilter';
 import storage from '@customMiddleware/fileStorage';
 
@@ -36,19 +36,19 @@ const router = express.Router();
 
 router.post(
   '/users',
-  validate([{ schema: UserSignUpValidator, target: 'body' }]),
+  validationHandler([{ schema: UserSignUpValidator, target: 'body' }]),
   signUp,
 );
 
 router.post(
   '/users/user/tokens',
-  validate([{ schema: UserLoginValidator, target: 'body' }]),
+  validationHandler([{ schema: UserLoginValidator, target: 'body' }]),
   logIn,
 );
 
 router.post(
   '/users/user',
-  validate([{ schema: EmailValidator, target: 'body' }]),
+  validationHandler([{ schema: EmailValidator, target: 'body' }]),
   requestPasswordResetEmail,
 );
 
@@ -57,7 +57,7 @@ router.patch('/users/user/:token/confirm', verifyEmail);
 router.patch(
   '/users/user/reset',
   authenticationHandler,
-  validate([{ schema: ResetPasswordValidator, target: 'body' }]),
+  validationHandler([{ schema: ResetPasswordValidator, target: 'body' }]),
   resetPassword,
 );
 
@@ -68,7 +68,7 @@ router.patch(
     { name: 'avatar', maxCount: 1 },
     { name: 'cover', maxCount: 1 },
   ]),
-  validate([{ schema: UserProfileValidator, target: 'body' }]),
+  validationHandler([{ schema: UserProfileValidator, target: 'body' }]),
 
   patchProfile,
 );
@@ -88,29 +88,29 @@ router.delete('/users', authenticationHandler, deleteUser);
 router.get(
   '/users/user/bookmarks',
   authenticationHandler,
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserBookmarks,
 );
 
 router.get(
   '/users/:userId/likes',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserLikes,
 );
 
 router.get(
   '/users/:handle',
-  validate([{ schema: UserHandleValidator, target: 'params' }]),
+  validationHandler([{ schema: UserHandleValidator, target: 'params' }]),
   getUsersList,
 );
 
 router.get(
   '/users/user/tweets',
   authenticationHandler,
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserFeed,
 );
 
@@ -118,15 +118,15 @@ router.get('/users/user/:userId', getUser);
 
 router.get(
   '/users/:userId/following',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserFollowing,
 );
 
 router.get(
   '/users/:userId/followers',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserFollowers,
 );
 

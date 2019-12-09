@@ -12,9 +12,9 @@ import {
 } from 'src/tweets/controller';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
-import validate from '@customMiddleware/validate';
+import validationHandler from '@src/middleware/validationHandler';
 import authenticationHandler from '@src/middleware/authenticationHandler';
-import paginate from '@customMiddleware/paginate';
+import paginationHandler from '@src/middleware/paginationHandler';
 import fileFilter from '@customMiddleware/fileFilter';
 import storage from '@customMiddleware/fileStorage';
 
@@ -25,7 +25,7 @@ router.post(
   '/tweets',
   authenticationHandler,
   multerStorage,
-  validate([{ schema: TweetValidator, target: 'body' }]),
+  validationHandler([{ schema: TweetValidator, target: 'body' }]),
   postTweet,
 );
 
@@ -33,7 +33,7 @@ router.patch(
   '/tweets/:tweetId',
   authenticationHandler,
   multerStorage,
-  validate([{ schema: TweetValidator, target: 'body' }]),
+  validationHandler([{ schema: TweetValidator, target: 'body' }]),
   patchTweet,
 );
 
@@ -43,29 +43,29 @@ router.get('/tweets/:tweetId', getTweet);
 
 router.get(
   '/tweets',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getAllTweets,
 );
 
 router.get(
   '/users/:userId/tweets',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserTweets,
 );
 
 router.get(
   '/tweets/:tweetId/replies',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getReplies,
 );
 
 router.get(
   '/users/:userId/replies',
-  validate([{ schema: SortStringValidator, target: 'query' }]),
-  paginate,
+  validationHandler([{ schema: SortStringValidator, target: 'query' }]),
+  paginationHandler,
   getUserReplies,
 );
 

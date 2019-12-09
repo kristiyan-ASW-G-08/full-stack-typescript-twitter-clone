@@ -2053,7 +2053,7 @@ Lockfile:
       jest-runtime "^24.9.0"
       jest-snapshot "^24.9.0"
       jest-util "^24.9.0"
-      jest-validate "^24.9.0"
+      jest-validationHandler "^24.9.0"
       jest-watcher "^24.9.0"
       micromatch "^3.1.10"
       p-each-series "^1.0.0"
@@ -9484,7 +9484,7 @@ Lockfile:
       is-ci "^2.0.0"
       jest-config "^24.9.0"
       jest-util "^24.9.0"
-      jest-validate "^24.9.0"
+      jest-validationHandler "^24.9.0"
       prompts "^2.0.1"
       realpath-native "^1.1.0"
       yargs "^13.3.0"
@@ -9507,7 +9507,7 @@ Lockfile:
       jest-regex-util "^24.3.0"
       jest-resolve "^24.9.0"
       jest-util "^24.9.0"
-      jest-validate "^24.9.0"
+      jest-validationHandler "^24.9.0"
       micromatch "^3.1.10"
       pretty-format "^24.9.0"
       realpath-native "^1.1.0"
@@ -9735,7 +9735,7 @@ Lockfile:
       jest-resolve "^24.9.0"
       jest-snapshot "^24.9.0"
       jest-util "^24.9.0"
-      jest-validate "^24.9.0"
+      jest-validationHandler "^24.9.0"
       realpath-native "^1.1.0"
       slash "^2.0.0"
       strip-bom "^3.0.0"
@@ -9790,9 +9790,9 @@ Lockfile:
       slash "^2.0.0"
       source-map "^0.6.0"
   
-  jest-validate@^24.9.0:
+  jest-validationHandler@^24.9.0:
     version "24.9.0"
-    resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-24.9.0.tgz#0775c55360d173cd854e40180756d4ff52def8ab"
+    resolved "https://registry.yarnpkg.com/jest-validationHandler/-/jest-validationHandler-24.9.0.tgz#0775c55360d173cd854e40180756d4ff52def8ab"
     integrity sha512-HPIt6C5ACwiqSiwi+OfSSHbK8sG7akG8eATl+IPKaeIjtPOeBUd/g3J7DghugzxrGjI93qS/+RPKe1H6PqvhRQ==
     dependencies:
       "@jest/types" "^24.9.0"
@@ -11799,7 +11799,7 @@ Lockfile:
       hosted-git-info "^2.1.4"
       resolve "^1.10.0"
       semver "2 || 3 || 4 || 5"
-      validate-npm-package-license "^3.0.1"
+      validationHandler-npm-package-license "^3.0.1"
   
   normalize-path@^2.1.1:
     version "2.1.1"
@@ -16736,9 +16736,9 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/valid-data-url/-/valid-data-url-2.0.0.tgz#2220fa9f8d4e761ebd3f3bb02770f1212b810537"
     integrity sha512-dyCZnv3aCey7yfTgIqdZanKl7xWAEEKCbgmR7SKqyK6QT/Z07ROactrgD1eA37C69ODRj7rNOjzKWVPh0EUjBA==
   
-  validate-npm-package-license@^3.0.1:
+  validationHandler-npm-package-license@^3.0.1:
     version "3.0.4"
-    resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
+    resolved "https://registry.yarnpkg.com/validationHandler-npm-package-license/-/validationHandler-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
     integrity sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==
     dependencies:
       spdx-correct "^3.0.0"

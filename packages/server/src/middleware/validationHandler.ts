@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import Validator from '@customTypes/Validator';
 import { ValidationError } from 'yup';
+import Validator from '@customTypes/Validator';
 import CustomValidationError from '@twtr/common/source/types/ValidationError';
-import { errors, RESTError } from '@utilities/RESTError';
+import RESTError, { errors } from '@utilities/RESTError';
 
-const validate = (
+const validationHandler = (
   validators: Validator[],
 ): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
   return async (
@@ -22,14 +22,14 @@ const validate = (
       next();
     } catch (err) {
       const validationErrors = err.inner.map(
-        ({ path, message }: ValidationError): CustomValidationError => {
-          return { path, message };
-        },
+        ({ path, message }: ValidationError): CustomValidationError => ({
+          path,
+          message,
+        }),
       );
       const { status, message } = errors.BadRequest;
-      const error = new RESTError(status, message, validationErrors);
-      next(error);
+      next(new RESTError(status, message, validationErrors));
     }
   };
 };
-export default validate;
+export default validationHandler;
