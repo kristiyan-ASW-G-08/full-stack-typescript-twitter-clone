@@ -2,12 +2,14 @@ import mongoose from 'mongoose';
 import Tweet from 'src/tweets/Tweet';
 import User from 'src/users/User';
 import TweetType from '@customTypes/Tweet';
-import db from 'src/db';
+import connectToDB from '@utilities/connectToDB';
 
 describe('Tweet model', (): void => {
+  const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   beforeAll(
     async (): Promise<void> => {
-      db();
+      await connectToDB(mongoURI);
       await User.deleteMany({}).exec();
       await Tweet.deleteMany({}).exec();
     },

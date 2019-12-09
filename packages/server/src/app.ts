@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import userRoutes from 'src/users/routes';
 import tweetRoutes from 'src/tweets/routes';
-import { RESTError } from '@utilities/RESTError';
+import errorHandler from '@customMiddleware/errorHandler';
 
 const app: Application = express();
 
@@ -28,14 +28,6 @@ app.use('/images', express.static('./images'));
 app.use(userRoutes);
 app.use(tweetRoutes);
 
-app.use(
-  (error: RESTError, req: Request, res: Response, _: NextFunction): void => {
-    console.log(error);
-    const status = error.status || 500;
-    const { message } = error;
-    const response = error.data ? { data: error.data, message } : { message };
-    res.status(status).json(response);
-  },
-);
+app.use(errorHandler);
 
 export default app;

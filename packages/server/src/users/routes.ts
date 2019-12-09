@@ -27,7 +27,7 @@ import SortStringValidator from '@twtr/common/source/schemaValidators/SortString
 import EmailValidator from '@twtr/common/source/schemaValidators/EmailValidator';
 import UserHandleValidator from '@twtr/common/source/schemaValidators/UserHandleValidator';
 import validate from '@customMiddleware/validate';
-import isAuth from '@customMiddleware/isAuth';
+import authenticationHandler from '@src/middleware/authenticationHandler';
 import paginate from '@customMiddleware/paginate';
 import fileFilter from '@customMiddleware/fileFilter';
 import storage from '@customMiddleware/fileStorage';
@@ -56,14 +56,14 @@ router.patch('/users/user/:token/confirm', verifyEmail);
 
 router.patch(
   '/users/user/reset',
-  isAuth,
+  authenticationHandler,
   validate([{ schema: ResetPasswordValidator, target: 'body' }]),
   resetPassword,
 );
 
 router.patch(
   '/users/user/profile',
-  isAuth,
+  authenticationHandler,
   multer({ storage, fileFilter }).fields([
     { name: 'avatar', maxCount: 1 },
     { name: 'cover', maxCount: 1 },
@@ -73,17 +73,21 @@ router.patch(
   patchProfile,
 );
 
-router.patch('/users/tweets/:tweetId/bookmark', isAuth, bookmarkTweet);
+router.patch(
+  '/users/tweets/:tweetId/bookmark',
+  authenticationHandler,
+  bookmarkTweet,
+);
 
-router.patch('/users/tweets/:tweetId/like', isAuth, likeTweet);
+router.patch('/users/tweets/:tweetId/like', authenticationHandler, likeTweet);
 
-router.patch('/users/:userId', isAuth, followUser);
+router.patch('/users/:userId', authenticationHandler, followUser);
 
-router.delete('/users', isAuth, deleteUser);
+router.delete('/users', authenticationHandler, deleteUser);
 
 router.get(
   '/users/user/bookmarks',
-  isAuth,
+  authenticationHandler,
   validate([{ schema: SortStringValidator, target: 'query' }]),
   paginate,
   getUserBookmarks,
@@ -104,7 +108,7 @@ router.get(
 
 router.get(
   '/users/user/tweets',
-  isAuth,
+  authenticationHandler,
   validate([{ schema: SortStringValidator, target: 'query' }]),
   paginate,
   getUserFeed,

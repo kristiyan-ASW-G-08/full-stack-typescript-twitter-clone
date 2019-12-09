@@ -6,7 +6,7 @@ import mjml from 'mjml';
 import app from 'src/app';
 import User from 'src/users/User';
 import Tweet from 'src/tweets/Tweet';
-import db from 'src/db';
+import connectToDB from '@utilities/connectToDB';
 import sendEmail from '@utilities/sendEmail';
 import UserType from '@customTypes/User';
 
@@ -16,27 +16,23 @@ const mockTemplate = 'MockTemplate';
 jest.mock('mjml');
 jest.mock('@utilities/sendEmail');
 
-describe('userRoutes', (): void => {
-  beforeAll(
-    async (): Promise<void> => {
-      await mongoose.disconnect();
-      await db();
-      app.listen(port);
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
-  afterEach(
-    async (): Promise<void> => {
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
-  afterAll(
-    async (): Promise<void> => {
-      await mongoose.disconnect();
-    },
-  );
+describe('userRoutes', () => {
+  const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  beforeAll(async () => {
+    await mongoose.disconnect();
+    await connectToDB(mongoURI);
+    app.listen(port);
+    await Tweet.deleteMany({}).exec();
+    await User.deleteMany({}).exec();
+  });
+  afterEach(async () => {
+    await Tweet.deleteMany({}).exec();
+    await User.deleteMany({}).exec();
+  });
+  afterAll(async () => {
+    await mongoose.disconnect();
+  });
   const username = 'username';
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
@@ -46,8 +42,8 @@ describe('userRoutes', (): void => {
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
   const secret = process.env.SECRET;
-  describe('/users', (): void => {
-    it('should create a new user', async (): Promise<void> => {
+  describe('/users', () => {
+    it('should create a new user', async () => {
       expect.assertions(2);
       const response = await request(app)
         .post('/users')
@@ -90,7 +86,7 @@ describe('userRoutes', (): void => {
     it('should throw an error with a status of 409: Conflict when the user credentials are already taken', async (): Promise<
       void
     > => {
-      expect.assertions(3);
+      expect.assertions(2);
       await User.insertMany({ username, handle, email, password });
       const response = await request(app)
         .post('/users')
@@ -102,11 +98,10 @@ describe('userRoutes', (): void => {
           confirmPassword: password,
         });
       expect(response.status).toBe(409);
-      expect(response.body).toMatchSnapshot();
       expect(sendEmail).not.toHaveBeenCalled();
     });
   });
-  describe('post /users/user/tokens', (): void => {
+  describe('post /users/user/tokens', () => {
     it('should get a authentication token and user data object', async (): Promise<
       void
     > => {
@@ -154,7 +149,7 @@ describe('userRoutes', (): void => {
     });
   });
 
-  describe('get /users/:searchQuery', (): void => {
+  describe('get /users/:searchQuery', () => {
     it('should get a list of users based on search term', async (): Promise<
       void
     > => {
@@ -187,44 +182,36 @@ describe('userRoutes', (): void => {
     });
   });
 
-  describe('', (): void => {
+  describe('', () => {
     let testUser: UserType;
-    beforeEach(
-      async (): Promise<void> => {
-        testUser = new User({
-          username,
-          handle,
-          email,
-          password,
-          confirmed: true,
-        });
-        await testUser.save();
-      },
-    );
-    afterEach(
-      async (): Promise<void> => {
-        await Tweet.deleteMany({}).exec();
-        await User.deleteMany({}).exec();
-      },
-    );
+    beforeEach(async () => {
+      testUser = new User({
+        username,
+        handle,
+        email,
+        password,
+        confirmed: true,
+      });
+      await testUser.save();
+    });
+    afterEach(async () => {
+      await Tweet.deleteMany({}).exec();
+      await User.deleteMany({}).exec();
+    });
 
-    beforeAll(
-      async (): Promise<void> => {
-        await mongoose.disconnect();
-        await db();
-        app.listen(port);
-        await Tweet.deleteMany({}).exec();
-        await User.deleteMany({}).exec();
-      },
-    );
-    afterAll(
-      async (): Promise<void> => {
-        await mongoose.disconnect();
-      },
-    );
+    beforeAll(async () => {
+      await mongoose.disconnect();
+      await connectToDB(mongoURI);
+      app.listen(port);
+      await Tweet.deleteMany({}).exec();
+      await User.deleteMany({}).exec();
+    });
+    afterAll(async () => {
+      await mongoose.disconnect();
+    });
 
-    describe('patch /users/user/:token/confirm', (): void => {
-      it("should confirm user's email address", async (): Promise<void> => {
+    describe('patch /users/user/:token/confirm', () => {
+      it("should confirm user's email address", async () => {
         expect.assertions(2);
         const userId = testUser._id;
 
@@ -265,8 +252,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('post /users/user', (): void => {
-      it('should request password reset email', async (): Promise<void> => {
+    describe('post /users/user', () => {
+      it('should request password reset email', async () => {
         expect.assertions(1);
         const response = await request(app)
           .post(`/users/user`)
@@ -283,8 +270,8 @@ describe('userRoutes', (): void => {
         expect(response.status).toBe(404);
       });
     });
-    describe('patch /users/user/reset', (): void => {
-      it("should reset user's password", async (): Promise<void> => {
+    describe('patch /users/user/reset', () => {
+      it("should reset user's password", async () => {
         expect.assertions(1);
         const userId = testUser._id;
         const newPassword = 'newPasswordNewPassword';
@@ -350,7 +337,7 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('patch /users/user/profile', (): void => {
+    describe('patch /users/user/profile', () => {
       const newUsername = 'newTestUsername';
       const newHandle = 'newTestHandle';
       const website = 'https://sometestwebsite.test';
@@ -476,8 +463,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('patch /users/tweets/:tweetId/bookmark', (): void => {
-      it('should add a tweet bookmark', async (): Promise<void> => {
+    describe('patch /users/tweets/:tweetId/bookmark', () => {
+      it('should add a tweet bookmark', async () => {
         expect.assertions(3);
         const userId = testUser._id;
         const newTweet = new Tweet({
@@ -503,7 +490,7 @@ describe('userRoutes', (): void => {
         expect(user.bookmarks.length).toBe(1);
         expect(user.bookmarks[0].equals(tweetId)).toBeTruthy();
       });
-      it('should remove a tweet bookmark', async (): Promise<void> => {
+      it('should remove a tweet bookmark', async () => {
         expect.assertions(3);
         const userId = testUser._id;
         const newTweet = new Tweet({
@@ -567,8 +554,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('patch /users/tweets/:tweetId/like', (): void => {
-      it('should add a liked tweet', async (): Promise<void> => {
+    describe('patch /users/tweets/:tweetId/like', () => {
+      it('should add a liked tweet', async () => {
         expect.assertions(4);
         const userId = testUser._id;
         const newTweet = new Tweet({
@@ -596,7 +583,7 @@ describe('userRoutes', (): void => {
         expect(user.likes[0].equals(tweetId)).toBeTruthy();
         expect(tweet.likes).toBe(1);
       });
-      it('should remove a liked tweet', async (): Promise<void> => {
+      it('should remove a liked tweet', async () => {
         expect.assertions(4);
         const userId = testUser._id;
         const newTweet = new Tweet({
@@ -663,8 +650,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('patch /users/:userId/', (): void => {
-      it('should follow a user', async (): Promise<void> => {
+    describe('patch /users/:userId/', () => {
+      it('should follow a user', async () => {
         expect.assertions(4);
         const newAuthenticatedUser = new User({
           username: 'authenticatedUser',
@@ -693,7 +680,7 @@ describe('userRoutes', (): void => {
         expect(authenticatedUser.following[0].equals(userId)).toBeTruthy();
         expect(user.followers).toBe(1);
       });
-      it('should remove a followed user', async (): Promise<void> => {
+      it('should remove a followed user', async () => {
         expect.assertions(4);
         const newAuthenticatedUser = new User({
           username: 'authenticatedUser',
@@ -754,8 +741,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('get /users/user/bookmarks', (): void => {
-      it('should get a list of bookmarks', async (): Promise<void> => {
+    describe('get /users/user/bookmarks', () => {
+      it('should get a list of bookmarks', async () => {
         expect.assertions(1);
         const validUserId = mongoose.Types.ObjectId().toString();
         const newTweet = new Tweet({
@@ -788,7 +775,7 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('get /users/:userId/likes', (): void => {
+    describe('get /users/:userId/likes', () => {
       it('should get a list of liked tweets or replies', async (): Promise<
         void
       > => {
@@ -816,7 +803,7 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('get /users/user/tweets', (): void => {
+    describe('get /users/user/tweets', () => {
       it("should get a list of tweets based on user's following", async (): Promise<
         void
       > => {
@@ -909,8 +896,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('get /users/user/:userId', (): void => {
-      it('should get a user  based on id', async (): Promise<void> => {
+    describe('get /users/user/:userId', () => {
+      it('should get a user  based on id', async () => {
         expect.assertions(2);
         const userId = testUser._id;
         const response = await request(app).get(`/users/user/${userId}`);
@@ -919,8 +906,8 @@ describe('userRoutes', (): void => {
         expect(user._id.toString()).toMatch(userId.toString());
       });
     });
-    describe('get /users/:userId/following ', (): void => {
-      it('should get a list of users', async (): Promise<void> => {
+    describe('get /users/:userId/following ', () => {
+      it('should get a list of users', async () => {
         expect.assertions(3);
         const followedUser = new User({
           username: 'followedUser',
@@ -957,8 +944,8 @@ describe('userRoutes', (): void => {
       });
     });
 
-    describe('get /users/:userId/followers ', (): void => {
-      it('should get a list of users', async (): Promise<void> => {
+    describe('get /users/:userId/followers ', () => {
+      it('should get a list of users', async () => {
         // expect.assertions(3);
         const followedUser = new User({
           username: 'followedUser',
@@ -980,8 +967,8 @@ describe('userRoutes', (): void => {
         expect(users[0]._id).toMatch(userId.toString());
       });
     });
-    describe('delete /users', (): void => {
-      it('should delete a user', async (): Promise<void> => {
+    describe('delete /users', () => {
+      it('should delete a user', async () => {
         expect.assertions(1);
         const userId = testUser._id;
         const token = jwt.sign(

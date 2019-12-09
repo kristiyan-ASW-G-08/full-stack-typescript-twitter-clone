@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`isAuth should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid 1`] = `"Authentication credentials not valid or missing"`;
+exports[`authenticationHandler should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid 1`] = `"Authentication credentials not valid or missing"`;

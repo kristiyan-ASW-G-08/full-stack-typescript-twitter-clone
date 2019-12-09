@@ -13,7 +13,7 @@ import {
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import validate from '@customMiddleware/validate';
-import isAuth from '@customMiddleware/isAuth';
+import authenticationHandler from '@src/middleware/authenticationHandler';
 import paginate from '@customMiddleware/paginate';
 import fileFilter from '@customMiddleware/fileFilter';
 import storage from '@customMiddleware/fileStorage';
@@ -23,7 +23,7 @@ const router = express.Router();
 
 router.post(
   '/tweets',
-  isAuth,
+  authenticationHandler,
   multerStorage,
   validate([{ schema: TweetValidator, target: 'body' }]),
   postTweet,
@@ -31,13 +31,13 @@ router.post(
 
 router.patch(
   '/tweets/:tweetId',
-  isAuth,
+  authenticationHandler,
   multerStorage,
   validate([{ schema: TweetValidator, target: 'body' }]),
   patchTweet,
 );
 
-router.delete('/tweets/:tweetId', isAuth, deleteTweet);
+router.delete('/tweets/:tweetId', authenticationHandler, deleteTweet);
 
 router.get('/tweets/:tweetId', getTweet);
 

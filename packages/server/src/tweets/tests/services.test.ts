@@ -5,8 +5,8 @@ import getResource from '@utilities/getResource';
 jest.mock('@utilities/getResource');
 
 const getResourceMock = getResource as jest.MockedFunction<typeof getResource>;
-describe('getTweetById', (): void => {
-  it(`should call getResource`, async (): Promise<void> => {
+describe('getTweetById', () => {
+  it(`should call getResource`, async () => {
     expect.assertions(2);
     const tweetId = 'tweetId';
     await getTweetById(tweetId);

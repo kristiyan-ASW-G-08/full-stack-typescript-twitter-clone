@@ -1,8 +1,12 @@
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { RESTError, errors } from '@utilities/RESTError';
+import RESTError, { errors } from '@utilities/RESTError';
 
-const isAuth = (req: Request, _: Response, next: NextFunction): void => {
+const authenticationHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const { SECRET } = process.env;
   const authHeader = req.get('Authorization');
   const { status, message } = errors.Unauthorized;
@@ -19,4 +23,4 @@ const isAuth = (req: Request, _: Response, next: NextFunction): void => {
   req.userId = userId;
   next();
 };
-export default isAuth;
+export default authenticationHandler;

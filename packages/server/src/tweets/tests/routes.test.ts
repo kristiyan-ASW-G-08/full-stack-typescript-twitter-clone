@@ -6,7 +6,7 @@ import mjml from 'mjml';
 import app from 'src/app';
 import User from 'src/users/User';
 import UserType from '@customTypes/User';
-import db from 'src/db';
+import connectToDB from '@utilities/connectToDB';
 import Tweet from 'src/tweets/Tweet';
 
 const port = process.env.PORT || 8080;
@@ -14,7 +14,9 @@ const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
 
-describe('tweetRoutes', (): void => {
+describe('tweetRoutes', () => {
+  const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const username = 'username';
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
@@ -25,42 +27,34 @@ describe('tweetRoutes', (): void => {
   const secret = process.env.SECRET;
   let testUser: UserType;
 
-  beforeEach(
-    async (): Promise<void> => {
-      testUser = new User({
-        username,
-        handle,
-        email,
-        password,
-      });
-      await testUser.save();
-    },
-  );
-  afterEach(
-    async (): Promise<void> => {
-      mockFs.restore();
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
-  beforeAll(
-    async (): Promise<void> => {
-      await mongoose.disconnect();
-      await db();
-      app.listen(port);
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
+  beforeEach(async () => {
+    testUser = new User({
+      username,
+      handle,
+      email,
+      password,
+    });
+    await testUser.save();
+  });
+  afterEach(async () => {
+    mockFs.restore();
+    await Tweet.deleteMany({}).exec();
+    await User.deleteMany({}).exec();
+  });
+  beforeAll(async () => {
+    await mongoose.disconnect();
+    await connectToDB(mongoURI);
+    app.listen(port);
+    await Tweet.deleteMany({}).exec();
+    await User.deleteMany({}).exec();
+  });
 
-  afterAll(
-    async (): Promise<void> => {
-      await mongoose.disconnect();
-    },
-  );
+  afterAll(async () => {
+    await mongoose.disconnect();
+  });
 
-  describe('post /tweets', (): void => {
-    it('should create a new text tweet', async (): Promise<void> => {
+  describe('post /tweets', () => {
+    it('should create a new text tweet', async () => {
       expect.assertions(1);
       const userId = testUser._id;
       const token = jwt.sign(
@@ -80,7 +74,7 @@ describe('tweetRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it('should create a new link tweet', async (): Promise<void> => {
+    it('should create a new link tweet', async () => {
       expect.assertions(1);
       const userId = testUser._id;
       const token = jwt.sign(
@@ -100,7 +94,7 @@ describe('tweetRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it('should create a new retweet', async (): Promise<void> => {
+    it('should create a new retweet', async () => {
       expect.assertions(1);
       const userId = testUser._id;
       const tweet = new Tweet({
@@ -128,7 +122,7 @@ describe('tweetRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it('should create a new reply tweet', async (): Promise<void> => {
+    it('should create a new reply tweet', async () => {
       expect.assertions(1);
       const userId = testUser._id;
       const tweet = new Tweet({
@@ -156,7 +150,7 @@ describe('tweetRoutes', (): void => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it('should create a new image tweet', async (): Promise<void> => {
+    it('should create a new image tweet', async () => {
       expect.assertions(1);
       const userId = testUser._id;
       mockFs({
@@ -220,8 +214,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(401);
     });
   });
-  describe('patch /tweets/:tweetId', (): void => {
-    it('should update a text tweet', async (): Promise<void> => {
+  describe('patch /tweets/:tweetId', () => {
+    it('should update a text tweet', async () => {
       expect.assertions(2);
       const newText = 'newTestText';
       const userId = mongoose.Types.ObjectId().toString();
@@ -253,7 +247,7 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(204);
       expect(tweet.text).toMatch(newText);
     });
-    it('should update a link tweet', async (): Promise<void> => {
+    it('should update a link tweet', async () => {
       expect.assertions(2);
       const newLink = 'https://fakeNewLink.com';
       const userId = mongoose.Types.ObjectId().toString();
@@ -354,8 +348,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(404);
     });
   });
-  describe('delete /tweets/:tweetId', (): void => {
-    it('should delete a tweet', async (): Promise<void> => {
+  describe('delete /tweets/:tweetId', () => {
+    it('should delete a tweet', async () => {
       expect.assertions(2);
       const newTweet = new Tweet({
         type: 'text',
@@ -424,8 +418,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(404);
     });
   });
-  describe('get /tweets/:tweetId', (): void => {
-    it('should get a tweet', async (): Promise<void> => {
+  describe('get /tweets/:tweetId', () => {
+    it('should get a tweet', async () => {
       expect.assertions(2);
       const userId = testUser._id;
       const newTweet = new Tweet({
@@ -449,8 +443,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(404);
     });
   });
-  describe('get /users/:userId/tweets', (): void => {
-    it('should get a list of tweets', async (): Promise<void> => {
+  describe('get /users/:userId/tweets', () => {
+    it('should get a list of tweets', async () => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId().toString();
       const newTweet = new Tweet({
@@ -463,8 +457,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(200);
     });
   });
-  describe('get /tweets', (): void => {
-    it('should get a list of tweets', async (): Promise<void> => {
+  describe('get /tweets', () => {
+    it('should get a list of tweets', async () => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId().toString();
       const newTweet = new Tweet({
@@ -477,8 +471,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(200);
     });
   });
-  describe('get /tweets/:tweetId/replies', (): void => {
-    it('should get a list of replies by tweet', async (): Promise<void> => {
+  describe('get /tweets/:tweetId/replies', () => {
+    it('should get a list of replies by tweet', async () => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId().toString();
       const tweetId = mongoose.Types.ObjectId().toString();
@@ -493,8 +487,8 @@ describe('tweetRoutes', (): void => {
       expect(response.status).toBe(200);
     });
   });
-  describe('get /users/:userId/replies', (): void => {
-    it('should get a list of replies by user', async (): Promise<void> => {
+  describe('get /users/:userId/replies', () => {
+    it('should get a list of replies by user', async () => {
       expect.assertions(1);
       const userId = mongoose.Types.ObjectId().toString();
       const tweetId = mongoose.Types.ObjectId().toString();

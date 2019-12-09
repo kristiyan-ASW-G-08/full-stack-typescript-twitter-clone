@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`authenticationHandler should throw an error with a status of 401: Unauthorized when the decoded jwt token doesn't contain a user id  1`] = `""`;
+
+exports[`authenticationHandler should throw an error with a status of 401: Unauthorized when there is no authorization header 1`] = `""`;
