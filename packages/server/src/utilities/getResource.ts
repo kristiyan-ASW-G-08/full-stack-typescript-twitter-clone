@@ -1,13 +1,11 @@
-import mongoose, { Model } from 'mongoose';
-import User from '@customTypes/User';
-import Tweet from '@customTypes/Tweet';
+import mongoose, { Model, Document } from 'mongoose';
 import RESTError, { errors } from '@utilities/RESTError';
 
 interface FindQuery {
   name: string;
   value: number | string | mongoose.Types.ObjectId;
 }
-const getResource = async <T extends User | Tweet>(
+const getResource = async <T extends Document>(
   model: Model<T>,
   { value, name }: FindQuery,
   select: string = '',

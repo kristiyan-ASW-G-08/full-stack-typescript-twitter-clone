@@ -15,8 +15,7 @@ const sendEmail = (mailOptions: MailOptions): void => {
     transporter.sendMail(mailOptions);
   } catch (err) {
     const { status, message } = errors.UnprocessableEntity;
-    const error = new RESTError(status, message);
-    throw error;
+    throw new RESTError(status, message);
   }
 };
 export default sendEmail;

@@ -1,53 +1,49 @@
-import mongoose from 'mongoose';
 import findDocs from '@utilities/findDocs';
 import User from '@users/User';
-import Tweet from '@tweets/Tweet';
-import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
-import db from 'src/db';
 
-describe('getTweetById', (): void => {
-  const username = 'username';
-  const handle = 'testUserHandle';
-  const email = 'testmail@mail.com';
-  const password = 'testPassword';
-  let user: UserType;
-  beforeEach(
-    async (): Promise<void> => {
-      user = new User({ username, handle, email, password });
-      await user.save();
-    },
-  );
-  beforeAll(
-    async (): Promise<void> => {
-      db();
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
-  afterEach(
-    async (): Promise<void> => {
-      await Tweet.deleteMany({}).exec();
-      await User.deleteMany({}).exec();
-    },
-  );
-  afterAll(
-    async (): Promise<void> => {
-      await mongoose.disconnect();
-    },
-  );
-  it(`should find a tweet by user id`, async (): Promise<void> => {
-    expect.assertions(2);
-    const userId2 = mongoose.Types.ObjectId();
-    const text = 'ThisTweet';
-    await Tweet.insertMany([{ text, user: user._id, type: 'text' }]);
-    await Tweet.insertMany([{ text: 'text', user: userId2, type: 'text' }]);
+describe('findDocs', (): void => {
+  afterEach(() => jest.clearAllMocks());
+  afterAll(() => jest.resetAllMocks());
+  it(`should call all countDocuments, find, sort, skip, and limit`, async () => {
+    expect.assertions(9);
+    const pageNum = 1;
+    const limitNum = 25;
+    const sortStr = '-date';
 
-    const { documents } = await findDocs<TweetType>(Tweet, 1, 25, '-date', {
-      user: user._id,
-    });
+    const limit = jest.fn();
+    const skip = jest.fn(() => ({ limit }));
+    const sort = jest.fn(() => ({ skip }));
+    const find = jest.fn(() => ({
+      sort,
+    }));
+    const findQuery = { user: 'user' };
 
-    expect(documents).toHaveLength(1);
-    expect(documents[0].text).toMatch(text);
+    jest
+      .spyOn(User, 'countDocuments')
+      // @ts-ignore
+      .mockReturnValue({ find });
+
+    await findDocs<UserType, { user: string }>(
+      User,
+      pageNum,
+      limitNum,
+      sortStr,
+      findQuery,
+    );
+
+    expect(User.countDocuments).toHaveBeenCalledTimes(2);
+
+    expect(find).toHaveBeenCalledTimes(1);
+    expect(find).toHaveBeenCalledWith(findQuery);
+
+    expect(sort).toHaveBeenCalledTimes(1);
+    expect(sort).toHaveBeenCalledWith(sortStr);
+
+    expect(skip).toHaveBeenCalledTimes(1);
+    expect(skip).toHaveBeenCalledWith((pageNum - 1) * limitNum);
+
+    expect(limit).toHaveBeenCalledTimes(1);
+    expect(limit).toHaveBeenCalledWith(limitNum);
   });
 });

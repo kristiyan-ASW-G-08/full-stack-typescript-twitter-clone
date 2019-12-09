@@ -1,6 +1,4 @@
 import mongoose, { Model, Document } from 'mongoose';
-import User from '@customTypes/User';
-import Tweet from '@customTypes/Tweet';
 
 const findDocs = async <
   T extends Document,
