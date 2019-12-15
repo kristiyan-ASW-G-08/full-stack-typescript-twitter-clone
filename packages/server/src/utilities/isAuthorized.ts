@@ -1,10 +1,9 @@
 import { RESTError, errors } from '@utilities/RESTError';
 
-const authenticationHandlerorized = (authorizedUserId: string, userId: string): void => {
+const isAuthorized = (authorizedUserId: string, userId: string): void => {
   if (authorizedUserId !== userId) {
     const { status, message } = errors.Unauthorized;
-    const error = new RESTError(status, message);
-    throw error;
+    throw new RESTError(status, message);
   }
 };
-export default authenticationHandlerorized;
+export default isAuthorized;

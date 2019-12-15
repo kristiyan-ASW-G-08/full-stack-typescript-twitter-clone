@@ -9,8 +9,7 @@ const deleteFile = async (fileUrl: string | undefined): Promise<void> => {
     }
   } catch (err) {
     const { status, message } = errors.NotFound;
-    const error = new RESTError(status, message);
-    throw error;
+    throw new RESTError(status, message);
   }
 };
 export default deleteFile;

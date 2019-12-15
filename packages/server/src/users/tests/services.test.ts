@@ -7,6 +7,7 @@ jest.mock('@utilities/getResource');
 const getResourceMock = getResource as jest.MockedFunction<typeof getResource>;
 
 describe('userServices', (): void => {
+  afterEach(() => jest.clearAllMocks());
   describe('getUserByEmail', (): void => {
     it(`should call getResource`, async (): Promise<void> => {
       const email = 'testmail@mail.com';
