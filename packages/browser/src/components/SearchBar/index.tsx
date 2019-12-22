@@ -22,8 +22,7 @@ export const SearchBar: FC = () => {
   };
   const searchHandler = async (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
-    const { value } = target;
-    await getUsers(value);
+    await getUsers(target.value);
   };
   return (
     <SearchBarWrapper role="search" onSubmit={e => e.preventDefault()}>

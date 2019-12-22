@@ -64,10 +64,11 @@ export const TweetForm: FC = () => {
         history.goBack();
       }
     } catch (error) {
-      if (error?.response?.data && Array.isArray(error.response.data)) {
-        const { data } = error.response.data;
-        const errors = transformValidationErrors(data);
-        setErrors(errors);
+      if (
+        error?.response?.data?.data &&
+        Array.isArray(error.response.data.data)
+      ) {
+        setErrors(transformValidationErrors(error.response.data.data));
       } else {
         notificationStore.setNotification(defaultWarning);
       }

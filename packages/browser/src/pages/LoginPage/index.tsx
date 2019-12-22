@@ -42,9 +42,7 @@ export const LoginPage: FC = () => {
         error?.response?.data?.data &&
         Array.isArray(error.response.data.data)
       ) {
-        const { data } = error.response.data;
-        const errors = transformValidationErrors(data);
-        setErrors(errors);
+        setErrors(transformValidationErrors(error.response.data.data));
       } else {
         notificationStore.setNotification(defaultWarning);
       }

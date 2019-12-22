@@ -13,10 +13,11 @@ import transformValidationErrors from 'utilities/transformValidationErrors';
 import populateFormData from 'utilities/populateFormData';
 import getUrl from 'utilities/getUrl';
 import useStores from 'hooks/useStores';
+import defaultWarning from 'utilities/defaultWarning';
 
 export const UserForm: FC = () => {
-  const { authStore, notificationStore } = useStores();
   const history = useHistory();
+  const { authStore, notificationStore } = useStores();
   const { user, token } = authStore.authState;
   const submitHandler = async (
     formValues: FormikValues,
@@ -41,16 +42,10 @@ export const UserForm: FC = () => {
       notificationStore.setNotification(notification);
       history.goBack();
     } catch (error) {
-      if (error?.response?.data && Array.isArray(error.response.data)) {
-        const { data } = error.response.data;
-        const errors = transformValidationErrors(data);
-        setErrors(errors);
+      if (error?.response?.data?.data && Array.isArray(error.response.data)) {
+        setErrors(transformValidationErrors(error.response.data.data));
       } else {
-        const notification: Notification = {
-          type: 'warning',
-          content: 'Something went wrong',
-        };
-        notificationStore.setNotification(notification);
+        notificationStore.setNotification(defaultWarning);
       }
     }
   };

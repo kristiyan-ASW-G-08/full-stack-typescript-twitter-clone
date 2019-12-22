@@ -24,7 +24,7 @@ export const SignUpPage: FC = () => {
       notificationStore.setNotification({
         type: 'message',
         content:
-          'You have signed up successfully.Confirm your email to log in.',
+          'You have signed up successfully. Confirm your email to log in.',
       });
       history.replace('/');
     } catch (error) {
@@ -32,9 +32,7 @@ export const SignUpPage: FC = () => {
         error?.response?.data?.data &&
         Array.isArray(error.response.data.data)
       ) {
-        const { data } = error.response.data;
-        const errors = transformValidationErrors(data);
-        setErrors(errors);
+        setErrors(transformValidationErrors(error.response.data.data));
       } else {
         notificationStore.setNotification(defaultWarning);
       }
