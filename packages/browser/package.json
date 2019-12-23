@@ -53,8 +53,7 @@
       "no-shadow": 0,
       "consistent-return": 1,
       "react/prop-types": 0,
-      "react/jsx-one-expression-per-line": 0,
-      "@typescript-eslint/prefer-optional-chain": 3
+      "react/jsx-one-expression-per-line": 0
     }
   },
   "browserslist": {

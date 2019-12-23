@@ -63,7 +63,7 @@ describe('SignUpPage', () => {
       expect(setNotification).toHaveBeenLastCalledWith({
         type: 'message',
         content:
-          'You have signed up successfully.Confirm your email to log in.',
+          'You have signed up successfully. Confirm your email to log in.',
       });
     });
   });
