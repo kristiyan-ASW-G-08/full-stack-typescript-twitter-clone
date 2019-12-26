@@ -11,7 +11,6 @@ import 'importFontAwesome';
 
 const App: FC = observer(() => {
   const { themeStore, authStore } = useContext(RootStoreContext);
-  const { theme } = themeStore;
   useEffect(() => {
     const expiryDate = localStorage.getItem('expiryDate');
     if (expiryDate) {
@@ -25,7 +24,7 @@ const App: FC = observer(() => {
     <>
       <GlobalStyle />
       <Normalize />
-      <Theme currentTheme={theme}>
+      <Theme currentTheme={themeStore.theme}>
         <React.StrictMode>
           <AppWrapper>
             <BrowserRouter>

@@ -62,14 +62,11 @@ export const UsersContainer: FC<UsersContainerProps> = ({
 
   useEffect(() => {
     getUsers(query)
-      .then(data => {
-        const { nextUsers, next } = data;
+      .then(({ nextUsers, next }) => {
         setNext(next);
         setUsers(nextUsers);
       })
-      .catch(() => {
-        notificationStore.setNotification(defaultWarning);
-      });
+      .catch(() => notificationStore.setNotification(defaultWarning));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 

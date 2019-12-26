@@ -14,7 +14,6 @@ export const EmailConfirmation: FC = () => {
   const confirmationHandler = async () => {
     try {
       await axios.patch(`http://localhost:8090/users/user/${token}/confirm`);
-
       notificationStore.setNotification({
         type: 'message',
         content: 'You have confirmed you email successfully.',

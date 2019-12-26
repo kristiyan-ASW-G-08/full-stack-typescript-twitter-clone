@@ -4,10 +4,9 @@ const useIntersection = (cb: () => void | Promise<void>) => {
   const [element, setElement] = useState<HTMLDivElement | null>();
   const observer = useRef(
     new IntersectionObserver(
-      async entries => {
+      async ([intersectedElement]) => {
         try {
-          const intersectedElement = entries[0];
-          if (intersectedElement && intersectedElement.isIntersecting) {
+          if (intersectedElement?.isIntersecting) {
             await cb();
           }
         } catch (error) {

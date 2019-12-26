@@ -46,7 +46,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const nextPageRef = useRef(nextPage);
   const loadNext = async () => {
     try {
-      if (nextPageRef && nextPageRef.current) {
+      if (nextPageRef?.current) {
         const { newTweets, next } = await getTweets(nextPageRef.current, token);
         setTweets([...tweetsRef.current, ...newTweets]);
         setNext(next);
@@ -66,15 +66,11 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
 
   useEffect(() => {
     getTweets(query, token)
-      .then(data => {
-        const { newTweets, next } = data;
-        console.log(next);
+      .then(({ newTweets, next }) => {
         setNext(next);
         setTweets(newTweets);
       })
-      .catch(() => {
-        setNotification(defaultWarning);
-      });
+      .catch(() => setNotification(defaultWarning));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, query]);
 
@@ -85,7 +81,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   };
 
   const deleteTweetHandler = (tweetId: string): void => {
-    setTweets(tweets.filter(tweet => tweet._id !== tweetId));
+    setTweets(tweets.filter(({ _id }) => _id !== tweetId));
   };
   return (
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
@@ -97,6 +93,8 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
             <Tweets>
               <TextLoader>...Loading</TextLoader>
             </Tweets>
+
+            // eslint-disable-next-line prettier/prettier
           )}
         >
           <SelectWrapper>
