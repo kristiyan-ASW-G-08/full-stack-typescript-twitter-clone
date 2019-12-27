@@ -511,9 +511,8 @@ export const getUserFeed = async (
 ): Promise<void> => {
   try {
     const { page, limit, sort, sortString } = pagination;
-    const user = await getUserById(userId);
+    const {following} = await getUserById(userId);
     const { SERVER_URL } = process.env;
-    const { following } = user;
     const { documents, count } = await findDocs<
       TweetType,
       { user: { [key: string]: mongoose.Types.ObjectId[] } }
