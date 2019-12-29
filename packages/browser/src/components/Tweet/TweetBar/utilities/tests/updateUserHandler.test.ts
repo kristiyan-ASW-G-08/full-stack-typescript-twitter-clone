@@ -13,7 +13,7 @@ describe('updateUserHandler', () => {
   const token = 'token';
   const setNotification = jest.fn();
   const updateUser = jest.fn();
-  afterEach(() => jest.clearAllMocks());
+  afterEach(jest.clearAllMocks);
   afterAll(() => jest.resetAllMocks());
   it('resolves:should call updateUser', async () => {
     expect.assertions(2);

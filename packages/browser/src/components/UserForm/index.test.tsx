@@ -37,7 +37,7 @@ useStoresMock.mockReturnValue({
 });
 jest.mock('hooks/useStores');
 describe('UserForm', () => {
-  afterEach(() => jest.clearAllMocks());
+  afterEach(jest.clearAllMocks);
   afterAll(() => jest.restoreAllMocks());
   it('render UserForm', async () => {
     expect.assertions(9);

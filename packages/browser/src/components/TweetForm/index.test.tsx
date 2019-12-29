@@ -39,7 +39,7 @@ useStoresMock.mockReturnValue({
 describe('TweetForm', () => {
   const text = 'text';
   const link = 'https://testing-library.com/';
-  afterEach(() => jest.clearAllMocks());
+  afterEach(jest.clearAllMocks);
   afterAll(() => jest.restoreAllMocks());
   it('render TweetForm (post a new Tweet)', async () => {
     expect.assertions(7);

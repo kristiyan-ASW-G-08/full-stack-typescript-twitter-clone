@@ -37,7 +37,7 @@ const history = createMemoryHistory();
 const historyPushSpy = jest.spyOn(history, 'push');
 
 describe('TweetBar', () => {
-  afterEach(() => jest.clearAllMocks());
+  afterEach(jest.clearAllMocks);
   afterAll(() => jest.restoreAllMocks());
 
   const deleteTweetHandler = jest.fn();

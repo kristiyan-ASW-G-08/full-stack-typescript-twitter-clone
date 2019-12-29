@@ -47,7 +47,9 @@ describe('Input', () => {
       },
     );
     const input = getByPlaceholderText(placeholder);
+
     userEvent.type(input, value);
+
     expect(input).toHaveAttribute('name', name);
     expect(input).toHaveAttribute('type', type);
     expect(input).toHaveAttribute('value', value);

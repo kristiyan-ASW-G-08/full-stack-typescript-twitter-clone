@@ -9,7 +9,7 @@ import { defaultAuthState } from 'stores/AuthStore';
 import UserCard from '.';
 
 describe('UserCard', () => {
-  afterEach(() => jest.clearAllMocks());
+  afterEach(jest.clearAllMocks);
   afterAll(() => jest.restoreAllMocks());
   it('render UserCard: default authState', async () => {
     expect.assertions(1);
