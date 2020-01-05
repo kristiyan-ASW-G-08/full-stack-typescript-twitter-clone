@@ -9,7 +9,6 @@ import useStores from 'hooks/useStores';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import transformValidationErrors from 'utilities/transformValidationErrors';
-import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 
 export const SignUpPage: FC = () => {
@@ -20,7 +19,7 @@ export const SignUpPage: FC = () => {
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      await axios.post(getUrl('/users'), formValues);
+      await axios.post(`${process.env.REACT_APP_API_URL}/users`, formValues);
       notificationStore.setNotification({
         type: 'message',
         content:

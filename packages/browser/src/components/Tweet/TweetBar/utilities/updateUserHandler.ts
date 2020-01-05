@@ -1,6 +1,5 @@
 import Notification from 'types/Notification';
 import User from 'types/User';
-import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 import getUpdatedUser from './getUpdatedUser';
 
@@ -11,7 +10,10 @@ const updateUserHandler = async (
   updateUser: (user: User | undefined) => void,
 ): Promise<void> => {
   try {
-    const user = await getUpdatedUser(token, getUrl(urlExtension));
+    const user = await getUpdatedUser(
+      token,
+      `${process.env.REACT_APP_URL}/${urlExtension}`,
+    );
 
     updateUser(user);
   } catch (error) {

@@ -11,7 +11,6 @@ import Logo from 'components/Logo';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 import populateFormData from 'utilities/populateFormData';
-import getUrl from 'utilities/getUrl';
 import useStores from 'hooks/useStores';
 import defaultWarning from 'utilities/defaultWarning';
 
@@ -24,11 +23,9 @@ export const UserForm: FC = () => {
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      const formData = populateFormData(formValues);
-
       const request = await axios.patch(
-        getUrl('/users/user/profile'),
-        formData,
+        `${process.env.REACT_APP_API_URL}/users/user/profile`,
+        populateFormData(formValues),
         {
           headers: { Authorization: `bearer ${token}` },
         },

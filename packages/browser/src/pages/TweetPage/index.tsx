@@ -7,7 +7,6 @@ import Notification from 'types/Notification';
 import defaultWarning from 'utilities/defaultWarning';
 import TweetType from 'types/Tweet';
 import Tweet from 'components/Tweet';
-import getUrl from 'utilities/getUrl';
 import { TweetPageWrapper, P } from './styled';
 
 export const TweetPage: FC = () => {
@@ -17,16 +16,19 @@ export const TweetPage: FC = () => {
   const { token } = authStore.authState;
   const { tweetId } = useParams();
   const history = useHistory();
+  const { REACT_APP_API_URL } = process.env;
 
   useEffect(() => {
     // @ts-ignore
     const getTweet = async (): Promise<{ tweet: TweetType; url: string }> => {
       try {
-        const request = await axios.get(getUrl(`/tweets/${tweetId}`));
+        const request = await axios.get(
+          `${REACT_APP_API_URL}/tweets/${tweetId}`,
+        );
 
         const { tweet } = request.data.data;
         return {
-          url: getUrl(`/tweets/${tweet._id}/replies`),
+          url: `${REACT_APP_API_URL}/tweets/${tweet._id}/replies`,
           tweet,
         };
       } catch (error) {
@@ -37,7 +39,7 @@ export const TweetPage: FC = () => {
       setTweet(tweet);
       setUrl(url);
     });
-  }, [notificationStore, tweetId]);
+  }, [REACT_APP_API_URL, notificationStore, tweetId]);
   return (
     <>
       {tweet && url ? (

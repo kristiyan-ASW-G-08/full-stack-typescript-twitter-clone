@@ -11,7 +11,6 @@ import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
 import transformValidationErrors from 'utilities/transformValidationErrors';
 import Input from 'components/Input';
-import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 
 export const LoginPage: FC = () => {
@@ -23,7 +22,7 @@ export const LoginPage: FC = () => {
   ): Promise<void> => {
     try {
       const response = await axios.post(
-        getUrl('/users/user/tokens'),
+        `${process.env.REACT_APP_API_URL}/users/user/tokens`,
         formValues,
       );
       const { data } = response.data;

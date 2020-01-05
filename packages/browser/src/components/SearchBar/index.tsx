@@ -2,7 +2,6 @@ import React, { FC, memo, useState, SyntheticEvent, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import User from 'types/User';
-import getUrl from 'utilities/getUrl';
 import RootStoreContext from 'stores/RootStore';
 import defaultWarning from 'utilities/defaultWarning';
 import { SearchBarWrapper, Datalist } from './styled';
@@ -13,7 +12,9 @@ export const SearchBar: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const getUsers = async (query: string): Promise<void> => {
     try {
-      const response = await axios.get(getUrl(`/users/${query}`));
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/${query}`,
+      );
       const { users } = response.data.data;
       setUsers(users);
     } catch (error) {

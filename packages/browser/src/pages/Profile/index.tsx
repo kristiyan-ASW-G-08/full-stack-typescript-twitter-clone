@@ -15,7 +15,6 @@ import Feed from 'types/Feed';
 import User from 'types/User';
 import Loader from 'components/Loader';
 import TweetsContainer from 'components/TweetsContainer';
-import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 import { ProfileWrapper, UserCardWrapper, TweetsWrapper } from './styled';
 
@@ -24,6 +23,7 @@ const UserCard = lazy(() => import('components/UserCard/index'));
 export const Profile: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const { authState } = authStore;
+  const { REACT_APP_API_URL } = process.env;
   const [user, setUser] = useState<User>();
   const { userId } = useParams();
   const [url, setUrl] = useState<string>('');
@@ -32,7 +32,9 @@ export const Profile: FC = () => {
   useEffect(() => {
     const getUser = async (userId: string): Promise<any> => {
       try {
-        const response = await axios.get(getUrl(`/users/user/${userId}`));
+        const response = await axios.get(
+          `${REACT_APP_API_URL}/users/user/${userId}`,
+        );
 
         const { user } = response.data.data;
 
@@ -43,24 +45,26 @@ export const Profile: FC = () => {
     };
     getUser(userId || '').then((userData: User) => {
       setUser(userData);
-      setUrl(userData ? getUrl(`/users/${userData._id}/tweets`) : '');
+      setUrl(
+        userData ? `${REACT_APP_API_URL}/users/${userData._id}/tweets` : '',
+      );
     });
-  }, [notificationStore, userId]);
+  }, [REACT_APP_API_URL, notificationStore, userId]);
 
   const feeds: Feed[] =
     user !== undefined
       ? [
           {
             name: 'Tweets',
-            url: getUrl(`/users/${user._id}/tweets`),
+            url: `${REACT_APP_API_URL}/users/${user._id}/tweets`,
           },
           {
             name: 'Replies',
-            url: getUrl(`/users/${user._id}/replies`),
+            url: `${REACT_APP_API_URL}/users/${user._id}/replies`,
           },
           {
             name: 'Likes',
-            url: getUrl(`/users/${user._id}/likes`),
+            url: `${REACT_APP_API_URL}/users/${user._id}/likes`,
           },
         ]
       : [];
@@ -86,7 +90,7 @@ export const Profile: FC = () => {
                         ...feeds,
                         {
                           name: 'Bookmarks',
-                          url: `http://localhost:8090/users/user/bookmarks`,
+                          url: `${REACT_APP_API_URL}/users/user/bookmarks`,
                         },
                       ]
                     : feeds

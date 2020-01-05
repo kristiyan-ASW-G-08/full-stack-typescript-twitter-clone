@@ -3,10 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { observer } from 'mobx-react-lite';
 import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
-
 import Notification from 'types/Notification';
 import axios from 'axios';
-import getUrl from 'utilities/getUrl';
 import useStores from 'hooks/useStores';
 import defaultWarning from 'utilities/defaultWarning';
 import updateUserHandler from './utilities/updateUserHandler';
@@ -85,7 +83,10 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                   const config = {
                     headers: { Authorization: `bearer ${token}` },
                   };
-                  await axios.delete(getUrl(`/tweets/${_id}`), config);
+                  await axios.delete(
+                    `${process.env.REACT_APP_API_URL}/tweets/${_id}`,
+                    config,
+                  );
                   deleteTweetHandler(tweet._id);
                 } catch (err) {
                   notificationStore.setNotification(defaultWarning);

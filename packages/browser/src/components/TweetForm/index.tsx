@@ -9,7 +9,6 @@ import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import ImageInput from 'components/ImageUploadButton';
-import getUrl from 'utilities/getUrl';
 import defaultWarning from 'utilities/defaultWarning';
 import populateFormData from 'utilities/populateFormData';
 import transformValidationErrors from 'utilities/transformValidationErrors';
@@ -47,6 +46,7 @@ export const TweetForm: FC = () => {
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
+      const { REACT_APP_API_URL } = process.env;
       const formData: FormData = populateFormData({
         ...formValues,
         type,
@@ -57,10 +57,14 @@ export const TweetForm: FC = () => {
         headers: { Authorization: `bearer ${token}` },
       };
       if (tweet) {
-        await axios.patch(getUrl(`/tweets/${tweet._id}`), formData, config);
+        await axios.patch(
+          `${REACT_APP_API_URL}/tweets/${tweet._id}`,
+          formData,
+          config,
+        );
         history.push(`/tweet/${tweet._id}`);
       } else {
-        await axios.post(getUrl('/tweets'), formData, config);
+        await axios.post(`${REACT_APP_API_URL}/tweets`, formData, config);
         history.goBack();
       }
     } catch (error) {
