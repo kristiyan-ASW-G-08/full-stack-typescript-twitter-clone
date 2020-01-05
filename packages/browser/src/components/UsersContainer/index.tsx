@@ -74,7 +74,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
     <UsersWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {users.length > 0 ? (
-        // eslint-disable-next-line prettier/prettier
+
         <Suspense
           fallback={(
             <Users>

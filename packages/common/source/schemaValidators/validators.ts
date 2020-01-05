@@ -1,11 +1,11 @@
-import UserLoginValidator from '@schemaValidators/UserLoginValidator';
-import TweetValidator from '@schemaValidators/TweetValidator';
-import UserSignUpValidator from '@schemaValidators/UserSignUpValidator';
-import SortStringValidator from '@schemaValidators/SortStringValidator';
-import ResetPasswordValidator from '@schemaValidators/ResetPasswordValidator';
-import EmailValidator from '@schemaValidators/EmailValidator';
-import UserHandleValidator from '@schemaValidators/UserHandleValidator';
-import UserProfileValidator from '@schemaValidators/UserProfileValidator';
+import UserLoginValidator from './UserLoginValidator';
+import TweetValidator from './TweetValidator';
+import UserSignUpValidator from './UserSignUpValidator';
+import SortStringValidator from './SortStringValidator';
+import ResetPasswordValidator from './ResetPasswordValidator';
+import EmailValidator from './EmailValidator';
+import UserHandleValidator from './UserHandleValidator';
+import UserProfileValidator from './UserProfileValidator';
 
 export default {
   UserLoginValidator,

@@ -88,13 +88,13 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
-          // eslint-disable-next-line prettier/prettier
+ 
           fallback={(
             <Tweets>
               <TextLoader>...Loading</TextLoader>
             </Tweets>
 
-            // eslint-disable-next-line prettier/prettier
+  
           )}
         >
           <SelectWrapper>
