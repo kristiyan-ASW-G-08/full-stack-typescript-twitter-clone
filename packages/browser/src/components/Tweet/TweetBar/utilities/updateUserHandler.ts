@@ -12,7 +12,7 @@ const updateUserHandler = async (
   try {
     const user = await getUpdatedUser(
       token,
-      `${process.env.REACT_APP_URL}/${urlExtension}`,
+      `${process.env.REACT_APP_API_URL}/${urlExtension}`,
     );
 
     updateUser(user);

@@ -6,6 +6,7 @@ import compression from 'compression';
 import userRoutes from 'src/users/routes';
 import tweetRoutes from 'src/tweets/routes';
 import errorHandler from '@customMiddleware/errorHandler';
+import populateDB from '@utilities/populateDB';
 
 const app: Application = express();
 
@@ -28,6 +29,7 @@ app.use('/images', express.static('./images'));
 app.use(userRoutes);
 app.use(tweetRoutes);
 
+// populateDB();
 app.use(errorHandler);
 
 export default app;

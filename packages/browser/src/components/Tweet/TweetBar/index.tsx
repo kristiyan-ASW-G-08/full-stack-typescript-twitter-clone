@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
 import Notification from 'types/Notification';
+import User from 'types/User';
 import axios from 'axios';
 import useStores from 'hooks/useStores';
 import defaultWarning from 'utilities/defaultWarning';
@@ -28,8 +29,9 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
     await updateUserHandler(
       token,
       urlExtension,
-      notificationStore.setNotification,
-      authStore.updateUser,
+      (notification: Notification) =>
+        notificationStore.setNotification(notification),
+      (user: User | undefined) => authStore.updateUser(user),
     );
   };
   const notification: Notification = {
@@ -45,12 +47,11 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
           data-testid="like-button"
           onClick={async () => {
             if (!user) {
-              console.log('No User');
               notificationStore.setNotification(notification);
               return;
             }
-            console.log('user');
-            await updateUserEvent(`/users/tweets/${_id}/like`);
+
+            await updateUserEvent(`users/tweets/${_id}/like`);
           }}
         >
           <FontAwesomeIcon icon="heart" />
@@ -64,7 +65,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               notificationStore.setNotification(notification);
               return;
             }
-            await updateUserEvent(`/users/tweets/${_id}/bookmark`);
+            await updateUserEvent(`users/tweets/${_id}/bookmark`);
           }}
         >
           <FontAwesomeIcon icon="bookmark" />
@@ -103,7 +104,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                   return;
                 }
                 history.push({
-                  pathname: `/update/tweet/${_id}`,
+                  pathname: `update/tweet/${_id}`,
                   state: {
                     tweetForm: location,
                     tweet,
@@ -126,7 +127,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               return;
             }
             history.push({
-              pathname: `/reply/${_id}`,
+              pathname: `reply/${_id}`,
               state: {
                 tweetForm: location,
               },
@@ -146,7 +147,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               return;
             }
             history.push({
-              pathname: `/retweet/${_id}`,
+              pathname: `retweet/${_id}`,
               state: {
                 tweetForm: location,
               },
