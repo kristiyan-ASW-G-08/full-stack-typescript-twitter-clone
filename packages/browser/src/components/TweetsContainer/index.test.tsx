@@ -25,8 +25,8 @@ describe('TweetsContainer', () => {
   const token = 'token';
 
   it('render TweetsContainer', async () => {
-    expect.assertions(14);
-    const { container, getByRole, getByTestId } = render(
+    expect.assertions(13);
+    const { getByRole, getByTestId } = render(
       <TweetsContainer
         token={token}
         feeds={[]}
@@ -58,6 +58,5 @@ describe('TweetsContainer', () => {
     expect(getTweets).toHaveBeenCalledTimes(5);
     expect(tweetsFeed.childElementCount).toBe(1);
     expect(tweetElement).toBeTruthy();
-    expect(container).toBeTruthy();
   });
 });
