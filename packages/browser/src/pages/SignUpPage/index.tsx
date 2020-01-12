@@ -8,8 +8,7 @@ import { FormWrapper, FieldsWrapper } from 'styled/Form';
 import useStores from 'hooks/useStores';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
-import transformValidationErrors from 'utilities/transformValidationErrors';
-import defaultWarning from 'utilities/defaultWarning';
+import formErrorHandler from 'utilities/formErrorHandler';
 
 export const SignUpPage: FC = () => {
   const history = useHistory();
@@ -27,14 +26,9 @@ export const SignUpPage: FC = () => {
       });
       history.replace('/');
     } catch (error) {
-      if (
-        error?.response?.data?.data &&
-        Array.isArray(error.response.data.data)
-      ) {
-        setErrors(transformValidationErrors(error.response.data.data));
-      } else {
-        notificationStore.setNotification(defaultWarning);
-      }
+      formErrorHandler(error, setErrors, notification =>
+        notificationStore.setNotification(notification),
+      );
     }
   };
   return (

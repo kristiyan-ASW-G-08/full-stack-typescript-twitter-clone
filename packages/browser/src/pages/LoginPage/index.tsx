@@ -9,9 +9,8 @@ import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore';
 import Notification from 'types/Notification';
-import transformValidationErrors from 'utilities/transformValidationErrors';
+import formErrorHandler from 'utilities/formErrorHandler';
 import Input from 'components/Input';
-import defaultWarning from 'utilities/defaultWarning';
 
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
@@ -37,14 +36,9 @@ export const LoginPage: FC = () => {
       notificationStore.setNotification(notification);
       history.replace('/');
     } catch (error) {
-      if (
-        error?.response?.data?.data &&
-        Array.isArray(error.response.data.data)
-      ) {
-        setErrors(transformValidationErrors(error.response.data.data));
-      } else {
-        notificationStore.setNotification(defaultWarning);
-      }
+      formErrorHandler(error, setErrors, notification =>
+        notificationStore.setNotification(notification),
+      );
     }
   };
   return (

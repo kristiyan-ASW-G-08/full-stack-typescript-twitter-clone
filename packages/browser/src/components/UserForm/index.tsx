@@ -9,10 +9,9 @@ import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import Notification from 'types/Notification';
-import transformValidationErrors from 'utilities/transformValidationErrors';
+import formErrorHandler from 'utilities/formErrorHandler';
 import populateFormData from 'utilities/populateFormData';
 import useStores from 'hooks/useStores';
-import defaultWarning from 'utilities/defaultWarning';
 
 export const UserForm: FC = () => {
   const history = useHistory();
@@ -39,11 +38,9 @@ export const UserForm: FC = () => {
       notificationStore.setNotification(notification);
       history.goBack();
     } catch (error) {
-      if (error?.response?.data?.data && Array.isArray(error.response.data)) {
-        setErrors(transformValidationErrors(error.response.data.data));
-      } else {
-        notificationStore.setNotification(defaultWarning);
-      }
+      formErrorHandler(error, setErrors, notification =>
+        notificationStore.setNotification(notification),
+      );
     }
   };
   return (

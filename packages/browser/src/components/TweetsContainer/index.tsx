@@ -88,14 +88,11 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
- 
-          fallback={(
+          fallback={
             <Tweets>
               <TextLoader>...Loading</TextLoader>
             </Tweets>
-
-  
-          )}
+          }
         >
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>

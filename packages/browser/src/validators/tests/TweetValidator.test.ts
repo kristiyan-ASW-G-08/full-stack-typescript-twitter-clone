@@ -1,4 +1,4 @@
-import TweetValidator from '@schemaValidators/TweetValidator';
+import TweetValidator from 'validators/TweetValidator';
 
 describe('TweetValidator', (): void => {
   const type = 'text';
@@ -26,15 +26,6 @@ describe('TweetValidator', (): void => {
   it(`should throw an error`, async (): Promise<void> => {
     const tweet = {
       type: 'link',
-      text,
-    };
-    await expect(
-      TweetValidator.validate(tweet, { abortEarly: false }),
-    ).rejects.toMatchSnapshot();
-  });
-  it(`should throw an error`, async (): Promise<void> => {
-    const tweet = {
-      type: 'invalidType',
       text,
     };
     await expect(

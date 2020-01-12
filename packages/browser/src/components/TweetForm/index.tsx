@@ -9,9 +9,8 @@ import Button from 'styled/Button';
 import Avatar from 'components/Avatar/index';
 import IconButton from 'styled/IconButton';
 import ImageInput from 'components/ImageUploadButton';
-import defaultWarning from 'utilities/defaultWarning';
 import populateFormData from 'utilities/populateFormData';
-import transformValidationErrors from 'utilities/transformValidationErrors';
+import formErrorHandler from 'utilities/formErrorHandler';
 import useStores from 'hooks/useStores';
 
 import {
@@ -68,14 +67,9 @@ export const TweetForm: FC = () => {
         history.goBack();
       }
     } catch (error) {
-      if (
-        error?.response?.data?.data &&
-        Array.isArray(error.response.data.data)
-      ) {
-        setErrors(transformValidationErrors(error.response.data.data));
-      } else {
-        notificationStore.setNotification(defaultWarning);
-      }
+      formErrorHandler(error, setErrors, notification =>
+        notificationStore.setNotification(notification),
+      );
     }
   };
   return (
