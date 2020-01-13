@@ -127,7 +127,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               return;
             }
             history.push({
-              pathname: `reply/${_id}`,
+              pathname: `/reply/${_id}`,
               state: {
                 tweetForm: location,
               },
@@ -147,7 +147,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               return;
             }
             history.push({
-              pathname: `retweet/${_id}`,
+              pathname: `/retweet/${_id}`,
               state: {
                 tweetForm: location,
               },

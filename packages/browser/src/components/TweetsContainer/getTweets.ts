@@ -9,6 +9,7 @@ const getTweets = async (
   next: string | null;
   prev: string | null;
 }> => {
+  console.log(url);
   const config = token
     ? {
         headers: { Authorization: `bearer ${token}` },
