@@ -1,21 +1,20 @@
 import EmailValidator from '@schemaValidators/EmailValidator';
 
-describe('EmailValidator', (): void => {
-  const email = 'testmail@mail.com';
-  it(`should validate successfully`, async (): Promise<void> => {
-    const body = {
-      email,
-    };
+describe('EmailValidator', () => {
+  const validEmails = [
+    'testmail@mail.com',
+    'someMail@gmail.com',
+    'jojo@test.com',
+  ];
+  const invalidEmails = ['testmail@mail', 'someMailgmail.com', 'test.com'];
+  it.each(validEmails)('should validate successfully', async email => {
     await expect(
-      EmailValidator.validate(body, { abortEarly: false }),
-    ).resolves.toBe(body);
+      EmailValidator.validate({ email }, { abortEarly: false }),
+    ).resolves.toStrictEqual({ email });
   });
-  it(`should throw an error`, async (): Promise<void> => {
-    const body = {
-      email: '',
-    };
+  it.each(invalidEmails)('should validate unsuccessfully', async email => {
     await expect(
-      EmailValidator.validate(body, { abortEarly: false }),
+      EmailValidator.validate({ email }, { abortEarly: false }),
     ).rejects.toMatchSnapshot();
   });
 });

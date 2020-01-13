@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SortStringValidator should throw an error 1`] = `[ValidationError: sort must be one of the following values: top, trending, new, replies]`;
+exports[`SortStringValidator should validate unsuccessfully 1`] = `[ValidationError: 3 errors occurred]`;
+
+exports[`SortStringValidator should validate unsuccessfully 2`] = `[ValidationError: 2 errors occurred]`;
+
+exports[`SortStringValidator should validate unsuccessfully 3`] = `[ValidationError: 4 errors occurred]`;
+
+exports[`SortStringValidator should validate unsuccessfully 4`] = `[ValidationError: sort must be one of the following values: top, trending, new, replies]`;
