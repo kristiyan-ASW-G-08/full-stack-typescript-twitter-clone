@@ -13,12 +13,11 @@ import renderUrl from '@utilities/renderUrl';
 import TweetType from '@customTypes/Tweet';
 
 export const postTweet = async (
-  { userId, body, file }: Request,
+  { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { text, linkUrl, type, retweetId, replyId } = body;
     const user = await getUserById(userId);
     const tweet = new Tweet({
       text,
@@ -65,13 +64,11 @@ export const postTweet = async (
 };
 
 export const patchTweet = async (
-  { userId, body, params, file }: Request,
+  { userId, body: { text, linkUrl }, params: { tweetId }, file }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
-    const { text, linkUrl } = body;
     const tweet = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
 
@@ -89,12 +86,11 @@ export const patchTweet = async (
 };
 
 export const deleteTweet = async (
-  { params, userId }: Request,
+  { params: { tweetId }, userId }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
     const tweet = await getTweetById(tweetId);
     isAuthorized(tweet.user.toString(), userId);
     const user = await getUserById(tweet.user, false);
@@ -121,12 +117,11 @@ export const deleteTweet = async (
 };
 
 export const getTweet = async (
-  { params }: Request,
+  { params: { tweetId } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
     const tweet = await getTweetById(tweetId);
     const populatedTweet = await tweet
       .populate([
@@ -142,12 +137,11 @@ export const getTweet = async (
 };
 
 export const getAllTweets = async (
-  { pagination }: Request,
+  { pagination: { page, limit, sort, sortString } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<TweetType>(
       Tweet,
@@ -190,13 +184,14 @@ export const getAllTweets = async (
 };
 
 export const getUserTweets = async (
-  { params, pagination }: Request,
+  {
+    params: { userId },
+    pagination: { page, limit, sort, sortString },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = params;
-    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<TweetType>(
       Tweet,
@@ -238,13 +233,14 @@ export const getUserTweets = async (
 };
 
 export const getReplies = async (
-  { params, pagination }: Request,
+  {
+    params: { tweetId },
+    pagination: { page, limit, sort, sortString },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
-    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<TweetType>(
       Tweet,
@@ -286,13 +282,14 @@ export const getReplies = async (
 };
 
 export const getUserReplies = async (
-  { params, pagination }: Request,
+  {
+    params: { userId },
+    pagination: { page, limit, sort, sortString },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = params;
-    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<TweetType>(
       Tweet,
