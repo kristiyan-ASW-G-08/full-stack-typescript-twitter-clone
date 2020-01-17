@@ -21,24 +21,21 @@ import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
 
 export const signUp = async (
-  { body }: Request,
+  { body: { username, handle, email, password } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { username, handle, email, password } = body;
-    const user = new User({
+    const { _id } = await new User({
       username,
       handle,
       email,
       password: await bcrypt.hash(password, 12),
-    });
-    await user.save();
-    const userId = user._id;
+    }).save();
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const token = jwt.sign(
       {
-        userId,
+        userId: _id,
       },
       SECRET,
       { expiresIn: '1h' },
@@ -94,12 +91,11 @@ export const signUp = async (
 };
 
 export const logIn = async (
-  { body }: Request,
+  { body: { email, password } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email, password } = body;
     const { SECRET } = process.env;
     const user = await getUserByEmail(email);
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -160,13 +156,12 @@ export const logIn = async (
 };
 
 export const verifyEmail = async (
-  { params }: Request,
+  { params: { token } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
     const { SECRET } = process.env;
-    const { token } = params;
     const decodedToken = jwt.verify(token, SECRET);
     // @ts-ignore
     const { userId } = decodedToken;
@@ -180,12 +175,11 @@ export const verifyEmail = async (
 };
 
 export const requestPasswordResetEmail = async (
-  { body }: Request,
+  { body: { email } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { email } = body;
     const user = await getUserByEmail(email);
     hasConfirmedEmail(user.confirmed);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
@@ -243,12 +237,11 @@ export const requestPasswordResetEmail = async (
   }
 };
 export const resetPassword = async (
-  { userId, body }: Request,
+  { userId, body: { password } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { password } = body;
     const user = await getUserById(userId);
     user.password = await bcrypt.hash(password, 12);
     await user.save();
@@ -263,8 +256,7 @@ export const deleteUser = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const user = await getUserById(userId);
-    await user.remove();
+    await (await getUserById(userId)).remove();
     res.sendStatus(204);
   } catch (err) {
     passErrorToNext(err, next);
@@ -272,12 +264,11 @@ export const deleteUser = async (
 };
 
 export const bookmarkTweet = async (
-  { userId, params }: Request,
+  { userId, params: { tweetId } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
     const user = await getUserById(userId, false);
     if (!includesId(user.bookmarks, tweetId)) {
       user.bookmarks = [...user.bookmarks, mongoose.Types.ObjectId(tweetId)];
@@ -292,12 +283,11 @@ export const bookmarkTweet = async (
 };
 
 export const likeTweet = async (
-  { userId, params }: Request,
+  { userId, params: { tweetId } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { tweetId } = params;
     const user = await getUserById(userId, false);
     const tweet = await getTweetById(tweetId);
     if (includesId(user.likes, tweetId)) {
@@ -347,12 +337,11 @@ export const followUser = async (
 };
 
 export const getUserBookmarks = async (
-  { userId, pagination }: Request,
+  { userId, pagination: { page, limit, sort, sortString } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const populatedUser = await user
@@ -401,13 +390,14 @@ export const getUserBookmarks = async (
 };
 
 export const getUserLikes = async (
-  { pagination, params }: Request,
+  {
+    pagination: { page, limit, sort, sortString },
+    params: { userId },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = params;
-    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const user = await getUserById(userId);
     const populatedUser = await user
@@ -455,12 +445,11 @@ export const getUserLikes = async (
 };
 
 export const patchProfile = async (
-  { body, userId, files }: Request,
+  { body: { username, handle, website }, userId, files }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { username, handle, website } = body;
     const user = await getUserById(userId, false);
 
     if (!Array.isArray(files) && files && files.avatar) {
@@ -482,12 +471,11 @@ export const patchProfile = async (
 };
 
 export const getUsersList = async (
-  { params }: Request,
+  { params: { handle } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { handle } = params;
     const searchRegex = new RegExp(handle, 'gi');
     const users = await User.find(
       {
@@ -505,13 +493,12 @@ export const getUsersList = async (
 };
 
 export const getUserFeed = async (
-  { userId, pagination }: Request,
+  { userId, pagination: { page, limit, sort, sortString } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
-    const {following} = await getUserById(userId);
+    const { following } = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<
       TweetType,
@@ -550,12 +537,11 @@ export const getUserFeed = async (
 };
 
 export const getUser = async (
-  { params }: Request,
+  { params: { userId } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { userId } = params;
     const user = await getUserById(userId, false);
     res.status(200).json({
       data: {
@@ -568,13 +554,14 @@ export const getUser = async (
 };
 
 export const getUserFollowing = async (
-  { params, pagination }: Request,
+  {
+    params: { userId },
+    pagination: { page, limit, sort, sortString },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
-    const { userId } = params;
     const user = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const populatedUser = await user
@@ -623,13 +610,14 @@ export const getUserFollowing = async (
 };
 
 export const getUserFollowers = async (
-  { params, pagination }: Request,
+  {
+    params: { userId },
+    pagination: { page, limit, sort, sortString },
+  }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
-    const { userId } = params;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<
       UserType,
