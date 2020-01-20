@@ -493,17 +493,22 @@ export const getUsersList = async (
 };
 
 export const getUserFeed = async (
-  { userId, pagination: { page, limit, sort, sortString } }: Request,
+  { userId, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
+    const { page, limit, sort, sortString } = pagination;
     const { following } = await getUserById(userId);
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<
       TweetType,
       { user: { [key: string]: mongoose.Types.ObjectId[] } }
-    >(Tweet, page, limit, sortString, { user: { $in: following } });
+    >({
+      model: Tweet,
+      pagination,
+      query: { user: { $in: following } },
+    });
 
     const nextPage =
       count > 0
@@ -610,20 +615,22 @@ export const getUserFollowing = async (
 };
 
 export const getUserFollowers = async (
-  {
-    params: { userId },
-    pagination: { page, limit, sort, sortString },
-  }: Request,
+  { params: { userId }, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<
       UserType,
       { following: { $in: [string] } }
-    >(User, page, limit, sortString, {
-      following: { $in: [userId] },
+    >({
+      model: User,
+      pagination,
+      query: {
+        following: { $in: [userId] },
+      },
     });
 
     const nextPage =

@@ -137,19 +137,18 @@ export const getTweet = async (
 };
 
 export const getAllTweets = async (
-  { pagination: { page, limit, sort, sortString } }: Request,
+  { pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
     const { SERVER_URL } = process.env;
-    const { documents, count } = await findDocs<TweetType>(
-      Tweet,
-      page,
-      limit,
-      sortString,
-      {},
-    );
+    const { page, limit, sort, sortString } = pagination;
+    const { documents, count } = await findDocs<TweetType>({
+      model: Tweet,
+      pagination,
+      query: {},
+    });
 
     const nextPage =
       count > 0
@@ -184,22 +183,18 @@ export const getAllTweets = async (
 };
 
 export const getUserTweets = async (
-  {
-    params: { userId },
-    pagination: { page, limit, sort, sortString },
-  }: Request,
+  { params: { userId }, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
     const { SERVER_URL } = process.env;
-    const { documents, count } = await findDocs<TweetType>(
-      Tweet,
-      page,
-      limit,
-      sortString,
-      { user: userId },
-    );
+    const { page, limit, sort, sortString } = pagination;
+    const { documents, count } = await findDocs<TweetType>({
+      model: Tweet,
+      pagination,
+      query: { user: userId },
+    });
 
     const nextPage =
       count > 0
@@ -233,22 +228,18 @@ export const getUserTweets = async (
 };
 
 export const getReplies = async (
-  {
-    params: { tweetId },
-    pagination: { page, limit, sort, sortString },
-  }: Request,
+  { params: { tweetId }, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
+    const { page, limit, sort } = pagination;
     const { SERVER_URL } = process.env;
-    const { documents, count } = await findDocs<TweetType>(
-      Tweet,
-      page,
-      limit,
-      sortString,
-      { reply: tweetId },
-    );
+    const { documents, count } = await findDocs<TweetType>({
+      model: Tweet,
+      pagination,
+      query: { reply: tweetId },
+    });
 
     const nextPage =
       count > 0
@@ -282,22 +273,18 @@ export const getReplies = async (
 };
 
 export const getUserReplies = async (
-  {
-    params: { userId },
-    pagination: { page, limit, sort, sortString },
-  }: Request,
+  { params: { userId }, pagination }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
+    const { page, limit, sort, sortString } = pagination;
     const { SERVER_URL } = process.env;
-    const { documents, count } = await findDocs<TweetType>(
-      Tweet,
-      page,
-      limit,
-      sortString,
-      { user: userId, type: 'reply' },
-    );
+    const { documents, count } = await findDocs<TweetType>({
+      model: Tweet,
+      pagination,
+      query: { user: userId, type: 'reply' },
+    });
 
     const nextPage =
       count > 0

@@ -7,9 +7,12 @@ describe('findDocs', (): void => {
   afterAll(() => jest.resetAllMocks());
   it(`should call all countDocuments, find, sort, skip, and limit`, async () => {
     expect.assertions(9);
-    const pageNum = 1;
-    const limitNum = 25;
-    const sortStr = '-date';
+    const pagination = {
+      page: 1,
+      limit: 25,
+      sortString: '-date',
+      sort: 'new',
+    };
 
     const limit = jest.fn();
     const skip = jest.fn(() => ({ limit }));
@@ -24,13 +27,11 @@ describe('findDocs', (): void => {
       // @ts-ignore
       .mockReturnValue({ find });
 
-    await findDocs<UserType, { user: string }>(
-      User,
-      pageNum,
-      limitNum,
-      sortStr,
-      findQuery,
-    );
+    await findDocs<UserType, { user: string }>({
+      model: User,
+      pagination,
+      query: findQuery,
+    });
 
     expect(User.countDocuments).toHaveBeenCalledTimes(2);
 
@@ -38,12 +39,12 @@ describe('findDocs', (): void => {
     expect(find).toHaveBeenCalledWith(findQuery);
 
     expect(sort).toHaveBeenCalledTimes(1);
-    expect(sort).toHaveBeenCalledWith(sortStr);
+    expect(sort).toHaveBeenCalledWith(pagination.sortString);
 
     expect(skip).toHaveBeenCalledTimes(1);
-    expect(skip).toHaveBeenCalledWith((pageNum - 1) * limitNum);
+    expect(skip).toHaveBeenCalledWith((pagination.page - 1) * pagination.limit);
 
     expect(limit).toHaveBeenCalledTimes(1);
-    expect(limit).toHaveBeenCalledWith(limitNum);
+    expect(limit).toHaveBeenCalledWith(pagination.limit);
   });
 });
