@@ -15,8 +15,8 @@ import RESTError, { errors } from '@utilities/RESTError';
 import sendEmail from '@utilities/sendEmail';
 import deleteFile from '@src/utilities/deleteFile';
 import findDocs from '@utilities/findDocs';
-import renderUrl from '@utilities/renderUrl';
 import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
+import getNavigationPages from '@src/utilities/getNavigationPages';
 import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
 
@@ -343,7 +343,7 @@ export const getUserBookmarks = async (
 ): Promise<void> => {
   try {
     const user = await getUserById(userId);
-    const { SERVER_URL } = process.env;
+
     const populatedUser = await user
       .populate({
         path: 'bookmarks',
@@ -356,31 +356,22 @@ export const getUserBookmarks = async (
       .execPopulate();
     const { bookmarks } = populatedUser;
     const count = bookmarks.length - page * limit;
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/user/bookmarks`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/user/bookmarks`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/user/bookmarks`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
 
     res.status(200).json({
       data: {
         tweets: bookmarks,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -398,7 +389,6 @@ export const getUserLikes = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { SERVER_URL } = process.env;
     const user = await getUserById(userId);
     const populatedUser = await user
       .populate({
@@ -412,30 +402,21 @@ export const getUserLikes = async (
       .execPopulate();
     const { likes } = populatedUser;
     const count = likes.length - page * limit;
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/${userId}/likes`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/${userId}/likes`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/${userId}/likes`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
     res.status(200).json({
       data: {
         tweets: likes,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -498,9 +479,9 @@ export const getUserFeed = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
+    const { page, limit, sort } = pagination;
     const { following } = await getUserById(userId);
-    const { SERVER_URL } = process.env;
+
     const { documents, count } = await findDocs<
       TweetType,
       { user: { [key: string]: mongoose.Types.ObjectId[] } }
@@ -510,29 +491,22 @@ export const getUserFeed = async (
       query: { user: { $in: following } },
     });
 
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/user/tweets`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/user/tweets`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
 
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/user/tweets`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
     res.status(200).json({
       data: {
         tweets: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -568,7 +542,7 @@ export const getUserFollowing = async (
 ): Promise<void> => {
   try {
     const user = await getUserById(userId);
-    const { SERVER_URL } = process.env;
+
     const populatedUser = await user
       .populate({
         path: 'following',
@@ -582,30 +556,21 @@ export const getUserFollowing = async (
       .execPopulate();
     const { following } = populatedUser;
     const count = following.length - page * limit;
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/${userId}/following?`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/${userId}/following?`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/${userId}/following?`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
     res.status(200).json({
       data: {
         users: following,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -620,8 +585,8 @@ export const getUserFollowers = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
-    const { SERVER_URL } = process.env;
+    const { page, limit, sort } = pagination;
+
     const { documents, count } = await findDocs<
       UserType,
       { following: { $in: [string] } }
@@ -632,30 +597,22 @@ export const getUserFollowers = async (
         following: { $in: [userId] },
       },
     });
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/${userId}/followers?`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
 
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/${userId}/followers?`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/${userId}/followers?`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
     res.status(200).json({
       data: {
         users: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });

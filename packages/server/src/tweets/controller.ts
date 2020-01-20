@@ -9,8 +9,8 @@ import includesId from '@src/utilities/includesId';
 import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
 import findDocs from '@utilities/findDocs';
-import renderUrl from '@utilities/renderUrl';
 import TweetType from '@customTypes/Tweet';
+import getNavigationPages from '@src/utilities/getNavigationPages';
 
 export const postTweet = async (
   { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,
@@ -142,38 +142,27 @@ export const getAllTweets = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { SERVER_URL } = process.env;
-    const { page, limit, sort, sortString } = pagination;
+    const { page, limit, sort } = pagination;
     const { documents, count } = await findDocs<TweetType>({
       model: Tweet,
       pagination,
       query: {},
     });
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, 'tweets', {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, 'tweets', {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
-
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: 'tweets',
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
     res.status(200).json({
       data: {
         tweets: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -188,37 +177,28 @@ export const getUserTweets = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { SERVER_URL } = process.env;
-    const { page, limit, sort, sortString } = pagination;
+    const { page, limit, sort } = pagination;
     const { documents, count } = await findDocs<TweetType>({
       model: Tweet,
       pagination,
       query: { user: userId },
     });
 
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/${userId}/tweets`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/${userId}/tweets`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/${userId}/tweets`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
     res.status(200).json({
       data: {
         tweets: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -234,36 +214,26 @@ export const getReplies = async (
 ): Promise<void> => {
   try {
     const { page, limit, sort } = pagination;
-    const { SERVER_URL } = process.env;
     const { documents, count } = await findDocs<TweetType>({
       model: Tweet,
       pagination,
       query: { reply: tweetId },
     });
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `tweets/${tweetId}/replies`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `tweets/${tweetId}/replies`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `tweets/${tweetId}/replies`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
     res.status(200).json({
       data: {
         tweets: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
@@ -278,38 +248,28 @@ export const getUserReplies = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { page, limit, sort, sortString } = pagination;
-    const { SERVER_URL } = process.env;
+    const { page, limit, sort } = pagination;
     const { documents, count } = await findDocs<TweetType>({
       model: Tweet,
       pagination,
       query: { user: userId, type: 'reply' },
     });
-
-    const nextPage =
-      count > 0
-        ? renderUrl(SERVER_URL, `users/${userId}/replies`, {
-            page: page + 1,
-            limit,
-            sort,
-          })
-        : null;
-
-    const prev =
-      page > 1
-        ? renderUrl(SERVER_URL, `users/${userId}/replies`, {
-            page: page - 1,
-            limit,
-            sort,
-          })
-        : null;
+    const { prevPage, nextPage } = getNavigationPages({
+      page,
+      urlExtension: `users/${userId}/replies`,
+      count,
+      queries: {
+        limit,
+        sort,
+      },
+    });
 
     res.status(200).json({
       data: {
         tweets: documents,
         links: {
           next: nextPage,
-          prev,
+          prev: prevPage,
         },
       },
     });
