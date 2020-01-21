@@ -5,8 +5,9 @@ import { NotificationWrapper, NotificationContent } from './styled';
 interface NotificationProps {
   notification: NotificationType;
 }
-export const Notification: FC<NotificationProps> = ({ notification }) => {
-  const { type, content } = notification;
+export const Notification: FC<NotificationProps> = ({
+  notification: { type, content },
+}) => {
   return (
     <NotificationWrapper>
       <NotificationContent notificationType={type} role="alert">
