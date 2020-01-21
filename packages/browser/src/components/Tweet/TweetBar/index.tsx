@@ -7,7 +7,6 @@ import Notification from 'types/Notification';
 import User from 'types/User';
 import axios from 'axios';
 import useStores from 'hooks/useStores';
-import defaultWarning from 'utilities/defaultWarning';
 import updateUserHandler from './utilities/updateUserHandler';
 import ShareButton from './ShareButton/index';
 
@@ -90,7 +89,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                   );
                   deleteTweetHandler(tweet._id);
                 } catch (err) {
-                  notificationStore.setNotification(defaultWarning);
+                  notificationStore.setNotification();
                 }
               }}
             >

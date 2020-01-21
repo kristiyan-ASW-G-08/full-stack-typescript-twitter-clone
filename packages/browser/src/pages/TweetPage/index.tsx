@@ -4,7 +4,6 @@ import axios from 'axios';
 import RootStoreContext from 'stores/RootStore';
 import TweetsContainer from 'components/TweetsContainer/index';
 import Notification from 'types/Notification';
-import defaultWarning from 'utilities/defaultWarning';
 import TweetType from 'types/Tweet';
 import Tweet from 'components/Tweet';
 import { TweetPageWrapper, P } from './styled';
@@ -32,7 +31,7 @@ export const TweetPage: FC = () => {
           tweet,
         };
       } catch (error) {
-        notificationStore.setNotification(defaultWarning);
+        notificationStore.setNotification();
       }
     };
     getTweet().then(({ tweet, url }) => {

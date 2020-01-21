@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import User from 'types/User';
 import RootStoreContext from 'stores/RootStore';
-import defaultWarning from 'utilities/defaultWarning';
 import { SearchBarWrapper, Datalist } from './styled';
 import UserItem from './UserItem/index';
 
@@ -18,7 +17,7 @@ export const SearchBar: FC = () => {
       const { users } = response.data.data;
       setUsers(users);
     } catch (error) {
-      notificationStore.setNotification(defaultWarning);
+      notificationStore.setNotification();
     }
   };
   const searchHandler = async (e: SyntheticEvent) => {

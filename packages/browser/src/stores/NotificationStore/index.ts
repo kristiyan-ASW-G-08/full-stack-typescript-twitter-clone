@@ -6,10 +6,17 @@ export const defaultNotification: Notification = {
   content: '',
 };
 
+const defaultWarning: Notification = {
+  type: 'warning',
+  content: 'Something went wrong, try again later.',
+};
+
 class NotificationStore {
   @observable public notification: Notification | undefined = undefined;
 
-  @action public setNotification(notification: Notification): void {
+  @action public setNotification(
+    notification: Notification = defaultWarning,
+  ): void {
     this.notification = notification;
     autorun(
       () => {

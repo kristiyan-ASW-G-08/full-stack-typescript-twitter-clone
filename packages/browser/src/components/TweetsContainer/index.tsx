@@ -13,10 +13,10 @@ import TweetType from 'types/Tweet';
 import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
-import defaultWarning from 'utilities/defaultWarning';
 import FeedBar from 'components/FeedBar';
 import Select from 'styled/Select';
 import TextLoader from 'styled/TextLoader';
+import useStores from 'hooks/useStores';
 import getTweets from './getTweets';
 import { TweetsWrapper, SelectWrapper, Tweets, LoaderWrapper } from './styled';
 
@@ -33,12 +33,12 @@ interface TweetsContainerProps {
 }
 export const TweetsContainer: FC<TweetsContainerProps> = ({
   url,
-  setNotification,
   setUrl,
   feeds,
   token,
   hasBorderRadius,
 }) => {
+  const { notificationStore } = useStores();
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
   const [query, setQuery] = useState<string>(`${url}?sort=new`);
@@ -52,7 +52,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
         setNext(next);
       }
     } catch {
-      setNotification(defaultWarning);
+      notificationStore.setNotification();
     }
   };
   const { setElement } = useIntersection(loadNext);
@@ -70,7 +70,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
         setNext(next);
         setTweets(newTweets);
       })
-      .catch(() => setNotification(defaultWarning));
+      .catch(() => notificationStore.setNotification());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, query]);
 
@@ -88,11 +88,11 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {tweets.length > 0 ? (
         <Suspense
-          fallback={
+          fallback={(
             <Tweets>
               <TextLoader>...Loading</TextLoader>
             </Tweets>
-          }
+          )}
         >
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>

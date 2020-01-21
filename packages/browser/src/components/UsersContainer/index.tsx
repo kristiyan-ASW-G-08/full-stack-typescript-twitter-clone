@@ -7,15 +7,13 @@ import React, {
   lazy,
   Dispatch,
   SetStateAction,
-  useContext,
 } from 'react';
 import UserType from 'types/User';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
-import RootStoreContext from 'stores/RootStore';
-import defaultWarning from 'utilities/defaultWarning';
 import TextLoader from 'styled/TextLoader';
+import useStores from 'hooks/useStores';
 import getUsers from './getUsers';
 import { UsersWrapper, Users, Center } from './styled';
 
@@ -33,7 +31,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
   feeds,
   hasBorderRadius,
 }) => {
-  const { authStore, notificationStore } = useContext(RootStoreContext);
+  const { authStore, notificationStore } = useStores();
   const { authState } = authStore;
   const [users, setUsers] = useState<UserType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
@@ -48,7 +46,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
         setNext(next);
       }
     } catch {
-      notificationStore.setNotification(defaultWarning);
+      notificationStore.setNotification();
     }
   };
   const { setElement } = useIntersection(loadNext);
@@ -66,7 +64,7 @@ export const UsersContainer: FC<UsersContainerProps> = ({
         setNext(next);
         setUsers(nextUsers);
       })
-      .catch(() => notificationStore.setNotification(defaultWarning));
+      .catch(() => notificationStore.setNotification());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
@@ -74,13 +72,12 @@ export const UsersContainer: FC<UsersContainerProps> = ({
     <UsersWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
       {users.length > 0 ? (
-
         <Suspense
-          fallback={(
+          fallback={
             <Users>
               <TextLoader>...Loading</TextLoader>
             </Users>
-          )}
+          }
         >
           <Users role="feed">
             {users.map(user => (

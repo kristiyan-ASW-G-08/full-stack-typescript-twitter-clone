@@ -5,7 +5,6 @@ import PageContainer from 'styled/PageContainer';
 import Button from 'styled/Button';
 import { Title, Paragraph, Container } from 'styled/Title';
 import useStores from 'hooks/useStores';
-import defaultWarning from 'utilities/defaultWarning';
 
 export const EmailConfirmation: FC = () => {
   const { notificationStore } = useStores();
@@ -21,7 +20,7 @@ export const EmailConfirmation: FC = () => {
         content: 'You have confirmed you email successfully.',
       });
     } catch (error) {
-      notificationStore.setNotification(defaultWarning);
+      notificationStore.setNotification();
     }
     history.replace('/');
   };

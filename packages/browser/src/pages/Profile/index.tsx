@@ -15,7 +15,6 @@ import Feed from 'types/Feed';
 import User from 'types/User';
 import Loader from 'components/Loader';
 import TweetsContainer from 'components/TweetsContainer';
-import defaultWarning from 'utilities/defaultWarning';
 import { ProfileWrapper, UserCardWrapper, TweetsWrapper } from './styled';
 
 const UserCard = lazy(() => import('components/UserCard/index'));
@@ -40,7 +39,7 @@ export const Profile: FC = () => {
 
         return user;
       } catch (err) {
-        notificationStore.setNotification(defaultWarning);
+        notificationStore.setNotification();
       }
     };
     getUser(userId || '').then((userData: User) => {
