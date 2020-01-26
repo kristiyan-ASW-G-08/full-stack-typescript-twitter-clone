@@ -10,7 +10,7 @@ export const EmailConfirmation: FC = () => {
   const { notificationStore } = useStores();
   const { token } = useParams();
   const history = useHistory();
-  const confirmationHandler = async () => {
+  const confirmEmail = async () => {
     try {
       await axios.patch(
         `${process.env.REACT_APP_API_URL}/users/user/${token}/confirm`,
@@ -31,7 +31,7 @@ export const EmailConfirmation: FC = () => {
         <Title>Email Confirmation</Title>
         <Paragraph>Confirm your email to use TwittClone</Paragraph>
         <div>
-          <Button buttonType="primary" onClick={confirmationHandler}>
+          <Button buttonType="primary" onClick={confirmEmail}>
             Confirm Email
           </Button>
         </div>

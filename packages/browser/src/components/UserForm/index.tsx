@@ -8,7 +8,6 @@ import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
-import Notification from 'types/Notification';
 import formErrorHandler from 'utilities/formErrorHandler';
 import populateFormData from 'utilities/populateFormData';
 import useStores from 'hooks/useStores';
@@ -31,11 +30,10 @@ export const UserForm: FC = () => {
       );
       const { user } = request.data.data;
       authStore.updateUser(user);
-      const notification: Notification = {
+      notificationStore.setNotification({
         type: 'message',
         content: 'Changes saved.',
-      };
-      notificationStore.setNotification(notification);
+      });
       history.goBack();
     } catch (error) {
       formErrorHandler(error, setErrors, notification =>

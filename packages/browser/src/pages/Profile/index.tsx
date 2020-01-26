@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import RootStoreContext from 'stores/RootStore';
-import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import User from 'types/User';
 import Loader from 'components/Loader';
@@ -96,9 +95,6 @@ export const Profile: FC = () => {
                 }
                 setUrl={setUrl}
                 url={url}
-                setNotification={(notification: Notification) =>
-                  notificationStore.setNotification(notification)
-                }
                 token={token}
               />
             </TweetsWrapper>

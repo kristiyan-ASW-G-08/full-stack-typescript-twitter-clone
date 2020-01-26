@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import RootStoreContext from 'stores/RootStore';
 import TweetsContainer from 'components/TweetsContainer/index';
-import Notification from 'types/Notification';
 import TweetType from 'types/Tweet';
 import Tweet from 'components/Tweet';
 import { TweetPageWrapper, P } from './styled';
@@ -43,15 +42,12 @@ export const TweetPage: FC = () => {
     <>
       {tweet && url ? (
         <TweetPageWrapper>
-          <Tweet tweet={tweet} deleteTweetHandler={() => history.goBack()} />
+          <Tweet tweet={tweet} deleteTweetHandler={history.goBack} />
           <P>Replies</P>
           <TweetsContainer
             feeds={[]}
             setUrl={setUrl}
             url={url}
-            setNotification={(notification: Notification) =>
-              notificationStore.setNotification(notification)
-            }
             hasBorderRadius={false}
             token={token}
           />

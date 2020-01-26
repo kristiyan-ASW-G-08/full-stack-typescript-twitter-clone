@@ -10,7 +10,6 @@ import React, {
   SetStateAction,
 } from 'react';
 import TweetType from 'types/Tweet';
-import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
 import FeedBar from 'components/FeedBar';
@@ -25,7 +24,6 @@ const Retweet = lazy(() => import('components/Retweet'));
 
 interface TweetsContainerProps {
   url: string;
-  setNotification: (notification: Notification) => void;
   setUrl: Dispatch<SetStateAction<string>>;
   feeds: Feed[];
   token: string;

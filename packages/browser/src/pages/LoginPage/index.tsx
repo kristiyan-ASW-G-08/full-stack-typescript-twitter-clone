@@ -8,7 +8,6 @@ import { FormWrapper, FieldsWrapper } from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore';
-import Notification from 'types/Notification';
 import formErrorHandler from 'utilities/formErrorHandler';
 import Input from 'components/Input';
 
@@ -29,11 +28,10 @@ export const LoginPage: FC = () => {
       const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
       localStorage.setItem('expiryDate', expiryDate.toISOString());
       authStore.setAuthState(data);
-      const notification: Notification = {
+      notificationStore.setNotification({
         type: 'message',
         content: 'You have logged in successfully.',
-      };
-      notificationStore.setNotification(notification);
+      });
       history.replace('/');
     } catch (error) {
       formErrorHandler(error, setErrors, notification =>
