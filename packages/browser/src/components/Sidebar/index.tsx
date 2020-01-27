@@ -33,13 +33,12 @@ interface SidebarProps {
 
 export const Sidebar: FC<SidebarProps> = ({
   isActive,
-  authState,
+  authState: { user },
   theme,
   resetAuthState,
   toggleTheme,
   toggleSidebar,
 }) => {
-  const { user } = authState;
   return (
     <>
       <SidebarWrapper isActive={isActive}>

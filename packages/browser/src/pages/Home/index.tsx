@@ -3,12 +3,11 @@ import { observer } from 'mobx-react-lite';
 import RootStoreContext from 'stores/RootStore';
 import PageContainer from 'styled/PageContainer';
 import TweetsContainer from 'components/TweetsContainer';
-import Notification from 'types/Notification';
 import Feed from 'types/Feed';
 import HomeWrapper from './styled';
 
 export const Home: FC = observer(() => {
-  const { authStore, notificationStore } = useContext(RootStoreContext);
+  const { authStore } = useContext(RootStoreContext);
   const { token, user } = authStore.authState;
   const { REACT_APP_API_URL } = process.env;
   const [url, setUrl] = useState<string>(`${REACT_APP_API_URL}/tweets`);
@@ -30,9 +29,6 @@ export const Home: FC = observer(() => {
           feeds={feeds}
           setUrl={setUrl}
           url={url}
-          setNotification={(notification: Notification) =>
-            notificationStore.setNotification(notification)
-          }
           token={token}
         />
       </HomeWrapper>
