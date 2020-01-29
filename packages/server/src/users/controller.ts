@@ -16,7 +16,7 @@ import sendEmail from '@utilities/sendEmail';
 import deleteFile from '@src/utilities/deleteFile';
 import findDocs from '@utilities/findDocs';
 import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
-import getNavigationPages from '@src/utilities/getNavigationPages';
+import getPaginationURLs from '@utilities/getPaginationURLs';
 import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
 
@@ -356,7 +356,7 @@ export const getUserBookmarks = async (
       .execPopulate();
     const { bookmarks } = populatedUser;
     const count = bookmarks.length - page * limit;
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/user/bookmarks`,
       count,
@@ -402,7 +402,7 @@ export const getUserLikes = async (
       .execPopulate();
     const { likes } = populatedUser;
     const count = likes.length - page * limit;
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/${userId}/likes`,
       count,
@@ -491,7 +491,7 @@ export const getUserFeed = async (
       query: { user: { $in: following } },
     });
 
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/user/tweets`,
       count,
@@ -556,7 +556,7 @@ export const getUserFollowing = async (
       .execPopulate();
     const { following } = populatedUser;
     const count = following.length - page * limit;
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/${userId}/following?`,
       count,
@@ -597,7 +597,7 @@ export const getUserFollowers = async (
         following: { $in: [userId] },
       },
     });
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/${userId}/followers?`,
       count,

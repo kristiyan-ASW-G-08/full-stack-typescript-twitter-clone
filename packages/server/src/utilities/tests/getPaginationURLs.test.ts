@@ -1,4 +1,4 @@
-import getNavigationPages from '@utilities/getNavigationPages';
+import getPaginationURLs from '@src/utilities/getPaginationURLs';
 import renderUrl from '@utilities/renderUrl';
 
 jest.mock('@utilities/renderUrl');
@@ -8,7 +8,7 @@ interface Queries {
 }
 const renderUrlMock = renderUrl as jest.MockedFunction<typeof renderUrl>;
 
-describe('getNavigationPages', () => {
+describe('getPaginationURLs', () => {
   const sortArr: {
     count: number;
     page: number;
@@ -44,7 +44,7 @@ describe('getNavigationPages', () => {
       // @ts-ignore
       renderUrlMock.mockReturnValueOnce(nextPage).mockReturnValueOnce(prevPage);
       expect(
-        getNavigationPages({ count, page, queries, urlExtension }),
+        getPaginationURLs({ count, page, queries, urlExtension }),
       ).toStrictEqual({ nextPage, prevPage });
     },
   );

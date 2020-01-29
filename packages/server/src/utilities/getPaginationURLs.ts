@@ -9,7 +9,7 @@ interface Options {
   count: number;
   queries: Queries;
 }
-const getNavigationPages = ({
+const getNavigationURLs = ({
   page,
   urlExtension,
   count,
@@ -28,4 +28,4 @@ const getNavigationPages = ({
   };
 };
 
-export default getNavigationPages;
+export default getNavigationURLs;

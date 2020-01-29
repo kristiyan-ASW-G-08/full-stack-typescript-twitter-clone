@@ -10,7 +10,7 @@ import removeId from '@utilities/removeId';
 import { getUserById } from 'src/users/services';
 import findDocs from '@utilities/findDocs';
 import TweetType from '@customTypes/Tweet';
-import getNavigationPages from '@src/utilities/getNavigationPages';
+import getPaginationURLs from '@utilities/getPaginationURLs';
 
 export const postTweet = async (
   { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,
@@ -148,7 +148,7 @@ export const getAllTweets = async (
       pagination,
       query: {},
     });
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: 'tweets',
       count,
@@ -184,7 +184,7 @@ export const getUserTweets = async (
       query: { user: userId },
     });
 
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/${userId}/tweets`,
       count,
@@ -219,7 +219,7 @@ export const getReplies = async (
       pagination,
       query: { reply: tweetId },
     });
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `tweets/${tweetId}/replies`,
       count,
@@ -254,7 +254,7 @@ export const getUserReplies = async (
       pagination,
       query: { user: userId, type: 'reply' },
     });
-    const { prevPage, nextPage } = getNavigationPages({
+    const { prevPage, nextPage } = getPaginationURLs({
       page,
       urlExtension: `users/${userId}/replies`,
       count,
