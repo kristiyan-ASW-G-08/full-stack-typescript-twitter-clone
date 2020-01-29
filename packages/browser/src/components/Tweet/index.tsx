@@ -22,10 +22,8 @@ interface TweetProps {
   tweet: TweetType;
   deleteTweetHandler: (tweetId: string) => void;
 }
-export const Tweet: FC<TweetProps> = ({
-  tweet: { user, text, date, image, link, reply, _id },
-  deleteTweetHandler,
-}) => {
+export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
+  const { user, date, _id, reply, text, link, image } = tweet;
   const location = useLocation();
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();

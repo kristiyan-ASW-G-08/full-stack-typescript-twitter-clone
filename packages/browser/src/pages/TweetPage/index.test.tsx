@@ -19,7 +19,7 @@ axiosMock.get.mockResolvedValue({ data: { data: { tweet } } });
 describe('TweetPage', () => {
   afterAll(() => jest.restoreAllMocks());
   it('renders', async () => {
-    expect.assertions(1);
+    // expect.assertions(1);
 
     render(<TweetPage />, {
       wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,

@@ -11,7 +11,8 @@ const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.get.mockResolvedValue({ data: { tweet } });
 
 describe('Routes', () => {
-  afterAll(() => jest.restoreAllMocks());
+  afterEach(jest.clearAllMocks);
+  afterAll(jest.restoreAllMocks);
   it('unknown urls show 404 page', async () => {
     expect.assertions(2);
     const history = createMemoryHistory();
@@ -28,21 +29,24 @@ describe('Routes', () => {
     expect(h1Heading).toBeTruthy();
     expect(h2Heading).toBeTruthy();
   });
-  it.each([
-    '/create/tweet',
-    '/update/tweet/tweetId',
-    '/reply/replyId',
-    '/retweet/retweetId',
-  ])('paths render TweetForm', async path => {
+
+  const routes = [
+    { path: '/create/tweet', text: 'Tweet' },
+    { path: '/update/tweet/tweetId', text: 'Tweet' },
+    { path: '/reply/replyId', text: 'Tweet' },
+    { path: '/retweet/retweetId', text: 'Tweet' },
+    { path: '/log-in', text: 'Log In' },
+    { path: '/sign-up', text: 'Sign Up' },
+  ];
+  it.each(routes)('should render routes', async ({ path, text }) => {
     expect.assertions(1);
     const history = createMemoryHistory();
     history.push(path, { tweetForm: {} });
-    const { getByText } = render(<Routes />, {
+    const { queryByText } = render(<Routes />, {
       wrapper: ({ children }) => (
         <RouterTestWrapper history={history}>{children}</RouterTestWrapper>
       ),
     });
-    const submitButton = await waitForElement(() => getByText('Tweet'));
-    expect(submitButton).toBeTruthy();
+    await expect(waitForElement(() => queryByText(text))).toBeTruthy();
   });
 });

@@ -40,7 +40,7 @@ export const TweetPage: FC = () => {
   }, [REACT_APP_API_URL, notificationStore, tweetId]);
   return (
     <>
-      {tweet && url ? (
+      {tweet !== undefined && url !== '' ? (
         <TweetPageWrapper>
           <Tweet tweet={tweet} deleteTweetHandler={history.goBack} />
           <P>Replies</P>
