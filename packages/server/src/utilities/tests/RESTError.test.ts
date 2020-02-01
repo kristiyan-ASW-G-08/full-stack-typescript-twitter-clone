@@ -1,6 +1,6 @@
 import { RESTError, errors } from '@utilities/RESTError';
 
-describe('CustomError', (): void => {
+describe('CustomError', () => {
   const errorData = 'ErrorData';
   it.each(Object.values(errors))(
     'RESTError should have the correct status, message, and error data',

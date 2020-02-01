@@ -1,6 +1,6 @@
 import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
 
-describe('hasConfirmedEmail', (): void => {
+describe('hasConfirmedEmail', () => {
   it('should throw an error when the passes value is truthy', async (): Promise<
     void
   > => {

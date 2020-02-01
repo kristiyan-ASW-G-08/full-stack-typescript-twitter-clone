@@ -8,9 +8,9 @@ jest.mock('nodemailer');
   sendMail: sendMailMock,
 });
 
-describe('sendEmail', (): void => {
-  const appEmail = process.env.EMAIL;
-  const clientUri = process.env.CLIENT_URI;
+describe('sendEmail', () => {
+  const appEmail = 'someEmail@mail.com';
+  const clientUri = 'https://client.com';
   const token = 'mockToken';
   const url = `${clientUri}/confirmation/${token}`;
   const email = 'testMail@mail.com';
@@ -20,7 +20,7 @@ describe('sendEmail', (): void => {
     subject: 'TwittClone Email Confirmation',
     html: `Confirm your email: <a href="${url}">${url}</a>`,
   };
-  it('should call createTransport and sendMail', (): void => {
+  it('should call createTransport and sendMail', () => {
     expect.assertions(2);
     sendEmail(mailOptions);
     expect(nodemailer.createTransport).toHaveBeenCalledTimes(1);

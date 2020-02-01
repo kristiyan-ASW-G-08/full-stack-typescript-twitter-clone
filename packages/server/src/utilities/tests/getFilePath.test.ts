@@ -1,6 +1,6 @@
 import getFilePath from '@utilities/getFilePath';
 
-describe('getFilePath', (): void => {
+describe('getFilePath', () => {
   const sortArr: { url: string; path: string }[] = [
     {
       url: 'http://localhost:8090/images\\2019-11-08T07-13-10.728Z-bear.jpg',
@@ -20,11 +20,8 @@ describe('getFilePath', (): void => {
     },
   ];
 
-  it.each(sortArr)(
-    'should return the proper file path',
-    ({ url, path }): void => {
-      expect.assertions(1);
-      expect(getFilePath(url)).toMatch(path);
-    },
-  );
+  it.each(sortArr)('should return the proper file path', ({ url, path }) => {
+    expect.assertions(1);
+    expect(getFilePath(url)).toMatch(path);
+  });
 });

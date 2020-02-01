@@ -1,5 +1,6 @@
 import Notification from 'types/Notification';
 import User from 'types/User';
+import defaultWarning from 'utilities/defaultWarning';
 import getUpdatedUser from './getUpdatedUser';
 
 const updateUserHandler = async (
@@ -16,7 +17,7 @@ const updateUserHandler = async (
 
     updateUser(user);
   } catch (error) {
-    setNotification();
+    setNotification(defaultWarning);
   }
 };
 

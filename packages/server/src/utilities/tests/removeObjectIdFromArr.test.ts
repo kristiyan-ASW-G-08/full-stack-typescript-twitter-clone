@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import removeObjectIdFromArr from '@utilities/removeId';
 
-describe('removeFromArr', (): void => {
+describe('removeFromArr', () => {
   const id = mongoose.Types.ObjectId();
   const stringId = id.toString();
   const idArr = [
@@ -9,7 +9,7 @@ describe('removeFromArr', (): void => {
     mongoose.Types.ObjectId(),
     mongoose.Types.ObjectId(),
   ];
-  it(`should return true`, (): void => {
+  it(`should return true`, () => {
     const newIdArr = [...idArr, id];
     const removedIdArr = removeObjectIdFromArr(newIdArr, stringId);
     expect(removedIdArr).toHaveLength(3);

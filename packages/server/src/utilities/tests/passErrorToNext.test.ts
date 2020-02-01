@@ -6,10 +6,10 @@ jest.mock('@utilities/RESTError');
 
 const RESTErrorMock = RESTError as jest.MockedClass<typeof RESTError>;
 
-describe('passErrorToNext', (): void => {
+describe('passErrorToNext', () => {
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
-  it(`should call next with the passed error if it has a status code`, (): void => {
+  it(`should call next with the passed error if it has a status code`, () => {
     expect.assertions(2);
     RESTErrorMock.mockImplementation(
       (status: number, message: string, data?: ValidationError[] | string) => ({
@@ -29,7 +29,7 @@ describe('passErrorToNext', (): void => {
     expect(nextMock).toHaveBeenCalledTimes(1);
     expect(nextMock).toHaveBeenCalledWith(error);
   });
-  it(`should call next with new RESTError if the passed error doesn't have a status code`, (): void => {
+  it(`should call next with new RESTError if the passed error doesn't have a status code`, () => {
     expect.assertions(2);
     RESTErrorMock.mockImplementation(
       (status: number, message: string, data?: ValidationError[] | string) => ({

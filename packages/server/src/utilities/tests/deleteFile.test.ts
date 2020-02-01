@@ -1,12 +1,10 @@
 import mockFs from 'mock-fs';
 import deleteFile from '@utilities/deleteFile';
 
-describe('deleteFile', (): void => {
-  afterEach((): void => {
-    mockFs.restore();
-  });
+describe('deleteFile', () => {
+  afterEach(mockFs.restore);
 
-  it('should delete a file', async (): Promise<void> => {
+  it('should delete a file', async () => {
     expect.assertions(1);
     mockFs({
       'assets/images': {

@@ -11,7 +11,7 @@ const formErrorHandler = (
   if (error?.response?.data?.data && Array.isArray(error.response.data.data)) {
     setErrors(transformValidationErrors(error.response.data.data));
   } else {
-    setNotification();
+    setNotification(defaultWarning);
   }
 };
 

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import includesId from '../includesId';
 
-describe('includesId', (): void => {
+describe('includesId', () => {
   const id = mongoose.Types.ObjectId();
   const stringId = id.toString();
   const idArr = [
@@ -9,11 +9,11 @@ describe('includesId', (): void => {
     mongoose.Types.ObjectId(),
     mongoose.Types.ObjectId(),
   ];
-  it(`should return true if the array includes the objectId`, (): void => {
+  it(`should return true if the array includes the objectId`, () => {
     const newIdArr = [...idArr, id];
     expect(includesId(newIdArr, stringId)).toBeTruthy();
   });
-  it(`should return false if the array doesn't include the objectId`, (): void => {
+  it(`should return false if the array doesn't include the objectId`, () => {
     const newIdArr = [...idArr];
     expect(includesId(newIdArr, stringId)).toBeFalsy();
   });

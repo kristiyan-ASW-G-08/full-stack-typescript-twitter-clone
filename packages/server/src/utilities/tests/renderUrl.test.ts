@@ -4,9 +4,8 @@ interface Queries {
   [key: string]: string | number;
 }
 
-describe('renderUrl', (): void => {
+describe('renderUrl', () => {
   const sortArr: {
-
     urlExtension: string;
     queries: Queries | undefined;
     urlResult: string;
@@ -25,7 +24,7 @@ describe('renderUrl', (): void => {
 
   it.each(sortArr)(
     'should return the correct url',
-    ({ urlExtension, queries, urlResult }): void => {
+    ({ urlExtension, queries, urlResult }) => {
       expect.assertions(1);
       expect(renderUrl(urlExtension, queries)).toMatch(urlResult);
     },
