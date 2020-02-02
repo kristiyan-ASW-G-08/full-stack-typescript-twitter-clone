@@ -9,28 +9,24 @@ import UserItem from './UserItem/index';
 export const SearchBar: FC = () => {
   const { notificationStore } = useContext(RootStoreContext);
   const [users, setUsers] = useState<User[]>([]);
-  const getUsers = async (query: string): Promise<void> => {
+  const searchHandler = async (e: SyntheticEvent) => {
     try {
+      const target = e.target as HTMLInputElement;
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/${query}`,
+        `${process.env.REACT_APP_API_URL}/users/${target.value}`,
       );
-      const { users } = response.data.data;
-      setUsers(users);
+      setUsers(response.data?.data?.users);
     } catch (error) {
       notificationStore.setNotification();
     }
   };
-  const searchHandler = async (e: SyntheticEvent) => {
-    const target = e.target as HTMLInputElement;
-    await getUsers(target.value);
-  };
   return (
-    <SearchBarWrapper role="search" onSubmit={e => e.preventDefault()}>
+    <SearchBarWrapper role="search">
       <input
         name="file"
         type="search"
         placeholder="Search TwittClone"
-        onChange={(e: SyntheticEvent) => searchHandler(e)}
+        onChange={searchHandler}
       />
       <Datalist data-testid="datalist">
         {users.map(user => (

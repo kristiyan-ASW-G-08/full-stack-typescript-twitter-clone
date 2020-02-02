@@ -80,12 +80,11 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                   return;
                 }
                 try {
-                  const config = {
-                    headers: { Authorization: `bearer ${token}` },
-                  };
                   await axios.delete(
                     `${process.env.REACT_APP_API_URL}/tweets/${_id}`,
-                    config,
+                    {
+                      headers: { Authorization: `bearer ${token}` },
+                    },
                   );
                   deleteTweetHandler(tweet._id);
                 } catch (err) {
