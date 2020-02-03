@@ -1,4 +1,5 @@
 import user from 'testUtilities/user';
+import defaultWarning from 'utilities/defaultWarning';
 import updateUserHandler from '../updateUserHandler';
 import getUpdatedUser from '../getUpdatedUser';
 
@@ -28,6 +29,6 @@ describe('updateUserHandler', () => {
     await updateUserHandler(token, url, setNotification, updateUser);
 
     expect(setNotification).toHaveBeenCalledTimes(1);
-    expect(setNotification).toHaveBeenCalledWith();
+    expect(setNotification).toHaveBeenCalledWith(defaultWarning);
   });
 });

@@ -1,6 +1,7 @@
 import formErrorHandler from 'utilities/formErrorHandler';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 import transformValidationErrors from 'utilities/transformValidationErrors';
+import defaultWarning from 'utilities/defaultWarning';
 
 jest.mock('utilities/transformValidationErrors');
 
@@ -54,6 +55,6 @@ describe('formErrorHandler', () => {
     expect(setErrors).not.toHaveBeenCalled();
 
     expect(setNotification).toHaveBeenCalledTimes(1);
-    expect(setNotification).toHaveBeenCalledWith();
+    expect(setNotification).toHaveBeenCalledWith(defaultWarning);
   });
 });

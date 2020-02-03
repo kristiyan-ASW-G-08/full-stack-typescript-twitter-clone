@@ -19145,7 +19145,6 @@ Array [
         </button>
         <form
           className="sc-fzXfLR cjoMqA"
-          onSubmit={[Function]}
           role="search"
         >
           <input
@@ -19888,7 +19887,6 @@ Array [
         </button>
         <form
           className="sc-fzXfLR cjoMqA"
-          onSubmit={[Function]}
           role="search"
         >
           <input
@@ -20631,7 +20629,6 @@ Array [
         </button>
         <form
           className="sc-fzXfLR dZoGzC"
-          onSubmit={[Function]}
           role="search"
         >
           <input
@@ -21374,7 +21371,6 @@ Array [
         </button>
         <form
           className="sc-fzXfLR dZoGzC"
-          onSubmit={[Function]}
           role="search"
         >
           <input
@@ -23467,7 +23463,6 @@ Array [
   >
     <form
       className="sc-fzXfLR cjoMqA"
-      onSubmit={[Function]}
       role="search"
     >
       <input
@@ -24127,7 +24122,6 @@ Array [
   >
     <form
       className="sc-fzXfLR dZoGzC"
-      onSubmit={[Function]}
       role="search"
     >
       <input
