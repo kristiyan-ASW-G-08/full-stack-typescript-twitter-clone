@@ -73,14 +73,13 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   }, [token, query]);
 
   const getTweetsHandler = (e: SyntheticEvent) => {
-    const target = e.target as HTMLSelectElement;
-    const { value } = target;
+    const { value } = e.target as HTMLSelectElement;
     setQuery(`${url}?sort=${value}`);
   };
 
-  const deleteTweetHandler = (tweetId: string): void => {
+  const deleteTweetHandler = (tweetId: string): void =>
     setTweets(tweets.filter(({ _id }) => _id !== tweetId));
-  };
+
   return (
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
@@ -115,7 +114,6 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
                 <Retweet key={tweet._id} tweet={tweet}>
                   <Tweet
                     deleteTweetHandler={deleteTweetHandler}
-                    key={tweet._id}
                     tweet={tweet.retweet}
                   />
                 </Retweet>

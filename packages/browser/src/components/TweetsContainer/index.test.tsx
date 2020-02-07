@@ -19,7 +19,6 @@ const getTweetsMock = getTweets as jest.Mock<any>;
 getTweetsMock.mockResolvedValue({ newTweets: [tweet], next: null, prev: null });
 
 describe('TweetsContainer', () => {
-  const setNotification = jest.fn();
   const setUrl = jest.fn();
   const url = 'url';
   const token = 'token';
@@ -27,13 +26,7 @@ describe('TweetsContainer', () => {
   it('render TweetsContainer', async () => {
     expect.assertions(13);
     const { getByRole, getByTestId } = render(
-      <TweetsContainer
-        token={token}
-        feeds={[]}
-        url={url}
-        setNotification={setNotification}
-        setUrl={setUrl}
-      />,
+      <TweetsContainer token={token} feeds={[]} url={url} setUrl={setUrl} />,
 
       {
         wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
