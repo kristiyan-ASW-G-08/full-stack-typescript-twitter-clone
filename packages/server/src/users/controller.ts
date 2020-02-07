@@ -108,7 +108,7 @@ export const logIn = async (
         },
       ]);
     }
-    hasConfirmedEmail(user.confirmed);
+    hasConfirmedEmail(user.isConfirmed);
     const token = jwt.sign(
       {
         userId: user._id,
@@ -181,7 +181,7 @@ export const requestPasswordResetEmail = async (
 ): Promise<void> => {
   try {
     const user = await getUserByEmail(email);
-    hasConfirmedEmail(user.confirmed);
+    hasConfirmedEmail(user.isConfirmed);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const token = jwt.sign(
       {

@@ -11,8 +11,6 @@ const deleteFile = async (fileUrl: string | undefined): Promise<void> => {
         throw new RESTError(status, message);
       }
     });
-
-    console.log(fileUrl, getFilePath(fileUrl));
     fs.unlink(getFilePath(fileUrl), (err): void => {});
   }
 };

@@ -231,7 +231,7 @@ describe('userRoutes', () => {
           return;
         }
         expect(response.status).toBe(204);
-        expect(confirmedUser.confirmed).toBeTruthy();
+        expect(confirmedUser.isConfirmed).toBeTruthy();
       });
       it("should throw an error with a status of 404: NotFound when the user doesn't exist", async (): Promise<
         void

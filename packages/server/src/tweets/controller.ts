@@ -27,7 +27,6 @@ export const postTweet = async (
       type,
       link: linkUrl,
     });
-    console.log(file);
     if (file) {
       const { path, filename } = file;
       tweet.image = filename;
@@ -65,7 +64,6 @@ export const postTweet = async (
     const tweetId = tweet._id;
     res.status(201).json({ data: { tweetId } });
   } catch (err) {
-    console.log({ ...err });
     passErrorToNext(err, next);
   }
 };
