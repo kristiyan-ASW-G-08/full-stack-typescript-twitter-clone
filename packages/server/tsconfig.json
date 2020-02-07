@@ -4,8 +4,6 @@
     "paths": {
       "@src/*": ["src/*"],
       "@tweets/*": ["src/tweets/*"],
-      "@models/*": ["src/models/*"],
-      "@controllers/*": ["src/controllers/*"],
       "@customTypes/*": ["src/types/*"],
       "@utilities/*": ["src/utilities/*"],
       "@customMiddleware/*": ["src/middleware/*"],

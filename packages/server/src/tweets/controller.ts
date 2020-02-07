@@ -11,6 +11,8 @@ import { getUserById } from 'src/users/services';
 import findDocs from '@utilities/findDocs';
 import TweetType from '@customTypes/Tweet';
 import getPaginationURLs from '@utilities/getPaginationURLs';
+import uploadToCloudinary from '@src/utilities/uploadToCloudinary';
+import deleteCloudinaryFile from '@src/utilities/deleteFromCloudinary';
 
 export const postTweet = async (
   { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,
@@ -25,8 +27,12 @@ export const postTweet = async (
       type,
       link: linkUrl,
     });
+    console.log(file);
     if (file) {
-      tweet.image = `${process.env.SERVER_URL}/${file.path}`;
+      const { path, filename } = file;
+      tweet.image = filename;
+      uploadToCloudinary(path, filename);
+      deleteFile(path);
     }
 
     if (retweetId) {
@@ -59,6 +65,7 @@ export const postTweet = async (
     const tweetId = tweet._id;
     res.status(201).json({ data: { tweetId } });
   } catch (err) {
+    console.log({ ...err });
     passErrorToNext(err, next);
   }
 };
@@ -75,8 +82,11 @@ export const patchTweet = async (
     tweet.text = text;
     tweet.link = linkUrl;
     if (tweet.image && file) {
-      await deleteFile(tweet.image);
-      tweet.image = `${process.env.SERVER_URL}/${file.path}`;
+      const { path, filename } = file;
+      await deleteCloudinaryFile(tweet.image);
+      tweet.image = filename;
+      uploadToCloudinary(path, filename);
+      deleteFile(path);
     }
     await tweet.save();
     res.sendStatus(204);
@@ -95,7 +105,7 @@ export const deleteTweet = async (
     isAuthorized(tweet.user.toString(), userId);
     const user = await getUserById(tweet.user, false);
     if (tweet.image) {
-      await deleteFile(tweet.image);
+      await deleteCloudinaryFile(tweet.image);
     }
     if (tweet.type === 'reply') {
       const repliedToTweet = await getTweetById(tweet.reply);

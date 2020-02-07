@@ -8,7 +8,20 @@ import User from 'src/users/User';
 import UserType from '@customTypes/User';
 import connectToDB from '@utilities/connectToDB';
 import Tweet from 'src/tweets/Tweet';
+import uploadToCloudinary from '@utilities/uploadToCloudinary';
+import deleteFromCloudinary from '@utilities/deleteFromCloudinary';
 
+jest.mock('@utilities/uploadToCloudinary');
+
+jest.mock('@utilities/deleteFromCloudinary');
+
+const uploadToCloudinaryMock = uploadToCloudinary as jest.MockedFunction<
+  typeof uploadToCloudinary
+>;
+
+const deleteFromCloudinaryMock = deleteFromCloudinary as jest.MockedFunction<
+  typeof deleteFromCloudinary
+>;
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
@@ -28,6 +41,7 @@ describe('tweetRoutes', () => {
   let testUser: UserType;
 
   beforeEach(async () => {
+    await User.deleteMany({}).exec();
     testUser = new User({
       username,
       handle,
@@ -151,7 +165,7 @@ describe('tweetRoutes', () => {
       expect(response.status).toBe(201);
     });
     it('should create a new image tweet', async () => {
-      expect.assertions(1);
+      // expect.assertions(1);
       const userId = testUser._id;
       mockFs({
         './images': {
