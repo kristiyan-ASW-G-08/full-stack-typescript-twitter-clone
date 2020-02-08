@@ -19,6 +19,8 @@ import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
 import getPaginationURLs from '@utilities/getPaginationURLs';
 import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
+import uploadToCloudinary from '@src/utilities/uploadToCloudinary';
+import deleteCloudinaryFile from '@src/utilities/deleteFromCloudinary';
 
 export const signUp = async (
   { body: { username, handle, email, password } }: Request,
@@ -151,6 +153,7 @@ export const logIn = async (
       },
     });
   } catch (err) {
+    console.log(err);
     passErrorToNext(err, next);
   }
 };
@@ -161,12 +164,10 @@ export const verifyEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { SECRET } = process.env;
-    const decodedToken = jwt.verify(token, SECRET);
     // @ts-ignore
-    const { userId } = decodedToken;
+    const { userId } = jwt.verify(token, process.env.SECRET);
     const user = await getUserById(userId);
-    user.confirmed = true;
+    user.isConfirmed = true;
     await user.save();
     res.sendStatus(204);
   } catch (err) {
@@ -180,12 +181,12 @@ export const requestPasswordResetEmail = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const user = await getUserByEmail(email);
-    hasConfirmedEmail(user.isConfirmed);
+    const { _id, isConfirmed } = await getUserByEmail(email);
+    hasConfirmedEmail(isConfirmed);
     const { EMAIL, CLIENT_URL, SECRET } = process.env;
     const token = jwt.sign(
       {
-        userId: user._id,
+        userId: _id,
       },
       SECRET,
       { expiresIn: '1h' },
@@ -432,14 +433,17 @@ export const patchProfile = async (
 ): Promise<void> => {
   try {
     const user = await getUserById(userId, false);
-
     if (!Array.isArray(files) && files && files.avatar) {
-      deleteFile(user.avatar);
-      user.avatar = `${process.env.SERVER_URL}/${files.avatar[0].path}`;
+      const { filename, path } = files.avatar[0];
+      deleteCloudinaryFile(user.avatar);
+      user.avatar = filename;
+      await uploadToCloudinary(path, filename);
     }
     if (!Array.isArray(files) && files && files.cover) {
-      deleteFile(user.cover);
-      user.cover = `${process.env.SERVER_URL}/${files.cover[0].path}`;
+      const { filename, path } = files.cover[0];
+      deleteCloudinaryFile(user.cover);
+      user.cover = filename;
+      await uploadToCloudinary(path, filename);
     }
     user.username = username;
     user.handle = handle;

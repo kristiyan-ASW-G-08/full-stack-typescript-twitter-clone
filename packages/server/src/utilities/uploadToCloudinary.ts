@@ -13,8 +13,6 @@ const uploadToCloudinary = async (
   filename: string,
 ): Promise<void> => {
   // @ts-ignore
-  // console.log(cloudinary.uploader);
-  // @ts-ignore
   await cloudinary.uploader.upload(path, { public_id: filename });
 };
 

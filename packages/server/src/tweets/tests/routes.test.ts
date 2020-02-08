@@ -15,13 +15,6 @@ jest.mock('@utilities/uploadToCloudinary');
 
 jest.mock('@utilities/deleteFromCloudinary');
 
-const uploadToCloudinaryMock = uploadToCloudinary as jest.MockedFunction<
-  typeof uploadToCloudinary
->;
-
-const deleteFromCloudinaryMock = deleteFromCloudinary as jest.MockedFunction<
-  typeof deleteFromCloudinary
->;
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);

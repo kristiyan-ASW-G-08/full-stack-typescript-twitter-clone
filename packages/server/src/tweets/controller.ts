@@ -61,8 +61,7 @@ export const postTweet = async (
 
     await tweet.save();
     await user.save();
-    const tweetId = tweet._id;
-    res.status(201).json({ data: { tweetId } });
+    res.status(201).json({ data: { tweetId: tweet._id } });
   } catch (err) {
     passErrorToNext(err, next);
   }

@@ -9,6 +9,12 @@ import Tweet from 'src/tweets/Tweet';
 import connectToDB from '@utilities/connectToDB';
 import sendEmail from '@utilities/sendEmail';
 import UserType from '@customTypes/User';
+import uploadToCloudinary from '@utilities/uploadToCloudinary';
+import deleteFromCloudinary from '@utilities/deleteFromCloudinary';
+
+jest.mock('@utilities/uploadToCloudinary');
+
+jest.mock('@utilities/deleteFromCloudinary');
 
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
@@ -101,18 +107,18 @@ describe('userRoutes', () => {
       expect(sendEmail).not.toHaveBeenCalled();
     });
   });
-  describe('post /users/user/tokens', () => {
+  describe.only('post /users/user/tokens', () => {
     it('should get a authentication token and user data object', async (): Promise<
       void
     > => {
-      expect.assertions(5);
+      // expect.assertions(5);
       const hashedPassword = await bcrypt.hash(password, 12);
       await User.insertMany({
         username,
         handle,
         email,
         password: hashedPassword,
-        confirmed: true,
+        isConfirmed: true,
       });
       const response = await request(app)
         .post('/users/user/tokens')
@@ -190,7 +196,7 @@ describe('userRoutes', () => {
         handle,
         email,
         password,
-        confirmed: true,
+        isConfirmed: true,
       });
       await testUser.save();
     });

@@ -70,7 +70,7 @@ describe('User', (): void => {
     expect(user.handle).toBe(handle);
     expect(user.email).toBe(email);
     expect(user.password).toBe(password);
-    expect(user.confirmed).toBeFalsy();
+    expect(user.isConfirmed).toBeFalsy();
     expect(user.date).toBeDefined();
     expect(user._id).toBeDefined();
     expect(user.followers).toBe(0);
