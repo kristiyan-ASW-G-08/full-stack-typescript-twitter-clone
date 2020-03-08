@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserItem render UserItem 1`] = `
+<div>
+  <li
+    class="sc-AykKE eSxiqy"
+  >
+    <a
+      href="/users/id"
+    >
+      <div
+        class="sc-AykKC kyvtll"
+      >
+        <img
+          alt="avatar"
+          src="logo-primary.svg"
+        />
+      </div>
+      <span>
+        @
+        userHandle
+      </span>
+    </a>
+  </li>
+</div>
+`;
