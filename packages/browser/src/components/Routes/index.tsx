@@ -7,7 +7,6 @@ import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import Loader from 'components/Loader/index';
 import MobileTweetButton from 'styled/MobileTweetButton';
-import PageContainer from 'styled/PageContainer';
 
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
@@ -21,6 +20,7 @@ const Portal = lazy(() => import('components/Portal'));
 const Notification = lazy(() => import('components/Notification'));
 const TweetForm = lazy(() => import('components/TweetForm'));
 const UserForm = lazy(() => import('components/UserForm'));
+const PageContainer = lazy(() => import('components/PageContainer'));
 
 const Router: FC = observer(
   (): JSX.Element => {
