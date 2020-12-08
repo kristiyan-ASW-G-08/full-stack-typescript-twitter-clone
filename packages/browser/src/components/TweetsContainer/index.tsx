@@ -83,7 +83,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   return (
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
-      {tweets.length > 0 ? (
+      {tweets.length > 0 ?  (
         <Suspense
           fallback={
             <Tweets>
@@ -107,7 +107,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
               </option>
             </Select>
           </SelectWrapper>
-
+          
           <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (
@@ -128,7 +128,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
           </Tweets>
         </Suspense>
       ) : (
-        ''
+        ""
       )}
       <LoaderWrapper>
         {nextPage ? (

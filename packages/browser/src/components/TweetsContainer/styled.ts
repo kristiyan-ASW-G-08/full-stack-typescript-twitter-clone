@@ -9,7 +9,7 @@ export const TweetsWrapper = styled('section')<TweetsWrapperProps>`
   grid:
     'feed-bar feed-bar feed-bar' auto
     '. select . ' auto
-    'tweets tweets tweets' minmax(90vh, auto)
+    'tweets tweets tweets' minmax(70vh, auto)
     'loader loader loader' auto/
     0.1rem 5rem 1fr;
   grid-gap: 1rem;

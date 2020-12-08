@@ -14,7 +14,7 @@ module.exports = {
   rules: {
     'import/no-unresolved': 0,
   },
-  plugins: ['jest'],
+ plugins: ['jest'],
   env: {
     'jest/globals': true,
   },

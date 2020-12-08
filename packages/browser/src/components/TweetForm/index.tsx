@@ -24,6 +24,7 @@ import {
 export const TweetForm: FC = () => {
   const { notificationStore, authStore } = useStores();
   const { token } = authStore.authState;
+  //@ts-ignore
   const { replyId, retweetId } = useParams();
   const history = useHistory();
   const location = useLocation();
@@ -44,6 +45,7 @@ export const TweetForm: FC = () => {
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
+    console.log('handler');
     try {
       const { REACT_APP_API_URL } = process.env;
       const formData: FormData = populateFormData({
@@ -52,9 +54,11 @@ export const TweetForm: FC = () => {
         retweetId,
         replyId,
       });
+      console.log(token);
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
+      console.log(tweet);
       if (tweet) {
         await axios.patch(
           `${REACT_APP_API_URL}/tweets/${tweet._id}`,
@@ -63,8 +67,14 @@ export const TweetForm: FC = () => {
         );
         history.push(`/tweet/${tweet._id}`);
       } else {
-        await axios.post(`${REACT_APP_API_URL}/tweets`, formData, config);
-        history.goBack();
+        const result = await axios.post(
+          `${REACT_APP_API_URL}/tweets`,
+          formData,
+          config,
+        );
+        console.log(result);
+        history.replace(`/tweet/${result.data.data.tweetId}`,{tweet:location});
+        // history.goBack();
       }
     } catch (error) {
       formErrorHandler(error, setErrors, notification =>
@@ -83,11 +93,14 @@ export const TweetForm: FC = () => {
     >
       {({ setFieldValue }) => (
         <Form>
+         
           <TweetFormWrapper>
+          
             <AvatarContainer>
               <Avatar />
             </AvatarContainer>
             <InputContainer>
+            
               <Input
                 component="textarea"
                 name="text"

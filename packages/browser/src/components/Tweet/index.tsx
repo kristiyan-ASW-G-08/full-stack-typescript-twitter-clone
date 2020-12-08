@@ -89,7 +89,10 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
           ''
         )}
       </ContentContainer>
-      <TweetBar deleteTweetHandler={deleteTweetHandler} tweet={tweet} />
+      <TweetBar
+        deleteTweetHandler={tweetId => deleteTweetHandler(tweetId)}
+        tweet={tweet}
+      />
     </TweetWrapper>
   );
 };

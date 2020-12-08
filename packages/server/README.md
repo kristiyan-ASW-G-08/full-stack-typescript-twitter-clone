@@ -1,4 +1,4 @@
-# Full Stack Twitter Clone: server package
+# Full stack podcasting app: server package
 
 ## Getting Started
 

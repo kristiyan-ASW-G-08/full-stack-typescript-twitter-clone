@@ -70,7 +70,8 @@ describe('User', (): void => {
     expect(user.handle).toBe(handle);
     expect(user.email).toBe(email);
     expect(user.password).toBe(password);
-    expect(user.isConfirmed).toBeFalsy();
+    // email confirmation is disabled
+    expect(user.isConfirmed).toBeTruthy();
     expect(user.date).toBeDefined();
     expect(user._id).toBeDefined();
     expect(user.followers).toBe(0);

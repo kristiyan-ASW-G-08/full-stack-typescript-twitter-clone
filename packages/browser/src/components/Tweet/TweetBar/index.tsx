@@ -72,28 +72,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
 
         {user && user._id === tweet.user._id ? (
           <>
-            <TweetBarButton
-              data-testid="delete-button"
-              onClick={async () => {
-                if (!user) {
-                  notificationStore.setNotification(notification);
-                  return;
-                }
-                try {
-                  await axios.delete(
-                    `${process.env.REACT_APP_API_URL}/tweets/${_id}`,
-                    {
-                      headers: { Authorization: `bearer ${token}` },
-                    },
-                  );
-                  deleteTweetHandler(tweet._id);
-                } catch (err) {
-                  notificationStore.setNotification();
-                }
-              }}
-            >
-              <FontAwesomeIcon icon="trash" />
-            </TweetBarButton>
+           
             <TweetBarButton
               data-testid="edit-button"
               onClick={async () => {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NotificationWrapper = styled('div')`
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   width: 100vw;
   ${({ theme }) => theme.mixins.flexCenter}
   pointer-events: none;

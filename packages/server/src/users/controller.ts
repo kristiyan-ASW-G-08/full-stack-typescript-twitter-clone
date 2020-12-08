@@ -34,58 +34,58 @@ export const signUp = async (
       email,
       password: await bcrypt.hash(password, 12),
     }).save();
-    const { EMAIL, CLIENT_URL, SECRET } = process.env;
-    const token = jwt.sign(
-      {
-        userId: _id,
-      },
-      SECRET,
-      { expiresIn: '1h' },
-    );
-    const url = `${CLIENT_URL}/confirmation/${token}`;
-    const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
-    const options = {
-      validationLevel,
-    };
-    const htmlOutput = mjml2html(
-      `
-      <mjml>
-      <mj-head>
-        <mj-attributes>
-          <mj-class name="dark" color="#4f4f4f" />
-          <mj-class name="primary" color="#1dcaff" />
-          <mj-class name="primary-bg" background-color="#1dcaff" />
-          <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
-          <mj-all font-family="Roboto" />
-        </mj-attributes>
-      </mj-head>
-      <mj-body>
-        <mj-hero mode="fixed-height" height="370px" padding="10px 40px 10px 40px">
-          <mj-text align="center" font-size="25px" font-weight="900" mj-class="primary">
-            TwittClone
-          </mj-text>
-          <mj-text align="left" font-size="20px" font-weight="900" mj-class="dark">
-            Confirm your email address
-          </mj-text>
-          <mj-text align="left" mj-class="dark" font-size="15px" line-height="20px">
-            There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
-          </mj-text>
-          <mj-button mj-class="primary-bg" href="${url}" align="center">
-            Verify email address
-          </mj-button>
-        </mj-hero>
-      </mj-body>
-    </mjml>
-  `,
-      options,
-    );
-    const mailOptions: MailOptions = {
-      from: EMAIL,
-      to: email,
-      subject: 'TwittClone Email Confirmation',
-      html: htmlOutput.html,
-    };
-    sendEmail(mailOptions);
+    // const { EMAIL, CLIENT_URL, SECRET } = process.env;
+    // const token = jwt.sign(
+    //   {
+    //     userId: _id,
+    //   },
+    //   SECRET,
+    //   { expiresIn: '1h' },
+    // );
+    // const url = `${CLIENT_URL}/confirmation/${token}`;
+    // const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
+    // const options = {
+    //   validationLevel,
+    // };
+    //   const htmlOutput = mjml2html(
+    //     `
+    //     <mjml>
+    //     <mj-head>
+    //       <mj-attributes>
+    //         <mj-class name="dark" color="#4f4f4f" />
+    //         <mj-class name="primary" color="#1dcaff" />
+    //         <mj-class name="primary-bg" background-color="#1dcaff" />
+    //         <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    //         <mj-all font-family="Roboto" />
+    //       </mj-attributes>
+    //     </mj-head>
+    //     <mj-body>
+    //       <mj-hero mode="fixed-height" height="370px" padding="10px 40px 10px 40px">
+    //         <mj-text align="center" font-size="25px" font-weight="900" mj-class="primary">
+    //           TwittClone
+    //         </mj-text>
+    //         <mj-text align="left" font-size="20px" font-weight="900" mj-class="dark">
+    //           Confirm your email address
+    //         </mj-text>
+    //         <mj-text align="left" mj-class="dark" font-size="15px" line-height="20px">
+    //           There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
+    //         </mj-text>
+    //         <mj-button mj-class="primary-bg" href="${url}" align="center">
+    //           Verify email address
+    //         </mj-button>
+    //       </mj-hero>
+    //     </mj-body>
+    //   </mjml>
+    // `,
+    //     options,
+    //   );
+    //   const mailOptions: MailOptions = {
+    //     from: EMAIL,
+    //     to: email,
+    //     subject: 'TwittClone Email Confirmation',
+    //     html: htmlOutput.html,
+    //   };
+    //   sendEmail(mailOptions);
     res.sendStatus(201);
   } catch (err) {
     passErrorToNext(err, next);
