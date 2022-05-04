@@ -14,7 +14,6 @@ const TweetPage = lazy(() => import('pages/TweetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
 const Profile = lazy(() => import('pages/Profile'));
-const EmailConfirmation = lazy(() => import('pages/EmailConfirmation'));
 const Modal = lazy(() => import('components/Modal'));
 const Portal = lazy(() => import('components/Portal'));
 const Notification = lazy(() => import('components/Notification'));
@@ -28,7 +27,6 @@ const Router: FC = observer(
     const history = useHistory();
     const location = useLocation();
     const { user } = authStore.authState;
-    const tweet = location.state && location.state.tweet;
     const tweetForm = location.state && location.state.tweetForm;
     const userForm = location.state && location.state.userForm;
     return (
@@ -48,21 +46,7 @@ const Router: FC = observer(
             )}
           />
         )}
-        {tweet && (
-          <Route
-            exact
-            path="/tweet/:tweetId"
-            render={(): JSX.Element => (
-              <Suspense fallback={<Loader />}>
-                <Portal portalId="tweet">
-                  <Modal backdropHandler={history.goBack}>
-                    <TweetPage />
-                  </Modal>
-                </Portal>
-              </Suspense>
-            )}
-          />
-        )}
+
         {tweetForm && (
           <Route
             exact
@@ -75,9 +59,7 @@ const Router: FC = observer(
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
                 <Portal portalId="tweet-form">
-                  <Modal backdropHandler={history.goBack}>
-                    <TweetForm />
-                  </Modal>
+                  <TweetForm />
                 </Portal>
               </Suspense>
             )}
@@ -107,7 +89,7 @@ const Router: FC = observer(
         ) : (
           ''
         )}
-        <Switch location={userForm || tweetForm || tweet || location}>
+        <Switch location={userForm || tweetForm || location}>
           <Route exact path="/" component={Home} />
           <Route
             exact
@@ -124,15 +106,6 @@ const Router: FC = observer(
             render={(): JSX.Element => (
               <Suspense fallback={<Loader />}>
                 <SignUpPage />
-              </Suspense>
-            )}
-          />
-          <Route
-            exact
-            path="/confirmation/:token"
-            render={(): JSX.Element => (
-              <Suspense fallback={<Loader />}>
-                <EmailConfirmation />
               </Suspense>
             )}
           />

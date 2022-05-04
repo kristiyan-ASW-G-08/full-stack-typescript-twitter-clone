@@ -5,13 +5,12 @@ import mockFs from 'mock-fs';
 import mjml from 'mjml';
 import app from 'src/app';
 import User from 'src/users/User';
-import UserType from '@customTypes/User';
 import connectToDB from '@utilities/connectToDB';
 import Tweet from 'src/tweets/Tweet';
-import uploadToCloudinary from '@utilities/uploadToCloudinary';
-import deleteFromCloudinary from '@utilities/deleteFromCloudinary';
 
-jest.mock('@utilities/uploadToCloudinary');
+jest.mock('@utilities/uploadToCloudinary', () =>
+  jest.fn(() => Promise.resolve({ public_id: 'public_id' })),
+);
 
 jest.mock('@utilities/deleteFromCloudinary');
 
@@ -22,7 +21,7 @@ jest.mock('mjml');
 
 describe('tweetRoutes', () => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const username = 'username';
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
@@ -138,7 +137,7 @@ describe('tweetRoutes', () => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it('should create a new image tweet', async () => {
+    it.only('should create a new image tweet', async () => {
       expect.assertions(1);
 
       mockFs({

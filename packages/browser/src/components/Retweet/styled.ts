@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const RetweetWrapper = styled('article')`
   width: 100%;
 `;
-
-export const RetweetText = styled('div')`
+export const RetweetMessageWrapper = styled('div')`
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-content: start;
   font-size: 1.2rem;
   padding: 1rem;
@@ -16,4 +15,10 @@ export const RetweetText = styled('div')`
     margin-left: 0.5rem;
     font-size: 1.3rem;
   }
+`;
+export const RetweetText = styled('p')`
+  margin-top: 1rem;
+  margin-left: 2rem;
+  font-size: 1.5rem;
+  overflow-wrap: break-word;
 `;

@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 import { Link as NavLink, useLocation } from 'react-router-dom';
+import { AdvancedImage } from '@cloudinary/react';
 import Avatar from 'components/Avatar';
 import TweetType from 'types/Tweet';
 import getTime from 'utilities/getTime';
@@ -15,8 +16,9 @@ import {
   AvatarContainer,
   Time,
   Link,
-  Img,
 } from './styled';
+
+import cloudinary from '../../cloudinary';
 
 interface TweetProps {
   tweet: TweetType;
@@ -28,11 +30,13 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
   const { username, handle, avatar } = user;
   const milliseconds = new Date().getTime() - new Date(date).getTime();
   const { hours, days, minutes } = getTime(milliseconds);
+  const tweetImage = cloudinary.image(image).setVersion('1650962083');
+
   return (
     <TweetWrapper data-testid={_id}>
       <AvatarContainer>
         <NavLink to={`/users/${user._id}`} data-testid="profile-link">
-          <Avatar avatarURL={avatar} altText={username} />
+          <Avatar avatar={avatar} altText={username} size="medium" />
         </NavLink>
       </AvatarContainer>
       <UserBar>
@@ -83,7 +87,7 @@ export const Tweet: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
               state: { tweet: location },
             }}
           >
-            <Img src={image} alt="" />
+            <AdvancedImage cldImg={tweetImage} alt="" />
           </NavLink>
         ) : (
           ''

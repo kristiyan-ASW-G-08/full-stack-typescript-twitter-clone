@@ -1,4 +1,5 @@
 import React, { FC, memo } from 'react';
+// @ts-ignore
 import LogoPrimary from 'assets/logo-primary.svg';
 import { LogoWrapper, LogoText, LogoSpan } from './styled';
 

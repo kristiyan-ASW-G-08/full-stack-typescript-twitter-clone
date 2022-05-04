@@ -15,6 +15,7 @@ import useStores from 'hooks/useStores';
 export const UserForm: FC = () => {
   const history = useHistory();
   const { authStore, notificationStore } = useStores();
+  console.log(useStores());
   const { user, token } = authStore.authState;
   const submitHandler = async (
     formValues: FormikValues,
@@ -47,7 +48,6 @@ export const UserForm: FC = () => {
       initialValues={{
         username: user?.username ? user.username : '',
         handle: user?.handle ? user.handle : '',
-        website: user?.website ? user.website : '',
       }}
       onSubmit={submitHandler}
     >
@@ -60,7 +60,6 @@ export const UserForm: FC = () => {
 
             <Input name="handle" type="text" placeholder="Handle" />
 
-            <Input name="website" type="url" placeholder="Website" />
             <ImageInput
               name="avatar"
               setFieldValue={setFieldValue}

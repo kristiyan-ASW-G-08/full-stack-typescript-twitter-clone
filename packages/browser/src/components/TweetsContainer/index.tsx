@@ -9,6 +9,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+import axios from 'axios';
 import TweetType from 'types/Tweet';
 import Feed from 'types/Feed';
 import useIntersection from 'hooks/useIntersection';
@@ -16,6 +17,7 @@ import FeedBar from 'components/FeedBar';
 import Select from 'styled/Select';
 import TextLoader from 'styled/TextLoader';
 import useStores from 'hooks/useStores';
+import defaultWarning from 'utilities/defaultWarning';
 import getTweets from './getTweets';
 import { TweetsWrapper, SelectWrapper, Tweets, LoaderWrapper } from './styled';
 
@@ -40,6 +42,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const [nextPage, setNext] = useState<string | null>(null);
   const [query, setQuery] = useState<string>(`${url}?sort=new`);
+  const { REACT_APP_API_URL } = process.env;
   const tweetsRef = useRef(tweets);
   const nextPageRef = useRef(nextPage);
   const loadNext = async () => {
@@ -53,6 +56,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
       notificationStore.setNotification();
     }
   };
+
   const { setElement } = useIntersection(loadNext);
   useEffect(() => {
     setQuery(`${url}?sort=new`);
@@ -77,19 +81,27 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
     setQuery(`${url}?sort=${value}`);
   };
 
-  const deleteTweetHandler = (tweetId: string): void =>
+  const deleteTweetHandler = async (tweetId: string): Promise<void> => {
     setTweets(tweets.filter(({ _id }) => _id !== tweetId));
+    try {
+      await axios.delete(`${REACT_APP_API_URL}/tweets/${tweetId}`, {
+        headers: { Authorization: `bearer ${token}` },
+      });
+    } catch {
+      notificationStore.setNotification(defaultWarning);
+    }
+  };
 
   return (
     <TweetsWrapper hasBorderRadius={hasBorderRadius}>
       <FeedBar currentUrl={url} setUrl={setUrl} feeds={feeds} />
-      {tweets.length > 0 ?  (
+      {tweets.length > 0 ? (
         <Suspense
-          fallback={
+          fallback={(
             <Tweets>
               <TextLoader>...Loading</TextLoader>
             </Tweets>
-          }
+          )}
         >
           <SelectWrapper>
             <Select data-testid="sort" onChange={getTweetsHandler}>
@@ -107,7 +119,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
               </option>
             </Select>
           </SelectWrapper>
-          
+
           <Tweets role="feed">
             {tweets.map((tweet: TweetType) =>
               tweet.retweet ? (
@@ -128,7 +140,7 @@ export const TweetsContainer: FC<TweetsContainerProps> = ({
           </Tweets>
         </Suspense>
       ) : (
-        ""
+        ''
       )}
       <LoaderWrapper>
         {nextPage ? (

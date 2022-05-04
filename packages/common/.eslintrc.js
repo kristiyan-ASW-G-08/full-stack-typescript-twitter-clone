@@ -23,7 +23,8 @@ module.exports = {
       files: ['*.test.ts'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 0,
-      },
+        'import/no-extraneous-dependencies':0
+      }
     },
-  ],
+  ],s
 };

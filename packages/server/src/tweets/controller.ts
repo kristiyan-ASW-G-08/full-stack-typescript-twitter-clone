@@ -27,10 +27,11 @@ export const postTweet = async (
       type,
       link: linkUrl,
     });
+
     if (file) {
       const { path, filename } = file;
-      tweet.image = filename;
-      uploadToCloudinary(path, filename);
+      console.log(await uploadToCloudinary(path, filename));
+      tweet.image = (await uploadToCloudinary(path, filename)).public_id;
       deleteFile(path);
     }
 
@@ -63,6 +64,7 @@ export const postTweet = async (
     await user.save();
     res.status(201).json({ data: { tweetId: tweet._id } });
   } catch (err) {
+    console.log(err, 'Errooooooooooooooooooooor');
     passErrorToNext(err, next);
   }
 };
@@ -81,8 +83,7 @@ export const patchTweet = async (
     if (tweet.image && file) {
       const { path, filename } = file;
       await deleteCloudinaryFile(tweet.image);
-      tweet.image = filename;
-      uploadToCloudinary(path, filename);
+      tweet.image = (await uploadToCloudinary(path, filename)).public_id;
       deleteFile(path);
     }
     await tweet.save();

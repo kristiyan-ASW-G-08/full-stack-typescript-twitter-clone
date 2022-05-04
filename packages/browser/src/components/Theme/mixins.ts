@@ -10,7 +10,7 @@ const border = css<BorderProps>`
 
 const center = css`
   display: grid;
-  place-content: center center;
+  place-items: center;
 `;
 const flexCenter = css`
   display: flex;

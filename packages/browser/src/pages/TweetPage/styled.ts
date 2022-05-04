@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TweetPageWrapper = styled('div')`
-  margin-top: 1rem;
+  margin-top: 4rem;
   display: grid;
   justify-items: center;
   overflow: auto;
@@ -14,7 +14,7 @@ export const TweetPageWrapper = styled('div')`
     width: 70vw;
   }
   @media ${({ theme }) => theme.mediaQueries.desktop} {
-    width: 60rem;
+    width: 60vw;
   }
 `;
 

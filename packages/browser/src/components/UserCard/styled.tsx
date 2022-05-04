@@ -22,12 +22,13 @@ export const Cover = styled('div')`
 
 export const CoverBackground = styled('div')`
   width: 100%;
-  height: 100%;
+  height: 10rem;
+  object-fit: cover;
   ${({ theme }) => theme.mixins.center};
   background: ${({ theme }) => theme.primary};
   img {
     width: 100%;
-    height: 100%;
+    height: 10rem;
     object-fit: cover;
   }
 `;

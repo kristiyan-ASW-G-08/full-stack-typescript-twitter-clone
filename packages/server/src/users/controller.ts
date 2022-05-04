@@ -13,7 +13,6 @@ import User from 'src/users/User';
 import Tweet from 'src/tweets/Tweet';
 import RESTError, { errors } from '@utilities/RESTError';
 import sendEmail from '@utilities/sendEmail';
-import deleteFile from '@src/utilities/deleteFile';
 import findDocs from '@utilities/findDocs';
 import hasConfirmedEmail from '@utilities/hasConfirmedEmail';
 import getPaginationURLs from '@utilities/getPaginationURLs';
@@ -21,6 +20,7 @@ import TweetType from '@customTypes/Tweet';
 import UserType from '@customTypes/User';
 import uploadToCloudinary from '@src/utilities/uploadToCloudinary';
 import deleteCloudinaryFile from '@src/utilities/deleteFromCloudinary';
+import deleteFile from '@src/utilities/deleteFile';
 
 export const signUp = async (
   { body: { username, handle, email, password } }: Request,
@@ -28,64 +28,12 @@ export const signUp = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { _id } = await new User({
+    await new User({
       username,
       handle,
       email,
       password: await bcrypt.hash(password, 12),
     }).save();
-    // const { EMAIL, CLIENT_URL, SECRET } = process.env;
-    // const token = jwt.sign(
-    //   {
-    //     userId: _id,
-    //   },
-    //   SECRET,
-    //   { expiresIn: '1h' },
-    // );
-    // const url = `${CLIENT_URL}/confirmation/${token}`;
-    // const validationLevel: 'strict' | 'soft' | 'skip' | undefined = 'strict';
-    // const options = {
-    //   validationLevel,
-    // };
-    //   const htmlOutput = mjml2html(
-    //     `
-    //     <mjml>
-    //     <mj-head>
-    //       <mj-attributes>
-    //         <mj-class name="dark" color="#4f4f4f" />
-    //         <mj-class name="primary" color="#1dcaff" />
-    //         <mj-class name="primary-bg" background-color="#1dcaff" />
-    //         <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
-    //         <mj-all font-family="Roboto" />
-    //       </mj-attributes>
-    //     </mj-head>
-    //     <mj-body>
-    //       <mj-hero mode="fixed-height" height="370px" padding="10px 40px 10px 40px">
-    //         <mj-text align="center" font-size="25px" font-weight="900" mj-class="primary">
-    //           TwittClone
-    //         </mj-text>
-    //         <mj-text align="left" font-size="20px" font-weight="900" mj-class="dark">
-    //           Confirm your email address
-    //         </mj-text>
-    //         <mj-text align="left" mj-class="dark" font-size="15px" line-height="20px">
-    //           There is one more step you need to complete before creating your TwittClone account. If you have not registered you can ignore and delete this email.
-    //         </mj-text>
-    //         <mj-button mj-class="primary-bg" href="${url}" align="center">
-    //           Verify email address
-    //         </mj-button>
-    //       </mj-hero>
-    //     </mj-body>
-    //   </mjml>
-    // `,
-    //     options,
-    //   );
-    //   const mailOptions: MailOptions = {
-    //     from: EMAIL,
-    //     to: email,
-    //     subject: 'TwittClone Email Confirmation',
-    //     html: htmlOutput.html,
-    //   };
-    //   sendEmail(mailOptions);
     res.sendStatus(201);
   } catch (err) {
     passErrorToNext(err, next);
@@ -128,7 +76,6 @@ export const logIn = async (
       replies,
       retweets,
       _id,
-      website,
       cover,
       avatar,
     } = user;
@@ -136,7 +83,6 @@ export const logIn = async (
       data: {
         token,
         user: {
-          website,
           username,
           handle,
           following,
@@ -153,7 +99,6 @@ export const logIn = async (
       },
     });
   } catch (err) {
-    console.log(err);
     passErrorToNext(err, next);
   }
 };
@@ -427,7 +372,7 @@ export const getUserLikes = async (
 };
 
 export const patchProfile = async (
-  { body: { username, handle, website }, userId, files }: Request,
+  { body: { username, handle }, userId, files }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -435,19 +380,22 @@ export const patchProfile = async (
     const user = await getUserById(userId, false);
     if (!Array.isArray(files) && files && files.avatar) {
       const { filename, path } = files.avatar[0];
-      deleteCloudinaryFile(user.avatar);
-      user.avatar = filename;
-      await uploadToCloudinary(path, filename);
+      if (user.avatar) {
+        await deleteCloudinaryFile(user.avatar);
+      }
+      user.avatar = (await uploadToCloudinary(path, filename)).public_id;
+      deleteFile(path);
     }
     if (!Array.isArray(files) && files && files.cover) {
       const { filename, path } = files.cover[0];
-      deleteCloudinaryFile(user.cover);
-      user.cover = filename;
-      await uploadToCloudinary(path, filename);
+      if (user.cover) {
+        await deleteCloudinaryFile(user.cover);
+      }
+      user.cover = (await uploadToCloudinary(path, filename)).public_id;
+      deleteFile(path);
     }
     user.username = username;
     user.handle = handle;
-    user.website = website;
     await user.save();
     res.status(200).json({ data: { user } });
   } catch (err) {
@@ -468,7 +416,10 @@ export const getUsersList = async (
       },
       'username handle avatar cover',
     )
-      .select({ score: { $meta: 'textScore' } })
+      .select([
+        { $match: { $text: { $search: 'Pattern' } } },
+        { score: { $meta: 'textScore' } },
+      ])
       .limit(10)
       .exec();
     res.status(200).json({ data: { users } });

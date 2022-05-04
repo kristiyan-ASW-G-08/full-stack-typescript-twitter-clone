@@ -1,5 +1,4 @@
 import React, { FC, useState, Suspense, lazy } from 'react';
-import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'components/Logo';
@@ -48,7 +47,7 @@ export const Navbar: FC = () => {
             <>
               <DropDownWrapper>
                 <AvatarWrapper onClick={toggleMenu}>
-                  <Avatar avatarURL={user.avatar} />
+                  <Avatar avatar={user.avatar} />
                 </AvatarWrapper>
                 {isMenuActive ? (
                   <DropDown>
@@ -88,7 +87,10 @@ export const Navbar: FC = () => {
                   Tweet
                 </Link>
               </Button>
-              <Button buttonType="secondary" onClick={authStore.resetAuthState}>
+              <Button
+                buttonType="secondary"
+                onClick={() => authStore.resetAuthState()}
+              >
                 Log Out
               </Button>
             </>
@@ -124,4 +126,4 @@ export const Navbar: FC = () => {
   );
 };
 
-export default observer(Navbar);
+export default Navbar;

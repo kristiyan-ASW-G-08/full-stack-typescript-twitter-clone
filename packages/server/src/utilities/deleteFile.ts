@@ -1,17 +1,16 @@
 import fs from 'fs';
 import { RESTError, errors } from '@utilities/RESTError';
-import getFilePath from '@utilities/getFilePath';
 
-const deleteFile = async (fileUrl: string | undefined): Promise<void> => {
-  if (fileUrl !== undefined) {
+const deleteFile = async (path: string | undefined): Promise<void> => {
+  if (path !== undefined) {
     // @ts-ignore
-    fs.access(getFilePath(fileUrl), fs.F_OK, (err: any): void => {
+    fs.access(path, fs.F_OK, (err: any): void => {
       if (err) {
         const { status, message } = errors.NotFound;
         throw new RESTError(status, message);
       }
     });
-    fs.unlink(getFilePath(fileUrl), (err): void => {});
+    fs.unlink(path, (err): void => {});
   }
 };
 export default deleteFile;

@@ -49,7 +49,7 @@ export const Sidebar: FC<SidebarProps> = ({
                 to={`/users/${user._id}`}
                 data-testid="profile-link-sidebar"
               >
-                <Avatar size="medium" avatarURL={user.avatar} />
+                <Avatar size="medium" avatar={user.avatar} />
               </Link>
               <UserCredentials
                 username={user.username}

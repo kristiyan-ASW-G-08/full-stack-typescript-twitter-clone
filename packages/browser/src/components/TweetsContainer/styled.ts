@@ -14,6 +14,7 @@ export const TweetsWrapper = styled('section')<TweetsWrapperProps>`
     0.1rem 5rem 1fr;
   grid-gap: 1rem;
   padding-top: 1rem;
+
   background: ${({ theme }) => theme.background};
   @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 80vw;
@@ -22,7 +23,7 @@ export const TweetsWrapper = styled('section')<TweetsWrapperProps>`
     ${({ hasBorderRadius }) => (hasBorderRadius ? `border-radius:1rem` : '')};
   }
   @media ${({ theme }) => theme.mediaQueries.desktop} {
-    width: 60rem;
+    width: 60vw;
   }
 `;
 TweetsWrapper.defaultProps = {

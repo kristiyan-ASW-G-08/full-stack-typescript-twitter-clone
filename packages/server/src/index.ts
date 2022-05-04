@@ -11,7 +11,6 @@ const initServer = (): void => {
   //   },
   //   app,
   // );
-
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
   const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   connectToDB(mongoURI);

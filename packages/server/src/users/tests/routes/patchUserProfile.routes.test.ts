@@ -13,10 +13,9 @@ const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
 jest.mock('@utilities/sendEmail');
-
 describe('userRoutes', () => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-zmcyw.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const username = 'username';
   const handle = 'testUserHandle';
   const email = 'testmail@mail.com';
@@ -48,11 +47,8 @@ describe('userRoutes', () => {
   describe('patch /users/user/profile', () => {
     const newUsername = 'newTestUsername';
     const newHandle = 'newTestHandle';
-    const website = 'https://sometestwebsite.test';
-    it("should patch user's username, handle and website", async (): Promise<
-      void
-    > => {
-      expect.assertions(4);
+    it("should patch user's username, handle", async (): Promise<void> => {
+      expect.assertions(3);
       const userId = testUser._id;
 
       const token = jwt.sign(
@@ -69,7 +65,6 @@ describe('userRoutes', () => {
         .send({
           username: newUsername,
           handle: newHandle,
-          website,
         });
       const user = await User.findById(userId);
       if (!user) {
@@ -78,7 +73,6 @@ describe('userRoutes', () => {
       expect(response.status).toBe(200);
       expect(user.username).toMatch(newUsername);
       expect(user.handle).toMatch(newHandle);
-      expect(user.website).toMatch(website);
     });
     it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", async (): Promise<
       void
@@ -109,7 +103,6 @@ describe('userRoutes', () => {
         .send({
           username: newUsername,
           handle: newHandle,
-          website,
         });
       expect(response.status).toBe(401);
     });
@@ -133,7 +126,6 @@ describe('userRoutes', () => {
         .send({
           username: newUsername,
           handle: newHandle,
-          website,
         });
       expect(response.status).toBe(404);
     });
@@ -165,7 +157,6 @@ describe('userRoutes', () => {
         .send({
           username: duplicateUsername,
           handle: duplicateHandle,
-          website,
         });
       expect(response.status).toBe(409);
     });

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { AdvancedImage } from '@cloudinary/react';
 import User from 'types/User';
 import Avatar from 'components/Avatar';
 import AuthState from 'types/AuthState';
@@ -18,6 +19,7 @@ import {
   FollowButtonWrapper,
   CredentialsContainer,
 } from './styled';
+import cloudinary from '../../cloudinary';
 
 interface UserCardProps {
   user: User;
@@ -32,16 +34,20 @@ export const UserCard: FC<UserCardProps> = ({
   const { notificationStore } = useContext(RootStoreContext);
   const location = useLocation();
   const { username, handle, following, followers, _id, avatar, cover } = user;
-
+  const coverImage = cloudinary.image(cover);
   return (
     <UserCardWrapper direction="bottom" data-testid={_id}>
       <Cover>
         <CoverBackground>
-          {cover ? <img src={cover} alt={`${username}'s cover`} /> : ''}
+          {cover ? (
+            <AdvancedImage cldImg={coverImage} alt={`${username}'s cover`} />
+          ) : (
+            ''
+          )}
         </CoverBackground>
         <AvatarContainer>
           <Link to={`/users/${user._id}`} data-testid="profile-link-usercard">
-            <Avatar size="large" avatarURL={avatar} />
+            <Avatar size="large" avatar={avatar} />
           </Link>
         </AvatarContainer>
       </Cover>

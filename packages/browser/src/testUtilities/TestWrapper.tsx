@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Theme from 'components/Theme/Theme';
+import Theme from 'components/Theme';
 
 interface TestWrapperProps {
   theme?: 'light' | 'dark';

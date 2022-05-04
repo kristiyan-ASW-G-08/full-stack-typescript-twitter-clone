@@ -1,5 +1,4 @@
 import User from 'types/User';
-import Logo from 'assets/logo-primary.svg';
 
 const user: User = {
   username: 'username',
@@ -8,9 +7,8 @@ const user: User = {
   profilePhoto: 'default',
   headerPhoto: 'default',
   date: 'mockDate',
-  website: 'mockWebsite',
-  avatar: Logo,
-  cover: Logo,
+  avatar: 'someImagePublicId',
+  cover: 'someImagePublicId',
   followers: 0,
   following: [],
   likes: [],

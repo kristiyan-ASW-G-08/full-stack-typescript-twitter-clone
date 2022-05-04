@@ -15,6 +15,7 @@ const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.patch.mockResolvedValue({ data: { data: { user } } });
 
 jest.mock('utilities/populateFormData');
+jest.mock('hooks/useStores');
 
 const populateFormDataMock = populateFormData as jest.Mock<any>;
 populateFormDataMock.mockReturnValue(new FormData());
@@ -35,12 +36,12 @@ useStoresMock.mockReturnValue({
     setNotification,
   },
 });
-jest.mock('hooks/useStores');
+
 describe('UserForm', () => {
   afterEach(jest.clearAllMocks);
   afterAll(() => jest.restoreAllMocks());
   it('render UserForm', async () => {
-    expect.assertions(9);
+    expect.assertions(8);
     const history = createMemoryHistory();
     history.push({
       pathname: ``,
@@ -58,10 +59,6 @@ describe('UserForm', () => {
     const submitButton = getByText('Save Changes');
 
     const credentials = [
-      {
-        value: 'https://github.com',
-        placeholder: 'Website',
-      },
       {
         value: 'newUsername',
         placeholder: 'Username',
@@ -84,11 +81,10 @@ describe('UserForm', () => {
       expect(populateFormData).toHaveBeenCalledWith({
         handle: 'newHandle',
         username: 'newUsername',
-        website: 'https://github.com',
       });
       expect(axios.patch).toHaveBeenCalledTimes(1);
       expect(axios.patch).toHaveBeenCalledWith(
-        'http://localhost:8090/users/user/profile',
+        'http://localhost:9000/users/user/profile',
         new FormData(),
         {
           headers: { Authorization: 'bearer mockToken' },

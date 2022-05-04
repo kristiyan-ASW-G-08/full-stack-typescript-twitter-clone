@@ -5,7 +5,7 @@ export const TweetWrapper = styled('article')`
   display: grid;
   grid:
     'avatar user-bar user-bar ' auto
-    'avatar . .' 0.3rem
+    'avatar . .' 1rem
     '  .   content content' minmax(min-content, max-content)
     'tweet-bar tweet-bar tweet-bar ' 1fr/1fr 7fr 1fr;
   grid-row-gap: 0.3rem;
@@ -62,6 +62,10 @@ export const ContentContainer = styled('div')`
     width: 90%;
     font-size: 1.4rem;
   }
+  img {
+    height: 15rem;
+    object-fit: cover;
+  }
 `;
 
 export const Text = styled('p')`
@@ -85,9 +89,4 @@ export const Reply = styled('p')`
 export const Link = styled('a')`
   display: block;
   color: ${({ theme }) => theme.primary};
-`;
-export const Img = styled('img')`
-  height: 15rem;
-  object-fit: cover;
-  border-radius: 1rem;
 `;

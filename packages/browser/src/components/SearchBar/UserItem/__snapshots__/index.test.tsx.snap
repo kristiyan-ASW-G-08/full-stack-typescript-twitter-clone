@@ -9,11 +9,10 @@ exports[`UserItem render UserItem 1`] = `
       href="/users/id"
     >
       <div
-        class="sc-AykKC kyvtll"
+        class="sc-AykKC bvduzj"
       >
         <img
           alt="avatar"
-          src="logo-primary.svg"
         />
       </div>
       <span>

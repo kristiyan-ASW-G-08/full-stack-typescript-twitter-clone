@@ -5,7 +5,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import TweetType from 'types/Tweet';
 import Notification from 'types/Notification';
 import User from 'types/User';
-import axios from 'axios';
 import useStores from 'hooks/useStores';
 import updateUserHandler from './utilities/updateUserHandler';
 import ShareButton from './ShareButton/index';
@@ -72,7 +71,6 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
 
         {user && user._id === tweet.user._id ? (
           <>
-           
             <TweetBarButton
               data-testid="edit-button"
               onClick={async () => {
@@ -81,7 +79,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                   return;
                 }
                 history.push({
-                  pathname: `update/tweet/${_id}`,
+                  pathname: `/update/tweet/${_id}`,
                   state: {
                     tweetForm: location,
                     tweet,
@@ -91,6 +89,25 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
             >
               <FontAwesomeIcon icon="edit" />
             </TweetBarButton>
+
+            <TweetBarButton
+              data-testid="delete-button"
+              onClick={async () => {
+                await deleteTweetHandler(_id);
+                notificationStore.setNotification({
+                  type: 'message',
+                  content: 'Deleted!',
+                });
+              }}
+            >
+              <FontAwesomeIcon icon="trash" />
+            </TweetBarButton>
+            <ShareButton
+              tweet={tweet}
+              setNotification={(notification: Notification) =>
+                notificationStore.setNotification(notification)
+              }
+            />
           </>
         ) : (
           ''

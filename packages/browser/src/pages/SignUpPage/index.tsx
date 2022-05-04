@@ -21,8 +21,7 @@ export const SignUpPage: FC = () => {
       await axios.post(`${process.env.REACT_APP_API_URL}/users`, formValues);
       notificationStore.setNotification({
         type: 'message',
-        content:
-          'You have signed up successfully. Confirm your email to log in.',
+        content: 'You have signed up successfully.Now you can log in.',
       });
       history.replace('/');
     } catch (error) {

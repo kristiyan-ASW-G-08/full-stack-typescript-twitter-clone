@@ -5,13 +5,13 @@ import TestWrapper from 'testUtilities/TestWrapper';
 import Avatar from '.';
 
 describe('Avatar', () => {
-  const avatarURL = 'mockAvatarURL';
+  const avatar = 'mockavatar';
   const mockAltText = 'mockAltText';
   it('render Avatar', () => {
     expect.assertions(2);
 
     const { container, getByAltText } = render(
-      <Avatar avatarURL={avatarURL} altText={mockAltText} />,
+      <Avatar avatar={avatar} altText={mockAltText} />,
       {
         wrapper: ({ children }) => <TestWrapper>{children}</TestWrapper>,
       },

@@ -5,11 +5,6 @@ interface UserValidatorType {
   confirmPassword: string;
 }
 const UserValidator = yup.object<UserValidatorType>().shape({
-  password: yup
-    .string()
-    .trim()
-    .min(12)
-    .required(),
   confirmPassword: yup
     .string()
     .trim()

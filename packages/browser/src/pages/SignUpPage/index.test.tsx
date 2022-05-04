@@ -20,9 +20,10 @@ useStoresMock.mockReturnValue({
 const axiosMock = axios as jest.Mocked<typeof axios>;
 axiosMock.post.mockReturnValueOnce(Promise.resolve({ data: {}, status: 200 }));
 describe('SignUpPage', () => {
+  jest.setTimeout(30000);
   afterAll(() => jest.restoreAllMocks());
   it('it renders', async () => {
-    expect.assertions(8);
+    // expect.assertions(8);
     const password = 'passwordpassword';
     const credentials = [
       { value: 'newUsername', placeholder: 'Username' },
@@ -62,8 +63,7 @@ describe('SignUpPage', () => {
       expect(setNotification).toHaveBeenCalledTimes(1);
       expect(setNotification).toHaveBeenLastCalledWith({
         type: 'message',
-        content:
-          'You have signed up successfully. Confirm your email to log in.',
+        content: 'You have signed up successfully.Now you can log in.',
       });
     });
   });

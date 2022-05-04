@@ -3,7 +3,7 @@ import User from '@customTypes/User';
 import duplicationErrorHandler from '@customMiddleware/duplicationErrorHandler';
 import uniqueValidator from 'mongoose-unique-validator';
 
-const UserSchema: Schema = new Schema({
+const UserSchema: Schema = new Schema<User>({
   username: {
     required: true,
     type: String,
@@ -20,9 +20,10 @@ const UserSchema: Schema = new Schema({
   },
   email: { required: true, type: String, minlength: 3, unique: true },
   password: { required: true, type: String, minlength: 12 },
-  website: { required: false, type: String, minlength: 3 },
   isConfirmed: { type: Boolean, default: true },
-  avatar: { type: String },
+  avatar: {
+    type: String,
+  },
   cover: { type: String },
   date: {
     type: Date,

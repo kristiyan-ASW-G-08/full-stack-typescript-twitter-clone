@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { create } from 'mobx-persist';
 import AuthStore from 'stores/AuthStore';
 import ThemeStore from 'stores/ThemeStore';
@@ -10,11 +10,17 @@ const hydrate = create({
   jsonify: true,
 });
 export class RootStore {
+  @observable private hydrateUpdate = true;
+
   @observable public authStore = new AuthStore();
 
   @observable public themeStore = new ThemeStore();
 
   @observable public notificationStore = new NotificationStore();
+
+  @action private forceUpdate(): void {
+    this.hydrateUpdate = false;
+  }
 
   public constructor() {
     hydrate('authStore', this.authStore);

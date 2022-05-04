@@ -2,7 +2,7 @@ import * as React from 'react';
 import { makeDecorator } from '@storybook/addons';
 import GlobalStyle from '../../src/styled/GlobalStyle';
 import { BrowserRouter } from 'react-router-dom';
-import Theme from '../../src/components/Theme/Theme';
+import Theme from 'components/Theme';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faBars,

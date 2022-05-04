@@ -13,11 +13,6 @@ const UserProfileValidator = yup.object().shape({
     .min(1)
     .max(50)
     .required(),
-  website: yup
-    .string()
-    .trim()
-    .url()
-    .required(),
 });
 
 export default UserProfileValidator;

@@ -3,8 +3,7 @@ import uploadToCloudinary from '@utilities/uploadToCloudinary';
 
 jest.mock('cloudinary');
 
-// @ts-ignore
-const cloudinaryMock = cloudinary as jest.Mock<typeof cloudinary>;
+jest.spyOn(cloudinary.v2.uploader, 'upload');
 
 describe('uploadToCloudinary', () => {
   it('should call upload', async () => {
@@ -15,9 +14,10 @@ describe('uploadToCloudinary', () => {
     uploadToCloudinary(path, filename);
 
     // @ts-ignore
-    expect(cloudinary.uploader.upload).toHaveBeenCalledTimes(1);
+    expect(cloudinary.v2.uploader.upload).toHaveBeenCalledTimes(1);
     // @ts-ignore
-    expect(cloudinary.uploader.upload).toHaveBeenCalledWith(path, {
+    expect(cloudinary.v2.uploader.upload).toHaveBeenCalledWith(path, {
+      folder: 'twittclone',
       public_id: filename,
     });
   });

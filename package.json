@@ -23,5 +23,8 @@
       "**/babel-loader",
       "**/babel-loader/**"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^9.6.0"
   }
 }

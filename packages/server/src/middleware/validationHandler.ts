@@ -21,6 +21,7 @@ const validationHandler = (
       }
       next();
     } catch (err) {
+      // @ts-ignore
       const validationErrors = err.inner.map(
         ({ path, message }: ValidationError): CustomValidationError => ({
           path,

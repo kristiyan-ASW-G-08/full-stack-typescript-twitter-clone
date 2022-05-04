@@ -1,12 +1,15 @@
-import user from './user';
 import Tweet from 'types/Tweet';
+import user from './user';
 
 const tweet: Tweet = {
   user,
   text: 'Text',
   link: 'https://github.com/',
   type: 'link',
-  image: 'mockImage',
+  image: {
+    public_id: 'someId',
+    url: 'someUrl',
+  },
   _id: 'mockId',
   date: new Date(),
   likes: 0,

@@ -32,11 +32,10 @@ export const ShareButton: FC<ShareButtonProps> = ({
               type="button"
               data-testid="clipboard-button"
               onClick={() => {
-                const notification: Notification = {
+                setNotification({
                   type: 'message',
                   content: 'Copied to clipboard!',
-                };
-                setNotification(notification);
+                });
                 setClipboard(tweetUrl);
               }}
             >

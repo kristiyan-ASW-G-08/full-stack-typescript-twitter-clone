@@ -12,6 +12,7 @@ import ImageInput from 'components/ImageUploadButton';
 import populateFormData from 'utilities/populateFormData';
 import formErrorHandler from 'utilities/formErrorHandler';
 import useStores from 'hooks/useStores';
+import Modal from 'components/Modal';
 
 import {
   TweetFormWrapper,
@@ -24,7 +25,7 @@ import {
 export const TweetForm: FC = () => {
   const { notificationStore, authStore } = useStores();
   const { token } = authStore.authState;
-  //@ts-ignore
+  // @ts-ignore
   const { replyId, retweetId } = useParams();
   const history = useHistory();
   const location = useLocation();
@@ -32,7 +33,7 @@ export const TweetForm: FC = () => {
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     tweet?.type ? tweet.type : 'text',
   );
-  const [hasImage, setHasImage] = useState<boolean>(false);
+  const [image, setImage] = useState<boolean>(false);
   useEffect(() => {
     if (replyId) {
       setType('reply');
@@ -45,7 +46,6 @@ export const TweetForm: FC = () => {
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
-    console.log('handler');
     try {
       const { REACT_APP_API_URL } = process.env;
       const formData: FormData = populateFormData({
@@ -54,11 +54,11 @@ export const TweetForm: FC = () => {
         retweetId,
         replyId,
       });
-      console.log(token);
+
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
-      console.log(tweet);
+
       if (tweet) {
         await axios.patch(
           `${REACT_APP_API_URL}/tweets/${tweet._id}`,
@@ -66,14 +66,16 @@ export const TweetForm: FC = () => {
           config,
         );
         history.push(`/tweet/${tweet._id}`);
+        window.location.reload();
       } else {
         const result = await axios.post(
           `${REACT_APP_API_URL}/tweets`,
           formData,
           config,
         );
-        console.log(result);
-        history.replace(`/tweet/${result.data.data.tweetId}`,{tweet:location});
+        history.replace(`/tweet/${result.data.data.tweetId}`, {
+          tweet: location,
+        });
         // history.goBack();
       }
     } catch (error) {
@@ -83,74 +85,81 @@ export const TweetForm: FC = () => {
     }
   };
   return (
-    <Formik
-      validationSchema={TweetValidator}
-      initialValues={{
-        text: tweet ? tweet.text : '',
-        linkUrl: tweet ? tweet.link : '',
+    <Modal
+      backdropHandler={() => {
+        if (tweet && tweet._id) {
+          history.replace(`/tweet/${tweet._id}`);
+        } else {
+          history.goBack();
+        }
       }}
-      onSubmit={submitHandler}
     >
-      {({ setFieldValue }) => (
-        <Form>
-         
-          <TweetFormWrapper>
-          
-            <AvatarContainer>
-              <Avatar />
-            </AvatarContainer>
-            <InputContainer>
-            
-              <Input
-                component="textarea"
-                name="text"
-                type="text"
-                placeholder="Text"
-              />
-              {hasImage ? (
-                <ImageInput name="image" setFieldValue={setFieldValue} />
-              ) : (
-                ''
-              )}
+      <Formik
+        validationSchema={TweetValidator}
+        initialValues={{
+          text: tweet ? tweet.text : '',
+          linkUrl: tweet ? tweet.link : '',
+        }}
+        onSubmit={submitHandler}
+      >
+        {({ setFieldValue }) => (
+          <Form>
+            <TweetFormWrapper>
+              <AvatarContainer>
+                <Avatar />
+              </AvatarContainer>
+              <InputContainer>
+                <Input
+                  component="textarea"
+                  name="text"
+                  type="text"
+                  placeholder="Text"
+                />
+                {image ? (
+                  <ImageInput name="image" setFieldValue={setFieldValue} />
+                ) : (
+                  ''
+                )}
 
-              {type === 'link' ? (
-                <Input name="linkUrl" type="text" placeholder="Link" />
-              ) : (
-                ''
-              )}
-            </InputContainer>
+                {type === 'link' ? (
+                  <Input name="linkUrl" type="text" placeholder="Link" />
+                ) : (
+                  ''
+                )}
+              </InputContainer>
 
-            <ContentButtonsContainer>
-              <IconButton
-                type="button"
-                onClick={() => {
-                  setHasImage(!hasImage);
-                  setFieldValue('image', undefined);
-                }}
-              >
-                <FontAwesomeIcon icon="image" />
-              </IconButton>
-              <IconButton
-                data-testid="link-button"
-                type="button"
-                onClick={(e: SyntheticEvent) => {
-                  e.preventDefault();
-                  setType(type === 'link' ? 'text' : 'link');
-                }}
-              >
-                <FontAwesomeIcon icon="link" />
-              </IconButton>
-            </ContentButtonsContainer>
+              <ContentButtonsContainer>
+                <IconButton
+                  type="button"
+                  onClick={() => {
+                    setImage(!image);
+                    setFieldValue('image', undefined);
+                  }}
+                >
+                  <FontAwesomeIcon icon="image" />
+                </IconButton>
+                <IconButton
+                  data-testid="link-button"
+                  type="button"
+                  onClick={(e: SyntheticEvent) => {
+                    e.preventDefault();
+                    setType(type === 'link' ? 'text' : 'link');
+                  }}
+                >
+                  <FontAwesomeIcon icon="link" />
+                </IconButton>
+              </ContentButtonsContainer>
 
-            <TwButtonButtonContainer>
-              <Button buttonType="primary" type="submit">
-                Tweet
-              </Button>
-            </TwButtonButtonContainer>
-          </TweetFormWrapper>
-        </Form>
-      )}
-    </Formik>
+              <TwButtonButtonContainer>
+                <Button buttonType="primary" type="submit">
+                  Tweet
+                </Button>
+              </TwButtonButtonContainer>
+            </TweetFormWrapper>
+          </Form>
+        )}
+      </Formik>
+    </Modal>
   );
 };
 

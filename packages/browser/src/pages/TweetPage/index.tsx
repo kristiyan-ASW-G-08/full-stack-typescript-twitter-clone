@@ -12,6 +12,7 @@ export const TweetPage: FC = () => {
   const [tweet, setTweet] = useState<TweetType>();
   const [url, setUrl] = useState<string>('');
   const { token } = authStore.authState;
+  // @ts-ignore
   const { tweetId } = useParams();
   const history = useHistory();
   const { REACT_APP_API_URL } = process.env;

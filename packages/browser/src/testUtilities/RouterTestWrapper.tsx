@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Router } from 'react-router-dom';
 import { History } from 'history';
-import Theme from 'components/Theme/Theme';
+import Theme from 'components/Theme';
 
 interface RouterTestWrapperProps {
   theme?: 'light' | 'dark';
