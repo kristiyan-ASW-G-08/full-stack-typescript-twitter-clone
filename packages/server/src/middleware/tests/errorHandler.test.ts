@@ -31,13 +31,12 @@ describe('errorHandler', () => {
 
     const statusMock = jest.spyOn(resMock, 'status');
     const jsonMock = jest.spyOn(resMock, 'json');
-    const nextMock = jest.fn();
     const status = 400;
     const message = 'Error Message';
     const data = 'Error Data';
     const error = new RESTError(status, message, data);
 
-    errorHandler(error, reqMock, resMock, nextMock);
+    errorHandler(error, reqMock, resMock);
 
     expect(loggerMock.error).toHaveBeenCalledTimes(1);
     expect(loggerMock.error).toHaveBeenCalledWith(error);
@@ -66,13 +65,12 @@ describe('errorHandler', () => {
 
     const statusMock = jest.spyOn(resMock, 'status');
     const jsonMock = jest.spyOn(resMock, 'json');
-    const nextMock = jest.fn();
     const status = 400;
     const message = 'Error Message';
     const data = 'Error Data';
     const error = new RESTError(status, message, data);
 
-    errorHandler(error, reqMock, resMock, nextMock);
+    errorHandler(error, reqMock, resMock);
 
     expect(loggerMock.error).toHaveBeenCalledTimes(1);
     expect(loggerMock.error).toHaveBeenCalledWith(error);

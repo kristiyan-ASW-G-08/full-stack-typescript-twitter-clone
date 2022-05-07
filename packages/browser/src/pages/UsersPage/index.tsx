@@ -5,6 +5,7 @@ import UsersContainer from 'components/UsersContainer';
 import Feed from 'types/Feed';
 
 export const UsersPage: FC = () => {
+  // @ts-ignore
   const { feed, userId } = useParams();
   const { REACT_APP_API_URL } = process.env;
   const [url, setUrl] = useState<string>(

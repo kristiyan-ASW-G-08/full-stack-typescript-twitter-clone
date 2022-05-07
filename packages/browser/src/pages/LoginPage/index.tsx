@@ -10,15 +10,18 @@ import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore';
 import formErrorHandler from 'utilities/formErrorHandler';
 import Input from 'components/Input';
+import FormButton from 'components/FormButton';
 
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const history = useHistory();
+  const [loading, setLoading] = useState<boolean>(false);
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/user/tokens`,
         formValues,
@@ -34,6 +37,7 @@ export const LoginPage: FC = () => {
       });
       history.replace('/');
     } catch (error) {
+      setLoading(false);
       formErrorHandler(error, setErrors, notification =>
         notificationStore.setNotification(notification),
       );
@@ -54,9 +58,7 @@ export const LoginPage: FC = () => {
 
             <Input name="password" type="password" placeholder="Password" />
 
-            <Button buttonType="primary" type="submit">
-              Log In
-            </Button>
+            <FormButton loading={loading} text="Login" />
           </FieldsWrapper>
         </Form>
       </FormWrapper>

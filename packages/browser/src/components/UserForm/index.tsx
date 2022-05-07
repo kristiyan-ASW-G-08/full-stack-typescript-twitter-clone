@@ -8,6 +8,7 @@ import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
+import FormButton from 'components/FormButton';
 import formErrorHandler from 'utilities/formErrorHandler';
 import populateFormData from 'utilities/populateFormData';
 import useStores from 'hooks/useStores';
