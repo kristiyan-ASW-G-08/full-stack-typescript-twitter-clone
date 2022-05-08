@@ -69,7 +69,7 @@ const UserSchema: Schema = new Schema<User>({
 UserSchema.index({ handle: 'text' });
 
 UserSchema.plugin(uniqueValidator);
-UserSchema.post('save', duplicationErrorHandler);
-UserSchema.post('update', duplicationErrorHandler);
+// UserSchema.post('save', duplicationErrorHandler);
+// UserSchema.post('update', duplicationErrorHandler);
 
 export default mongoose.model<User>('User', UserSchema);

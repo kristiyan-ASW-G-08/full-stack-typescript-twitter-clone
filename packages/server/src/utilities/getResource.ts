@@ -1,5 +1,6 @@
 import mongoose, { Model, Document } from 'mongoose';
 import RESTError, { errors } from '@utilities/RESTError';
+import { ValidationError } from 'yup';
 
 interface FindQuery {
   name: string;
@@ -9,11 +10,12 @@ const getResource = async <T extends Document>(
   model: Model<T>,
   { value, name }: FindQuery,
   select: string = '',
+  validationErrors: ValidationError[] | undefined = undefined,
 ): Promise<T> => {
   const resource = await model.findOne({ [name]: value }).select(select);
   if (!resource) {
     const { status, message } = errors.NotFound;
-    throw new RESTError(status, message);
+    throw new RESTError(status, message, validationErrors);
   }
   return resource;
 };

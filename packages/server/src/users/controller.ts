@@ -21,6 +21,8 @@ import UserType from '@customTypes/User';
 import uploadToCloudinary from '@src/utilities/uploadToCloudinary';
 import deleteCloudinaryFile from '@src/utilities/deleteFromCloudinary';
 import deleteFile from '@src/utilities/deleteFile';
+import ValidationError from '@twtr/common/source/types/ValidationError';
+import duplicationErrorHandler from '@src/middleware/duplicationErrorHandler';
 
 export const signUp = async (
   { body: { username, handle, email, password } }: Request,
@@ -33,7 +35,10 @@ export const signUp = async (
       handle,
       email,
       password: await bcrypt.hash(password, 12),
-    }).save();
+      // eslint-disable-next-line consistent-return
+    })
+      .save()
+      .catch(err => duplicationErrorHandler(err, res));
     res.sendStatus(201);
   } catch (err) {
     passErrorToNext(err, next);
@@ -50,13 +55,15 @@ export const logIn = async (
     const user = await getUserByEmail(email);
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      const { status, message } = errors.Unauthorized;
-      throw new RESTError(status, message, [
-        {
-          path: 'password',
-          message: 'Wrong password. Try again',
-        },
-      ]);
+      const { status } = errors.Unauthorized;
+      res.status(status).send({
+        data: [
+          {
+            path: 'password',
+            message: 'Wrong password. Try again',
+          },
+        ],
+      });
     }
     hasConfirmedEmail(user.isConfirmed);
     const token = jwt.sign(

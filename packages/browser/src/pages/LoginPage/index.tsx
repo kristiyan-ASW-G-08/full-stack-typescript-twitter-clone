@@ -1,11 +1,10 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import axios from 'axios';
 import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import UserLoginValidator from '@twtr/common/source/schemaValidators/UserLoginValidator';
 import { FormWrapper, FieldsWrapper } from 'styled/Form';
-import Button from 'styled/Button';
 import Logo from 'components/Logo';
 import RootStoreContext from 'stores/RootStore';
 import formErrorHandler from 'utilities/formErrorHandler';

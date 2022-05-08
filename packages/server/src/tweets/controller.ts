@@ -30,7 +30,6 @@ export const postTweet = async (
 
     if (file) {
       const { path, filename } = file;
-      console.log(await uploadToCloudinary(path, filename));
       tweet.image = (await uploadToCloudinary(path, filename)).public_id;
       deleteFile(path);
     }
@@ -64,7 +63,6 @@ export const postTweet = async (
     await user.save();
     res.status(201).json({ data: { tweetId: tweet._id } });
   } catch (err) {
-    console.log(err, 'Errooooooooooooooooooooor');
     passErrorToNext(err, next);
   }
 };

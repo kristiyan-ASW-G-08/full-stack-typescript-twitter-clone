@@ -20,13 +20,18 @@ export const SignUpPage: FC = () => {
   ): Promise<void> => {
     try {
       setLoading(true);
-      await axios.post(`${process.env.REACT_APP_API_URL}/users`, formValues);
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users`,
+        formValues,
+      );
       notificationStore.setNotification({
         type: 'message',
         content: 'You have signed up successfully.Now you can log in.',
       });
-      history.replace('/');
+      console.log(data);
+      // history.replace('/');
     } catch (error) {
+      console.log(error);
       setLoading(false);
       formErrorHandler(error, setErrors, notification =>
         notificationStore.setNotification(notification),

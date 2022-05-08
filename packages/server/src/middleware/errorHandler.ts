@@ -3,7 +3,6 @@ import RESTError from '@utilities/RESTError';
 import logger from '@utilities/logger';
 
 const errorHandler = (error: RESTError, _req: Request, res: Response): void => {
-  logger.error(error);
   const status = error.status || 500;
   const { message, data } = error;
   const resData = data ? { data, message } : { message };
