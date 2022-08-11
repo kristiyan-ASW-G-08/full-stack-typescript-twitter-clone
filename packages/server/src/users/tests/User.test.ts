@@ -59,7 +59,7 @@ describe('User', (): void => {
       password,
     });
     await expect(user.save()).resolves.not.toThrowError();
-    expect(duplicationErrorHandlerMock).toHaveBeenCalledTimes(1);
+    expect(duplicationErrorHandlerMock).toHaveBeenCalledTimes(0);
     expect(user).toMatchObject({
       username,
       handle,

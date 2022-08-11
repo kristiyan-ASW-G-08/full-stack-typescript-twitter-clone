@@ -12,6 +12,5 @@ Object {
       "path": "password",
     },
   ],
-  "message": "Request has wrong format",
 }
 `;

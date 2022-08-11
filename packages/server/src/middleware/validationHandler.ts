@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ValidationError } from 'yup';
 import Validator from '@customTypes/Validator';
 import CustomValidationError from '@twtr/common/source/types/ValidationError';
-import RESTError, { errors } from '@utilities/RESTError';
+import { errors } from '@utilities/RESTError';
 
 const validationHandler = (
   validators: Validator[],
@@ -28,8 +28,8 @@ const validationHandler = (
           message,
         }),
       );
-      const { status, message } = errors.BadRequest;
-      next(new RESTError(status, message, validationErrors));
+      const { status } = errors.BadRequest;
+      res.status(status).json({ data: validationErrors });
     }
   };
 };

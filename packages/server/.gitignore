@@ -7,3 +7,4 @@ error.log
 combined.log
 server.cert
 server.key
+out

@@ -10,7 +10,9 @@
     "lint:fix": "eslint . --fix",
     "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
     "test": "jest --watchAll --runInBand --no-cache",
-    "build": "tsc src/index.ts"
+    "build": "tsc src/index.ts",
+    "docs": "jsdoc -c jsdoc.json",
+    "heroku-post-build": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "dependencies": {
     "@twtr/common": "^1.0.307",
@@ -20,6 +22,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^3.19.0",
+    "jsdoc": "^3.6.10",
     "jsonwebtoken": "^8.5.1",
     "mjml": "^4.4.0",
     "mongoose": "^5.6.4",
@@ -52,7 +55,10 @@
     "@types/yup": "^0.26.22",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
+    "better": "^0.1.0",
+    "better-docs": "^2.7.2",
     "concurrently": "^4.1.1",
+    "dock": "^0.1.4",
     "dotenv": "^8.0.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb-typescript": "^4.0.1",
@@ -62,6 +68,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "faker": "^4.1.0",
     "jest": "^24.8.0",
+    "jsdoc": "^3.6.10",
     "mock-fs": "^4.10.1",
     "node-mocks-http": "^1.7.6",
     "nodemon": "^1.19.1",

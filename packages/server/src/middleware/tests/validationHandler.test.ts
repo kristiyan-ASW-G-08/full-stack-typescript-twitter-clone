@@ -13,7 +13,7 @@ const TestValidatorMock = ({ validate } as unknown) as MixedSchema;
 describe('validationHandler', (): void => {
   afterEach(() => jest.clearAllMocks());
   afterAll(() => jest.restoreAllMocks());
-  it(`should call next when a validation error occurs`, async (): Promise<
+  it(`should call next when a validation doesn't occur`, async (): Promise<
     void
   > => {
     expect.assertions(6);
@@ -103,7 +103,9 @@ describe('validationHandler', (): void => {
       query,
       params,
     });
-    const res = httpMocks.createResponse();
+    const resMock = httpMocks.createResponse();
+    const statusMock = jest.spyOn(resMock, 'status');
+    const jsonMock = jest.spyOn(resMock, 'json');
     const next = jest.fn();
     const validators: Validator[] = [
       {
@@ -111,28 +113,18 @@ describe('validationHandler', (): void => {
         target: 'body',
       },
     ];
-    const expectedError = {
-      data: validationErrors,
-      message: 'Request has wrong format',
-      name: 'error',
-      status: 400,
-    };
-
-    await validationHandler(validators)(req, res, next);
+    await validationHandler(validators)(req, resMock, next);
 
     expect(TestValidatorMock.validate).toHaveBeenCalledTimes(1);
     expect(TestValidatorMock.validate).toHaveBeenNthCalledWith(1, body, {
       abortEarly: false,
     });
 
-    expect(RESTErrorMock).toHaveBeenCalledTimes(1);
-    expect(RESTErrorMock).toHaveBeenCalledWith(
-      400,
-      'Request has wrong format',
-      validationErrors,
-    );
+    expect(statusMock).toHaveBeenCalledTimes(1);
+    expect(statusMock).toHaveBeenCalledWith(400);
 
-    expect(next).toHaveBeenCalledTimes(1);
-    expect(next).toHaveBeenCalledWith(expectedError);
+    expect(jsonMock).toHaveBeenCalledTimes(1);
+
+    expect(jsonMock).toHaveBeenCalledWith({ data: validationErrors });
   });
 });

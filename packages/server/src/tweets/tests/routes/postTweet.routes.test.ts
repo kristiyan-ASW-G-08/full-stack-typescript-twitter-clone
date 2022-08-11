@@ -137,7 +137,7 @@ describe('tweetRoutes', () => {
         .set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(201);
     });
-    it.only('should create a new image tweet', async () => {
+    it('should create a new image tweet', async () => {
       expect.assertions(1);
 
       mockFs({
@@ -145,7 +145,6 @@ describe('tweetRoutes', () => {
           'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
         },
       });
-
       const type = 'text';
       const response = await request(app)
         .post('/tweets')
