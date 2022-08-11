@@ -15,10 +15,10 @@ describe('includesId', () => {
     ];
     it(`should return true if the array includes the objectId`, () => {
         const newIdArr = [...idArr, id];
-        expect(includesId_1.default(newIdArr, stringId)).toBeTruthy();
+        expect((0, includesId_1.default)(newIdArr, stringId)).toBeTruthy();
     });
     it(`should return false if the array doesn't include the objectId`, () => {
         const newIdArr = [...idArr];
-        expect(includesId_1.default(newIdArr, stringId)).toBeFalsy();
+        expect((0, includesId_1.default)(newIdArr, stringId)).toBeFalsy();
     });
 });

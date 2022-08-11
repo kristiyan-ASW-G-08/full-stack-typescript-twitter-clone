@@ -32,6 +32,6 @@ describe('getPaginationURLs', () => {
         expect.assertions(1);
         // @ts-ignore
         renderUrlMock.mockReturnValueOnce(nextPage).mockReturnValueOnce(prevPage);
-        expect(getPaginationURLs_1.default({ count, page, queries, urlExtension })).toStrictEqual({ nextPage, prevPage });
+        expect((0, getPaginationURLs_1.default)({ count, page, queries, urlExtension })).toStrictEqual({ nextPage, prevPage });
     });
 });

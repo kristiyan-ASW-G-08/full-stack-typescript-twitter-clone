@@ -26,7 +26,7 @@ describe('User', () => {
     const email = 'testEmail@mail.com';
     const password = 'testPassword';
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         yield User_1.default.deleteMany({}).exec();
     }));
     afterEach(() => __awaiter(void 0, void 0, void 0, function* () {

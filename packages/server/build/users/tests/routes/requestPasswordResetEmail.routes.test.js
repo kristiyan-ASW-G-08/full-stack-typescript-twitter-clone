@@ -44,7 +44,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -57,14 +57,14 @@ describe('userRoutes', () => {
     describe('post /users/user', () => {
         it('should request password reset email', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post(`/users/user`)
                 .send({ email });
             expect(response.status).toBe(204);
         }));
         it("should throw an error with a status of 404: NotFound when the user doesn't exist", () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post(`/users/user`)
                 .send({ email: 'unknownEmail@mail.test' });
             expect(response.status).toBe(404);

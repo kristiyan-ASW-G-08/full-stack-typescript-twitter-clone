@@ -45,7 +45,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -62,7 +62,7 @@ describe('userRoutes', () => {
             const token = jsonwebtoken_1.default.sign({
                 userId,
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default).patch(`/users/user/${token}/confirm`);
+            const response = yield (0, supertest_1.default)(app_1.default).patch(`/users/user/${token}/confirm`);
             const confirmedUser = yield User_1.default.findById(userId);
             if (!confirmedUser) {
                 return;
@@ -76,7 +76,7 @@ describe('userRoutes', () => {
             const token = jsonwebtoken_1.default.sign({
                 userId,
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default).patch(`/users/user/${token}/confirm`);
+            const response = yield (0, supertest_1.default)(app_1.default).patch(`/users/user/${token}/confirm`);
             expect(response.status).toBe(404);
         }));
     });

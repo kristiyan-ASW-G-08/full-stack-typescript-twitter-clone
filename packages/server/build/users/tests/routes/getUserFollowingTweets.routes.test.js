@@ -60,7 +60,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -89,7 +89,7 @@ describe('userRoutes', () => {
             yield newTweet.save();
             testUser.following = [followedUserId];
             yield testUser.save();
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .get(`/users/user/tweets`)
                 .set('Authorization', `Bearer ${token}`);
             const { tweets } = response.body.data;
@@ -114,7 +114,7 @@ describe('userRoutes', () => {
             yield newTweet.save();
             testUser.following = [followedUserId];
             yield testUser.save();
-            const response = yield supertest_1.default(app_1.default).get(`/users/user/tweets`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/user/tweets`);
             expect(response.status).toBe(401);
         }));
         it('should throw an error with a status of 404: NotFound when the user is not found', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -132,7 +132,7 @@ describe('userRoutes', () => {
             const notFoundToken = jsonwebtoken_1.default.sign({
                 userId: mongoose_1.default.Types.ObjectId(),
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .get(`/users/user/tweets`)
                 .set('Authorization', `Bearer ${notFoundToken}`);
             expect(response.status).toBe(404);

@@ -18,14 +18,14 @@ describe('fileFilter', () => {
     it.each(formats)('should call cb once with true', (format) => {
         expect.assertions(2);
         const cb = jest.fn();
-        fileFilter_1.default(reqMock, { mimetype: format }, cb);
+        (0, fileFilter_1.default)(reqMock, { mimetype: format }, cb);
         expect(cb).toHaveBeenCalledTimes(1);
         expect(cb).toHaveBeenCalledWith(null, true);
     });
     it.each(unacceptableFormats)('should call cb once with false', (format) => {
         expect.assertions(2);
         const cb = jest.fn();
-        fileFilter_1.default(reqMock, { mimetype: format }, cb);
+        (0, fileFilter_1.default)(reqMock, { mimetype: format }, cb);
         expect(cb).toHaveBeenCalledTimes(1);
         expect(cb).toHaveBeenCalledWith(null, false);
     });

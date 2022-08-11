@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserById = exports.getUserByEmail = void 0;
 const User_1 = __importDefault(require("src/users/User"));
 const getResource_1 = __importDefault(require("@utilities/getResource"));
-exports.getUserByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () { return getResource_1.default(User_1.default, { name: 'email', value: email }); });
-exports.getUserById = (userId, secure = true) => __awaiter(void 0, void 0, void 0, function* () {
-    return getResource_1.default(User_1.default, { name: '_id', value: userId }, secure ? '' : '-password -email -confirmed');
+const getUserByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () { return (0, getResource_1.default)(User_1.default, { name: 'email', value: email }); });
+exports.getUserByEmail = getUserByEmail;
+const getUserById = (userId, secure = true) => __awaiter(void 0, void 0, void 0, function* () {
+    return (0, getResource_1.default)(User_1.default, { name: '_id', value: userId }, secure ? '' : '-password -email -confirmed');
 });
+exports.getUserById = getUserById;

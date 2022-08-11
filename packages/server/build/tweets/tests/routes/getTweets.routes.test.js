@@ -44,7 +44,7 @@ describe('tweetRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield Tweet_1.default.deleteMany({}).exec();
         yield User_1.default.deleteMany({}).exec();
@@ -62,14 +62,14 @@ describe('tweetRoutes', () => {
             });
             yield newTweet.save();
             const tweetId = newTweet._id;
-            const response = yield supertest_1.default(app_1.default).get(`/tweets/${tweetId}`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/tweets/${tweetId}`);
             const { tweet } = response.body.data;
             expect(response.status).toBe(200);
             expect(tweet._id.toString()).toMatch(tweetId.toString());
         }));
         it('should throw an error with a status of 404: NotFound when the tweet is not found', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default).get(`/tweets/${mongoose_1.default.Types.ObjectId()}`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/tweets/${mongoose_1.default.Types.ObjectId()}`);
             expect(response.status).toBe(404);
         }));
     });
@@ -82,7 +82,7 @@ describe('tweetRoutes', () => {
                 user: userId,
             });
             yield newTweet.save();
-            const response = yield supertest_1.default(app_1.default).get(`/users/${userId}/tweets`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${userId}/tweets`);
             expect(response.status).toBe(200);
         }));
     });
@@ -95,7 +95,7 @@ describe('tweetRoutes', () => {
                 user: userId,
             });
             yield newTweet.save();
-            const response = yield supertest_1.default(app_1.default).get(`/tweets`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/tweets`);
             expect(response.status).toBe(200);
         }));
     });
@@ -110,7 +110,7 @@ describe('tweetRoutes', () => {
                 reply: tweetId,
             });
             yield newReply.save();
-            const response = yield supertest_1.default(app_1.default).get(`/tweets/${tweetId}/replies`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/tweets/${tweetId}/replies`);
             expect(response.status).toBe(200);
         }));
     });
@@ -125,7 +125,7 @@ describe('tweetRoutes', () => {
                 reply: tweetId,
             });
             yield newReply.save();
-            const response = yield supertest_1.default(app_1.default).get(`/users/${userId}/replies`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${userId}/replies`);
             expect(response.status).toBe(200);
         }));
     });

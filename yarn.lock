@@ -2116,7 +2116,7 @@
     "@lerna/validation-error" "5.4.0"
     p-map "^4.0.0"
 
-"@lerna/filter-options@5.4.0":
+"@lerna/filter-options@5.4.0", "@lerna/filter-options@^5.4.0":
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@lerna/filter-options/-/filter-options-5.4.0.tgz#c1f53a705c8256d599b7cf72b75b1e0945673ff6"
   integrity sha512-qK8863UrVcgKJYoZ0dKs82uXIeHhntMoCcqWXOUa1zHP4Fwuz0nGhVGWIO2q4GC8A4HoeduN6vjrLr2d6rsEdw==
@@ -4735,13 +4735,6 @@
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
-
-"@types/mongoose-unique-validator@^1.0.3":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/mongoose-unique-validator/-/mongoose-unique-validator-1.0.6.tgz#03f2ccf142fce817e779dc1c32501565732b27b8"
-  integrity sha512-IBZh2biw+vGK98BJJ+gQagEaZHYLk7kc5h2vIoirhqSyKbGjLPV1WCnJUpxfru3Veg+KozyEuoKAtoYGCHaG8A==
-  dependencies:
-    mongoose "^6.3.0"
 
 "@types/mongoose@^5.5.8":
   version "5.11.97"
@@ -16423,7 +16416,7 @@ mongoose-unique-validator@^2.0.3:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
 
-mongoose@*, mongoose@^6.3.0:
+mongoose@*:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.5.2.tgz#630ae67c4d2576635ba1f859b2840560b27b7775"
   integrity sha512-3CFDrSLtK2qjM1pZeZpLTUyqPRkc11Iuh74ZrwS4IwEJ3K2PqGnmyPLw7ex4Kzu37ujIMp3MAuiBlUjfrcb6hw==
@@ -22776,12 +22769,12 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@^3.2.2, typescript@^3.5.3, typescript@^3.7.2, typescript@^3.7.3:
+typescript@^3.2.2, typescript@^3.5.3, typescript@^3.7.3:
   version "3.9.10"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
   integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
-typescript@^4.1.2, typescript@^4.5.4:
+typescript@^4.1.2, typescript@^4.5.4, typescript@^4.7.4:
   version "4.7.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==

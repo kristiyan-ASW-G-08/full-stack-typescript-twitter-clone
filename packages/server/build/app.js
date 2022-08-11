@@ -10,9 +10,9 @@ const compression_1 = __importDefault(require("compression"));
 const routes_1 = __importDefault(require("src/users/routes"));
 const routes_2 = __importDefault(require("src/tweets/routes"));
 const errorHandler_1 = __importDefault(require("@customMiddleware/errorHandler"));
-const app = express_1.default();
-app.use(helmet_1.default());
-app.use(compression_1.default());
+const app = (0, express_1.default)();
+app.use((0, helmet_1.default)());
+app.use((0, compression_1.default)());
 app.use(body_parser_1.default.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

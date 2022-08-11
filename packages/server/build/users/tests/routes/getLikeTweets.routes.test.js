@@ -60,7 +60,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -75,12 +75,12 @@ describe('userRoutes', () => {
             expect.assertions(1);
             testUser.likes = [testTweet._id];
             yield testUser.save();
-            const response = yield supertest_1.default(app_1.default).get(`/users/${userId}/likes`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${userId}/likes`);
             expect(response.status).toBe(200);
         }));
         it('should throw an error with a status of 404: NotFound when the user is not found', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default).get(`/users/${mongoose_1.default.Types.ObjectId()}/likes`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${mongoose_1.default.Types.ObjectId()}/likes`);
             expect(response.status).toBe(404);
         }));
     });

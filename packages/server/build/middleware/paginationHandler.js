@@ -10,7 +10,7 @@ const paginationHandler = (req, _, next) => {
         limit: parseInt(req.query.limit, 10) || 25,
         sort,
         page: parseInt(req.query.page, 10) || 1,
-        sortString: getSortString_1.default(sort),
+        sortString: (0, getSortString_1.default)(sort),
     };
     next();
 };

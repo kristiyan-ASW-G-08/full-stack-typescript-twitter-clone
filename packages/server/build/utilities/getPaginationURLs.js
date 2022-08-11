@@ -7,9 +7,9 @@ const renderUrl_1 = __importDefault(require("@utilities/renderUrl"));
 const getNavigationURLs = ({ page, urlExtension, count, queries, }) => {
     return {
         nextPage: count > 0
-            ? renderUrl_1.default(urlExtension, Object.assign(Object.assign({}, queries), { page: page + 1 }))
+            ? (0, renderUrl_1.default)(urlExtension, Object.assign(Object.assign({}, queries), { page: page + 1 }))
             : null,
-        prevPage: page > 1 ? renderUrl_1.default(urlExtension, Object.assign(Object.assign({}, queries), { page: page - 1 })) : null,
+        prevPage: page > 1 ? (0, renderUrl_1.default)(urlExtension, Object.assign(Object.assign({}, queries), { page: page - 1 })) : null,
     };
 };
 exports.default = getNavigationURLs;

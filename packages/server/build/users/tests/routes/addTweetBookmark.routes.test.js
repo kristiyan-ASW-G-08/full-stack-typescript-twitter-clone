@@ -61,7 +61,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
         yield Tweet_1.default.deleteMany({}).exec();
@@ -76,7 +76,7 @@ describe('userRoutes', () => {
     describe('patch /users/tweets/:tweetId/bookmark', () => {
         it('should add a tweet bookmark', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(3);
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .patch(`/users/tweets/${tweetId}/bookmark`)
                 .set('Authorization', `Bearer ${token}`);
             const user = yield User_1.default.findById(userId);
@@ -90,7 +90,7 @@ describe('userRoutes', () => {
             expect.assertions(3);
             testUser.bookmarks = [tweetId];
             yield testUser.save();
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .patch(`/users/tweets/${tweetId}/bookmark`)
                 .set('Authorization', `Bearer ${token}`);
             const user = yield User_1.default.findById(userId);
@@ -102,7 +102,7 @@ describe('userRoutes', () => {
         }));
         it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default).patch(`/users/tweets/${tweetId}/bookmark`);
+            const response = yield (0, supertest_1.default)(app_1.default).patch(`/users/tweets/${tweetId}/bookmark`);
             expect(response.status).toBe(401);
         }));
         it("should throw an error with a status of 404: NotFound when the user doesn't exist", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -110,7 +110,7 @@ describe('userRoutes', () => {
             const notFoundToken = jsonwebtoken_1.default.sign({
                 userId: mongoose_1.default.Types.ObjectId().toString(),
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .patch(`/users/tweets/${tweetId}/bookmark`)
                 .set('Authorization', `Bearer ${notFoundToken}`);
             expect(response.status).toBe(404);

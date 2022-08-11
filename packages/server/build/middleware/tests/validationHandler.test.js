@@ -58,7 +58,7 @@ describe('validationHandler', () => {
                 target: 'params',
             },
         ];
-        yield validationHandler_1.default(validators)(req, res, next);
+        yield (0, validationHandler_1.default)(validators)(req, res, next);
         expect(TestValidatorMock.validate).toHaveBeenCalledTimes(3);
         expect(TestValidatorMock.validate).toHaveBeenNthCalledWith(1, body, {
             abortEarly: false,
@@ -111,7 +111,7 @@ describe('validationHandler', () => {
                 target: 'body',
             },
         ];
-        yield validationHandler_1.default(validators)(req, resMock, next);
+        yield (0, validationHandler_1.default)(validators)(req, resMock, next);
         expect(TestValidatorMock.validate).toHaveBeenCalledTimes(1);
         expect(TestValidatorMock.validate).toHaveBeenNthCalledWith(1, body, {
             abortEarly: false,

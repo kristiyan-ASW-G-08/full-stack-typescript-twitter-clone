@@ -25,7 +25,7 @@ describe('paginationHandler', () => {
             },
         });
         const resMock = node_mocks_http_1.default.createResponse();
-        paginationHandler_1.default(reqMock, resMock, nextMock);
+        (0, paginationHandler_1.default)(reqMock, resMock, nextMock);
         expect(nextMock).toBeCalledTimes(1);
         expect(reqMock.pagination).toEqual({
             limit: 25,
@@ -45,7 +45,7 @@ describe('paginationHandler', () => {
             },
         });
         const resMock = node_mocks_http_1.default.createResponse();
-        paginationHandler_1.default(reqMock, resMock, nextMock);
+        (0, paginationHandler_1.default)(reqMock, resMock, nextMock);
         expect(nextMock).toBeCalledTimes(1);
         expect(reqMock.pagination).toEqual({
             limit,

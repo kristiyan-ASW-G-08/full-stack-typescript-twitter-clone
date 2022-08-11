@@ -36,7 +36,7 @@ describe('findDocs', () => {
             .spyOn(User_1.default, 'countDocuments')
             // @ts-ignore
             .mockReturnValue({ find });
-        yield findDocs_1.default({
+        yield (0, findDocs_1.default)({
             model: User_1.default,
             pagination,
             query: findQuery,

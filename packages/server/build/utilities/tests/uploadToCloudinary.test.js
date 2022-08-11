@@ -22,7 +22,7 @@ describe('uploadToCloudinary', () => {
         const path = './mockPath';
         const filename = 'fileName';
         // @ts-ignore
-        uploadToCloudinary_1.default(path, filename);
+        (0, uploadToCloudinary_1.default)(path, filename);
         // @ts-ignore
         expect(cloudinary_1.default.v2.uploader.upload).toHaveBeenCalledTimes(1);
         // @ts-ignore

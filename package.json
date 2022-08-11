@@ -24,7 +24,10 @@
       "**/babel-loader/**"
     ]
   },
-  "dependencies": {"lerna":""},
+  "dependencies": {
+    "@lerna/filter-options": "^5.4.0",
+    "lerna": ""
+  },
   "devDependencies": {
     "cypress": "^9.6.0"
   }

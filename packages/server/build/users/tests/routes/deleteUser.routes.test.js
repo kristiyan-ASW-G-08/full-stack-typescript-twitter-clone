@@ -51,7 +51,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -64,14 +64,14 @@ describe('userRoutes', () => {
     describe('delete /users', () => {
         it('should delete a user', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .delete(`/users`)
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toBe(204);
         }));
         it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default).delete(`/users`);
+            const response = yield (0, supertest_1.default)(app_1.default).delete(`/users`);
             expect(response.status).toBe(401);
         }));
         it('should throw an error with a status of 404: NotFound when the user is not found', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -79,7 +79,7 @@ describe('userRoutes', () => {
             const notFoundToken = jsonwebtoken_1.default.sign({
                 userId: mongoose_1.default.Types.ObjectId(),
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .delete(`/users`)
                 .set('Authorization', `Bearer ${notFoundToken}`);
             expect(response.status).toBe(404);

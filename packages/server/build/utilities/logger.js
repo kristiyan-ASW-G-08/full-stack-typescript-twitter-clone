@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const winston_1 = require("winston");
 const { combine, timestamp, colorize, prettyPrint } = winston_1.format;
 const { File, Console } = winston_1.transports;
-const logger = winston_1.createLogger({
+const logger = (0, winston_1.createLogger)({
     level: 'info',
     format: combine(timestamp(), prettyPrint(), colorize()),
     transports: [

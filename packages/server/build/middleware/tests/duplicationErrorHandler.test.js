@@ -29,7 +29,7 @@ describe('duplicationErrorHandler', () => {
         const validationErrors = [
             { path, message: `${value} is already taken` },
         ];
-        duplicationErrorHandler_1.default(MongooseError, resMock);
+        (0, duplicationErrorHandler_1.default)(MongooseError, resMock);
         expect(statusMock).toHaveBeenCalledTimes(1);
         expect(statusMock).toHaveBeenCalledWith(status);
         expect(jsMock).toHaveBeenCalledTimes(1);

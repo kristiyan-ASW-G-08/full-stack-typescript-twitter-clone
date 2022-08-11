@@ -45,7 +45,7 @@ describe('authenticationHandler', () => {
             },
         });
         const resMock = node_mocks_http_1.default.createResponse();
-        authenticationHandler_1.default(reqMock, resMock, nextMock);
+        (0, authenticationHandler_1.default)(reqMock, resMock, nextMock);
         expect(jsonwebtoken_1.default.verify).toHaveBeenCalledTimes(1);
         expect(jsonwebtoken_1.default.verify).toHaveBeenCalledWith(token, SECRET);
         expect(jsonwebtoken_1.default.verify).toHaveReturnedTimes(1);
@@ -60,7 +60,7 @@ describe('authenticationHandler', () => {
             url: '/',
         });
         const resMock = node_mocks_http_1.default.createResponse();
-        expect(() => authenticationHandler_1.default(reqMock, resMock, nextMock)).toThrowErrorMatchingSnapshot();
+        expect(() => (0, authenticationHandler_1.default)(reqMock, resMock, nextMock)).toThrowErrorMatchingSnapshot();
     }));
     it("should throw an error with a status of 401: Unauthorized when the decoded jwt token doesn't contain a user id ", () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(1);
@@ -74,6 +74,6 @@ describe('authenticationHandler', () => {
             },
         });
         const resMock = node_mocks_http_1.default.createResponse();
-        expect(() => authenticationHandler_1.default(reqMock, resMock, nextMock)).toThrowErrorMatchingSnapshot();
+        expect(() => (0, authenticationHandler_1.default)(reqMock, resMock, nextMock)).toThrowErrorMatchingSnapshot();
     }));
 });

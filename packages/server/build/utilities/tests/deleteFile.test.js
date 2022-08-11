@@ -18,12 +18,12 @@ describe('deleteFile', () => {
     afterEach(mock_fs_1.default.restore);
     it('should delete a file', () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(1);
-        mock_fs_1.default({
+        (0, mock_fs_1.default)({
             '/images': {
                 'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
             },
         });
         const path = '/images/test.jpg';
-        yield expect(deleteFile_1.default(path)).resolves.toBeUndefined();
+        yield expect((0, deleteFile_1.default)(path)).resolves.toBeUndefined();
     }));
 });

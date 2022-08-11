@@ -15,7 +15,7 @@ describe('removeFromArr', () => {
     ];
     it(`should return true`, () => {
         const newIdArr = [...idArr, id];
-        const removedIdArr = removeId_1.default(newIdArr, stringId);
+        const removedIdArr = (0, removeId_1.default)(newIdArr, stringId);
         expect(removedIdArr).toHaveLength(3);
         expect(removedIdArr).toEqual(idArr);
     });

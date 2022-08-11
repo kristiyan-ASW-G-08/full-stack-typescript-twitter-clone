@@ -29,7 +29,7 @@ describe('getResource', () => {
             .spyOn(User_1.default, 'findOne')
             // @ts-ignore
             .mockReturnValue({ select });
-        yield getResource_1.default(User_1.default, findQuery, selectQuery);
+        yield (0, getResource_1.default)(User_1.default, findQuery, selectQuery);
         expect(findOneSpy).toHaveBeenCalledTimes(1);
         expect(findOneSpy).toHaveBeenCalledWith({
             [findQuery.name]: findQuery.value,
@@ -53,7 +53,7 @@ describe('getResource', () => {
             data,
             name: 'error',
         }));
-        yield expect(getResource_1.default(User_1.default, findQuery, selectQuery)).rejects.toThrowErrorMatchingSnapshot();
+        yield expect((0, getResource_1.default)(User_1.default, findQuery, selectQuery)).rejects.toThrowErrorMatchingSnapshot();
         expect(RESTErrorMock).toHaveBeenCalledTimes(1);
     }));
 });

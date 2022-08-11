@@ -24,7 +24,7 @@ describe('sendEmail', () => {
     };
     it('should call createTransport and sendMail', () => {
         expect.assertions(2);
-        sendEmail_1.default(mailOptions);
+        (0, sendEmail_1.default)(mailOptions);
         expect(nodemailer_1.default.createTransport).toHaveBeenCalledTimes(1);
         expect(sendMailMock).toHaveBeenCalledTimes(1);
     });

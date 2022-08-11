@@ -58,7 +58,7 @@ describe('tweetRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield Tweet_1.default.deleteMany({}).exec();
         yield User_1.default.deleteMany({}).exec();
@@ -70,7 +70,7 @@ describe('tweetRoutes', () => {
         it('should create a new text tweet', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
             const type = 'text';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,
@@ -82,7 +82,7 @@ describe('tweetRoutes', () => {
         it('should create a new link tweet', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
             const type = 'link';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,
@@ -101,7 +101,7 @@ describe('tweetRoutes', () => {
             yield tweet.save();
             const retweetId = tweet._id;
             const type = 'retweet';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,
@@ -121,7 +121,7 @@ describe('tweetRoutes', () => {
             yield tweet.save();
             const replyId = tweet._id;
             const type = 'reply';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,
@@ -133,13 +133,13 @@ describe('tweetRoutes', () => {
         }));
         it('should create a new image tweet', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            mock_fs_1.default({
+            (0, mock_fs_1.default)({
                 './images': {
                     'test.jpg': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
                 },
             });
             const type = 'text';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .field({
                 type,
@@ -152,7 +152,7 @@ describe('tweetRoutes', () => {
         it("should throw an error with a status of 400: BadRequest when the tweet type and the content don't match", () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
             const type = 'retweet';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,
@@ -164,7 +164,7 @@ describe('tweetRoutes', () => {
         it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
             const type = 'text';
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/tweets')
                 .send({
                 type,

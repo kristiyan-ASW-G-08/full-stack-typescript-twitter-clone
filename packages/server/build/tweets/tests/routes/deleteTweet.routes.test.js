@@ -55,7 +55,7 @@ describe('tweetRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield Tweet_1.default.deleteMany({}).exec();
         yield User_1.default.deleteMany({}).exec();
@@ -76,7 +76,7 @@ describe('tweetRoutes', () => {
             const token = jsonwebtoken_1.default.sign({
                 userId: testUser._id,
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .delete(`/tweets/${tweetId}`)
                 .set('Authorization', `Bearer ${token}`);
             const tweet = yield Tweet_1.default.findById(tweetId);
@@ -96,7 +96,7 @@ describe('tweetRoutes', () => {
             const token = jsonwebtoken_1.default.sign({
                 userId: unauthorizedUserId,
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .delete(`/tweets/${tweetId}`)
                 .set('Authorization', `Bearer ${token}`);
             const tweet = yield Tweet_1.default.findById(tweetId);
@@ -110,7 +110,7 @@ describe('tweetRoutes', () => {
             const token = jsonwebtoken_1.default.sign({
                 userId,
             }, secret, { expiresIn: '1h' });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .delete(`/tweets/${tweetId}`)
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toBe(404);

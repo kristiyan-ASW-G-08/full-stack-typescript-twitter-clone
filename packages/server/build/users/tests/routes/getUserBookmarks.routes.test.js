@@ -60,7 +60,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -76,14 +76,14 @@ describe('userRoutes', () => {
             const validUserId = mongoose_1.default.Types.ObjectId().toString();
             testUser.bookmarks = [tweetId];
             yield testUser.save();
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .get(`/users/user/bookmarks`)
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toBe(200);
         }));
         it('should throw an error with a status of 401: Unauthorized when there is no authorization header or its contents are invalid', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default).get(`/users/user/bookmarks`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/user/bookmarks`);
             expect(response.status).toBe(401);
         }));
     });

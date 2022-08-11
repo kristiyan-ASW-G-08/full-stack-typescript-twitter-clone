@@ -29,7 +29,7 @@ describe('userRoutes', () => {
     const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -55,7 +55,7 @@ describe('userRoutes', () => {
                 password: hashedPassword,
                 isConfirmed: true,
             });
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/users/user/tokens')
                 .send({
                 email,
@@ -70,13 +70,13 @@ describe('userRoutes', () => {
         }));
         it("should throw an error with a status of 400: BadRequest when the req body doesn't pass validation", () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(2);
-            const response = yield supertest_1.default(app_1.default).post('/users/user/tokens');
+            const response = yield (0, supertest_1.default)(app_1.default).post('/users/user/tokens');
             expect(response.status).toBe(400);
             expect(response.body).toMatchSnapshot();
         }));
         it("should throw an error with a status of 404: NotFound when the user doesn't exist", () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(1);
-            const response = yield supertest_1.default(app_1.default)
+            const response = yield (0, supertest_1.default)(app_1.default)
                 .post('/users/user/tokens')
                 .send({
                 email,

@@ -32,7 +32,7 @@ describe('userRoutes', () => {
     const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield Tweet_1.default.deleteMany({}).exec();
         yield User_1.default.deleteMany({}).exec();
@@ -70,7 +70,7 @@ describe('userRoutes', () => {
         }));
         beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
             yield mongoose_1.default.disconnect();
-            yield connectToDB_1.default(mongoURI);
+            yield (0, connectToDB_1.default)(mongoURI);
             app_1.default.listen(port);
             yield Tweet_1.default.deleteMany({}).exec();
             yield User_1.default.deleteMany({}).exec();
@@ -92,7 +92,7 @@ describe('userRoutes', () => {
                 testUser.following = [followedUserId];
                 yield testUser.save();
                 const userId = testUser._id;
-                const response = yield supertest_1.default(app_1.default).get(`/users/${userId}/following`);
+                const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${userId}/following`);
                 const { users } = response.body.data;
                 expect(response.status).toBe(200);
                 expect(users).toHaveLength(1);
@@ -104,7 +104,7 @@ describe('userRoutes', () => {
                 const token = jsonwebtoken_1.default.sign({
                     userId,
                 }, secret, { expiresIn: '1h' });
-                const response = yield supertest_1.default(app_1.default).get(`/users/${userId}/following`);
+                const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${userId}/following`);
                 expect(response.status).toBe(404);
             }));
         });
@@ -122,7 +122,7 @@ describe('userRoutes', () => {
                 testUser.following = [followedUserId];
                 yield testUser.save();
                 const userId = testUser._id;
-                const response = yield supertest_1.default(app_1.default).get(`/users/${followedUserId}/followers`);
+                const response = yield (0, supertest_1.default)(app_1.default).get(`/users/${followedUserId}/followers`);
                 const { users } = response.body.data;
                 expect(response.status).toBe(200);
                 expect(users).toHaveLength(1);

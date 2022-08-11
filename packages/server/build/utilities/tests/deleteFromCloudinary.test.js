@@ -22,7 +22,7 @@ describe('deleteFromCloudinary', () => {
         expect.assertions(2);
         const filename = 'fileName';
         // @ts-ignore
-        deleteFromCloudinary_1.default(filename);
+        (0, deleteFromCloudinary_1.default)(filename);
         // @ts-ignore
         expect(cloudinary_1.default.uploader.destroy).toHaveBeenCalledTimes(1);
         // @ts-ignore

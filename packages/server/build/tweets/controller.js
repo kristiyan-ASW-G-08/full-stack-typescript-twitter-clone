@@ -26,9 +26,9 @@ const findDocs_1 = __importDefault(require("@utilities/findDocs"));
 const getPaginationURLs_1 = __importDefault(require("@utilities/getPaginationURLs"));
 const uploadToCloudinary_1 = __importDefault(require("@src/utilities/uploadToCloudinary"));
 const deleteFromCloudinary_1 = __importDefault(require("@src/utilities/deleteFromCloudinary"));
-exports.postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }, file }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }, file }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield services_2.getUserById(userId);
+        const user = yield (0, services_2.getUserById)(userId);
         const tweet = new Tweet_1.default({
             text,
             user: userId,
@@ -37,14 +37,14 @@ exports.postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }
         });
         if (file) {
             const { path, filename } = file;
-            tweet.image = (yield uploadToCloudinary_1.default(path, filename)).public_id;
-            deleteFile_1.default(path);
+            tweet.image = (yield (0, uploadToCloudinary_1.default)(path, filename)).public_id;
+            (0, deleteFile_1.default)(path);
         }
         if (retweetId) {
-            const retweetedTweet = yield services_1.getTweetById(retweetId);
+            const retweetedTweet = yield (0, services_1.getTweetById)(retweetId);
             tweet.retweet = retweetId;
-            if (includesId_1.default(user.retweets, retweetId)) {
-                user.retweets = removeId_1.default(user.retweets, retweetId);
+            if ((0, includesId_1.default)(user.retweets, retweetId)) {
+                user.retweets = (0, removeId_1.default)(user.retweets, retweetId);
                 retweetedTweet.retweets -= 1;
             }
             else {
@@ -54,10 +54,10 @@ exports.postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }
             yield retweetedTweet.save();
         }
         if (replyId) {
-            const replyTweet = yield services_1.getTweetById(replyId);
+            const replyTweet = yield (0, services_1.getTweetById)(replyId);
             tweet.reply = replyId;
-            if (includesId_1.default(user.replies, replyId)) {
-                user.replies = removeId_1.default(user.replies, replyId);
+            if ((0, includesId_1.default)(user.replies, replyId)) {
+                user.replies = (0, removeId_1.default)(user.replies, replyId);
                 replyTweet.replies -= 1;
             }
             else {
@@ -71,45 +71,47 @@ exports.postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }
         res.status(201).json({ data: { tweetId: tweet._id } });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.patchTweet = ({ userId, body: { text, linkUrl }, params: { tweetId }, file }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postTweet = postTweet;
+const patchTweet = ({ userId, body: { text, linkUrl }, params: { tweetId }, file }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tweet = yield services_1.getTweetById(tweetId);
-        isAuthorized_1.default(tweet.user.toString(), userId);
+        const tweet = yield (0, services_1.getTweetById)(tweetId);
+        (0, isAuthorized_1.default)(tweet.user.toString(), userId);
         tweet.text = text;
         tweet.link = linkUrl;
         if (tweet.image && file) {
             const { path, filename } = file;
-            yield deleteFromCloudinary_1.default(tweet.image);
-            tweet.image = (yield uploadToCloudinary_1.default(path, filename)).public_id;
-            deleteFile_1.default(path);
+            yield (0, deleteFromCloudinary_1.default)(tweet.image);
+            tweet.image = (yield (0, uploadToCloudinary_1.default)(path, filename)).public_id;
+            (0, deleteFile_1.default)(path);
         }
         yield tweet.save();
         res.sendStatus(204);
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.deleteTweet = ({ params: { tweetId }, userId }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.patchTweet = patchTweet;
+const deleteTweet = ({ params: { tweetId }, userId }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tweet = yield services_1.getTweetById(tweetId);
-        isAuthorized_1.default(tweet.user.toString(), userId);
-        const user = yield services_2.getUserById(tweet.user, false);
+        const tweet = yield (0, services_1.getTweetById)(tweetId);
+        (0, isAuthorized_1.default)(tweet.user.toString(), userId);
+        const user = yield (0, services_2.getUserById)(tweet.user, false);
         if (tweet.image) {
-            yield deleteFromCloudinary_1.default(tweet.image);
+            yield (0, deleteFromCloudinary_1.default)(tweet.image);
         }
         if (tweet.type === 'reply') {
-            const repliedToTweet = yield services_1.getTweetById(tweet.reply);
-            user.replies = removeId_1.default(user.replies, tweet.reply);
+            const repliedToTweet = yield (0, services_1.getTweetById)(tweet.reply);
+            user.replies = (0, removeId_1.default)(user.replies, tweet.reply);
             repliedToTweet.replies -= 1;
             yield repliedToTweet.save();
         }
         if (tweet.type === 'retweet') {
-            const repliedToTweet = yield services_1.getTweetById(tweet.reply);
-            user.retweets = removeId_1.default(user.retweets, tweet.reply);
+            const repliedToTweet = yield (0, services_1.getTweetById)(tweet.reply);
+            user.retweets = (0, removeId_1.default)(user.retweets, tweet.reply);
             repliedToTweet.retweets -= 1;
             yield repliedToTweet.save();
         }
@@ -117,12 +119,13 @@ exports.deleteTweet = ({ params: { tweetId }, userId }, res, next) => __awaiter(
         res.sendStatus(204);
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.getTweet = ({ params: { tweetId } }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteTweet = deleteTweet;
+const getTweet = ({ params: { tweetId } }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tweet = yield services_1.getTweetById(tweetId);
+        const tweet = yield (0, services_1.getTweetById)(tweetId);
         const populatedTweet = yield tweet
             .populate([
             { path: 'user', select: 'username handle avatar' },
@@ -133,18 +136,19 @@ exports.getTweet = ({ params: { tweetId } }, res, next) => __awaiter(void 0, voi
         res.status(200).json({ data: { tweet: populatedTweet } });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.getAllTweets = ({ pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getTweet = getTweet;
+const getAllTweets = ({ pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page, limit, sort } = pagination;
-        const { documents, count } = yield findDocs_1.default({
+        const { documents, count } = yield (0, findDocs_1.default)({
             model: Tweet_1.default,
             pagination,
             query: {},
         });
-        const { prevPage, nextPage } = getPaginationURLs_1.default({
+        const { prevPage, nextPage } = (0, getPaginationURLs_1.default)({
             page,
             urlExtension: 'tweets',
             count,
@@ -164,18 +168,19 @@ exports.getAllTweets = ({ pagination }, res, next) => __awaiter(void 0, void 0, 
         });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.getUserTweets = ({ params: { userId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAllTweets = getAllTweets;
+const getUserTweets = ({ params: { userId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page, limit, sort } = pagination;
-        const { documents, count } = yield findDocs_1.default({
+        const { documents, count } = yield (0, findDocs_1.default)({
             model: Tweet_1.default,
             pagination,
             query: { user: userId },
         });
-        const { prevPage, nextPage } = getPaginationURLs_1.default({
+        const { prevPage, nextPage } = (0, getPaginationURLs_1.default)({
             page,
             urlExtension: `users/${userId}/tweets`,
             count,
@@ -195,18 +200,19 @@ exports.getUserTweets = ({ params: { userId }, pagination }, res, next) => __awa
         });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.getReplies = ({ params: { tweetId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUserTweets = getUserTweets;
+const getReplies = ({ params: { tweetId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page, limit, sort } = pagination;
-        const { documents, count } = yield findDocs_1.default({
+        const { documents, count } = yield (0, findDocs_1.default)({
             model: Tweet_1.default,
             pagination,
             query: { reply: tweetId },
         });
-        const { prevPage, nextPage } = getPaginationURLs_1.default({
+        const { prevPage, nextPage } = (0, getPaginationURLs_1.default)({
             page,
             urlExtension: `tweets/${tweetId}/replies`,
             count,
@@ -226,18 +232,19 @@ exports.getReplies = ({ params: { tweetId }, pagination }, res, next) => __await
         });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
-exports.getUserReplies = ({ params: { userId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getReplies = getReplies;
+const getUserReplies = ({ params: { userId }, pagination }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page, limit, sort } = pagination;
-        const { documents, count } = yield findDocs_1.default({
+        const { documents, count } = yield (0, findDocs_1.default)({
             model: Tweet_1.default,
             pagination,
             query: { user: userId, type: 'reply' },
         });
-        const { prevPage, nextPage } = getPaginationURLs_1.default({
+        const { prevPage, nextPage } = (0, getPaginationURLs_1.default)({
             page,
             urlExtension: `users/${userId}/replies`,
             count,
@@ -257,6 +264,7 @@ exports.getUserReplies = ({ params: { userId }, pagination }, res, next) => __aw
         });
     }
     catch (err) {
-        passErrorToNext_1.default(err, next);
+        (0, passErrorToNext_1.default)(err, next);
     }
 });
+exports.getUserReplies = getUserReplies;

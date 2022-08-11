@@ -22,18 +22,18 @@ describe('errorHandler', () => {
             data,
             name: 'error',
         }));
-        const reqMock = node_mocks_http_1.createRequest({
+        const reqMock = (0, node_mocks_http_1.createRequest)({
             method: 'POST',
             url: '/',
         });
-        const resMock = node_mocks_http_1.createResponse();
+        const resMock = (0, node_mocks_http_1.createResponse)();
         const statusMock = jest.spyOn(resMock, 'status');
         const jsonMock = jest.spyOn(resMock, 'json');
         const status = 400;
         const message = 'Error Message';
         const data = 'Error Data';
         const error = new RESTError_1.default(status, message, data);
-        errorHandler_1.default(error, reqMock, resMock);
+        (0, errorHandler_1.default)(error, reqMock, resMock);
         expect(loggerMock.error).toHaveBeenCalledTimes(1);
         expect(loggerMock.error).toHaveBeenCalledWith(error);
         expect(statusMock).toHaveBeenCalledWith(status);
@@ -51,18 +51,18 @@ describe('errorHandler', () => {
             data: undefined,
             name: 'error',
         }));
-        const reqMock = node_mocks_http_1.createRequest({
+        const reqMock = (0, node_mocks_http_1.createRequest)({
             method: 'POST',
             url: '/',
         });
-        const resMock = node_mocks_http_1.createResponse();
+        const resMock = (0, node_mocks_http_1.createResponse)();
         const statusMock = jest.spyOn(resMock, 'status');
         const jsonMock = jest.spyOn(resMock, 'json');
         const status = 400;
         const message = 'Error Message';
         const data = 'Error Data';
         const error = new RESTError_1.default(status, message, data);
-        errorHandler_1.default(error, reqMock, resMock);
+        (0, errorHandler_1.default)(error, reqMock, resMock);
         expect(loggerMock.error).toHaveBeenCalledTimes(1);
         expect(loggerMock.error).toHaveBeenCalledWith(error);
         expect(statusMock).toHaveBeenCalledWith(500);

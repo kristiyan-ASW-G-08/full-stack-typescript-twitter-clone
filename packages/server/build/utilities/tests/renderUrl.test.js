@@ -19,6 +19,6 @@ describe('renderUrl', () => {
     ];
     it.each(sortArr)('should return the correct url', ({ urlExtension, queries, urlResult }) => {
         expect.assertions(1);
-        expect(renderUrl_1.default(urlExtension, queries)).toMatch(urlResult);
+        expect((0, renderUrl_1.default)(urlExtension, queries)).toMatch(urlResult);
     });
 });

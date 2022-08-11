@@ -13,6 +13,6 @@ describe('getSortString', () => {
     ];
     it.each(sortArr)('should return the proper sort string', ({ sortKey, sortString }) => {
         expect.assertions(1);
-        expect(getSortString_1.default(sortKey)).toMatch(sortString);
+        expect((0, getSortString_1.default)(sortKey)).toMatch(sortString);
     });
 });

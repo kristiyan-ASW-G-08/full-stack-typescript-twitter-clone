@@ -60,7 +60,7 @@ describe('userRoutes', () => {
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         app_1.default.listen(port);
         yield User_1.default.deleteMany({}).exec();
     }));
@@ -73,7 +73,7 @@ describe('userRoutes', () => {
     describe('get /users/user/:userId', () => {
         it('should get a user  based on id', () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(2);
-            const response = yield supertest_1.default(app_1.default).get(`/users/user/${userId}`);
+            const response = yield (0, supertest_1.default)(app_1.default).get(`/users/user/${userId}`);
             const { user } = response.body.data;
             expect(response.status).toBe(200);
             expect(user._id.toString()).toMatch(userId.toString());

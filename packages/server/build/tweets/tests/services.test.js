@@ -21,7 +21,7 @@ describe('getTweetById', () => {
     it(`should call getResource`, () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(2);
         const tweetId = 'tweetId';
-        yield services_1.getTweetById(tweetId);
+        yield (0, services_1.getTweetById)(tweetId);
         expect(getResource_1.default).toHaveBeenCalledTimes(1);
         expect(getResourceMock).toHaveBeenCalledWith(Tweet_1.default, {
             name: '_id',

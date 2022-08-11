@@ -28,7 +28,7 @@ describe('connectToDB', () => {
     }));
     it('should connect to mongodb', () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(4);
-        yield expect(connectToDB_1.default(mongoURI)).resolves.toBeUndefined();
+        yield expect((0, connectToDB_1.default)(mongoURI)).resolves.toBeUndefined();
         expect(mongooseMock.connect).toHaveBeenCalledTimes(1);
         expect(mongooseMock.connect).toHaveBeenCalledWith(mongoURI, {
             useNewUrlParser: true,
@@ -39,7 +39,7 @@ describe('connectToDB', () => {
     it('should not connect to mongodb', () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(4);
         mongooseMock.connect.mockRejectedValueOnce(new Error('Connection Error'));
-        yield expect(connectToDB_1.default(mongoURI)).resolves.toBeUndefined();
+        yield expect((0, connectToDB_1.default)(mongoURI)).resolves.toBeUndefined();
         expect(mongooseMock.connect).toHaveBeenCalledTimes(1);
         expect(mongooseMock.connect).toHaveBeenCalledWith(mongoURI, {
             useNewUrlParser: true,

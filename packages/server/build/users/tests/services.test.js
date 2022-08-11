@@ -23,7 +23,7 @@ describe('userServices', () => {
         it(`should call getResource`, () => __awaiter(void 0, void 0, void 0, function* () {
             const email = 'testmail@mail.com';
             expect.assertions(2);
-            yield services_1.getUserByEmail(email);
+            yield (0, services_1.getUserByEmail)(email);
             expect(getResource_1.default).toHaveBeenCalledTimes(1);
             expect(getResourceMock).toHaveBeenCalledWith(User_1.default, {
                 name: 'email',
@@ -35,7 +35,7 @@ describe('userServices', () => {
         it(`should call getResource`, () => __awaiter(void 0, void 0, void 0, function* () {
             expect.assertions(2);
             const userId = 'userId';
-            yield services_1.getUserById(userId);
+            yield (0, services_1.getUserById)(userId);
             expect(getResource_1.default).toHaveBeenCalledTimes(1);
             expect(getResourceMock).toHaveBeenCalledWith(User_1.default, {
                 name: '_id',

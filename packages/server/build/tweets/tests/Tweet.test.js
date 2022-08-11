@@ -22,7 +22,7 @@ describe('Tweet model', () => {
     const user = mongoose_1.default.Types.ObjectId().toString();
     const type = 'text';
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield connectToDB_1.default(mongoURI);
+        yield (0, connectToDB_1.default)(mongoURI);
         yield User_1.default.deleteMany({}).exec();
         yield Tweet_1.default.deleteMany({}).exec();
     }));

@@ -19,11 +19,11 @@ describe('isAuthorized', () => {
     const userId = mongoose_1.default.Types.ObjectId().toString();
     it(`should throw an error when the ids don't match`, () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(2);
-        expect(() => isAuthorized_1.default(authorizedUserId, userId)).toThrow();
-        expect(() => isAuthorized_1.default(authorizedUserId, userId)).toMatchInlineSnapshot(`[Function]`);
+        expect(() => (0, isAuthorized_1.default)(authorizedUserId, userId)).toThrow();
+        expect(() => (0, isAuthorized_1.default)(authorizedUserId, userId)).toMatchInlineSnapshot(`[Function]`);
     }));
     it(`shouldn't throw an error when the ids match`, () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(1);
-        expect(() => isAuthorized_1.default(authorizedUserId, authorizedUserId)).not.toThrow();
+        expect(() => (0, isAuthorized_1.default)(authorizedUserId, authorizedUserId)).not.toThrow();
     }));
 });
