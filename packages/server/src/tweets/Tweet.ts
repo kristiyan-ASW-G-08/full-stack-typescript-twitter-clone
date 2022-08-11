@@ -1,5 +1,5 @@
 import mongoose, { Schema, Query } from 'mongoose';
-import Tweet from '@customTypes/Tweet';
+import Tweet from '../types/Tweet';
 
 export const TweetSchema: Schema = new Schema({
   type: {
@@ -41,4 +41,4 @@ TweetSchema.pre('find', populateFields);
 
 TweetSchema.pre('populate', populateFields);
 
-export default mongoose.model<Tweet>('Tweet', TweetSchema);
+export default mongoose.model('Tweet', TweetSchema);
