@@ -1,4 +1,4 @@
-import User from 'src/users/User';
+import User from './User';
 import UserType from '../types/User';
 import getResource from '../utilities/getResource';
 

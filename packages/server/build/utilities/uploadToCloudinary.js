@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cloudinary_1 = __importDefault(require("cloudinary"));
-const RESTError_1 = __importStar(require("@utilities/RESTError"));
+const RESTError_1 = __importStar(require("./RESTError"));
 const { CLOUD_NAME, CLOUDINARY_API_KEY, API_SECRET } = process.env;
 // @ts-ignore
 cloudinary_1.default.config({

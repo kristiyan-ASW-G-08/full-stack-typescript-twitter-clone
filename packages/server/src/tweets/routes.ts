@@ -9,7 +9,7 @@ import {
   getReplies,
   getUserReplies,
   getUserTweets,
-} from 'src/tweets/controller';
+} from './controller';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
 import validationHandler from '../middleware/validationHandler';

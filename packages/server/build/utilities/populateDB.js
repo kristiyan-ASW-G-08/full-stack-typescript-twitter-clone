@@ -20,8 +20,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const faker_1 = __importDefault(require("faker"));
-const User_1 = __importDefault(require("@users/User"));
-const Tweet_1 = __importDefault(require("@tweets/Tweet"));
+const User_1 = __importDefault(require("../users/User"));
+const Tweet_1 = __importDefault(require("../tweets/Tweet"));
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);

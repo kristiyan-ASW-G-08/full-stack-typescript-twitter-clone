@@ -18,7 +18,7 @@ import {
   getUser,
   getUserFollowing,
   getUserFollowers,
-} from 'src/users/controller';
+} from './controller';
 import validationHandler from '..//middleware/validationHandler';
 import authenticationHandler from '..//middleware/authenticationHandler';
 import validators from '@twtr/common/source/schemaValidators/validators';

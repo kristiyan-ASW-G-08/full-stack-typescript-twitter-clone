@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserReplies = exports.getReplies = exports.getUserTweets = exports.getAllTweets = exports.getTweet = exports.deleteTweet = exports.patchTweet = exports.postTweet = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
-const services_1 = require("src/tweets/services");
+const Tweet_1 = __importDefault(require("./Tweet"));
+const services_1 = require("./services");
 const passErrorToNext_1 = __importDefault(require("../utilities/passErrorToNext"));
 const isAuthorized_1 = __importDefault(require("../utilities/isAuthorized"));
 const deleteFile_1 = __importDefault(require("../utilities/deleteFile"));

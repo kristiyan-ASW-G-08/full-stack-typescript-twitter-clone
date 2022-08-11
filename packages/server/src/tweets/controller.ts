@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import Tweet from 'src/tweets/Tweet';
-import { getTweetById } from 'src/tweets/services';
+import Tweet from './Tweet';
+import { getTweetById } from './services';
 import passErrorToNext from '../utilities/passErrorToNext';
 import isAuthorized from '../utilities/isAuthorized';
 import deleteFile from '../utilities/deleteFile';

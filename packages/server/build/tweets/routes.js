@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
-const controller_1 = require("src/tweets/controller");
+const controller_1 = require("./controller");
 const TweetValidator_1 = __importDefault(require("@twtr/common/source/schemaValidators/TweetValidator"));
 const SortStringValidator_1 = __importDefault(require("@twtr/common/source/schemaValidators/SortStringValidator"));
 const validationHandler_1 = __importDefault(require("../middleware/validationHandler"));

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
-const controller_1 = require("src/users/controller");
+const controller_1 = require("./controller");
 const validationHandler_1 = __importDefault(require("..//middleware/validationHandler"));
 const authenticationHandler_1 = __importDefault(require("..//middleware/authenticationHandler"));
 const validators_1 = __importDefault(require("@twtr/common/source/schemaValidators/validators"));

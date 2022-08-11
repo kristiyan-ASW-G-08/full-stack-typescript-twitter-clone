@@ -1,4 +1,4 @@
-import Tweet from 'src/tweets/Tweet';
+import Tweet from './Tweet';
 import TweetType from '../types/Tweet';
 import getResource from '../utilities/getResource';
 
