@@ -3,7 +3,7 @@ import request from 'supertest';
 import mockFs from 'mock-fs';
 import mjml from 'mjml';
 import app from 'src/app';
-import connectToDB from '@utilities/connectToDB';
+import connectToDB from 'utilities/connectToDB';
 import Tweet from 'src/tweets/Tweet';
 
 const port = process.env.PORT || 8080;
@@ -13,7 +13,7 @@ jest.mock('mjml');
 
 describe('tweetRoutes', () => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const text =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
 

@@ -16,19 +16,19 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const supertest_1 = __importDefault(require("supertest"));
 const mjml_1 = __importDefault(require("mjml"));
 const app_1 = __importDefault(require("src/app"));
-const User_1 = __importDefault(require("@users/User"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
+const User_1 = __importDefault(require("users/User"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 mjml_1.default.mockReturnValue(mockTemplate);
 jest.mock('mjml');
-jest.mock('@utilities/sendEmail');
+jest.mock('utilities/sendEmail');
 describe('userRoutes', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     const username = 'username';
     const handle = 'testUserHandle';
-    const email = 'testmail@mail.com';
+    const email = 'testmailmail.com';
     const password = 'testPassword';
     let testUser;
     const secret = process.env.SECRET;
@@ -66,7 +66,7 @@ describe('userRoutes', () => {
             expect.assertions(1);
             const response = yield (0, supertest_1.default)(app_1.default)
                 .post(`/users/user`)
-                .send({ email: 'unknownEmail@mail.test' });
+                .send({ email: 'unknownEmailmail.test' });
             expect(response.status).toBe(404);
         }));
     });

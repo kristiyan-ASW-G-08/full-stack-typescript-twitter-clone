@@ -7,12 +7,13 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const helmet_1 = __importDefault(require("helmet"));
 const compression_1 = __importDefault(require("compression"));
-const routes_1 = __importDefault(require("src/users/routes"));
-const routes_2 = __importDefault(require("src/tweets/routes"));
-const errorHandler_1 = __importDefault(require("@customMiddleware/errorHandler"));
+const routes_1 = __importDefault(require("./users/routes"));
+const routes_2 = __importDefault(require("./tweets/routes"));
+const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
 const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 app.use((0, compression_1.default)());
+//@ts-ignore
 app.use(body_parser_1.default.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

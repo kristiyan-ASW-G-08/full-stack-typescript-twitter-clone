@@ -1,5 +1,6 @@
+//@ts-nocheck
 import mongoose, { Model, Document } from 'mongoose';
-import Pagination from '@customTypes/Pagination';
+import Pagination from '../types/Pagination';
 
 const findDocs = async <
   T extends Document,

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mock_fs_1 = __importDefault(require("mock-fs"));
-const deleteFile_1 = __importDefault(require("@utilities/deleteFile"));
+const deleteFile_1 = __importDefault(require("utilities/deleteFile"));
 describe('deleteFile', () => {
     afterEach(mock_fs_1.default.restore);
     it('should delete a file', () => __awaiter(void 0, void 0, void 0, function* () {

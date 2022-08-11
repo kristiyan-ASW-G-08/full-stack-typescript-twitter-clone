@@ -1,4 +1,4 @@
-import getSortString from '@utilities/getSortString';
+import getSortString from 'utilities/getSortString';
 
 type SortKey = 'top' | 'trending' | 'new' | 'replies';
 type SortString = '-likes' | '-retweets' | '-date' | '-replies';

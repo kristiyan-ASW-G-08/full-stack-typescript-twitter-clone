@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import MailOptions from '@customTypes/MailOptions';
-import { RESTError, errors } from '@utilities/RESTError';
+import MailOptions from '../types/MailOptions';
+import { RESTError, errors } from './RESTError';
 
 const sendEmail = (mailOptions: MailOptions): void => {
   try {

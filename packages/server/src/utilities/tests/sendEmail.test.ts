@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import sendEmail from '@utilities/sendEmail';
-import MailOptions from '@customTypes/MailOptions';
+import sendEmail from 'utilities/sendEmail';
+import MailOptions from 'customTypes/MailOptions';
 
 const sendMailMock = jest.fn();
 jest.mock('nodemailer');
@@ -9,11 +9,11 @@ jest.mock('nodemailer');
 });
 
 describe('sendEmail', () => {
-  const appEmail = 'someEmail@mail.com';
+  const appEmail = 'someEmailmail.com';
   const clientUri = 'https://client.com';
   const token = 'mockToken';
   const url = `${clientUri}/confirmation/${token}`;
-  const email = 'testMail@mail.com';
+  const email = 'testMailmail.com';
   const mailOptions: MailOptions = {
     from: appEmail,
     to: email,

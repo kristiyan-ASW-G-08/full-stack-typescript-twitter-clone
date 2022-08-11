@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import Tweet from 'src/tweets/Tweet';
 import User from 'src/users/User';
-import TweetType from '@customTypes/Tweet';
-import connectToDB from '@utilities/connectToDB';
+import TweetType from 'customTypes/Tweet';
+import connectToDB from 'utilities/connectToDB';
 
 describe('Tweet model', (): void => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const user = mongoose.Types.ObjectId().toString();
   const type = 'text';
   beforeAll(

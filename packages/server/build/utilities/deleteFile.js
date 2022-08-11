@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("./RESTError");
 const deleteFile = (path) => __awaiter(void 0, void 0, void 0, function* () {
     if (path !== undefined) {
         // @ts-ignore

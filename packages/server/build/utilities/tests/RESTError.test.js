@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("utilities/RESTError");
 describe('CustomError', () => {
     const errorData = 'ErrorData';
     it.each(Object.values(RESTError_1.errors))('RESTError should have the correct status, message, and error data', ({ status, message }) => {

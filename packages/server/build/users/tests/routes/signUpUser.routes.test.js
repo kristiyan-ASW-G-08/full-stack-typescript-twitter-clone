@@ -16,13 +16,13 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const supertest_1 = __importDefault(require("supertest"));
 const app_1 = __importDefault(require("src/app"));
 const User_1 = __importDefault(require("src/users/User"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 jest.mock('mjml');
 describe('userRoutes', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
         yield (0, connectToDB_1.default)(mongoURI);
@@ -37,7 +37,7 @@ describe('userRoutes', () => {
     }));
     const username = 'username';
     const handle = 'testUserHandle';
-    const email = 'testmail@mail.com';
+    const email = 'testmailmail.com';
     const password = 'testPassword';
     const invalidEmail = 'testmail';
     const invalidPassword = '1234';

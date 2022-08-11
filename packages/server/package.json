@@ -6,14 +6,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc",
+    "build": "tsc ",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "node index.js ",
+    "start": "node ./build/index.js",
     "test": "jest --watchAll --runInBand --no-cache",
     "docs": "jsdoc -c jsdoc.json",
-    "start-dev": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
-    "postinstall": "tsc"
+    "start-dev": "  nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
+    "postinstall": "tsc "
   },
   "dependencies": {
     "@twtr/common": "^1.0.307",
@@ -85,4 +85,5 @@
   "resolutions": {
     "write-file-atomic": "^2.4.1"
   }
+
 }

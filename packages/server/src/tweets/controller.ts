@@ -2,17 +2,17 @@ import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import Tweet from 'src/tweets/Tweet';
 import { getTweetById } from 'src/tweets/services';
-import passErrorToNext from '@utilities/passErrorToNext';
-import isAuthorized from '@utilities/isAuthorized';
-import deleteFile from '@utilities/deleteFile';
-import includesId from '@src/utilities/includesId';
-import removeId from '@utilities/removeId';
-import { getUserById } from 'src/users/services';
-import findDocs from '@utilities/findDocs';
-import TweetType from '@customTypes/Tweet';
-import getPaginationURLs from '@utilities/getPaginationURLs';
-import uploadToCloudinary from '@src/utilities/uploadToCloudinary';
-import deleteCloudinaryFile from '@src/utilities/deleteFromCloudinary';
+import passErrorToNext from '../utilities/passErrorToNext';
+import isAuthorized from '../utilities/isAuthorized';
+import deleteFile from '../utilities/deleteFile';
+import includesId from '../utilities/includesId';
+import removeId from '../utilities/removeId';
+import { getUserById } from '../users/services';
+import findDocs from '../utilities/findDocs';
+import TweetType from '../types/Tweet';
+import getPaginationURLs from '../utilities/getPaginationURLs';
+import uploadToCloudinary from '../utilities/uploadToCloudinary';
+import deleteCloudinaryFile from '../utilities/deleteFromCloudinary';
 
 export const postTweet = async (
   { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,

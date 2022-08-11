@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const RESTError_1 = __importDefault(require("@utilities/RESTError"));
-const User_1 = __importDefault(require("@users/User"));
-const getResource_1 = __importDefault(require("@utilities/getResource"));
-jest.mock('@utilities/RESTError');
+const RESTError_1 = __importDefault(require("utilities/RESTError"));
+const User_1 = __importDefault(require("users/User"));
+const getResource_1 = __importDefault(require("utilities/getResource"));
+jest.mock('utilities/RESTError');
 const RESTErrorMock = RESTError_1.default;
 describe('getResource', () => {
     expect.assertions(5);
@@ -23,7 +23,7 @@ describe('getResource', () => {
     afterAll(() => jest.restoreAllMocks());
     it('should call find and select', () => __awaiter(void 0, void 0, void 0, function* () {
         const select = jest.fn(() => true);
-        const findQuery = { name: 'email', value: 'testMail@test' };
+        const findQuery = { name: 'email', value: 'testMailtest' };
         const selectQuery = 'username email';
         const findOneSpy = jest
             .spyOn(User_1.default, 'findOne')
@@ -41,7 +41,7 @@ describe('getResource', () => {
     it('should throw an error if find and select resolve to falsy value', () => __awaiter(void 0, void 0, void 0, function* () {
         expect.assertions(2);
         const select = jest.fn(() => false);
-        const findQuery = { name: 'email', value: 'testMail@test' };
+        const findQuery = { name: 'email', value: 'testMailtest' };
         const selectQuery = 'username email';
         const findOneSpy = jest
             .spyOn(User_1.default, 'findOne')

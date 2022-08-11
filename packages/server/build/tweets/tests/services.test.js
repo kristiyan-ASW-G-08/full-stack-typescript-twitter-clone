@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("src/tweets/services");
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
-const getResource_1 = __importDefault(require("@utilities/getResource"));
-jest.mock('@utilities/getResource');
+const getResource_1 = __importDefault(require("utilities/getResource"));
+jest.mock('utilities/getResource');
 const getResourceMock = getResource_1.default;
 describe('getTweetById', () => {
     it(`should call getResource`, () => __awaiter(void 0, void 0, void 0, function* () {

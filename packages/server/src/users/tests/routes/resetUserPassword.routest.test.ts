@@ -4,22 +4,22 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mjml from 'mjml';
 import app from 'src/app';
-import User from '@users/User';
-import UserType from '@customTypes/User';
-import connectToDB from '@utilities/connectToDB';
+import User from 'users/User';
+import UserType from 'customTypes/User';
+import connectToDB from 'utilities/connectToDB';
 
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 (mjml as jest.Mock).mockReturnValue(mockTemplate);
 jest.mock('mjml');
-jest.mock('@utilities/sendEmail');
+jest.mock('utilities/sendEmail');
 
 describe('userRoutes', () => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const username = 'username';
   const handle = 'testUserHandle';
-  const email = 'testmail@mail.com';
+  const email = 'testmailmail.com';
   const password = 'testPassword';
   let testUser: UserType;
   const secret = process.env.SECRET;

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import connectToDB from '@utilities/connectToDB';
-import logger from '@utilities/logger';
+import connectToDB from 'utilities/connectToDB';
+import logger from 'utilities/logger';
 
 jest.mock('mongoose');
-jest.mock('@utilities/logger');
+jest.mock('utilities/logger');
 
 const loggerMock = logger as jest.Mocked<typeof logger>;
 const mongooseMock = mongoose as jest.Mocked<typeof mongoose>;

@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
 const controller_1 = require("src/users/controller");
-const validationHandler_1 = __importDefault(require("@src/middleware/validationHandler"));
-const authenticationHandler_1 = __importDefault(require("@src/middleware/authenticationHandler"));
+const validationHandler_1 = __importDefault(require("..//middleware/validationHandler"));
+const authenticationHandler_1 = __importDefault(require("..//middleware/authenticationHandler"));
 const validators_1 = __importDefault(require("@twtr/common/source/schemaValidators/validators"));
-const paginationHandler_1 = __importDefault(require("@src/middleware/paginationHandler"));
-const fileFilter_1 = __importDefault(require("@customMiddleware/fileFilter"));
-const fileStorage_1 = __importDefault(require("@customMiddleware/fileStorage"));
+const paginationHandler_1 = __importDefault(require("..//middleware/paginationHandler"));
+const fileFilter_1 = __importDefault(require("../middleware/fileFilter"));
+const fileStorage_1 = __importDefault(require("../middleware/fileStorage"));
 const router = express_1.default.Router();
 router.post('/users', (0, validationHandler_1.default)([
     { schema: validators_1.default.UserSignUpValidator, target: 'body' },

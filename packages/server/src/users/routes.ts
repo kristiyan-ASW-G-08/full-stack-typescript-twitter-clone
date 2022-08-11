@@ -19,12 +19,12 @@ import {
   getUserFollowing,
   getUserFollowers,
 } from 'src/users/controller';
-import validationHandler from '@src/middleware/validationHandler';
-import authenticationHandler from '@src/middleware/authenticationHandler';
+import validationHandler from '..//middleware/validationHandler';
+import authenticationHandler from '..//middleware/authenticationHandler';
 import validators from '@twtr/common/source/schemaValidators/validators';
-import paginationHandler from '@src/middleware/paginationHandler';
-import fileFilter from '@customMiddleware/fileFilter';
-import storage from '@customMiddleware/fileStorage';
+import paginationHandler from '..//middleware/paginationHandler';
+import fileFilter from '../middleware/fileFilter';
+import storage from '../middleware/fileStorage';
 
 const router = express.Router();
 

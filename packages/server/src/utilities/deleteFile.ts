@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { RESTError, errors } from '@utilities/RESTError';
+import { RESTError, errors } from './RESTError';
 
 const deleteFile = async (path: string | undefined): Promise<void> => {
   if (path !== undefined) {

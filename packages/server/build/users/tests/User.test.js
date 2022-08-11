@@ -14,16 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const User_1 = __importDefault(require("src/users/User"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
-const duplicationErrorHandler_1 = __importDefault(require("@customMiddleware/duplicationErrorHandler"));
-jest.mock('@customMiddleware/duplicationErrorHandler');
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
+const duplicationErrorHandler_1 = __importDefault(require("customMiddleware/duplicationErrorHandler"));
+jest.mock('customMiddleware/duplicationErrorHandler');
 const duplicationErrorHandlerMock = duplicationErrorHandler_1.default;
 describe('User', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     const username = 'username';
     const handle = 'testUserHandle';
-    const email = 'testEmail@mail.com';
+    const email = 'testEmailmail.com';
     const password = 'testPassword';
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield (0, connectToDB_1.default)(mongoURI);

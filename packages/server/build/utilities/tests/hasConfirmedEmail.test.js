@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const hasConfirmedEmail_1 = __importDefault(require("@utilities/hasConfirmedEmail"));
+const hasConfirmedEmail_1 = __importDefault(require("utilities/hasConfirmedEmail"));
 describe('hasConfirmedEmail', () => {
     it('should throw an error when the passes value is truthy', () => __awaiter(void 0, void 0, void 0, function* () {
         expect(() => (0, hasConfirmedEmail_1.default)(true)).not.toThrow();

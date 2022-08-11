@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const findDocs_1 = __importDefault(require("@utilities/findDocs"));
-const User_1 = __importDefault(require("@users/User"));
+const findDocs_1 = __importDefault(require("utilities/findDocs"));
+const User_1 = __importDefault(require("users/User"));
 describe('findDocs', () => {
     afterEach(() => jest.clearAllMocks());
     afterAll(() => jest.resetAllMocks());

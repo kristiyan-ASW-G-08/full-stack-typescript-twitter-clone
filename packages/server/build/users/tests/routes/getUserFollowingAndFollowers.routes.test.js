@@ -19,17 +19,17 @@ const mjml_1 = __importDefault(require("mjml"));
 const app_1 = __importDefault(require("src/app"));
 const User_1 = __importDefault(require("src/users/User"));
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
-jest.mock('@utilities/uploadToCloudinary');
-jest.mock('@utilities/deleteFromCloudinary');
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
+jest.mock('utilities/uploadToCloudinary');
+jest.mock('utilities/deleteFromCloudinary');
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 mjml_1.default.mockReturnValue(mockTemplate);
 jest.mock('mjml');
-jest.mock('@utilities/sendEmail');
+jest.mock('utilities/sendEmail');
 describe('userRoutes', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield mongoose_1.default.disconnect();
         yield (0, connectToDB_1.default)(mongoURI);
@@ -46,7 +46,7 @@ describe('userRoutes', () => {
     }));
     const username = 'username';
     const handle = 'testUserHandle';
-    const email = 'testmail@mail.com';
+    const email = 'testmailmail.com';
     const password = 'testPassword';
     const invalidEmail = 'testmail';
     const invalidPassword = '1234';
@@ -84,7 +84,7 @@ describe('userRoutes', () => {
                 const followedUser = new User_1.default({
                     username: 'followedUser',
                     handle: 'followedUserHandle',
-                    email: 'followedUserMail@mail.com',
+                    email: 'followedUserMailmail.com',
                     password,
                 });
                 yield followedUser.save();
@@ -114,7 +114,7 @@ describe('userRoutes', () => {
                 const followedUser = new User_1.default({
                     username: 'followedUser',
                     handle: 'followedUserHandle',
-                    email: 'followedUserMail@mail.com',
+                    email: 'followedUserMailmail.com',
                     password,
                 });
                 yield followedUser.save();

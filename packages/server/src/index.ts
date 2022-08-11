@@ -1,6 +1,6 @@
 import https from 'https';
 import fs from 'fs';
-import connectToDB from '@utilities/connectToDB';
+import connectToDB from './utilities/connectToDB';
 import app from 'src/app';
 
 const initServer = (): void => {

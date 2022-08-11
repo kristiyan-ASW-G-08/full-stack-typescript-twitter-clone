@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
 const User_1 = __importDefault(require("src/users/User"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
 describe('Tweet model', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     const user = mongoose_1.default.Types.ObjectId().toString();
     const type = 'text';
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {

@@ -1,8 +1,8 @@
 import { getUserById, getUserByEmail } from 'src/users/services';
 import User from 'src/users/User';
-import getResource from '@utilities/getResource';
+import getResource from 'utilities/getResource';
 
-jest.mock('@utilities/getResource');
+jest.mock('utilities/getResource');
 
 const getResourceMock = getResource as jest.MockedFunction<typeof getResource>;
 
@@ -10,7 +10,7 @@ describe('userServices', (): void => {
   afterEach(() => jest.clearAllMocks());
   describe('getUserByEmail', (): void => {
     it(`should call getResource`, async (): Promise<void> => {
-      const email = 'testmail@mail.com';
+      const email = 'testmailmail.com';
       expect.assertions(2);
       await getUserByEmail(email);
 

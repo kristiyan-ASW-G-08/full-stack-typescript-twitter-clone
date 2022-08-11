@@ -1,6 +1,6 @@
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import RESTError, { errors } from '@utilities/RESTError';
+import RESTError, { errors } from '../utilities/RESTError';
 
 const authenticationHandler = (
   req: Request,

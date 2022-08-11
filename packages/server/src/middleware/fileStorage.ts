@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { RESTError, errors } from '@utilities/RESTError';
+import { RESTError, errors } from '../utilities/RESTError';
 
 const fileStorage = multer.diskStorage({
   // @ts-ignore

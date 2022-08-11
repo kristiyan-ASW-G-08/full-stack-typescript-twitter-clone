@@ -1,4 +1,4 @@
-import renderUrl from '@utilities/renderUrl';
+import renderUrl from './renderUrl';
 
 interface Queries {
   [key: string]: string | number;

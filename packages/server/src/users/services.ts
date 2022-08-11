@@ -1,6 +1,6 @@
 import User from 'src/users/User';
-import UserType from '@customTypes/User';
-import getResource from '@utilities/getResource';
+import UserType from '../types/User';
+import getResource from '../utilities/getResource';
 
 export const getUserByEmail = async (email: string): Promise<UserType> =>
   getResource<UserType>(User, { name: 'email', value: email });

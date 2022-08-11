@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = require("jsonwebtoken");
-const RESTError_1 = __importStar(require("@utilities/RESTError"));
+const RESTError_1 = __importStar(require("../utilities/RESTError"));
 const authenticationHandler = (req, res, next) => {
     const { SECRET } = process.env;
     const authHeader = req.get('Authorization');

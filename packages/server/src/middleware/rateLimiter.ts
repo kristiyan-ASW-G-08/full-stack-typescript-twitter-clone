@@ -1,6 +1,6 @@
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 import { Request, Response, NextFunction } from 'express';
-import { RESTError, errors } from '@utilities/RESTError';
+import { RESTError, errors } from '../utilities/RESTError';
 
 const idRateLimiter = new RateLimiterMemory({
   keyPrefix: 'middleware',

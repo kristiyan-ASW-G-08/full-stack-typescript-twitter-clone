@@ -17,19 +17,19 @@ const supertest_1 = __importDefault(require("supertest"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const mjml_1 = __importDefault(require("mjml"));
 const app_1 = __importDefault(require("src/app"));
-const User_1 = __importDefault(require("@users/User"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
+const User_1 = __importDefault(require("users/User"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
 mjml_1.default.mockReturnValue(mockTemplate);
 jest.mock('mjml');
-jest.mock('@utilities/sendEmail');
+jest.mock('utilities/sendEmail');
 describe('userRoutes', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     const username = 'username';
     const handle = 'testUserHandle';
-    const email = 'testmail@mail.com';
+    const email = 'testmailmail.com';
     const password = 'testPassword';
     let testUser;
     const secret = process.env.SECRET;
@@ -118,7 +118,7 @@ describe('userRoutes', () => {
         it('should throw an error with a status of 409: Conflict when the user credentials are already taken', () => __awaiter(void 0, void 0, void 0, function* () {
             const duplicateUsername = 'DupUsername';
             const duplicateHandle = 'Dup';
-            const duplicateEmail = 'dup@mail.test';
+            const duplicateEmail = 'dupmail.test';
             //   expect.assertions(1);
             yield User_1.default.insertMany({
                 username: duplicateUsername,

@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const RESTError_1 = __importStar(require("@utilities/RESTError"));
+const RESTError_1 = __importStar(require("./RESTError"));
 const hasConfirmedEmail = (isConfirmed) => {
     if (!isConfirmed) {
         const { status, message } = RESTError_1.errors.Unauthorized;

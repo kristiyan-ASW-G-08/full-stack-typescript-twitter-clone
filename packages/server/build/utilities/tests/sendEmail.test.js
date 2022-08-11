@@ -4,18 +4,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const sendEmail_1 = __importDefault(require("@utilities/sendEmail"));
+const sendEmail_1 = __importDefault(require("utilities/sendEmail"));
 const sendMailMock = jest.fn();
 jest.mock('nodemailer');
 nodemailer_1.default.createTransport.mockReturnValue({
     sendMail: sendMailMock,
 });
 describe('sendEmail', () => {
-    const appEmail = 'someEmail@mail.com';
+    const appEmail = 'someEmailmail.com';
     const clientUri = 'https://client.com';
     const token = 'mockToken';
     const url = `${clientUri}/confirmation/${token}`;
-    const email = 'testMail@mail.com';
+    const email = 'testMailmail.com';
     const mailOptions = {
         from: appEmail,
         to: email,

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { ValidationError } from 'yup';
-import Validator from '@customTypes/Validator';
+import Validator from '../types/Validator';
 import CustomValidationError from '@twtr/common/source/types/ValidationError';
-import { errors } from '@utilities/RESTError';
+import { errors } from '../utilities/RESTError';
 
 const validationHandler = (
   validators: Validator[],
@@ -14,6 +14,7 @@ const validationHandler = (
   ): Promise<void> => {
     try {
       for await (const { schema, target } of validators) {
+        //@rs-ignore
         const validationTarget = req[target];
         await schema.validate(validationTarget, {
           abortEarly: false,

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cloudinary_1 = __importDefault(require("cloudinary"));
-const uploadToCloudinary_1 = __importDefault(require("@utilities/uploadToCloudinary"));
+const uploadToCloudinary_1 = __importDefault(require("utilities/uploadToCloudinary"));
 jest.mock('cloudinary');
 jest.spyOn(cloudinary_1.default.v2.uploader, 'upload');
 describe('uploadToCloudinary', () => {

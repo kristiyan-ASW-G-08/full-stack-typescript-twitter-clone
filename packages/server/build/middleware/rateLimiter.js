@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rate_limiter_flexible_1 = require("rate-limiter-flexible");
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("../utilities/RESTError");
 const idRateLimiter = new rate_limiter_flexible_1.RateLimiterMemory({
     keyPrefix: 'middleware',
     points: 10,

@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import RESTError, { errors } from '@utilities/RESTError';
+import RESTError, { errors } from './RESTError';
 
 const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
   if (err.status !== undefined) {

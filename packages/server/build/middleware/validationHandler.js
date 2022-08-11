@@ -16,7 +16,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("../utilities/RESTError");
 const validationHandler = (validators) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var e_1, _a;
@@ -24,6 +24,7 @@ const validationHandler = (validators) => {
             try {
                 for (var validators_1 = __asyncValues(validators), validators_1_1; validators_1_1 = yield validators_1.next(), !validators_1_1.done;) {
                     const { schema, target } = validators_1_1.value;
+                    //@rs-ignore
                     const validationTarget = req[target];
                     yield schema.validate(validationTarget, {
                         abortEarly: false,

@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getPaginationURLs_1 = __importDefault(require("@src/utilities/getPaginationURLs"));
-const renderUrl_1 = __importDefault(require("@utilities/renderUrl"));
-jest.mock('@utilities/renderUrl');
+const getPaginationURLs_1 = __importDefault(require("src/utilities/getPaginationURLs"));
+const renderUrl_1 = __importDefault(require("utilities/renderUrl"));
+jest.mock('utilities/renderUrl');
 const renderUrlMock = renderUrl_1.default;
 describe('getPaginationURLs', () => {
     const sortArr = [

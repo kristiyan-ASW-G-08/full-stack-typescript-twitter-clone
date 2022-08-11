@@ -2,12 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
-      "@tweets/*": ["src/tweets/*"],
-      "@customTypes/*": ["src/types/*"],
-      "@utilities/*": ["src/utilities/*"],
-      "@customMiddleware/*": ["src/middleware/*"],
-      "@users/*": ["src/users/*"]
+      "src/*": ["src/*"],
+      "tweets/*": ["src/tweets/*"],
+      "customTypes/*": ["src/types/*"],
+      "utilities/*": ["src/utilities/*"],
+      "customMiddleware/*": ["src/middleware/*"],
+      "users/*": ["src/users/*"]
     },
     "target": "es6",
     "lib": ["esnext"],
@@ -21,8 +21,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "typeRoots": ["./node_modules/@types", "./types"],
-    "outDir": "./build"
+    "typeRoots": ["./node_modules/types", "./types"],
+    "outDir": "./build",
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "include": ["./src", "./types"]
 }

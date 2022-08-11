@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cloudinary_1 = __importDefault(require("cloudinary"));
-const deleteFromCloudinary_1 = __importDefault(require("@utilities/deleteFromCloudinary"));
+const deleteFromCloudinary_1 = __importDefault(require("utilities/deleteFromCloudinary"));
 jest.mock('cloudinary');
 // @ts-ignore
 const cloudinaryMock = cloudinary_1.default;

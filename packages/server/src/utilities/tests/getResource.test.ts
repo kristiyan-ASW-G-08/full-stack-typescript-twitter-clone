@@ -1,10 +1,10 @@
-import RESTError from '@utilities/RESTError';
-import User from '@users/User';
-import UserType from '@customTypes/User';
-import getResource from '@utilities/getResource';
-import ValidationError from '@twtr/common/source/types/ValidationError';
+import RESTError from 'utilities/RESTError';
+import User from 'users/User';
+import UserType from 'customTypes/User';
+import getResource from 'utilities/getResource';
+import ValidationError from 'twtr/common/source/types/ValidationError';
 
-jest.mock('@utilities/RESTError');
+jest.mock('utilities/RESTError');
 
 const RESTErrorMock = RESTError as jest.MockedClass<typeof RESTError>;
 
@@ -15,7 +15,7 @@ describe('getResource', () => {
 
   it('should call find and select', async () => {
     const select = jest.fn(() => true);
-    const findQuery = { name: 'email', value: 'testMail@test' };
+    const findQuery = { name: 'email', value: 'testMailtest' };
     const selectQuery = 'username email';
     const findOneSpy = jest
       .spyOn(User, 'findOne')
@@ -34,7 +34,7 @@ describe('getResource', () => {
   it('should throw an error if find and select resolve to falsy value', async () => {
     expect.assertions(2);
     const select = jest.fn(() => false);
-    const findQuery = { name: 'email', value: 'testMail@test' };
+    const findQuery = { name: 'email', value: 'testMailtest' };
     const selectQuery = 'username email';
     const findOneSpy = jest
       .spyOn(User, 'findOne')

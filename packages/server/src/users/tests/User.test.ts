@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import User from 'src/users/User';
-import UserType from '@customTypes/User';
-import connectToDB from '@utilities/connectToDB';
-import duplicationErrorHandler from '@customMiddleware/duplicationErrorHandler';
+import UserType from 'customTypes/User';
+import connectToDB from 'utilities/connectToDB';
+import duplicationErrorHandler from 'customMiddleware/duplicationErrorHandler';
 
-jest.mock('@customMiddleware/duplicationErrorHandler');
+jest.mock('customMiddleware/duplicationErrorHandler');
 
 const duplicationErrorHandlerMock = duplicationErrorHandler as jest.MockedFunction<
   typeof duplicationErrorHandler
@@ -12,10 +12,10 @@ const duplicationErrorHandlerMock = duplicationErrorHandler as jest.MockedFuncti
 
 describe('User', (): void => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+  const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   const username = 'username';
   const handle = 'testUserHandle';
-  const email = 'testEmail@mail.com';
+  const email = 'testEmailmail.com';
   const password = 'testPassword';
   beforeAll(
     async (): Promise<void> => {

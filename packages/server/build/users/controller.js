@@ -19,20 +19,20 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const mjml_1 = __importDefault(require("mjml"));
 const services_1 = require("src/users/services");
 const services_2 = require("src/tweets/services");
-const passErrorToNext_1 = __importDefault(require("@utilities/passErrorToNext"));
-const includesId_1 = __importDefault(require("@src/utilities/includesId"));
-const removeId_1 = __importDefault(require("@utilities/removeId"));
+const passErrorToNext_1 = __importDefault(require("../utilities/passErrorToNext"));
+const includesId_1 = __importDefault(require("../utilities/includesId"));
+const removeId_1 = __importDefault(require("../utilities/removeId"));
 const User_1 = __importDefault(require("src/users/User"));
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
-const RESTError_1 = require("@utilities/RESTError");
-const sendEmail_1 = __importDefault(require("@utilities/sendEmail"));
-const findDocs_1 = __importDefault(require("@utilities/findDocs"));
-const hasConfirmedEmail_1 = __importDefault(require("@utilities/hasConfirmedEmail"));
-const getPaginationURLs_1 = __importDefault(require("@utilities/getPaginationURLs"));
-const uploadToCloudinary_1 = __importDefault(require("@src/utilities/uploadToCloudinary"));
-const deleteFromCloudinary_1 = __importDefault(require("@src/utilities/deleteFromCloudinary"));
-const deleteFile_1 = __importDefault(require("@src/utilities/deleteFile"));
-const duplicationErrorHandler_1 = __importDefault(require("@src/middleware/duplicationErrorHandler"));
+const RESTError_1 = require("../utilities/RESTError");
+const sendEmail_1 = __importDefault(require("../utilities/sendEmail"));
+const findDocs_1 = __importDefault(require("../utilities/findDocs"));
+const hasConfirmedEmail_1 = __importDefault(require("../utilities/hasConfirmedEmail"));
+const getPaginationURLs_1 = __importDefault(require("../utilities/getPaginationURLs"));
+const uploadToCloudinary_1 = __importDefault(require("../utilities/uploadToCloudinary"));
+const deleteFromCloudinary_1 = __importDefault(require("../utilities/deleteFromCloudinary"));
+const deleteFile_1 = __importDefault(require("../utilities/deleteFile"));
+const duplicationErrorHandler_1 = __importDefault(require("../middleware/duplicationErrorHandler"));
 const signUp = ({ body: { username, handle, email, password } }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield new User_1.default({

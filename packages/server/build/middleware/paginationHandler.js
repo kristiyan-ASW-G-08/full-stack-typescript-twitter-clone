@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getSortString_1 = __importDefault(require("@utilities/getSortString"));
+const getSortString_1 = __importDefault(require("../utilities/getSortString"));
 const paginationHandler = (req, _, next) => {
     const sort = req.query.sort || 'new';
     req.pagination = {

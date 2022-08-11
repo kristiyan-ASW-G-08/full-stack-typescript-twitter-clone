@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("src/users/services");
 const User_1 = __importDefault(require("src/users/User"));
-const getResource_1 = __importDefault(require("@utilities/getResource"));
-jest.mock('@utilities/getResource');
+const getResource_1 = __importDefault(require("utilities/getResource"));
+jest.mock('utilities/getResource');
 const getResourceMock = getResource_1.default;
 describe('userServices', () => {
     afterEach(() => jest.clearAllMocks());
     describe('getUserByEmail', () => {
         it(`should call getResource`, () => __awaiter(void 0, void 0, void 0, function* () {
-            const email = 'testmail@mail.com';
+            const email = 'testmailmail.com';
             expect.assertions(2);
             yield (0, services_1.getUserByEmail)(email);
             expect(getResource_1.default).toHaveBeenCalledTimes(1);

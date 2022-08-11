@@ -1,5 +1,5 @@
 import cloudinary from 'cloudinary';
-import RESTError, { errors } from '@utilities/RESTError';
+import RESTError, { errors } from './RESTError';
 
 const { CLOUD_NAME, CLOUDINARY_API_KEY, API_SECRET } = process.env;
 // @ts-ignore

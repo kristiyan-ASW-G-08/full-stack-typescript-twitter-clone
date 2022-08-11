@@ -1,4 +1,4 @@
-import { RESTError, errors } from '@utilities/RESTError';
+import { RESTError, errors } from './RESTError';
 
 const isAuthorized = (authorizedUserId: string, userId: string): void => {
   if (authorizedUserId !== userId) {

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const renderUrl_1 = __importDefault(require("@utilities/renderUrl"));
+const renderUrl_1 = __importDefault(require("utilities/renderUrl"));
 describe('renderUrl', () => {
     const sortArr = [
         {

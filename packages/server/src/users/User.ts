@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import User from '@customTypes/User';
-import duplicationErrorHandler from '@customMiddleware/duplicationErrorHandler';
+import User from '../types/User';
+import duplicationErrorHandler from '../middleware/duplicationErrorHandler';
 //@ts-ignore
 import uniqueValidator from 'mongoose-unique-validator';
 

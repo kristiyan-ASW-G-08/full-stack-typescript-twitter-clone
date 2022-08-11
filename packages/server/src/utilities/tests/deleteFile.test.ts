@@ -1,5 +1,5 @@
 import mockFs from 'mock-fs';
-import deleteFile from '@utilities/deleteFile';
+import deleteFile from 'utilities/deleteFile';
 
 describe('deleteFile', () => {
   afterEach(mockFs.restore);

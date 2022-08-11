@@ -17,7 +17,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const mock_fs_1 = __importDefault(require("mock-fs"));
 const mjml_1 = __importDefault(require("mjml"));
 const app_1 = __importDefault(require("src/app"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
 const port = process.env.PORT || 8080;
 const mockTemplate = 'MockTemplate';
@@ -25,7 +25,7 @@ mjml_1.default.mockReturnValue(mockTemplate);
 jest.mock('mjml');
 describe('tweetRoutes', () => {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
-    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
+    const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
     const text = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vel alias, amet corporis modi corrupti.';
     afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
         mock_fs_1.default.restore();

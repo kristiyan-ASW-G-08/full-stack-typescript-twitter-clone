@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const connectToDB_1 = __importDefault(require("@utilities/connectToDB"));
-const logger_1 = __importDefault(require("@utilities/logger"));
+const connectToDB_1 = __importDefault(require("utilities/connectToDB"));
+const logger_1 = __importDefault(require("utilities/logger"));
 jest.mock('mongoose');
-jest.mock('@utilities/logger');
+jest.mock('utilities/logger');
 const loggerMock = logger_1.default;
 const mongooseMock = mongoose_1.default;
 const mongoURI = 'mongoURL';

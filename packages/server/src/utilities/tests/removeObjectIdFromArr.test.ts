@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import removeObjectIdFromArr from '@utilities/removeId';
+import removeObjectIdFromArr from 'utilities/removeId';
 
 describe('removeFromArr', () => {
   const id = mongoose.Types.ObjectId();

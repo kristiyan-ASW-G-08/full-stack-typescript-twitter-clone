@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("./RESTError");
 const sendEmail = (mailOptions) => {
     try {
         const { EMAIL, EMAIL_PASSWORD } = process.env;

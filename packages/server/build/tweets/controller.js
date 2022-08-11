@@ -16,16 +16,16 @@ exports.getUserReplies = exports.getReplies = exports.getUserTweets = exports.ge
 const mongoose_1 = __importDefault(require("mongoose"));
 const Tweet_1 = __importDefault(require("src/tweets/Tweet"));
 const services_1 = require("src/tweets/services");
-const passErrorToNext_1 = __importDefault(require("@utilities/passErrorToNext"));
-const isAuthorized_1 = __importDefault(require("@utilities/isAuthorized"));
-const deleteFile_1 = __importDefault(require("@utilities/deleteFile"));
-const includesId_1 = __importDefault(require("@src/utilities/includesId"));
-const removeId_1 = __importDefault(require("@utilities/removeId"));
-const services_2 = require("src/users/services");
-const findDocs_1 = __importDefault(require("@utilities/findDocs"));
-const getPaginationURLs_1 = __importDefault(require("@utilities/getPaginationURLs"));
-const uploadToCloudinary_1 = __importDefault(require("@src/utilities/uploadToCloudinary"));
-const deleteFromCloudinary_1 = __importDefault(require("@src/utilities/deleteFromCloudinary"));
+const passErrorToNext_1 = __importDefault(require("../utilities/passErrorToNext"));
+const isAuthorized_1 = __importDefault(require("../utilities/isAuthorized"));
+const deleteFile_1 = __importDefault(require("../utilities/deleteFile"));
+const includesId_1 = __importDefault(require("../utilities/includesId"));
+const removeId_1 = __importDefault(require("../utilities/removeId"));
+const services_2 = require("../users/services");
+const findDocs_1 = __importDefault(require("../utilities/findDocs"));
+const getPaginationURLs_1 = __importDefault(require("../utilities/getPaginationURLs"));
+const uploadToCloudinary_1 = __importDefault(require("../utilities/uploadToCloudinary"));
+const deleteFromCloudinary_1 = __importDefault(require("../utilities/deleteFromCloudinary"));
 const postTweet = ({ userId, body: { text, linkUrl, type, retweetId, replyId }, file }, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, services_2.getUserById)(userId);

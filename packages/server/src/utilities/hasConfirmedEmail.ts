@@ -1,4 +1,4 @@
-import RESTError, { errors } from '@utilities/RESTError';
+import RESTError, { errors } from './RESTError';
 
 const hasConfirmedEmail = (isConfirmed: boolean): void => {
   if (!isConfirmed) {

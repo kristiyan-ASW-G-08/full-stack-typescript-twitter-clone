@@ -1,9 +1,9 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: 'typescript-eslint/parser',
   extends: [
     'airbnb-typescript/base',
-    'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
+    'plugin:typescript-eslint/recommended',
+    'prettier/typescript-eslint',
     'plugin:prettier/recommended',
   ],
   parserOptions: {
@@ -18,7 +18,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
     'no-case-declarations': 0,
-    "@typescript-eslint/camelcase": 0,
+    'typescript-eslint/camelcase': 0,
   },
   env: {
     'jest/globals': true,
@@ -27,7 +27,7 @@ module.exports = {
     {
       files: ['*.test.ts'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': 0,
+        'typescript-eslint/explicit-function-return-type': 0,
       },
     },
   ],

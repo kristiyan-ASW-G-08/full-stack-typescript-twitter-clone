@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
-const RESTError_1 = require("@utilities/RESTError");
+const RESTError_1 = require("../utilities/RESTError");
 const fileStorage = multer_1.default.diskStorage({
     // @ts-ignore
     destination: (_, file, cb) => {

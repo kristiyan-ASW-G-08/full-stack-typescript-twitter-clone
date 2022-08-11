@@ -1,7 +1,7 @@
-import getPaginationURLs from '@src/utilities/getPaginationURLs';
-import renderUrl from '@utilities/renderUrl';
+import getPaginationURLs from 'src/utilities/getPaginationURLs';
+import renderUrl from 'utilities/renderUrl';
 
-jest.mock('@utilities/renderUrl');
+jest.mock('utilities/renderUrl');
 
 interface Queries {
   [key: string]: string | number;

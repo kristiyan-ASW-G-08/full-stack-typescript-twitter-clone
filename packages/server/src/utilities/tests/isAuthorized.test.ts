@@ -1,4 +1,4 @@
-import isAuthorized from '@utilities/isAuthorized';
+import isAuthorized from 'utilities/isAuthorized';
 import mongoose from 'mongoose';
 
 describe('isAuthorized', () => {

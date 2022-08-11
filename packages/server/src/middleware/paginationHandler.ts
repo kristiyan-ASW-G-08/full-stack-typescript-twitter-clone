@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Request, Response, NextFunction } from 'express';
-import getSortString from '@utilities/getSortString';
+import getSortString from '../utilities/getSortString';
 
 const paginationHandler = (
   req: Request,

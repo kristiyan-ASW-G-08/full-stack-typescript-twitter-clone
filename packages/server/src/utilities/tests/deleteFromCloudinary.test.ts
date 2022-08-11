@@ -1,6 +1,5 @@
 import cloudinary from 'cloudinary';
-import deleteFromCloudinary from '@utilities/deleteFromCloudinary';
-
+import deleteFromCloudinary from 'utilities/deleteFromCloudinary';
 
 jest.mock('cloudinary');
 

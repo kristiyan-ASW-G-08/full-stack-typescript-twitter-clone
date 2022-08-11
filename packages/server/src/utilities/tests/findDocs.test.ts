@@ -1,6 +1,6 @@
-import findDocs from '@utilities/findDocs';
-import User from '@users/User';
-import UserType from '@customTypes/User';
+import findDocs from 'utilities/findDocs';
+import User from 'users/User';
+import UserType from 'customTypes/User';
 
 describe('findDocs', (): void => {
   afterEach(() => jest.clearAllMocks());

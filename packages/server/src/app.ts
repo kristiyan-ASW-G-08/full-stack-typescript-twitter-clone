@@ -3,15 +3,16 @@ import express, { Request, Response, NextFunction, Application } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import compression from 'compression';
-import userRoutes from 'src/users/routes';
-import tweetRoutes from 'src/tweets/routes';
-import errorHandler from '@customMiddleware/errorHandler';
-import populateDB from '@utilities/populateDB';
+import userRoutes from './users/routes';
+import tweetRoutes from './tweets/routes';
+import errorHandler from './middleware/errorHandler';
+import populateDB from './utilities/populateDB';
 
 const app: Application = express();
 
 app.use(helmet());
 app.use(compression());
+//@ts-ignore
 app.use(bodyParser.json());
 
 app.use((req: Request, res: Response, next: NextFunction): void => {

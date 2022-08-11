@@ -1,8 +1,8 @@
-import passErrorToNext from '@utilities/passErrorToNext';
-import RESTError, { errors } from '@utilities/RESTError';
-import ValidationError from '@twtr/common/source/types/ValidationError';
+import passErrorToNext from 'utilities/passErrorToNext';
+import RESTError, { errors } from 'utilities/RESTError';
+import ValidationError from 'twtr/common/source/types/ValidationError';
 
-jest.mock('@utilities/RESTError');
+jest.mock('utilities/RESTError');
 
 const RESTErrorMock = RESTError as jest.MockedClass<typeof RESTError>;
 

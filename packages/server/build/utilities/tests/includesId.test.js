@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const includesId_1 = __importDefault(require("@utilities/includesId"));
+const includesId_1 = __importDefault(require("utilities/includesId"));
 describe('includesId', () => {
     const id = mongoose_1.default.Types.ObjectId();
     const stringId = id.toString();

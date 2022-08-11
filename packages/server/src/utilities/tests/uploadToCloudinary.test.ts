@@ -1,5 +1,5 @@
 import cloudinary from 'cloudinary';
-import uploadToCloudinary from '@utilities/uploadToCloudinary';
+import uploadToCloudinary from 'utilities/uploadToCloudinary';
 
 jest.mock('cloudinary');
 

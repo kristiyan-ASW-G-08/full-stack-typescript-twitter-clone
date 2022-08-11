@@ -1,6 +1,6 @@
 import mongoose, { Model, Document } from 'mongoose';
-import RESTError, { errors } from '@utilities/RESTError';
-//@ts-ignore
+import RESTError, { errors } from './RESTError';
+//@@ts-ignore
 import { ValidationError } from 'yup';
 
 interface FindQuery {

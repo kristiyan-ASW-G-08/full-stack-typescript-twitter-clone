@@ -26,9 +26,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passErrorToNext_1 = __importDefault(require("@utilities/passErrorToNext"));
-const RESTError_1 = __importStar(require("@utilities/RESTError"));
-jest.mock('@utilities/RESTError');
+const passErrorToNext_1 = __importDefault(require("utilities/passErrorToNext"));
+const RESTError_1 = __importStar(require("utilities/RESTError"));
+jest.mock('utilities/RESTError');
 const RESTErrorMock = RESTError_1.default;
 describe('passErrorToNext', () => {
     afterEach(() => jest.clearAllMocks());

@@ -28,7 +28,6 @@ export const TweetSchema: Schema = new Schema({
     default: Date.now,
   },
 });
-
 //@ts-ignore
 async function populateFields(this: Query<any>): Promise<void> {
   this.populate([

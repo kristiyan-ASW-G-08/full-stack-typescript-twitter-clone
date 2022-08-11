@@ -12,11 +12,11 @@ import {
 } from 'src/tweets/controller';
 import TweetValidator from '@twtr/common/source/schemaValidators/TweetValidator';
 import SortStringValidator from '@twtr/common/source/schemaValidators/SortStringValidator';
-import validationHandler from '@src/middleware/validationHandler';
-import authenticationHandler from '@src/middleware/authenticationHandler';
-import paginationHandler from '@src/middleware/paginationHandler';
-import fileFilter from '@customMiddleware/fileFilter';
-import storage from '@customMiddleware/fileStorage';
+import validationHandler from '../middleware/validationHandler';
+import authenticationHandler from '../middleware/authenticationHandler';
+import paginationHandler from '../middleware/paginationHandler';
+import fileFilter from '../middleware/fileFilter';
+import storage from '../middleware/fileStorage';
 
 const multerStorage = multer({ storage, fileFilter }).single('image');
 const router = express.Router();

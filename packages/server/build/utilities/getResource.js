@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const RESTError_1 = __importStar(require("@utilities/RESTError"));
+const RESTError_1 = __importStar(require("./RESTError"));
 const getResource = (model, { value, name }, select = '', validationErrors = undefined) => __awaiter(void 0, void 0, void 0, function* () {
     //@ts-ignore
     const resource = yield model.findOne({ [name]: value }).select(select);
