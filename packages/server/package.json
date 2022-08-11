@@ -11,7 +11,7 @@
     "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
     "test": "jest --watchAll --runInBand --no-cache",
     "docs": "jsdoc -c jsdoc.json",
-    "postinstall": "tsc src/index.ts"
+    "postinstall": "tsc"
   },
   "dependencies": {
     "@twtr/common": "^1.0.307",
