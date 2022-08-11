@@ -25,5 +25,6 @@
     "outDir": "./build",
     "plugins": [{ "transform": "typescript-transform-paths" }]
   },
-  "include": ["./src", "./types"]
+  "include": ["./src", "./types"],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

@@ -1,7 +1,7 @@
 import { Response } from 'express';
 
 import { Document } from 'mongoose';
-import RESTError, { errors } from '@../utilities/RESTError';
+import RESTError, { errors } from '../utilities/RESTError';
 import ValidationError from '@twtr/common/source/types/ValidationError';
 
 const duplicationErrorHandler = (
