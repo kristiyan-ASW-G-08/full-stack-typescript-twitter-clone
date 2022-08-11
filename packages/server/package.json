@@ -10,7 +10,6 @@
     "lint:fix": "eslint . --fix",
     "start": " nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
     "test": "jest --watchAll --runInBand --no-cache",
-    "build": "tsc src/index.ts",
     "docs": "jsdoc -c jsdoc.json",
     "postinstall": "tsc src/index.ts"
   },
