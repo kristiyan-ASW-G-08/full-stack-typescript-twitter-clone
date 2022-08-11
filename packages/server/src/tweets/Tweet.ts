@@ -41,4 +41,4 @@ TweetSchema.pre('find', populateFields);
 
 TweetSchema.pre('populate', populateFields);
 
-export default mongoose.model('Tweet', TweetSchema);
+export default mongoose.model<Tweet>('Tweet', TweetSchema);
