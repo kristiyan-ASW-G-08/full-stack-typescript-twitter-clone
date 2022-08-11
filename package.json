@@ -7,7 +7,7 @@
   "scripts": {
     "test": "lerna run test --since --ignore @twtr/common",
     "start": "lerna run start --stream --ignore @twtr/common",
-    "build": "lerna run build",
+    "build": "",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "new-version": "lerna version --conventional-commits --yes",
