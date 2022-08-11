@@ -4,7 +4,7 @@ import duplicationErrorHandler from '@customMiddleware/duplicationErrorHandler';
 //@ts-ignore
 import uniqueValidator from 'mongoose-unique-validator';
 
-const UserSchema: Schema = new Schema<User>({
+const UserSchema: Schema = new Schema({
   username: {
     required: true,
     type: String,

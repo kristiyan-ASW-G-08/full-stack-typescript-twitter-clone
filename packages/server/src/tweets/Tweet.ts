@@ -29,6 +29,7 @@ export const TweetSchema: Schema = new Schema({
   },
 });
 
+//@ts-ignore
 async function populateFields(this: Query<any>): Promise<void> {
   this.populate([
     { path: 'user', select: 'username handle avatar' },
