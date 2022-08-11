@@ -22,4 +22,4 @@ storiesOf('Button', module)
       info: { inline: true },
       options: { currentTheme: 'dark' },
     },
-  );
+  )

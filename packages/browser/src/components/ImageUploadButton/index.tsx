@@ -14,7 +14,7 @@ interface InputProps {
 export const ImageUploadButton: FC<InputProps> = ({
   name,
   setFieldValue,
-  buttonText,
+  buttonText = 'Upload a photo',
 }) => {
   const [fileUrl, setFileUrl] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +35,7 @@ export const ImageUploadButton: FC<InputProps> = ({
         hidden
       />
       <UploadButton type="button" onClick={() => clickHandler(inputRef)}>
-        {buttonText || 'Upload photo'}
+        {buttonText}
       </UploadButton>
       <ErrorMessage component="label" name={name} />
     </InputWrapper>

@@ -13,12 +13,12 @@ describe('renderUrl', () => {
     {
       urlExtension: 'tweets',
       queries: { limit: 25, page: 1, sort: 'top' },
-      urlResult: `${process.env.SERVER_URL}/tweets?limit=25&page=1&sort=top`,
+      urlResult: `${process.env.PORT}/tweets?limit=25&page=1&sort=top`,
     },
     {
       urlExtension: 'users/tweets/tweetId',
       queries: undefined,
-      urlResult: `${process.env.SERVER_URL}/users/tweets/tweetId`,
+      urlResult: `${process.env.PORT}/users/tweets/tweetId`,
     },
   ];
 

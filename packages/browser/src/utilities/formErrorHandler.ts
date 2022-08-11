@@ -8,9 +8,7 @@ const formErrorHandler = (
   setErrors: (errors: FormikErrors<FormikValues>) => void,
   setNotification: (notification: Notification) => void,
 ) => {
-  console.log(error);
   if (error?.response?.data?.data && Array.isArray(error.response.data.data)) {
-    console.log(error.response.data);
     setErrors(transformValidationErrors(error.response.data.data));
   } else {
     setNotification(defaultWarning);

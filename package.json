@@ -7,7 +7,7 @@
   "scripts": {
     "test": "lerna run test --since --ignore @twtr/common",
     "start": "lerna run start --stream --ignore @twtr/common",
-    "build": "lerna run build  --ignore @twtr/common",
+    "build": "lerna run build  @twtr/common",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "new-version": "lerna version --conventional-commits --yes",
@@ -24,6 +24,7 @@
       "**/babel-loader/**"
     ]
   },
+  "dependencies": {"lerna":""},
   "devDependencies": {
     "cypress": "^9.6.0"
   }

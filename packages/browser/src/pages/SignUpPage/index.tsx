@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -13,26 +13,18 @@ import FormButton from 'components/FormButton';
 export const SignUpPage: FC = () => {
   const history = useHistory();
   const { notificationStore } = useStores();
-  const [loading, setLoading] = useState<boolean>(false);
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      setLoading(true);
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users`,
-        formValues,
-      );
+      await axios.post(`${process.env.REACT_APP_API_URL}/users`, formValues);
       notificationStore.setNotification({
         type: 'message',
         content: 'You have signed up successfully.Now you can log in.',
       });
-      console.log(data);
-      // history.replace('/');
+      history.replace('/');
     } catch (error) {
-      console.log(error);
-      setLoading(false);
       formErrorHandler(error, setErrors, notification =>
         notificationStore.setNotification(notification),
       );
@@ -50,28 +42,30 @@ export const SignUpPage: FC = () => {
       }}
       onSubmit={submitHandler}
     >
-      <FormWrapper>
-        <Form>
-          <FieldsWrapper>
-            <Logo type="vertical" />
+      {({ isSubmitting }) => (
+        <FormWrapper>
+          <Form>
+            <FieldsWrapper>
+              <Logo type="vertical" />
 
-            <Input name="username" type="text" placeholder="Username" />
+              <Input name="username" type="text" placeholder="Username" />
 
-            <Input name="handle" type="text" placeholder="Handle" />
+              <Input name="handle" type="text" placeholder="Handle" />
 
-            <Input name="email" type="email" placeholder="Email address" />
+              <Input name="email" type="email" placeholder="Email address" />
 
-            <Input name="password" type="password" placeholder="Password" />
+              <Input name="password" type="password" placeholder="Password" />
 
-            <Input
-              name="confirmPassword"
-              type="password"
-              placeholder="Repeat Password"
-            />
-            <FormButton loading={loading} text="Sign Up" />
-          </FieldsWrapper>
-        </Form>
-      </FormWrapper>
+              <Input
+                name="confirmPassword"
+                type="password"
+                placeholder="Repeat Password"
+              />
+              <FormButton loading={isSubmitting} text="Sign Up" />
+            </FieldsWrapper>
+          </Form>
+        </FormWrapper>
+      )}
     </Formik>
   );
 };

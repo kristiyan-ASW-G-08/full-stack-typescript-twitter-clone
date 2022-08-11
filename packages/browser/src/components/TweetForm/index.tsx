@@ -102,7 +102,7 @@ export const TweetForm: FC = () => {
         }}
         onSubmit={submitHandler}
       >
-        {({ setFieldValue }) => (
+        {({ setFieldValue, isSubmitting }) => (
           <Form>
             <TweetFormWrapper>
               <AvatarContainer>

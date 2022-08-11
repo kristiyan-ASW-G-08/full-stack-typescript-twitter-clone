@@ -12,7 +12,7 @@
     "test": "jest --watchAll --runInBand --no-cache",
     "build": "tsc src/index.ts",
     "docs": "jsdoc -c jsdoc.json",
-    "heroku-post-build": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "postinstall": "tsc src/index.ts"
   },
   "dependencies": {
     "@twtr/common": "^1.0.307",
@@ -24,6 +24,7 @@
     "helmet": "^3.19.0",
     "jsdoc": "^3.6.10",
     "jsonwebtoken": "^8.5.1",
+    "lerna": "^5.4.0",
     "mjml": "^4.4.0",
     "mongoose": "^5.6.4",
     "mongoose-unique-validator": "^2.0.3",

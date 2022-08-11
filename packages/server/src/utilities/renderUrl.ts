@@ -6,15 +6,15 @@ const generateLink = (
   urlExtension: string,
   queries: Queries | undefined,
 ): string => {
-  const { SERVER_URL } = process.env;
+  const { PORT } = process.env;
   if (queries) {
     const stringifiedQueries = Object.entries(queries)
       .map(([query, value]): string => `${query}=${value}`)
       .join('&');
-    return `${SERVER_URL}/${urlExtension}?${stringifiedQueries}`;
+    return `${PORT}/${urlExtension}?${stringifiedQueries}`;
   }
 
-  return `${SERVER_URL}/${urlExtension}`;
+  return `${PORT}/${urlExtension}`;
 };
 
 export default generateLink;

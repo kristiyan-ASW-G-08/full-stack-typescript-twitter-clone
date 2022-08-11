@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext } from 'react';
 import axios from 'axios';
 import { Formik, Form, FormikValues, FormikActions } from 'formik';
 import { useHistory } from 'react-router-dom';
@@ -14,13 +14,11 @@ import FormButton from 'components/FormButton';
 export const LoginPage: FC = () => {
   const { authStore, notificationStore } = useContext(RootStoreContext);
   const history = useHistory();
-  const [loading, setLoading] = useState<boolean>(false);
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
-      setLoading(true);
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/user/tokens`,
         formValues,
@@ -36,7 +34,6 @@ export const LoginPage: FC = () => {
       });
       history.replace('/');
     } catch (error) {
-      setLoading(false);
       formErrorHandler(error, setErrors, notification =>
         notificationStore.setNotification(notification),
       );
@@ -48,19 +45,21 @@ export const LoginPage: FC = () => {
       initialValues={{ email: '', password: '' }}
       onSubmit={submitHandler}
     >
-      <FormWrapper>
-        <Form>
-          <FieldsWrapper>
-            <Logo type="vertical" />
+      {({ isSubmitting }) => (
+        <FormWrapper>
+          <Form>
+            <FieldsWrapper>
+              <Logo type="vertical" />
 
-            <Input name="email" type="email" placeholder="Email address" />
+              <Input name="email" type="email" placeholder="Email address" />
 
-            <Input name="password" type="password" placeholder="Password" />
+              <Input name="password" type="password" placeholder="Password" />
 
-            <FormButton loading={loading} text="Login" />
-          </FieldsWrapper>
-        </Form>
-      </FormWrapper>
+              <FormButton loading={isSubmitting} text="Login" />
+            </FieldsWrapper>
+          </Form>
+        </FormWrapper>
+      )}
     </Formik>
   );
 };

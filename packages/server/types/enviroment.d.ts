@@ -3,7 +3,7 @@ declare namespace NodeJS {
     SECRET: string;
     EMAIL: string;
     EMAIL_PASSWORD: string;
-    SERVER_URL: string;
+    PORT: string;
     PORT: number;
     CLIENT_URL: string;
     ALLOW_IMAGES: string;
