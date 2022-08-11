@@ -1,8 +1,8 @@
 import faker from 'faker';
 import mongoose from 'mongoose';
-import User from '@users/User';
-import Tweet from '@tweets/Tweet';
-import { getUserByEmail } from '@users/services';
+import User from '../users/User';
+import Tweet from '../tweets/Tweet';
+import { getUserByEmail } from '../users/services';
 
 function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
