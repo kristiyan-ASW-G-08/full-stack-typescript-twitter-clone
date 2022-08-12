@@ -2,6 +2,7 @@ import { NextFunction } from 'express';
 import RESTError, { errors } from './RESTError';
 
 const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
+  console.log(err);
   if (err.status !== undefined) {
     next(err);
   } else {
