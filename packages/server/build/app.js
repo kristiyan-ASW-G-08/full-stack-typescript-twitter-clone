@@ -15,6 +15,7 @@ app.use((0, helmet_1.default)());
 app.use((0, compression_1.default)());
 //@ts-ignore
 app.use(body_parser_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');

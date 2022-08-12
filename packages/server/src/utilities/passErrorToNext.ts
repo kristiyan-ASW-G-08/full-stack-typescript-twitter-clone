@@ -4,13 +4,12 @@ import logger from './logger';
 import RESTError, { errors } from './RESTError';
 
 const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
-  logger.info(JSON.stringify(err));
+  logger.info(err)
   if (err.status !== undefined) {
     next(err);
   } else {
     const { status, message } = errors.InternalServerError;
-    //@ts-ignore
-    next(new RESTError(status, message, err,err));
+    next(new RESTError(status, message, err));
   }
 };
 export default passErrorToNext;

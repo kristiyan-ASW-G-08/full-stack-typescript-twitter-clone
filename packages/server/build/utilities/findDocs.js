@@ -8,18 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const passErrorToNext_1 = __importDefault(require("./passErrorToNext"));
 const findDocs = ({ query, model, pagination: { sortString, limit, page }, }) => __awaiter(void 0, void 0, void 0, function* () {
-    const documents = yield model
-        .countDocuments()
-        .find(query)
-        .sort(sortString)
-        .skip((page - 1) * limit)
-        .limit(limit);
-    const count = (yield model.countDocuments(query)) - page * limit;
-    return {
-        documents,
-        count,
-    };
+    try {
+        const documents = yield model
+            .countDocuments()
+            .find(query)
+            .sort(sortString)
+            .skip((page - 1) * limit)
+            .limit(limit);
+        const count = (yield model.countDocuments(query)) - page * limit;
+        return {
+            documents,
+            count,
+        };
+    }
+    catch (err) {
+        (0, passErrorToNext_1.default)(err);
+    }
 });
 exports.default = findDocs;

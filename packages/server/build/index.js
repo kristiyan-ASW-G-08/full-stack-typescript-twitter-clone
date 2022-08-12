@@ -6,7 +6,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 const connectToDB_1 = __importDefault(require('./utilities/connectToDB'));
-const app_1 = __importDefault(require('.//app'));
+const app_1 = __importDefault(require('./app'));
 const initServer = () => {
   // const httpsApp = https.createServer(
   //   {
@@ -18,11 +18,11 @@ const initServer = () => {
   const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = {
     MONGO_USER: 'kristiyan',
     MONGO_PASSWORD: 'yrppZIuYBL82FXUn',
-    MONGO_DATABASE: 'testFullStackTwitterClone',
+    MONGO_DATABASE: 'fullStackTwitterClone',
   };
   const mongoURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.ol9wi.mongodb.net/${MONGO_DATABASE}?retryWrites=true`;
   (0, connectToDB_1.default)(mongoURI);
-  const port = process.env.PORT || 'localhost:8000 ';
+  const port = 8080;
   app_1.default.listen(port);
 };
 initServer();
