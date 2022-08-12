@@ -1,9 +1,10 @@
 import { NextFunction } from 'express';
 import winston from 'winston';
+import logger from './logger';
 import RESTError, { errors } from './RESTError';
 
 const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
-  winston.log('info', err);
+  logger.info(err)
   if (err.status !== undefined) {
     next(err);
   } else {
