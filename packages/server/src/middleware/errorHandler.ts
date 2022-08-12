@@ -10,7 +10,7 @@ const errorHandler = (
 ): void => {
   const status = error.status || 500;
   const { message, data } = error;
-  const resData = data ? { data, message } : { message };
+  const resData = data ? { data, message } : { error, message };
   res.status(status).json(resData);
 };
 export default errorHandler;
