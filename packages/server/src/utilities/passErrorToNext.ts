@@ -4,7 +4,7 @@ import logger from './logger';
 import RESTError, { errors } from './RESTError';
 
 const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
-  logger.info(err)
+  logger.info(JSON.stringify(err));
   if (err.status !== undefined) {
     next(err);
   } else {
