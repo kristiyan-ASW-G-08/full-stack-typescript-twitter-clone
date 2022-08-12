@@ -9,7 +9,8 @@ const passErrorToNext = (err: any | RESTError, next: NextFunction): void => {
     next(err);
   } else {
     const { status, message } = errors.InternalServerError;
-    next(new RESTError(status, message, err));
+    //@ts-ignore
+    next(new RESTError(status, message, err,err));
   }
 };
 export default passErrorToNext;
