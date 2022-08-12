@@ -14,7 +14,7 @@ app.use(helmet());
 app.use(compression());
 //@ts-ignore
 app.use(bodyParser.json());
-
+app.use(express.urlencoded({extended: true})); 
 app.use((req: Request, res: Response, next: NextFunction): void => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
