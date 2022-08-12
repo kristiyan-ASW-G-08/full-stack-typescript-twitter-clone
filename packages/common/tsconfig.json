@@ -17,6 +17,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "composite": true,
     "outDir": "./build"
   },
   "include": ["./source"]

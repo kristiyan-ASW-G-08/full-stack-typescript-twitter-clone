@@ -1,7 +1,7 @@
 {
   "name": "@twtr/server",
   "version": "1.0.307",
-  "main": "index.js",
+  "main": "build/index.js",
   "author": "Kristiyan Todorov",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "build": "tsc ",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "node ./build/index.js",
+    "start": "ts-node ./build/index.js",
     "test": "jest --watchAll --runInBand --no-cache",
     "docs": "jsdoc -c jsdoc.json",
     "start-dev": "  nodemon --exec  ts-node -r tsconfig-paths/register --files src/index.ts NODE_ENV=development",
@@ -85,5 +85,4 @@
   "resolutions": {
     "write-file-atomic": "^2.4.1"
   }
-
 }

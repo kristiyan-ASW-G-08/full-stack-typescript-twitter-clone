@@ -1,7 +1,7 @@
 {
   "name": "@twtr/common",
   "version": "1.0.307",
-  "main": "index.js",
+  "main": "build/schemaValidators/validators.js",
   "author": "Kristiyan Todorov",
   "license": "MIT",
   "private": true,

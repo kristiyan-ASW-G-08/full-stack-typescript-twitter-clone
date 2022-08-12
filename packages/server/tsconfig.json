@@ -7,7 +7,10 @@
       "customTypes/*": ["src/types/*"],
       "utilities/*": ["src/utilities/*"],
       "customMiddleware/*": ["src/middleware/*"],
-      "users/*": ["src/users/*"]
+      "users/*": ["src/users/*"],
+      "@twtr/common": [
+        "../common"
+      ],
     },
     "target": "es6",
     "lib": ["esnext"],
@@ -26,5 +29,6 @@
     "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "include": ["./src", "./types"],
+  "references": [{ "path": "../common" }],
   "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }
