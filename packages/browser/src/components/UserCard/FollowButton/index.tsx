@@ -28,7 +28,7 @@ export const FollowButton: FC<FollowButtonProps> = ({
         headers: { Authorization: `bearer ${token}` },
       };
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_URL}/${currentUser._id}`,
+        `${process.env.REACT_APP_API_URL}/users/${currentUser._id}`,
         {},
         config,
       );
