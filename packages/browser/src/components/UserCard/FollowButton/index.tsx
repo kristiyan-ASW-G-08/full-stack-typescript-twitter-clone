@@ -28,13 +28,11 @@ export const FollowButton: FC<FollowButtonProps> = ({
         headers: { Authorization: `bearer ${token}` },
       };
       const response = await axios.patch(
-        `http://localhost:8090/users/${currentUser._id}`,
+        `${process.env.REACT_APP_API_URL}/${currentUser._id}`,
         {},
         config,
       );
-
-      const { user } = response.data.data;
-      updateUser(user);
+      updateUser(response.data.data.user);
     } catch (err) {
       const notification: Notification = {
         type: 'warning',

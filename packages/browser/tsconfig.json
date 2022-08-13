@@ -27,5 +27,7 @@
   "include": [
     "src",
     ".storybook/decorators"
-  ]
+  ],
+  "references": [{ "path": "../common" }],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

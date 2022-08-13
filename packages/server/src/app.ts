@@ -7,7 +7,7 @@ import userRoutes from './users/routes';
 import tweetRoutes from './tweets/routes';
 import errorHandler from './middleware/errorHandler';
 import populateDB from './utilities/populateDB';
-
+import cors from 'cors';
 const app: Application = express();
 app.use(cors());
 app.use(helmet());
@@ -25,8 +25,8 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
     'Access-Control-Allow-Headers',
     'Content-Type content-Type  Authorization',
   );
-  res.setHeader('Access-Control-Allow-Headers', 'content-Type');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization');
+  // res.setHeader('Access-Control-Allow-Headers', 'content-Type');
+  // res.setHeader('Access-Control-Allow-Headers', 'Authorization');
   next();
 });
 
