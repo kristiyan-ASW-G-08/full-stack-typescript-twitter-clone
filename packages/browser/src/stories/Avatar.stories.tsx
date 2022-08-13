@@ -1,14 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Avatar } from 'components/Avatar/index';
-import Logo from 'assets/logo-primary.svg';
+// @ts-ignore
+import Logo from '../assets/logo-primary.svg';
 
 storiesOf('Avatar', module)
   .add('light theme - default avatar', () => <Avatar />, {
     info: { inline: true },
     options: { currentTheme: 'light' },
   })
-  .add('light theme - custom avatar', () => <Avatar avatarURL={Logo} />, {
+  .add('light theme - custom avatar', () => <Avatar avatar={Logo} />, {
     info: { inline: true },
     options: { currentTheme: 'light' },
   })
@@ -22,7 +23,7 @@ storiesOf('Avatar', module)
   )
   .add(
     'light theme - custom avatar - large size',
-    () => <Avatar avatarURL={Logo} size="large" />,
+    () => <Avatar avatar={Logo} size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'light' },
@@ -32,7 +33,7 @@ storiesOf('Avatar', module)
     info: { inline: true },
     options: { currentTheme: 'dark' },
   })
-  .add('dark theme - custom avatar', () => <Avatar avatarURL={Logo} />, {
+  .add('dark theme - custom avatar', () => <Avatar avatar={Logo} />, {
     info: { inline: true },
     options: { currentTheme: 'dark' },
   })
@@ -46,7 +47,7 @@ storiesOf('Avatar', module)
   )
   .add(
     'dark theme - custom avatar - large size',
-    () => <Avatar avatarURL={Logo} size="large" />,
+    () => <Avatar avatar={Logo} size="large" />,
     {
       info: { inline: true },
       options: { currentTheme: 'dark' },

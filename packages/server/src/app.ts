@@ -9,7 +9,7 @@ import errorHandler from './middleware/errorHandler';
 import populateDB from './utilities/populateDB';
 import cors from 'cors';
 const app: Application = express();
-app.use(cors());
+
 app.use(helmet());
 app.use(compression());
 //@ts-ignore

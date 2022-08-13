@@ -29,6 +29,7 @@ export const TweetForm: FC = () => {
   const { replyId, retweetId } = useParams();
   const history = useHistory();
   const location = useLocation();
+  // @ts-ignore
   const { tweet } = location.state;
   const [type, setType] = useState<'text' | 'link' | 'retweet' | 'reply'>(
     tweet?.type ? tweet.type : 'text',

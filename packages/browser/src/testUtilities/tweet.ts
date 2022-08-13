@@ -6,10 +6,7 @@ const tweet: Tweet = {
   text: 'Text',
   link: 'https://github.com/',
   type: 'link',
-  image: {
-    public_id: 'someId',
-    url: 'someUrl',
-  },
+  image: '',
   _id: 'mockId',
   date: new Date(),
   likes: 0,

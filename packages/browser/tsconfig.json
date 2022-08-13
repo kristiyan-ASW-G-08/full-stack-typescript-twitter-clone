@@ -28,6 +28,15 @@
     "src",
     ".storybook/decorators"
   ],
-  "references": [{ "path": "../common" }],
-  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+  "references": [
+    {
+      "path": "../common"
+    }
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/testUtilities/*.ts",
+    "src/testUtilities/*.tsx"
+  ]
 }

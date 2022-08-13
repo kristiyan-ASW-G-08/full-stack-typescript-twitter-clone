@@ -27,7 +27,9 @@ const Router: FC = observer(
     const history = useHistory();
     const location = useLocation();
     const { user } = authStore.authState;
+    // @ts-ignore
     const tweetForm = location.state && location.state.tweetForm;
+    // @ts-ignore
     const userForm = location.state && location.state.userForm;
     return (
       <>

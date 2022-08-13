@@ -6,13 +6,7 @@ const { File, Console } = transports;
 const logger = createLogger({
   level: 'info',
   format: combine(timestamp(), prettyPrint(), colorize()),
-  transports: [
-    new File({
-      filename: 'error.log',
-      level: 'error',
-    }),
-    new File({ filename: 'combined.log' }),
-  ],
+  transports: [new Console({ format: format.simple() })],
 });
 
 if (process.env.NODE_ENV !== 'production') {

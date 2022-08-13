@@ -11,7 +11,6 @@ const routes_1 = __importDefault(require("./users/routes"));
 const routes_2 = __importDefault(require("./tweets/routes"));
 const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
 const app = (0, express_1.default)();
-app.use(cors());
 app.use((0, helmet_1.default)());
 app.use((0, compression_1.default)());
 //@ts-ignore
@@ -20,9 +19,9 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type content-Type  Authorization');
-    res.setHeader('Access-Control-Allow-Headers', 'content-Type');
-    res.setHeader('Access-Control-Allow-Headers', 'Authorization');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    // res.setHeader('Access-Control-Allow-Headers', 'content-Type');
+    // res.setHeader('Access-Control-Allow-Headers', 'Authorization');
     next();
 });
 app.use('/images', express_1.default.static('./images'));

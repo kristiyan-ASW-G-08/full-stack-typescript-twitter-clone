@@ -41,12 +41,20 @@ const form = css`
   ${({ theme }) => theme.mixins.border}
   border-radius: 10px;
 `;
+
+const header = css`
+  width: 100%;
+  height: 20%;
+  min-height: 15rem;
+`;
+
 const mixins = {
   slide,
   border,
   button,
   form,
   center,
+  header,
   flexCenter,
 };
 export default mixins;

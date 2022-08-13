@@ -3,11 +3,11 @@ import { BrowserRouter } from 'react-router-dom';
 import Theme from 'components/Theme';
 
 interface TestWrapperProps {
-  theme?: 'light' | 'dark';
+  theme: 'light' | 'dark';
 }
 const TestWrapper: FC<TestWrapperProps> = ({ children, theme = 'light' }) => (
   <Theme currentTheme={theme}>
-    <BrowserRouter>{children}</BrowserRouter>
+    <BrowserRouter><>{children}</></BrowserRouter>
   </Theme>
 );
 

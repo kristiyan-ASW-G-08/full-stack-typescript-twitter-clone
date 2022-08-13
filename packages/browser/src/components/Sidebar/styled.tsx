@@ -38,7 +38,7 @@ export const Container = styled('div')`
 `;
 
 export const SidebarHeader = styled('div')`
-  ${header};
+  ${({ theme }) => theme.mixins.header};
   display: grid;
   grid:
     ' . . . ' 1fr
@@ -48,7 +48,7 @@ export const SidebarHeader = styled('div')`
 `;
 
 export const AuthenticatedSidebarHeader = styled('div')`
-  ${header};
+  ${({ theme }) => theme.mixins.header}
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 0.2rem;

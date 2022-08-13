@@ -4,7 +4,7 @@ import { History } from 'history';
 import Theme from 'components/Theme';
 
 interface RouterTestWrapperProps {
-  theme?: 'light' | 'dark';
+  theme: 'light' | 'dark';
   history: History;
 }
 const RouterTestWrapper: FC<RouterTestWrapperProps> = ({
@@ -13,7 +13,9 @@ const RouterTestWrapper: FC<RouterTestWrapperProps> = ({
   history,
 }) => (
   <Theme currentTheme={theme}>
-    <Router history={history}>{children}</Router>
+    <Router history={history}>
+      <>{children}</>
+    </Router>
   </Theme>
 );
 
