@@ -10,13 +10,12 @@ cloudinary.config({
 });
 
 const uploadToCloudinary = async (
-  path: string,
-  filename: string,
+  base64EncodedImage: string,
 ): Promise<{ public_id: string }> => {
   try {
     // @ts-ignore
-    return await cloudinary.v2.uploader.upload(path, {
-      public_id: filename,
+    return await cloudinary.v2.uploader.upload(base64EncodedImage, {
+      public_id: base64EncodedImage.substr(base64EncodedImage.length - 100),
       folder: 'twittclone',
     });
   } catch {

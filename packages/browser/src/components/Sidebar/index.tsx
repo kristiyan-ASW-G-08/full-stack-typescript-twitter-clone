@@ -85,7 +85,7 @@ export const Sidebar: FC<SidebarProps> = ({
                 <Link to="/" onClick={toggleSidebar}>
                   <SidebarButton>
                     <span>
-                      <FontAwesomeIcon icon="home" />
+                      <FontAwesomeIcon size="lg" icon="home" />
                     </span>
                     <p>Home</p>
                   </SidebarButton>
@@ -96,7 +96,7 @@ export const Sidebar: FC<SidebarProps> = ({
                   <Link to={`/users/${user._id}`} onClick={toggleSidebar}>
                     <SidebarButton>
                       <span>
-                        <FontAwesomeIcon icon="user" />
+                        <FontAwesomeIcon size="lg" icon="user" />
                       </span>
                       <p>Profile</p>
                     </SidebarButton>
@@ -119,7 +119,7 @@ export const Sidebar: FC<SidebarProps> = ({
             {user ? (
               <SidebarButton onClick={resetAuthState}>
                 <span>
-                  <FontAwesomeIcon icon="sign-out-alt" />
+                  <FontAwesomeIcon size="lg" icon="sign-out-alt" />
                 </span>
                 <p>Log Out</p>
               </SidebarButton>

@@ -64,10 +64,10 @@ router.patch(
 router.patch(
   '/users/user/profile',
   authenticationHandler,
-  multer({ storage, fileFilter }).fields([
-    { name: 'avatar', maxCount: 1 },
-    { name: 'cover', maxCount: 1 },
-  ]),
+  // multer({ storage, fileFilter }).fields([
+  //   { name: 'avatar', maxCount: 1 },
+  //   { name: 'cover', maxCount: 1 },
+  // ]),
   validationHandler([
     { schema: validators.UserProfileValidator, target: 'body' },
   ]),

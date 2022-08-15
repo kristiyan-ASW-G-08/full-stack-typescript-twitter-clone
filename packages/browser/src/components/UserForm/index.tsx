@@ -8,7 +8,6 @@ import Input from 'components/Input';
 import StyledForm from 'styled/Form';
 import Button from 'styled/Button';
 import Logo from 'components/Logo';
-import FormButton from 'components/FormButton';
 import formErrorHandler from 'utilities/formErrorHandler';
 import populateFormData from 'utilities/populateFormData';
 import useStores from 'hooks/useStores';
@@ -16,16 +15,16 @@ import useStores from 'hooks/useStores';
 export const UserForm: FC = () => {
   const history = useHistory();
   const { authStore, notificationStore } = useStores();
-  console.log(useStores());
   const { user, token } = authStore.authState;
   const submitHandler = async (
     formValues: FormikValues,
     { setErrors }: FormikActions<FormikValues>,
   ): Promise<void> => {
     try {
+      console.log(formValues);
       const request = await axios.patch(
         `${process.env.REACT_APP_API_URL}/users/user/profile`,
-        populateFormData(formValues),
+        formValues,
         {
           headers: { Authorization: `bearer ${token}` },
         },

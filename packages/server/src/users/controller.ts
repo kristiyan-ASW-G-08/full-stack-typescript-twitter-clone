@@ -379,27 +379,24 @@ export const getUserLikes = async (
 };
 
 export const patchProfile = async (
-  { body: { username, handle }, userId, files }: Request,
+  { body: { username, handle, avatar, cover }, userId }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
   try {
+    
     const user = await getUserById(userId, false);
-    if (!Array.isArray(files) && files && files.avatar) {
-      const { filename, path } = files.avatar[0];
+    if (avatar) {
       if (user.avatar) {
         await deleteCloudinaryFile(user.avatar);
       }
-      user.avatar = (await uploadToCloudinary(path, filename)).public_id;
-      deleteFile(path);
+      user.avatar = (await uploadToCloudinary(avatar)).public_id;
     }
-    if (!Array.isArray(files) && files && files.cover) {
-      const { filename, path } = files.cover[0];
+    if (cover) {
       if (user.cover) {
         await deleteCloudinaryFile(user.cover);
       }
-      user.cover = (await uploadToCloudinary(path, filename)).public_id;
-      deleteFile(path);
+      user.cover = (await uploadToCloudinary(cover)).public_id;
     }
     user.username = username;
     user.handle = handle;

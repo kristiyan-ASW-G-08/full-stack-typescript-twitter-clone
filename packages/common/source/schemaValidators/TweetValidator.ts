@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { StringSchema } from 'yup';
 
 const TweetValidator = yup.object().shape({
+  image: yup.string(),
   type: yup
     .string()
     .trim()

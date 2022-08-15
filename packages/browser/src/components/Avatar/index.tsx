@@ -22,7 +22,7 @@ export const Avatar: FC<AvatarProps> = ({
         <AdvancedImage cldImg={avatarImage} alt={altText} />
       ) : (
         <IconContainer size={size}>
-          <FontAwesomeIcon icon="user-circle" />
+          <FontAwesomeIcon size="lg" icon="user-circle" />
         </IconContainer>
       )}
     </AvatarWrapper>

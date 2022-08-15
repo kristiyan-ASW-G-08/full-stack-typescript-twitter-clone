@@ -52,7 +52,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
             await updateUserEvent(`users/tweets/${_id}/like`);
           }}
         >
-          <FontAwesomeIcon icon="heart" />
+          <FontAwesomeIcon size="lg" icon="heart" />
           <span> {tweet.likes}</span>
         </TweetBarButton>
         <TweetBarButton
@@ -66,7 +66,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
             await updateUserEvent(`users/tweets/${_id}/bookmark`);
           }}
         >
-          <FontAwesomeIcon icon="bookmark" />
+          <FontAwesomeIcon size="lg" icon="bookmark" />
         </TweetBarButton>
 
         {user && user._id === tweet.user._id ? (
@@ -87,7 +87,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                 });
               }}
             >
-              <FontAwesomeIcon icon="edit" />
+              <FontAwesomeIcon size="lg" icon="edit" />
             </TweetBarButton>
 
             <TweetBarButton
@@ -100,7 +100,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
                 });
               }}
             >
-              <FontAwesomeIcon icon="trash" />
+              <FontAwesomeIcon size="lg" icon="trash" />
             </TweetBarButton>
             <ShareButton
               tweet={tweet}
@@ -128,7 +128,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
             });
           }}
         >
-          <FontAwesomeIcon icon="comment" />
+          <FontAwesomeIcon size="lg" icon="comment" />
           <span>{tweet.replies}</span>
         </TweetBarButton>
 
@@ -148,7 +148,7 @@ export const TweetBar: FC<TweetProps> = ({ tweet, deleteTweetHandler }) => {
             });
           }}
         >
-          <FontAwesomeIcon icon="retweet" />
+          <FontAwesomeIcon size="lg" icon="retweet" />
           <span>{tweet.retweets}</span>
         </TweetBarButton>
 

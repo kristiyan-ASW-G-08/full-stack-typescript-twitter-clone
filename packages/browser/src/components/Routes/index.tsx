@@ -85,7 +85,7 @@ const Router: FC = observer(
             }}
           >
             <MobileTweetButton>
-              <FontAwesomeIcon icon="feather-alt" />
+              <FontAwesomeIcon size="lg" icon="feather-alt" />
             </MobileTweetButton>
           </Link>
         ) : (

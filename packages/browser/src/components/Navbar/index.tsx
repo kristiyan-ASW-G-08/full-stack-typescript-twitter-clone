@@ -36,7 +36,7 @@ export const Navbar: FC = () => {
           <Logo />
         </Link>
         <NavIcon onClick={toggleSidebar} data-testid="mobile-nav-button">
-          <FontAwesomeIcon icon="bars" />
+          <FontAwesomeIcon size="lg" icon="bars" />
         </NavIcon>
         <Container>
           <ThemeButton onClick={() => themeStore.toggleTheme()}>
@@ -55,7 +55,7 @@ export const Navbar: FC = () => {
                       <Link to="/" onClick={toggleMenu}>
                         <SidebarButton>
                           <span>
-                            <FontAwesomeIcon icon="home" />
+                            <FontAwesomeIcon size="lg" icon="home" />
                           </span>
                           <p>Home</p>
                         </SidebarButton>
@@ -65,7 +65,7 @@ export const Navbar: FC = () => {
                       <Link to={`/users/${user._id}`} onClick={toggleMenu}>
                         <SidebarButton>
                           <span>
-                            <FontAwesomeIcon icon="user" />
+                            <FontAwesomeIcon size="lg" icon="user" />
                           </span>
                           <p>Profile</p>
                         </SidebarButton>

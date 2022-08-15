@@ -18,7 +18,7 @@ export const Retweet: FC<RetweetProps> = ({
   <RetweetWrapper>
     <RetweetMessageWrapper>
       <div>
-        <FontAwesomeIcon icon="retweet" />
+        <FontAwesomeIcon size="lg" icon="retweet" />
         <Link to={`/users/${_id}`} data-testid="retweet-profile-link">
           @{handle} Retweeted
         </Link>

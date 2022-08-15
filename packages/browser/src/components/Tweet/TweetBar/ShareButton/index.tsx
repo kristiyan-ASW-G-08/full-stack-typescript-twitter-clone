@@ -23,7 +23,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
         data-testid="share-button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <FontAwesomeIcon icon="share-alt" />
+        <FontAwesomeIcon size="lg" icon="share-alt" />
       </TweetBarButton>
       {isOpen ? (
         <DropDown>
@@ -39,7 +39,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
                 setClipboard(tweetUrl);
               }}
             >
-              <FontAwesomeIcon icon="share-alt" /> Link
+              <FontAwesomeIcon size="lg" icon="share-alt" /> Link
             </button>
           </DropDownItem>
           <DropDownItem>
@@ -50,7 +50,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
               target="_blank"
               rel="noreferrer noopener"
             >
-              <FontAwesomeIcon icon={['fab', 'reddit']} /> Reddit
+              <FontAwesomeIcon size="lg" icon={['fab', 'reddit']} /> Reddit
             </a>
           </DropDownItem>
           <DropDownItem>
@@ -61,7 +61,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
               target="_blank"
               rel="noreferrer noopener"
             >
-              <FontAwesomeIcon icon={['fab', 'twitter']} /> Twitter
+              <FontAwesomeIcon size="lg" icon={['fab', 'twitter']} /> Twitter
             </a>
           </DropDownItem>
           <DropDownItem />

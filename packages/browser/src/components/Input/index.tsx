@@ -6,6 +6,7 @@ interface InputProps {
   name: string;
   placeholder: string;
   type: string;
+  // @ts-ignore
   component?: 'input' | 'textarea';
 }
 

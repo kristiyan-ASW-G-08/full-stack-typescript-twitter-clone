@@ -15,7 +15,7 @@ import uploadToCloudinary from '../utilities/uploadToCloudinary';
 import deleteCloudinaryFile from '../utilities/deleteFromCloudinary';
 
 export const postTweet = async (
-  { userId, body: { text, linkUrl, type, retweetId, replyId }, file }: Request,
+  { userId, body: { text, linkUrl, type, retweetId, replyId, image } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -28,10 +28,9 @@ export const postTweet = async (
       link: linkUrl,
     });
 
-    if (file) {
-      const { path, filename } = file;
-      tweet.image = (await uploadToCloudinary(path, filename)).public_id;
-      deleteFile(path);
+    if (image) {
+      //@ts-ignore
+      tweet.image = (await uploadToCloudinary(image)).public_id;
     }
 
     if (retweetId) {
@@ -68,7 +67,7 @@ export const postTweet = async (
 };
 
 export const patchTweet = async (
-  { userId, body: { text, linkUrl }, params: { tweetId }, file }: Request,
+  { userId, body: { text, linkUrl, image }, params: { tweetId } }: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -78,11 +77,9 @@ export const patchTweet = async (
 
     tweet.text = text;
     tweet.link = linkUrl;
-    if (tweet.image && file) {
-      const { path, filename } = file;
+    if (tweet.image && image) {
       await deleteCloudinaryFile(tweet.image);
-      tweet.image = (await uploadToCloudinary(path, filename)).public_id;
-      deleteFile(path);
+      tweet.image = (await uploadToCloudinary(image)).public_id;
     }
     await tweet.save();
     res.sendStatus(204);

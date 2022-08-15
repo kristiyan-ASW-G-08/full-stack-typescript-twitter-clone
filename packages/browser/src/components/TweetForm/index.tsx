@@ -49,13 +49,6 @@ export const TweetForm: FC = () => {
   ): Promise<void> => {
     try {
       const { REACT_APP_API_URL } = process.env;
-      const formData: FormData = populateFormData({
-        ...formValues,
-        type,
-        retweetId,
-        replyId,
-      });
-
       const config = {
         headers: { Authorization: `bearer ${token}` },
       };
@@ -63,7 +56,7 @@ export const TweetForm: FC = () => {
       if (tweet) {
         await axios.patch(
           `${REACT_APP_API_URL}/tweets/${tweet._id}`,
-          formData,
+          { ...formValues, type, retweetId, replyId },
           config,
         );
         history.push(`/tweet/${tweet._id}`);
@@ -71,7 +64,7 @@ export const TweetForm: FC = () => {
       } else {
         const result = await axios.post(
           `${REACT_APP_API_URL}/tweets`,
-          formData,
+          { ...formValues, type, retweetId, replyId },
           config,
         );
         history.replace(`/tweet/${result.data.data.tweetId}`, {
@@ -80,6 +73,7 @@ export const TweetForm: FC = () => {
         // history.goBack();
       }
     } catch (error) {
+      console.log(JSON.stringify(error));
       formErrorHandler(error, setErrors, notification =>
         notificationStore.setNotification(notification),
       );
@@ -103,7 +97,7 @@ export const TweetForm: FC = () => {
         }}
         onSubmit={submitHandler}
       >
-        {({ setFieldValue, isSubmitting }) => (
+        {({ setFieldValue }) => (
           <Form>
             <TweetFormWrapper>
               <AvatarContainer>
@@ -137,7 +131,7 @@ export const TweetForm: FC = () => {
                     setFieldValue('image', undefined);
                   }}
                 >
-                  <FontAwesomeIcon icon="image" />
+                  <FontAwesomeIcon size="lg" icon="image" />
                 </IconButton>
                 <IconButton
                   data-testid="link-button"
@@ -147,7 +141,7 @@ export const TweetForm: FC = () => {
                     setType(type === 'link' ? 'text' : 'link');
                   }}
                 >
-                  <FontAwesomeIcon icon="link" />
+                  <FontAwesomeIcon size="lg" icon="link" />
                 </IconButton>
               </ContentButtonsContainer>
 

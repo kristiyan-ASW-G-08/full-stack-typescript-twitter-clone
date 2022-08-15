@@ -21,7 +21,13 @@ export const ImageUploadButton: FC<InputProps> = ({
   const uploadHandler = (e: SyntheticEvent<HTMLInputElement>) => {
     const { file, fileUrl } = getFile(e);
     setFileUrl(fileUrl);
-    setFieldValue(name, file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      console.log(reader.result);
+      // @ts-ignore
+      setFieldValue(name, reader.result);
+    };
   };
   return (
     <InputWrapper>

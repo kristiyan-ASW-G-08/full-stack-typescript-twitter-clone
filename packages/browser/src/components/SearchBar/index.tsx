@@ -34,7 +34,7 @@ export const SearchBar: FC = () => {
         ))}
       </Datalist>
       <span>
-        <FontAwesomeIcon icon="search" />
+        <FontAwesomeIcon size="lg" icon="search" />
       </span>
     </SearchBarWrapper>
   );

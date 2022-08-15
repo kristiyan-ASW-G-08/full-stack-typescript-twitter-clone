@@ -24,7 +24,7 @@ const router = express.Router();
 router.post(
   '/tweets',
   authenticationHandler,
-  multerStorage,
+  // multerStorage,
   validationHandler([{ schema: TweetValidator, target: 'body' }]),
   postTweet,
 );
@@ -32,7 +32,7 @@ router.post(
 router.patch(
   '/tweets/:tweetId',
   authenticationHandler,
-  multerStorage,
+  // multerStorage,
   validationHandler([{ schema: TweetValidator, target: 'body' }]),
   patchTweet,
 );
